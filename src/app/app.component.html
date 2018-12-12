@@ -44,6 +44,10 @@
                   <optgroup label="Intermediate Goods">
                     <option *ngFor="let module of modules.intermediateGoods" [value]="module.id">{{ module.name }}</option>
                   </optgroup>
+
+                  <optgroup label="Final Construction Goods">
+                    <option *ngFor="let module of modules.finalGoods" [value]="module.id">{{ module.name }}</option>
+                  </optgroup>
                 </select>
               </div>
             </td>

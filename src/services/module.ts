@@ -328,6 +328,119 @@ export class Module {
     production: { resource: Resource.quantumTube, value: 550 }
   };
 
+  static advancedElectronics: ModuleDefinition = {
+    id: 30,
+    name: 'Advanced Electronics Production',
+    requirements: [
+      { resource: Resource.energyCells, value: 300 },
+      { resource: Resource.microchip, value: 220 },
+      { resource: Resource.quantumTube, value: 100 }
+    ],
+    production: { resource: Resource.advancedElectronics, value: 300 }
+  };
+
+  static antimatterConverter: ModuleDefinition = {
+    id: 31,
+    name: 'Antimatter Converter Production',
+    requirements: [
+      { resource: Resource.energyCells, value: 960 },
+      { resource: Resource.microchip, value: 360 },
+      { resource: Resource.advancedComposite, value: 240 }
+    ],
+    production: { resource: Resource.antimatterConverter, value: 1800 }
+  };
+
+  static claytronic: ModuleDefinition = {
+    id: 32,
+    name: 'Claytronic Production',
+    requirements: [
+      { resource: Resource.energyCells, value: 560 },
+      { resource: Resource.microchip, value: 640 },
+      { resource: Resource.quantumTube, value: 400 },
+      { resource: Resource.antimatterCell, value: 400 }
+    ],
+    production: { resource: Resource.claytronic, value: 480 }
+  };
+
+  static droneComponent: ModuleDefinition = {
+    id: 33,
+    name: 'Drone Component Production',
+    requirements: [
+      { resource: Resource.energyCells, value: 180 },
+      { resource: Resource.microchip, value: 60 },
+      { resource: Resource.scanningArray, value: 120 },
+      { resource: Resource.hullPart, value: 60 },
+      { resource: Resource.enginePart, value: 60 }
+    ],
+    production: { resource: Resource.droneComponent, value: 360 }
+  };
+
+  static missileComponent: ModuleDefinition = {
+    id: 34,
+    name: 'Missile Component Production',
+    requirements: [
+      { resource: Resource.energyCells, value: 80 },
+      { resource: Resource.hullPart, value: 8 },
+      { resource: Resource.advancedComposite, value: 8 }
+    ],
+    production: { resource: Resource.missileComponent, value: 1320 }
+  };
+
+  static shieldComponent: ModuleDefinition = {
+    id: 35,
+    name: 'Shield Component Production',
+    requirements: [
+      { resource: Resource.energyCells, value: 210 },
+      { resource: Resource.plasmaConductor, value: 60 },
+      { resource: Resource.quantumTube, value: 60 }
+    ],
+    production: { resource: Resource.shieldComponent, value: 660 }
+  };
+
+  static turretComponent: ModuleDefinition = {
+    id: 36,
+    name: 'Turret Component Production',
+    requirements: [
+      { resource: Resource.energyCells, value: 120 },
+      { resource: Resource.microchip, value: 40 },
+      { resource: Resource.scanningArray, value: 20 },
+      { resource: Resource.quantumTube, value: 40 },
+    ],
+    production: { resource: Resource.turretComponent, value: 400 }
+  };
+
+  static weaponComponent: ModuleDefinition = {
+    id: 37,
+    name: 'Weapon Component Production',
+    requirements: [
+      { resource: Resource.energyCells, value: 120 },
+      { resource: Resource.hullPart, value: 40 },
+      { resource: Resource.plasmaConductor, value: 60 }
+    ],
+    production: { resource: Resource.weaponComponent, value: 400 }
+  };
+
+  static smartChipsComponent: ModuleDefinition = {
+    id: 38,
+    name: 'Smart Chips Production',
+    requirements: [
+      { resource: Resource.energyCells, value: 300 },
+      { resource: Resource.siliconWafer, value: 120 }
+    ],
+    production: { resource: Resource.smartChips, value: 480 }
+  };
+
+  static fieldCoilsComponent: ModuleDefinition = {
+    id: 39,
+    name: 'Field Coils Production',
+    requirements: [
+      { resource: Resource.energyCells, value: 360 },
+      { resource: Resource.plasmaConductor, value: 240 },
+      { resource: Resource.quantumTube, value: 258 }
+    ],
+    production: { resource: Resource.fieldCoils, value: 1200 }
+  };
+
   static all = [
     Module.energyCell,
     Module.water,
@@ -358,7 +471,17 @@ export class Module {
     Module.advancedComposite,
     Module.enginePart,
     Module.plasmaConductor,
-    Module.quantumTube
+    Module.quantumTube,
+    Module.advancedElectronics,
+    Module.antimatterConverter,
+    Module.claytronic,
+    Module.droneComponent,
+    Module.missileComponent,
+    Module.shieldComponent,
+    Module.turretComponent,
+    Module.weaponComponent,
+    Module.smartChipsComponent,
+    Module.fieldCoilsComponent
   ];
 
   static basicResources = [
@@ -407,6 +530,19 @@ export class Module {
     Module.enginePart,
     Module.plasmaConductor,
     Module.quantumTube
+  ];
+
+  static finalGoods = [
+    Module.advancedElectronics,
+    Module.antimatterConverter,
+    Module.claytronic,
+    Module.droneComponent,
+    Module.missileComponent,
+    Module.shieldComponent,
+    Module.turretComponent,
+    Module.weaponComponent,
+    Module.smartChipsComponent,
+    Module.fieldCoilsComponent
   ];
 
   public static get(id: number) {
