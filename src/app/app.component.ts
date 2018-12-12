@@ -76,7 +76,8 @@ export class AppComponent implements OnInit {
     finalFood: Module.finalFood,
     illegal: Module.illegal,
     basicIntermediate: Module.basicIntermediate,
-    intermediateGoods: Module.intermediateGoods
+    intermediateGoods: Module.intermediateGoods,
+    finalGoods: Module.finalGoods
   };
 
   expandState: { [resourceId: number]: boolean } = {};
@@ -119,6 +120,7 @@ export class AppComponent implements OnInit {
       }
     });
 
+    resources.sort((x, y) => x.resource.id - y.resource.id);
     return resources;
   }
 

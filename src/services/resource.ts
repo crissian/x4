@@ -40,7 +40,7 @@ export class Resource {
   static readonly plasmaConductor = new Resource(33, 'Plasma Conductors');
   static readonly quantumTube = new Resource(34, 'Quantum Tubes');
 
-  static readonly advancedElectronic = new Resource(35, 'Advanced Electronics');
+  static readonly advancedElectronics = new Resource(35, 'Advanced Electronics');
   static readonly antimatterConverter = new Resource(36, 'Antimatter Converters');
   static readonly claytronic = new Resource(37, 'Claytronic');
   static readonly droneComponent = new Resource(38, 'Drone Components');
@@ -86,7 +86,7 @@ export class Resource {
     Resource.enginePart,
     Resource.plasmaConductor,
     Resource.quantumTube,
-    Resource.advancedElectronic,
+    Resource.advancedElectronics,
     Resource.antimatterConverter,
     Resource.claytronic,
     Resource.droneComponent,
