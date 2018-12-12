@@ -181,7 +181,7 @@ export class Module {
   };
 
   static spaceWeed: ModuleDefinition = {
-    id: 16,
+    id: 17,
     name: 'Space Weed Production',
     requirements: [
       { resource: Resource.energyCells, value: 840 },
@@ -192,7 +192,7 @@ export class Module {
   };
 
   static majaDust: ModuleDefinition = {
-    id: 17,
+    id: 18,
     name: 'Maja Dust Production',
     requirements: [
       { resource: Resource.energyCells, value: 240 },
@@ -203,7 +203,7 @@ export class Module {
   };
 
   static refinedMetal: ModuleDefinition = {
-    id: 18,
+    id: 19,
     name: 'Refined Metal Production',
     requirements: [
       { resource: Resource.energyCells, value: 2160 },
@@ -213,7 +213,7 @@ export class Module {
   };
 
   static siliconWaferMetal: ModuleDefinition = {
-    id: 19,
+    id: 20,
     name: 'Silicon Wafer Production',
     requirements: [
       { resource: Resource.energyCells, value: 1350 },
@@ -223,7 +223,7 @@ export class Module {
   };
 
   static antimatterCell: ModuleDefinition = {
-    id: 20,
+    id: 21,
     name: 'Antimatter Cell Production',
     requirements: [
       { resource: Resource.energyCells, value: 1800 },
@@ -233,7 +233,7 @@ export class Module {
   };
 
   static graphene: ModuleDefinition = {
-    id: 21,
+    id: 22,
     name: 'Graphene Production',
     requirements: [
       { resource: Resource.energyCells, value: 3000 },
@@ -243,7 +243,7 @@ export class Module {
   };
 
   static superfluidCoolant: ModuleDefinition = {
-    id: 22,
+    id: 23,
     name: 'Superfluid Coolant Production',
     requirements: [
       { resource: Resource.energyCells, value: 1200 },
@@ -253,7 +253,7 @@ export class Module {
   };
 
   static microchip: ModuleDefinition = {
-    id: 23,
+    id: 24,
     name: 'Microchip Production',
     requirements: [
       { resource: Resource.energyCells, value: 300 },
@@ -263,7 +263,7 @@ export class Module {
   };
 
   static scanningArray: ModuleDefinition = {
-    id: 24,
+    id: 25,
     name: 'Scanning Array Production',
     requirements: [
       { resource: Resource.energyCells, value: 360 },
@@ -274,7 +274,7 @@ export class Module {
   };
 
   static hullPart: ModuleDefinition = {
-    id: 25,
+    id: 26,
     name: 'Hull Part Production',
     requirements: [
       { resource: Resource.energyCells, value: 320 },
@@ -285,7 +285,7 @@ export class Module {
   };
 
   static advancedComposite: ModuleDefinition = {
-    id: 26,
+    id: 27,
     name: 'Advanced Composite Production',
     requirements: [
       { resource: Resource.energyCells, value: 600 },
@@ -296,7 +296,7 @@ export class Module {
   };
 
   static enginePart: ModuleDefinition = {
-    id: 27,
+    id: 28,
     name: 'Engine Part Production',
     requirements: [
       { resource: Resource.energyCells, value: 240 },
@@ -307,7 +307,7 @@ export class Module {
   };
 
   static plasmaConductor: ModuleDefinition = {
-    id: 28,
+    id: 29,
     name: 'Plasma Conductor Production',
     requirements: [
       { resource: Resource.energyCells, value: 240 },
@@ -318,7 +318,7 @@ export class Module {
   };
 
   static quantumTube: ModuleDefinition = {
-    id: 29,
+    id: 30,
     name: 'Quantum Tube Production',
     requirements: [
       { resource: Resource.energyCells, value: 200 },
@@ -329,7 +329,7 @@ export class Module {
   };
 
   static advancedElectronics: ModuleDefinition = {
-    id: 30,
+    id: 31,
     name: 'Advanced Electronics Production',
     requirements: [
       { resource: Resource.energyCells, value: 300 },
@@ -340,7 +340,7 @@ export class Module {
   };
 
   static antimatterConverter: ModuleDefinition = {
-    id: 31,
+    id: 32,
     name: 'Antimatter Converter Production',
     requirements: [
       { resource: Resource.energyCells, value: 960 },
@@ -351,7 +351,7 @@ export class Module {
   };
 
   static claytronic: ModuleDefinition = {
-    id: 32,
+    id: 33,
     name: 'Claytronic Production',
     requirements: [
       { resource: Resource.energyCells, value: 560 },
@@ -363,7 +363,7 @@ export class Module {
   };
 
   static droneComponent: ModuleDefinition = {
-    id: 33,
+    id: 34,
     name: 'Drone Component Production',
     requirements: [
       { resource: Resource.energyCells, value: 180 },
@@ -376,7 +376,7 @@ export class Module {
   };
 
   static missileComponent: ModuleDefinition = {
-    id: 34,
+    id: 35,
     name: 'Missile Component Production',
     requirements: [
       { resource: Resource.energyCells, value: 80 },
@@ -387,7 +387,7 @@ export class Module {
   };
 
   static shieldComponent: ModuleDefinition = {
-    id: 35,
+    id: 36,
     name: 'Shield Component Production',
     requirements: [
       { resource: Resource.energyCells, value: 210 },
@@ -398,7 +398,7 @@ export class Module {
   };
 
   static turretComponent: ModuleDefinition = {
-    id: 36,
+    id: 37,
     name: 'Turret Component Production',
     requirements: [
       { resource: Resource.energyCells, value: 120 },
@@ -410,7 +410,7 @@ export class Module {
   };
 
   static weaponComponent: ModuleDefinition = {
-    id: 37,
+    id: 38,
     name: 'Weapon Component Production',
     requirements: [
       { resource: Resource.energyCells, value: 120 },
@@ -421,7 +421,7 @@ export class Module {
   };
 
   static smartChipsComponent: ModuleDefinition = {
-    id: 38,
+    id: 39,
     name: 'Smart Chips Production',
     requirements: [
       { resource: Resource.energyCells, value: 300 },
@@ -431,7 +431,7 @@ export class Module {
   };
 
   static fieldCoilsComponent: ModuleDefinition = {
-    id: 39,
+    id: 40,
     name: 'Field Coils Production',
     requirements: [
       { resource: Resource.energyCells, value: 360 },
