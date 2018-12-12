@@ -1,0 +1,65 @@
+<app-header></app-header>
+
+<div class="row" style="padding: 0 10px 0 10px">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-sm table-hover">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Module</th>
+            <th scope="col">Count</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of stationModules; let index = index">
+            <td scope="row">{{ index + 1 }}</td>
+            <td>
+              <div class="form-group">
+                <select class="form-control" [(ngModel)]="item.moduleId">
+                  <option value="0">( Select )</option>
+                  <option *ngFor="let module of modules" [value]="module.id">{{ module.name }}</option>
+                </select>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="Module Count" [(ngModel)]="item.count"/>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <td colspan="3">
+              <button type="button" class="btn btn-primary" (click)="addModule()">Add Module</button>
+            </td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-sm table-hover">
+          <thead>
+          <tr>
+            <th scope="col">Resource</th>
+            <th scope="col">Amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of resources" [ngClass]="{ 'alert-danger': item.amount < 0, 'alert-success': item.amount > 0 }">
+            <td>{{ item.resource.name }}</td>
+            <td>{{ item.amount }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
