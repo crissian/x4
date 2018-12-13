@@ -1,8 +1,10 @@
+import { StorageType } from './storage-type';
+
 export class Resource {
-  static readonly ice = new Resource(1, 'Ice');
-  static readonly ore = new Resource(2, 'Ore');
-  static readonly silicon = new Resource(3, 'Silicon');
-  static readonly hydrogen = new Resource(4, 'Hydrogen');
+  static readonly ice = new Resource(1, 'Ice', 26, 35, 6, StorageType.solid);
+  static readonly ore = new Resource(2, 'Ore', 43, 68);
+  static readonly silicon = new Resource(3, 'Silicon', 111, 150);
+  static readonly hydrogen = new Resource(4, 'Hydrogen', 49, 67);
   static readonly methane = new Resource(5, 'Methane');
   static readonly helium = new Resource(6, 'Helium');
 
@@ -98,15 +100,15 @@ export class Resource {
     Resource.fieldCoils
   ];
 
-  id: number;
-  name: string;
-
-  constructor(id: number = null, name: string = null) {
-    this.id = id;
-    this.name = name;
+  constructor(public id: number, public name: string, public minPrice: number = null,
+              public maxPrice: number = null, volume: number = null, storageType: StorageType = null) {
   }
 
   static get(id: number) {
     return Resource.all.find(x => x.id === id);
+  }
+
+  get averagePrice() {
+    return Math.trunc(this.maxPrice - this.minPrice);
   }
 }
