@@ -8,27 +8,21 @@
         <div class="form-group row">
           <label class="col col-form-label col-form-label-sm">{{ entity.description }}</label>
         </div>
-        <table class="table table-sm table-bordered">
-          <tbody>
-            <tr>
-              <th>Price</th>
-              <td>{{ entity.price.min | number }} - {{ entity.price.max | number }} <mark>(difference: {{ entity.price.max - entity.price.min | number }})</mark></td>
-            </tr>
+        <dl class="row">
+          <dt class="col-sm-2">Price</dt>
+          <dd class="col-sm-10">
+            {{ entity.price.min | number }} - {{ entity.price.max | number }} <span class="text-success">(difference: {{ entity.price.max - entity.price.min | number }})</span>
+          </dd>
 
-            <tr>
-              <th>Volume</th>
-              <td>{{ entity.volume }}</td>
-            </tr>
-            <tr>
-              <th>Transport</th>
-              <td>{{ entity.transport }}</td>
-            </tr>
-            <tr>
-              <th>Type</th>
-              <td>{{ entity.group.name }}</td>
-            </tr>
-          </tbody>
-        </table>
+          <dt class="col-sm-2">Volume</dt>
+          <dd class="col-sm-10">{{ entity.volume }}</dd>
+
+          <dt class="col-sm-2">Transport</dt>
+          <dd class="col-sm-10">{{ entity.transport }}</dd>
+
+          <dt class="col-sm-2">Type</dt>
+          <dd class="col-sm-10">{{ entity.group.name }}</dd>
+        </dl>
       </div>
     </div>
   </div>

@@ -2,21 +2,6 @@
   cursor: pointer;
 }
 
-@media (min-width: 768px) {
-  .bd-navbar {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1071;
-  }
-}
-
-.bd-navbar {
-  min-height: 4rem;
-  background-color: #563d7c;
-  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
-}
-
 .content-row {
   padding: 10px 10px 10px 0;
 }
