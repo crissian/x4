@@ -1,0 +1,35 @@
+<div class="row content-row">
+  <div class="col-md-12">
+    <div class="card" *ngIf="entity">
+      <div class="card-header">
+        {{ entity.name }}
+      </div>
+      <div class="card-body" *ngIf="entity">
+        <div class="form-group row">
+          <label class="col col-form-label col-form-label-sm">{{ entity.description }}</label>
+        </div>
+        <table class="table table-sm table-bordered">
+          <tbody>
+            <tr>
+              <th>Price</th>
+              <td>{{ entity.price.min | number }} - {{ entity.price.max | number }} <mark>(difference: {{ entity.price.max - entity.price.min | number }})</mark></td>
+            </tr>
+
+            <tr>
+              <th>Volume</th>
+              <td>{{ entity.volume }}</td>
+            </tr>
+            <tr>
+              <th>Transport</th>
+              <td>{{ entity.transport }}</td>
+            </tr>
+            <tr>
+              <th>Type</th>
+              <td>{{ entity.group.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Module, ModuleDefinition } from '../../services/module';
-import { Resource } from '../../services/resource';
+import { Module, ModuleDefinition } from '../services/module';
+import { Resource } from '../services/resource';
 
 
 interface ModuleConfig {

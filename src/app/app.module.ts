@@ -8,20 +8,27 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { StationCalculatorComponent } from './components/station-calculator.component';
+import { WareService } from './services/ware.service';
+import { WaresComponent } from './components/wares.component';
+import { WareDetailComponent } from './components/ware-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    StationCalculatorComponent
+    StationCalculatorComponent,
+    WaresComponent,
+    WareDetailComponent
   ],
   imports: [
     NgbModule,
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { useHash: true }),
   ],
-  providers: [],
+  providers: [
+    WareService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
