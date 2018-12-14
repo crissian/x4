@@ -85,14 +85,16 @@
           </tr>
           </thead>
           <tbody>
-          <tr class="hover-icon" *ngFor="let item of resources" [ngClass]="{ 'alert-danger': item.amount < 0, 'alert-success': item.amount > 0 }" (click)="toggleExpanded(item)">
+          <tr class="hover-icon" *ngFor="let item of resources" (click)="toggleExpanded(item)">
             <td>
               <i *ngIf="!item.expanded" class="fa fa-angle-right"></i>
               <i *ngIf="item.expanded" class="fa fa-angle-down"></i>
-              {{ item.resource.name }}
+              <span [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }"> {{ item.resource.name }}</span>
               <ul *ngIf="item.expanded">
                 <li *ngFor="let moduleRes of item.moduleResources">
-                  ({{ (moduleRes.count * moduleRes.value) | number }}) {{ moduleRes.count }} x {{ moduleRes.moduleName }}
+                  <small [ngClass]="{'text-danger': moduleRes.value < 0, 'text-success': moduleRes.value > 0 }">
+                    ({{ (moduleRes.count * moduleRes.value) | number }}) {{ moduleRes.count }} x {{ moduleRes.moduleName }}
+                  </small>
                 </li>
               </ul>
             </td>
