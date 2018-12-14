@@ -1,107 +1,108 @@
 <div class="row content-row">
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="card">
       <div class="card-header">
         Station Calculator
       </div>
       <div class="card-body">
-        <table class="table table-sm table-hover">
-          <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Module</th>
-            <th scope="col">Count</th>
-            <th scope="col"><i class="fa fa-trash" aria-hidden="true"></i></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let item of stationModules; let index = index">
-            <td scope="row">{{ index + 1 }}</td>
-            <td>
-              <div class="form-group">
-                <select class="form-control form-control-sm" [(ngModel)]="item.moduleId">
-                  <option value="0">( Select )</option>
+        <div class="row">
+          <div class="col-md-6">
+            <h6 class="card-title">Station Modules</h6>
+            <table class="table table-sm table-hover">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Module</th>
+                <th scope="col">Count</th>
+                <th scope="col"><i class="fa fa-trash" aria-hidden="true"></i></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of stationModules; let index = index">
+                <td scope="row">{{ index + 1 }}</td>
+                <td>
+                  <div class="form-group">
+                    <select class="form-control form-control-sm" [(ngModel)]="item.moduleId">
+                      <option value="0">( Select )</option>
 
-                  <optgroup label="Basic Resources">
-                    <option *ngFor="let module of modules.basicResources" [value]="module.id">{{ module.name }}</option>
-                  </optgroup>
+                      <optgroup label="Basic Resources">
+                        <option *ngFor="let module of modules.basicResources" [value]="module.id">{{ module.name }}</option>
+                      </optgroup>
 
-                  <optgroup label="Basic Food & Water">
-                    <option *ngFor="let module of modules.basicFood" [value]="module.id">{{ module.name }}</option>
-                  </optgroup>
+                      <optgroup label="Basic Food & Water">
+                        <option *ngFor="let module of modules.basicFood" [value]="module.id">{{ module.name }}</option>
+                      </optgroup>
 
-                  <optgroup label="Final Food">
-                    <option *ngFor="let module of modules.finalFood" [value]="module.id">{{ module.name }}</option>
-                  </optgroup>
+                      <optgroup label="Final Food">
+                        <option *ngFor="let module of modules.finalFood" [value]="module.id">{{ module.name }}</option>
+                      </optgroup>
 
-                  <optgroup label="Illegal Goods">
-                    <option *ngFor="let module of modules.illegal" [value]="module.id">{{ module.name }}</option>
-                  </optgroup>
+                      <optgroup label="Illegal Goods">
+                        <option *ngFor="let module of modules.illegal" [value]="module.id">{{ module.name }}</option>
+                      </optgroup>
 
-                  <optgroup label="Basic Intermediate Goods">
-                    <option *ngFor="let module of modules.basicIntermediate" [value]="module.id">{{ module.name }}</option>
-                  </optgroup>
+                      <optgroup label="Basic Intermediate Goods">
+                        <option *ngFor="let module of modules.basicIntermediate" [value]="module.id">{{ module.name }}</option>
+                      </optgroup>
 
-                  <optgroup label="Intermediate Goods">
-                    <option *ngFor="let module of modules.intermediateGoods" [value]="module.id">{{ module.name }}</option>
-                  </optgroup>
+                      <optgroup label="Intermediate Goods">
+                        <option *ngFor="let module of modules.intermediateGoods" [value]="module.id">{{ module.name }}</option>
+                      </optgroup>
 
-                  <optgroup label="Final Construction Goods">
-                    <option *ngFor="let module of modules.finalGoods" [value]="module.id">{{ module.name }}</option>
-                  </optgroup>
-                </select>
-              </div>
-            </td>
-            <td>
-              <div class="form-group">
-                <input type="number" class="form-control form-control-sm" placeholder="Module Count" [(ngModel)]="item.count"/>
-              </div>
-            </td>
-            <td>
-              <i class="fa fa-trash hover-icon" aria-hidden="true" (click)="removeModule(item)"></i>
-            </td>
-          </tr>
-          </tbody>
-          <tfoot>
-          <tr>
-            <td colspan="3">
-              <button type="button" class="btn btn-secondary btn-sm" (click)="addModule()">Add Module</button>
-            </td>
-          </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-
-  </div>
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-body">
-        <table class="table table-sm">
-          <thead>
-          <tr>
-            <th scope="col">Resource</th>
-            <th scope="col">Amount</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr class="hover-icon" *ngFor="let item of resources" (click)="toggleExpanded(item)">
-            <td>
-              <i *ngIf="!item.expanded" class="fa fa-angle-right"></i>
-              <i *ngIf="item.expanded" class="fa fa-angle-down"></i>
-              <span [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }"> {{ item.resource.name }}</span>
-              <ul *ngIf="item.expanded">
-                <li *ngFor="let moduleRes of item.moduleResources">
-                  <small [ngClass]="{'text-danger': moduleRes.value < 0, 'text-success': moduleRes.value > 0 }">
-                    ({{ (moduleRes.count * moduleRes.value) | number }}) {{ moduleRes.count }} x {{ moduleRes.moduleName }}
-                  </small>
-                </li>
-              </ul>
-            </td>
-            <td>{{ item.amount | number }}</td>
-          </tr>
-          </tbody>
-        </table>
+                      <optgroup label="Final Construction Goods">
+                        <option *ngFor="let module of modules.finalGoods" [value]="module.id">{{ module.name }}</option>
+                      </optgroup>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <input type="number" class="form-control form-control-sm" placeholder="Module Count" [(ngModel)]="item.count"/>
+                  </div>
+                </td>
+                <td>
+                  <i class="fa fa-trash hover-icon" aria-hidden="true" (click)="removeModule(item)"></i>
+                </td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr>
+                <td colspan="3">
+                  <button type="button" class="btn btn-secondary btn-sm" (click)="addModule()">Add Module</button>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <h6 class="card-title">Station Resources</h6>
+            <table class="table table-sm">
+              <thead>
+              <tr>
+                <th scope="col">Resource</th>
+                <th scope="col">Amount</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="hover-icon" *ngFor="let item of resources" (click)="toggleExpanded(item)">
+                <td>
+                  <i *ngIf="!item.expanded" class="fa fa-angle-right"></i>
+                  <i *ngIf="item.expanded" class="fa fa-angle-down"></i>
+                  <span [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }"> {{ item.resource.name }}</span>
+                  <ul *ngIf="item.expanded">
+                    <li *ngFor="let moduleRes of item.moduleResources">
+                      <small [ngClass]="{'text-danger': moduleRes.value < 0, 'text-success': moduleRes.value > 0 }">
+                        ({{ (moduleRes.count * moduleRes.value) | number }}) {{ moduleRes.count }} x {{ moduleRes.moduleName }}
+                      </small>
+                    </li>
+                  </ul>
+                </td>
+                <td>{{ item.amount | number }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -36,12 +36,32 @@ export class WareService {
   }
 
   getWare(id: string) {
-    const entity = Wares.find(x => x.id === id);
-    return of(this.map(entity));
+    const result = this.getWareInternal(id, true);
+    return of(result);
   }
 
-  private map(entity: any) {
+  private getWareInternal(id: string, loadProductionWares = true) {
+    const entity = Wares.find(x => x.id === id);
+    return this.map(entity, loadProductionWares);
+  }
+
+  private map(entity: any, mapProduction = false) {
     const group = WareGroups.find(g => g.id === entity.group);
-    return { ...entity, group: group };
+    const result = { ...entity, group: group };
+
+    if (mapProduction) {
+      if (result.production != null) {
+        result.production.forEach(x => {
+          for (let i = 0; i < x.wares.length; i ++) {
+            const ware = x.wares[i];
+            if (typeof ware.ware === 'string') {
+              x.wares[i] = {...ware, ware: this.getWareInternal(ware.ware, false)};
+            }
+          }
+        });
+      }
+    }
+
+    return result;
   }
 }
