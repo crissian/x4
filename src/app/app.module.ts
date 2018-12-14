@@ -11,6 +11,8 @@ import { StationCalculatorComponent } from './components/station-calculator.comp
 import { WareService } from './services/ware.service';
 import { WaresComponent } from './components/wares.component';
 import { WareDetailComponent } from './components/ware-detail.component';
+import { AnalyticsModule } from './google-analytics/analytics.module';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { WareDetailComponent } from './components/ware-detail.component';
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes, { useHash: true }),
+    AnalyticsModule.forRoot({ trackingId: environment.googleAnalytics })
   ],
   providers: [
     WareService
