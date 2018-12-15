@@ -1,6 +1,7 @@
 import { WareGroup } from './ware-group';
 import { Price } from './price';
 import { Production } from './production';
+import { WareTransport } from './ware-transport';
 
 export class Ware {
   id: string;
@@ -11,7 +12,7 @@ export class Ware {
   icon: string;
 
   group: WareGroup;
-  transport: Transport;
+  transport: WareTransport;
   price: Price;
   production: Production[];
 

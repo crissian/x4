@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Module, ModuleDefinition } from '../services/module';
 import { Resource } from '../services/resource';
-
-
-interface ModuleConfig {
-  moduleId?: number;
-  count: number;
-}
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ShareLayoutComponent } from './share-layout.component';
+import * as urlon from 'urlon';
+import { ActivatedRoute } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { ComponentBase } from '../shared/component-base';
+import { Layout, ModuleConfig } from '../services/module-config';
+import { LayoutService } from '../services/layout-service';
+import { SaveLayoutComponent } from './save-layout.component';
+import { Message, MessageType } from '../services/message';
 
 interface ModuleResourceOutput {
   module: ModuleDefinition;
@@ -27,7 +31,7 @@ class ResourceOutput {
   }
 
   addModuleResource(module: ModuleDefinition, count: number) {
-    this.modules.push({ module: module, count: count });
+    this.modules.push({module: module, count: count});
   }
 
   get moduleResources() {
@@ -35,12 +39,12 @@ class ResourceOutput {
 
     this.modules.forEach(x => {
       if (x.module.production != null && x.module.production.resource.id === this.resource.id) {
-        result.push({ count: x.count, moduleName: x.module.name, value: x.module.production.value });
+        result.push({count: x.count, moduleName: x.module.name, value: x.module.production.value});
       }
 
       const requirement = x.module.requirements.find(r => r.resource.id === this.resource.id);
       if (requirement != null) {
-        result.push({ count: x.count, moduleName: x.module.name, value: -requirement.value });
+        result.push({count: x.count, moduleName: x.module.name, value: -requirement.value});
       }
     });
 
@@ -69,8 +73,7 @@ class ResourceOutput {
   selector: 'app-station-calculator',
   templateUrl: './station-calculator.component.html'
 })
-export class StationCalculatorComponent implements OnInit {
-  stationModules: ModuleConfig[] = [];
+export class StationCalculatorComponent extends ComponentBase implements OnInit {
   modules = {
     basicResources: Module.basicResources,
     basicFood: Module.basicFood,
@@ -82,9 +85,35 @@ export class StationCalculatorComponent implements OnInit {
   };
 
   expandState: { [resourceId: number]: boolean } = {};
+  layout: Layout;
+  messages: Message[] = [];
+
+  @Input()
+  stationModules: ModuleConfig[] = [];
+
+  constructor(private modal: NgbModal, private route: ActivatedRoute, private layoutService: LayoutService) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.stationModules.push({moduleId: 0, count: 0});
+    this.route.queryParams
+      .pipe(
+        takeUntil(this.onDestroy)
+      )
+      .subscribe(data => {
+        if (data['l']) {
+          try {
+            const layout = data['l'].replace(/-/g, '=').replace(/,/g, '&');
+            this.stationModules = urlon.parse(layout);
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      });
+
+    if (this.stationModules.length === 0) {
+      this.stationModules.push({moduleId: 0, count: 0});
+    }
   }
 
   get resources() {
@@ -139,5 +168,39 @@ export class StationCalculatorComponent implements OnInit {
 
   addModule() {
     this.stationModules.push({moduleId: 0, count: 0});
+  }
+
+  shareLayout() {
+    const modalRef = this.modal.open(ShareLayoutComponent);
+    const params = urlon.stringify(this.stationModules.filter(x => x.count > 0 && x.moduleId != 0)).replace(/=/g, '-').replace(/&/g, ',');
+    const url = window.location.href.split('?')[0];
+    modalRef.componentInstance.url = `${url}?l=${params}`;
+  }
+
+  save() {
+    if (!this.layout || !this.layout.name) {
+      const modalRef = this.modal.open(SaveLayoutComponent);
+      modalRef.result
+        .then(res => {
+          if (res) {
+            this.layout = {
+              name: res,
+              config: this.stationModules
+            };
+            this.layoutService.saveLayout(this.layout);
+            this.messages.push({
+              type: MessageType.success,
+              content: `<strong>${res}</strong> successfully saved.`
+            });
+          }
+        });
+    } else {
+      this.layout.config = this.stationModules;
+      this.layoutService.saveLayout(this.layout);
+      this.messages.push({
+        type: MessageType.success,
+        content: `<strong>${this.layout.name}</strong> successfully saved.`
+      });
+    }
   }
 }

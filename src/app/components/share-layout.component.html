@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <h4 class="modal-title">Share Layout</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="input-group">
+    <input class="form-control" [value]="url" readonly #urlInput />
+    <div class="input-group-append">
+      <button class="btn btn-sm btn-outline-secondary" type="button" (click)="copy(urlInput)">Copy</button>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" (click)="activeModal.close()">Ok</button>
+</div>

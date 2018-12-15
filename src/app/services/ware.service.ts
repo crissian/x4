@@ -4,6 +4,9 @@ import { of } from 'rxjs';
 import { WareGroups } from './data/ware-groups-data';
 import { Ware } from './model/ware';
 import { WareGroup } from './model/ware-group';
+import { WareTransport } from './model/ware-transport';
+import { Price } from './model/price';
+import { Production } from './model/production';
 
 export class WareType {
   static ware = [
@@ -30,13 +33,38 @@ export class WareService {
   getEntities() {
     if (this.wares == null) {
       this.wareGroups = WareGroups.map(x => WareGroup.initialize(x));
-      this.wares = Wares.map(x => Ware.initialize(x));
+      this.wares = Wares.map(x => {
+        const ware = Ware.initialize(x);
 
-      this.wares.forEach(ware => {
-        // ware.group = this.wareGroups.find(x => x.id == ware.group);
+        ware.group = this.wareGroups.find(g => g.id == x.group);
+        ware.transport = WareTransport.get(x.transport);
+        ware.price = new Price(x.price.min, x.price.max, x.price.average);
+        ware.icon = x.icon == null ? null : x.icon.active;
+
+        ware.production = this.getProduction(x.production);
+
+        return ware;
       });
+
+      // this.wares.forEach(x =)
     }
   }
+
+  private getProduction(production: any[]): any {
+    return production.map(prod => {
+      const item = <any>new Production();
+
+      item.time = prod.time;
+      item.amount = prod.amount;
+      item.method = prod.method;
+      item.name = prod.name;
+      item.wares = null;
+      item.effects = null;
+
+      return item;
+    });
+  }
+
   getWares() {
     const results = Wares
       .filter(x => WareType.ware.indexOf(x.group) >= 0)

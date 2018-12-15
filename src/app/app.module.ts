@@ -13,6 +13,11 @@ import { WaresComponent } from './components/wares.component';
 import { WareDetailComponent } from './components/ware-detail.component';
 import { AnalyticsModule } from './google-analytics/analytics.module';
 import { environment } from '../environments/environment';
+import { ShareLayoutComponent } from './components/share-layout.component';
+import { SaveLayoutComponent } from './components/save-layout.component';
+import { StorageService } from './services/storage.service';
+import { LayoutService } from './services/layout-service';
+import { MessagesComponent } from './components/messages.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,14 @@ import { environment } from '../environments/environment';
     HeaderComponent,
     StationCalculatorComponent,
     WaresComponent,
-    WareDetailComponent
+    WareDetailComponent,
+    ShareLayoutComponent,
+    SaveLayoutComponent,
+    MessagesComponent
+  ],
+  entryComponents: [
+    ShareLayoutComponent,
+    SaveLayoutComponent
   ],
   imports: [
     NgbModule,
@@ -30,7 +42,9 @@ import { environment } from '../environments/environment';
     AnalyticsModule.forRoot({ trackingId: environment.googleAnalytics })
   ],
   providers: [
-    WareService
+    WareService,
+    StorageService,
+    LayoutService
   ],
   bootstrap: [AppComponent]
 })
