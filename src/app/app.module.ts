@@ -18,6 +18,7 @@ import { SaveLayoutComponent } from './components/save-layout.component';
 import { StorageService } from './services/storage.service';
 import { LayoutService } from './services/layout-service';
 import { MessagesComponent } from './components/messages.component';
+import { LoadLayoutComponent } from './components/load-layout.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +29,13 @@ import { MessagesComponent } from './components/messages.component';
     WareDetailComponent,
     ShareLayoutComponent,
     SaveLayoutComponent,
+    LoadLayoutComponent,
     MessagesComponent
   ],
   entryComponents: [
     ShareLayoutComponent,
-    SaveLayoutComponent
+    SaveLayoutComponent,
+    LoadLayoutComponent
   ],
   imports: [
     NgbModule,

@@ -11,6 +11,7 @@ import { Layout, ModuleConfig } from '../services/module-config';
 import { LayoutService } from '../services/layout-service';
 import { SaveLayoutComponent } from './save-layout.component';
 import { Message, MessageType } from '../services/message';
+import { LoadLayoutComponent } from './load-layout.component';
 
 interface ModuleResourceOutput {
   module: ModuleDefinition;
@@ -177,7 +178,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
     modalRef.componentInstance.url = `${url}?l=${params}`;
   }
 
-  save() {
+  saveLayout() {
     if (!this.layout || !this.layout.name) {
       const modalRef = this.modal.open(SaveLayoutComponent);
       modalRef.result
@@ -202,5 +203,9 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
         content: `<strong>${this.layout.name}</strong> successfully saved.`
       });
     }
+  }
+
+  loadLayout() {
+    const modalRef = this.modal.open(LoadLayoutComponent);
   }
 }
