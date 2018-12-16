@@ -9,12 +9,17 @@ export class LayoutService {
   constructor(private storageService: StorageService) {
   }
 
-  getLayouts() {
+  getLayouts(): Layout[] {
     const layouts = this.storageService.get<Layout[]>(LayoutService.storageKey);
     if (layouts == null) {
       return [];
     }
     return layouts;
+  }
+
+  getLayout(name: string): Layout {
+    return this.getLayouts()
+      .find(x => x.name === name);
   }
 
   saveLayout(layout: Layout) {
