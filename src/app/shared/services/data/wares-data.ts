@@ -1,3 +1,4 @@
+/* tslint:disable:max-line-length */
 export const Wares = [
   {
     id: 'advancedcomposites',
@@ -29426,4 +29427,4 @@ export const Wares = [
       active: 'ware_advancedelectronics'
     }
   }
-]
+];

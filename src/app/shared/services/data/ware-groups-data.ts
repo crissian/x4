@@ -128,4 +128,4 @@ export const WareGroups = [
     id: 'weapons',
     name: 'Weapons'
   }
-]
+];

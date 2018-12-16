@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { StorageService } from './storage.service';
-import { Layout } from './module-config';
+import { StorageService } from '../../core/services/storage.service';
+import { Layout } from '../../shared/services/module-config';
 
 @Injectable()
 export class LayoutService {

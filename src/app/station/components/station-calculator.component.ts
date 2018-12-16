@@ -1,16 +1,16 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Module, ModuleDefinition } from '../services/module';
-import { Resource } from '../services/resource';
+import { Component, Input, OnInit } from '@angular/core';
+import { Module, ModuleDefinition } from '../../shared/services/module';
+import { Resource } from '../../shared/services/resource';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShareLayoutComponent } from './share-layout.component';
 import * as urlon from 'urlon';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
-import { ComponentBase } from '../shared/component-base';
-import { Layout, ModuleConfig } from '../services/module-config';
+import { ComponentBase } from '../../shared/components/component-base';
+import { Layout, ModuleConfig } from '../../shared/services/module-config';
 import { LayoutService } from '../services/layout-service';
 import { SaveLayoutComponent } from './save-layout.component';
-import { Message, MessageType } from '../services/message';
+import { Message, MessageType } from '../../shared/services/message';
 import { LoadLayoutComponent } from './load-layout.component';
 
 interface ModuleResourceOutput {
@@ -206,6 +206,6 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   }
 
   loadLayout() {
-    const modalRef = this.modal.open(LoadLayoutComponent);
+    this.modal.open(LoadLayoutComponent);
   }
 }

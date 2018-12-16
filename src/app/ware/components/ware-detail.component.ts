@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ComponentBase } from '../shared/component-base';
-import { WareService } from '../services/ware.service';
+import { ComponentBase } from '../../shared/components/component-base';
+import { WareService } from '../../shared/services/ware.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 

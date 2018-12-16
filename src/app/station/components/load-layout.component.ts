@@ -1,9 +1,9 @@
-import { ComponentBase } from '../shared/component-base';
+import { ComponentBase } from '../../shared/components/component-base';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { LayoutService } from '../services/layout-service';
-import { Layout } from '../services/module-config';
-import { Module } from '../services/module';
+import { Layout } from '../../shared/services/module-config';
+import { Module } from '../../shared/services/module';
 
 class LayoutData {
 
