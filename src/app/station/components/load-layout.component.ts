@@ -1,8 +1,9 @@
 import { ComponentBase } from '../../shared/components/component-base';
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { LayoutService } from '../services/layout-service';
 import {Module, ModuleDefinition} from '../../shared/services/module';
+import {ConfirmComponent} from '../../shared/components/confirm.component';
 
 interface LayoutModule {
   count: number;
@@ -20,7 +21,7 @@ interface LayoutData {
 export class LoadLayoutComponent extends ComponentBase implements OnInit {
   entities: LayoutData[];
 
-  constructor(public activeModal: NgbActiveModal, private layoutService: LayoutService) {
+  constructor(public activeModal: NgbActiveModal, private modal: NgbModal, private layoutService: LayoutService) {
     super();
   }
 
@@ -42,6 +43,20 @@ export class LoadLayoutComponent extends ComponentBase implements OnInit {
     return item.modules.map(x => x.count + ' x ' + (x.module == null ? '' : x.module.name)).join(', ');
   }
 
-  deleteLayout(item: LayoutData) {
+  deleteLayout(event: any, item: LayoutData) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const modalRef = this.modal.open(ConfirmComponent);
+    modalRef.componentInstance.title = 'Confirm Delete';
+    modalRef.componentInstance.message = `Are you sure you want to delete <strong>${item.name}</strong>?`;
+
+    modalRef.result
+      .then(res => {
+        if (res) {
+          this.layoutService.deleteLayout(item.name);
+          this.ngOnInit();
+        }
+      });
   }
 }

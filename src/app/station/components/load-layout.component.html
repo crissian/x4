@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title">Load Layout</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -9,10 +9,7 @@
     <a *ngFor="let entity of entities" class="list-group-item list-group-item-action" (click)="activeModal.close(entity.name)">
       <div>
         <strong>{{ entity.name }}</strong>
-        &nbsp;
-        <small class="text-danger">
-          <a class="hover-icon" (click)="deleteLayout(entity)">Delete</a>
-        </small>
+        <a class="hover-icon text-danger float-right small" (click)="deleteLayout($event, entity)">Delete</a>
       </div>
       <small>
         {{ getModules(entity) }}

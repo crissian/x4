@@ -36,10 +36,10 @@ export class LayoutService {
     this.storageService.add(LayoutService.storageKey, layouts);
   }
 
-  deleteLauout(layout: Layout) {
+  deleteLayout(name: string) {
     const layouts = this.getLayouts();
 
-    const index = layouts.findIndex(x => x.name.toLowerCase() === layout.name.toLowerCase());
+    const index = layouts.findIndex(x => x.name.toLowerCase() === name.toLowerCase());
     if (index >= 0) {
       layouts.splice(index, 1);
     }

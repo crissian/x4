@@ -6,24 +6,32 @@ import {BrowserModule} from '@angular/platform-browser';
 import {MessagesComponent} from './components/messages.component';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
+import {ConfirmComponent} from './components/confirm.component';
+import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     CoreModule,
-    RouterModule
+    RouterModule,
+    NgbModalModule
   ],
   providers: [
     WareService
   ],
   declarations: [
     HeaderComponent,
-    MessagesComponent
+    MessagesComponent,
+    ConfirmComponent
+  ],
+  entryComponents: [
+    ConfirmComponent
   ],
   exports: [
     HeaderComponent,
-    MessagesComponent
+    MessagesComponent,
+    ConfirmComponent
   ]
 })
 export class SharedModule {

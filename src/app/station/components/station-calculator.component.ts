@@ -178,23 +178,27 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
     modalRef.componentInstance.url = `${url}?l=${params}`;
   }
 
+  saveLayoutAs() {
+    const modalRef = this.modal.open(SaveLayoutComponent);
+    modalRef.result
+      .then(res => {
+        if (res) {
+          this.layout = {
+            name: res,
+            config: this.stationModules
+          };
+          this.layoutService.saveLayout(this.layout);
+          this.messages.push({
+            type: MessageType.success,
+            content: `<strong>${res}</strong> successfully saved.`
+          });
+        }
+      });
+  }
+
   saveLayout() {
     if (!this.layout || !this.layout.name) {
-      const modalRef = this.modal.open(SaveLayoutComponent);
-      modalRef.result
-        .then(res => {
-          if (res) {
-            this.layout = {
-              name: res,
-              config: this.stationModules
-            };
-            this.layoutService.saveLayout(this.layout);
-            this.messages.push({
-              type: MessageType.success,
-              content: `<strong>${res}</strong> successfully saved.`
-            });
-          }
-        });
+      this.saveLayoutAs();
     } else {
       this.layout.config = this.stationModules;
       this.layoutService.saveLayout(this.layout);
