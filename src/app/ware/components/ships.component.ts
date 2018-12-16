@@ -9,7 +9,7 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './ships.component.html'
 })
 export class ShipsComponent extends ComponentBase implements OnInit {
-  private entities: any[];
+  entities: any[];
 
   constructor(private wareService: WareService, private router: Router, private titleService: Title) {
     super();

@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './equipments.component.html'
 })
 export class EquipmentsComponent extends ComponentBase implements OnInit {
-  private entities: any[];
+  entities: any[];
 
   constructor(private wareService: WareService, private router: Router, private titleService: Title) {
     super();
@@ -28,6 +28,6 @@ export class EquipmentsComponent extends ComponentBase implements OnInit {
   }
 
   showEntity(item: any) {
-    return this.router.navigate(['/equipment', item.id]);
+    return this.router.navigate(['/equipments', item.id]);
   }
 }

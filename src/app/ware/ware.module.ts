@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ShipsComponent } from './components/ships.component';
 import { ShipDetailComponent } from './components/ship-detail.component';
+import { EquipmentsComponent } from './components/equipments.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { ShipDetailComponent } from './components/ship-detail.component';
     WaresComponent,
     WareDetailComponent,
     ShipsComponent,
-    ShipDetailComponent
+    ShipDetailComponent,
+    EquipmentsComponent
   ]
 })
 export class WareModule {
