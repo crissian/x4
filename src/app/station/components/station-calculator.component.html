@@ -87,6 +87,14 @@
                   <button type="button" class="btn btn-secondary btn-sm" (click)="addModule()">Add Module</button>
                 </td>
               </tr>
+              <tr>
+                <td colspan="3">
+                  <div class="form-group">
+                    <label for="production-efficiency">Production Efficiency: <strong class="text-info">{{ productionEfficiency }}%</strong></label>
+                    <input id="production-efficiency" type="range" class="custom-range" min="100" max="150" [(ngModel)]="productionEfficiency" />
+                  </div>
+                </td>
+              </tr>
               </tfoot>
             </table>
           </div>
@@ -108,7 +116,8 @@
                   <ul *ngIf="item.expanded">
                     <li *ngFor="let moduleRes of item.moduleResources">
                       <small [ngClass]="{'text-danger': moduleRes.value < 0, 'text-success': moduleRes.value > 0 }">
-                        ({{ (moduleRes.count * moduleRes.value) | number }}) {{ moduleRes.count }} x {{ moduleRes.moduleName }}
+                        ({{ (moduleRes.count * moduleRes.value * (moduleRes.value < 0 ? 1 : (item.efficiency  / 100))) | number }})
+                        {{ moduleRes.count }} x {{ moduleRes.moduleName }}
                       </small>
                     </li>
                   </ul>

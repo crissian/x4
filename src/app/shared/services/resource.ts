@@ -21,7 +21,7 @@ export class Resource {
   static readonly swampPlant = new Resource(15, 'Swamp Plant');
 
   static readonly medicalSupplies = new Resource(16, 'Medical Supplies');
-  static readonly foodRatios = new Resource(17, 'Food Ratios');
+  static readonly foodRation = new Resource(17, 'Food Rations');
   static readonly sojaHusk = new Resource(18, 'Soja Husk');
   static readonly nostropOil = new Resource(19, 'Nostrop Oil');
   static readonly spaceFuel = new Resource(20, 'Space Fuel');
@@ -70,7 +70,7 @@ export class Resource {
     Resource.sunriseFlowers,
     Resource.swampPlant,
     Resource.medicalSupplies,
-    Resource.foodRatios,
+    Resource.foodRation,
     Resource.sojaHusk,
     Resource.nostropOil,
     Resource.spaceFuel,

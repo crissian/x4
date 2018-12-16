@@ -134,16 +134,16 @@ export class Module {
     production: { resource: Resource.medicalSupplies, value: 1440 }
   };
 
-  static foodRatios: ModuleDefinition = {
+  static foodRation: ModuleDefinition = {
     id: 13,
-    name: 'Food Ratios Production',
+    name: 'Food Ration Production',
     requirements: [
       { resource: Resource.energyCells, value: 600 },
       { resource: Resource.meat, value: 600 },
       { resource: Resource.spices, value: 300 },
       { resource: Resource.wheat, value: 600 },
     ],
-    production: { resource: Resource.foodRatios, value: 4920 }
+    production: { resource: Resource.foodRation, value: 4920 }
   };
 
   static sojaHusk: ModuleDefinition = {
@@ -175,6 +175,7 @@ export class Module {
     name: 'Space Fuel Production',
     requirements: [
       { resource: Resource.energyCells, value: 300 },
+      { resource: Resource.water, value: 750 },
       { resource: Resource.wheat, value: 600 }
     ],
     production: { resource: Resource.spaceFuel, value: 900 }
@@ -454,7 +455,7 @@ export class Module {
     Module.medicalSuppliesArgon,
     Module.medicalSuppliesTeladi,
     Module.medicalSuppliesParanid,
-    Module.foodRatios,
+    Module.foodRation,
     Module.sojaHusk,
     Module.nostropOil,
     Module.spaceFuel,
@@ -503,7 +504,7 @@ export class Module {
     Module.medicalSuppliesArgon,
     Module.medicalSuppliesTeladi,
     Module.medicalSuppliesParanid,
-    Module.foodRatios,
+    Module.foodRation,
     Module.sojaHusk,
     Module.nostropOil
   ];

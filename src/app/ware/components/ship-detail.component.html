@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="card" *ngIf="entity">
       <div class="card-header">
-        <a routerLink="/wares">Wares</a> - {{ entity.name }}
+        <a routerLink="/ships">Ships</a> - {{ entity.name }}
       </div>
       <div class="card-body" *ngIf="entity">
         <div class="form-group row">
@@ -17,12 +17,6 @@
 
           <dt class="col-sm-2">Volume</dt>
           <dd class="col-sm-10">{{ entity.volume }}</dd>
-
-          <dt class="col-sm-2">Transport</dt>
-          <dd class="col-sm-10">{{ entity.transport }}</dd>
-
-          <dt class="col-sm-2">Type</dt>
-          <dd class="col-sm-10">{{ entity.group.name }}</dd>
         </dl>
 
         <ngb-tabset>
@@ -84,21 +78,7 @@
                             </tr>
                             <tr>
                               <td>Products per hour</td>
-                              <td class="text-right">{{ (3600 / production.time) * production.amount | number:'1.0' }}</td>
-                            </tr>
-                            <tr>
-                              <td>Profit per hour</td>
-                              <td class="text-right">
-                                <span class="text-danger">
-                                    Min: <strong>{{ entity.price.min * (3600 / production.time) * production.amount | number:'1.0' }}</strong> /
-                                </span>
-                                <span class="text-primary">
-                                    Avg: <strong>{{ entity.price.average * (3600 / production.time) * production.amount | number:'1.0' }}</strong> /
-                                </span>
-                                <span class="text-success">
-                                    Max: <strong>{{ entity.price.max * (3600 / production.time) * production.amount | number:'1.0' }}</strong>
-                                </span>
-                              </td>
+                              <td class="text-right">{{ (3600 / production.time) * production.amount | number:'1.0-2' }}</td>
                             </tr>
                             </tbody>
                           </table>
@@ -106,20 +86,6 @@
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Required For">
-            <ng-template ngbTabContent>
-              <div class="row">
-                <div class="col-12">
-                  <ul *ngIf="waresUsedIn.length">
-                    <li *ngFor="let ware of waresUsedIn">
-                      <a [routerLink]="['/wares/', ware.id ]">{{ ware.name }}</a>
-                    </li>
-                  </ul>
-                  <span class="text-info" *ngIf="!waresUsedIn.length">No usage found.</span>
                 </div>
               </div>
             </ng-template>

@@ -23,6 +23,10 @@ export class WareType {
     'shiptech',
     'weapontech'
   ];
+
+  equipment = [
+
+  ];
 }
 
 @Injectable()
@@ -78,9 +82,52 @@ export class WareService {
     return of(results);
   }
 
+  getEquipment() {
+    const results = Wares
+      .filter(x => x.transport === 'ship')
+      .map(x => this.map(x))
+      .sort((a, b ) => {
+        if (a.name < b.name) { return -1; }
+        if (a.name > b.name) { return 1; }
+        return 0;
+      });
+
+    return of(results);
+  }
+
+  getShips() {
+    const results = Wares
+      .filter(x => x.transport === 'ship')
+      .map(x => this.map(x))
+      .sort((a, b ) => {
+        if (a.name < b.name) { return -1; }
+        if (a.name > b.name) { return 1; }
+        return 0;
+      });
+
+    return of(results);
+  }
+
   getWare(id: string) {
     const result = this.getWareInternal(id, true);
     return of(result);
+  }
+
+  getWaresUsingWare(id: string) {
+    const results = Wares
+      .filter(x => WareType.ware.indexOf(x.group) >= 0 && this.isUsing(x, id));
+    return of(results);
+  }
+
+  private isUsing(ware: any, wareId: string) {
+    for (let i = 0; i < ware.production.length; i ++) {
+      const production = ware.production[i];
+      if (production.wares.find(y => y.ware == wareId) != null) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   private getWareInternal(id: string, loadProductionWares = true) {

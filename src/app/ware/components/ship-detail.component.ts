@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { ComponentBase } from '../../shared/components/component-base';
 import { WareService } from '../../shared/services/ware.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
+import { ComponentBase } from '../../shared/components/component-base';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  templateUrl: './ware-detail.component.html'
+  templateUrl: './ship-detail.component.html'
 })
-export class WareDetailComponent extends ComponentBase implements OnInit {
+export class ShipDetailComponent extends ComponentBase implements OnInit {
   public entity: any;
-  public waresUsedIn: any[] = [];
 
   constructor(private wareService: WareService, private route: ActivatedRoute, private titleService: Title) {
     super();
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('X4:Foundations - Wares');
+    this.titleService.setTitle('X4:Foundations - Ships');
 
     this.route.paramMap
       .pipe(takeUntil(this.onDestroy))
@@ -32,15 +31,6 @@ export class WareDetailComponent extends ComponentBase implements OnInit {
               if (entity) {
                 this.titleService.setTitle('X4:Foundations - ' + entity.name);
               }
-            });
-
-          this.wareService
-            .getWaresUsingWare(id)
-            .pipe(
-              takeUntil(this.onDestroy)
-            )
-            .subscribe(entities => {
-              this.waresUsedIn = entities;
             });
         }
       });

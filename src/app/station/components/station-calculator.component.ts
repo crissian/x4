@@ -12,6 +12,7 @@ import { LayoutService } from '../services/layout-service';
 import { SaveLayoutComponent } from './save-layout.component';
 import { Message, MessageType } from '../../shared/services/message';
 import { LoadLayoutComponent } from './load-layout.component';
+import { Title } from '@angular/platform-browser';
 
 interface ModuleResourceOutput {
   module: ModuleDefinition;
@@ -28,7 +29,7 @@ class ResourceOutput {
   private modules: ModuleResourceOutput[] = [];
   expanded = false;
 
-  constructor(public resource: Resource) {
+  constructor(public resource: Resource, public efficiency) {
   }
 
   addModuleResource(module: ModuleDefinition, count: number) {
@@ -57,7 +58,7 @@ class ResourceOutput {
 
     this.modules.forEach(x => {
       if (x.module.production != null && x.module.production.resource.id === this.resource.id) {
-        amount += x.count * x.module.production.value;
+        amount += x.count * x.module.production.value * (this.efficiency / 100);
       }
 
       const requirement = x.module.requirements.find(r => r.resource.id === this.resource.id);
@@ -85,6 +86,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
     finalGoods: Module.finalGoods
   };
 
+  productionEfficiency = 100;
   expandState: { [resourceId: number]: boolean } = {};
   layout: Layout;
   messages: Message[] = [];
@@ -92,11 +94,13 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   @Input()
   stationModules: ModuleConfig[] = [];
 
-  constructor(private modal: NgbModal, private route: ActivatedRoute, private layoutService: LayoutService) {
+  constructor(private modal: NgbModal, private route: ActivatedRoute, private layoutService: LayoutService, private titleService: Title) {
     super();
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle('X4:Foundations - Station Calculator');
+
     this.route.queryParams
       .pipe(
         takeUntil(this.onDestroy)
@@ -113,7 +117,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       });
 
     if (this.stationModules.length === 0) {
-      this.stationModules.push({moduleId: 0, count: 0});
+      this.stationModules.push({ moduleId: 0, count: 1 });
     }
   }
 
@@ -128,7 +132,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
             let resource = resources.find(y => y.resource.id === r.resource.id);
 
             if (resource == null) {
-              resource = new ResourceOutput(r.resource);
+              resource = new ResourceOutput(r.resource, this.productionEfficiency);
               resource.expanded = this.expandState[r.resource.id] || false;
               resources.push(resource);
             }
@@ -140,7 +144,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
             let resource = resources.find(y => y.resource.id === module.production.resource.id);
 
             if (resource == null) {
-              resource = new ResourceOutput(module.production.resource);
+              resource = new ResourceOutput(module.production.resource, this.productionEfficiency);
               resource.expanded = this.expandState[module.production.resource.id] || false;
               resources.push(resource);
             }
@@ -168,7 +172,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   }
 
   addModule() {
-    this.stationModules.push({moduleId: 0, count: 0});
+    this.stationModules.push({moduleId: 0, count: 1});
   }
 
   shareLayout() {

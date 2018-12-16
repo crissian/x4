@@ -1,31 +1,33 @@
+import { ComponentBase } from '../../shared/components/component-base';
 import { Component, OnInit } from '@angular/core';
 import { WareService } from '../../shared/services/ware.service';
-import { ComponentBase } from '../../shared/components/component-base';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  templateUrl: './wares.component.html'
+  templateUrl: './ships.component.html'
 })
-export class WaresComponent extends ComponentBase implements OnInit {
-  entities: any[];
+export class ShipsComponent extends ComponentBase implements OnInit {
+  private entities: any[];
 
   constructor(private wareService: WareService, private router: Router, private titleService: Title) {
     super();
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('X4:Foundations - Wares');
+    this.titleService.setTitle('X4:Foundations - Ships');
     this.wareService
-      .getWares()
-      .pipe(takeUntil(this.onDestroy))
+      .getShips()
+      .pipe(
+        takeUntil(this.onDestroy)
+      )
       .subscribe(data => {
         this.entities = data;
       });
   }
 
   showEntity(item: any) {
-    return this.router.navigate(['/wares', item.id]);
+    return this.router.navigate(['/ships', item.id]);
   }
 }
