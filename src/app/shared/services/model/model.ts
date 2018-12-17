@@ -72,6 +72,7 @@ export interface ModuleType {
 }
 
 export interface StationModule {
+
   name: string;
   description: string;
   explosionDamage?: number;
@@ -80,5 +81,6 @@ export interface StationModule {
   price: Price;
   owners?: Faction[];
   production: Production[];
+  product?: Ware;
   type: ModuleType;
 }

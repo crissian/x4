@@ -4,14 +4,29 @@ import { WareService } from '../../shared/services/ware.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
-import { Production } from '../../shared/services/model/model';
+import { ProductionEffect, Ware } from '../../shared/services/model/model';
+
+export interface ProductionWareData {
+  ware: Ware;
+  amount: number;
+}
+
+interface ProductionData {
+  time: number;
+  amount: number;
+  method: string;
+  name: string;
+  wares: ProductionWareData[];
+  effects?: ProductionEffect[];
+}
 
 @Component({
   templateUrl: './ware-detail.component.html'
 })
 export class WareDetailComponent extends ComponentBase implements OnInit {
-  public entity: any;
+  public entity: Ware;
   public waresUsedIn: any[] = [];
+  public entityProduction: ProductionData[];
 
   constructor(private wareService: WareService, private route: ActivatedRoute, private titleService: Title) {
     super();
@@ -28,13 +43,30 @@ export class WareDetailComponent extends ComponentBase implements OnInit {
           this.entity = this.wareService
             .getWare(id);
 
+          this.entityProduction = this.entity.production
+            .map(x => {
+              return {
+                amount: x.amount,
+                effects: x.effects,
+                method: x.method,
+                name: x.name,
+                time: x.time,
+                wares: x.wares.map(y => {
+                  return {
+                    ware: this.wareService.getWare(y.ware),
+                    amount: y.amount
+                  };
+                })
+              };
+            });
+
           this.waresUsedIn = this.wareService
             .getWaresUsingWare(id);
         }
       });
   }
 
-  getTotalMin(production: Production) {
+  getTotalMin(production: ProductionData) {
     let total = 0;
     production.wares.forEach(x => {
       total += x.amount * x.ware.price.min;
@@ -42,7 +74,7 @@ export class WareDetailComponent extends ComponentBase implements OnInit {
     return total;
   }
 
-  getTotalMax(production: Production) {
+  getTotalMax(production: ProductionData) {
     let total = 0;
     production.wares.forEach(x => {
       total += x.amount * x.ware.price.max;
@@ -50,7 +82,7 @@ export class WareDetailComponent extends ComponentBase implements OnInit {
     return total;
   }
 
-  getTotalAvg(production: Production) {
+  getTotalAvg(production: ProductionData) {
     let total = 0;
     production.wares.forEach(x => {
       total += x.amount * x.ware.price.avg;
@@ -58,6 +90,7 @@ export class WareDetailComponent extends ComponentBase implements OnInit {
     return total;
   }
 
+  // noinspection JSMethodCanBeStatic
   getProductionTime(amount: number) {
     const minutes = Math.trunc(amount / 60);
     const seconds = amount - minutes * 60;

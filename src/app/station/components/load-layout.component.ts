@@ -36,12 +36,13 @@ export class LoadLayoutComponent extends ComponentBase implements OnInit {
           name: x.name,
           modules: x.config
             .map<LayoutModule>(y => {
-              return {count: y.count, module: Module.get(y.moduleId)};
+              return {count: y.count, module: this.moduleService.getModule(y.moduleId)};
             })
         };
       });
   }
 
+  // noinspection JSMethodCanBeStatic
   getModules(item: LayoutData) {
     return item.modules.map(x => x.count + ' x ' + (x.module == null ? '' : x.module.name)).join(', ');
   }

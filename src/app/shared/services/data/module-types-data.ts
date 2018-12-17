@@ -4,7 +4,7 @@ export const ModuleTypes = {
     name: 'Connection Module'
   },
   production: {
-    id: 'production',
+    id: 'entityProduction',
     name: 'Production'
   },
   defencemodule: {

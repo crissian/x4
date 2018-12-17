@@ -28,8 +28,8 @@
         <ngb-tabset>
           <ngb-tab title="Construction">
             <ng-template ngbTabContent>
-              <div *ngIf="entity.production && entity.production.length" style="margin-top: 10px; margin-bottom: 10px" class="row">
-                <div class="col-md-6 col-sm-6 col-lg-4" *ngFor="let production of entity.production">
+              <div *ngIf="entityProduction && entityProduction.length" style="margin-top: 10px; margin-bottom: 10px" class="row">
+                <div class="col-md-6 col-sm-6 col-lg-4" *ngFor="let production of entityProduction">
                   <div class="card">
                     <div class="card-header small">
                       {{ production.name }}
