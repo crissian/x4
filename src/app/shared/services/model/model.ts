@@ -14,8 +14,8 @@ export interface Ware {
   volume: number;
   transport: string;
   price: Price;
-  group: WareGroup;
-  production: Production[];
+  group?: WareGroup;
+  production?: Production[];
 }
 
 export interface Price {
@@ -41,4 +41,44 @@ export interface Production {
   name: string;
   wares: ProductionWare[];
   effects: ProductionEffect[];
+}
+
+export interface Race {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+}
+
+export interface License {
+  type: string;
+  name: string;
+  icon?: string;
+  price: number;
+}
+
+export interface Faction {
+  id: string;
+  name: string;
+  description: string;
+  race: Race;
+  icon: string;
+  licenses?: License[];
+}
+
+export interface ModuleType {
+  id: string;
+  name: string;
+}
+
+export interface StationModule {
+  name: string;
+  description: string;
+  explosionDamage?: number;
+  hull?: number;
+  makerRace?: Race;
+  price: Price;
+  owners?: Faction[];
+  production: Production[];
+  type?: ModuleType;
 }

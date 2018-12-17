@@ -14,6 +14,17 @@ const entities = {
     price: { min: 735, max: 994, avg: 865 },
     group: WareGroups.hightech,
   },
+  advancedelectronics: {
+    id: 'advancedelectronics',
+    name: 'Advanced Electronics',
+    description: 'Designed specifically to work alongside weapon and turret components, it is a variety of advanced electronics that allow different weapons and turrets to have a range of turning speeds, fire rates and cooldowns. Whereas field coils for shields and antimatter converters for engines are more modular and can be used \'across the board\', different weapons and turrets expect different electronic systems to be used in order to ensure the correct properties. However, as all equipment is built and repaired on demand, all advanced electronics are shipped to shipyards and equipment docks together.',
+    factoryName: 'Advanced Electronics Factory',
+    icon: 'ware_advancedelectronics',
+    volume: 30,
+    transport: TransportType.container,
+    price: { min: 1986, max: 2428, avg: 2207 },
+    group: WareGroups.shiptech,
+  },
   antimattercells: {
     id: 'antimattercells',
     name: 'Antimatter Cells',
@@ -24,6 +35,39 @@ const entities = {
     transport: TransportType.container,
     price: { min: 181, max: 222, avg: 202 },
     group: WareGroups.refined,
+  },
+  antimatterconverters: {
+    id: 'antimatterconverters',
+    name: 'Antimatter Converters',
+    description: 'Attached to the antimatter cells used in engine parts for both main engines and thrusters, antimatter converters fine-tune the amount of energy used to a more specific configuration. It is the use of this component that allows so many variations of engine, as their number and set up greatly impact the power and efficiency of the final product.',
+    factoryName: 'Antimatter Converter Factory',
+    icon: 'ware_antimatterconverters',
+    volume: 10,
+    transport: TransportType.container,
+    price: { min: 626, max: 847, avg: 737 },
+    group: WareGroups.shiptech,
+  },
+  claytronics: {
+    id: 'claytronics',
+    name: 'Claytronics',
+    description: 'More commonly known as programmable matter, claytronics are made up of millions of individual nanometre-scale computers known as catoms. This technology lives at the heart of any non-Xenon station, used to build anything from internal wiring to computer systems and control mechanisms - effectively everything but the hull of the station itself. Claytronics are always in high-demand, as the universe rebuilds itself after the Jump Gate shutdown.',
+    factoryName: 'Claytronics Factory',
+    icon: 'ware_claytronics',
+    volume: 24,
+    transport: TransportType.container,
+    price: { min: 4254, max: 4702, avg: 4478 },
+    group: WareGroups.shiptech,
+  },
+  dronecomponents: {
+    id: 'dronecomponents',
+    name: 'Drone Components',
+    description: 'Much like weapon and turret components, drone components have been generalised and standardised across much of the Jump Gate network to be modularly used in all kinds of drone, making them a highly sought-after resource. Drone components are directly shipped to shipyards, equipment docks and stations to source drone-building, which is done on-demand as and when it is necessary.',
+    factoryName: 'Drone Component Factory',
+    icon: 'ware_dronecomponents',
+    volume: 30,
+    transport: TransportType.container,
+    price: { min: 2261, max: 2764, avg: 2512 },
+    group: WareGroups.shiptech,
   },
   energycells: {
     id: 'energycells',
@@ -46,6 +90,17 @@ const entities = {
     transport: TransportType.container,
     price: { min: 480, max: 719, avg: 600 },
     group: WareGroups.hightech,
+  },
+  fieldcoils: {
+    id: 'fieldcoils',
+    name: 'Field Coils',
+    description: 'Used to fine-tune the arrays used on ship and station shielding, field coils allow for much more modulation than using shield components alone. As such shipyards have begun using them to build a much wider variety of shields than was previously available. Like many of the components used on ships - that aren\'t the hull itself - shield components are shipped straight to shipyards and equipment docks so that shields can be produced on-demand.',
+    factoryName: 'Field Coil Factory',
+    icon: 'ware_fieldcoils',
+    volume: 15,
+    transport: TransportType.container,
+    price: { min: 854, max: 1281, avg: 1068 },
+    group: WareGroups.shiptech,
   },
   foodrations: {
     id: 'foodrations',
@@ -179,6 +234,17 @@ const entities = {
     price: { min: 1364, max: 1668, avg: 1516 },
     group: WareGroups.hightech,
   },
+  missilecomponents: {
+    id: 'missilecomponents',
+    name: 'Missile Components',
+    description: 'Missile components are used in the construction of all missiles, often with a different number and configuration making up the construction of each missile. As with ship equipment, missiles are built on demand, and so missile components are bought at and found at shipyards and equipment docks, where most pilots can order missiles on demand.',
+    factoryName: 'Missile Component Factory',
+    icon: 'ware_missilecomponents',
+    volume: 2,
+    transport: TransportType.container,
+    price: { min: 17, max: 26, avg: 21 },
+    group: WareGroups.shiptech,
+  },
   nividium: {
     id: 'nividium',
     name: 'Nividium',
@@ -256,6 +322,17 @@ const entities = {
     price: { min: 1744, max: 2131, avg: 1938 },
     group: WareGroups.hightech,
   },
+  shieldcomponents: {
+    id: 'shieldcomponents',
+    name: 'Shield Components',
+    description: 'From generators to coils that maintain energy over time, shield components are a wide arrange of technologies that provide everything necessary to build a variety of shields. Completely modular, each part can be used in each shield, which has led to a wide variety of new-generation shields being produced in recent years. As with all ship equipment, shields are built on-demand, and so shield components are produced in factories and shipped straight to shipyards and equipment docks where they can be more freely used for construction and repair.',
+    factoryName: 'Shield Component Factory',
+    icon: 'ware_shieldcomponents',
+    volume: 10,
+    transport: TransportType.container,
+    price: { min: 387, max: 581, avg: 484 },
+    group: WareGroups.shiptech,
+  },
   silicon: {
     id: 'silicon',
     name: 'Silicon',
@@ -277,6 +354,17 @@ const entities = {
     transport: TransportType.container,
     price: { min: 269, max: 329, avg: 299 },
     group: WareGroups.refined,
+  },
+  smartchips: {
+    id: 'smartchips',
+    name: 'Smart Chips',
+    description: 'A specialised form of microchip that contains a small amount of heuristic programming, these chips cannot allow a system to learn, but can allow for small, snap intelligent decision-making that assists in targeting systems and makes autonomous piloting more accurate. These chips are primarily used in guided missiles and drones.',
+    factoryName: 'Smart Chip Factory',
+    icon: 'ware_smartchips',
+    volume: 5,
+    transport: TransportType.container,
+    price: { min: 176, max: 215, avg: 195 },
+    group: WareGroups.shiptech,
   },
   sojabeans: {
     id: 'sojabeans',
@@ -377,6 +465,17 @@ const entities = {
     price: { min: 182, max: 223, avg: 202 },
     group: WareGroups.refined,
   },
+  turretcomponents: {
+    id: 'turretcomponents',
+    name: 'Turret Components',
+    description: 'After the unification of the design process in station and capital ship weapon systems, many different turrets can be built from different configurations of these turret components.',
+    factoryName: 'Turret Component Factory',
+    icon: 'ware_turretcomponents',
+    volume: 20,
+    transport: TransportType.container,
+    price: { min: 609, max: 913, avg: 761 },
+    group: WareGroups.shiptech,
+  },
   water: {
     id: 'water',
     name: 'Water',
@@ -387,6 +486,17 @@ const entities = {
     transport: TransportType.container,
     price: { min: 48, max: 58, avg: 53 },
     group: WareGroups.water,
+  },
+  weaponcomponents: {
+    id: 'weaponcomponents',
+    name: 'Weapon Components',
+    description: 'Made up from such things as trigger and reloading mechanisms, chambers and barrels, weapon components make up the mechanical part of all ship weapons. Combined with specialised advanced electronics, a number of different weapons can be made from the modular components, also across different size ranges. Shipped to shipyards and equipment docks as a single package, these components can then be put together relatively quickly and easily to make any weapon for the final customer on-demand.',
+    factoryName: 'Weapon Component Factory',
+    icon: 'ware_weaponcomponents',
+    volume: 20,
+    transport: TransportType.container,
+    price: { min: 586, max: 879, avg: 733 },
+    group: WareGroups.shiptech,
   },
   wheat: {
     id: 'wheat',
@@ -432,6 +542,22 @@ const production = {
       ],
     },
   ],
+  advancedelectronics: [
+    {
+      time: 720,
+      amount: 60,
+      method: 'default',
+      name: 'Universal',
+      wares: [
+        { ware: entities.energycells, amount: 60 },
+        { ware: entities.microchips, amount: 44 },
+        { ware: entities.quantumtubes, amount: 20 },
+      ],
+      effects: [
+        { type: 'work', product: 0.22 },
+      ],
+    },
+  ],
   antimattercells: [
     {
       time: 120,
@@ -444,6 +570,57 @@ const production = {
       ],
       effects: [
         { type: 'work', product: 0.21 },
+      ],
+    },
+  ],
+  antimatterconverters: [
+    {
+      time: 300,
+      amount: 150,
+      method: 'default',
+      name: 'Universal',
+      wares: [
+        { ware: entities.advancedcomposites, amount: 20 },
+        { ware: entities.energycells, amount: 80 },
+        { ware: entities.microchips, amount: 30 },
+      ],
+      effects: [
+        { type: 'work', product: 0.23 },
+      ],
+    },
+  ],
+  claytronics: [
+    {
+      time: 900,
+      amount: 120,
+      method: 'default',
+      name: 'Universal',
+      wares: [
+        { ware: entities.antimattercells, amount: 100 },
+        { ware: entities.energycells, amount: 140 },
+        { ware: entities.microchips, amount: 160 },
+        { ware: entities.quantumtubes, amount: 100 },
+      ],
+      effects: [
+        { type: 'work', product: 0.2 },
+      ],
+    },
+  ],
+  dronecomponents: [
+    {
+      time: 1200,
+      amount: 120,
+      method: 'default',
+      name: 'Universal',
+      wares: [
+        { ware: entities.energycells, amount: 60 },
+        { ware: entities.engineparts, amount: 20 },
+        { ware: entities.hullparts, amount: 20 },
+        { ware: entities.microchips, amount: 20 },
+        { ware: entities.scanningarrays, amount: 40 },
+      ],
+      effects: [
+        { type: 'work', product: 0.25 },
       ],
     },
   ],
@@ -487,6 +664,22 @@ const production = {
       ],
       effects: [
         { type: 'work', product: 0.27 },
+      ],
+    },
+  ],
+  fieldcoils: [
+    {
+      time: 600,
+      amount: 200,
+      method: 'default',
+      name: 'Universal',
+      wares: [
+        { ware: entities.energycells, amount: 60 },
+        { ware: entities.plasmaconductors, amount: 40 },
+        { ware: entities.quantumtubes, amount: 43 },
+      ],
+      effects: [
+        { type: 'work', product: 0.25 },
       ],
     },
   ],
@@ -668,6 +861,22 @@ const production = {
       ],
     },
   ],
+  missilecomponents: [
+    {
+      time: 900,
+      amount: 330,
+      method: 'default',
+      name: 'Universal',
+      wares: [
+        { ware: entities.advancedcomposites, amount: 2 },
+        { ware: entities.energycells, amount: 20 },
+        { ware: entities.hullparts, amount: 2 },
+      ],
+      effects: [
+        { type: 'work', product: 0.3 },
+      ],
+    },
+  ],
   nividium: [
   ],
   nostropoil: [
@@ -794,6 +1003,22 @@ const production = {
       ],
     },
   ],
+  shieldcomponents: [
+    {
+      time: 1200,
+      amount: 220,
+      method: 'default',
+      name: 'Universal',
+      wares: [
+        { ware: entities.energycells, amount: 70 },
+        { ware: entities.plasmaconductors, amount: 20 },
+        { ware: entities.quantumtubes, amount: 20 },
+      ],
+      effects: [
+        { type: 'work', product: 0.25 },
+      ],
+    },
+  ],
   silicon: [
   ],
   siliconwafers: [
@@ -805,6 +1030,21 @@ const production = {
       wares: [
         { ware: entities.energycells, amount: 90 },
         { ware: entities.silicon, amount: 240 },
+      ],
+      effects: [
+        { type: 'work', product: 0.22 },
+      ],
+    },
+  ],
+  smartchips: [
+    {
+      time: 600,
+      amount: 80,
+      method: 'default',
+      name: 'Universal',
+      wares: [
+        { ware: entities.energycells, amount: 50 },
+        { ware: entities.siliconwafers, amount: 20 },
       ],
       effects: [
         { type: 'work', product: 0.22 },
@@ -950,6 +1190,23 @@ const production = {
       ],
     },
   ],
+  turretcomponents: [
+    {
+      time: 1800,
+      amount: 200,
+      method: 'default',
+      name: 'Universal',
+      wares: [
+        { ware: entities.energycells, amount: 60 },
+        { ware: entities.microchips, amount: 20 },
+        { ware: entities.quantumtubes, amount: 20 },
+        { ware: entities.scanningarrays, amount: 10 },
+      ],
+      effects: [
+        { type: 'work', product: 0.3 },
+      ],
+    },
+  ],
   water: [
     {
       time: 120,
@@ -962,6 +1219,22 @@ const production = {
       ],
       effects: [
         { type: 'work', product: 0.25 },
+      ],
+    },
+  ],
+  weaponcomponents: [
+    {
+      time: 1800,
+      amount: 200,
+      method: 'default',
+      name: 'Universal',
+      wares: [
+        { ware: entities.energycells, amount: 60 },
+        { ware: entities.hullparts, amount: 20 },
+        { ware: entities.plasmaconductors, amount: 30 },
+      ],
+      effects: [
+        { type: 'work', product: 0.3 },
       ],
     },
   ],
@@ -984,9 +1257,14 @@ const production = {
 
 const wares = {
   advancedcomposites: { ...entities.advancedcomposites, production: production.advancedcomposites },
+  advancedelectronics: { ...entities.advancedelectronics, production: production.advancedelectronics },
   antimattercells: { ...entities.antimattercells, production: production.antimattercells },
+  antimatterconverters: { ...entities.antimatterconverters, production: production.antimatterconverters },
+  claytronics: { ...entities.claytronics, production: production.claytronics },
+  dronecomponents: { ...entities.dronecomponents, production: production.dronecomponents },
   energycells: { ...entities.energycells, production: production.energycells },
   engineparts: { ...entities.engineparts, production: production.engineparts },
+  fieldcoils: { ...entities.fieldcoils, production: production.fieldcoils },
   foodrations: { ...entities.foodrations, production: production.foodrations },
   graphene: { ...entities.graphene, production: production.graphene },
   helium: { ...entities.helium, production: production.helium },
@@ -999,6 +1277,7 @@ const wares = {
   medicalsupplies: { ...entities.medicalsupplies, production: production.medicalsupplies },
   methane: { ...entities.methane, production: production.methane },
   microchips: { ...entities.microchips, production: production.microchips },
+  missilecomponents: { ...entities.missilecomponents, production: production.missilecomponents },
   nividium: { ...entities.nividium, production: production.nividium },
   nostropoil: { ...entities.nostropoil, production: production.nostropoil },
   ore: { ...entities.ore, production: production.ore },
@@ -1006,8 +1285,10 @@ const wares = {
   quantumtubes: { ...entities.quantumtubes, production: production.quantumtubes },
   refinedmetals: { ...entities.refinedmetals, production: production.refinedmetals },
   scanningarrays: { ...entities.scanningarrays, production: production.scanningarrays },
+  shieldcomponents: { ...entities.shieldcomponents, production: production.shieldcomponents },
   silicon: { ...entities.silicon, production: production.silicon },
   siliconwafers: { ...entities.siliconwafers, production: production.siliconwafers },
+  smartchips: { ...entities.smartchips, production: production.smartchips },
   sojabeans: { ...entities.sojabeans, production: production.sojabeans },
   sojahusk: { ...entities.sojahusk, production: production.sojahusk },
   spacefuel: { ...entities.spacefuel, production: production.spacefuel },
@@ -1017,7 +1298,9 @@ const wares = {
   superfluidcoolant: { ...entities.superfluidcoolant, production: production.superfluidcoolant },
   swampplant: { ...entities.swampplant, production: production.swampplant },
   teladianium: { ...entities.teladianium, production: production.teladianium },
+  turretcomponents: { ...entities.turretcomponents, production: production.turretcomponents },
   water: { ...entities.water, production: production.water },
+  weaponcomponents: { ...entities.weaponcomponents, production: production.weaponcomponents },
   wheat: { ...entities.wheat, production: production.wheat },
 };
 
@@ -1025,9 +1308,14 @@ export const Wares = {
   ...wares,
   all: [
     wares.advancedcomposites,
+    wares.advancedelectronics,
     wares.antimattercells,
+    wares.antimatterconverters,
+    wares.claytronics,
+    wares.dronecomponents,
     wares.energycells,
     wares.engineparts,
+    wares.fieldcoils,
     wares.foodrations,
     wares.graphene,
     wares.helium,
@@ -1040,6 +1328,7 @@ export const Wares = {
     wares.medicalsupplies,
     wares.methane,
     wares.microchips,
+    wares.missilecomponents,
     wares.nividium,
     wares.nostropoil,
     wares.ore,
@@ -1047,8 +1336,10 @@ export const Wares = {
     wares.quantumtubes,
     wares.refinedmetals,
     wares.scanningarrays,
+    wares.shieldcomponents,
     wares.silicon,
     wares.siliconwafers,
+    wares.smartchips,
     wares.sojabeans,
     wares.sojahusk,
     wares.spacefuel,
@@ -1058,7 +1349,9 @@ export const Wares = {
     wares.superfluidcoolant,
     wares.swampplant,
     wares.teladianium,
+    wares.turretcomponents,
     wares.water,
+    wares.weaponcomponents,
     wares.wheat,
   ]
 };

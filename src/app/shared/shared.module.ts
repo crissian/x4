@@ -8,6 +8,7 @@ import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {ConfirmComponent} from './components/confirm.component';
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+import { ModuleService } from './services/module.service';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
     NgbModalModule
   ],
   providers: [
-    WareService
+    WareService,
+    ModuleService
   ],
   declarations: [
     HeaderComponent,

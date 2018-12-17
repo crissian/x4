@@ -53,6 +53,12 @@ const entities = {
     factoryName: 'Refined Goods Complex',
     icon: 'be_upgrade_refined',
   },
+  shiptech: {
+    id: 'shiptech',
+    name: 'Ship Technology',
+    factoryName: 'Ship Technology Factory',
+    icon: 'be_upgrade_equipmenparts',
+  },
   water: {
     id: 'water',
     name: 'Water',
@@ -73,6 +79,7 @@ export const WareGroups = {
     entities.minerals,
     entities.pharmaceutical,
     entities.refined,
+    entities.shiptech,
     entities.water,
   ]
 };
