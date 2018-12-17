@@ -25,7 +25,7 @@ export interface Price {
 }
 
 export interface ProductionWare {
-  ware: Ware;
+  ware: string;
   amount: number;
 }
 
@@ -40,7 +40,7 @@ export interface Production {
   method: string;
   name: string;
   wares: ProductionWare[];
-  effects: ProductionEffect[];
+  effects?: ProductionEffect[];
 }
 
 export interface Race {
@@ -75,10 +75,10 @@ export interface StationModule {
   name: string;
   description: string;
   explosionDamage?: number;
-  hull?: number;
+  hull: number;
   makerRace?: Race;
   price: Price;
   owners?: Faction[];
   production: Production[];
-  type?: ModuleType;
+  type: ModuleType;
 }

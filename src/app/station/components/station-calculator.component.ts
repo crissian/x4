@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Module, ModuleDefinition } from '../../shared/services/module';
-import { Resource } from '../../shared/services/resource';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShareLayoutComponent } from './share-layout.component';
 import * as urlon from 'urlon';

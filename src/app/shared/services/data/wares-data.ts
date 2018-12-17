@@ -2,7 +2,7 @@
 import { WareGroups } from './ware-groups-data';
 import { TransportType } from './transport-data';
 
-const entities = {
+export const Wares = {
   advancedcomposites: {
     id: 'advancedcomposites',
     name: 'Advanced Composites',
@@ -13,6 +13,36 @@ const entities = {
     transport: TransportType.container,
     price: { min: 735, max: 994, avg: 865 },
     group: WareGroups.hightech,
+    production: [
+      {
+        time: 300,
+        amount: 60,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 50 },
+          { ware: 'graphene', amount: 80 },
+          { ware: 'refinedmetals', amount: 80 },
+        ],
+        effects: [
+          { type: 'work', product: 0.2 },
+        ],
+      },
+      {
+        time: 300,
+        amount: 60,
+        method: 'teladi',
+        name: 'Teladi',
+        wares: [
+          { ware: 'energycells', amount: 50 },
+          { ware: 'graphene', amount: 80 },
+          { ware: 'teladianium', amount: 58 },
+        ],
+        effects: [
+          { type: 'work', product: 0.2 },
+        ],
+      },
+    ]
   },
   advancedelectronics: {
     id: 'advancedelectronics',
@@ -24,6 +54,22 @@ const entities = {
     transport: TransportType.container,
     price: { min: 1986, max: 2428, avg: 2207 },
     group: WareGroups.shiptech,
+    production: [
+      {
+        time: 720,
+        amount: 60,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 60 },
+          { ware: 'microchips', amount: 44 },
+          { ware: 'quantumtubes', amount: 20 },
+        ],
+        effects: [
+          { type: 'work', product: 0.22 },
+        ],
+      },
+    ]
   },
   antimattercells: {
     id: 'antimattercells',
@@ -35,6 +81,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 181, max: 222, avg: 202 },
     group: WareGroups.refined,
+    production: [
+      {
+        time: 120,
+        amount: 110,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 100 },
+          { ware: 'hydrogen', amount: 320 },
+        ],
+        effects: [
+          { type: 'work', product: 0.21 },
+        ],
+      },
+    ]
   },
   antimatterconverters: {
     id: 'antimatterconverters',
@@ -46,6 +107,22 @@ const entities = {
     transport: TransportType.container,
     price: { min: 626, max: 847, avg: 737 },
     group: WareGroups.shiptech,
+    production: [
+      {
+        time: 300,
+        amount: 150,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'advancedcomposites', amount: 20 },
+          { ware: 'energycells', amount: 80 },
+          { ware: 'microchips', amount: 30 },
+        ],
+        effects: [
+          { type: 'work', product: 0.23 },
+        ],
+      },
+    ]
   },
   claytronics: {
     id: 'claytronics',
@@ -57,6 +134,23 @@ const entities = {
     transport: TransportType.container,
     price: { min: 4254, max: 4702, avg: 4478 },
     group: WareGroups.shiptech,
+    production: [
+      {
+        time: 900,
+        amount: 120,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'antimattercells', amount: 100 },
+          { ware: 'energycells', amount: 140 },
+          { ware: 'microchips', amount: 160 },
+          { ware: 'quantumtubes', amount: 100 },
+        ],
+        effects: [
+          { type: 'work', product: 0.2 },
+        ],
+      },
+    ]
   },
   dronecomponents: {
     id: 'dronecomponents',
@@ -68,6 +162,24 @@ const entities = {
     transport: TransportType.container,
     price: { min: 2261, max: 2764, avg: 2512 },
     group: WareGroups.shiptech,
+    production: [
+      {
+        time: 1200,
+        amount: 120,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 60 },
+          { ware: 'engineparts', amount: 20 },
+          { ware: 'hullparts', amount: 20 },
+          { ware: 'microchips', amount: 20 },
+          { ware: 'scanningarrays', amount: 40 },
+        ],
+        effects: [
+          { type: 'work', product: 0.25 },
+        ],
+      },
+    ]
   },
   energycells: {
     id: 'energycells',
@@ -79,6 +191,19 @@ const entities = {
     transport: TransportType.container,
     price: { min: 11, max: 21, avg: 16 },
     group: WareGroups.energy,
+    production: [
+      {
+        time: 60,
+        amount: 200,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+        ],
+        effects: [
+          { type: 'work', product: 0.25 },
+        ],
+      },
+    ]
   },
   engineparts: {
     id: 'engineparts',
@@ -90,6 +215,36 @@ const entities = {
     transport: TransportType.container,
     price: { min: 480, max: 719, avg: 600 },
     group: WareGroups.hightech,
+    production: [
+      {
+        time: 900,
+        amount: 120,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'antimattercells', amount: 80 },
+          { ware: 'energycells', amount: 60 },
+          { ware: 'refinedmetals', amount: 96 },
+        ],
+        effects: [
+          { type: 'work', product: 0.27 },
+        ],
+      },
+      {
+        time: 900,
+        amount: 120,
+        method: 'teladi',
+        name: 'Teladi',
+        wares: [
+          { ware: 'antimattercells', amount: 80 },
+          { ware: 'energycells', amount: 60 },
+          { ware: 'teladianium', amount: 70 },
+        ],
+        effects: [
+          { type: 'work', product: 0.27 },
+        ],
+      },
+    ]
   },
   fieldcoils: {
     id: 'fieldcoils',
@@ -101,6 +256,22 @@ const entities = {
     transport: TransportType.container,
     price: { min: 854, max: 1281, avg: 1068 },
     group: WareGroups.shiptech,
+    production: [
+      {
+        time: 600,
+        amount: 200,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 60 },
+          { ware: 'plasmaconductors', amount: 40 },
+          { ware: 'quantumtubes', amount: 43 },
+        ],
+        effects: [
+          { type: 'work', product: 0.25 },
+        ],
+      },
+    ]
   },
   foodrations: {
     id: 'foodrations',
@@ -112,6 +283,23 @@ const entities = {
     transport: TransportType.container,
     price: { min: 34, max: 51, avg: 43 },
     group: WareGroups.food,
+    production: [
+      {
+        time: 240,
+        amount: 328,
+        method: 'default',
+        name: 'Argon',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'meat', amount: 40 },
+          { ware: 'spices', amount: 20 },
+          { ware: 'wheat', amount: 40 },
+        ],
+        effects: [
+          { type: 'work', product: 0.25 },
+        ],
+      },
+    ]
   },
   graphene: {
     id: 'graphene',
@@ -123,6 +311,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 150, max: 183, avg: 166 },
     group: WareGroups.refined,
+    production: [
+      {
+        time: 240,
+        amount: 110,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 80 },
+          { ware: 'methane', amount: 320 },
+        ],
+        effects: [
+          { type: 'work', product: 0.27 },
+        ],
+      },
+    ]
   },
   helium: {
     id: 'helium',
@@ -134,6 +337,8 @@ const entities = {
     transport: TransportType.liquid,
     price: { min: 37, max: 51, avg: 44 },
     group: WareGroups.gases,
+    production: [
+    ]
   },
   hullparts: {
     id: 'hullparts',
@@ -145,6 +350,36 @@ const entities = {
     transport: TransportType.container,
     price: { min: 413, max: 619, avg: 516 },
     group: WareGroups.hightech,
+    production: [
+      {
+        time: 900,
+        amount: 220,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 80 },
+          { ware: 'graphene', amount: 40 },
+          { ware: 'refinedmetals', amount: 280 },
+        ],
+        effects: [
+          { type: 'work', product: 0.22 },
+        ],
+      },
+      {
+        time: 900,
+        amount: 220,
+        method: 'teladi',
+        name: 'Teladi',
+        wares: [
+          { ware: 'energycells', amount: 80 },
+          { ware: 'graphene', amount: 40 },
+          { ware: 'teladianium', amount: 204 },
+        ],
+        effects: [
+          { type: 'work', product: 0.22 },
+        ],
+      },
+    ]
   },
   hydrogen: {
     id: 'hydrogen',
@@ -156,6 +391,8 @@ const entities = {
     transport: TransportType.liquid,
     price: { min: 49, max: 67, avg: 58 },
     group: WareGroups.gases,
+    production: [
+    ]
   },
   ice: {
     id: 'ice',
@@ -167,6 +404,8 @@ const entities = {
     transport: TransportType.solid,
     price: { min: 26, max: 35, avg: 30 },
     group: WareGroups.ice,
+    production: [
+    ]
   },
   majadust: {
     id: 'majadust',
@@ -178,6 +417,22 @@ const entities = {
     transport: TransportType.container,
     price: { min: 233, max: 700, avg: 466 },
     group: WareGroups.pharmaceutical,
+    production: [
+      {
+        time: 600,
+        amount: 80,
+        method: 'default',
+        name: 'Paranid',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'majasnails', amount: 120 },
+          { ware: 'spices', amount: 60 },
+        ],
+        effects: [
+          { type: 'work', product: 0.4 },
+        ],
+      },
+    ]
   },
   majasnails: {
     id: 'majasnails',
@@ -189,6 +444,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 76, max: 114, avg: 95 },
     group: WareGroups.agricultural,
+    production: [
+      {
+        time: 450,
+        amount: 174,
+        method: 'default',
+        name: 'Paranid',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'water', amount: 100 },
+        ],
+        effects: [
+          { type: 'work', product: 0.33 },
+        ],
+      },
+    ]
   },
   meat: {
     id: 'meat',
@@ -200,6 +470,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 57, max: 94, avg: 75 },
     group: WareGroups.agricultural,
+    production: [
+      {
+        time: 450,
+        amount: 220,
+        method: 'default',
+        name: 'Argon',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'water', amount: 100 },
+        ],
+        effects: [
+          { type: 'work', product: 0.33 },
+        ],
+      },
+    ]
   },
   medicalsupplies: {
     id: 'medicalsupplies',
@@ -211,6 +496,53 @@ const entities = {
     transport: TransportType.container,
     price: { min: 92, max: 138, avg: 115 },
     group: WareGroups.pharmaceutical,
+    production: [
+      {
+        time: 300,
+        amount: 120,
+        method: 'default',
+        name: 'Argon',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'spices', amount: 30 },
+          { ware: 'water', amount: 60 },
+          { ware: 'wheat', amount: 22 },
+        ],
+        effects: [
+          { type: 'work', product: 0.28 },
+        ],
+      },
+      {
+        time: 300,
+        amount: 120,
+        method: 'paranid',
+        name: 'Paranid',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'sojabeans', amount: 10 },
+          { ware: 'spices', amount: 30 },
+          { ware: 'water', amount: 60 },
+        ],
+        effects: [
+          { type: 'work', product: 0.28 },
+        ],
+      },
+      {
+        time: 300,
+        amount: 120,
+        method: 'teladi',
+        name: 'Teladi',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'spices', amount: 30 },
+          { ware: 'sunriseflowers', amount: 8 },
+          { ware: 'water', amount: 60 },
+        ],
+        effects: [
+          { type: 'work', product: 0.28 },
+        ],
+      },
+    ]
   },
   methane: {
     id: 'methane',
@@ -222,6 +554,8 @@ const entities = {
     transport: TransportType.liquid,
     price: { min: 41, max: 55, avg: 48 },
     group: WareGroups.gases,
+    production: [
+    ]
   },
   microchips: {
     id: 'microchips',
@@ -233,6 +567,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 1364, max: 1668, avg: 1516 },
     group: WareGroups.hightech,
+    production: [
+      {
+        time: 600,
+        amount: 80,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 50 },
+          { ware: 'siliconwafers', amount: 200 },
+        ],
+        effects: [
+          { type: 'work', product: 0.22 },
+        ],
+      },
+    ]
   },
   missilecomponents: {
     id: 'missilecomponents',
@@ -244,6 +593,22 @@ const entities = {
     transport: TransportType.container,
     price: { min: 17, max: 26, avg: 21 },
     group: WareGroups.shiptech,
+    production: [
+      {
+        time: 900,
+        amount: 330,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'advancedcomposites', amount: 2 },
+          { ware: 'energycells', amount: 20 },
+          { ware: 'hullparts', amount: 2 },
+        ],
+        effects: [
+          { type: 'work', product: 0.3 },
+        ],
+      },
+    ]
   },
   nividium: {
     id: 'nividium',
@@ -255,6 +620,8 @@ const entities = {
     transport: TransportType.solid,
     price: { min: 434, max: 587, avg: 510 },
     group: WareGroups.minerals,
+    production: [
+    ]
   },
   nostropoil: {
     id: 'nostropoil',
@@ -266,6 +633,23 @@ const entities = {
     transport: TransportType.container,
     price: { min: 48, max: 72, avg: 60 },
     group: WareGroups.food,
+    production: [
+      {
+        time: 300,
+        amount: 320,
+        method: 'default',
+        name: 'Teladi',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'spices', amount: 20 },
+          { ware: 'sunriseflowers', amount: 40 },
+          { ware: 'water', amount: 40 },
+        ],
+        effects: [
+          { type: 'work', product: 0.2 },
+        ],
+      },
+    ]
   },
   ore: {
     id: 'ore',
@@ -277,6 +661,8 @@ const entities = {
     transport: TransportType.solid,
     price: { min: 43, max: 58, avg: 50 },
     group: WareGroups.minerals,
+    production: [
+    ]
   },
   plasmaconductors: {
     id: 'plasmaconductors',
@@ -288,6 +674,36 @@ const entities = {
     transport: TransportType.container,
     price: { min: 1485, max: 2010, avg: 1748 },
     group: WareGroups.hightech,
+    production: [
+      {
+        time: 900,
+        amount: 50,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 60 },
+          { ware: 'graphene', amount: 96 },
+          { ware: 'superfluidcoolant', amount: 140 },
+        ],
+        effects: [
+          { type: 'work', product: 0.25 },
+        ],
+      },
+      {
+        time: 900,
+        amount: 50,
+        method: 'teladi',
+        name: 'Teladi',
+        wares: [
+          { ware: 'energycells', amount: 60 },
+          { ware: 'graphene', amount: 96 },
+          { ware: 'superfluidcoolant', amount: 140 },
+        ],
+        effects: [
+          { type: 'work', product: 0.25 },
+        ],
+      },
+    ]
   },
   quantumtubes: {
     id: 'quantumtubes',
@@ -299,6 +715,36 @@ const entities = {
     transport: TransportType.container,
     price: { min: 435, max: 588, avg: 511 },
     group: WareGroups.hightech,
+    production: [
+      {
+        time: 720,
+        amount: 110,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'graphene', amount: 116 },
+          { ware: 'superfluidcoolant', amount: 30 },
+        ],
+        effects: [
+          { type: 'work', product: 0.3 },
+        ],
+      },
+      {
+        time: 720,
+        amount: 110,
+        method: 'teladi',
+        name: 'Teladi',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'graphene', amount: 116 },
+          { ware: 'superfluidcoolant', amount: 30 },
+        ],
+        effects: [
+          { type: 'work', product: 0.3 },
+        ],
+      },
+    ]
   },
   refinedmetals: {
     id: 'refinedmetals',
@@ -310,6 +756,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 133, max: 163, avg: 148 },
     group: WareGroups.refined,
+    production: [
+      {
+        time: 150,
+        amount: 100,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 90 },
+          { ware: 'ore', amount: 240 },
+        ],
+        effects: [
+          { type: 'work', product: 0.25 },
+        ],
+      },
+    ]
   },
   scanningarrays: {
     id: 'scanningarrays',
@@ -321,6 +782,36 @@ const entities = {
     transport: TransportType.container,
     price: { min: 1744, max: 2131, avg: 1938 },
     group: WareGroups.hightech,
+    production: [
+      {
+        time: 600,
+        amount: 40,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 60 },
+          { ware: 'refinedmetals', amount: 100 },
+          { ware: 'siliconwafers', amount: 60 },
+        ],
+        effects: [
+          { type: 'work', product: 0.24 },
+        ],
+      },
+      {
+        time: 600,
+        amount: 40,
+        method: 'teladi',
+        name: 'Teladi',
+        wares: [
+          { ware: 'energycells', amount: 60 },
+          { ware: 'siliconwafers', amount: 60 },
+          { ware: 'teladianium', amount: 73 },
+        ],
+        effects: [
+          { type: 'work', product: 0.24 },
+        ],
+      },
+    ]
   },
   shieldcomponents: {
     id: 'shieldcomponents',
@@ -332,6 +823,22 @@ const entities = {
     transport: TransportType.container,
     price: { min: 387, max: 581, avg: 484 },
     group: WareGroups.shiptech,
+    production: [
+      {
+        time: 1200,
+        amount: 220,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 70 },
+          { ware: 'plasmaconductors', amount: 20 },
+          { ware: 'quantumtubes', amount: 20 },
+        ],
+        effects: [
+          { type: 'work', product: 0.25 },
+        ],
+      },
+    ]
   },
   silicon: {
     id: 'silicon',
@@ -343,6 +850,8 @@ const entities = {
     transport: TransportType.solid,
     price: { min: 111, max: 150, avg: 130 },
     group: WareGroups.minerals,
+    production: [
+    ]
   },
   siliconwafers: {
     id: 'siliconwafers',
@@ -354,6 +863,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 269, max: 329, avg: 299 },
     group: WareGroups.refined,
+    production: [
+      {
+        time: 180,
+        amount: 120,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 90 },
+          { ware: 'silicon', amount: 240 },
+        ],
+        effects: [
+          { type: 'work', product: 0.22 },
+        ],
+      },
+    ]
   },
   smartchips: {
     id: 'smartchips',
@@ -365,6 +889,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 176, max: 215, avg: 195 },
     group: WareGroups.shiptech,
+    production: [
+      {
+        time: 600,
+        amount: 80,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 50 },
+          { ware: 'siliconwafers', amount: 20 },
+        ],
+        effects: [
+          { type: 'work', product: 0.22 },
+        ],
+      },
+    ]
   },
   sojabeans: {
     id: 'sojabeans',
@@ -376,6 +915,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 88, max: 132, avg: 110 },
     group: WareGroups.agricultural,
+    production: [
+      {
+        time: 300,
+        amount: 120,
+        method: 'default',
+        name: 'Paranid',
+        wares: [
+          { ware: 'energycells', amount: 30 },
+          { ware: 'water', amount: 80 },
+        ],
+        effects: [
+          { type: 'work', product: 0.28 },
+        ],
+      },
+    ]
   },
   sojahusk: {
     id: 'sojahusk',
@@ -387,6 +941,23 @@ const entities = {
     transport: TransportType.container,
     price: { min: 50, max: 83, avg: 66 },
     group: WareGroups.food,
+    production: [
+      {
+        time: 300,
+        amount: 320,
+        method: 'default',
+        name: 'Paranid',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'majasnails', amount: 40 },
+          { ware: 'sojabeans', amount: 40 },
+          { ware: 'spices', amount: 20 },
+        ],
+        effects: [
+          { type: 'work', product: 0.22 },
+        ],
+      },
+    ]
   },
   spacefuel: {
     id: 'spacefuel',
@@ -398,6 +969,22 @@ const entities = {
     transport: TransportType.container,
     price: { min: 106, max: 319, avg: 213 },
     group: WareGroups.pharmaceutical,
+    production: [
+      {
+        time: 480,
+        amount: 120,
+        method: 'default',
+        name: 'Argon',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'water', amount: 100 },
+          { ware: 'wheat', amount: 80 },
+        ],
+        effects: [
+          { type: 'work', product: 0.38 },
+        ],
+      },
+    ]
   },
   spaceweed: {
     id: 'spaceweed',
@@ -409,6 +996,22 @@ const entities = {
     transport: TransportType.container,
     price: { min: 176, max: 529, avg: 352 },
     group: WareGroups.pharmaceutical,
+    production: [
+      {
+        time: 600,
+        amount: 225,
+        method: 'default',
+        name: 'Teladi',
+        wares: [
+          { ware: 'energycells', amount: 140 },
+          { ware: 'spices', amount: 40 },
+          { ware: 'swampplant', amount: 120 },
+        ],
+        effects: [
+          { type: 'work', product: 0.38 },
+        ],
+      },
+    ]
   },
   spices: {
     id: 'spices',
@@ -420,6 +1023,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 30, max: 46, avg: 38 },
     group: WareGroups.agricultural,
+    production: [
+      {
+        time: 600,
+        amount: 480,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'water', amount: 80 },
+        ],
+        effects: [
+          { type: 'work', product: 0.4 },
+        ],
+      },
+    ]
   },
   sunriseflowers: {
     id: 'sunriseflowers',
@@ -431,6 +1049,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 105, max: 158, avg: 132 },
     group: WareGroups.agricultural,
+    production: [
+      {
+        time: 300,
+        amount: 100,
+        method: 'default',
+        name: 'Teladi',
+        wares: [
+          { ware: 'energycells', amount: 30 },
+          { ware: 'water', amount: 80 },
+        ],
+        effects: [
+          { type: 'work', product: 0.28 },
+        ],
+      },
+    ]
   },
   superfluidcoolant: {
     id: 'superfluidcoolant',
@@ -442,6 +1075,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 135, max: 165, avg: 150 },
     group: WareGroups.refined,
+    production: [
+      {
+        time: 240,
+        amount: 110,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 60 },
+          { ware: 'helium', amount: 320 },
+        ],
+        effects: [
+          { type: 'work', product: 0.28 },
+        ],
+      },
+    ]
   },
   swampplant: {
     id: 'swampplant',
@@ -453,6 +1101,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 104, max: 173, avg: 138 },
     group: WareGroups.agricultural,
+    production: [
+      {
+        time: 450,
+        amount: 120,
+        method: 'default',
+        name: 'Teladi',
+        wares: [
+          { ware: 'energycells', amount: 40 },
+          { ware: 'water', amount: 100 },
+        ],
+        effects: [
+          { type: 'work', product: 0.33 },
+        ],
+      },
+    ]
   },
   teladianium: {
     id: 'teladianium',
@@ -464,6 +1127,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 182, max: 223, avg: 202 },
     group: WareGroups.refined,
+    production: [
+      {
+        time: 120,
+        amount: 80,
+        method: 'default',
+        name: 'Teladi',
+        wares: [
+          { ware: 'energycells', amount: 45 },
+          { ware: 'ore', amount: 280 },
+        ],
+        effects: [
+          { type: 'work', product: 0.25 },
+        ],
+      },
+    ]
   },
   turretcomponents: {
     id: 'turretcomponents',
@@ -475,6 +1153,23 @@ const entities = {
     transport: TransportType.container,
     price: { min: 609, max: 913, avg: 761 },
     group: WareGroups.shiptech,
+    production: [
+      {
+        time: 1800,
+        amount: 200,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 60 },
+          { ware: 'microchips', amount: 20 },
+          { ware: 'quantumtubes', amount: 20 },
+          { ware: 'scanningarrays', amount: 10 },
+        ],
+        effects: [
+          { type: 'work', product: 0.3 },
+        ],
+      },
+    ]
   },
   water: {
     id: 'water',
@@ -486,6 +1181,21 @@ const entities = {
     transport: TransportType.container,
     price: { min: 48, max: 58, avg: 53 },
     group: WareGroups.water,
+    production: [
+      {
+        time: 120,
+        amount: 220,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 60 },
+          { ware: 'ice', amount: 320 },
+        ],
+        effects: [
+          { type: 'work', product: 0.25 },
+        ],
+      },
+    ]
   },
   weaponcomponents: {
     id: 'weaponcomponents',
@@ -497,6 +1207,22 @@ const entities = {
     transport: TransportType.container,
     price: { min: 586, max: 879, avg: 733 },
     group: WareGroups.shiptech,
+    production: [
+      {
+        time: 1800,
+        amount: 200,
+        method: 'default',
+        name: 'Universal',
+        wares: [
+          { ware: 'energycells', amount: 60 },
+          { ware: 'hullparts', amount: 20 },
+          { ware: 'plasmaconductors', amount: 30 },
+        ],
+        effects: [
+          { type: 'work', product: 0.3 },
+        ],
+      },
+    ]
   },
   wheat: {
     id: 'wheat',
@@ -508,850 +1234,69 @@ const entities = {
     transport: TransportType.container,
     price: { min: 37, max: 61, avg: 49 },
     group: WareGroups.agricultural,
+    production: [
+      {
+        time: 300,
+        amount: 270,
+        method: 'default',
+        name: 'Argon',
+        wares: [
+          { ware: 'energycells', amount: 30 },
+          { ware: 'water', amount: 80 },
+        ],
+        effects: [
+          { type: 'work', product: 0.28 },
+        ],
+      },
+    ]
   },
 };
 
-const production = {
-  advancedcomposites: [
-    {
-      time: 300,
-      amount: 60,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 50 },
-        { ware: entities.graphene, amount: 80 },
-        { ware: entities.refinedmetals, amount: 80 },
-      ],
-      effects: [
-        { type: 'work', product: 0.2 },
-      ],
-    },
-    {
-      time: 300,
-      amount: 60,
-      method: 'teladi',
-      name: 'Teladi',
-      wares: [
-        { ware: entities.energycells, amount: 50 },
-        { ware: entities.graphene, amount: 80 },
-        { ware: entities.teladianium, amount: 58 },
-      ],
-      effects: [
-        { type: 'work', product: 0.2 },
-      ],
-    },
-  ],
-  advancedelectronics: [
-    {
-      time: 720,
-      amount: 60,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 60 },
-        { ware: entities.microchips, amount: 44 },
-        { ware: entities.quantumtubes, amount: 20 },
-      ],
-      effects: [
-        { type: 'work', product: 0.22 },
-      ],
-    },
-  ],
-  antimattercells: [
-    {
-      time: 120,
-      amount: 110,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 100 },
-        { ware: entities.hydrogen, amount: 320 },
-      ],
-      effects: [
-        { type: 'work', product: 0.21 },
-      ],
-    },
-  ],
-  antimatterconverters: [
-    {
-      time: 300,
-      amount: 150,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.advancedcomposites, amount: 20 },
-        { ware: entities.energycells, amount: 80 },
-        { ware: entities.microchips, amount: 30 },
-      ],
-      effects: [
-        { type: 'work', product: 0.23 },
-      ],
-    },
-  ],
-  claytronics: [
-    {
-      time: 900,
-      amount: 120,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.antimattercells, amount: 100 },
-        { ware: entities.energycells, amount: 140 },
-        { ware: entities.microchips, amount: 160 },
-        { ware: entities.quantumtubes, amount: 100 },
-      ],
-      effects: [
-        { type: 'work', product: 0.2 },
-      ],
-    },
-  ],
-  dronecomponents: [
-    {
-      time: 1200,
-      amount: 120,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 60 },
-        { ware: entities.engineparts, amount: 20 },
-        { ware: entities.hullparts, amount: 20 },
-        { ware: entities.microchips, amount: 20 },
-        { ware: entities.scanningarrays, amount: 40 },
-      ],
-      effects: [
-        { type: 'work', product: 0.25 },
-      ],
-    },
-  ],
-  energycells: [
-    {
-      time: 60,
-      amount: 200,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-      ],
-      effects: [
-        { type: 'work', product: 0.25 },
-      ],
-    },
-  ],
-  engineparts: [
-    {
-      time: 900,
-      amount: 120,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.antimattercells, amount: 80 },
-        { ware: entities.energycells, amount: 60 },
-        { ware: entities.refinedmetals, amount: 96 },
-      ],
-      effects: [
-        { type: 'work', product: 0.27 },
-      ],
-    },
-    {
-      time: 900,
-      amount: 120,
-      method: 'teladi',
-      name: 'Teladi',
-      wares: [
-        { ware: entities.antimattercells, amount: 80 },
-        { ware: entities.energycells, amount: 60 },
-        { ware: entities.teladianium, amount: 70 },
-      ],
-      effects: [
-        { type: 'work', product: 0.27 },
-      ],
-    },
-  ],
-  fieldcoils: [
-    {
-      time: 600,
-      amount: 200,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 60 },
-        { ware: entities.plasmaconductors, amount: 40 },
-        { ware: entities.quantumtubes, amount: 43 },
-      ],
-      effects: [
-        { type: 'work', product: 0.25 },
-      ],
-    },
-  ],
-  foodrations: [
-    {
-      time: 240,
-      amount: 328,
-      method: 'default',
-      name: 'Argon',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.meat, amount: 40 },
-        { ware: entities.spices, amount: 20 },
-        { ware: entities.wheat, amount: 40 },
-      ],
-      effects: [
-        { type: 'work', product: 0.25 },
-      ],
-    },
-  ],
-  graphene: [
-    {
-      time: 240,
-      amount: 110,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 80 },
-        { ware: entities.methane, amount: 320 },
-      ],
-      effects: [
-        { type: 'work', product: 0.27 },
-      ],
-    },
-  ],
-  helium: [
-  ],
-  hullparts: [
-    {
-      time: 900,
-      amount: 220,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 80 },
-        { ware: entities.graphene, amount: 40 },
-        { ware: entities.refinedmetals, amount: 280 },
-      ],
-      effects: [
-        { type: 'work', product: 0.22 },
-      ],
-    },
-    {
-      time: 900,
-      amount: 220,
-      method: 'teladi',
-      name: 'Teladi',
-      wares: [
-        { ware: entities.energycells, amount: 80 },
-        { ware: entities.graphene, amount: 40 },
-        { ware: entities.teladianium, amount: 204 },
-      ],
-      effects: [
-        { type: 'work', product: 0.22 },
-      ],
-    },
-  ],
-  hydrogen: [
-  ],
-  ice: [
-  ],
-  majadust: [
-    {
-      time: 600,
-      amount: 80,
-      method: 'default',
-      name: 'Paranid',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.majasnails, amount: 120 },
-        { ware: entities.spices, amount: 60 },
-      ],
-      effects: [
-        { type: 'work', product: 0.4 },
-      ],
-    },
-  ],
-  majasnails: [
-    {
-      time: 450,
-      amount: 174,
-      method: 'default',
-      name: 'Paranid',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.water, amount: 100 },
-      ],
-      effects: [
-        { type: 'work', product: 0.33 },
-      ],
-    },
-  ],
-  meat: [
-    {
-      time: 450,
-      amount: 220,
-      method: 'default',
-      name: 'Argon',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.water, amount: 100 },
-      ],
-      effects: [
-        { type: 'work', product: 0.33 },
-      ],
-    },
-  ],
-  medicalsupplies: [
-    {
-      time: 300,
-      amount: 120,
-      method: 'default',
-      name: 'Argon',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.spices, amount: 30 },
-        { ware: entities.water, amount: 60 },
-        { ware: entities.wheat, amount: 22 },
-      ],
-      effects: [
-        { type: 'work', product: 0.28 },
-      ],
-    },
-    {
-      time: 300,
-      amount: 120,
-      method: 'paranid',
-      name: 'Paranid',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.sojabeans, amount: 10 },
-        { ware: entities.spices, amount: 30 },
-        { ware: entities.water, amount: 60 },
-      ],
-      effects: [
-        { type: 'work', product: 0.28 },
-      ],
-    },
-    {
-      time: 300,
-      amount: 120,
-      method: 'teladi',
-      name: 'Teladi',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.spices, amount: 30 },
-        { ware: entities.sunriseflowers, amount: 8 },
-        { ware: entities.water, amount: 60 },
-      ],
-      effects: [
-        { type: 'work', product: 0.28 },
-      ],
-    },
-  ],
-  methane: [
-  ],
-  microchips: [
-    {
-      time: 600,
-      amount: 80,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 50 },
-        { ware: entities.siliconwafers, amount: 200 },
-      ],
-      effects: [
-        { type: 'work', product: 0.22 },
-      ],
-    },
-  ],
-  missilecomponents: [
-    {
-      time: 900,
-      amount: 330,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.advancedcomposites, amount: 2 },
-        { ware: entities.energycells, amount: 20 },
-        { ware: entities.hullparts, amount: 2 },
-      ],
-      effects: [
-        { type: 'work', product: 0.3 },
-      ],
-    },
-  ],
-  nividium: [
-  ],
-  nostropoil: [
-    {
-      time: 300,
-      amount: 320,
-      method: 'default',
-      name: 'Teladi',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.spices, amount: 20 },
-        { ware: entities.sunriseflowers, amount: 40 },
-        { ware: entities.water, amount: 40 },
-      ],
-      effects: [
-        { type: 'work', product: 0.2 },
-      ],
-    },
-  ],
-  ore: [
-  ],
-  plasmaconductors: [
-    {
-      time: 900,
-      amount: 50,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 60 },
-        { ware: entities.graphene, amount: 96 },
-        { ware: entities.superfluidcoolant, amount: 140 },
-      ],
-      effects: [
-        { type: 'work', product: 0.25 },
-      ],
-    },
-    {
-      time: 900,
-      amount: 50,
-      method: 'teladi',
-      name: 'Teladi',
-      wares: [
-        { ware: entities.energycells, amount: 60 },
-        { ware: entities.graphene, amount: 96 },
-        { ware: entities.superfluidcoolant, amount: 140 },
-      ],
-      effects: [
-        { type: 'work', product: 0.25 },
-      ],
-    },
-  ],
-  quantumtubes: [
-    {
-      time: 720,
-      amount: 110,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.graphene, amount: 116 },
-        { ware: entities.superfluidcoolant, amount: 30 },
-      ],
-      effects: [
-        { type: 'work', product: 0.3 },
-      ],
-    },
-    {
-      time: 720,
-      amount: 110,
-      method: 'teladi',
-      name: 'Teladi',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.graphene, amount: 116 },
-        { ware: entities.superfluidcoolant, amount: 30 },
-      ],
-      effects: [
-        { type: 'work', product: 0.3 },
-      ],
-    },
-  ],
-  refinedmetals: [
-    {
-      time: 150,
-      amount: 100,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 90 },
-        { ware: entities.ore, amount: 240 },
-      ],
-      effects: [
-        { type: 'work', product: 0.25 },
-      ],
-    },
-  ],
-  scanningarrays: [
-    {
-      time: 600,
-      amount: 40,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 60 },
-        { ware: entities.refinedmetals, amount: 100 },
-        { ware: entities.siliconwafers, amount: 60 },
-      ],
-      effects: [
-        { type: 'work', product: 0.24 },
-      ],
-    },
-    {
-      time: 600,
-      amount: 40,
-      method: 'teladi',
-      name: 'Teladi',
-      wares: [
-        { ware: entities.energycells, amount: 60 },
-        { ware: entities.siliconwafers, amount: 60 },
-        { ware: entities.teladianium, amount: 73 },
-      ],
-      effects: [
-        { type: 'work', product: 0.24 },
-      ],
-    },
-  ],
-  shieldcomponents: [
-    {
-      time: 1200,
-      amount: 220,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 70 },
-        { ware: entities.plasmaconductors, amount: 20 },
-        { ware: entities.quantumtubes, amount: 20 },
-      ],
-      effects: [
-        { type: 'work', product: 0.25 },
-      ],
-    },
-  ],
-  silicon: [
-  ],
-  siliconwafers: [
-    {
-      time: 180,
-      amount: 120,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 90 },
-        { ware: entities.silicon, amount: 240 },
-      ],
-      effects: [
-        { type: 'work', product: 0.22 },
-      ],
-    },
-  ],
-  smartchips: [
-    {
-      time: 600,
-      amount: 80,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 50 },
-        { ware: entities.siliconwafers, amount: 20 },
-      ],
-      effects: [
-        { type: 'work', product: 0.22 },
-      ],
-    },
-  ],
-  sojabeans: [
-    {
-      time: 300,
-      amount: 120,
-      method: 'default',
-      name: 'Paranid',
-      wares: [
-        { ware: entities.energycells, amount: 30 },
-        { ware: entities.water, amount: 80 },
-      ],
-      effects: [
-        { type: 'work', product: 0.28 },
-      ],
-    },
-  ],
-  sojahusk: [
-    {
-      time: 300,
-      amount: 320,
-      method: 'default',
-      name: 'Paranid',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.majasnails, amount: 40 },
-        { ware: entities.sojabeans, amount: 40 },
-        { ware: entities.spices, amount: 20 },
-      ],
-      effects: [
-        { type: 'work', product: 0.22 },
-      ],
-    },
-  ],
-  spacefuel: [
-    {
-      time: 480,
-      amount: 120,
-      method: 'default',
-      name: 'Argon',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.water, amount: 100 },
-        { ware: entities.wheat, amount: 80 },
-      ],
-      effects: [
-        { type: 'work', product: 0.38 },
-      ],
-    },
-  ],
-  spaceweed: [
-    {
-      time: 600,
-      amount: 225,
-      method: 'default',
-      name: 'Teladi',
-      wares: [
-        { ware: entities.energycells, amount: 140 },
-        { ware: entities.spices, amount: 40 },
-        { ware: entities.swampplant, amount: 120 },
-      ],
-      effects: [
-        { type: 'work', product: 0.38 },
-      ],
-    },
-  ],
-  spices: [
-    {
-      time: 600,
-      amount: 480,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.water, amount: 80 },
-      ],
-      effects: [
-        { type: 'work', product: 0.4 },
-      ],
-    },
-  ],
-  sunriseflowers: [
-    {
-      time: 300,
-      amount: 100,
-      method: 'default',
-      name: 'Teladi',
-      wares: [
-        { ware: entities.energycells, amount: 30 },
-        { ware: entities.water, amount: 80 },
-      ],
-      effects: [
-        { type: 'work', product: 0.28 },
-      ],
-    },
-  ],
-  superfluidcoolant: [
-    {
-      time: 240,
-      amount: 110,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 60 },
-        { ware: entities.helium, amount: 320 },
-      ],
-      effects: [
-        { type: 'work', product: 0.28 },
-      ],
-    },
-  ],
-  swampplant: [
-    {
-      time: 450,
-      amount: 120,
-      method: 'default',
-      name: 'Teladi',
-      wares: [
-        { ware: entities.energycells, amount: 40 },
-        { ware: entities.water, amount: 100 },
-      ],
-      effects: [
-        { type: 'work', product: 0.33 },
-      ],
-    },
-  ],
-  teladianium: [
-    {
-      time: 120,
-      amount: 80,
-      method: 'default',
-      name: 'Teladi',
-      wares: [
-        { ware: entities.energycells, amount: 45 },
-        { ware: entities.ore, amount: 280 },
-      ],
-      effects: [
-        { type: 'work', product: 0.25 },
-      ],
-    },
-  ],
-  turretcomponents: [
-    {
-      time: 1800,
-      amount: 200,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 60 },
-        { ware: entities.microchips, amount: 20 },
-        { ware: entities.quantumtubes, amount: 20 },
-        { ware: entities.scanningarrays, amount: 10 },
-      ],
-      effects: [
-        { type: 'work', product: 0.3 },
-      ],
-    },
-  ],
-  water: [
-    {
-      time: 120,
-      amount: 220,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 60 },
-        { ware: entities.ice, amount: 320 },
-      ],
-      effects: [
-        { type: 'work', product: 0.25 },
-      ],
-    },
-  ],
-  weaponcomponents: [
-    {
-      time: 1800,
-      amount: 200,
-      method: 'default',
-      name: 'Universal',
-      wares: [
-        { ware: entities.energycells, amount: 60 },
-        { ware: entities.hullparts, amount: 20 },
-        { ware: entities.plasmaconductors, amount: 30 },
-      ],
-      effects: [
-        { type: 'work', product: 0.3 },
-      ],
-    },
-  ],
-  wheat: [
-    {
-      time: 300,
-      amount: 270,
-      method: 'default',
-      name: 'Argon',
-      wares: [
-        { ware: entities.energycells, amount: 30 },
-        { ware: entities.water, amount: 80 },
-      ],
-      effects: [
-        { type: 'work', product: 0.28 },
-      ],
-    },
-  ],
-};
-
-const wares = {
-  advancedcomposites: { ...entities.advancedcomposites, production: production.advancedcomposites },
-  advancedelectronics: { ...entities.advancedelectronics, production: production.advancedelectronics },
-  antimattercells: { ...entities.antimattercells, production: production.antimattercells },
-  antimatterconverters: { ...entities.antimatterconverters, production: production.antimatterconverters },
-  claytronics: { ...entities.claytronics, production: production.claytronics },
-  dronecomponents: { ...entities.dronecomponents, production: production.dronecomponents },
-  energycells: { ...entities.energycells, production: production.energycells },
-  engineparts: { ...entities.engineparts, production: production.engineparts },
-  fieldcoils: { ...entities.fieldcoils, production: production.fieldcoils },
-  foodrations: { ...entities.foodrations, production: production.foodrations },
-  graphene: { ...entities.graphene, production: production.graphene },
-  helium: { ...entities.helium, production: production.helium },
-  hullparts: { ...entities.hullparts, production: production.hullparts },
-  hydrogen: { ...entities.hydrogen, production: production.hydrogen },
-  ice: { ...entities.ice, production: production.ice },
-  majadust: { ...entities.majadust, production: production.majadust },
-  majasnails: { ...entities.majasnails, production: production.majasnails },
-  meat: { ...entities.meat, production: production.meat },
-  medicalsupplies: { ...entities.medicalsupplies, production: production.medicalsupplies },
-  methane: { ...entities.methane, production: production.methane },
-  microchips: { ...entities.microchips, production: production.microchips },
-  missilecomponents: { ...entities.missilecomponents, production: production.missilecomponents },
-  nividium: { ...entities.nividium, production: production.nividium },
-  nostropoil: { ...entities.nostropoil, production: production.nostropoil },
-  ore: { ...entities.ore, production: production.ore },
-  plasmaconductors: { ...entities.plasmaconductors, production: production.plasmaconductors },
-  quantumtubes: { ...entities.quantumtubes, production: production.quantumtubes },
-  refinedmetals: { ...entities.refinedmetals, production: production.refinedmetals },
-  scanningarrays: { ...entities.scanningarrays, production: production.scanningarrays },
-  shieldcomponents: { ...entities.shieldcomponents, production: production.shieldcomponents },
-  silicon: { ...entities.silicon, production: production.silicon },
-  siliconwafers: { ...entities.siliconwafers, production: production.siliconwafers },
-  smartchips: { ...entities.smartchips, production: production.smartchips },
-  sojabeans: { ...entities.sojabeans, production: production.sojabeans },
-  sojahusk: { ...entities.sojahusk, production: production.sojahusk },
-  spacefuel: { ...entities.spacefuel, production: production.spacefuel },
-  spaceweed: { ...entities.spaceweed, production: production.spaceweed },
-  spices: { ...entities.spices, production: production.spices },
-  sunriseflowers: { ...entities.sunriseflowers, production: production.sunriseflowers },
-  superfluidcoolant: { ...entities.superfluidcoolant, production: production.superfluidcoolant },
-  swampplant: { ...entities.swampplant, production: production.swampplant },
-  teladianium: { ...entities.teladianium, production: production.teladianium },
-  turretcomponents: { ...entities.turretcomponents, production: production.turretcomponents },
-  water: { ...entities.water, production: production.water },
-  weaponcomponents: { ...entities.weaponcomponents, production: production.weaponcomponents },
-  wheat: { ...entities.wheat, production: production.wheat },
-};
-
-export const Wares = {
-  ...wares,
-  all: [
-    wares.advancedcomposites,
-    wares.advancedelectronics,
-    wares.antimattercells,
-    wares.antimatterconverters,
-    wares.claytronics,
-    wares.dronecomponents,
-    wares.energycells,
-    wares.engineparts,
-    wares.fieldcoils,
-    wares.foodrations,
-    wares.graphene,
-    wares.helium,
-    wares.hullparts,
-    wares.hydrogen,
-    wares.ice,
-    wares.majadust,
-    wares.majasnails,
-    wares.meat,
-    wares.medicalsupplies,
-    wares.methane,
-    wares.microchips,
-    wares.missilecomponents,
-    wares.nividium,
-    wares.nostropoil,
-    wares.ore,
-    wares.plasmaconductors,
-    wares.quantumtubes,
-    wares.refinedmetals,
-    wares.scanningarrays,
-    wares.shieldcomponents,
-    wares.silicon,
-    wares.siliconwafers,
-    wares.smartchips,
-    wares.sojabeans,
-    wares.sojahusk,
-    wares.spacefuel,
-    wares.spaceweed,
-    wares.spices,
-    wares.sunriseflowers,
-    wares.superfluidcoolant,
-    wares.swampplant,
-    wares.teladianium,
-    wares.turretcomponents,
-    wares.water,
-    wares.weaponcomponents,
-    wares.wheat,
-  ]
-};
+export const AllWares = [
+  Wares.advancedcomposites,
+  Wares.advancedelectronics,
+  Wares.antimattercells,
+  Wares.antimatterconverters,
+  Wares.claytronics,
+  Wares.dronecomponents,
+  Wares.energycells,
+  Wares.engineparts,
+  Wares.fieldcoils,
+  Wares.foodrations,
+  Wares.graphene,
+  Wares.helium,
+  Wares.hullparts,
+  Wares.hydrogen,
+  Wares.ice,
+  Wares.majadust,
+  Wares.majasnails,
+  Wares.meat,
+  Wares.medicalsupplies,
+  Wares.methane,
+  Wares.microchips,
+  Wares.missilecomponents,
+  Wares.nividium,
+  Wares.nostropoil,
+  Wares.ore,
+  Wares.plasmaconductors,
+  Wares.quantumtubes,
+  Wares.refinedmetals,
+  Wares.scanningarrays,
+  Wares.shieldcomponents,
+  Wares.silicon,
+  Wares.siliconwafers,
+  Wares.smartchips,
+  Wares.sojabeans,
+  Wares.sojahusk,
+  Wares.spacefuel,
+  Wares.spaceweed,
+  Wares.spices,
+  Wares.sunriseflowers,
+  Wares.superfluidcoolant,
+  Wares.swampplant,
+  Wares.teladianium,
+  Wares.turretcomponents,
+  Wares.water,
+  Wares.weaponcomponents,
+  Wares.wheat,
+];

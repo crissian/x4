@@ -1,13 +1,14 @@
 import { ComponentBase } from '../../shared/components/component-base';
 import { Component, OnInit } from '@angular/core';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LayoutService } from '../services/layout-service';
-import {Module, ModuleDefinition} from '../../shared/services/module';
-import {ConfirmComponent} from '../../shared/components/confirm.component';
+import { ConfirmComponent } from '../../shared/components/confirm.component';
+import { ModuleService } from '../../shared/services/module.service';
+import { StationModule } from '../../shared/services/model/model';
 
 interface LayoutModule {
   count: number;
-  module: ModuleDefinition;
+  module: StationModule;
 }
 
 interface LayoutData {
@@ -21,7 +22,9 @@ interface LayoutData {
 export class LoadLayoutComponent extends ComponentBase implements OnInit {
   entities: LayoutData[];
 
-  constructor(public activeModal: NgbActiveModal, private modal: NgbModal, private layoutService: LayoutService) {
+  constructor(public activeModal: NgbActiveModal, private modal: NgbModal,
+              private layoutService: LayoutService,
+              private moduleService: ModuleService) {
     super();
   }
 
@@ -33,7 +36,7 @@ export class LoadLayoutComponent extends ComponentBase implements OnInit {
           name: x.name,
           modules: x.config
             .map<LayoutModule>(y => {
-              return { count: y.count, module: Module.get(y.moduleId) };
+              return {count: y.count, module: Module.get(y.moduleId)};
             })
         };
       });

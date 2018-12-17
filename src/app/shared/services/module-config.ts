@@ -1,5 +1,5 @@
 export interface ModuleConfig {
-  moduleId?: number;
+  moduleId?: string;
   count: number;
 }
 

@@ -1,4 +1,4 @@
-import { Wares } from './data/wares-data';
+import { AllWares, Wares } from './data/wares-data';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { Ware } from './model/model';
@@ -6,7 +6,7 @@ import { Ware } from './model/model';
 @Injectable()
 export class WareService {
   getWares(): Ware[] {
-    return Wares.all;
+    return AllWares;
   }
 
   getShips() {
@@ -18,7 +18,7 @@ export class WareService {
   }
 
   getWaresUsingWare(id: string): Ware[] {
-    const results = Wares.all
+    const results = AllWares
       .filter(x => this.isUsing(x, id));
     return results;
   }
@@ -26,7 +26,7 @@ export class WareService {
   private isUsing(ware: Ware, wareId: string) {
     for (let i = 0; i < ware.production.length; i ++) {
       const production = ware.production[i];
-      if (production.wares.find(y => y.ware.id == wareId) != null) {
+      if (production.wares.find(y => y.ware == wareId) != null) {
         return true;
       }
     }

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Modules } from './data/modules-data';
+import { AllModules } from './data/modules-data';
 import { ModuleTypes } from './data/module-types-data';
+import { StationModule } from './model/model';
 
 @Injectable()
 export class ModuleService {
-  getProductionModules() {
-    return Modules.all
+  getProductionModules(): StationModule {
+    return AllModules
       .filter(x => x.type === ModuleTypes.production);
   }
 }
