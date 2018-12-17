@@ -29,6 +29,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Module</th>
+                <th scope="col">Production</th>
                 <th scope="col">Count</th>
                 <th scope="col"><i class="fa fa-trash" aria-hidden="true"></i></th>
               </tr>
@@ -38,38 +39,21 @@
                 <td scope="row">{{ index + 1 }}</td>
                 <td>
                   <div class="form-group">
-                    <select class="form-control form-control-sm" [(ngModel)]="item.moduleId">
-                      <option value="0">( Select )</option>
-
-                      <optgroup label="Basic Resources">
-                        <option *ngFor="let module of modules.basicResources" [value]="module.id">{{ module.name }}</option>
-                      </optgroup>
-
-                      <optgroup label="Basic Food & Water">
-                        <option *ngFor="let module of modules.basicFood" [value]="module.id">{{ module.name }}</option>
-                      </optgroup>
-
-                      <optgroup label="Final Food">
-                        <option *ngFor="let module of modules.finalFood" [value]="module.id">{{ module.name }}</option>
-                      </optgroup>
-
-                      <optgroup label="Illegal Goods">
-                        <option *ngFor="let module of modules.illegal" [value]="module.id">{{ module.name }}</option>
-                      </optgroup>
-
-                      <optgroup label="Basic Intermediate Goods">
-                        <option *ngFor="let module of modules.basicIntermediate" [value]="module.id">{{ module.name }}</option>
-                      </optgroup>
-
-                      <optgroup label="Intermediate Goods">
-                        <option *ngFor="let module of modules.intermediateGoods" [value]="module.id">{{ module.name }}</option>
-                      </optgroup>
-
-                      <optgroup label="Final Construction Goods">
-                        <option *ngFor="let module of modules.finalGoods" [value]="module.id">{{ module.name }}</option>
+                    <select class="form-control form-control-sm" [(ngModel)]="item.wareId">
+                      <option value="">( Select )</option>
+                      <optgroup *ngFor="let group of wareGroups" label="{{ group.name }}">
+                        <option *ngFor="let ware of group.wares" [value]="ware.id">{{ ware.name }}</option>
                       </optgroup>
                     </select>
                   </div>
+                </td>
+                <td>
+                  <select class="form-control form-control-sm" *ngIf="!item.ware" disabled="disabled">
+                    <option value="">( Select )</option>
+                  </select>
+                  <select class="form-control form-control-sm" *ngIf="item.ware">
+                    <option *ngFor="let prod of item.ware.production" [value]="prod.method">{{ prod.name }}</option>
+                  </select>
                 </td>
                 <td>
                   <div class="form-group">

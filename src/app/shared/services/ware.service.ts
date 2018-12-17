@@ -2,6 +2,7 @@ import { AllWares, Wares } from './data/wares-data';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { Ware } from './model/model';
+import { WareGroups } from './data/ware-groups-data';
 
 @Injectable()
 export class WareService {
@@ -32,5 +33,14 @@ export class WareService {
     }
 
     return false;
+  }
+
+  getWaresByGroup(groupId: string) {
+    return this.getWares()
+      .filter(x => x.group.id == groupId);
+  }
+
+  getWareGroups() {
+    return WareGroups.all;
   }
 }

@@ -1,6 +1,7 @@
 export interface ModuleConfig {
   moduleId?: string;
   count: number;
+  production?: string;
 }
 
 export interface Layout {

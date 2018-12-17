@@ -1,40 +1,78 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShareLayoutComponent } from './share-layout.component';
 import * as urlon from 'urlon';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { ComponentBase } from '../../shared/components/component-base';
-import { Layout, ModuleConfig } from '../../shared/services/module-config';
+import { Layout } from '../../shared/services/module-config';
 import { LayoutService } from '../services/layout-service';
 import { SaveLayoutComponent } from './save-layout.component';
 import { Message, MessageType } from '../../shared/services/message';
 import { LoadLayoutComponent } from './load-layout.component';
 import { Title } from '@angular/platform-browser';
-import { WareGroups } from '../../shared/services/data/ware-groups-data';
+import { WareService } from '../../shared/services/ware.service';
+import { Ware } from '../../shared/services/model/model';
 
+interface WareGroupData {
+  name: string;
+  wares: { id: string, name: string }[];
+}
+
+class ProductionModel {
+  count: number;
+  productionId: string;
+  ware: Ware;
+
+  constructor(private wareService: WareService) {
+    this.count = 1;
+  }
+
+  get wareId() {
+    return this.ware == null ? '' : this.ware.id;
+  }
+
+  set wareId(value: string) {
+    if (!value) {
+      this.ware = null;
+    } else {
+      this.ware = this.wareService.getWare(value);
+    }
+  }
+}
 
 @Component({
   selector: 'app-station-calculator',
   templateUrl: './station-calculator.component.html'
 })
 export class StationCalculatorComponent extends ComponentBase implements OnInit {
-  wareGroups = WareGroups.all;
-
   productionEfficiency = 100;
   expandState: { [resourceId: number]: boolean } = {};
   layout: Layout;
   messages: Message[] = [];
+  stationModules: ProductionModel[] = [];
 
-  @Input()
-  stationModules: ModuleConfig[] = [];
+  wareGroups: WareGroupData[];
 
-  constructor(private modal: NgbModal, private route: ActivatedRoute, private layoutService: LayoutService, private titleService: Title) {
+  constructor(private modal: NgbModal, private route: ActivatedRoute,
+              private layoutService: LayoutService,
+              private titleService: Title,
+              private wareService: WareService) {
     super();
   }
 
   ngOnInit(): void {
     this.titleService.setTitle('X4:Foundations - Station Calculator');
+
+    this.wareGroups = this.wareService.getWareGroups()
+      .map(x => {
+        return {
+          name: x.name,
+          wares: this.wareService.getWaresByGroup(x.id)
+            .filter(y => y.production.length > 0)
+        };
+      })
+      .filter(x => x.wares.length > 0);
 
     this.route.queryParams
       .pipe(
@@ -52,7 +90,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       });
 
     if (this.stationModules.length === 0) {
-      this.stationModules.push({ moduleId: '', count: 1 });
+      this.stationModules.push(new ProductionModel(this.wareService));
     }
   }
 
@@ -60,7 +98,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
     return [];
   }
 
-  removeModule(item: ModuleConfig) {
+  removeModule(item: ProductionModel) {
     const index = this.stationModules.indexOf(item);
     if (index >= 0) {
       this.stationModules.splice(index, 1);
@@ -73,12 +111,12 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   }
 
   addModule() {
-    this.stationModules.push({moduleId: '', count: 1});
+    this.stationModules.push(new ProductionModel(this.wareService));
   }
 
   shareLayout() {
     const modalRef = this.modal.open(ShareLayoutComponent);
-    const params = urlon.stringify(this.stationModules.filter(x => x.count > 0 && x.moduleId)).replace(/=/g, '-').replace(/&/g, ',');
+    const params = urlon.stringify(this.stationModules.filter(x => x.count > 0 && x.wareId)).replace(/=/g, '-').replace(/&/g, ',');
     const url = window.location.href.split('?')[0];
     modalRef.componentInstance.url = `${url}?l=${params}`;
   }
@@ -122,7 +160,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
           const layout = this.layoutService.getLayout(data);
           if (layout) {
             this.layout = layout;
-            this.stationModules = layout.config;
+            // this.stationModules = layout.config;
           }
         }
       });
