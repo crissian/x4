@@ -54,7 +54,7 @@
                               </td>
                               <td class="text-right">{{ item.amount * item.ware.price.min | number }}</td>
                               <td class="text-right">{{ item.amount * item.ware.price.max | number }}</td>
-                              <td class="text-right">{{ item.amount * item.ware.price.average | number }}</td>
+                              <td class="text-right">{{ item.amount * item.ware.price.avg | number }}</td>
                             </tr>
                             </tbody>
                             <tfoot>
@@ -93,7 +93,7 @@
                                     Min: <strong>{{ entity.price.min * (3600 / production.time) * production.amount | number:'1.0' }}</strong> /
                                 </span>
                                 <span class="text-primary">
-                                    Avg: <strong>{{ entity.price.average * (3600 / production.time) * production.amount | number:'1.0' }}</strong> /
+                                    Avg: <strong>{{ entity.price.avg * (3600 / production.time) * production.amount | number:'1.0' }}</strong> /
                                 </span>
                                 <span class="text-success">
                                     Max: <strong>{{ entity.price.max * (3600 / production.time) * production.amount | number:'1.0' }}</strong>

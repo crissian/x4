@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { WareService } from '../../shared/services/ware.service';
 import { ComponentBase } from '../../shared/components/component-base';
-import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { Ware } from '../../shared/services/model/model';
 
 @Component({
   templateUrl: './wares.component.html'
 })
 export class WaresComponent extends ComponentBase implements OnInit {
-  entities: any[];
+  entities: Ware[];
 
   constructor(private wareService: WareService, private router: Router, private titleService: Title) {
     super();
@@ -17,12 +17,8 @@ export class WaresComponent extends ComponentBase implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('X4:Foundations - Wares');
-    this.wareService
-      .getWares()
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(data => {
-        this.entities = data;
-      });
+    this.entities = this.wareService
+      .getWares();
   }
 
   showEntity(item: any) {

@@ -4,6 +4,7 @@ import { WareService } from '../../shared/services/ware.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
+import { Production } from '../../shared/services/model/model';
 
 @Component({
   templateUrl: './ware-detail.component.html'
@@ -24,29 +25,16 @@ export class WareDetailComponent extends ComponentBase implements OnInit {
       .subscribe(data => {
         const id = data.get('id');
         if (id) {
-          this.wareService
-            .getWare(id)
-            .pipe(takeUntil(this.onDestroy))
-            .subscribe(entity => {
-              this.entity = entity;
-              if (entity) {
-                this.titleService.setTitle('X4:Foundations - ' + entity.name);
-              }
-            });
+          this.entity = this.wareService
+            .getWare(id);
 
-          this.wareService
-            .getWaresUsingWare(id)
-            .pipe(
-              takeUntil(this.onDestroy)
-            )
-            .subscribe(entities => {
-              this.waresUsedIn = entities;
-            });
+          this.waresUsedIn = this.wareService
+            .getWaresUsingWare(id);
         }
       });
   }
 
-  getTotalMin(production: any) {
+  getTotalMin(production: Production) {
     let total = 0;
     production.wares.forEach(x => {
       total += x.amount * x.ware.price.min;
@@ -54,7 +42,7 @@ export class WareDetailComponent extends ComponentBase implements OnInit {
     return total;
   }
 
-  getTotalMax(production: any) {
+  getTotalMax(production: Production) {
     let total = 0;
     production.wares.forEach(x => {
       total += x.amount * x.ware.price.max;
@@ -62,10 +50,10 @@ export class WareDetailComponent extends ComponentBase implements OnInit {
     return total;
   }
 
-  getTotalAvg(production: any) {
+  getTotalAvg(production: Production) {
     let total = 0;
     production.wares.forEach(x => {
-      total += x.amount * x.ware.price.average;
+      total += x.amount * x.ware.price.avg;
     });
     return total;
   }

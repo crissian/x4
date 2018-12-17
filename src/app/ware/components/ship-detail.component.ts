@@ -23,15 +23,6 @@ export class ShipDetailComponent extends ComponentBase implements OnInit {
       .subscribe(data => {
         const id = data.get('id');
         if (id) {
-          this.wareService
-            .getWare(id)
-            .pipe(takeUntil(this.onDestroy))
-            .subscribe(entity => {
-              this.entity = entity;
-              if (entity) {
-                this.titleService.setTitle('X4:Foundations - ' + entity.name);
-              }
-            });
         }
       });
   }
