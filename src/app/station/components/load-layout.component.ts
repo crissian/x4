@@ -3,12 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LayoutService } from '../services/layout-service';
 import { ConfirmComponent } from '../../shared/components/confirm.component';
-import { ModuleService } from '../../shared/services/module.service';
-import { StationModule } from '../../shared/services/model/model';
+import { Ware } from '../../shared/services/model/model';
+import { WareService } from '../../shared/services/ware.service';
 
 interface LayoutModule {
   count: number;
-  module: StationModule;
+  ware: Ware;
 }
 
 interface LayoutData {
@@ -24,7 +24,7 @@ export class LoadLayoutComponent extends ComponentBase implements OnInit {
 
   constructor(public activeModal: NgbActiveModal, private modal: NgbModal,
               private layoutService: LayoutService,
-              private moduleService: ModuleService) {
+              private wareService: WareService) {
     super();
   }
 
@@ -36,7 +36,7 @@ export class LoadLayoutComponent extends ComponentBase implements OnInit {
           name: x.name,
           modules: x.config
             .map<LayoutModule>(y => {
-              return {count: y.count, module: this.moduleService.getModule(y.moduleId)};
+              return {count: y.count, ware: this.wareService.getWare(y.moduleId)};
             })
         };
       });
@@ -44,7 +44,7 @@ export class LoadLayoutComponent extends ComponentBase implements OnInit {
 
   // noinspection JSMethodCanBeStatic
   getModules(item: LayoutData) {
-    return item.modules.map(x => x.count + ' x ' + (x.module == null ? '' : x.module.name)).join(', ');
+    return item.modules.map(x => x.count + ' x ' + (x.ware == null ? '' : x.ware.name)).join(', ');
   }
 
   deleteLayout(event: any, item: LayoutData) {
