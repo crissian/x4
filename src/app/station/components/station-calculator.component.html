@@ -51,7 +51,7 @@
                   <select class="form-control form-control-sm" *ngIf="!item.ware" disabled="disabled">
                     <option value="">( Select )</option>
                   </select>
-                  <select class="form-control form-control-sm" *ngIf="item.ware">
+                  <select class="form-control form-control-sm" *ngIf="item.ware" [(ngModel)]="item.productionId">
                     <option *ngFor="let prod of item.ware.production" [value]="prod.method">{{ prod.name }}</option>
                   </select>
                 </td>
@@ -75,6 +75,7 @@
                 <td colspan="3">
                   <div class="form-group">
                     <label for="production-efficiency">Production Efficiency: <strong class="text-info">{{ productionEfficiency }}%</strong></label>
+
                     <input id="production-efficiency" type="range" class="custom-range" min="100" max="150" [(ngModel)]="productionEfficiency" />
                   </div>
                 </td>

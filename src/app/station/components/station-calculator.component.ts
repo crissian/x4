@@ -37,6 +37,11 @@ class ProductionModel {
       this.ware = null;
     } else {
       this.ware = this.wareService.getWare(value);
+      if (this.ware.production.length > 0) {
+        this.productionId = this.ware.production[0].method;
+      } else {
+        this.productionId = '';
+      }
     }
   }
 }
@@ -82,7 +87,16 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
         if (data['l']) {
           try {
             const layout = data['l'].replace(/-/g, '=').replace(/,/g, '&');
-            this.stationModules = urlon.parse(layout);
+            const layoutData = urlon.parse(layout);
+            this.stationModules = layoutData.map(x => {
+              const model = new ProductionModel(this.wareService);
+              model.wareId = x.ware;
+              model.count = x.count;
+              if (x.prod) {
+                model.productionId = x.prod;
+              }
+              return model;
+            });
           } catch (err) {
             console.log(err);
           }
@@ -116,7 +130,16 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
 
   shareLayout() {
     const modalRef = this.modal.open(ShareLayoutComponent);
-    const params = urlon.stringify(this.stationModules.filter(x => x.count > 0 && x.wareId)).replace(/=/g, '-').replace(/&/g, ',');
+    const data = this.stationModules
+      .filter(x => x.count > 0 && x.wareId)
+      .map(x => {
+        return {
+          prod: x.productionId,
+          ware: x.wareId,
+          count: x.count
+        };
+      });
+    const params = urlon.stringify(data).replace(/=/g, '-').replace(/&/g, ',');
     const url = window.location.href.split('?')[0];
     modalRef.componentInstance.url = `${url}?l=${params}`;
   }
