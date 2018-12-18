@@ -5,7 +5,7 @@ import * as urlon from 'urlon';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { ComponentBase } from '../../shared/components/component-base';
-import { Layout } from '../../shared/services/module-config';
+import { Layout, ModuleConfig } from '../../shared/services/module-config';
 import { LayoutService } from '../services/layout-service';
 import { SaveLayoutComponent } from './save-layout.component';
 import { Message, MessageType } from '../../shared/services/message';
@@ -19,28 +19,108 @@ interface WareGroupData {
   wares: { id: string, name: string }[];
 }
 
-class ProductionModel {
-  count: number;
-  productionId: string;
+interface WareProductionData {
   ware: Ware;
+  count: number;
+  amount: number;
+  efficiency: number;
+  name: string;
+  total: number;
+}
 
-  constructor(private wareService: WareService) {
-    this.count = 1;
+class ProductionModel {
+  private _count: number;
+  private _productionId: string;
+  private _wareId: string;
+  private _ware: Ware;
+
+  production: { amount: number, ware: Ware };
+  needs: { amount: number, ware: Ware }[];
+
+  constructor(private wareService: WareService, wareId: string = '', productionId: string = '', count: number = 1) {
+    this._wareId = wareId;
+    this._productionId = productionId;
+    this._count = count;
+
+    this.update();
   }
 
   get wareId() {
-    return this.ware == null ? '' : this.ware.id;
+    return this._wareId;
   }
 
   set wareId(value: string) {
+    if (value == this._wareId) {
+      return;
+    }
+
+    this._wareId = value;
+
     if (!value) {
-      this.ware = null;
+      this._ware = null;
+      this.productionId = '';
     } else {
-      this.ware = this.wareService.getWare(value);
-      if (this.ware.production.length > 0) {
-        this.productionId = this.ware.production[0].method;
+      this._ware = this.wareService.getWare(value);
+      if (this._ware.production.length > 0) {
+        this.productionId = this._ware.production[0].method;
       } else {
-        this.productionId = '';
+        this._productionId = '';
+      }
+    }
+  }
+
+  get productionId() {
+    return this._productionId;
+  }
+
+  set productionId(value: string) {
+    if (value == this._productionId) {
+      return;
+    }
+
+    this._productionId = value;
+
+    if (value) {
+      this.update();
+    }
+  }
+
+  get count() {
+    return this._count;
+  }
+
+  set count(value: number) {
+    if (this._count != value) {
+      this._count = value;
+      this.update();
+    }
+  }
+
+  get ware() {
+    return this._ware;
+  }
+
+  private update() {
+    if (this.ware == null) {
+      this.production = null;
+      this.needs = [];
+    } else {
+      const currentProduction = this.ware.production.find(x => x.method == this.productionId);
+      if (currentProduction == null) {
+        this.needs = [];
+        this.production = null;
+      } else {
+        this.needs = [];
+
+        // cycles per hour
+        const cycles = 3600 / currentProduction.time;
+
+        this.production = {amount: currentProduction.amount * cycles, ware: this.ware};
+        currentProduction.wares
+          .forEach(x => {
+            const neededWare = this.wareService.getWare(x.ware);
+            this.needs.push({amount: x.amount * cycles, ware: neededWare});
+          });
       }
     }
   }
@@ -109,7 +189,62 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   }
 
   get resources() {
-    return [];
+    const data = this.stationModules
+      .map<WareProductionData[]>(x => {
+        const values = x.needs.map(y => {
+          return {
+            ware: y.ware,
+            count: x.count,
+            amount: -y.amount,
+            efficiency: 100,
+            name: x.ware.name + ' Production',
+            total: x.count * -y.amount
+          };
+        });
+
+        if (x.production) {
+          values.push({
+            ware: x.ware,
+            count: x.count,
+            amount: x.production.amount,
+            efficiency: this.productionEfficiency,
+            name: x.ware.name + ' Production',
+            total: x.count * x.production.amount * this.productionEfficiency / 100
+          });
+        }
+
+        return values;
+      })
+      .reduce((a, b) => {
+        return a.concat(b);
+      })
+      .reduce(function (obj, item) {
+        obj[item.ware.id] = obj[item.ware.id] || [];
+        obj[item.ware.id].push(item);
+        return obj;
+      }, {});
+
+    const results = [];
+
+    for (const prop in data) {
+      if (data.hasOwnProperty(prop)) {
+        const values = <WareProductionData[]>data[prop];
+
+        let sum = 0;
+        values.forEach(x => {
+          sum += x.total;
+        });
+
+        results.push({
+          ware: values[0].ware,
+          amount: sum,
+          items: values,
+          expanded: this.expandState[values[0].ware.id]
+        });
+      }
+    }
+
+    return results;
   }
 
   removeModule(item: ProductionModel) {
@@ -121,7 +256,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
 
   toggleExpanded(item: any) {
     item.expanded = !item.expanded;
-    this.expandState[item.resource.id] = item.expanded;
+    this.expandState[item.ware.id] = item.expanded;
   }
 
   addModule() {
@@ -151,7 +286,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
         if (res) {
           this.layout = {
             name: res,
-            config: this.stationModules
+            config: this.getModuleConfig()
           };
           this.layoutService.saveLayout(this.layout);
           this.messages.push({
@@ -166,7 +301,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
     if (!this.layout || !this.layout.name) {
       this.saveLayoutAs();
     } else {
-      this.layout.config = this.stationModules;
+      this.layout.config = this.getModuleConfig();
       this.layoutService.saveLayout(this.layout);
       this.messages.push({
         type: MessageType.success,
@@ -183,9 +318,32 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
           const layout = this.layoutService.getLayout(data);
           if (layout) {
             this.layout = layout;
-            // this.stationModules = layout.config;
+            this.stationModules = this.getProductionModules(layout.config);
           }
         }
       });
+  }
+
+  private getModuleConfig() {
+    return this.stationModules
+      .map<ModuleConfig>(x => {
+        return {
+          moduleId: x.wareId,
+          count: x.count,
+          production: x.productionId
+        };
+      });
+  }
+
+  getProductionModules(config: ModuleConfig[]) {
+    return config.map(x => {
+      const model = new ProductionModel(this.wareService);
+      model.wareId = x.moduleId;
+      model.count = x.count;
+      if (x.production) {
+        model.productionId = x.production;
+      }
+      return model;
+    });
   }
 }

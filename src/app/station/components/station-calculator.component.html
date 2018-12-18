@@ -97,12 +97,12 @@
                 <td>
                   <i *ngIf="!item.expanded" class="fa fa-angle-right"></i>
                   <i *ngIf="item.expanded" class="fa fa-angle-down"></i>
-                  <span [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }"> {{ item.resource.name }}</span>
+                  <span [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }"> {{ item.ware.name }}</span>
                   <ul *ngIf="item.expanded">
-                    <li *ngFor="let moduleRes of item.moduleResources">
-                      <small [ngClass]="{'text-danger': moduleRes.value < 0, 'text-success': moduleRes.value > 0 }">
-                        ({{ (moduleRes.count * moduleRes.value * (moduleRes.value < 0 ? 1 : (item.efficiency  / 100))) | number }})
-                        {{ moduleRes.count }} x {{ moduleRes.moduleName }}
+                    <li *ngFor="let moduleRes of item.items">
+                      <small [ngClass]="{'text-danger': moduleRes.total < 0, 'text-success': moduleRes.total > 0 }">
+                        ({{ (moduleRes.count * moduleRes.amount * moduleRes.efficiency  / 100) | number }})
+                        {{ moduleRes.count }} x {{ moduleRes.name }}
                       </small>
                     </li>
                   </ul>
