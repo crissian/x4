@@ -189,40 +189,43 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   }
 
   get resources() {
-    const data = this.stationModules
-      .map<WareProductionData[]>(x => {
-        const values = x.needs.map(y => {
-          return {
-            ware: y.ware,
-            count: x.count,
-            amount: -y.amount,
-            efficiency: 100,
-            name: x.ware.name + ' Production',
-            total: x.count * -y.amount
-          };
-        });
-
-        if (x.production) {
-          values.push({
-            ware: x.ware,
-            count: x.count,
-            amount: x.production.amount,
-            efficiency: this.productionEfficiency,
-            name: x.ware.name + ' Production',
-            total: x.count * x.production.amount * this.productionEfficiency / 100
+    let data = {};
+    if (this.stationModules.length > 0) {
+      data = this.stationModules
+        .map<WareProductionData[]>(x => {
+          const values = x.needs.map(y => {
+            return {
+              ware: y.ware,
+              count: x.count,
+              amount: -y.amount,
+              efficiency: 100,
+              name: x.ware.name + ' Production',
+              total: x.count * -y.amount
+            };
           });
-        }
 
-        return values;
-      })
-      .reduce((a, b) => {
-        return a.concat(b);
-      })
-      .reduce(function (obj, item) {
-        obj[item.ware.id] = obj[item.ware.id] || [];
-        obj[item.ware.id].push(item);
-        return obj;
-      }, {});
+          if (x.production) {
+            values.push({
+              ware: x.ware,
+              count: x.count,
+              amount: x.production.amount,
+              efficiency: this.productionEfficiency,
+              name: x.ware.name + ' Production',
+              total: x.count * x.production.amount * this.productionEfficiency / 100
+            });
+          }
+
+          return values;
+        })
+        .reduce((a, b) => {
+          return a.concat(b);
+        })
+        .reduce(function (obj, item) {
+          obj[item.ware.id] = obj[item.ware.id] || [];
+          obj[item.ware.id].push(item);
+          return obj;
+        }, {});
+    }
 
     const results = [];
 
