@@ -244,7 +244,9 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       }
     }
 
-    return results;
+    return results.sort((a, b) => {
+      return this.wareService.compareWares(a.ware, b.ware);
+    });
   }
 
   removeModule(item: ProductionModel) {

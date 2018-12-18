@@ -3,6 +3,7 @@ export interface WareGroup {
   name: string;
   factoryName: string;
   icon: string;
+  tier?: number;
 }
 
 export interface Ware {
