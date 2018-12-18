@@ -24,7 +24,7 @@
             </h6>
 
 
-            <table class="table table-sm table-hover">
+            <table class="table table-sm table-hover small">
               <thead>
               <tr>
                 <th scope="col">#</th>
@@ -85,15 +85,18 @@
           </div>
           <div class="col-md-6">
             <h6 class="card-title">Station Resources</h6>
-            <table class="table table-sm">
+            <table class="table table-sm small">
               <thead>
-              <tr>
+              <tr class="bg-light">
                 <th scope="col">Resource</th>
                 <th scope="col">Amount</th>
+                <th scope="col">Min Price</th>
+                <th scope="col">Max Price</th>
+                <th scope="col">Avg Price</th>
               </tr>
               </thead>
               <tbody>
-              <tr class="hover-icon" *ngFor="let item of resources" (click)="toggleExpanded(item)">
+              <tr class="hover-icon" *ngFor="let item of resources.wares" (click)="toggleExpanded(item)">
                 <td>
                   <i *ngIf="!item.expanded" class="fa fa-angle-right"></i>
                   <i *ngIf="item.expanded" class="fa fa-angle-down"></i>
@@ -107,9 +110,28 @@
                     </li>
                   </ul>
                 </td>
-                <td>{{ item.amount | number }}</td>
+                <td [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount | number }}</td>
+                <td [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.min | number }}</td>
+                <td [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.max | number }}</td>
+                <td [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.avg | number }}</td>
               </tr>
               </tbody>
+              <tfoot>
+                <tr class="bg-light">
+                  <th colspan="2">
+                    Totals Per Hour
+                  </th>
+                  <th class="text-danger">
+                    {{ resources.totalMin | number }}
+                  </th>
+                  <th class="text-success">
+                    {{ resources.totalMax | number }}
+                  </th>
+                  <th class="text-primary">
+                    {{ resources.totalAvg | number }}
+                  </th>
+                </tr>
+              </tfoot>
             </table>
           </div>
         </div>

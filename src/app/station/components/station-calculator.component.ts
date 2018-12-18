@@ -244,9 +244,22 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       }
     }
 
-    return results.sort((a, b) => {
-      return this.wareService.compareWares(a.ware, b.ware);
+    let totalMin = 0;
+    let totalMax = 0;
+    let totalAvg = 0;
+
+    results.forEach(x => {
+      totalMin += x.amount * x.ware.price.min;
+      totalMax += x.amount * x.ware.price.max;
+      totalAvg += x.amount * x.ware.price.avg;
     });
+
+    return {
+      wares: results.sort((a, b) => this.wareService.compareWares(a.ware, b.ware)),
+      totalMin: totalMin,
+      totalMax: totalMax,
+      totalAvg: totalAvg,
+    };
   }
 
   removeModule(item: ProductionModel) {
