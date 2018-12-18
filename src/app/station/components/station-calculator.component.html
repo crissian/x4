@@ -23,7 +23,6 @@
               <button class="btn btn-sm btn-secondary" (click)="shareLayout()"><i class="fa fa-share-square"></i> Share</button>&nbsp;
             </h6>
 
-
             <table class="table table-sm table-hover small">
               <thead>
               <tr>
@@ -31,6 +30,7 @@
                 <th scope="col">Module</th>
                 <th scope="col">Production</th>
                 <th scope="col">Count</th>
+                <th scope="col">Workforce</th>
                 <th scope="col"><i class="fa fa-trash" aria-hidden="true"></i></th>
               </tr>
               </thead>
@@ -61,21 +61,26 @@
                   </div>
                 </td>
                 <td>
+                  {{ item.module?.workForce?.max * item.count }}
+                </td>
+                <td>
                   <i class="fa fa-trash hover-icon" aria-hidden="true" (click)="removeModule(item)"></i>
                 </td>
               </tr>
               </tbody>
               <tfoot>
               <tr>
-                <td colspan="3">
+                <th colspan="2">
                   <button type="button" class="btn btn-secondary btn-sm" (click)="addModule()">Add Module</button>
-                </td>
+                </th>
+                <th colspan="2" class="text-right">Workforce Needed: </th>
+                <th>{{ getTotalWorkforce() }}</th>
+                <th></th>
               </tr>
               <tr>
-                <td colspan="3">
+                <td colspan="6">
                   <div class="form-group">
                     <label for="production-efficiency">Production Efficiency: <strong class="text-info">{{ productionEfficiency }}%</strong></label>
-
                     <input id="production-efficiency" type="range" class="custom-range" min="100" max="150" [(ngModel)]="productionEfficiency" />
                   </div>
                 </td>
@@ -89,10 +94,10 @@
               <thead>
               <tr class="bg-light">
                 <th scope="col">Resource</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Min Price</th>
-                <th scope="col">Max Price</th>
-                <th scope="col">Avg Price</th>
+                <th scope="col" class="text-right">Amount</th>
+                <th scope="col" class="text-right">Min Price</th>
+                <th scope="col" class="text-right">Max Price</th>
+                <th scope="col" class="text-right">Avg Price</th>
               </tr>
               </thead>
               <tbody>
@@ -110,10 +115,10 @@
                     </li>
                   </ul>
                 </td>
-                <td [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount | number }}</td>
-                <td [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.min | number }}</td>
-                <td [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.max | number }}</td>
-                <td [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.avg | number }}</td>
+                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount | number }}</td>
+                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.min | number }}</td>
+                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.max | number }}</td>
+                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.avg | number }}</td>
               </tr>
               </tbody>
               <tfoot>
@@ -121,13 +126,13 @@
                   <th colspan="2">
                     Totals Per Hour
                   </th>
-                  <th class="text-danger">
+                  <th class="text-danger text-right">
                     {{ resources.totalMin | number }}
                   </th>
-                  <th class="text-success">
+                  <th class="text-success text-right">
                     {{ resources.totalMax | number }}
                   </th>
-                  <th class="text-primary">
+                  <th class="text-primary text-right">
                     {{ resources.totalAvg | number }}
                   </th>
                 </tr>

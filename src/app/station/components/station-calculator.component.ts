@@ -12,7 +12,8 @@ import { Message, MessageType } from '../../shared/services/message';
 import { LoadLayoutComponent } from './load-layout.component';
 import { Title } from '@angular/platform-browser';
 import { WareService } from '../../shared/services/ware.service';
-import { Ware } from '../../shared/services/model/model';
+import { StationModule, Ware } from '../../shared/services/model/model';
+import { ModuleService } from '../../shared/services/module.service';
 
 interface WareGroupData {
   name: string;
@@ -36,12 +37,15 @@ class ProductionModel {
 
   production: { amount: number, ware: Ware };
   needs: { amount: number, ware: Ware }[];
+  module: StationModule;
 
-  constructor(private wareService: WareService, wareId: string = '', productionId: string = '', count: number = 1) {
+  constructor(private wareService: WareService, private moduleService: ModuleService,
+              wareId: string = '', productionId: string = '', count: number = 1) {
     this._wareId = wareId;
     this._productionId = productionId;
     this._count = count;
 
+    this.updateWare();
     this.update();
   }
 
@@ -56,17 +60,7 @@ class ProductionModel {
 
     this._wareId = value;
 
-    if (!value) {
-      this._ware = null;
-      this.productionId = '';
-    } else {
-      this._ware = this.wareService.getWare(value);
-      if (this._ware.production.length > 0) {
-        this.productionId = this._ware.production[0].method;
-      } else {
-        this._productionId = '';
-      }
-    }
+    this.updateWare();
   }
 
   get productionId() {
@@ -79,10 +73,7 @@ class ProductionModel {
     }
 
     this._productionId = value;
-
-    if (value) {
-      this.update();
-    }
+    this.update();
   }
 
   get count() {
@@ -100,16 +91,33 @@ class ProductionModel {
     return this._ware;
   }
 
+  private updateWare() {
+    if (!this._wareId) {
+      this.module = null;
+      this.productionId = '';
+    } else {
+      this._ware = this.wareService.getWare(this._wareId);
+      if (this._ware.production.length > 0) {
+        this.productionId = this._ware.production[0].method;
+      } else {
+        this._productionId = '';
+      }
+    }
+  }
+
   private update() {
     if (this.ware == null) {
       this.production = null;
       this.needs = [];
+      this.module = null;
     } else {
       const currentProduction = this.ware.production.find(x => x.method == this.productionId);
       if (currentProduction == null) {
         this.needs = [];
         this.production = null;
+        this.module = null;
       } else {
+        this.module = this.moduleService.getModuleByWare(this.wareId, this.productionId);
         this.needs = [];
 
         // cycles per hour
@@ -142,7 +150,8 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   constructor(private modal: NgbModal, private route: ActivatedRoute,
               private layoutService: LayoutService,
               private titleService: Title,
-              private wareService: WareService) {
+              private wareService: WareService,
+              private moduleService: ModuleService) {
     super();
   }
 
@@ -169,13 +178,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
             const layout = data['l'].replace(/-/g, '=').replace(/,/g, '&');
             const layoutData = urlon.parse(layout);
             this.stationModules = layoutData.map(x => {
-              const model = new ProductionModel(this.wareService);
-              model.wareId = x.ware;
-              model.count = x.count;
-              if (x.prod) {
-                model.productionId = x.prod;
-              }
-              return model;
+              return new ProductionModel(this.wareService, this.moduleService, x.ware, x.prod, x.count);
             });
           } catch (err) {
             console.log(err);
@@ -184,7 +187,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       });
 
     if (this.stationModules.length === 0) {
-      this.stationModules.push(new ProductionModel(this.wareService));
+      this.stationModules.push(new ProductionModel(this.wareService, this.moduleService));
     }
   }
 
@@ -278,7 +281,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   }
 
   addModule() {
-    this.stationModules.push(new ProductionModel(this.wareService));
+    this.stationModules.push(new ProductionModel(this.wareService, this.moduleService));
   }
 
   shareLayout() {
@@ -355,13 +358,18 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
 
   getProductionModules(config: ModuleConfig[]) {
     return config.map(x => {
-      const model = new ProductionModel(this.wareService);
-      model.wareId = x.moduleId;
-      model.count = x.count;
-      if (x.production) {
-        model.productionId = x.production;
-      }
+      const model = new ProductionModel(this.wareService, this.moduleService, x.moduleId, x.production, x.count);
       return model;
     });
+  }
+
+  getTotalWorkforce() {
+    let total = 0;
+    this.stationModules.forEach(x => {
+      if (x.module != null && x.module.workForce != null && x.module.workForce.max != null) {
+        total += x.count * x.module.workForce.max;
+      }
+    });
+    return total;
   }
 }

@@ -73,7 +73,6 @@ export interface ModuleType {
 }
 
 export interface StationModule {
-
   name: string;
   description: string;
   explosionDamage?: number;
@@ -84,4 +83,7 @@ export interface StationModule {
   production: Production[];
   product?: Ware;
   type: ModuleType;
+  workForce?: {
+    max?: number;
+  };
 }
