@@ -9,7 +9,6 @@ import {StationCalculatorComponent} from './components/station-calculator.compon
 import {SharedModule} from '../shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {LayoutService} from './services/layout-service';
-import { ProductionService } from './services/production.service';
 
 @NgModule({
   declarations: [
@@ -31,8 +30,7 @@ import { ProductionService } from './services/production.service';
     ShareLayoutComponent
   ],
   providers: [
-    LayoutService,
-    ProductionService
+    LayoutService
   ]
 })
 export class StationModule {

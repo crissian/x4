@@ -1,5 +1,9 @@
-import { StationModule, Ware } from '../../shared/services/model/model';
-import { ProductionService } from '../services/production.service';
+import { ModuleWorker, Production, StationModule, Ware } from '../../shared/services/model/model';
+import { WareService } from '../../shared/services/ware.service';
+import { ModuleService } from '../../shared/services/module.service';
+import { ModuleTypes } from '../../shared/services/data/module-types-data';
+import { ProductionMethods } from '../../shared/services/data/production-method-data';
+import { Workers } from '../../shared/services/data/workers-data';
 
 
 export interface WareGroupData {
@@ -22,108 +26,67 @@ export interface StationModelData {
   count?: number;
 }
 
-export class ProductionModel {
-  private static defaultValues = { wareId: '', count: 1, productionId: ''};
-
-  private _count: number;
-  private _productionId: string;
-  private _wareId: string;
-  private _ware: Ware;
-
-  production: { amount: number, ware: Ware };
-  needs: { amount: number, ware: Ware }[];
+export class StationModuleModel {
   module: StationModule;
+  needs: { amount: number, ware: Ware }[];
+  production: { amount: number, ware: Ware };
+  count: number;
 
-  constructor(private service: ProductionService, data?: StationModelData) {
-    data = { ...ProductionModel.defaultValues, ...data };
-    this._wareId = data.wareId || '';
-    this._productionId = data.productionId || '';
-    this._count = data.count == null ? 1 : data.count;
+  private _moduleId: string;
 
-    this.updateWare();
-    this.update();
+  constructor(private wareService: WareService, private moduleService: ModuleService, moduleId: string = '', count: number = 1) {
+    this.moduleId = moduleId;
+    this.count = count;
   }
 
-  get wareId() {
-    return this._wareId;
+  get moduleId() {
+    return this._moduleId;
   }
 
-  set wareId(value: string) {
-    if (value == this._wareId) {
-      return;
-    }
-
-    this._wareId = value;
-
-    this.updateWare();
-  }
-
-  get productionId() {
-    return this._productionId;
-  }
-
-  set productionId(value: string) {
-    if (value == this._productionId) {
-      return;
-    }
-
-    this._productionId = value;
-    this.update();
-  }
-
-  get count() {
-    return this._count;
-  }
-
-  set count(value: number) {
-    if (this._count != value) {
-      this._count = value;
+  set moduleId(value: string) {
+    if (value != this._moduleId) {
+      this._moduleId = value;
       this.update();
     }
   }
 
-  get ware() {
-    return this._ware;
-  }
-
-  private updateWare() {
-    if (!this._wareId) {
-      this.module = null;
-      this.productionId = '';
-    } else {
-      this._ware = this.service.getWare(this._wareId);
-      if (this._ware.production.length > 0) {
-        this.productionId = this._ware.production[0].method;
-      } else {
-        this._productionId = '';
-      }
-    }
-  }
-
   private update() {
-    if (this.ware == null) {
+    if (!this._moduleId) {
+      this.module = null;
       this.production = null;
       this.needs = [];
-      this.module = null;
     } else {
-      const currentProduction = this.ware.production.find(x => x.method == this.productionId);
-      if (currentProduction == null) {
-        this.needs = [];
-        this.production = null;
-        this.module = null;
-      } else {
-        this.module = this.service.getModuleByWare(this.wareId, this.productionId);
-        this.needs = [];
+      this.module = this.moduleService.getModule(this.moduleId);
+      this.needs = [];
+      this.production = null;
+
+      if (this.module.type == ModuleTypes.production) {
+        const ware = this.module.product;
+
+        let currentProd: Production;
+        if (this.module.makerRace == null) {
+          currentProd = ware.production.find(x => x.method == ProductionMethods.default);
+        } else {
+          currentProd = ware.production.find(x => x.method == this.module.makerRace.id) ||
+            ware.production.find(x => x.method == ProductionMethods.default);
+        }
 
         // cycles per hour
-        const cycles = 3600 / currentProduction.time;
+        const cycles = 3600 / currentProd.time;
 
-        this.production = {amount: currentProduction.amount * cycles, ware: this.ware};
-        currentProduction.wares
+        this.production = {amount: currentProd.amount * cycles, ware: ware};
+        currentProd.wares
           .forEach(x => {
-            const neededWare = this.service.getWare(x.ware);
+            const neededWare = this.wareService.getWare(x.ware);
             this.needs.push({amount: x.amount * cycles, ware: neededWare});
           });
+      } else if (this.module.type == ModuleTypes.habitation) {
+        const capacity = this.module.workForce.capacity;
+        const worker: ModuleWorker = Workers.get(this.module.workForce.race.id);
+
+        worker.consumption.forEach(x => {
+          this.needs.push({ amount: x.amount * capacity / worker.amount, ware: x.ware });
+        });
       }
     }
   }

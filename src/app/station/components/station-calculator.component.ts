@@ -13,11 +13,9 @@ import { LoadLayoutComponent } from './load-layout.component';
 import { Title } from '@angular/platform-browser';
 import { WareService } from '../../shared/services/ware.service';
 import { ModuleService } from '../../shared/services/module.service';
-import { ProductionService } from '../services/production.service';
-import { ProductionModel, WareGroupData, WareProductionData } from './station-calculator.model';
+import { StationModuleModel, WareGroupData, WareProductionData } from './station-calculator.model';
 import { StationModule } from '../../shared/services/model/model';
 import { ModuleTypes } from '../../shared/services/data/module-types-data';
-import { StationModuleModel } from './model';
 
 
 @Component({
@@ -37,8 +35,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
               private layoutService: LayoutService,
               private titleService: Title,
               private wareService: WareService,
-              private moduleService: ModuleService,
-              private productionService: ProductionService) {
+              private moduleService: ModuleService) {
     super();
   }
 
@@ -71,7 +68,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
             const layout = data['l'].replace(/-/g, '=').replace(/,/g, '&');
             const layoutData = urlon.parse(layout);
             this.stationModules = layoutData.map(x => {
-              return new ProductionModel(this.productionService, { wareId: x.ware, productionId: x.prod, count: x.count });
+              return new StationModuleModel(this.wareService, this.moduleService, x.module, x.count);
             });
           } catch (err) {
             console.log(err);
@@ -249,8 +246,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
 
   getProductionModules(config: ModuleConfig[]) {
     return config.map(x => {
-      const model = new StationModuleModel(this.wareService, this.moduleService, x.moduleId, x.count);
-      return model;
+      return new StationModuleModel(this.wareService, this.moduleService, x.moduleId, x.count);
     });
   }
 
