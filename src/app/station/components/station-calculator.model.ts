@@ -20,12 +20,6 @@ export interface WareProductionData {
   total: number;
 }
 
-export interface StationModelData {
-  wareId?: string;
-  productionId?: string;
-  count?: number;
-}
-
 export class StationModuleModel {
   module: StationModule;
   needs: { amount: number, ware: Ware }[];

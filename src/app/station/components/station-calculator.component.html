@@ -28,7 +28,6 @@
               <tr>
                 <th scope="col">Module</th>
                 <th scope="col">Count</th>
-                <th scope="col">Workforce</th>
                 <th scope="col"><i class="fa fa-trash" aria-hidden="true"></i></th>
               </tr>
               </thead>
@@ -50,9 +49,6 @@
                   </div>
                 </td>
                 <td>
-                  <span *ngIf="item.module?.workForce?.max">{{ item.module?.workForce?.max * item.count }}</span>
-                </td>
-                <td>
                   <i class="fa fa-trash hover-icon" aria-hidden="true" (click)="removeModule(item)"></i>
                 </td>
               </tr>
@@ -62,12 +58,17 @@
                 <th>
                   <button type="button" class="btn btn-secondary btn-sm" (click)="addModule()">Add Module</button>
                 </th>
-                <th class="text-right">Workforce Needed: </th>
-                <th>{{ getTotalWorkforce() }}</th>
+                <th class="text-right">
+                  <!-- TODO: Improve performance -->
+                  Workforce Needed / Capacity:
+                  <span [ngClass]="{ 'text-danger': getTotalWorkforce() > getTotalWorkforceCapacity(), 'text-success': getTotalWorkforce() <= getTotalWorkforceCapacity() }">
+                    {{ getTotalWorkforce() }} / {{ getTotalWorkforceCapacity() }}
+                  </span>
+                </th>
                 <th></th>
               </tr>
               <tr>
-                <td colspan="4">
+                <td colspan="3">
                   <div class="form-group">
                     <label for="production-efficiency">Production Efficiency: <strong class="text-info">{{ productionEfficiency }}%</strong></label>
                     <input id="production-efficiency" type="range" class="custom-range" min="100" max="150" [(ngModel)]="productionEfficiency" />

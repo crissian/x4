@@ -259,4 +259,14 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
     });
     return total;
   }
+
+  getTotalWorkforceCapacity() {
+    let total = 0;
+    this.stationModules.forEach(x => {
+      if (x.module != null && x.module.workForce != null && x.module.workForce.capacity != null) {
+        total += x.count * x.module.workForce.capacity;
+      }
+    });
+    return total;
+  }
 }
