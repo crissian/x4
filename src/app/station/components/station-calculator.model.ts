@@ -23,7 +23,7 @@ export interface WareProductionData {
 export class StationModuleModel {
   module: StationModule;
   needs: { amount: number, ware: Ware }[];
-  production: { amount: number, ware: Ware };
+  production: { amount: number, ware: Ware, value: Production };
   count: number;
 
   private _moduleId: string;
@@ -68,11 +68,11 @@ export class StationModuleModel {
         // cycles per hour
         const cycles = 3600 / currentProd.time;
 
-        this.production = {amount: currentProd.amount * cycles, ware: ware};
+        this.production = { amount: currentProd.amount * cycles, ware: ware, value: currentProd };
         currentProd.wares
           .forEach(x => {
             const neededWare = this.wareService.getWare(x.ware);
-            this.needs.push({amount: x.amount * cycles, ware: neededWare});
+            this.needs.push({ amount: x.amount * cycles, ware: neededWare });
           });
       } else if (this.module.type == ModuleTypes.habitation) {
         const capacity = this.module.workForce.capacity;

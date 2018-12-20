@@ -1,12 +1,13 @@
 /* tslint:disable:max-line-length */
 import { WareGroups } from './ware-groups-data';
 import { TransportType } from './transport-data';
+import { Effects } from './effects-data';
 
 export const Wares = {
   advancedcomposites: {
     id: 'advancedcomposites',
     name: 'Advanced Composites',
-    description: 'Formed from some of the refined resources collected from mining ships, advanced composites is a general term for many compounds created to serve several purposes; most commonly used in the entityProduction of a variety of equipment parts.',
+    description: 'Formed from some of the refined resources collected from mining ships, advanced composites is a general term for many compounds created to serve several purposes; most commonly used in the production of a variety of equipment parts.',
     factoryName: 'Advanced Composite Factory',
     icon: 'ware_advancedcomposites',
     volume: 32,
@@ -25,7 +26,7 @@ export const Wares = {
           { ware: 'refinedmetals', amount: 80 },
         ],
         effects: [
-          { type: 'work', product: 0.2 },
+          { type: Effects.work, product: 0.2 },
         ],
       },
       {
@@ -39,7 +40,7 @@ export const Wares = {
           { ware: 'teladianium', amount: 58 },
         ],
         effects: [
-          { type: 'work', product: 0.2 },
+          { type: Effects.work, product: 0.2 },
         ],
       },
     ]
@@ -66,7 +67,7 @@ export const Wares = {
           { ware: 'quantumtubes', amount: 20 },
         ],
         effects: [
-          { type: 'work', product: 0.22 },
+          { type: Effects.work, product: 0.22 },
         ],
       },
     ]
@@ -74,7 +75,7 @@ export const Wares = {
   antimattercells: {
     id: 'antimattercells',
     name: 'Antimatter Cells',
-    description: 'Highly advanced magnetic storage devices that carry antimatter. Due to the effect of Hawking radiation and their being self-powered, antimatter cells cannot store antimatter indefinitely. They are produced and filled using refined hydrogen and primarily used in the entityProduction of engine parts, and also can be miniaturised to be used in claytronics.',
+    description: 'Highly advanced magnetic storage devices that carry antimatter. Due to the effect of Hawking radiation and their being self-powered, antimatter cells cannot store antimatter indefinitely. They are produced and filled using refined hydrogen and primarily used in the production of engine parts, and also can be miniaturised to be used in claytronics.',
     factoryName: 'Antimatter Cell Factory',
     icon: 'ware_antimattercells',
     volume: 18,
@@ -92,7 +93,7 @@ export const Wares = {
           { ware: 'hydrogen', amount: 320 },
         ],
         effects: [
-          { type: 'work', product: 0.21 },
+          { type: Effects.work, product: 0.21 },
         ],
       },
     ]
@@ -119,7 +120,7 @@ export const Wares = {
           { ware: 'microchips', amount: 30 },
         ],
         effects: [
-          { type: 'work', product: 0.23 },
+          { type: Effects.work, product: 0.23 },
         ],
       },
     ]
@@ -147,7 +148,7 @@ export const Wares = {
           { ware: 'quantumtubes', amount: 100 },
         ],
         effects: [
-          { type: 'work', product: 0.2 },
+          { type: Effects.work, product: 0.2 },
         ],
       },
     ]
@@ -176,7 +177,7 @@ export const Wares = {
           { ware: 'scanningarrays', amount: 40 },
         ],
         effects: [
-          { type: 'work', product: 0.25 },
+          { type: Effects.work, product: 0.25 },
         ],
       },
     ]
@@ -200,7 +201,7 @@ export const Wares = {
         wares: [
         ],
         effects: [
-          { type: 'work', product: 0.25 },
+          { type: Effects.work, product: 0.25 },
         ],
       },
     ]
@@ -208,7 +209,7 @@ export const Wares = {
   engineparts: {
     id: 'engineparts',
     name: 'Engine Parts',
-    description: 'Comprised of a number of different components that make up ship engines, engine parts are delivered straight to the end customer, most commonly shipyards and equipment docks, who then use them themselves to produce or repair engines. While naturally engine parts are a very necessary resource across the entire Jump Gate network, the ability to produce and repair engines on demand, instead of requiring an entirely separate entityProduction step for each, has greatly streamlined the universal economy.',
+    description: 'Comprised of a number of different components that make up ship engines, engine parts are delivered straight to the end customer, most commonly shipyards and equipment docks, who then use them themselves to produce or repair engines. While naturally engine parts are a very necessary resource across the entire Jump Gate network, the ability to produce and repair engines on demand, instead of requiring an entirely separate production step for each, has greatly streamlined the universal economy.',
     factoryName: 'Engine Part Factory',
     icon: 'ware_engineparts',
     volume: 30,
@@ -227,7 +228,7 @@ export const Wares = {
           { ware: 'refinedmetals', amount: 96 },
         ],
         effects: [
-          { type: 'work', product: 0.27 },
+          { type: Effects.work, product: 0.27 },
         ],
       },
       {
@@ -241,7 +242,7 @@ export const Wares = {
           { ware: 'teladianium', amount: 70 },
         ],
         effects: [
-          { type: 'work', product: 0.27 },
+          { type: Effects.work, product: 0.27 },
         ],
       },
     ]
@@ -268,7 +269,7 @@ export const Wares = {
           { ware: 'quantumtubes', amount: 43 },
         ],
         effects: [
-          { type: 'work', product: 0.25 },
+          { type: Effects.work, product: 0.25 },
         ],
       },
     ]
@@ -296,7 +297,7 @@ export const Wares = {
           { ware: 'wheat', amount: 40 },
         ],
         effects: [
-          { type: 'work', product: 0.25 },
+          { type: Effects.work, product: 0.25 },
         ],
       },
     ]
@@ -322,7 +323,7 @@ export const Wares = {
           { ware: 'methane', amount: 320 },
         ],
         effects: [
-          { type: 'work', product: 0.27 },
+          { type: Effects.work, product: 0.27 },
         ],
       },
     ]
@@ -362,7 +363,7 @@ export const Wares = {
           { ware: 'refinedmetals', amount: 280 },
         ],
         effects: [
-          { type: 'work', product: 0.22 },
+          { type: Effects.work, product: 0.22 },
         ],
       },
       {
@@ -376,7 +377,7 @@ export const Wares = {
           { ware: 'teladianium', amount: 204 },
         ],
         effects: [
-          { type: 'work', product: 0.22 },
+          { type: Effects.work, product: 0.22 },
         ],
       },
     ]
@@ -429,7 +430,7 @@ export const Wares = {
           { ware: 'spices', amount: 60 },
         ],
         effects: [
-          { type: 'work', product: 0.4 },
+          { type: Effects.work, product: 0.4 },
         ],
       },
     ]
@@ -455,7 +456,7 @@ export const Wares = {
           { ware: 'water', amount: 100 },
         ],
         effects: [
-          { type: 'work', product: 0.33 },
+          { type: Effects.work, product: 0.33 },
         ],
       },
     ]
@@ -481,7 +482,7 @@ export const Wares = {
           { ware: 'water', amount: 100 },
         ],
         effects: [
-          { type: 'work', product: 0.33 },
+          { type: Effects.work, product: 0.33 },
         ],
       },
     ]
@@ -509,7 +510,7 @@ export const Wares = {
           { ware: 'wheat', amount: 22 },
         ],
         effects: [
-          { type: 'work', product: 0.28 },
+          { type: Effects.work, product: 0.28 },
         ],
       },
       {
@@ -524,7 +525,7 @@ export const Wares = {
           { ware: 'water', amount: 60 },
         ],
         effects: [
-          { type: 'work', product: 0.28 },
+          { type: Effects.work, product: 0.28 },
         ],
       },
       {
@@ -539,7 +540,7 @@ export const Wares = {
           { ware: 'water', amount: 60 },
         ],
         effects: [
-          { type: 'work', product: 0.28 },
+          { type: Effects.work, product: 0.28 },
         ],
       },
     ]
@@ -578,7 +579,7 @@ export const Wares = {
           { ware: 'siliconwafers', amount: 200 },
         ],
         effects: [
-          { type: 'work', product: 0.22 },
+          { type: Effects.work, product: 0.22 },
         ],
       },
     ]
@@ -605,7 +606,7 @@ export const Wares = {
           { ware: 'hullparts', amount: 2 },
         ],
         effects: [
-          { type: 'work', product: 0.3 },
+          { type: Effects.work, product: 0.3 },
         ],
       },
     ]
@@ -646,7 +647,7 @@ export const Wares = {
           { ware: 'water', amount: 40 },
         ],
         effects: [
-          { type: 'work', product: 0.2 },
+          { type: Effects.work, product: 0.2 },
         ],
       },
     ]
@@ -686,7 +687,7 @@ export const Wares = {
           { ware: 'superfluidcoolant', amount: 140 },
         ],
         effects: [
-          { type: 'work', product: 0.25 },
+          { type: Effects.work, product: 0.25 },
         ],
       },
       {
@@ -700,7 +701,7 @@ export const Wares = {
           { ware: 'superfluidcoolant', amount: 140 },
         ],
         effects: [
-          { type: 'work', product: 0.25 },
+          { type: Effects.work, product: 0.25 },
         ],
       },
     ]
@@ -727,7 +728,7 @@ export const Wares = {
           { ware: 'superfluidcoolant', amount: 30 },
         ],
         effects: [
-          { type: 'work', product: 0.3 },
+          { type: Effects.work, product: 0.3 },
         ],
       },
       {
@@ -741,7 +742,7 @@ export const Wares = {
           { ware: 'superfluidcoolant', amount: 30 },
         ],
         effects: [
-          { type: 'work', product: 0.3 },
+          { type: Effects.work, product: 0.3 },
         ],
       },
     ]
@@ -767,7 +768,7 @@ export const Wares = {
           { ware: 'ore', amount: 240 },
         ],
         effects: [
-          { type: 'work', product: 0.25 },
+          { type: Effects.work, product: 0.25 },
         ],
       },
     ]
@@ -794,7 +795,7 @@ export const Wares = {
           { ware: 'siliconwafers', amount: 60 },
         ],
         effects: [
-          { type: 'work', product: 0.24 },
+          { type: Effects.work, product: 0.24 },
         ],
       },
       {
@@ -808,7 +809,7 @@ export const Wares = {
           { ware: 'teladianium', amount: 73 },
         ],
         effects: [
-          { type: 'work', product: 0.24 },
+          { type: Effects.work, product: 0.24 },
         ],
       },
     ]
@@ -835,7 +836,7 @@ export const Wares = {
           { ware: 'quantumtubes', amount: 20 },
         ],
         effects: [
-          { type: 'work', product: 0.25 },
+          { type: Effects.work, product: 0.25 },
         ],
       },
     ]
@@ -843,7 +844,7 @@ export const Wares = {
   silicon: {
     id: 'silicon',
     name: 'Silicon',
-    description: 'Silicon, required for the entityProduction of the most common types of silicon wafers, is usually mined or harvested from asteroids or other uninhabited celestial bodies.',
+    description: 'Silicon, required for the production of the most common types of silicon wafers, is usually mined or harvested from asteroids or other uninhabited celestial bodies.',
     factoryName: 'Silicon Mine',
     icon: 'ware_silicon',
     volume: 10,
@@ -874,7 +875,7 @@ export const Wares = {
           { ware: 'silicon', amount: 240 },
         ],
         effects: [
-          { type: 'work', product: 0.22 },
+          { type: Effects.work, product: 0.22 },
         ],
       },
     ]
@@ -900,7 +901,7 @@ export const Wares = {
           { ware: 'siliconwafers', amount: 20 },
         ],
         effects: [
-          { type: 'work', product: 0.22 },
+          { type: Effects.work, product: 0.22 },
         ],
       },
     ]
@@ -926,7 +927,7 @@ export const Wares = {
           { ware: 'water', amount: 80 },
         ],
         effects: [
-          { type: 'work', product: 0.28 },
+          { type: Effects.work, product: 0.28 },
         ],
       },
     ]
@@ -954,7 +955,7 @@ export const Wares = {
           { ware: 'spices', amount: 20 },
         ],
         effects: [
-          { type: 'work', product: 0.22 },
+          { type: Effects.work, product: 0.22 },
         ],
       },
     ]
@@ -981,7 +982,7 @@ export const Wares = {
           { ware: 'wheat', amount: 80 },
         ],
         effects: [
-          { type: 'work', product: 0.38 },
+          { type: Effects.work, product: 0.38 },
         ],
       },
     ]
@@ -1008,7 +1009,7 @@ export const Wares = {
           { ware: 'swampplant', amount: 120 },
         ],
         effects: [
-          { type: 'work', product: 0.38 },
+          { type: Effects.work, product: 0.38 },
         ],
       },
     ]
@@ -1034,7 +1035,7 @@ export const Wares = {
           { ware: 'water', amount: 80 },
         ],
         effects: [
-          { type: 'work', product: 0.4 },
+          { type: Effects.work, product: 0.4 },
         ],
       },
     ]
@@ -1060,7 +1061,7 @@ export const Wares = {
           { ware: 'water', amount: 80 },
         ],
         effects: [
-          { type: 'work', product: 0.28 },
+          { type: Effects.work, product: 0.28 },
         ],
       },
     ]
@@ -1086,7 +1087,7 @@ export const Wares = {
           { ware: 'helium', amount: 320 },
         ],
         effects: [
-          { type: 'work', product: 0.28 },
+          { type: Effects.work, product: 0.28 },
         ],
       },
     ]
@@ -1112,7 +1113,7 @@ export const Wares = {
           { ware: 'water', amount: 100 },
         ],
         effects: [
-          { type: 'work', product: 0.33 },
+          { type: Effects.work, product: 0.33 },
         ],
       },
     ]
@@ -1138,7 +1139,7 @@ export const Wares = {
           { ware: 'ore', amount: 280 },
         ],
         effects: [
-          { type: 'work', product: 0.25 },
+          { type: Effects.work, product: 0.25 },
         ],
       },
     ]
@@ -1166,7 +1167,7 @@ export const Wares = {
           { ware: 'scanningarrays', amount: 10 },
         ],
         effects: [
-          { type: 'work', product: 0.3 },
+          { type: Effects.work, product: 0.3 },
         ],
       },
     ]
@@ -1174,7 +1175,7 @@ export const Wares = {
   water: {
     id: 'water',
     name: 'Water',
-    description: 'Essential to all known biological life forms, water has never become much of a catalyst for dispute amongst species, owing to its ubiquity in space. It is being used somewhere in the manufacturing process of nearly all goods available across space; especially, however, in the entityProduction of edible goods.',
+    description: 'Essential to all known biological life forms, water has never become much of a catalyst for dispute amongst species, owing to its ubiquity in space. It is being used somewhere in the manufacturing process of nearly all goods available across space; especially, however, in the production of edible goods.',
     factoryName: 'Ice Refinery',
     icon: 'ware_water',
     volume: 6,
@@ -1192,7 +1193,7 @@ export const Wares = {
           { ware: 'ice', amount: 320 },
         ],
         effects: [
-          { type: 'work', product: 0.25 },
+          { type: Effects.work, product: 0.25 },
         ],
       },
     ]
@@ -1219,7 +1220,7 @@ export const Wares = {
           { ware: 'plasmaconductors', amount: 30 },
         ],
         effects: [
-          { type: 'work', product: 0.3 },
+          { type: Effects.work, product: 0.3 },
         ],
       },
     ]
@@ -1245,7 +1246,7 @@ export const Wares = {
           { ware: 'water', amount: 80 },
         ],
         effects: [
-          { type: 'work', product: 0.28 },
+          { type: Effects.work, product: 0.28 },
         ],
       },
     ]

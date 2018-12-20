@@ -16,6 +16,7 @@ import { ModuleService } from '../../shared/services/module.service';
 import { StationModuleModel, WareGroupData, WareProductionData } from './station-calculator.model';
 import { StationModule } from '../../shared/services/model/model';
 import { ModuleTypes } from '../../shared/services/data/module-types-data';
+import { Effects } from '../../shared/services/data/effects-data';
 
 
 @Component({
@@ -23,7 +24,6 @@ import { ModuleTypes } from '../../shared/services/data/module-types-data';
   templateUrl: './station-calculator.component.html'
 })
 export class StationCalculatorComponent extends ComponentBase implements OnInit {
-  productionEfficiency = 100;
   expandState: { [resourceId: number]: boolean } = {};
   layout: Layout;
   messages: Message[] = [];
@@ -82,6 +82,14 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   }
 
   get resources() {
+    const workersCapacity = this.getTotalWorkforceCapacity();
+    const workersNeeded = this.getTotalWorkforce();
+
+    let multiplier = (workersCapacity == 0 || workersNeeded == 0) ? 0 : (workersCapacity / workersNeeded);
+    if (multiplier > 1) {
+      multiplier = 1;
+    }
+
     let data = {};
     if (this.stationModules.length > 0) {
       data = this.stationModules
@@ -98,13 +106,16 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
           });
 
           if (x.production) {
+            const effect = x.production.value.effects ? x.production.value.effects.find(e => e.type == Effects.work) : null;
+            const efficiency = effect == null ? 1 : (1 + effect.product * multiplier);
+
             values.push({
               ware: x.production.ware,
               count: x.count,
               amount: x.production.amount,
-              efficiency: this.productionEfficiency,
+              efficiency: efficiency * 100,
               name: x.module.name,
-              total: x.count * x.production.amount * this.productionEfficiency / 100
+              total: x.count * x.production.amount * efficiency
             });
           }
 
