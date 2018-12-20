@@ -1,3 +1,6 @@
+import { Races } from '../data/race-data';
+import { Wares } from '../data/wares-data';
+
 export interface WareGroup {
   id: string;
   name: string;
@@ -85,5 +88,13 @@ export interface StationModule {
   type: ModuleType;
   workForce?: {
     max?: number;
+    capacity?: number;
+    race?: Race;
   };
+}
+
+export interface ModuleWorker {
+  race: Race;
+  amount: number;
+  consumption: { ware: Ware, amount: number}[];
 }

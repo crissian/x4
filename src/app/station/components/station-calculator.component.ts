@@ -12,127 +12,10 @@ import { Message, MessageType } from '../../shared/services/message';
 import { LoadLayoutComponent } from './load-layout.component';
 import { Title } from '@angular/platform-browser';
 import { WareService } from '../../shared/services/ware.service';
-import { StationModule, Ware } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
+import { ProductionService } from '../services/production.service';
+import { ProductionModel, WareGroupData, WareProductionData } from './station-calculator.model';
 
-interface WareGroupData {
-  name: string;
-  wares: { id: string, name: string }[];
-}
-
-interface WareProductionData {
-  ware: Ware;
-  count: number;
-  amount: number;
-  efficiency: number;
-  name: string;
-  total: number;
-}
-
-class ProductionModel {
-  private _count: number;
-  private _productionId: string;
-  private _wareId: string;
-  private _ware: Ware;
-
-  production: { amount: number, ware: Ware };
-  needs: { amount: number, ware: Ware }[];
-  module: StationModule;
-
-  constructor(private wareService: WareService, private moduleService: ModuleService,
-              wareId: string = '', productionId: string = '', count: number = 1) {
-    this._wareId = wareId;
-    this._productionId = productionId;
-    this._count = count;
-
-    this.updateWare();
-    this.update();
-  }
-
-  get wareId() {
-    return this._wareId;
-  }
-
-  set wareId(value: string) {
-    if (value == this._wareId) {
-      return;
-    }
-
-    this._wareId = value;
-
-    this.updateWare();
-  }
-
-  get productionId() {
-    return this._productionId;
-  }
-
-  set productionId(value: string) {
-    if (value == this._productionId) {
-      return;
-    }
-
-    this._productionId = value;
-    this.update();
-  }
-
-  get count() {
-    return this._count;
-  }
-
-  set count(value: number) {
-    if (this._count != value) {
-      this._count = value;
-      this.update();
-    }
-  }
-
-  get ware() {
-    return this._ware;
-  }
-
-  private updateWare() {
-    if (!this._wareId) {
-      this.module = null;
-      this.productionId = '';
-    } else {
-      this._ware = this.wareService.getWare(this._wareId);
-      if (this._ware.production.length > 0) {
-        this.productionId = this._ware.production[0].method;
-      } else {
-        this._productionId = '';
-      }
-    }
-  }
-
-  private update() {
-    if (this.ware == null) {
-      this.production = null;
-      this.needs = [];
-      this.module = null;
-    } else {
-      const currentProduction = this.ware.production.find(x => x.method == this.productionId);
-      if (currentProduction == null) {
-        this.needs = [];
-        this.production = null;
-        this.module = null;
-      } else {
-        this.module = this.moduleService.getModuleByWare(this.wareId, this.productionId);
-        this.needs = [];
-
-        // cycles per hour
-        const cycles = 3600 / currentProduction.time;
-
-        this.production = {amount: currentProduction.amount * cycles, ware: this.ware};
-        currentProduction.wares
-          .forEach(x => {
-            const neededWare = this.wareService.getWare(x.ware);
-            this.needs.push({amount: x.amount * cycles, ware: neededWare});
-          });
-      }
-    }
-  }
-}
 
 @Component({
   selector: 'app-station-calculator',
@@ -151,7 +34,8 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
               private layoutService: LayoutService,
               private titleService: Title,
               private wareService: WareService,
-              private moduleService: ModuleService) {
+              private moduleService: ModuleService,
+              private productionService: ProductionService) {
     super();
   }
 
@@ -178,7 +62,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
             const layout = data['l'].replace(/-/g, '=').replace(/,/g, '&');
             const layoutData = urlon.parse(layout);
             this.stationModules = layoutData.map(x => {
-              return new ProductionModel(this.wareService, this.moduleService, x.ware, x.prod, x.count);
+              return new ProductionModel(this.productionService, { wareId: x.ware, productionId: x.prod, count: x.count });
             });
           } catch (err) {
             console.log(err);
@@ -187,7 +71,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       });
 
     if (this.stationModules.length === 0) {
-      this.stationModules.push(new ProductionModel(this.wareService, this.moduleService));
+      this.stationModules.push(new ProductionModel(this.productionService));
     }
   }
 
@@ -281,7 +165,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   }
 
   addModule() {
-    this.stationModules.push(new ProductionModel(this.wareService, this.moduleService));
+    this.stationModules.push(new ProductionModel(this.productionService));
   }
 
   shareLayout() {
@@ -358,7 +242,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
 
   getProductionModules(config: ModuleConfig[]) {
     return config.map(x => {
-      const model = new ProductionModel(this.wareService, this.moduleService, x.moduleId, x.production, x.count);
+      const model = new ProductionModel(this.productionService, { wareId: x.moduleId, productionId: x.production, count: x.count });
       return model;
     });
   }
