@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AllModules, Modules } from './data/modules-data';
-import { ModuleTypes } from './data/module-types-data';
-import { StationModule } from './model/model';
+import { ModuleType, StationModule } from './model/model';
 
 @Injectable()
 export class ModuleService {
-  getProductionModules(): StationModule[] {
+  getModulesByType(moduleType: string | ModuleType): StationModule[] {
+    const moduleTypeId = typeof moduleType == 'string' ? moduleType : moduleType.id;
+
     return this.allModules
-      .filter(x => x.type === ModuleTypes.production);
+      .filter(x => x.type.id == moduleTypeId);
   }
 
   // noinspection JSMethodCanBeStatic

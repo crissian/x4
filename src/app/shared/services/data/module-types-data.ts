@@ -25,7 +25,7 @@ export const ModuleTypes = {
   },
   storage: {
     id: 'storage',
-    name: 'storage'
+    name: 'Storage'
   },
   ventureplatform: {
     id: 'ventureplatform',

@@ -13,7 +13,9 @@ export class StationModuleModel {
 
   private _moduleId: string;
 
-  constructor(private wareService: WareService, private moduleService: ModuleService) {
+  constructor(private wareService: WareService, private moduleService: ModuleService, moduleId: string = '', count: number = 1) {
+    this.moduleId = moduleId;
+    this.count = count;
   }
 
   get moduleId() {

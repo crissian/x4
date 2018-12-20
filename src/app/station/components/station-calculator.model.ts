@@ -4,7 +4,7 @@ import { ProductionService } from '../services/production.service';
 
 export interface WareGroupData {
   name: string;
-  wares: { id: string, name: string }[];
+  modules: StationModule[];
 }
 
 export interface WareProductionData {

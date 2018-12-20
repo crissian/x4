@@ -15,6 +15,9 @@ import { WareService } from '../../shared/services/ware.service';
 import { ModuleService } from '../../shared/services/module.service';
 import { ProductionService } from '../services/production.service';
 import { ProductionModel, WareGroupData, WareProductionData } from './station-calculator.model';
+import { StationModule } from '../../shared/services/model/model';
+import { ModuleTypes } from '../../shared/services/data/module-types-data';
+import { StationModuleModel } from './model';
 
 
 @Component({
@@ -26,7 +29,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   expandState: { [resourceId: number]: boolean } = {};
   layout: Layout;
   messages: Message[] = [];
-  stationModules: ProductionModel[] = [];
+  stationModules: StationModuleModel[] = [];
 
   wareGroups: WareGroupData[];
 
@@ -42,15 +45,21 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   ngOnInit(): void {
     this.titleService.setTitle('X4:Foundations - Station Calculator');
 
-    this.wareGroups = this.wareService.getWareGroups()
-      .map(x => {
-        return {
-          name: x.name,
-          wares: this.wareService.getWaresByGroup(x.id)
-            .filter(y => y.production.length > 0)
-        };
-      })
-      .filter(x => x.wares.length > 0);
+    const groupsObj = this.moduleService.getModulesByType(ModuleTypes.production)
+      .reduce((obj, item: StationModule) => {
+        obj[item.product.group.id] = obj[item.product.group.id] || { name: item.product.group.name, group: item.product.group, modules: [] };
+        obj[item.product.group.id].modules.push(item);
+        return obj;
+      }, []);
+
+    this.wareGroups = Object.keys(groupsObj)
+      .map(x => groupsObj[x])
+      .sort((a, b) => this.wareService.compareGroups(a.group, b.group));
+
+    this.wareGroups.push({ name: ModuleTypes.habitation.name, modules: this.moduleService.getModulesByType(ModuleTypes.habitation) });
+    this.wareGroups.push({ name: ModuleTypes.dockarea.name, modules: this.moduleService.getModulesByType(ModuleTypes.dockarea) });
+    this.wareGroups.push({ name: ModuleTypes.pier.name, modules: this.moduleService.getModulesByType(ModuleTypes.pier) });
+    this.wareGroups.push({ name: ModuleTypes.storage.name, modules: this.moduleService.getModulesByType(ModuleTypes.storage) });
 
     this.route.queryParams
       .pipe(
@@ -71,7 +80,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       });
 
     if (this.stationModules.length === 0) {
-      this.stationModules.push(new ProductionModel(this.productionService));
+      this.stationModules.push(new StationModuleModel(this.wareService, this.moduleService));
     }
   }
 
@@ -86,18 +95,18 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
               count: x.count,
               amount: -y.amount,
               efficiency: 100,
-              name: x.ware.name + ' Production',
+              name: x.module.name,
               total: x.count * -y.amount
             };
           });
 
           if (x.production) {
             values.push({
-              ware: x.ware,
+              ware: x.production.ware,
               count: x.count,
               amount: x.production.amount,
               efficiency: this.productionEfficiency,
-              name: x.ware.name + ' Production',
+              name: x.module.name,
               total: x.count * x.production.amount * this.productionEfficiency / 100
             });
           }
@@ -152,7 +161,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
     };
   }
 
-  removeModule(item: ProductionModel) {
+  removeModule(item: StationModuleModel) {
     const index = this.stationModules.indexOf(item);
     if (index >= 0) {
       this.stationModules.splice(index, 1);
@@ -165,17 +174,16 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   }
 
   addModule() {
-    this.stationModules.push(new ProductionModel(this.productionService));
+    this.stationModules.push(new StationModuleModel(this.wareService, this.moduleService));
   }
 
   shareLayout() {
     const modalRef = this.modal.open(ShareLayoutComponent);
     const data = this.stationModules
-      .filter(x => x.count > 0 && x.wareId)
+      .filter(x => x.count > 0 && x.moduleId)
       .map(x => {
         return {
-          prod: x.productionId,
-          ware: x.wareId,
+          module: x.moduleId,
           count: x.count
         };
       });
@@ -233,16 +241,15 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
     return this.stationModules
       .map<ModuleConfig>(x => {
         return {
-          moduleId: x.wareId,
-          count: x.count,
-          production: x.productionId
+          moduleId: x.moduleId,
+          count: x.count
         };
       });
   }
 
   getProductionModules(config: ModuleConfig[]) {
     return config.map(x => {
-      const model = new ProductionModel(this.productionService, { wareId: x.moduleId, productionId: x.production, count: x.count });
+      const model = new StationModuleModel(this.wareService, this.moduleService, x.moduleId, x.count);
       return model;
     });
   }

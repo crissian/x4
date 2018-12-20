@@ -3,9 +3,11 @@ import { Races } from './race-data';
 import { Wares } from './wares-data';
 import { Factions } from './factions-data';
 import { ModuleTypes } from './module-types-data';
+import { CargoTypes } from './cargo-types-data';
 
 export const Modules = {
   module_arg_conn_base_01: {
+    id: 'module_arg_conn_base_01',
     name: 'Argon Base Connection Structure 01',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -31,6 +33,7 @@ export const Modules = {
     ]
   },
   module_arg_conn_base_02: {
+    id: 'module_arg_conn_base_02',
     name: 'Argon Base Connection Structure 02',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -56,6 +59,7 @@ export const Modules = {
     ]
   },
   module_arg_conn_base_03: {
+    id: 'module_arg_conn_base_03',
     name: 'Argon Base Connection Structure 03',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -81,6 +85,7 @@ export const Modules = {
     ]
   },
   module_arg_conn_cross_01: {
+    id: 'module_arg_conn_cross_01',
     name: 'Argon Cross Connection Structure 01',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -106,6 +111,7 @@ export const Modules = {
     ]
   },
   module_arg_conn_vertical_01: {
+    id: 'module_arg_conn_vertical_01',
     name: 'Argon Vertical Connection Structure 01',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -131,6 +137,7 @@ export const Modules = {
     ]
   },
   module_arg_conn_vertical_02: {
+    id: 'module_arg_conn_vertical_02',
     name: 'Argon Vertical Connection Structure 02',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -156,6 +163,7 @@ export const Modules = {
     ]
   },
   module_arg_def_claim_01: {
+    id: 'module_arg_def_claim_01',
     name: 'Argon Administrative Centre',
     description: 'No information available',
     type: ModuleTypes.defencemodule,
@@ -181,6 +189,7 @@ export const Modules = {
     ]
   },
   module_arg_def_disc_01: {
+    id: 'module_arg_def_disc_01',
     name: 'Argon Disc Defence Platform',
     description: 'No information available',
     type: ModuleTypes.defencemodule,
@@ -207,6 +216,7 @@ export const Modules = {
     ]
   },
   module_arg_def_tube_01: {
+    id: 'module_arg_def_tube_01',
     name: 'Argon Bridge Defence Platform',
     description: 'No information available',
     type: ModuleTypes.defencemodule,
@@ -233,6 +243,7 @@ export const Modules = {
     ]
   },
   module_arg_dock_m_01: {
+    id: 'module_arg_dock_m_01',
     name: '1M6S Standard Dock Area',
     description: 'No information available',
     type: ModuleTypes.dockarea,
@@ -261,6 +272,7 @@ export const Modules = {
     ]
   },
   module_arg_dock_m_01_hightech: {
+    id: 'module_arg_dock_m_01_hightech',
     name: '1M6S Luxury Dock Area',
     description: 'No information available',
     type: ModuleTypes.dockarea,
@@ -289,6 +301,7 @@ export const Modules = {
     ]
   },
   module_arg_dock_m_01_lowtech: {
+    id: 'module_arg_dock_m_01_lowtech',
     name: '1M6S Basic Dock Area',
     description: 'No information available',
     type: ModuleTypes.dockarea,
@@ -317,6 +330,7 @@ export const Modules = {
     ]
   },
   module_arg_dock_m_02: {
+    id: 'module_arg_dock_m_02',
     name: '3M6S Standard Dock Area',
     description: 'No information available',
     type: ModuleTypes.dockarea,
@@ -345,6 +359,7 @@ export const Modules = {
     ]
   },
   module_arg_dock_m_02_hightech: {
+    id: 'module_arg_dock_m_02_hightech',
     name: '3M6S Luxury Dock Area',
     description: 'No information available',
     type: ModuleTypes.dockarea,
@@ -373,6 +388,7 @@ export const Modules = {
     ]
   },
   module_arg_dock_m_02_lowtech: {
+    id: 'module_arg_dock_m_02_lowtech',
     name: '3M6S Basic Dock Area',
     description: 'No information available',
     type: ModuleTypes.dockarea,
@@ -401,6 +417,7 @@ export const Modules = {
     ]
   },
   module_arg_hab_l_01: {
+    id: 'module_arg_hab_l_01',
     name: 'Argon L Habitat',
     description: 'No information available',
     type: ModuleTypes.habitation,
@@ -431,6 +448,7 @@ export const Modules = {
     ]
   },
   module_arg_hab_m_01: {
+    id: 'module_arg_hab_m_01',
     name: 'Argon M Habitat',
     description: 'No information available',
     type: ModuleTypes.habitation,
@@ -461,6 +479,7 @@ export const Modules = {
     ]
   },
   module_arg_hab_s_01: {
+    id: 'module_arg_hab_s_01',
     name: 'Argon S Habitat',
     description: 'No information available',
     type: ModuleTypes.habitation,
@@ -491,6 +510,7 @@ export const Modules = {
     ]
   },
   module_arg_pier_l_01: {
+    id: 'module_arg_pier_l_01',
     name: 'Argon 3-Dock T Pier',
     description: 'No information available',
     type: ModuleTypes.pier,
@@ -516,6 +536,7 @@ export const Modules = {
     ]
   },
   module_arg_pier_l_02: {
+    id: 'module_arg_pier_l_02',
     name: 'Argon 1-Dock Pier',
     description: 'No information available',
     type: ModuleTypes.pier,
@@ -542,6 +563,7 @@ export const Modules = {
     ]
   },
   module_arg_pier_l_03: {
+    id: 'module_arg_pier_l_03',
     name: 'Argon 3-Dock E Pier',
     description: 'No information available',
     type: ModuleTypes.pier,
@@ -567,6 +589,7 @@ export const Modules = {
     ]
   },
   module_arg_prod_foodrations_01: {
+    id: 'module_arg_prod_foodrations_01',
     name: 'Food Ration Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -597,6 +620,7 @@ export const Modules = {
     ]
   },
   module_arg_prod_meat_01: {
+    id: 'module_arg_prod_meat_01',
     name: 'Meat Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -627,6 +651,7 @@ export const Modules = {
     ]
   },
   module_arg_prod_medicalsupplies_01: {
+    id: 'module_arg_prod_medicalsupplies_01',
     name: 'Argon Medical Supply Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -656,6 +681,7 @@ export const Modules = {
     ]
   },
   module_arg_prod_spacefuel_01: {
+    id: 'module_arg_prod_spacefuel_01',
     name: 'Spacefuel Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -685,6 +711,7 @@ export const Modules = {
     ]
   },
   module_arg_prod_wheat_01: {
+    id: 'module_arg_prod_wheat_01',
     name: 'Wheat Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -715,12 +742,14 @@ export const Modules = {
     ]
   },
   module_arg_stor_container_l_01: {
+    id: 'module_arg_stor_container_l_01',
     name: 'Argon L Container Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 10000,
     hull: 565000,
     makerRace: Races.argon,
+    cargo: { max: 1000000, type: CargoTypes.container },
     price: { min: 625503, max: 846269, avg: 735886 },
     owners: [
       Factions.antigone,
@@ -741,12 +770,14 @@ export const Modules = {
     ]
   },
   module_arg_stor_container_m_01: {
+    id: 'module_arg_stor_container_m_01',
     name: 'Argon M Container Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 8000,
     hull: 285000,
     makerRace: Races.argon,
+    cargo: { max: 100000, type: CargoTypes.container },
     price: { min: 445475, max: 602701, avg: 524088 },
     owners: [
       Factions.antigone,
@@ -767,12 +798,14 @@ export const Modules = {
     ]
   },
   module_arg_stor_container_s_01: {
+    id: 'module_arg_stor_container_s_01',
     name: 'Argon S Container Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 5000,
     hull: 114000,
     makerRace: Races.argon,
+    cargo: { max: 25000, type: CargoTypes.container },
     price: { min: 282224, max: 381832, avg: 332028 },
     owners: [
       Factions.antigone,
@@ -793,12 +826,14 @@ export const Modules = {
     ]
   },
   module_arg_stor_liquid_l_01: {
+    id: 'module_arg_stor_liquid_l_01',
     name: 'Argon L Liquid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 10000,
     hull: 565000,
     makerRace: Races.argon,
+    cargo: { max: 1000000, type: CargoTypes.liquid },
     price: { min: 625503, max: 846269, avg: 735886 },
     owners: [
       Factions.antigone,
@@ -819,12 +854,14 @@ export const Modules = {
     ]
   },
   module_arg_stor_liquid_m_01: {
+    id: 'module_arg_stor_liquid_m_01',
     name: 'Argon M Liquid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 8000,
     hull: 285000,
     makerRace: Races.argon,
+    cargo: { max: 500000, type: CargoTypes.liquid },
     price: { min: 445475, max: 602701, avg: 524088 },
     owners: [
       Factions.antigone,
@@ -845,12 +882,14 @@ export const Modules = {
     ]
   },
   module_arg_stor_liquid_s_01: {
+    id: 'module_arg_stor_liquid_s_01',
     name: 'Argon S Liquid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 5000,
     hull: 114000,
     makerRace: Races.argon,
+    cargo: { max: 100000, type: CargoTypes.liquid },
     price: { min: 282224, max: 381832, avg: 332028 },
     owners: [
       Factions.antigone,
@@ -871,12 +910,14 @@ export const Modules = {
     ]
   },
   module_arg_stor_solid_l_01: {
+    id: 'module_arg_stor_solid_l_01',
     name: 'Argon L Solid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 10000,
     hull: 565000,
     makerRace: Races.argon,
+    cargo: { max: 1000000, type: CargoTypes.solid },
     price: { min: 625503, max: 846269, avg: 735886 },
     owners: [
       Factions.antigone,
@@ -897,12 +938,14 @@ export const Modules = {
     ]
   },
   module_arg_stor_solid_m_01: {
+    id: 'module_arg_stor_solid_m_01',
     name: 'Argon M Solid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 8000,
     hull: 285000,
     makerRace: Races.argon,
+    cargo: { max: 500000, type: CargoTypes.solid },
     price: { min: 445475, max: 602701, avg: 524088 },
     owners: [
       Factions.antigone,
@@ -923,12 +966,14 @@ export const Modules = {
     ]
   },
   module_arg_stor_solid_s_01: {
+    id: 'module_arg_stor_solid_s_01',
     name: 'Argon S Solid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 5000,
     hull: 114000,
     makerRace: Races.argon,
+    cargo: { max: 100000, type: CargoTypes.solid },
     price: { min: 282224, max: 381832, avg: 332028 },
     owners: [
       Factions.antigone,
@@ -949,6 +994,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_advancedcomposites_01: {
+    id: 'module_gen_prod_advancedcomposites_01',
     name: 'Advanced Composite Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -981,6 +1027,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_advancedelectronics_01: {
+    id: 'module_gen_prod_advancedelectronics_01',
     name: 'Advanced Electronics Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1013,6 +1060,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_antimattercells_01: {
+    id: 'module_gen_prod_antimattercells_01',
     name: 'Antimatter Cell Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1045,6 +1093,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_antimatterconverters_01: {
+    id: 'module_gen_prod_antimatterconverters_01',
     name: 'Antimatter Converter Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1077,6 +1126,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_claytronics_01: {
+    id: 'module_gen_prod_claytronics_01',
     name: 'Claytronics Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1108,6 +1158,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_dronecomponents_01: {
+    id: 'module_gen_prod_dronecomponents_01',
     name: 'Drone Component Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1138,6 +1189,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_energycells_01: {
+    id: 'module_gen_prod_energycells_01',
     name: 'Energy Cell Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1170,6 +1222,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_engineparts_01: {
+    id: 'module_gen_prod_engineparts_01',
     name: 'Engine Part Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1201,6 +1254,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_fieldcoils_01: {
+    id: 'module_gen_prod_fieldcoils_01',
     name: 'Field Coil Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1231,6 +1285,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_graphene_01: {
+    id: 'module_gen_prod_graphene_01',
     name: 'Graphene Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1263,6 +1318,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_hullparts_01: {
+    id: 'module_gen_prod_hullparts_01',
     name: 'Hull Part Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1295,6 +1351,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_microchips_01: {
+    id: 'module_gen_prod_microchips_01',
     name: 'Microchip Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1327,6 +1384,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_missilecomponents_01: {
+    id: 'module_gen_prod_missilecomponents_01',
     name: 'Missile Component Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1358,6 +1416,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_plasmaconductors_01: {
+    id: 'module_gen_prod_plasmaconductors_01',
     name: 'Plasma Conductor Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1390,6 +1449,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_quantumtubes_01: {
+    id: 'module_gen_prod_quantumtubes_01',
     name: 'Quantum Tube Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1422,6 +1482,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_refinedmetals_01: {
+    id: 'module_gen_prod_refinedmetals_01',
     name: 'Refined Metal Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1454,6 +1515,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_scanningarrays_01: {
+    id: 'module_gen_prod_scanningarrays_01',
     name: 'Scanning Array Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1486,6 +1548,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_shieldcomponents_01: {
+    id: 'module_gen_prod_shieldcomponents_01',
     name: 'Shield Component Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1518,6 +1581,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_siliconwafers_01: {
+    id: 'module_gen_prod_siliconwafers_01',
     name: 'Silicon Wafer Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1550,6 +1614,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_smartchips_01: {
+    id: 'module_gen_prod_smartchips_01',
     name: 'Smart Chip Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1580,6 +1645,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_spices_01: {
+    id: 'module_gen_prod_spices_01',
     name: 'Spice Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1612,6 +1678,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_superfluidcoolant_01: {
+    id: 'module_gen_prod_superfluidcoolant_01',
     name: 'Superfluid Coolant Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1644,6 +1711,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_turretcomponents_01: {
+    id: 'module_gen_prod_turretcomponents_01',
     name: 'Turret Component Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1674,6 +1742,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_water_01: {
+    id: 'module_gen_prod_water_01',
     name: 'Water Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1706,6 +1775,7 @@ export const Modules = {
     ]
   },
   module_gen_prod_weaponcomponents_01: {
+    id: 'module_gen_prod_weaponcomponents_01',
     name: 'Weapon Component Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -1736,6 +1806,7 @@ export const Modules = {
     ]
   },
   module_par_conn_base_01: {
+    id: 'module_par_conn_base_01',
     name: 'Paranid Base Connection Structure 01',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -1761,6 +1832,7 @@ export const Modules = {
     ]
   },
   module_par_conn_base_02: {
+    id: 'module_par_conn_base_02',
     name: 'Paranid Base Connection Structure 02',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -1786,6 +1858,7 @@ export const Modules = {
     ]
   },
   module_par_conn_base_03: {
+    id: 'module_par_conn_base_03',
     name: 'Paranid Base Connection Structure 03',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -1811,6 +1884,7 @@ export const Modules = {
     ]
   },
   module_par_conn_cross_01: {
+    id: 'module_par_conn_cross_01',
     name: 'Paranid Cross Connection Structure 01',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -1836,6 +1910,7 @@ export const Modules = {
     ]
   },
   module_par_conn_cross_02: {
+    id: 'module_par_conn_cross_02',
     name: 'Paranid Cross Connection Structure 02',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -1861,6 +1936,7 @@ export const Modules = {
     ]
   },
   module_par_conn_cross_03: {
+    id: 'module_par_conn_cross_03',
     name: 'Paranid Cross Connection Structure 03',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -1886,6 +1962,7 @@ export const Modules = {
     ]
   },
   module_par_conn_vertical_01: {
+    id: 'module_par_conn_vertical_01',
     name: 'Paranid Vertical Connection Structure 01',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -1911,6 +1988,7 @@ export const Modules = {
     ]
   },
   module_par_conn_vertical_02: {
+    id: 'module_par_conn_vertical_02',
     name: 'Paranid Vertical Connection Structure 02',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -1936,6 +2014,7 @@ export const Modules = {
     ]
   },
   module_par_def_claim_01: {
+    id: 'module_par_def_claim_01',
     name: 'Paranid Administrative Centre',
     description: 'No information available',
     type: ModuleTypes.defencemodule,
@@ -1961,6 +2040,7 @@ export const Modules = {
     ]
   },
   module_par_def_disc_01: {
+    id: 'module_par_def_disc_01',
     name: 'Paranid Disc Defence Platform',
     description: 'No information available',
     type: ModuleTypes.defencemodule,
@@ -1987,6 +2067,7 @@ export const Modules = {
     ]
   },
   module_par_def_tube_01: {
+    id: 'module_par_def_tube_01',
     name: 'Paranid Bridge Defence Platform',
     description: 'No information available',
     type: ModuleTypes.defencemodule,
@@ -2013,6 +2094,7 @@ export const Modules = {
     ]
   },
   module_par_hab_l_01: {
+    id: 'module_par_hab_l_01',
     name: 'Paranid L Dome',
     description: 'No information available',
     type: ModuleTypes.habitation,
@@ -2043,6 +2125,7 @@ export const Modules = {
     ]
   },
   module_par_hab_m_01: {
+    id: 'module_par_hab_m_01',
     name: 'Paranid M Dome',
     description: 'No information available',
     type: ModuleTypes.habitation,
@@ -2073,6 +2156,7 @@ export const Modules = {
     ]
   },
   module_par_hab_s_01: {
+    id: 'module_par_hab_s_01',
     name: 'Paranid S Dome',
     description: 'No information available',
     type: ModuleTypes.habitation,
@@ -2103,6 +2187,7 @@ export const Modules = {
     ]
   },
   module_par_pier_l_01: {
+    id: 'module_par_pier_l_01',
     name: 'Paranid 3-Dock T Pier',
     description: 'No information available',
     type: ModuleTypes.pier,
@@ -2128,6 +2213,7 @@ export const Modules = {
     ]
   },
   module_par_pier_l_02: {
+    id: 'module_par_pier_l_02',
     name: 'Paranid 1-Dock Pier',
     description: 'No information available',
     type: ModuleTypes.pier,
@@ -2154,6 +2240,7 @@ export const Modules = {
     ]
   },
   module_par_pier_l_03: {
+    id: 'module_par_pier_l_03',
     name: 'Paranid 3-Dock E Pier',
     description: 'No information available',
     type: ModuleTypes.pier,
@@ -2179,6 +2266,7 @@ export const Modules = {
     ]
   },
   module_par_prod_majadust_01: {
+    id: 'module_par_prod_majadust_01',
     name: 'Maja Dust Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -2209,6 +2297,7 @@ export const Modules = {
     ]
   },
   module_par_prod_majasnails_01: {
+    id: 'module_par_prod_majasnails_01',
     name: 'Maja Snail Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -2239,6 +2328,7 @@ export const Modules = {
     ]
   },
   module_par_prod_medicalsupplies_01: {
+    id: 'module_par_prod_medicalsupplies_01',
     name: 'Paranid Medical Supply Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -2269,6 +2359,7 @@ export const Modules = {
     ]
   },
   module_par_prod_sojabeans_01: {
+    id: 'module_par_prod_sojabeans_01',
     name: 'Soja Bean Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -2299,6 +2390,7 @@ export const Modules = {
     ]
   },
   module_par_prod_sojahusk_01: {
+    id: 'module_par_prod_sojahusk_01',
     name: 'Soja Husk Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -2329,12 +2421,14 @@ export const Modules = {
     ]
   },
   module_par_stor_container_l_01: {
+    id: 'module_par_stor_container_l_01',
     name: 'Paranid L Container Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 10000,
     hull: 653000,
     makerRace: Races.paranid,
+    cargo: { max: 1000000, type: CargoTypes.container },
     price: { min: 674026, max: 911918, avg: 792972 },
     owners: [
       Factions.holyorder,
@@ -2355,12 +2449,14 @@ export const Modules = {
     ]
   },
   module_par_stor_container_m_01: {
+    id: 'module_par_stor_container_m_01',
     name: 'Paranid M Container Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 8000,
     hull: 304000,
     makerRace: Races.paranid,
+    cargo: { max: 100000, type: CargoTypes.container },
     price: { min: 457555, max: 619045, avg: 538300 },
     owners: [
       Factions.holyorder,
@@ -2381,11 +2477,13 @@ export const Modules = {
     ]
   },
   module_par_stor_container_s_01: {
+    id: 'module_par_stor_container_s_01',
     name: 'Paranid S Container Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     hull: 133000,
     makerRace: Races.paranid,
+    cargo: { max: 25000, type: CargoTypes.container },
     price: { min: 304150, max: 411498, avg: 357824 },
     owners: [
       Factions.holyorder,
@@ -2406,11 +2504,13 @@ export const Modules = {
     ]
   },
   module_par_stor_liquid_l_01: {
+    id: 'module_par_stor_liquid_l_01',
     name: 'Paranid L Liquid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     hull: 653000,
     makerRace: Races.paranid,
+    cargo: { max: 1000000, type: CargoTypes.liquid },
     price: { min: 674026, max: 911918, avg: 792972 },
     owners: [
       Factions.holyorder,
@@ -2431,11 +2531,13 @@ export const Modules = {
     ]
   },
   module_par_stor_liquid_m_01: {
+    id: 'module_par_stor_liquid_m_01',
     name: 'Paranid M Liquid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     hull: 304000,
     makerRace: Races.paranid,
+    cargo: { max: 500000, type: CargoTypes.liquid },
     price: { min: 457555, max: 619045, avg: 538300 },
     owners: [
       Factions.holyorder,
@@ -2456,11 +2558,13 @@ export const Modules = {
     ]
   },
   module_par_stor_liquid_s_01: {
+    id: 'module_par_stor_liquid_s_01',
     name: 'Paranid S Liquid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     hull: 133000,
     makerRace: Races.paranid,
+    cargo: { max: 100000, type: CargoTypes.liquid },
     price: { min: 304150, max: 411498, avg: 357824 },
     owners: [
       Factions.holyorder,
@@ -2481,12 +2585,14 @@ export const Modules = {
     ]
   },
   module_par_stor_solid_l_01: {
+    id: 'module_par_stor_solid_l_01',
     name: 'Paranid L Solid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 10000,
     hull: 653000,
     makerRace: Races.paranid,
+    cargo: { max: 1000000, type: CargoTypes.solid },
     price: { min: 674026, max: 911918, avg: 792972 },
     owners: [
       Factions.holyorder,
@@ -2507,12 +2613,14 @@ export const Modules = {
     ]
   },
   module_par_stor_solid_m_01: {
+    id: 'module_par_stor_solid_m_01',
     name: 'Paranid M Solid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 8000,
     hull: 304000,
     makerRace: Races.paranid,
+    cargo: { max: 500000, type: CargoTypes.solid },
     price: { min: 457555, max: 619045, avg: 538300 },
     owners: [
       Factions.holyorder,
@@ -2533,12 +2641,14 @@ export const Modules = {
     ]
   },
   module_par_stor_solid_s_01: {
+    id: 'module_par_stor_solid_s_01',
     name: 'Paranid S Solid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 5000,
     hull: 133000,
     makerRace: Races.paranid,
+    cargo: { max: 100000, type: CargoTypes.solid },
     price: { min: 304150, max: 411498, avg: 357824 },
     owners: [
       Factions.holyorder,
@@ -2559,6 +2669,7 @@ export const Modules = {
     ]
   },
   module_tel_conn_base_01: {
+    id: 'module_tel_conn_base_01',
     name: 'Teladi Base Connection Structure 01',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -2583,6 +2694,7 @@ export const Modules = {
     ]
   },
   module_tel_conn_base_02: {
+    id: 'module_tel_conn_base_02',
     name: 'Teladi Base Connection Structure 02',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -2607,6 +2719,7 @@ export const Modules = {
     ]
   },
   module_tel_conn_base_03: {
+    id: 'module_tel_conn_base_03',
     name: 'Teladi Base Connection Structure 03',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -2631,6 +2744,7 @@ export const Modules = {
     ]
   },
   module_tel_conn_cross_01: {
+    id: 'module_tel_conn_cross_01',
     name: 'Teladi Cross Connection Structure 01',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -2655,6 +2769,7 @@ export const Modules = {
     ]
   },
   module_tel_conn_vertical_01: {
+    id: 'module_tel_conn_vertical_01',
     name: 'Teladi Vertical Connection Structure 01',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -2679,6 +2794,7 @@ export const Modules = {
     ]
   },
   module_tel_conn_vertical_02: {
+    id: 'module_tel_conn_vertical_02',
     name: 'Teladi Vertical Connection Structure 02',
     description: 'No information available',
     type: ModuleTypes.connectionmodule,
@@ -2703,6 +2819,7 @@ export const Modules = {
     ]
   },
   module_tel_def_claim_01: {
+    id: 'module_tel_def_claim_01',
     name: 'Teladi Administrative Centre',
     description: 'No information available',
     type: ModuleTypes.defencemodule,
@@ -2728,6 +2845,7 @@ export const Modules = {
     ]
   },
   module_tel_def_disc_01: {
+    id: 'module_tel_def_disc_01',
     name: 'Teladi Disc Defence Platform',
     description: 'No information available',
     type: ModuleTypes.defencemodule,
@@ -2754,6 +2872,7 @@ export const Modules = {
     ]
   },
   module_tel_def_tube_01: {
+    id: 'module_tel_def_tube_01',
     name: 'Teladi Bridge Defence Platform',
     description: 'No information available',
     type: ModuleTypes.defencemodule,
@@ -2780,6 +2899,7 @@ export const Modules = {
     ]
   },
   module_tel_hab_l_01: {
+    id: 'module_tel_hab_l_01',
     name: 'Teladi L Biome',
     description: 'No information available',
     type: ModuleTypes.habitation,
@@ -2809,6 +2929,7 @@ export const Modules = {
     ]
   },
   module_tel_hab_m_01: {
+    id: 'module_tel_hab_m_01',
     name: 'Teladi M Biome',
     description: 'No information available',
     type: ModuleTypes.habitation,
@@ -2838,6 +2959,7 @@ export const Modules = {
     ]
   },
   module_tel_hab_s_01: {
+    id: 'module_tel_hab_s_01',
     name: 'Teladi S Biome',
     description: 'No information available',
     type: ModuleTypes.habitation,
@@ -2867,6 +2989,7 @@ export const Modules = {
     ]
   },
   module_tel_pier_l_01: {
+    id: 'module_tel_pier_l_01',
     name: 'Teladi 3-Dock T Pier',
     description: 'No information available',
     type: ModuleTypes.pier,
@@ -2893,6 +3016,7 @@ export const Modules = {
     ]
   },
   module_tel_pier_l_02: {
+    id: 'module_tel_pier_l_02',
     name: 'Teladi 1-Dock Pier',
     description: 'No information available',
     type: ModuleTypes.pier,
@@ -2919,6 +3043,7 @@ export const Modules = {
     ]
   },
   module_tel_pier_l_03: {
+    id: 'module_tel_pier_l_03',
     name: 'Teladi 3-Dock E Pier',
     description: 'No information available',
     type: ModuleTypes.pier,
@@ -2945,6 +3070,7 @@ export const Modules = {
     ]
   },
   module_tel_prod_advancedcomposites_01: {
+    id: 'module_tel_prod_advancedcomposites_01',
     name: 'Teladi Advanced Composite Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -2974,6 +3100,7 @@ export const Modules = {
     ]
   },
   module_tel_prod_engineparts_01: {
+    id: 'module_tel_prod_engineparts_01',
     name: 'Teladi Engine Part Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -3003,6 +3130,7 @@ export const Modules = {
     ]
   },
   module_tel_prod_hullparts_01: {
+    id: 'module_tel_prod_hullparts_01',
     name: 'Teladi Hull Part Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -3032,6 +3160,7 @@ export const Modules = {
     ]
   },
   module_tel_prod_medicalsupplies_01: {
+    id: 'module_tel_prod_medicalsupplies_01',
     name: 'Teladi Medical Supply Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -3061,6 +3190,7 @@ export const Modules = {
     ]
   },
   module_tel_prod_nostropoil_01: {
+    id: 'module_tel_prod_nostropoil_01',
     name: 'Nostrop Oil Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -3090,6 +3220,7 @@ export const Modules = {
     ]
   },
   module_tel_prod_scanningarrays_01: {
+    id: 'module_tel_prod_scanningarrays_01',
     name: 'Teladi Scanning Array Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -3119,6 +3250,7 @@ export const Modules = {
     ]
   },
   module_tel_prod_spaceweed_01: {
+    id: 'module_tel_prod_spaceweed_01',
     name: 'Spaceweed Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -3150,6 +3282,7 @@ export const Modules = {
     ]
   },
   module_tel_prod_sunriseflowers_01: {
+    id: 'module_tel_prod_sunriseflowers_01',
     name: 'Sunrise Flower Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -3179,6 +3312,7 @@ export const Modules = {
     ]
   },
   module_tel_prod_swampplant_01: {
+    id: 'module_tel_prod_swampplant_01',
     name: 'Swamp Plant Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -3208,6 +3342,7 @@ export const Modules = {
     ]
   },
   module_tel_prod_teladianium_01: {
+    id: 'module_tel_prod_teladianium_01',
     name: 'Teladianium Production',
     description: 'No information available',
     type: ModuleTypes.production,
@@ -3237,12 +3372,14 @@ export const Modules = {
     ]
   },
   module_tel_stor_container_l_01: {
+    id: 'module_tel_stor_container_l_01',
     name: 'Teladi L Container Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 10000,
     hull: 531000,
     makerRace: Races.teladi,
+    cargo: { max: 1000000, type: CargoTypes.container },
     price: { min: 608287, max: 822977, avg: 715632 },
     owners: [
       Factions.teladi,
@@ -3262,12 +3399,14 @@ export const Modules = {
     ]
   },
   module_tel_stor_container_m_01: {
+    id: 'module_tel_stor_container_m_01',
     name: 'Teladi M Container Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 8000,
     hull: 259000,
     makerRace: Races.teladi,
+    cargo: { max: 100000, type: CargoTypes.container },
     price: { min: 424014, max: 573666, avg: 498840 },
     owners: [
       Factions.teladi,
@@ -3287,12 +3426,14 @@ export const Modules = {
     ]
   },
   module_tel_stor_container_s_01: {
+    id: 'module_tel_stor_container_s_01',
     name: 'Teladi S Container Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 5000,
     hull: 111000,
     makerRace: Races.teladi,
+    cargo: { max: 25000, type: CargoTypes.container },
     price: { min: 277527, max: 375477, avg: 326502 },
     owners: [
       Factions.teladi,
@@ -3312,12 +3453,14 @@ export const Modules = {
     ]
   },
   module_tel_stor_liquid_l_01: {
+    id: 'module_tel_stor_liquid_l_01',
     name: 'Teladi L Liquid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 10000,
     hull: 531000,
     makerRace: Races.teladi,
+    cargo: { max: 1000000, type: CargoTypes.liquid },
     price: { min: 608287, max: 822977, avg: 715632 },
     owners: [
       Factions.teladi,
@@ -3337,12 +3480,14 @@ export const Modules = {
     ]
   },
   module_tel_stor_liquid_m_01: {
+    id: 'module_tel_stor_liquid_m_01',
     name: 'Teladi M Liquid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 8000,
     hull: 259000,
     makerRace: Races.teladi,
+    cargo: { max: 500000, type: CargoTypes.liquid },
     price: { min: 424014, max: 573666, avg: 498840 },
     owners: [
       Factions.teladi,
@@ -3362,12 +3507,14 @@ export const Modules = {
     ]
   },
   module_tel_stor_liquid_s_01: {
+    id: 'module_tel_stor_liquid_s_01',
     name: 'Teladi S Liquid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 5000,
     hull: 111000,
     makerRace: Races.teladi,
+    cargo: { max: 100000, type: CargoTypes.liquid },
     price: { min: 277527, max: 375477, avg: 326502 },
     owners: [
       Factions.teladi,
@@ -3387,12 +3534,14 @@ export const Modules = {
     ]
   },
   module_tel_stor_solid_l_01: {
+    id: 'module_tel_stor_solid_l_01',
     name: 'Teladi L Solid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 10000,
     hull: 531000,
     makerRace: Races.teladi,
+    cargo: { max: 1000000, type: CargoTypes.solid },
     price: { min: 608287, max: 822977, avg: 715632 },
     owners: [
       Factions.teladi,
@@ -3412,12 +3561,14 @@ export const Modules = {
     ]
   },
   module_tel_stor_solid_m_01: {
+    id: 'module_tel_stor_solid_m_01',
     name: 'Teladi M Solid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 8000,
     hull: 259000,
     makerRace: Races.teladi,
+    cargo: { max: 500000, type: CargoTypes.solid },
     price: { min: 424014, max: 573666, avg: 498840 },
     owners: [
       Factions.teladi,
@@ -3437,12 +3588,14 @@ export const Modules = {
     ]
   },
   module_tel_stor_solid_s_01: {
+    id: 'module_tel_stor_solid_s_01',
     name: 'Teladi S Solid Storage',
     description: 'No information available',
     type: ModuleTypes.storage,
     explosionDamage: 5000,
     hull: 111000,
     makerRace: Races.teladi,
+    cargo: { max: 100000, type: CargoTypes.solid },
     price: { min: 277527, max: 375477, avg: 326502 },
     owners: [
       Factions.teladi,

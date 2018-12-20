@@ -76,6 +76,7 @@ export interface ModuleType {
 }
 
 export interface StationModule {
+  id: string;
   name: string;
   description: string;
   explosionDamage?: number;

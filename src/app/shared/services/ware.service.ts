@@ -49,13 +49,15 @@ export class WareService {
     return false;
   }
 
-  getWaresByGroup(groupId: string) {
-    return this.getWares()
-      .filter(x => x.group.id == groupId);
-  }
+  compareGroups(a: WareGroup, b: WareGroup) {
+    const aidx = WareService.order[a.id];
+    const bidx = WareService.order[b.id];
 
-  getWareGroups(): WareGroup[] {
-    return WareGroups.all.concat([]).sort((a, b) => WareService.order[a.id] - WareService.order[b.id]);
+    if (aidx == bidx) {
+      return this.compareProp(a, b, 'name');
+    }
+
+    return aidx - bidx;
   }
 
   compareWares(a: Ware, b: Ware) {

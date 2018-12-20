@@ -3,29 +3,34 @@ import { StorageService } from '../../core/services/storage.service';
 import { Layout } from '../../shared/services/module-config';
 import { LayoutV0Service } from './layout-v0.service';
 import { LayoutV1Service } from './layout-v1.service';
+import { LayoutV2Service } from './layout-v2.service';
+import { ModuleService } from '../../shared/services/module.service';
+import { LayoutVersionService } from './layout-version.service';
 
 @Injectable()
 export class LayoutService {
-  private static version = 1;
+  private static version = 2;
   private static storageKey = 'layouts';
 
-  private static services = [
-    new LayoutV0Service(),
-    new LayoutV1Service()
-  ];
+  private services: LayoutVersionService[];
 
-  private static getCurrentService() {
+  private getCurrentService() {
     return this.services[LayoutService.version];
   }
 
-  constructor(private storageService: StorageService) {
+  constructor(private storageService: StorageService, private moduleService: ModuleService) {
+    this.services = [
+      new LayoutV0Service(),
+      new LayoutV1Service(moduleService),
+      new LayoutV2Service()
+    ];
   }
 
   getLayouts(): Layout[] {
     const data = this.storageService.get<any>(LayoutService.storageKey);
     const layoutVersion = data.version || 0;
 
-    const layouts = LayoutService.services[layoutVersion].getLayouts(data);
+    const layouts = this.services[layoutVersion].getLayouts(data);
     return layouts || [];
   }
 
@@ -60,7 +65,7 @@ export class LayoutService {
   }
 
   saveLayoutsInternal(layouts: Layout[]) {
-    const data = LayoutService.getCurrentService().getSaveData(layouts);
+    const data = this.getCurrentService().getSaveData(layouts);
     this.storageService.add(LayoutService.storageKey, { ...data, version: LayoutService.version });
   }
 }
