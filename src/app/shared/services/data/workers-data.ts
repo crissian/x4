@@ -28,6 +28,6 @@ export const Workers = {
   },
 
   get(method: string) {
-    return Worker[method] || Workers.argon;
+    return Workers[method] || Workers.argon;
   }
 };

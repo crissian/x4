@@ -105,10 +105,10 @@
                     </li>
                   </ul>
                 </td>
-                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount | number }}</td>
-                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.min | number }}</td>
-                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.max | number }}</td>
-                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.avg | number }}</td>
+                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount | number:'1.0-0' }}</td>
+                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.min | number:'1.0-0' }}</td>
+                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.max | number:'1.0-0' }}</td>
+                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.avg | number:'1.0-0' }}</td>
               </tr>
               </tbody>
               <tfoot>
@@ -117,13 +117,13 @@
                     Totals Per Hour
                   </th>
                   <th class="text-danger text-right">
-                    {{ resources.totalMin | number }}
+                    {{ resources.totalMin | number:'1.0-0' }}
                   </th>
                   <th class="text-success text-right">
-                    {{ resources.totalMax | number }}
+                    {{ resources.totalMax | number:'1.0-0' }}
                   </th>
                   <th class="text-primary text-right">
-                    {{ resources.totalAvg | number }}
+                    {{ resources.totalAvg | number:'1.0-0' }}
                   </th>
                 </tr>
               </tfoot>
