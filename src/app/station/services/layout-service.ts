@@ -27,7 +27,8 @@ export class LayoutService {
   }
 
   getLayouts(): Layout[] {
-    const data = this.storageService.get<any>(LayoutService.storageKey);
+    const data = this.storageService.get<any>(LayoutService.storageKey) || { version: LayoutService.version };
+
     const layoutVersion = data.version || 0;
 
     const layouts = this.services[layoutVersion].getLayouts(data);
