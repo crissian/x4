@@ -1,0 +1,38 @@
+<table class="table table-sm small">
+  <thead>
+  <tr class="bg-light">
+    <th scope="col">Summary</th>
+    <th scope="col" class="text-right">Value</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="hover-icon" (click)="toggleExpanded('totalWorkforce')">
+    <td>
+      <i *ngIf="!expandState['totalWorkforce']" class="fa fa-angle-right"></i>
+      <i *ngIf="expandState['totalWorkforce']" class="fa fa-angle-down"></i>
+      <span [ngClass]="{'text-danger': totalWorkforce > totalWorkforceCapacity, 'text-success': totalWorkforce <= totalWorkforceCapacity }"> Needed Workforce</span>
+      <ul *ngIf="expandState['totalWorkforce']">
+        <li *ngFor="let item of workforceNeeded" class="text-danger">
+          ({{ item.amount * item.count  }})
+          <strong>{{ item.count }}</strong> x <strong>{{ item.name }}</strong>
+        </li>
+      </ul>
+    </td>
+    <td class="text-right">{{ totalWorkforce | number:'1.0-0' }}</td>
+  </tr>
+  <tr class="hover-icon" (click)="toggleExpanded('totalWorkforceCapacity')">
+    <td>
+      <i *ngIf="!expandState['totalWorkforceCapacity']" class="fa fa-angle-right"></i>
+      <i *ngIf="expandState['totalWorkforceCapacity']" class="fa fa-angle-down"></i>
+      <span [ngClass]="{'text-danger': totalWorkforce > totalWorkforceCapacity, 'text-success': totalWorkforce <= totalWorkforceCapacity }"> Workforce Capacity</span>
+      <ul *ngIf="expandState['totalWorkforceCapacity']">
+        <li *ngFor="let item of workforceCapacity" class="text-success">
+          ({{ item.amount * item.count  }})
+          <strong>{{ item.count }}</strong> x <strong>{{ item.name }}</strong>
+        </li>
+      </ul>
+    </td>
+    <td class="text-right">{{ totalWorkforceCapacity | number:'1.0-0' }}</td>
+  </tr>
+  </tbody>
+</table>

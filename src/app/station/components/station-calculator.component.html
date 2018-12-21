@@ -1,8 +1,13 @@
 <div class="row content-row">
   <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
+    <div class="card shadow">
+      <div class="card-header shadow-sm">
         Station Calculator
+
+        <button class="btn btn-sm btn-primary" (click)="saveLayout()"><i class="fa fa-save"></i> Save</button>&nbsp;
+        <button class="btn btn-sm btn-primary" (click)="saveLayoutAs()"><i class="fa fa-save"></i> Save As</button>&nbsp;
+        <button class="btn btn-sm btn-info" (click)="loadLayout()"><i class="fa fa-folder-open"></i> Load</button>&nbsp;
+        <button class="btn btn-sm btn-secondary" (click)="shareLayout()"><i class="fa fa-share-square"></i> Share</button>&nbsp;
       </div>
       <div class="card-body">
         <div class="row" *ngIf="messages.length">
@@ -12,115 +17,23 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4 col-sm-12">
             <h6 class="card-title">
               <span *ngIf="!layout">Station Modules</span>
               <span *ngIf="layout" class="text-primary">{{ layout.name }}</span>
-              &nbsp;
-              <button class="btn btn-sm btn-primary" (click)="saveLayout()"><i class="fa fa-save"></i> Save</button>&nbsp;
-              <button class="btn btn-sm btn-primary" (click)="saveLayoutAs()"><i class="fa fa-save"></i> Save As</button>&nbsp;
-              <button class="btn btn-sm btn-info" (click)="loadLayout()"><i class="fa fa-folder-open"></i> Load</button>&nbsp;
-              <button class="btn btn-sm btn-secondary" (click)="shareLayout()"><i class="fa fa-share-square"></i> Share</button>&nbsp;
             </h6>
 
-            <table class="table table-sm table-hover small">
-              <thead>
-              <tr>
-                <th scope="col">Module</th>
-                <th scope="col">Count</th>
-                <th scope="col"><i class="fa fa-trash" aria-hidden="true"></i></th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let item of stationModules">
-                <td>
-                  <div class="form-group">
-                    <select class="form-control form-control-sm" [(ngModel)]="item.moduleId">
-                      <option value="">( Select )</option>
-                      <optgroup *ngFor="let group of wareGroups" label="{{ group.name }}">
-                        <option *ngFor="let module of group.modules" [value]="module.id">{{ module.name }}</option>
-                      </optgroup>
-                    </select>
-                  </div>
-                </td>
-                <td>
-                  <div class="form-group">
-                    <input type="number" class="form-control form-control-sm" placeholder="Module Count" [(ngModel)]="item.count" min="0" />
-                  </div>
-                </td>
-                <td>
-                  <i class="fa fa-trash hover-icon" aria-hidden="true" (click)="removeModule(item)"></i>
-                </td>
-              </tr>
-              </tbody>
-              <tfoot>
-              <tr>
-                <th>
-                  <button type="button" class="btn btn-secondary btn-sm" (click)="addModule()">Add Module</button>
-                </th>
-                <th class="text-right">
-                  <!-- TODO: Improve performance -->
-                  Workforce Needed / Capacity:
-                  <span [ngClass]="{ 'text-danger': getTotalWorkforce() > getTotalWorkforceCapacity(), 'text-success': getTotalWorkforce() <= getTotalWorkforceCapacity() }">
-                    {{ getTotalWorkforce() }} / {{ getTotalWorkforceCapacity() }}
-                  </span>
-                </th>
-                <th></th>
-              </tr>
-              </tfoot>
-            </table>
+            <app-station-modules [modules]="modules" (change)="onChange()"></app-station-modules>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4 col-sm-12">
             <h6 class="card-title">Station Resources</h6>
-            <table class="table table-sm small">
-              <thead>
-              <tr class="bg-light">
-                <th scope="col">Resource</th>
-                <th scope="col" class="text-right">Amount</th>
-                <th scope="col" class="text-right">Min Price</th>
-                <th scope="col" class="text-right">Max Price</th>
-                <th scope="col" class="text-right">Avg Price</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr class="hover-icon" *ngFor="let item of resources.wares" (click)="toggleExpanded(item)">
-                <td>
-                  <i *ngIf="!item.expanded" class="fa fa-angle-right"></i>
-                  <i *ngIf="item.expanded" class="fa fa-angle-down"></i>
-                  <span [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }"> {{ item.ware.name }}</span>
-                  <ul *ngIf="item.expanded">
-                    <li *ngFor="let moduleRes of item.items">
-                      <div [ngClass]="{'text-danger': moduleRes.total < 0, 'text-success': moduleRes.total > 0 }">
-                        ({{ (moduleRes.total) | number:'1.0-0' }})
-                        <strong>{{ moduleRes.count }}</strong> x <strong>{{ moduleRes.name }}</strong>
-                        <span *ngIf="moduleRes.total > 0"> at <strong>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong> efficiency</span>
-                      </div>
-                    </li>
-                  </ul>
-                </td>
-                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount | number:'1.0-0' }}</td>
-                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.min | number:'1.0-0' }}</td>
-                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.max | number:'1.0-0' }}</td>
-                <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount * item.ware.price.avg | number:'1.0-0' }}</td>
-              </tr>
-              </tbody>
-              <tfoot>
-                <tr class="bg-light">
-                  <th colspan="2">
-                    Totals Per Hour
-                  </th>
-                  <th class="text-danger text-right">
-                    {{ resources.totalMin | number:'1.0-0' }}
-                  </th>
-                  <th class="text-success text-right">
-                    {{ resources.totalMax | number:'1.0-0' }}
-                  </th>
-                  <th class="text-primary text-right">
-                    {{ resources.totalAvg | number:'1.0-0' }}
-                  </th>
-                </tr>
-              </tfoot>
-            </table>
+
+            <app-station-resources #stationResources [modules]="modules"></app-station-resources>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <h6 class="card-title">Station Summary</h6>
+
+            <app-station-summary #stationSummary [modules]="modules"></app-station-summary>
           </div>
         </div>
       </div>

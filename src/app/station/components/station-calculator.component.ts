@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShareLayoutComponent } from './share-layout.component';
 import * as urlon from 'urlon';
@@ -13,23 +13,23 @@ import { LoadLayoutComponent } from './load-layout.component';
 import { Title } from '@angular/platform-browser';
 import { WareService } from '../../shared/services/ware.service';
 import { ModuleService } from '../../shared/services/module.service';
-import { StationModuleModel, WareGroupData, WareProductionData } from './station-calculator.model';
-import { StationModule } from '../../shared/services/model/model';
-import { ModuleTypes } from '../../shared/services/data/module-types-data';
-import { Effects } from '../../shared/services/data/effects-data';
+import { StationModuleModel} from './station-calculator.model';
 
+interface Updatable {
+  update();
+}
 
 @Component({
   selector: 'app-station-calculator',
   templateUrl: './station-calculator.component.html'
 })
 export class StationCalculatorComponent extends ComponentBase implements OnInit {
-  expandState: { [resourceId: number]: boolean } = {};
   layout: Layout;
   messages: Message[] = [];
-  stationModules: StationModuleModel[] = [];
+  modules: StationModuleModel[] = [];
 
-  wareGroups: WareGroupData[];
+  @ViewChildren('stationResources,stationSummary')
+  components: QueryList<Updatable>;
 
   constructor(private modal: NgbModal, private route: ActivatedRoute,
               private layoutService: LayoutService,
@@ -42,22 +42,6 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   ngOnInit(): void {
     this.titleService.setTitle('X4:Foundations - Station Calculator');
 
-    const groupsObj = this.moduleService.getModulesByType(ModuleTypes.production)
-      .reduce((obj, item: StationModule) => {
-        obj[item.product.group.id] = obj[item.product.group.id] || { name: item.product.group.name, group: item.product.group, modules: [] };
-        obj[item.product.group.id].modules.push(item);
-        return obj;
-      }, []);
-
-    this.wareGroups = Object.keys(groupsObj)
-      .map(x => groupsObj[x])
-      .sort((a, b) => this.wareService.compareGroups(a.group, b.group));
-
-    this.wareGroups.push({ name: ModuleTypes.habitation.name, modules: this.moduleService.getModulesByType(ModuleTypes.habitation) });
-    this.wareGroups.push({ name: ModuleTypes.dockarea.name, modules: this.moduleService.getModulesByType(ModuleTypes.dockarea) });
-    this.wareGroups.push({ name: ModuleTypes.pier.name, modules: this.moduleService.getModulesByType(ModuleTypes.pier) });
-    this.wareGroups.push({ name: ModuleTypes.storage.name, modules: this.moduleService.getModulesByType(ModuleTypes.storage) });
-
     this.route.queryParams
       .pipe(
         takeUntil(this.onDestroy)
@@ -67,7 +51,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
           try {
             const layout = data['l'].replace(/-/g, '=').replace(/,/g, '&');
             const layoutData = urlon.parse(layout);
-            this.stationModules = layoutData.map(x => {
+            this.modules = layoutData.map(x => {
               return new StationModuleModel(this.wareService, this.moduleService, x.module, x.count);
             });
           } catch (err) {
@@ -76,118 +60,20 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
         }
       });
 
-    if (this.stationModules.length === 0) {
-      this.stationModules.push(new StationModuleModel(this.wareService, this.moduleService));
+    if (this.modules.length === 0) {
+      this.modules.push(new StationModuleModel(this.wareService, this.moduleService));
     }
   }
 
-  get resources() {
-    const workersCapacity = this.getTotalWorkforceCapacity();
-    const workersNeeded = this.getTotalWorkforce();
-
-    let multiplier = (workersCapacity == 0 || workersNeeded == 0) ? 0 : (workersCapacity / workersNeeded);
-    if (multiplier > 1) {
-      multiplier = 1;
-    }
-
-    let data = {};
-    if (this.stationModules.length > 0) {
-      data = this.stationModules
-        .map<WareProductionData[]>(x => {
-          const values = x.needs.map(y => {
-            return {
-              ware: y.ware,
-              count: x.count,
-              amount: -y.amount,
-              efficiency: 100,
-              name: x.module.name,
-              total: x.count * -y.amount
-            };
-          });
-
-          if (x.production) {
-            const effect = x.production.value.effects ? x.production.value.effects.find(e => e.type == Effects.work) : null;
-            const efficiency = effect == null ? 1 : (1 + effect.product * multiplier);
-
-            values.push({
-              ware: x.production.ware,
-              count: x.count,
-              amount: x.production.amount,
-              efficiency: efficiency * 100,
-              name: x.module.name,
-              total: x.count * x.production.amount * efficiency
-            });
-          }
-
-          return values;
-        })
-        .reduce((a, b) => {
-          return a.concat(b);
-        })
-        .reduce(function (obj, item) {
-          obj[item.ware.id] = obj[item.ware.id] || [];
-          obj[item.ware.id].push(item);
-          return obj;
-        }, {});
-    }
-
-    const results = [];
-
-    for (const prop in data) {
-      if (data.hasOwnProperty(prop)) {
-        const values = <WareProductionData[]>data[prop];
-
-        let sum = 0;
-        values.forEach(x => {
-          sum += x.total;
-        });
-
-        results.push({
-          ware: values[0].ware,
-          amount: sum,
-          items: values,
-          expanded: this.expandState[values[0].ware.id]
-        });
-      }
-    }
-
-    let totalMin = 0;
-    let totalMax = 0;
-    let totalAvg = 0;
-
-    results.forEach(x => {
-      totalMin += x.amount * x.ware.price.min;
-      totalMax += x.amount * x.ware.price.max;
-      totalAvg += x.amount * x.ware.price.avg;
+  onChange() {
+    this.components.forEach(x => {
+      x.update();
     });
-
-    return {
-      wares: results.sort((a, b) => this.wareService.compareWares(a.ware, b.ware)),
-      totalMin: totalMin,
-      totalMax: totalMax,
-      totalAvg: totalAvg,
-    };
-  }
-
-  removeModule(item: StationModuleModel) {
-    const index = this.stationModules.indexOf(item);
-    if (index >= 0) {
-      this.stationModules.splice(index, 1);
-    }
-  }
-
-  toggleExpanded(item: any) {
-    item.expanded = !item.expanded;
-    this.expandState[item.ware.id] = item.expanded;
-  }
-
-  addModule() {
-    this.stationModules.push(new StationModuleModel(this.wareService, this.moduleService));
   }
 
   shareLayout() {
     const modalRef = this.modal.open(ShareLayoutComponent);
-    const data = this.stationModules
+    const data = this.modules
       .filter(x => x.count > 0 && x.moduleId)
       .map(x => {
         return {
@@ -239,14 +125,14 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
           const layout = this.layoutService.getLayout(data);
           if (layout) {
             this.layout = layout;
-            this.stationModules = this.getProductionModules(layout.config);
+            this.modules = this.getModules(layout.config);
           }
         }
       });
   }
 
   private getModuleConfig() {
-    return this.stationModules
+    return this.modules
       .map<ModuleConfig>(x => {
         return {
           moduleId: x.moduleId,
@@ -255,29 +141,9 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       });
   }
 
-  getProductionModules(config: ModuleConfig[]) {
+  getModules(config: ModuleConfig[]) {
     return config.map(x => {
       return new StationModuleModel(this.wareService, this.moduleService, x.moduleId, x.count);
     });
-  }
-
-  getTotalWorkforce() {
-    let total = 0;
-    this.stationModules.forEach(x => {
-      if (x.module != null && x.module.workForce != null && x.module.workForce.max != null) {
-        total += x.count * x.module.workForce.max;
-      }
-    });
-    return total;
-  }
-
-  getTotalWorkforceCapacity() {
-    let total = 0;
-    this.stationModules.forEach(x => {
-      if (x.module != null && x.module.workForce != null && x.module.workForce.capacity != null) {
-        total += x.count * x.module.workForce.capacity;
-      }
-    });
-    return total;
   }
 }

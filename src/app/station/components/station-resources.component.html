@@ -1,0 +1,27 @@
+<table class="table table-sm small">
+  <thead>
+  <tr class="bg-light">
+    <th scope="col">Resource</th>
+    <th scope="col" class="text-right">Amount</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="hover-icon" *ngFor="let item of resources" (click)="toggleExpanded(item)">
+    <td>
+      <i *ngIf="!item.expanded" class="fa fa-angle-right"></i>
+      <i *ngIf="item.expanded" class="fa fa-angle-down"></i>
+      <span [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }"> {{ item.ware.name }}</span>
+      <ul *ngIf="item.expanded">
+        <li *ngFor="let moduleRes of item.items">
+          <div [ngClass]="{'text-danger': moduleRes.total < 0, 'text-success': moduleRes.total > 0 }">
+            ({{ (moduleRes.total) | number:'1.0-0' }})
+            <strong>{{ moduleRes.count }}</strong> x <strong>{{ moduleRes.name }}</strong>
+            <span *ngIf="moduleRes.total > 0"> at <strong>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong> efficiency</span>
+          </div>
+        </li>
+      </ul>
+    </td>
+    <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount | number:'1.0-0' }}</td>
+  </tr>
+  </tbody>
+</table>

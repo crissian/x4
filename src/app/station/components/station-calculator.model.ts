@@ -5,8 +5,23 @@ import { ModuleTypes } from '../../shared/services/data/module-types-data';
 import { ProductionMethods } from '../../shared/services/data/production-method-data';
 import { Workers } from '../../shared/services/data/workers-data';
 
+export interface StationResourceItemModel {
+  ware: Ware;
+  count: number;
+  amount: number;
+  efficiency: number;
+  name: string;
+  total: number;
+}
 
-export interface WareGroupData {
+export interface StationResourceModel {
+  ware: Ware;
+  amount: number;
+  items: StationResourceItemModel[];
+  expanded: boolean;
+}
+
+export interface WareGroupModel {
   name: string;
   modules: StationModule[];
 }

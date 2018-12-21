@@ -1,7 +1,7 @@
 <div class="row content-row">
   <div class="col-md-12">
-    <div class="card" *ngIf="entity">
-      <div class="card-header">
+    <div class="card shadow" *ngIf="entity">
+      <div class="card-header shadow-sm">
         <a routerLink="/wares">Wares</a> - {{ entity.name }}
       </div>
       <div class="card-body" *ngIf="entity">
@@ -30,7 +30,7 @@
             <ng-template ngbTabContent>
               <div *ngIf="entityProduction && entityProduction.length" style="margin-top: 10px; margin-bottom: 10px" class="row">
                 <div class="col-md-6 col-sm-6 col-lg-4" *ngFor="let production of entityProduction">
-                  <div class="card">
+                  <div class="card shadow-sm">
                     <div class="card-header small">
                       {{ production.name }}
                     </div>
