@@ -139,14 +139,24 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of moduleCosts">
-    <td>
-      {{ item.count }} x {{ item.module.name }}
-    </td>
-    <td class="text-right">
-      {{ item.price | number:'1.0-0' }}
-    </td>
-  </tr>
+  <ng-container *ngFor="let cost of moduleCosts">
+    <tr class="hover-icon" (click)="toggleExpanded(cost.module.id)">
+      <td>
+        <i *ngIf="!expandState[cost.module.id]" class="fa fa-angle-double-down"></i>
+        <i *ngIf="expandState[cost.module.id]" class="fa fa-angle-double-up"></i>
+        {{ cost.count }} x {{ cost.module.name }}
+      </td>
+      <td class="text-right">
+        {{ cost.price | number:'1.0-0' }}
+      </td>
+    </tr>
+    <ng-container *ngIf="expandState[cost.module.id]">
+      <tr *ngFor="let item of cost.items">
+        <td class="pl-5">{{ cost.count * item.amount }} x {{ item.ware.name }}</td>
+        <td class="text-right">{{ cost.count * item.price | number:'1.0-0' }}</td>
+      </tr>
+    </ng-container>
+  </ng-container>
   <tr>
     <td colspan="2">
       <div class="row">

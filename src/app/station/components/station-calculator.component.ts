@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShareLayoutComponent } from './share-layout.component';
 import * as urlon from 'urlon';
@@ -14,6 +14,7 @@ import { Title } from '@angular/platform-browser';
 import { WareService } from '../../shared/services/ware.service';
 import { ModuleService } from '../../shared/services/module.service';
 import { StationModuleModel} from './station-calculator.model';
+import { StationSummaryComponent } from './station-summary.component';
 
 interface Updatable {
   update();
@@ -30,6 +31,8 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
 
   @ViewChildren('stationResources,stationSummary')
   components: QueryList<Updatable>;
+
+  @ViewChild(StationSummaryComponent) summaryComponent: StationSummaryComponent;
 
   constructor(private modal: NgbModal, private route: ActivatedRoute,
               private layoutService: LayoutService,
@@ -93,6 +96,10 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
         if (res) {
           this.layout = {
             name: res,
+            resourcesPrice: this.summaryComponent.resourcesPrice,
+            productsPrice: this.summaryComponent.productsPrice,
+            modulesResourcesPrice: this.summaryComponent.modulesResourcesPrice,
+            provideBasicResources: this.summaryComponent.provideBasicResources,
             config: this.getModuleConfig()
           };
           this.layoutService.saveLayout(this.layout);
@@ -109,6 +116,11 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       this.saveLayoutAs();
     } else {
       this.layout.config = this.getModuleConfig();
+      this.layout.resourcesPrice = this.summaryComponent.resourcesPrice;
+      this.layout.productsPrice = this.summaryComponent.productsPrice;
+      this.layout.modulesResourcesPrice = this.summaryComponent.modulesResourcesPrice;
+      this.layout.provideBasicResources = this.summaryComponent.provideBasicResources;
+
       this.layoutService.saveLayout(this.layout);
       this.messages.push({
         type: MessageType.success,
@@ -126,6 +138,10 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
           if (layout) {
             this.layout = layout;
             this.modules = this.getModules(layout.config);
+
+            this.summaryComponent.productsPrice = layout.productsPrice == null ? 50 : layout.productsPrice;
+            this.summaryComponent.modulesResourcesPrice = layout.modulesResourcesPrice == null ? 50 : layout.modulesResourcesPrice;
+            this.summaryComponent.resourcesPrice = layout.resourcesPrice == null ? 50 : layout.resourcesPrice;
           }
         }
       });

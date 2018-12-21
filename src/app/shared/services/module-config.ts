@@ -5,5 +5,9 @@ export interface ModuleConfig {
 
 export interface Layout {
   name: string;
+  resourcesPrice?: number;
+  productsPrice?: number;
+  modulesResourcesPrice?: number;
+  provideBasicResources?: boolean;
   config: ModuleConfig[];
 }

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ResourceCalculator, StationModuleModel, StationResourceModel } from './station-calculator.model';
 import { WareService } from '../../shared/services/ware.service';
 import { WareGroups } from '../../shared/services/data/ware-groups-data';
+import { Ware } from '../../shared/services/model/model';
 
 enum ResourcePriceType {
   expense,
@@ -37,9 +38,19 @@ class ResourceSummaryModel {
   }
 }
 
+class ModuleCostItemModel {
+  constructor(public ware: Ware, public amount: number, private component: StationSummaryComponent) {
+  }
+
+  get price() {
+    return this.amount * (this.ware.price.min + (this.ware.price.max - this.ware.price.min) * this.component.modulesResourcesPrice / 100);
+  }
+}
+
 class ModuleCostModel {
   constructor(private item: StationModuleModel, private component: StationSummaryComponent,
-              private minPrice: number, private maxPrice) {
+              private minPrice: number, private maxPrice,
+              public items: ModuleCostItemModel[]) {
   }
 
   get module() {
@@ -66,7 +77,7 @@ export class StationSummaryComponent {
     WareGroups.ice
   ];
 
-  private expandState: { [key: string]: boolean } = {};
+  expandState: { [key: string]: boolean } = {};
   private _modules: StationModuleModel[];
 
   provideBasicResources = false;
@@ -188,14 +199,17 @@ export class StationSummaryComponent {
     let totalMin = 0;
     let totalMax = 0;
 
+    const items: ModuleCostItemModel[] = [];
     production.wares
       .forEach(x => {
         const ware = this.wareService.getWare(x.ware);
         totalMin += ware.price.min * x.amount;
         totalMax += ware.price.max * x.amount;
+
+        items.push(new ModuleCostItemModel(ware, x.amount, this));
       });
 
-    return new ModuleCostModel(item, this, totalMin, totalMax);
+    return new ModuleCostModel(item, this, totalMin, totalMax, items);
   }
 
   toggleExpanded(key: string) {
