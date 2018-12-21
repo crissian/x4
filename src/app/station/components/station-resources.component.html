@@ -8,8 +8,8 @@
   <tbody>
   <tr class="hover-icon" *ngFor="let item of resources" (click)="toggleExpanded(item)">
     <td>
-      <i *ngIf="!item.expanded" class="fa fa-angle-right"></i>
-      <i *ngIf="item.expanded" class="fa fa-angle-down"></i>
+      <i *ngIf="!item.expanded" class="fa fa-angle-double-down"></i>
+      <i *ngIf="item.expanded" class="fa fa-angle-double-up"></i>
       <span [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }"> {{ item.ware.name }}</span>
       <ul *ngIf="item.expanded">
         <li *ngFor="let moduleRes of item.items">

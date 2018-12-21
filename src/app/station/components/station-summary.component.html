@@ -1,38 +1,174 @@
-<table class="table table-sm small">
+<table class="table table-sm small table-hover">
   <thead>
   <tr class="bg-light">
-    <th scope="col">Summary</th>
+    <th scope="col">Workforce</th>
     <th scope="col" class="text-right">Value</th>
   </tr>
   </thead>
   <tbody>
   <tr class="hover-icon" (click)="toggleExpanded('totalWorkforce')">
     <td>
-      <i *ngIf="!expandState['totalWorkforce']" class="fa fa-angle-right"></i>
-      <i *ngIf="expandState['totalWorkforce']" class="fa fa-angle-down"></i>
+      <i *ngIf="!expandState['totalWorkforce']" class="fa fa-angle-double-down"></i>
+      <i *ngIf="expandState['totalWorkforce']" class="fa fa-angle-double-up"></i>
       <span [ngClass]="{'text-danger': totalWorkforce > totalWorkforceCapacity, 'text-success': totalWorkforce <= totalWorkforceCapacity }"> Needed Workforce</span>
-      <ul *ngIf="expandState['totalWorkforce']">
-        <li *ngFor="let item of workforceNeeded" class="text-danger">
-          ({{ item.amount * item.count  }})
-          <strong>{{ item.count }}</strong> x <strong>{{ item.name }}</strong>
-        </li>
-      </ul>
     </td>
     <td class="text-right">{{ totalWorkforce | number:'1.0-0' }}</td>
   </tr>
+
+  <ng-container *ngIf="expandState['totalWorkforce']">
+    <tr *ngFor="let item of workforceNeeded" class="text-danger">
+      <td class="pl-4">
+        {{ item.count }} x {{ item.name }}
+      </td>
+      <td class="text-right">-{{ item.amount * item.count | number: '1.0-0'}}</td>
+    </tr>
+  </ng-container>
+
   <tr class="hover-icon" (click)="toggleExpanded('totalWorkforceCapacity')">
     <td>
-      <i *ngIf="!expandState['totalWorkforceCapacity']" class="fa fa-angle-right"></i>
-      <i *ngIf="expandState['totalWorkforceCapacity']" class="fa fa-angle-down"></i>
+      <i *ngIf="!expandState['totalWorkforceCapacity']" class="fa fa-angle-double-down"></i>
+      <i *ngIf="expandState['totalWorkforceCapacity']" class="fa fa-angle-double-up"></i>
       <span [ngClass]="{'text-danger': totalWorkforce > totalWorkforceCapacity, 'text-success': totalWorkforce <= totalWorkforceCapacity }"> Workforce Capacity</span>
-      <ul *ngIf="expandState['totalWorkforceCapacity']">
-        <li *ngFor="let item of workforceCapacity" class="text-success">
-          ({{ item.amount * item.count  }})
-          <strong>{{ item.count }}</strong> x <strong>{{ item.name }}</strong>
-        </li>
-      </ul>
     </td>
     <td class="text-right">{{ totalWorkforceCapacity | number:'1.0-0' }}</td>
   </tr>
+
+  <ng-container *ngIf="expandState['totalWorkforceCapacity']">
+    <tr *ngFor="let item of workforceCapacity" class="text-success">
+      <td class="pl-4">
+        {{ item.count }} x {{ item.name }}
+      </td>
+      <td class="text-right">+{{ item.amount * item.count | number: '1.0-0' }}</td>
+    </tr>
+  </ng-container>
   </tbody>
+</table>
+
+<table class="table table-sm small table-hover">
+  <thead>
+  <tr class="bg-light">
+    <th scope="col">Production Per Hour</th>
+    <th scope="col" class="text-right">Amount</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="hover-icon text-danger" (click)="toggleExpanded('totalExpenses')">
+    <td>
+      <i *ngIf="!expandState['totalExpenses']" class="fa fa-angle-double-down"></i>
+      <i *ngIf="expandState['totalExpenses']" class="fa fa-angle-double-up"></i>
+      <span> Expenses</span>
+    </td>
+    <td class="text-right">{{ totalExpenses | number:'1.0-0' }}</td>
+  </tr>
+  <ng-container *ngIf="expandState['totalExpenses']">
+    <tr *ngFor="let item of resourcesNeeded" [ngClass]="{ 'text-danger': item.price > 0, 'text-warning': item.price == 0 }">
+      <td class="pl-5">
+        {{ item.amount | number: '1.0-0' }} x {{ item.name }}
+      </td>
+      <td class="text-right">{{ item.amount * item.price | number:'1.0-0' }}</td>
+    </tr>
+  </ng-container>
+
+  <tr class="hover-icon text-primary" (click)="toggleExpanded('totalProfits')">
+    <td>
+      <i *ngIf="!expandState['totalProfits']" class="fa fa-angle-double-down"></i>
+      <i *ngIf="expandState['totalProfits']" class="fa fa-angle-double-up"></i>
+      <span> Production</span>
+    </td>
+    <td class="text-right">{{ totalProfits | number:'1.0-0' }}</td>
+  </tr>
+  <ng-container *ngIf="expandState['totalProfits']">
+    <tr *ngFor="let item of resourcesProduced" class="text-primary">
+      <td class="pl-5">
+        {{ item.amount | number: '1.0-0' }} x {{ item.name }}
+      </td>
+      <td class="text-right">+{{ item.amount * item.price | number:'1.0-0' }}</td>
+    </tr>
+  </ng-container>
+  <tr class="text-success">
+    <td>
+      <i class="fa fa-line-chart"></i><strong> Profit</strong>
+    </td>
+    <td class="text-right"><strong>{{ totalProfits + totalExpenses | number:'1.0-0' }}</strong></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div class="form-check">
+        <input type="checkbox" id="basic-resources" class="form-check-input" [(ngModel)]="provideBasicResources" (ngModelChange)="update()"/>
+        <label class="form-check-label" for="basic-resources">Miners provide basic resources</label>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div class="row">
+        <div class="form-group col">
+          <label for="resources-price">Resources Price:
+            <strong [ngSwitch]="resourcesPrice">
+              <ng-container *ngSwitchCase="0">Min</ng-container>
+              <ng-container *ngSwitchCase="50">Average</ng-container>
+              <ng-container *ngSwitchCase="100">Max</ng-container>
+              <ng-container *ngSwitchDefault>{{ resourcesPrice }}%</ng-container>
+            </strong>
+          </label>
+          <input type="range" class="form-control-range small" id="resources-price" min="0" max="100" step="5" [(ngModel)]="resourcesPrice"/>
+        </div>
+
+        <div class="form-group col">
+          <label for="products-price">Products Price:
+            <strong [ngSwitch]="productsPrice">
+              <ng-container *ngSwitchCase="0">Min</ng-container>
+              <ng-container *ngSwitchCase="50">Average</ng-container>
+              <ng-container *ngSwitchCase="100">Max</ng-container>
+              <ng-container *ngSwitchDefault>{{ productsPrice }}%</ng-container>
+            </strong>
+          </label>
+          <input type="range" class="form-control-range small" id="products-price" min="0" max="100" step="5" [(ngModel)]="productsPrice"/>
+        </div>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<table class="table table-sm small table-hover">
+  <thead>
+  <tr class="bg-light">
+    <th scope="col">Station Costs</th>
+    <th scope="col" class="text-right">Amount</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of moduleCosts">
+    <td>
+      {{ item.count }} x {{ item.module.name }}
+    </td>
+    <td class="text-right">
+      {{ item.price | number:'1.0-0' }}
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div class="row">
+        <div class="form-group col">
+          <label for="modules-resources-price">Resources Price:
+            <strong [ngSwitch]="modulesResourcesPrice">
+              <ng-container *ngSwitchCase="0">Min</ng-container>
+              <ng-container *ngSwitchCase="50">Average</ng-container>
+              <ng-container *ngSwitchCase="100">Max</ng-container>
+              <ng-container *ngSwitchDefault>{{ modulesResourcesPrice }}%</ng-container>
+            </strong>
+          </label>
+          <input type="range" class="form-control-range small" id="modules-resources-price" min="0" max="100" step="5" [(ngModel)]="modulesResourcesPrice"/>
+        </div>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <th class="text-right">Total:</th>
+    <th class="text-right">{{ totalModuleCost | number:'1.0-0' }}</th>
+  </tr>
+  </tfoot>
 </table>
