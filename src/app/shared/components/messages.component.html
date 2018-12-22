@@ -1,0 +1,8 @@
+<div *ngIf="messages && messages.length">
+  <div *ngFor="let message of messages" class="alert alert-{{ message.type}}">
+    <span [innerHTML]="message.content"></span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="close(message)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>

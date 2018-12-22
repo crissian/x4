@@ -3,20 +3,36 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HeaderComponent } from './components/header.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { AnalyticsModule } from './google-analytics/analytics.module';
+import { environment } from '../environments/environment';
+import {AppRoutingModule} from './app-routing.module';
+import {CoreModule} from './core/core.module';
+import {SharedModule} from './shared/shared.module';
+import {StationModule} from './station/station.module';
+import {StationRoutingModule} from './station/station-routing.module';
+import {WareModule} from './ware/ware.module';
+import {WareRoutingModule} from './ware/ware-routing.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent
-  ],
   imports: [
     NgbModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule,
+    CoreModule,
+    SharedModule,
+    StationModule,
+    StationRoutingModule,
+    WareModule,
+    WareRoutingModule,
+    RouterModule,
+    AnalyticsModule.forRoot({ trackingId: environment.googleAnalytics })
   ],
-  providers: [],
+  declarations: [
+    AppComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
