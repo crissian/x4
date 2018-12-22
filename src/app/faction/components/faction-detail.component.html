@@ -12,7 +12,9 @@
         <dl class="row">
           <dt class="col-sm-2">Race</dt>
           <dd class="col-sm-10">
-            <span *ngIf="entity.race">{{ entity.race.name }}</span>
+            <span *ngIf="entity.race">
+              <a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
+            </span>
             <span *ngIf="!entity.race"> - </span>
           </dd>
         </dl>
