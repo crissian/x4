@@ -24,7 +24,6 @@ interface ProductionData {
   templateUrl: './ware-detail.component.html'
 })
 export class WareDetailComponent extends EntityDetailsComponent<Ware> implements OnInit {
-  public entity: Ware;
   public waresUsedIn: any[] = [];
   public modulesUsedIn: any[] = [];
   public entityProduction: ProductionData[];
