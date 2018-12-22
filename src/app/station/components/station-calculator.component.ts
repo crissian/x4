@@ -142,6 +142,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
             this.summaryComponent.productsPrice = layout.productsPrice == null ? 50 : layout.productsPrice;
             this.summaryComponent.modulesResourcesPrice = layout.modulesResourcesPrice == null ? 50 : layout.modulesResourcesPrice;
             this.summaryComponent.resourcesPrice = layout.resourcesPrice == null ? 50 : layout.resourcesPrice;
+            this.summaryComponent.provideBasicResources = layout.provideBasicResources;
           }
         }
       });

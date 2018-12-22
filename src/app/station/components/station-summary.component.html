@@ -158,6 +158,10 @@
     </ng-container>
   </ng-container>
   <tr>
+    <th class="text-right">Total:</th>
+    <th class="text-right">{{ totalModuleCost | number:'1.0-0' }}</th>
+  </tr>
+  <tr>
     <td colspan="2">
       <div class="row">
         <div class="form-group col">
@@ -175,10 +179,4 @@
     </td>
   </tr>
   </tbody>
-  <tfoot>
-  <tr>
-    <th class="text-right">Total:</th>
-    <th class="text-right">{{ totalModuleCost | number:'1.0-0' }}</th>
-  </tr>
-  </tfoot>
 </table>
