@@ -17,34 +17,11 @@
         <ngx-datatable class="bootstrap small"
                        [rows]="entities"
                        [columns]="columns"
-                       [rowHeight]="'auto'"
                        [selectionType]="'single'"
                        [columnMode]="'force'"
                        [rowClass]="rowClass"
                        (select)="onSelect($event)">
         </ngx-datatable>
-        <!--
-        <table class="table table-sm table-hover small">
-          <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Type</th>
-            <th scope="col">Race</th>
-            <th scope="col">Product</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let item of entities; let index = index;" class="hover" (click)="showEntity(item)">
-            <td>{{ index + 1 }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.type?.name }}</td>
-            <td>{{ item.makerRace?.name }}</td>
-            <td>{{ item.product?.name }}</td>
-          </tr>
-          </tbody>
-        </table>
-        -->
       </div>
     </div>
   </div>

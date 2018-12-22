@@ -18,12 +18,15 @@ import { ShipsModule } from './ship/ships.module';
 import { ShipRoutingModule } from './ship/ship-routing.module';
 import { ModuleModule } from './module/module.module';
 import { ModuleRoutingModule } from './module/module-routing.module';
+import { RaceModule } from './races/race.module';
+import { RaceRoutingModule } from './races/race-routing.module';
 
 @NgModule({
   imports: [
     NgbModule,
     BrowserModule,
     FormsModule,
+    RouterModule,
     AppRoutingModule,
     CoreModule,
     SharedModule,
@@ -37,7 +40,8 @@ import { ModuleRoutingModule } from './module/module-routing.module';
     ShipRoutingModule,
     ModuleModule,
     ModuleRoutingModule,
-    RouterModule,
+    RaceModule,
+    RaceRoutingModule,
     AnalyticsModule.forRoot({ trackingId: environment.googleAnalytics })
   ],
   declarations: [

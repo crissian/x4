@@ -36,7 +36,7 @@ export class LoadLayoutComponent extends ComponentBase implements OnInit {
           name: x.name,
           modules: x.config
             .map<LayoutModule>(y => {
-              return { count: y.count, module: this.moduleService.getModule(y.moduleId)};
+              return { count: y.count, module: this.moduleService.getEntity(y.moduleId)};
             })
         };
       });

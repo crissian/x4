@@ -202,7 +202,7 @@ export class StationSummaryComponent {
     const items: ModuleCostItemModel[] = [];
     production.wares
       .forEach(x => {
-        const ware = this.wareService.getWare(x.ware);
+        const ware = this.wareService.getEntity(x.ware);
         totalMin += ware.price.min * x.amount;
         totalMax += ware.price.max * x.amount;
 

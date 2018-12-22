@@ -1,50 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { WareService } from '../../shared/services/ware.service';
-import { ComponentBase } from '../../shared/components/component-base';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Ware } from '../../shared/services/model/model';
+import { DecimalPipe } from '@angular/common';
+import { EntityListComponent } from '../../shared/components/entity-list.component';
 
 @Component({
   templateUrl: './wares.component.html'
 })
-export class WaresComponent extends ComponentBase implements OnInit {
-  entities: Ware[];
-  filterText: string;
+export class WaresComponent extends EntityListComponent<Ware> implements OnInit {
+  public numberPipe: DecimalPipe;
 
-  columns = [
-    { prop: 'name', name: 'Name' },
-    { prop: 'transport', name: 'Transport' },
-    { prop: 'price.min', name: 'Min Price' },
-    { prop: 'price.avg', name: 'Avg Price' },
-    { prop: 'price.max', name: 'Max Price' },
-    { prop: 'volume', name: 'Volume' }
-  ];
+  constructor(wareService: WareService, private router: Router, private titleService: Title, @Inject(LOCALE_ID) private locale: string) {
+    super(wareService);
 
-  constructor(private wareService: WareService, private router: Router, private titleService: Title) {
-    super();
+    this.numberPipe  = new DecimalPipe(locale);
   }
 
   ngOnInit(): void {
     this.titleService.setTitle('X4:Foundations - Wares');
-    this.entities = this.wareService
-      .getWares();
-  }
-
-  onSelect(event: any) {
-    if (event.selected && event.selected.length) {
-      const item: Ware = event.selected[0];
-      return this.router.navigate([ '/wares', item.id ]);
-    }
-  }
-
-  onFilterChanged() {
-    this.entities = this.wareService
-      .getWares();
-
-    if (this.filterText != null) {
-      this.entities = this.entities.filter(x => x.name.toLowerCase().indexOf(this.filterText) > -1);
-    }
+    super.ngOnInit();
   }
 
   rowClass() {
@@ -57,4 +33,11 @@ export class WaresComponent extends ComponentBase implements OnInit {
     return propA - propB;
   }
 
+  filter(x: Ware, text: string): boolean {
+    return x.name.toLowerCase().indexOf(this.filterText) > -1;
+  }
+
+  onSelectCore(item: Ware) {
+    return this.router.navigate([ '/wares', item.id ]);
+  }
 }

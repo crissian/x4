@@ -149,8 +149,7 @@
                       <div class="row">
                         <div class="col text-info" *ngIf="!modulesUsedIn.length">No usage found.</div>
                         <div *ngFor="let module of modulesUsedIn" class="col-md-6 col-sm-12">
-                          <!--<a [routerLink]="['/modules/', module.id ]">{{ module.name }}</a>-->
-                          {{ module.name }}
+                          <a [routerLink]="['/modules/', module.id ]">{{ module.name }}</a>
                         </div>
                       </div>
                     </div>

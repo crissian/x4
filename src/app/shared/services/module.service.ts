@@ -1,37 +1,37 @@
 import { Injectable } from '@angular/core';
 import { AllModules, Modules } from './data/modules-data';
 import { ModuleType, StationModule } from './model/model';
+import { EntityService } from './entity.service';
 
 @Injectable()
-export class ModuleService {
+export class ModuleService implements EntityService<StationModule> {
   getModulesByType(moduleType: string | ModuleType): StationModule[] {
     const moduleTypeId = typeof moduleType == 'string' ? moduleType : moduleType.id;
 
-    return this.allModules
+    return this.getEntities()
       .filter(x => x.type.id == moduleTypeId);
   }
 
-  // noinspection JSMethodCanBeStatic
-  getModule(id: string): StationModule {
+  getEntity(id: string): StationModule {
     return Modules[id];
   }
 
   getModuleByWare(wareId: string, productionMethod: string = 'default'): StationModule {
     if (productionMethod === 'default') {
-      let module = this.allModules
+      let module = this.getEntities()
         .find(x => x.product != null && x.product.id == wareId && x.makerRace == null);
       if (module == null) {
-        module = this.allModules
+        module = this.getEntities()
           .find(x => x.product != null && x.product.id == wareId);
       }
       return module;
     } else {
-      return this.allModules
+      return this.getEntities()
         .find(x => x.product != null && x.product.id == wareId && x.makerRace != null && x.makerRace.id == productionMethod);
     }
   }
 
-  get allModules(): StationModule[] {
+  getEntities(): StationModule[] {
     return AllModules;
   }
 

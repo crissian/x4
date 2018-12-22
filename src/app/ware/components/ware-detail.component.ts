@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ComponentBase } from '../../shared/components/component-base';
 import { WareService } from '../../shared/services/ware.service';
 import { ActivatedRoute } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { ProductionEffect, Ware } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
+import { EntityDetailsComponent } from '../../shared/components/entity-details.component';
 
 export interface ProductionWareData {
   ware: Ware;
@@ -24,55 +23,46 @@ interface ProductionData {
 @Component({
   templateUrl: './ware-detail.component.html'
 })
-export class WareDetailComponent extends ComponentBase implements OnInit {
+export class WareDetailComponent extends EntityDetailsComponent<Ware> implements OnInit {
   public entity: Ware;
   public waresUsedIn: any[] = [];
   public modulesUsedIn: any[] = [];
   public entityProduction: ProductionData[];
 
   constructor(private wareService: WareService, private moduleService: ModuleService,
-              private route: ActivatedRoute, private titleService: Title) {
-    super();
+              route: ActivatedRoute, private titleService: Title) {
+    super(wareService, route);
   }
 
   ngOnInit(): void {
     this.titleService.setTitle('X4:Foundations - Wares');
+    super.ngOnInit();
+  }
 
-    this.route.paramMap
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(data => {
-        const id = data.get('id');
-        if (id) {
-          this.entity = this.wareService
-            .getWare(id);
-
-          if (this.entity) {
-            this.titleService.setTitle(`X4:Foundations - Wares - ${this.entity.name}`);
-            this.entityProduction = this.entity.production
-              .map(x => {
-                return {
-                  amount: x.amount,
-                  effects: x.effects,
-                  method: x.method,
-                  name: x.name,
-                  time: x.time,
-                  wares: x.wares.map(y => {
-                    return {
-                      ware: this.wareService.getWare(y.ware),
-                      amount: y.amount
-                    };
-                  })
-                };
-              });
-
-            this.waresUsedIn = this.wareService
-              .getWaresUsingWare(id);
-
-            this.modulesUsedIn = this.moduleService
-              .getModulesUsingWare(id);
-          }
-        }
+  onEntityLoaded(entity: Ware) {
+    this.titleService.setTitle(`X4:Foundations - Wares - ${this.entity.name}`);
+    this.entityProduction = this.entity.production
+      .map(x => {
+        return {
+          amount: x.amount,
+          effects: x.effects,
+          method: x.method,
+          name: x.name,
+          time: x.time,
+          wares: x.wares.map(y => {
+            return {
+              ware: this.service.getEntity(y.ware),
+              amount: y.amount
+            };
+          })
+        };
       });
+
+    this.waresUsedIn = this.wareService
+      .getWaresUsingWare(entity.id);
+
+    this.modulesUsedIn = this.moduleService
+      .getModulesUsingWare(entity.id);
   }
 
   getTotalMin(production: ProductionData) {

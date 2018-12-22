@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="card shadow">
       <div class="card-header shadow-sm">
-        Wares
+        Races
       </div>
       <div class="card-body">
         <div class="form-group mb-2">
@@ -22,16 +22,6 @@
                        [rowClass]="rowClass"
                        (select)="onSelect($event)">
           <ngx-datatable-column prop="name" name="Name"></ngx-datatable-column>
-          <ngx-datatable-column prop="transport" name="Transport"></ngx-datatable-column>
-          <ngx-datatable-column prop="price.min" name="Min Price" [pipe]="numberPipe"></ngx-datatable-column>
-          <ngx-datatable-column prop="price.avg" name="Avg Price" [pipe]="numberPipe"></ngx-datatable-column>
-          <ngx-datatable-column prop="price.max" name="Max Price" [pipe]="numberPipe"></ngx-datatable-column>
-          <ngx-datatable-column prop="volume" name="Volume" [pipe]="numberPipe"></ngx-datatable-column>
-          <ngx-datatable-column name="Price Diff / Volume" [sortable]="true" [comparator]="priceDifPerVolumeComparator">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ (row.price.max - row.price.min) / row.volume | number:'1.0-2' }}
-            </ng-template>
-          </ngx-datatable-column>
         </ngx-datatable>
       </div>
     </div>
