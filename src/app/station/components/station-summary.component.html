@@ -6,7 +6,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr class="hover-icon" (click)="toggleExpanded('totalWorkforce')">
+  <tr class="hover" (click)="toggleExpanded('totalWorkforce')">
     <td>
       <i *ngIf="!expandState['totalWorkforce']" class="fa fa-angle-double-down"></i>
       <i *ngIf="expandState['totalWorkforce']" class="fa fa-angle-double-up"></i>
@@ -24,7 +24,7 @@
     </tr>
   </ng-container>
 
-  <tr class="hover-icon" (click)="toggleExpanded('totalWorkforceCapacity')">
+  <tr class="hover" (click)="toggleExpanded('totalWorkforceCapacity')">
     <td>
       <i *ngIf="!expandState['totalWorkforceCapacity']" class="fa fa-angle-double-down"></i>
       <i *ngIf="expandState['totalWorkforceCapacity']" class="fa fa-angle-double-up"></i>
@@ -52,7 +52,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr class="hover-icon text-danger" (click)="toggleExpanded('totalExpenses')">
+  <tr class="hover text-danger" (click)="toggleExpanded('totalExpenses')">
     <td>
       <i *ngIf="!expandState['totalExpenses']" class="fa fa-angle-double-down"></i>
       <i *ngIf="expandState['totalExpenses']" class="fa fa-angle-double-up"></i>
@@ -69,7 +69,7 @@
     </tr>
   </ng-container>
 
-  <tr class="hover-icon text-primary" (click)="toggleExpanded('totalProfits')">
+  <tr class="hover text-primary" (click)="toggleExpanded('totalProfits')">
     <td>
       <i *ngIf="!expandState['totalProfits']" class="fa fa-angle-double-down"></i>
       <i *ngIf="expandState['totalProfits']" class="fa fa-angle-double-up"></i>
@@ -140,7 +140,7 @@
   </thead>
   <tbody>
   <ng-container *ngFor="let cost of moduleCosts">
-    <tr class="hover-icon" (click)="toggleExpanded(cost.module.id)">
+    <tr class="hover" (click)="toggleExpanded(cost.module.id)">
       <td>
         <i *ngIf="!expandState[cost.module.id]" class="fa fa-angle-double-down"></i>
         <i *ngIf="expandState[cost.module.id]" class="fa fa-angle-double-up"></i>

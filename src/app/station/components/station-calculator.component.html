@@ -2,12 +2,11 @@
   <div class="col-md-12">
     <div class="card shadow">
       <div class="card-header shadow-sm">
-        Station Calculator
-
-        <button class="btn btn-sm btn-primary" (click)="saveLayout()"><i class="fa fa-save"></i> Save</button>&nbsp;
-        <button class="btn btn-sm btn-primary" (click)="saveLayoutAs()"><i class="fa fa-save"></i> Save As</button>&nbsp;
-        <button class="btn btn-sm btn-info" (click)="loadLayout()"><i class="fa fa-folder-open"></i> Load</button>&nbsp;
-        <button class="btn btn-sm btn-secondary" (click)="shareLayout()"><i class="fa fa-share-square"></i> Share</button>&nbsp;
+        <button type="button" class="btn btn-sm btn-info" (click)="newLayout()"><i class="fa fa-file"></i> New</button>&nbsp;
+        <button type="button" class="btn btn-sm btn-primary" (click)="saveLayout()"><i class="fa fa-save"></i> Save</button>&nbsp;
+        <button type="button"  class="btn btn-sm btn-primary" (click)="saveLayoutAs()"><i class="fa fa-save"></i> Save As</button>&nbsp;
+        <button type="button"  class="btn btn-sm btn-info" (click)="loadLayout()"><i class="fa fa-folder-open"></i> Load</button>&nbsp;
+        <button type="button"  class="btn btn-sm btn-secondary" (click)="shareLayout()"><i class="fa fa-share-square"></i> Share</button>
       </div>
       <div class="card-body">
         <div class="row" *ngIf="messages.length">

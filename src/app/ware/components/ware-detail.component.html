@@ -28,7 +28,7 @@
         <ngb-tabset>
           <ngb-tab title="Construction">
             <ng-template ngbTabContent>
-              <div *ngIf="entityProduction && entityProduction.length" style="margin-top: 10px; margin-bottom: 10px" class="row">
+              <div *ngIf="entityProduction && entityProduction.length" class="row mt-2 mb-2">
                 <div class="col-md-6 col-sm-6 col-lg-4" *ngFor="let production of entityProduction">
                   <div class="card shadow-sm">
                     <div class="card-header small">
@@ -112,14 +112,49 @@
           </ngb-tab>
           <ngb-tab title="Required For">
             <ng-template ngbTabContent>
-              <div class="row">
-                <div class="col-12">
-                  <ul *ngIf="waresUsedIn.length">
-                    <li *ngFor="let ware of waresUsedIn">
-                      <a [routerLink]="['/wares/', ware.id ]">{{ ware.name }}</a>
-                    </li>
-                  </ul>
-                  <span class="text-info" *ngIf="!waresUsedIn.length">No usage found.</span>
+              <div class="row mt-2 mb-2">
+                <div class="col-md-4 col-sm-12">
+                  <div class="card small">
+                    <div class="card-header">
+                      Wares
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col text-info" *ngIf="!waresUsedIn.length">No usage found.</div>
+                        <div *ngFor="let ware of waresUsedIn" class="col-md-4 col-sm-6">
+                          <a [routerLink]="['/wares/', ware.id ]">{{ ware.name }}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-sm-12">
+                  <div class="card small">
+                    <div class="card-header">
+                      Ships
+                    </div>
+                    <div class="card-body">
+                      Coming soon
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-sm-12">
+                  <div class="card small">
+                    <div class="card-header">
+                      Station Modules
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col text-info" *ngIf="!modulesUsedIn.length">No usage found.</div>
+                        <div *ngFor="let module of modulesUsedIn" class="col-md-6 col-sm-12">
+                          <!--<a [routerLink]="['/modules/', module.id ]">{{ module.name }}</a>-->
+                          {{ module.name }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </ng-template>
