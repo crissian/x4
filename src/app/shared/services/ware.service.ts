@@ -18,11 +18,11 @@ export class WareService {
     shiptech: 100
   };
 
-  getWares(): Ware[] {
+  getEntities(): Ware[] {
     return AllWares;
   }
 
-  getWare(id: string): Ware {
+  getEntity(id: string): Ware {
     return Wares[id];
   }
 

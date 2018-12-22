@@ -23,7 +23,7 @@ export class TechChartComponent extends ComponentBase implements OnInit {
   }
 
   ngOnInit(): void {
-    this.wares = this.wareService.getWares();
+    this.wares = this.wareService.getEntities();
     this.removeWare(Wares.energycells);
     this.removeWare(Wares.nividium);
 

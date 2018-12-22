@@ -1,6 +1,3 @@
-import { Races } from '../data/race-data';
-import { Wares } from '../data/wares-data';
-
 export interface WareGroup {
   id: string;
   name: string;
@@ -51,7 +48,7 @@ export interface Race {
   id: string;
   name: string;
   description: string;
-  icon: string;
+  icon?: string;
 }
 
 export interface License {

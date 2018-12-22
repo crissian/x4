@@ -66,7 +66,7 @@ export class StationModuleModel {
       this.production = null;
       this.needs = [];
     } else {
-      this.module = this.moduleService.getModule(this.moduleId);
+      this.module = this.moduleService.getEntity(this.moduleId);
       this.needs = [];
       this.production = null;
 
@@ -87,7 +87,7 @@ export class StationModuleModel {
         this.production = { amount: currentProd.amount * cycles, ware: ware, value: currentProd };
         currentProd.wares
           .forEach(x => {
-            const neededWare = this.wareService.getWare(x.ware);
+            const neededWare = this.wareService.getEntity(x.ware);
             this.needs.push({ amount: x.amount * cycles, ware: neededWare });
           });
       } else if (this.module.type == ModuleTypes.habitation) {
