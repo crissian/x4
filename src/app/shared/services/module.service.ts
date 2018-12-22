@@ -34,4 +34,20 @@ export class ModuleService {
   get allModules(): StationModule[] {
     return AllModules;
   }
+
+  getModulesUsingWare(wareId: any) {
+    return AllModules
+      .filter(x => this.isUsing(x, wareId));
+  }
+
+  private isUsing(module: StationModule, wareId: string) {
+    for (let i = 0; i < module.production.length; i ++) {
+      const production = module.production[i];
+      if (production.wares.find(y => y.ware == wareId) != null) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }

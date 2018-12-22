@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { WaresComponent } from './components/wares.component';
-import { WareDetailComponent } from './components/ware-detail.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ShipsComponent } from './components/ships.component';
+import { ShipDetailComponent } from './components/ship-detail.component';
 
 @NgModule({
   imports: [
@@ -14,13 +13,12 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     BrowserModule,
     FormsModule,
     SharedModule,
-    RouterModule,
-    NgxDatatableModule
+    RouterModule
   ],
   declarations: [
-    WaresComponent,
-    WareDetailComponent
+    ShipsComponent,
+    ShipDetailComponent
   ]
 })
-export class WareModule {
+export class ShipsModule {
 }

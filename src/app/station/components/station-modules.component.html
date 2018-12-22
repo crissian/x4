@@ -10,6 +10,7 @@
   <tr *ngFor="let item of modules">
     <td>
       <div class="form-group">
+        <!--suppress HtmlFormInputWithoutLabel -->
         <select class="form-control form-control-sm" [(ngModel)]="item.moduleId" (ngModelChange)="onChange()">
           <option value="">( Select )</option>
           <optgroup *ngFor="let group of wareGroups" label="{{ group.name }}">
@@ -24,7 +25,7 @@
       </div>
     </td>
     <td>
-      <i class="fa fa-trash hover-icon" aria-hidden="true" (click)="removeModule(item)"></i>
+      <i class="fa fa-trash hover" aria-hidden="true" (click)="removeModule(item)"></i>
     </td>
   </tr>
   </tbody>

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { ProductionEffect, Ware } from '../../shared/services/model/model';
+import { ModuleService } from '../../shared/services/module.service';
 
 export interface ProductionWareData {
   ware: Ware;
@@ -26,9 +27,11 @@ interface ProductionData {
 export class WareDetailComponent extends ComponentBase implements OnInit {
   public entity: Ware;
   public waresUsedIn: any[] = [];
+  public modulesUsedIn: any[] = [];
   public entityProduction: ProductionData[];
 
-  constructor(private wareService: WareService, private route: ActivatedRoute, private titleService: Title) {
+  constructor(private wareService: WareService, private moduleService: ModuleService,
+              private route: ActivatedRoute, private titleService: Title) {
     super();
   }
 
@@ -43,25 +46,31 @@ export class WareDetailComponent extends ComponentBase implements OnInit {
           this.entity = this.wareService
             .getWare(id);
 
-          this.entityProduction = this.entity.production
-            .map(x => {
-              return {
-                amount: x.amount,
-                effects: x.effects,
-                method: x.method,
-                name: x.name,
-                time: x.time,
-                wares: x.wares.map(y => {
-                  return {
-                    ware: this.wareService.getWare(y.ware),
-                    amount: y.amount
-                  };
-                })
-              };
-            });
+          if (this.entity) {
+            this.titleService.setTitle(`X4:Foundations - Wares - ${this.entity.name}`);
+            this.entityProduction = this.entity.production
+              .map(x => {
+                return {
+                  amount: x.amount,
+                  effects: x.effects,
+                  method: x.method,
+                  name: x.name,
+                  time: x.time,
+                  wares: x.wares.map(y => {
+                    return {
+                      ware: this.wareService.getWare(y.ware),
+                      amount: y.amount
+                    };
+                  })
+                };
+              });
 
-          this.waresUsedIn = this.wareService
-            .getWaresUsingWare(id);
+            this.waresUsedIn = this.wareService
+              .getWaresUsingWare(id);
+
+            this.modulesUsedIn = this.moduleService
+              .getModulesUsingWare(id);
+          }
         }
       });
   }

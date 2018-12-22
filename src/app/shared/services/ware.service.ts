@@ -1,8 +1,6 @@
 import { AllWares, Wares } from './data/wares-data';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
 import { Ware, WareGroup } from './model/model';
-import { WareGroups } from './data/ware-groups-data';
 
 @Injectable()
 export class WareService {
@@ -24,18 +22,13 @@ export class WareService {
     return AllWares;
   }
 
-  getShips() {
-    return of([]);
-  }
-
   getWare(id: string): Ware {
     return Wares[id];
   }
 
   getWaresUsingWare(id: string): Ware[] {
-    const results = AllWares
+    return AllWares
       .filter(x => this.isUsing(x, id));
-    return results;
   }
 
   private isUsing(ware: Ware, wareId: string) {

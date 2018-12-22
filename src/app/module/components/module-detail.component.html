@@ -1,0 +1,14 @@
+<div class="row content-row">
+  <div class="col-md-12">
+    <div class="card shadow" *ngIf="entity">
+      <div class="card-header shadow-sm">
+        <a routerLink="/modules">Station Modules</a> - {{ entity.name }}
+      </div>
+      <div class="card-body" *ngIf="entity">
+        <div class="form-group row">
+          <label class="col col-form-label col-form-label-sm">{{ entity.description }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

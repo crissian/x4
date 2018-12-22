@@ -7,13 +7,17 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AnalyticsModule } from './google-analytics/analytics.module';
 import { environment } from '../environments/environment';
-import {AppRoutingModule} from './app-routing.module';
-import {CoreModule} from './core/core.module';
-import {SharedModule} from './shared/shared.module';
-import {StationModule} from './station/station.module';
-import {StationRoutingModule} from './station/station-routing.module';
-import {WareModule} from './ware/ware.module';
-import {WareRoutingModule} from './ware/ware-routing.module';
+import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { StationModule } from './station/station.module';
+import { StationRoutingModule } from './station/station-routing.module';
+import { WareModule } from './ware/ware.module';
+import { WareRoutingModule } from './ware/ware-routing.module';
+import { ShipsModule } from './ship/ships.module';
+import { ShipRoutingModule } from './ship/ship-routing.module';
+import { ModuleModule } from './module/module.module';
+import { ModuleRoutingModule } from './module/module-routing.module';
 
 @NgModule({
   imports: [
@@ -27,12 +31,19 @@ import {WareRoutingModule} from './ware/ware-routing.module';
     StationRoutingModule,
     WareModule,
     WareRoutingModule,
+    StationModule,
+    StationRoutingModule,
+    ShipsModule,
+    ShipRoutingModule,
+    ModuleModule,
+    ModuleRoutingModule,
     RouterModule,
     AnalyticsModule.forRoot({ trackingId: environment.googleAnalytics })
   ],
   declarations: [
     AppComponent
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+}

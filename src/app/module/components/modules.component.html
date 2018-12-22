@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="card shadow">
       <div class="card-header shadow-sm">
-        Wares
+        Station Modules
       </div>
       <div class="card-body">
         <div class="form-group mb-2">
@@ -16,36 +16,35 @@
 
         <ngx-datatable class="bootstrap small"
                        [rows]="entities"
+                       [columns]="columns"
                        [rowHeight]="'auto'"
                        [selectionType]="'single'"
                        [columnMode]="'force'"
                        [rowClass]="rowClass"
                        (select)="onSelect($event)">
-          <ngx-datatable-column prop="name" name="Name"></ngx-datatable-column>
-          <ngx-datatable-column prop="transport" name="Transport"></ngx-datatable-column>
-          <ngx-datatable-column prop="price.min" name="Min Price"></ngx-datatable-column>
-          <ngx-datatable-column prop="price.avg" name="Avg Price"></ngx-datatable-column>
-          <ngx-datatable-column prop="price.max" name="Max Price"></ngx-datatable-column>
-          <ngx-datatable-column prop="volume" name="Volume"></ngx-datatable-column>
-          <ngx-datatable-column name="Price Diff / Volume" [sortable]="true" [comparator]="priceDifPerVolumeComparator">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              {{ (row.price.max - row.price.min) / row.volume | number:'1.0-2' }}
-            </ng-template>
-          </ngx-datatable-column>
         </ngx-datatable>
-
+        <!--
         <table class="table table-sm table-hover small">
           <thead>
           <tr>
-            <th scope="col">Price Diff / Volume</th>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Race</th>
+            <th scope="col">Product</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of entities" class="hover">
-            <td>{{ (item.price.max - item.price.min) / item.volume | number:'1.0-2' }}</td>
+          <tr *ngFor="let item of entities; let index = index;" class="hover" (click)="showEntity(item)">
+            <td>{{ index + 1 }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.type?.name }}</td>
+            <td>{{ item.makerRace?.name }}</td>
+            <td>{{ item.product?.name }}</td>
           </tr>
           </tbody>
         </table>
+        -->
       </div>
     </div>
   </div>

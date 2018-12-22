@@ -129,6 +129,11 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
     }
   }
 
+  newLayout() {
+    this.layout = null;
+    this.modules = [ new StationModuleModel(this.wareService, this.moduleService) ];
+  }
+
   loadLayout() {
     const modalRef = this.modal.open(LoadLayoutComponent);
     modalRef.result

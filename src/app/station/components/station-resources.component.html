@@ -6,7 +6,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr class="hover-icon" *ngFor="let item of resources" (click)="toggleExpanded(item)">
+  <tr class="hover" *ngFor="let item of resources" (click)="toggleExpanded(item)">
     <td>
       <i *ngIf="!item.expanded" class="fa fa-angle-double-down"></i>
       <i *ngIf="item.expanded" class="fa fa-angle-double-up"></i>
