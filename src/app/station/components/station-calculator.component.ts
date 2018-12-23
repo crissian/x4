@@ -15,7 +15,6 @@ import { WareService } from '../../shared/services/ware.service';
 import { ModuleService } from '../../shared/services/module.service';
 import { StationModuleModel} from './station-calculator.model';
 import { StationSummaryComponent } from './station-summary.component';
-import { AnalyticsService } from '../../google-analytics/services/analytics.service';
 
 interface Updatable {
   update();
