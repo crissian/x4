@@ -6,6 +6,7 @@ import { LayoutV1Service } from './layout-v1.service';
 import { LayoutV2Service } from './layout-v2.service';
 import { ModuleService } from '../../shared/services/module.service';
 import { LayoutVersionService } from './layout-version.service';
+import { AnalyticsService } from '../../google-analytics/services/analytics.service';
 
 @Injectable()
 export class LayoutService {
@@ -18,7 +19,7 @@ export class LayoutService {
     return this.services[LayoutService.version];
   }
 
-  constructor(private storageService: StorageService, private moduleService: ModuleService) {
+  constructor(private storageService: StorageService, private moduleService: ModuleService, private analytics: AnalyticsService) {
     this.services = [
       new LayoutV0Service(),
       new LayoutV1Service(moduleService),
@@ -36,6 +37,7 @@ export class LayoutService {
   }
 
   getLayout(name: string): Layout {
+    this.analytics.event({ label: name, category: 'Layouts', action: 'Load Layout' });
     return this.getLayouts()
       .find(x => x.name === name);
   }
@@ -51,10 +53,12 @@ export class LayoutService {
       layouts.push(layout);
     }
 
+    this.analytics.event({ label: layout.name, category: 'Layouts', action: 'Save Layout' });
     this.saveLayoutsInternal(layouts);
   }
 
   deleteLayout(name: string) {
+    this.analytics.event({ label: name, category: 'Layouts', action: 'Delete Layout' });
     const layouts = this.getLayouts();
 
     const index = layouts.findIndex(x => x.name.toLowerCase() === name.toLowerCase());
