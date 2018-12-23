@@ -23,7 +23,7 @@ export class FactionsComponent extends EntityListComponent<Faction> implements O
   }
 
   filter(x: Faction, text: string): boolean {
-    return x.name.toLowerCase().indexOf(this.filterText) > -1;
+    return x.name.toLowerCase().indexOf(text) > -1;
   }
 
   onSelectCore(item: Faction) {
