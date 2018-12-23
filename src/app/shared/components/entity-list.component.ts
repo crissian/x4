@@ -25,7 +25,7 @@ export abstract class EntityListComponent<T> extends ComponentBase implements On
     this.entities = this.service.getEntities();
 
     if (this.filterText != null) {
-      const text = this.filterText.trim();
+      const text = this.filterText.trim().toLowerCase();
 
       this.entities = this.entities
         .filter(x => {

@@ -34,7 +34,8 @@ export class WaresComponent extends EntityListComponent<Ware> implements OnInit 
   }
 
   filter(x: Ware, text: string): boolean {
-    return x.name.toLowerCase().indexOf(this.filterText) > -1;
+    return x.name.toLowerCase().indexOf(this.filterText) > -1 ||
+      (x.transport != null && x.transport.toLowerCase().indexOf(this.filterText) > -1);
   }
 
   onSelectCore(item: Ware) {
