@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductionEffect, StationModule, Ware } from '../../shared/services/model/model';
+import { StationModule, Ware } from '../../shared/services/model/model';
 import { WareService } from '../../shared/services/ware.service';
 import { ModuleService } from '../../shared/services/module.service';
 import { ActivatedRoute } from '@angular/router';
@@ -17,7 +17,6 @@ interface ProductionData {
   method: string;
   name: string;
   wares: ProductionWareData[];
-  effects?: ProductionEffect[];
 }
 
 @Component({
@@ -37,7 +36,22 @@ export class ModuleDetailComponent extends EntityDetailsComponent<StationModule>
   }
 
   onEntityLoaded(entity: StationModule) {
-    super.onEntityLoaded(entity);
+    this.entityProduction = this.entity.production
+      .map<ProductionData>(x => {
+        return {
+          amount: x.amount,
+          effects: x.effects,
+          method: x.method,
+          name: x.name,
+          time: x.time,
+          wares: x.wares.map(y => {
+            return {
+              ware: this.wareService.getEntity(y.ware),
+              amount: y.amount
+            };
+          })
+        };
+      });
   }
 
   getTotalMin(production: ProductionData) {

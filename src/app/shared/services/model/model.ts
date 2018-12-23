@@ -72,6 +72,16 @@ export interface ModuleType {
   name: string;
 }
 
+export interface Cargo {
+  max: number;
+  type: CargoType;
+}
+
+export interface CargoType {
+  id: string;
+  name: string;
+}
+
 export interface StationModule {
   id: string;
   name: string;
@@ -84,6 +94,7 @@ export interface StationModule {
   production: Production[];
   product?: Ware;
   type: ModuleType;
+  cargo?: Cargo;
   workForce?: {
     max?: number;
     capacity?: number;

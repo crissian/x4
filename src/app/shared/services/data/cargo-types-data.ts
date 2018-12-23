@@ -1,5 +1,16 @@
 export class CargoTypes {
-  static liquid = 'liquid';
-  static solid = 'solid';
-  static container = 'container';
+  static readonly liquid = {
+    id: 'liquid',
+    name: 'Liquid'
+  };
+
+  static readonly solid = {
+    id: 'solid',
+    name: 'Solid'
+  };
+
+  static readonly container = {
+    id: 'container',
+    name: 'Container'
+  };
 }
