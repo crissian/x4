@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { ProductionEffect, Ware } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
 import { EntityDetailsComponent } from '../../shared/components/entity-details.component';
+import { Effects } from '../../shared/services/data/effects-data';
 
 export interface ProductionWareData {
   ware: Ware;
@@ -17,7 +18,7 @@ interface ProductionData {
   method: string;
   name: string;
   wares: ProductionWareData[];
-  effects?: ProductionEffect[];
+  efficiency?: ProductionEffect;
 }
 
 @Component({
@@ -41,13 +42,14 @@ export class WareDetailComponent extends EntityDetailsComponent<Ware> implements
   onEntityLoaded(entity: Ware) {
     this.titleService.setTitle(`X4:Foundations - Wares - ${this.entity.name}`);
     this.entityProduction = this.entity.production
-      .map(x => {
+      .map<ProductionData>(x => {
         return {
           amount: x.amount,
           effects: x.effects,
           method: x.method,
           name: x.name,
           time: x.time,
+          efficiency: x.effects == null ? null : x.effects.find(y => y.type == Effects.work),
           wares: x.wares.map(y => {
             return {
               ware: this.service.getEntity(y.ware),

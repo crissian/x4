@@ -83,11 +83,15 @@
                               <td class="text-right">{{ production.amount }}</td>
                             </tr>
                             <tr>
-                              <td>Products per hour</td>
+                              <td>Products per Hour</td>
                               <td class="text-right">{{ (3600 / production.time) * production.amount | number:'1.0' }}</td>
                             </tr>
+                            <tr *ngIf="production.efficiency">
+                              <td>Max Efficiency</td>
+                              <td class="text-right">{{ production.efficiency.product * 100 + 100 }}%</td>
+                            </tr>
                             <tr>
-                              <td>Profit per hour</td>
+                              <td>Profit per Hour (100% Efficiency)</td>
                               <td class="text-right">
                                 <span class="text-danger">
                                     Min: <strong>{{ entity.price.min * (3600 / production.time) * production.amount | number:'1.0' }}</strong> /
@@ -97,6 +101,20 @@
                                 </span>
                                 <span class="text-success">
                                     Max: <strong>{{ entity.price.max * (3600 / production.time) * production.amount | number:'1.0' }}</strong>
+                                </span>
+                              </td>
+                            </tr>
+                            <tr *ngIf="production.efficiency">
+                              <td>Profit per Hour ({{ production.efficiency.product * 100 + 100 }}% Efficiency)</td>
+                              <td class="text-right">
+                                <span class="text-danger">
+                                    Min: <strong>{{ entity.price.min * (3600 / production.time) * production.amount * (1 + production.efficiency.product) | number:'1.0' }}</strong> /
+                                </span>
+                                <span class="text-primary">
+                                    Avg: <strong>{{ entity.price.avg * (3600 / production.time) * production.amount * (1 + production.efficiency.product) | number:'1.0' }}</strong> /
+                                </span>
+                                <span class="text-success">
+                                    Max: <strong>{{ entity.price.max * (3600 / production.time) * production.amount * (1 + production.efficiency.product) | number:'1.0' }}</strong>
                                 </span>
                               </td>
                             </tr>
