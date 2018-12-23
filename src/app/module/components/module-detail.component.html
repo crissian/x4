@@ -18,6 +18,12 @@
             <span *ngIf="!entity.makerRace"> - </span>
           </dd>
 
+          <dt class="col-sm-2">Type</dt>
+          <dd class="col-sm-10">
+            <span *ngIf="entity.type">{{ entity.type.name }}</span>
+            <span *ngIf="!entity.type"> - </span>
+          </dd>
+
           <dt class="col-sm-2">Product</dt>
           <dd class="col-sm-10">
             <span *ngIf="entity.product">
@@ -26,11 +32,10 @@
             <span *ngIf="!entity.product"> - </span>
           </dd>
 
-          <dt class="col-sm-2">Type</dt>
-          <dd class="col-sm-10">
-            <span *ngIf="entity.type">{{ entity.type.name }}</span>
-            <span *ngIf="!entity.type"> - </span>
-          </dd>
+          <ng-container *ngIf="entity.cargo">
+            <dt class="col-sm-2">Storage Capacity ({{ entity.cargo.type?.name }})</dt>
+            <dd class="col-sm-10">{{ entity.cargo.max | number }}</dd>
+          </ng-container>
 
           <dt class="col-sm-2">Hull</dt>
           <dd class="col-sm-10">{{ entity.hull | number }}</dd>
