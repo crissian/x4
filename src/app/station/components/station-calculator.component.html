@@ -2,11 +2,19 @@
   <div class="col-md-12">
     <div class="card shadow">
       <div class="card-header shadow-sm">
-        <button type="button" class="btn btn-sm btn-info" (click)="newLayout()"><i class="fa fa-file"></i> New</button>&nbsp;
-        <button type="button" class="btn btn-sm btn-primary" (click)="saveLayout()"><i class="fa fa-save"></i> Save</button>&nbsp;
-        <button type="button"  class="btn btn-sm btn-primary" (click)="saveLayoutAs()"><i class="fa fa-save"></i> Save As</button>&nbsp;
-        <button type="button"  class="btn btn-sm btn-info" (click)="loadLayout()"><i class="fa fa-folder-open"></i> Load</button>&nbsp;
-        <button type="button"  class="btn btn-sm btn-secondary" (click)="shareLayout()"><i class="fa fa-share-square"></i> Share</button>
+        <button (click)="newLayout()" class="btn btn-sm btn-info" i18n type="button"><i class="fa fa-file"></i> New
+        </button>&nbsp;
+        <button (click)="saveLayout()" class="btn btn-sm btn-primary" i18n type="button"><i class="fa fa-save"></i> Save
+        </button>&nbsp;
+        <button (click)="saveLayoutAs()" class="btn btn-sm btn-primary" i18n type="button"><i class="fa fa-save"></i>
+          Save As
+        </button>&nbsp;
+        <button (click)="loadLayout()" class="btn btn-sm btn-info" i18n type="button"><i class="fa fa-folder-open"></i>
+          Load
+        </button>&nbsp;
+        <button (click)="shareLayout()" class="btn btn-sm btn-secondary" i18n type="button"><i
+          class="fa fa-share-square"></i> Share
+        </button>
       </div>
       <div class="card-body">
         <div class="row" *ngIf="messages.length">
@@ -18,19 +26,19 @@
         <div class="row">
           <div class="col-md-4 col-sm-12">
             <h6 class="card-title">
-              <span *ngIf="!layout">Station Modules</span>
+              <span *ngIf="!layout" i18n>Station Modules</span>
               <span *ngIf="layout" class="text-primary">{{ layout.name }}</span>
             </h6>
 
             <app-station-modules [modules]="modules" (change)="onChange()"></app-station-modules>
           </div>
           <div class="col-md-4 col-sm-12">
-            <h6 class="card-title">Station Resources</h6>
+            <h6 class="card-title" i18n>Station Resources</h6>
 
             <app-station-resources #stationResources [modules]="modules"></app-station-resources>
           </div>
           <div class="col-md-4 col-sm-12">
-            <h6 class="card-title">Station Summary</h6>
+            <h6 class="card-title" i18n>Station Summary</h6>
 
             <app-station-summary #stationSummary [modules]="modules"></app-station-summary>
           </div>
