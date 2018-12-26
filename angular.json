@@ -31,6 +31,14 @@
             "scripts": []
           },
           "configurations": {
+            "zh-Hans": {
+              "aot": true,
+              "outputPath": "dist/x4-fr/",
+              "i18nFile": "src/locale/messages.zh-Hans.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "zh-Hans",
+              "i18nMissingTranslation": "error"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -65,6 +73,9 @@
           "configurations": {
             "production": {
               "browserTarget": "X4:build:production"
+            },
+            "zh-Hans": {
+              "browserTarget": "X4:build:zh-Hans"
             }
           }
         },
