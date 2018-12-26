@@ -33,11 +33,11 @@
           "configurations": {
             "zh-Hans": {
               "aot": true,
-              "outputPath": "dist/x4-fr/",
-              "i18nFile": "src/locale/messages.zh-Hans.xlf",
-              "i18nFormat": "xlf2",
+              "outputPath": "dist/X4-zh-Hans/",
+              "i18nFile": "src/i18n/messages.zh-Hans.xlf",
+              "i18nFormat": "xlf",
               "i18nLocale": "zh-Hans",
-              "i18nMissingTranslation": "error"
+              "i18nMissingTranslation": "warning"
             },
             "production": {
               "fileReplacements": [

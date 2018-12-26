@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title">Load Layout</h4>
+  <h4 class="modal-title" i18n>Load Layout</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -9,7 +9,7 @@
     <a *ngFor="let entity of entities" class="list-group-item list-group-item-action" (click)="activeModal.close(entity.name)">
       <div>
         <strong>{{ entity.name }}</strong>
-        <a class="hover text-danger float-right small" (click)="deleteLayout($event, entity)">Delete</a>
+        <a class="hover text-danger float-right small" (click)="deleteLayout($event, entity)" i18n>Delete</a>
       </div>
       <div class="small">
         {{ getModules(entity) }}
@@ -18,5 +18,5 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="activeModal.close()">Cancel</button>
+  <button type="button" class="btn btn-secondary" (click)="activeModal.close()" i18n>Cancel</button>
 </div>
