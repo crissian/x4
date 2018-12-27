@@ -24,4 +24,14 @@
       </li>
     </ul>
   </div>
+  <div *ngIf="languages !== null" class="col text-right" ngbDropdown>
+    <label ngbDropdownToggle>languages</label>
+    <div ngbDropdownMenu>
+      <ng-template [ngForOf]="languages" let-lang ngFor>
+        <li *ngIf="lang.code !== localeId" class="dropdown-item">
+          <a href="/{{lang.code}}/">{{lang.label}}</a></li>
+        <li *ngIf="lang.code === localeId" class="dropdown-item">{{lang.label}} </li>
+      </ng-template>
+    </div>
+  </div>
 </header>
