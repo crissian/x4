@@ -5,8 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "start-zh-Hans": "ng serve --configuration=zh-Hans",
-    "build-zh-Hans": "ng build --configuration=zh-Hans",
+    "build:production": "ng build --configuration=production",
+    "build-i18n:en": "ng build --configuration=en",
+    "build-i18n:zh-Hans": "ng build --configuration=zh-Hans",
+    "build-i18n:all": "ng build --configuration=en && ng build --configuration=zh-Hans",
+    "build:all": "npm run build:production && npm run build-i18n:all",
     "lint": "ng lint",
     "extract-i18n": "ng xi18n --output-path i18n --i18n-locale en && xliffmerge --profile xliffmerge.json en zh-Hans"
 

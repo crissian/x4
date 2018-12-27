@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  googleAnalytics: null
+  googleAnalytics: null,
+  languages: null
 };
 
 /*
