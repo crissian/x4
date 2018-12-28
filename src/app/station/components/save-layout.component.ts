@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {LayoutService} from '../services/layout-service';
-import {ConfirmComponent} from '../../shared/components/confirm.component';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LayoutService } from '../services/layout-service';
+import { ConfirmComponent } from '../../shared/components/confirm.component';
 
 @Component({
   templateUrl: './save-layout.component.html'

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { LoadLayoutComponent } from './components/load-layout.component';
@@ -24,7 +24,7 @@ import { StationSummaryComponent } from './components/station-summary.component'
     StationSummaryComponent
   ],
   imports: [
-    NgbModule,
+    NgbModalModule,
     BrowserModule,
     FormsModule,
     SharedModule,
