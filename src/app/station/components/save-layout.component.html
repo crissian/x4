@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title" i18n>Save Layout</h4>
+  <h4 class="modal-title" i18n="@@saveLayout">Save Layout</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -10,6 +10,6 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-success" (click)="saveLayout()" [disabled]="!canSave()" i18n>Save</button>
-  <button type="button" class="btn btn-secondary" (click)="activeModal.close()" i18n>Cancel</button>
+  <button type="button" class="btn btn-success" (click)="saveLayout()" [disabled]="!canSave()" i18n="@@save">Save</button>
+  <button type="button" class="btn btn-secondary" (click)="activeModal.close()" i18n="@@cancel">Cancel</button>
 </div>

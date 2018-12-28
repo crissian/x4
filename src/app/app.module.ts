@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AnalyticsModule } from './google-analytics/analytics.module';
@@ -25,7 +24,6 @@ import { FactionRoutingModule } from './faction/faction-routing.module';
 
 @NgModule({
   imports: [
-    NgbModule,
     BrowserModule,
     FormsModule,
     RouterModule,

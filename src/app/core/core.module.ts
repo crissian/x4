@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {StorageService} from './services/storage.service';
+import { NgModule } from '@angular/core';
+import { StorageService } from './services/storage.service';
 
 @NgModule({
   providers: [

@@ -5,7 +5,10 @@
 export const environment = {
   production: false,
   googleAnalytics: null,
-  languages: null
+  languages: [
+    {code: 'en', label: 'English'},
+    {code: 'zh-Hans', label: '简体中文'},
+  ]
 };
 
 /*
