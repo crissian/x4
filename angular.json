@@ -31,36 +31,6 @@
             "scripts": []
           },
           "configurations": {
-            "en": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ],
-              "aot": true,
-              "outputPath": "dist/X4/en/",
-              "baseHref": "/en/",
-              "i18nFile": "src/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "i18nMissingTranslation": "warning"
-            },
             "zh-Hans": {
               "fileReplacements": [
                 {
@@ -123,9 +93,6 @@
             "browserTarget": "X4:build"
           },
           "configurations": {
-            "en": {
-              "browserTarget": "X4:build:en"
-            },
             "zh-Hans": {
               "browserTarget": "X4:build:zh-Hans"
             },

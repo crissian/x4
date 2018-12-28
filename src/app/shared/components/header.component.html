@@ -30,7 +30,9 @@
         Languages
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languages" ngbDropdownMenu>
+        <a class="dropdown-item" [ngClass]="{ 'active': localeId == 'en-US' }" href="/">English</a>
         <ng-container *ngFor="let lang of languages">
+          <!--suppress HtmlUnknownTarget -->
           <a class="dropdown-item" [ngClass]="{ 'active': lang.code == localeId }" href="/{{ lang.code }}/">{{ lang.label }}</a>
         </ng-container>
       </div>
