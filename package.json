@@ -12,7 +12,6 @@
     "build:all": "npm run build:production && npm run build-i18n:all",
     "lint": "ng lint",
     "extract-i18n": "ng xi18n --output-path i18n --i18n-locale en && xliffmerge --profile xliffmerge.json en zh-Hans"
-
   },
   "private": true,
   "dependencies": {

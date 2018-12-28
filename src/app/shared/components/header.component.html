@@ -1,37 +1,39 @@
 <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bg-secondary shadow">
-  <div>
+  <div class="navbar-nav-scroll">
     <ul class="navbar-nav bd-navbar-nav flex-row">
       <li class="navbar-brand">
         <img src="../../../assets/images/x4-logo.png" alt="X4:Foundations" class="navbar-logo" />
       </li>
       <li class="nav-item">
-        <a class="nav-link" i18n routerLink="/station-calculator" routerLinkActive="active">Station Calculator</a>
+        <a class="nav-link" i18n="@@stationCalculator" routerLink="/station-calculator" routerLinkActive="active">Station Calculator</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" i18n routerLink="/wares" routerLinkActive="active">Wares</a>
+        <a class="nav-link" i18n="@@wares" routerLink="/wares" routerLinkActive="active">Wares</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" i18n routerLink="/modules" routerLinkActive="active">Station Modules</a>
+        <a class="nav-link" i18n="@@stationModules" routerLink="/modules" routerLinkActive="active">Station Modules</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" i18n routerLink="/ships" routerLinkActive="active">Ships</a>
+        <a class="nav-link" i18n="@@ships" routerLink="/ships" routerLinkActive="active">Ships</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" i18n routerLink="/races" routerLinkActive="active">Races</a>
+        <a class="nav-link" i18n="@@races" routerLink="/races" routerLinkActive="active">Races</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" i18n routerLink="/factions" routerLinkActive="active">Factions</a>
+        <a class="nav-link" i18n="@@factions" routerLink="/factions" routerLinkActive="active">Factions</a>
       </li>
     </ul>
   </div>
-  <div *ngIf="languages !== null" class="col text-right" ngbDropdown>
-    <label ngbDropdownToggle>languages</label>
-    <div ngbDropdownMenu>
-      <ng-template [ngForOf]="languages" let-lang ngFor>
-        <li *ngIf="lang.code !== localeId" class="dropdown-item">
-          <a href="/{{lang.code}}/">{{lang.label}}</a></li>
-        <li *ngIf="lang.code === localeId" class="dropdown-item">{{lang.label}} </li>
-      </ng-template>
-    </div>
-  </div>
+  <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex" *ngIf="languages" ngbDropdown>
+    <li class="nav-item dropdown hover">
+      <a class="nav-item nav-link dropdown-toggle mr-md-2" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" id="languages" ngbDropdownToggle>
+        Languages
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languages" ngbDropdownMenu>
+        <ng-container *ngFor="let lang of languages">
+          <a class="dropdown-item" [ngClass]="{ 'active': lang.code == localeId }" href="/{{ lang.code }}/">{{ lang.label }}</a>
+        </ng-container>
+      </div>
+    </li>
+  </ul>
 </header>
