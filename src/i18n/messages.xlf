@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en" datatype="plaintext" original="ng2.template">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="stationCalculator" datatype="html">
         <source>Station Calculator</source>
@@ -15,6 +15,10 @@
           <context context-type="sourcefile">app/shared/components/header.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ware/components/wares.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="stationModules" datatype="html">
         <source>Station Modules</source>
@@ -26,12 +30,20 @@
           <context context-type="sourcefile">app/station/components/station-calculator.component.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/module/components/modules.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="ships" datatype="html">
         <source>Ships</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/shared/components/header.component.html</context>
           <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ship/components/ships.component.html</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="races" datatype="html">
@@ -40,12 +52,20 @@
           <context context-type="sourcefile">app/shared/components/header.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/races/components/races.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="factions" datatype="html">
         <source>Factions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/shared/components/header.component.html</context>
           <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/faction/components/factions.component.html</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.alert.close" datatype="html">
@@ -587,11 +607,29 @@
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="select" datatype="html">
+        <source>( Select )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/station/components/station-modules.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="addModule" datatype="html">
         <source>Add Module</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/station/components/station-modules.component.html</context>
           <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="search" datatype="html">
+        <source>Search</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ware/components/wares.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/module/components/modules.component.html</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
     </body>
