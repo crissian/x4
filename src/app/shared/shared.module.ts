@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { WareService } from './services/ware.service';
 import { CoreModule } from '../core/core.module';
-import { HeaderComponent } from './components/header.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { MessagesComponent } from './components/messages.component';
 import { RouterModule } from '@angular/router';
@@ -29,7 +28,6 @@ import { ShipService } from './services/ship.service';
     ShipService
   ],
   declarations: [
-    HeaderComponent,
     MessagesComponent,
     ConfirmComponent
   ],
@@ -37,7 +35,6 @@ import { ShipService } from './services/ship.service';
     ConfirmComponent
   ],
   exports: [
-    HeaderComponent,
     MessagesComponent,
     ConfirmComponent
   ]

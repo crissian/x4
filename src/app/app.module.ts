@@ -22,6 +22,7 @@ import { RaceRoutingModule } from './races/race-routing.module';
 import { FactionModule } from './faction/faction.module';
 import { FactionRoutingModule } from './faction/faction-routing.module';
 import { AboutComponent } from './about.component';
+import { HeaderComponent } from './header.component';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { AboutComponent } from './about.component';
   ],
   declarations: [
     AppComponent,
-    AboutComponent
+    AboutComponent,
+    HeaderComponent
   ],
   bootstrap: [ AppComponent ]
 })
