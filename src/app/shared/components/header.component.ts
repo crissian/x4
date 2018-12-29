@@ -8,6 +8,6 @@ import {environment} from '../../../environments/environment';
 export class HeaderComponent {
   languages = environment.languages;
 
-  constructor(@Inject(LOCALE_ID) protected localeId: string) {
+  constructor(@Inject(LOCALE_ID) public localeId: string) {
   }
 }
