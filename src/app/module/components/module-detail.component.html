@@ -60,7 +60,7 @@
           <dd class="col-sm-10">
             <ul class="list-unstyled">
               <li *ngFor="let item of entity.owners">
-                {{ item.name }}
+                <a [routerLink]="['/factions/', item.id ]">{{ item.name }}</a>
               </li>
             </ul>
           </dd>

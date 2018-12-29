@@ -1,0 +1,107 @@
+<div class="row content-row">
+  <div class="col-md-12">
+    <div class="card shadow" *ngIf="entity">
+      <div class="card-header shadow-sm">
+        <a routerLink="/modules">Station Modules</a> - {{ entity.name }}
+      </div>
+      <div class="card-body small" *ngIf="entity">
+        <div class="form-group row" *ngIf="entity.description != 'No information available'">
+          <label class="col col-form-label col-form-label-sm">{{ entity.description }}</label>
+        </div>
+
+        <dl class="row">
+          <dt class="col-sm-2">Race</dt>
+          <dd class="col-sm-10">
+            <span *ngIf="entity.race">
+              <a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
+            </span>
+            <span *ngIf="!entity.race"> - </span>
+          </dd>
+
+          <dt class="col-sm-2">Type</dt>
+          <dd class="col-sm-10">
+            <span *ngIf="entity.type">{{ entity.type }}</span>
+            <span *ngIf="!entity.type"> - </span>
+          </dd>
+
+          <dt class="col-sm-2">Hull</dt>
+          <dd class="col-sm-10">{{ entity.hull | number }}</dd>
+
+          <dt class="col-sm-2">Explosion Damage</dt>
+          <dd class="col-sm-10">
+            <span *ngIf="entity.explosionDamage">{{ entity.explosionDamage | number }}</span>
+            <span *ngIf="!entity.explosionDamage"> - </span>
+          </dd>
+
+          <dt class="col-sm-2">Owners</dt>
+          <dd class="col-sm-10">
+            <ul class="list-unstyled">
+              <li *ngFor="let item of entity.owners">
+                <a [routerLink]="['/factions/', item.id ]">{{ item.name }}</a>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+
+        <div *ngIf="entityProduction && entityProduction.length" class="row mt-2 mb-2">
+          <div class="col-md-6 col-sm-6 col-lg-4" *ngFor="let production of entityProduction">
+            <div class="card shadow-sm">
+              <div class="card-header">
+                Production: <em>{{ production.name }}</em>
+              </div>
+              <div class="card-body">
+                <div class="row" *ngIf="production.wares.length">
+                  <div class="col">
+                    <h6>Requirements</h6>
+                    <table class="table table-sm">
+                      <thead>
+                      <tr>
+                        <th>Resource</th>
+                        <th class="text-right">Min</th>
+                        <th class="text-right">Max</th>
+                        <th class="text-right">Avg</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let item of production.wares">
+                        <td>
+                          {{ item.amount }} x <a [routerLink]="['/wares/', item.ware.id ]">{{ item.ware.name }}</a>
+                        </td>
+                        <td class="text-right">{{ item.amount * item.ware.price.min | number }}</td>
+                        <td class="text-right">{{ item.amount * item.ware.price.max | number }}</td>
+                        <td class="text-right">{{ item.amount * item.ware.price.avg | number }}</td>
+                      </tr>
+                      </tbody>
+                      <tfoot>
+                      <tr>
+                        <th class="text-right">Total</th>
+                        <th class="text-right">{{ getTotalMin(production) | number }}</th>
+                        <th class="text-right">{{ getTotalMax(production) | number }}</th>
+                        <th class="text-right">{{ getTotalAvg(production) | number }}</th>
+                      </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <h6>Production</h6>
+                    <table class="table table-sm">
+                      <tbody>
+                      <tr>
+                        <td>Time</td>
+                        <td class="text-right">{{ getProductionTime(production.time) }}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

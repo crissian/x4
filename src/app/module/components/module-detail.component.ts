@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { EntityDetailsComponent } from '../../shared/components/entity-details.component';
 
-export interface ProductionWareData {
+interface ProductionWareData {
   ware: Ware;
   amount: number;
 }
@@ -36,6 +36,8 @@ export class ModuleDetailComponent extends EntityDetailsComponent<StationModule>
   }
 
   onEntityLoaded(entity: StationModule) {
+    this.titleService.setTitle(`X4:Foundations - Modules - ${this.entity.name}`);
+
     this.entityProduction = this.entity.production
       .map<ProductionData>(x => {
         return {
@@ -85,10 +87,10 @@ export class ModuleDetailComponent extends EntityDetailsComponent<StationModule>
 
     let result = '';
     if (minutes > 0) {
-      result += ' ' + minutes + (minutes === 1 ? ' minute' : ' minutes');
+      result += minutes + (minutes === 1 ? ' minute' : ' minutes');
     }
     if (seconds > 0) {
-      if (minutes > 1) {
+      if (minutes > 0) {
         result += ' ';
       }
       result += seconds + (seconds === 1 ? ' second' : ' seconds');
