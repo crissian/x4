@@ -5,13 +5,15 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ShipsComponent } from './components/ships.component';
 import { ShipDetailComponent } from './components/ship-detail.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    NgxDatatableModule
   ],
   declarations: [
     ShipsComponent,

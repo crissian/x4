@@ -107,3 +107,25 @@ export interface ModuleWorker {
   amount: number;
   consumption: { ware: Ware, amount: number}[];
 }
+
+export interface ShipStorage {
+  missile: number;
+  unit: number;
+}
+
+export interface Ship {
+  id: string;
+  name: string;
+  description: string;
+  explosionDamage?: number;
+  hull: number;
+  race?: Race;
+  price: Price;
+  owners?: Faction[];
+  production: Production[];
+  storage?: ShipStorage;
+  people?: number;
+  purpose: string;
+  thruster?: string;
+  type: string;
+}
