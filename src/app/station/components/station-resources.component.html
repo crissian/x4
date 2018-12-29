@@ -16,7 +16,7 @@
           <div [ngClass]="{'text-danger': moduleRes.total < 0, 'text-success': moduleRes.total > 0 }">
             ({{ (moduleRes.total) | number:'1.0-0' }})
             <strong>{{ moduleRes.count }}</strong> x <strong>{{ moduleRes.name }}</strong>
-            <span *ngIf="moduleRes.total> 0"> <span i18n="@@at">at</span> <strong>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong> <span i18n="@@efficiency">efficiency</span></span>
+            <span *ngIf="moduleRes.total> 0">&nbsp;<span i18n="@@at">at</span>&nbsp;<strong>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong>&nbsp;<span i18n="@@efficiency">efficiency</span></span>
           </div>
         </li>
       </ul>
