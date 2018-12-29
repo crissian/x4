@@ -21,6 +21,7 @@ import { RaceModule } from './races/race.module';
 import { RaceRoutingModule } from './races/race-routing.module';
 import { FactionModule } from './faction/faction.module';
 import { FactionRoutingModule } from './faction/faction-routing.module';
+import { AboutComponent } from './about.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { FactionRoutingModule } from './faction/faction-routing.module';
     AnalyticsModule.forRoot({ trackingId: environment.googleAnalytics })
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    AboutComponent
   ],
   bootstrap: [ AppComponent ]
 })
