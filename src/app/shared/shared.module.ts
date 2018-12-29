@@ -11,6 +11,7 @@ import { ConfirmComponent } from './components/confirm.component';
 import { ModuleService } from './services/module.service';
 import { RaceService } from './services/race.service';
 import { FactionService } from './services/faction.service';
+import { ShipService } from './services/ship.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { FactionService } from './services/faction.service';
     WareService,
     ModuleService,
     RaceService,
-    FactionService
+    FactionService,
+    ShipService
   ],
   declarations: [
     HeaderComponent,
