@@ -21,7 +21,7 @@ export class ModulesComponent extends EntityListComponent<StationModule> impleme
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('X4:Foundations - Modules');
+    this.titleService.setTitle('X4: Foundations - Modules');
     super.ngOnInit();
   }
 

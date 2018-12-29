@@ -14,11 +14,11 @@ export class RaceDetailComponent extends EntityDetailsComponent<Race> implements
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('X4:Foundations - Races');
+    this.titleService.setTitle('X4: Foundations - Races');
     super.ngOnInit();
   }
 
   onEntityLoaded(entity: Race) {
-    this.titleService.setTitle(`X4:Foundations - Races - ${entity.name}`);
+    this.titleService.setTitle(`X4: Foundations - Races - ${entity.name}`);
   }
 }

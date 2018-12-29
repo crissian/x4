@@ -31,12 +31,12 @@ export class ShipDetailComponent extends EntityDetailsComponent<Ship> implements
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('X4:Foundations - Ships');
+    this.titleService.setTitle('X4: Foundations - Ships');
     super.ngOnInit();
   }
 
   onEntityLoaded(entity: Ship) {
-    this.titleService.setTitle(`X4:Foundations - Ships - ${this.entity.name}`);
+    this.titleService.setTitle(`X4: Foundations - Ships - ${this.entity.name}`);
 
     this.entityProduction = this.entity.production
       .map<ProductionData>(x => {

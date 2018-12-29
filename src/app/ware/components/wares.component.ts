@@ -19,7 +19,7 @@ export class WaresComponent extends EntityListComponent<Ware> implements OnInit 
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('X4:Foundations - Wares');
+    this.titleService.setTitle('X4: Foundations - Wares');
     super.ngOnInit();
   }
 
