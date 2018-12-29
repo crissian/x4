@@ -153,7 +153,12 @@
                       Ships
                     </div>
                     <div class="card-body">
-                      Coming soon
+                      <div class="row">
+                        <div class="col text-info" *ngIf="!shipsUsedIn.length">No usage found.</div>
+                        <div *ngFor="let ship of shipsUsedIn" class="col-md-6 col-sm-12">
+                          <a [routerLink]="['/ships/', ship.id ]">{{ ship.name }}</a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

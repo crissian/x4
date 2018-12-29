@@ -6,6 +6,7 @@ import { ProductionEffect, Ware } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
 import { EntityDetailsComponent } from '../../shared/components/entity-details.component';
 import { Effects } from '../../shared/services/data/effects-data';
+import { ShipService } from '../../shared/services/ship.service';
 
 export interface ProductionWareData {
   ware: Ware;
@@ -27,9 +28,12 @@ interface ProductionData {
 export class WareDetailComponent extends EntityDetailsComponent<Ware> implements OnInit {
   public waresUsedIn: any[] = [];
   public modulesUsedIn: any[] = [];
+  public shipsUsedIn: any[] = [];
   public entityProduction: ProductionData[];
 
-  constructor(private wareService: WareService, private moduleService: ModuleService,
+  constructor(private wareService: WareService,
+              private moduleService: ModuleService,
+              private shipService: ShipService,
               route: ActivatedRoute, private titleService: Title) {
     super(wareService, route);
   }
@@ -64,6 +68,9 @@ export class WareDetailComponent extends EntityDetailsComponent<Ware> implements
 
     this.modulesUsedIn = this.moduleService
       .getModulesUsingWare(entity.id);
+
+    this.shipsUsedIn = this.shipService
+      .getEntitiesUsingWare(this.entity.id);
   }
 
   getTotalMin(production: ProductionData) {
@@ -97,10 +104,10 @@ export class WareDetailComponent extends EntityDetailsComponent<Ware> implements
 
     let result = '';
     if (minutes > 0) {
-      result += ' ' + minutes + (minutes === 1 ? ' minute' : ' minutes');
+      result += minutes + (minutes === 1 ? ' minute' : ' minutes');
     }
     if (seconds > 0) {
-      if (minutes > 1) {
+      if (minutes > 0) {
         result += ' ';
       }
       result += seconds + (seconds === 1 ? ' second' : ' seconds');
