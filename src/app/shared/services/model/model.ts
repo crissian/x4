@@ -113,6 +113,19 @@ export interface ShipStorage {
   unit: number;
 }
 
+export interface Inertia {
+  pitch: number;
+  yaw: number;
+  roll: number;
+}
+
+export interface Drag extends Inertia {
+  forward: number;
+  reverse: number;
+  horizontal: number;
+  vertical: number;
+}
+
 export interface Ship {
   id: string;
   name: string;
@@ -128,4 +141,7 @@ export interface Ship {
   purpose: string;
   thruster?: string;
   type: string;
+  mass: number;
+  inertia: Inertia;
+  drag: Drag;
 }
