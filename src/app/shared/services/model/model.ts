@@ -100,6 +100,9 @@ export interface StationModule {
     capacity?: number;
     race?: Race;
   };
+  docks?: Dock[];
+  shields?: Slot[];
+  turrets?: TurretSlot[];
 }
 
 export interface ModuleWorker {
@@ -144,4 +147,24 @@ export interface Ship {
   mass: number;
   inertia: Inertia;
   drag: Drag;
+  docks?: Dock[];
+  engines: Slot[];
+  shields: Slot[];
+  weapons?: TurretSlot[];
+  turrets?: TurretSlot[];
+}
+
+export interface Dock {
+  capacity: number;
+  size: string;
+}
+
+export interface Slot {
+  group?: string;
+  size: string;
+  hittable: boolean;
+}
+
+export interface TurretSlot extends Slot {
+  types: string[];
 }

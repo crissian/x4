@@ -321,6 +321,10 @@ export const Modules = {
       Factions.paranid,
       Factions.teladi,
     ],
+    docks: [
+      { capacity: 10, size: Size.medium },
+      { capacity: 40, size: Size.small },
+    ],
     production: [
       {
         time: 653,
@@ -349,6 +353,10 @@ export const Modules = {
       Factions.holyorder,
       Factions.paranid,
       Factions.teladi,
+    ],
+    docks: [
+      { capacity: 10, size: Size.medium },
+      { capacity: 40, size: Size.small },
     ],
     production: [
       {
@@ -379,6 +387,10 @@ export const Modules = {
       Factions.paranid,
       Factions.teladi,
     ],
+    docks: [
+      { capacity: 10, size: Size.medium },
+      { capacity: 40, size: Size.small },
+    ],
     production: [
       {
         time: 611,
@@ -407,6 +419,10 @@ export const Modules = {
       Factions.holyorder,
       Factions.paranid,
       Factions.teladi,
+    ],
+    docks: [
+      { capacity: 10, size: Size.medium },
+      { capacity: 40, size: Size.small },
     ],
     production: [
       {
@@ -437,6 +453,10 @@ export const Modules = {
       Factions.paranid,
       Factions.teladi,
     ],
+    docks: [
+      { capacity: 10, size: Size.medium },
+      { capacity: 40, size: Size.small },
+    ],
     production: [
       {
         time: 971,
@@ -465,6 +485,10 @@ export const Modules = {
       Factions.holyorder,
       Factions.paranid,
       Factions.teladi,
+    ],
+    docks: [
+      { capacity: 10, size: Size.medium },
+      { capacity: 40, size: Size.small },
     ],
     production: [
       {
