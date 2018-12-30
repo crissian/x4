@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EntityDetailsComponent } from '../../shared/components/entity-details.component';
-import { Ship, Ware } from '../../shared/services/model/model';
+import { Dock, Ship, Slot, SlotSummary, Ware } from '../../shared/services/model/model';
 import { WareService } from '../../shared/services/ware.service';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -97,5 +97,52 @@ export class ShipDetailComponent extends EntityDetailsComponent<Ship> implements
     }
 
     return result;
+  }
+
+  get mainShields() {
+    if (!this.entity.shields) {
+      return [];
+    }
+
+    return this.entity.shields.filter(x => !x.group);
+  }
+
+  get additionalShields() {
+    if (!this.entity.shields) {
+      return [];
+    }
+
+    return this.entity.shields.filter(x => x.group);
+  }
+
+  getSlotsStr(value: (Slot | Dock)[]) {
+    const slots = this.getSlots(value);
+    if (slots.length == 0) {
+      return '-';
+    }
+
+    return slots
+      .map(x => `${x.capacity} x ${x.size}`)
+      .join(', ');
+  }
+
+  getSlots(value: (Slot | Dock)[]) {
+    if (!value) {
+      return [];
+    }
+
+    const valueObj = value.reduce((obj, slot) => {
+      obj[slot.size] = obj[slot.size] || 0;
+      obj[slot.size] += (<Dock>slot).capacity || 1;
+      return obj;
+    }, {});
+
+    const slots: SlotSummary[] = [];
+    Object.keys(valueObj)
+      .forEach(key => {
+        slots.push({ size: key, capacity: valueObj[key] });
+      });
+
+    return slots;
   }
 }

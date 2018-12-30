@@ -10,7 +10,7 @@ export class ShipType {
   static scavenger = 'Scavenger';
   static frigate = 'Frigate';
   static transporter = 'Transporter';
-  static interceptor = 'Tnterceptor';
+  static interceptor = 'Interceptor';
   static scout = 'Scout';
   static courier = 'Courier';
   static builder = 'Builder';

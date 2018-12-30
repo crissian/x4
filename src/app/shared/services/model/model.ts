@@ -142,7 +142,7 @@ export interface Ship {
   storage?: ShipStorage;
   people?: number;
   purpose: string;
-  thruster?: string;
+  thruster: string;
   type: string;
   mass: number;
   inertia: Inertia;
@@ -167,4 +167,9 @@ export interface Slot {
 
 export interface TurretSlot extends Slot {
   types: string[];
+}
+
+export interface SlotSummary {
+  size: string;
+  capacity: number;
 }
