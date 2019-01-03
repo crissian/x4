@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-import { RouterModule } from '@angular/router';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { RacesComponent } from './components/races.component';
 import { RaceDetailComponent } from './components/race-detail.component';
+import { RaceRoutingModule } from './race-routing.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    CommonModule,
     FormsModule,
     SharedModule,
-    RouterModule,
+    RaceRoutingModule,
     NgxDatatableModule
   ],
   declarations: [

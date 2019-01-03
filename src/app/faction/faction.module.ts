@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { FactionsComponent } from './components/factions.component';
 import { FactionDetailComponent } from './components/faction-detail.component';
 import { SharedModule } from '../shared/shared.module';
-import { RouterModule } from '@angular/router';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { FactionRoutingModule } from './faction-routing.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    CommonModule,
     FormsModule,
     SharedModule,
-    RouterModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    FactionRoutingModule
   ],
   declarations: [
     FactionsComponent,
