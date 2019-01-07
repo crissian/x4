@@ -16,6 +16,16 @@ interface LayoutData {
   modules: LayoutModule[];
 }
 
+export enum LoadLayoutType {
+  load,
+  add
+}
+
+export interface LoadLayoutResult {
+  layoutName: string;
+  type: LoadLayoutType;
+}
+
 @Component({
   templateUrl: './load-layout.component.html'
 })
@@ -45,6 +55,30 @@ export class LoadLayoutComponent extends ComponentBase implements OnInit {
   // noinspection JSMethodCanBeStatic
   getModules(item: LayoutData) {
     return item.modules.map(x => x.count + ' x ' + (x.module == null ? '' : x.module.name)).join(', ');
+  }
+
+  loadLayout(event: any, item: LayoutData) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const result: LoadLayoutResult = {
+      layoutName: item.name,
+      type: LoadLayoutType.load
+    };
+
+    this.activeModal.close(result);
+  }
+
+  addLayout(event: any, item: LayoutData) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const result: LoadLayoutResult = {
+      layoutName: item.name,
+      type: LoadLayoutType.add
+    };
+
+    this.activeModal.close(result);
   }
 
   deleteLayout(event: any, item: LayoutData) {

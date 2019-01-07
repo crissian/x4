@@ -6,10 +6,14 @@
 </div>
 <div class="modal-body">
   <div class="list-group">
-    <a *ngFor="let entity of entities" class="list-group-item list-group-item-action" (click)="activeModal.close(entity.name)">
+    <a *ngFor="let entity of entities" class="list-group-item list-group-item-action" (click)="loadLayout($event, entity)">
       <div>
         <strong>{{ entity.name }}</strong>
-        <a class="hover text-danger float-right small" (click)="deleteLayout($event, entity)" i18n="@@delete">Delete</a>
+        <div class="float-right small">
+          <a class="hover text-primary" i18n="@@load" (click)="loadLayout($event, entity)">Load Layout</a> |
+          <a class="hover text-secondary" i18n="@@load" (click)="addLayout($event, entity)">Add Modules</a> |
+          <a class="hover text-danger" (click)="deleteLayout($event, entity)" i18n="@@delete">Delete Layout</a>
+        </div>
       </div>
       <div class="small">
         {{ getModules(entity) }}

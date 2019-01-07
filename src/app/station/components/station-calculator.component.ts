@@ -9,11 +9,11 @@ import { Layout, ModuleConfig } from '../../shared/services/module-config';
 import { LayoutService } from '../services/layout-service';
 import { SaveLayoutComponent } from './save-layout.component';
 import { Message, MessageType } from '../../shared/services/message';
-import { LoadLayoutComponent } from './load-layout.component';
+import { LoadLayoutComponent, LoadLayoutResult, LoadLayoutType } from './load-layout.component';
 import { Title } from '@angular/platform-browser';
 import { WareService } from '../../shared/services/ware.service';
 import { ModuleService } from '../../shared/services/module.service';
-import { StationModuleModel} from './station-calculator.model';
+import { StationModuleModel } from './station-calculator.model';
 import { StationSummaryComponent } from './station-summary.component';
 
 interface Updatable {
@@ -137,17 +137,31 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
   loadLayout() {
     const modalRef = this.modal.open(LoadLayoutComponent);
     modalRef.result
-      .then(data => {
+      .then((data: LoadLayoutResult) => {
         if (data) {
-          const layout = this.layoutService.getLayout(data);
+          const layout = this.layoutService.getLayout(data.layoutName);
           if (layout) {
-            this.layout = layout;
-            this.modules = this.getModules(layout.config);
+            const modules = this.getModules(layout.config);
 
-            this.summaryComponent.productsPrice = layout.productsPrice == null ? 50 : layout.productsPrice;
-            this.summaryComponent.modulesResourcesPrice = layout.modulesResourcesPrice == null ? 50 : layout.modulesResourcesPrice;
-            this.summaryComponent.resourcesPrice = layout.resourcesPrice == null ? 50 : layout.resourcesPrice;
-            this.summaryComponent.provideBasicResources = layout.provideBasicResources;
+            if (data.type == LoadLayoutType.load) {
+              this.layout = layout;
+              this.modules = modules;
+              this.summaryComponent.productsPrice = layout.productsPrice == null ? 50 : layout.productsPrice;
+              this.summaryComponent.modulesResourcesPrice = layout.modulesResourcesPrice == null ? 50 : layout.modulesResourcesPrice;
+              this.summaryComponent.resourcesPrice = layout.resourcesPrice == null ? 50 : layout.resourcesPrice;
+              this.summaryComponent.provideBasicResources = layout.provideBasicResources;
+            } else if (data.type == LoadLayoutType.add) {
+              const existingModules = this.modules.concat([]);
+              modules.forEach(x => {
+                const existing = existingModules.find(m => m.moduleId == x.moduleId);
+                if (existing == null) {
+                  existingModules.push(x);
+                } else {
+                  existing.count += x.count;
+                }
+              });
+              this.modules = existingModules;
+            }
           }
         }
       });
