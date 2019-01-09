@@ -24,6 +24,12 @@
       </td>
       <td class="text-right">-{{ item.amount * item.count | number: '1.0-0'}}</td>
     </tr>
+    <tr class="text-danger" *ngIf="isHq">
+      <td class="pl-4">
+        1 x Unknown Module
+      </td>
+      <td class="text-right">-200</td>
+    </tr>
   </ng-container>
 
   <tr class="hover" (click)="toggleExpanded('totalWorkforceCapacity')">
@@ -45,6 +51,15 @@
       <td class="text-right">+{{ item.amount * item.count | number: '1.0-0' }}</td>
     </tr>
   </ng-container>
+
+  <tr>
+    <td colspan="2">
+      <div class="form-check">
+        <input type="checkbox" id="is-hq" class="form-check-input" [(ngModel)]="isHq" (ngModelChange)="update()"/>
+        <label class="form-check-label" for="is-hq" i18n="@@isHeadquarters">Headquarters (The HQ needs 200 workers for some reason)</label>
+      </div>
+    </td>
+  </tr>
   </tbody>
 </table>
 

@@ -5,19 +5,25 @@
   <title>X4: Foundations Utilities</title>
   <base href="/">
 
+  <meta name="description"
+        content="X4: Foundations station planner / calculator, database, ships, wares, races, factions. Plan your station modules layout by calculating production and resource needs."/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root></app-root>
+<app-root></app-root>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130883167-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130883167-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
 
-    gtag('config', 'UA-130883167-1', { 'send_page_view': false });
-  </script>
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  gtag('js', new Date());
+
+  gtag('config', 'UA-130883167-1', {'send_page_view': false});
+</script>
 </body>
 </html>

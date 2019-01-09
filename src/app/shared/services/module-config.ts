@@ -9,5 +9,6 @@ export interface Layout {
   productsPrice?: number;
   modulesResourcesPrice?: number;
   provideBasicResources?: boolean;
+  isHeadquarters?: boolean;
   config: ModuleConfig[];
 }

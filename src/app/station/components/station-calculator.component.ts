@@ -100,6 +100,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
             productsPrice: this.summaryComponent.productsPrice,
             modulesResourcesPrice: this.summaryComponent.modulesResourcesPrice,
             provideBasicResources: this.summaryComponent.provideBasicResources,
+            isHeadquarters: this.summaryComponent.isHq,
             config: this.getModuleConfig()
           };
           this.layoutService.saveLayout(this.layout);
@@ -120,7 +121,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       this.layout.productsPrice = this.summaryComponent.productsPrice;
       this.layout.modulesResourcesPrice = this.summaryComponent.modulesResourcesPrice;
       this.layout.provideBasicResources = this.summaryComponent.provideBasicResources;
-
+      this.layout.isHeadquarters = this.summaryComponent.isHq;
       this.layoutService.saveLayout(this.layout);
       this.messages.push({
         type: MessageType.success,
@@ -150,6 +151,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
               this.summaryComponent.modulesResourcesPrice = layout.modulesResourcesPrice == null ? 50 : layout.modulesResourcesPrice;
               this.summaryComponent.resourcesPrice = layout.resourcesPrice == null ? 50 : layout.resourcesPrice;
               this.summaryComponent.provideBasicResources = layout.provideBasicResources;
+              this.summaryComponent.isHq = layout.isHeadquarters;
             } else if (data.type == LoadLayoutType.add) {
               const existingModules = this.modules.concat([]);
               modules.forEach(x => {

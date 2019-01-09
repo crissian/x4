@@ -81,11 +81,12 @@ export class StationSummaryComponent {
   private _modules: StationModuleModel[];
 
   provideBasicResources = false;
+  isHq = false;
   resourcesPrice = 50;
   productsPrice = 50;
   modulesResourcesPrice = 50;
 
-  totalWorkforce = 0;
+  private _totalWorkforce = 0;
   totalWorkforceCapacity = 0;
 
   workforceNeeded: { amount: number, name: string, count: number }[] = [];
@@ -108,8 +109,12 @@ export class StationSummaryComponent {
     this.update();
   }
 
+  get totalWorkforce() {
+    return this._totalWorkforce + (this.isHq ? 200 : 0);
+  }
+
   update() {
-    this.totalWorkforce = 0;
+    this._totalWorkforce = 0;
     this.totalWorkforceCapacity = 0;
 
     this.workforceNeeded = [];
@@ -126,7 +131,7 @@ export class StationSummaryComponent {
     this.modules.forEach(item => {
       if (item.module != null && item.module.workForce != null) {
         if (item.module.workForce.max != null) {
-          this.totalWorkforce += item.count * item.module.workForce.max;
+          this._totalWorkforce += item.count * item.module.workForce.max;
           this.workforceNeeded.push({ amount: item.module.workForce.max, name: item.module.name, count: item.count });
         }
         if (item.module.workForce.capacity != null) {
@@ -142,7 +147,7 @@ export class StationSummaryComponent {
       }
     });
 
-    const resources = ResourceCalculator.calculate(this.modules, this.totalWorkforce, this.totalWorkforceCapacity);
+    const resources = ResourceCalculator.calculate(this.modules, this._totalWorkforce, this.totalWorkforceCapacity);
     resources.sort((a, b) => this.wareService.compareWares(a.ware, b.ware));
 
     resources.forEach(x => {
