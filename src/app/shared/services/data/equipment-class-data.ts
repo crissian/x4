@@ -10,6 +10,6 @@ export enum EquipmentClass {
    mine = 'Mine',
    missilelauncher = 'Missile Launcher',
 
-   ship_s = 'Small Ship',
-   ship_xs = 'Extra Small Ship',
+   ship_s = 'Small Drone',
+   ship_xs = 'Extra Small Drone',
 }

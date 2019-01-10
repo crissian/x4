@@ -1,6 +1,3 @@
-import { EquipmentType } from '../data/equipment-type-data';
-import { EquipmentClass } from '../data/equipment-class-data';
-
 export interface WareGroup {
   id: string;
   name: string;
@@ -187,8 +184,8 @@ export interface Equipment {
    name: string;
    description: string;
    race?: Race;
-   type?: EquipmentType;
-   equipmentClass?: EquipmentClass;
+   type?: string;
+   equipmentClass?: string;
    size?: string;
    hull?: number;
    price?: Price;

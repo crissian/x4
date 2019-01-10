@@ -4,4 +4,12 @@ export class Size {
   static medium = 'Medium';
   static large = 'Large';
   static extralarge = 'Extra Large';
+
+  static all = [
+    Size.extrasmall,
+    Size.small,
+    Size.medium,
+    Size.large,
+    Size.extralarge
+  ];
 }

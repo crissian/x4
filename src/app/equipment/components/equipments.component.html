@@ -5,27 +5,57 @@
             Equipment
          </div>
          <div class="card-body">
-            <div class="form-group mb-2">
-               <div class="input-group">
-                  <div class="input-group-prepend">
-                     <span class="input-group-text"><i class="fa fa-search"></i></span>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Search" i18n-placeholder="@@search" [(ngModel)]="filterText" (ngModelChange)="onFilterChanged()"/>
-               </div>
-            </div>
-
             <ngx-datatable class="bootstrap small"
                            [rows]="entities"
                            [selectionType]="'single'"
                            [columnMode]="'force'"
                            [rowClass]="rowClass"
-                           (select)="onSelect($event)">
-               <ngx-datatable-column prop="name" name="Name"></ngx-datatable-column>
-               <ngx-datatable-column prop="size" name="Size"></ngx-datatable-column>
-               <ngx-datatable-column prop="race.name" name="Race"></ngx-datatable-column>
-               <ngx-datatable-column prop="type" name="Type"></ngx-datatable-column>
-               <ngx-datatable-column prop="equipmentClass" name="Class"></ngx-datatable-column>
+                           (select)="onSelect($event)"
+                           [summaryRow]="true"
+                           [summaryHeight]="50">
+               <ngx-datatable-column prop="name" name="Name" [summaryTemplate]="nameTemplate"></ngx-datatable-column>
+               <ngx-datatable-column prop="size" name="Size" [summaryTemplate]="sizeTemplate"></ngx-datatable-column>
+               <ngx-datatable-column prop="race.name" name="Race" [summaryTemplate]="raceTemplate"></ngx-datatable-column>
+               <ngx-datatable-column prop="type" name="Type" [summaryTemplate]="typeTemplate"></ngx-datatable-column>
+               <ngx-datatable-column prop="equipmentClass" name="Class" [summaryTemplate]="classTemplate"></ngx-datatable-column>
             </ngx-datatable>
+            <ng-template #nameTemplate>
+               <div class="form-group mr-3">
+                  <input type="text" class="form-control form-control-sm" placeholder="Search Name" [(ngModel)]="nameFilter" (ngModelChange)="onFilterChanged()" />
+               </div>
+            </ng-template>
+            <ng-template #sizeTemplate>
+               <div class="form-group mr-3">
+                  <select class="form-control form-control-sm" [(ngModel)]="sizeFilter" (ngModelChange)="onFilterChanged()">
+                     <option value="">( Select )</option>
+                     <option *ngFor="let item of sizes" [value]="item">{{ item }}</option>
+                  </select>
+               </div>
+            </ng-template>
+            <ng-template #raceTemplate>
+               <div class="form-group mr-3">
+                  <select class="form-control form-control-sm" [(ngModel)]="raceFilter" (ngModelChange)="onFilterChanged()">
+                     <option value="">( Select )</option>
+                     <option *ngFor="let item of races" [value]="item.id">{{ item.name }}</option>
+                  </select>
+               </div>
+            </ng-template>
+            <ng-template #typeTemplate>
+               <div class="form-group mr-3">
+                  <select class="form-control form-control-sm" [(ngModel)]="typeFilter" (ngModelChange)="onFilterChanged()">
+                     <option value="">( Select )</option>
+                     <option *ngFor="let item of equipmentTypes" [value]="item">{{ item }}</option>
+                  </select>
+               </div>
+            </ng-template>
+            <ng-template #classTemplate>
+               <div class="form-group mr-3">
+                  <select class="form-control form-control-sm" [(ngModel)]="classFilter" (ngModelChange)="onFilterChanged()">
+                     <option value="">( Select )</option>
+                     <option *ngFor="let item of equipmentClasses" [value]="item">{{ item }}</option>
+                  </select>
+               </div>
+            </ng-template>
          </div>
       </div>
    </div>

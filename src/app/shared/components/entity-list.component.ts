@@ -3,41 +3,40 @@ import { EntityService } from '../services/entity.service';
 import { ComponentBase } from './component-base';
 
 export abstract class EntityListComponent<T> extends ComponentBase implements OnInit {
-  filterText: string;
-  entities: T[];
+   filterText: string;
+   entities: T[];
 
-  protected constructor(protected service: EntityService<T>) {
-    super();
-  }
+   protected constructor(protected service: EntityService<T>) {
+      super();
+   }
 
-  ngOnInit(): void {
-    this.entities = this.service.getEntities();
-  }
+   ngOnInit(): void {
+      this.entities = this.service.getEntities();
+   }
 
-  onSelect(event: any) {
-    if (event.selected && event.selected.length) {
-      const item: T = event.selected[0];
-      this.onSelectCore(item);
-    }
-  }
+   onSelect(event: any) {
+      if (event.selected && event.selected.length) {
+         const item: T = event.selected[0];
+         this.onSelectCore(item);
+      }
+   }
 
-  onFilterChanged() {
-    this.entities = this.service.getEntities();
+   onFilterChanged() {
+      this.entities = this.service.getEntities();
 
-    if (this.filterText != null) {
-      const text = this.filterText.trim().toLowerCase();
+      const text = (this.filterText || '').trim().toLowerCase();
 
       this.entities = this.entities
-        .filter(x => {
-          return this.filter(x, text);
-        });
-    }
-  }
+         .filter(x => {
+            return this.filter(x, text);
+         });
+   }
 
-  rowClass() {
-    return { hover: true };
-  }
+   rowClass() {
+      return { hover: true };
+   }
 
-  abstract filter(entity: T, text: string): boolean;
-  abstract onSelectCore(item: T);
+   abstract filter(entity: T, text: string): boolean;
+
+   abstract onSelectCore(item: T);
 }
