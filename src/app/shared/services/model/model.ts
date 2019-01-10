@@ -1,3 +1,7 @@
+import { EquipmentType } from '../data/equipment-type-data';
+import { EquipmentClass } from '../data/equipment-class-data';
+import { Size } from '../data/size-data';
+
 export interface WareGroup {
   id: string;
   name: string;
@@ -172,4 +176,51 @@ export interface TurretSlot extends Slot {
 export interface SlotSummary {
   size: string;
   capacity: number;
+}
+
+/*
+id: 'engine_arg_l_allround_01_mk1',
+      name: 'ARG L All-round Engine Mk1',
+      description: 'No information available',
+      race: Races.argon,
+      type: EquipmentType.engines,
+      equipmentClass: EquipmentClass.engine,
+      size: Size.large,
+      hull: 4033,
+      price: { min: 321518, max: 392966, avg: 357242 },
+      owners: [ Factions.argon ],
+      thrust: { forward: 5083, reverse: 5591 },
+      production: [
+         {
+            time: 20,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'antimatterconverters', amount: 147 },
+               { ware: 'energycells', amount: 25 },
+               { ware: 'engineparts', amount: 67 },
+            ],
+         },
+      ]
+ */
+
+export interface Thrust {
+   forward: number;
+   reverse: number;
+}
+
+export interface Equipment {
+   id: string;
+   name: string;
+   description: string;
+   race?: Race;
+   type: EquipmentType;
+   equipmentClass: EquipmentClass;
+   size: Size;
+   hull?: number;
+   price: Price;
+   thrust?: Thrust;
+   owners?: Faction[];
+   production: Production[];
 }
