@@ -36,9 +36,9 @@ export class ShipDetailComponent extends EntityDetailsComponent<Ship> implements
   }
 
   onEntityLoaded(entity: Ship) {
-    this.titleService.setTitle(`X4: Foundations - Ships - ${this.entity.name}`);
+    this.titleService.setTitle(`X4: Foundations - Ships - ${entity.name}`);
 
-    this.entityProduction = this.entity.production
+    this.entityProduction = entity.production
       .map<ProductionData>(x => {
         return {
           amount: x.amount,

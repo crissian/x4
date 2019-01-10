@@ -3,13 +3,14 @@ import { EntityListComponent } from '../../shared/components/entity-list.compone
 import { Equipment } from '../../shared/services/model/model';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { EquipmentService } from '../../shared/services/equipment.service';
 
 @Component({
    templateUrl: './equipments.component.html'
 })
 export class EquipmentsComponent extends EntityListComponent<Equipment> implements OnInit {
-   constructor(private router: Router, private titleService: Title) {
-      super(null);
+   constructor(service: EquipmentService, private router: Router, private titleService: Title) {
+      super(service);
    }
 
    filter(x: Equipment, text: string): boolean {
@@ -17,7 +18,8 @@ export class EquipmentsComponent extends EntityListComponent<Equipment> implemen
          (x.race != null && x.race.name.toLowerCase().indexOf(text) > -1) ||
          (x.owners != null && x.owners.find(y => y.name.toLowerCase().indexOf(text) > -1) != null) ||
          (x.type != null && x.type.toLowerCase().indexOf(text) > -1) ||
-         (x.equipmentClass != null && x.equipmentClass.toLowerCase().indexOf(text) > -1);
+         (x.equipmentClass != null && x.equipmentClass.toLowerCase().indexOf(text) > -1) ||
+         (x.size != null && x.size.toLowerCase().indexOf(text) > -1);
    }
 
    onSelectCore(item: Equipment) {

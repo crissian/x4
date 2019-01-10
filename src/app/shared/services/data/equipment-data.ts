@@ -5,7 +5,7 @@ import { Races } from './race-data';
 import { Factions } from './factions-data';
 import { Size } from './size-data';
 
-export const Equipment = [
+export const Equipments = [
    {
       id: 'countermeasure_flares_01',
       name: 'Flares',
@@ -3634,6 +3634,7 @@ export const Equipment = [
       id: 'software_dockmk1',
       name: 'Docking Computer Mk1',
       description: 'This flight software automates the final stages of the docking procedure.',
+      type: EquipmentType.software,
       price: { min: 5000, max: 10000, avg: 7500 },
       production: [
          {
@@ -3650,6 +3651,7 @@ export const Equipment = [
       id: 'software_dockmk2',
       name: 'Docking Computer Mk2',
       description: 'This flight software increases the range at which the docking procedure can be automated.',
+      type: EquipmentType.software,
       price: { min: 24576, max: 40960, avg: 32768 },
       production: [
          {
@@ -3666,6 +3668,7 @@ export const Equipment = [
       id: 'software_flightassistmk1',
       name: 'Flight Assist Software Mk1',
       description: 'This flight software assists a pilot by automatically compensating for drift when changing flight direction.',
+      type: EquipmentType.software,
       price: { min: 6825, max: 11375, avg: 9100 },
       production: [
          {
@@ -3754,6 +3757,7 @@ export const Equipment = [
       id: 'software_targetmk1',
       name: 'Targeting Computer Extension Mk1',
       description: 'This targeting software allows a ship\'s targeting system to lock on to small objects such as debris and floating containers.',
+      type: EquipmentType.software,
       price: { min: 6144, max: 10240, avg: 8192 },
       production: [
          {
@@ -3770,6 +3774,7 @@ export const Equipment = [
       id: 'software_trademk1',
       name: 'Trading Computer Extension Mk1',
       description: 'This trading software maintains a link to potential buyers and sellers for a limited time, to provide current trade offer information.',
+      type: EquipmentType.software,
       price: { min: 8438, max: 14063, avg: 11250 },
       production: [
          {

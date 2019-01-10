@@ -11,33 +11,35 @@ import { RaceService } from './services/race.service';
 import { FactionService } from './services/faction.service';
 import { ShipService } from './services/ship.service';
 import { CommonModule } from '@angular/common';
+import { EquipmentService } from './services/equipment.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    CoreModule,
-    RouterModule,
-    NgbDropdownModule
-  ],
-  providers: [
-    WareService,
-    ModuleService,
-    RaceService,
-    FactionService,
-    ShipService
-  ],
-  declarations: [
-    MessagesComponent,
-    ConfirmComponent
-  ],
-  entryComponents: [
-    ConfirmComponent
-  ],
-  exports: [
-    MessagesComponent,
-    ConfirmComponent
-  ]
+   imports: [
+      CommonModule,
+      FormsModule,
+      CoreModule,
+      RouterModule,
+      NgbDropdownModule
+   ],
+   providers: [
+      WareService,
+      ModuleService,
+      RaceService,
+      FactionService,
+      ShipService,
+      EquipmentService,
+   ],
+   declarations: [
+      MessagesComponent,
+      ConfirmComponent
+   ],
+   entryComponents: [
+      ConfirmComponent
+   ],
+   exports: [
+      MessagesComponent,
+      ConfirmComponent
+   ]
 })
 export class SharedModule {
 }

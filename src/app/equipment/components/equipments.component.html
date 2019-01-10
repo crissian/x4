@@ -1,0 +1,32 @@
+<div class="row content-row">
+   <div class="col-md-12">
+      <div class="card shadow">
+         <div class="card-header shadow-sm" i18n="@@equipment">
+            Equipment
+         </div>
+         <div class="card-body">
+            <div class="form-group mb-2">
+               <div class="input-group">
+                  <div class="input-group-prepend">
+                     <span class="input-group-text"><i class="fa fa-search"></i></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Search" i18n-placeholder="@@search" [(ngModel)]="filterText" (ngModelChange)="onFilterChanged()"/>
+               </div>
+            </div>
+
+            <ngx-datatable class="bootstrap small"
+                           [rows]="entities"
+                           [selectionType]="'single'"
+                           [columnMode]="'force'"
+                           [rowClass]="rowClass"
+                           (select)="onSelect($event)">
+               <ngx-datatable-column prop="name" name="Name"></ngx-datatable-column>
+               <ngx-datatable-column prop="size" name="Size"></ngx-datatable-column>
+               <ngx-datatable-column prop="race.name" name="Race"></ngx-datatable-column>
+               <ngx-datatable-column prop="type" name="Type"></ngx-datatable-column>
+               <ngx-datatable-column prop="equipmentClass" name="Class"></ngx-datatable-column>
+            </ngx-datatable>
+         </div>
+      </div>
+   </div>
+</div>
