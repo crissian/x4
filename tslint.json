@@ -127,5 +127,10 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true
-  }
+  },
+   "linterOptions": {
+      "exclude": [
+         "src/assets/styles"
+      ]
+   }
 }

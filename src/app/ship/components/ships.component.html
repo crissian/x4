@@ -12,7 +12,7 @@
                        [hoverStateEnabled]="true"
                        (onCellClick)="onRowSelect($event)"
                        keyExpr="id">
-            <dxo-state-storing [enabled]="true" type="localStorage" storageKey="equipmentGrid"></dxo-state-storing>
+            <dxo-state-storing [enabled]="true" type="localStorage" storageKey="shipsGrid"></dxo-state-storing>
             <dxo-pager [showPageSizeSelector]="true" [showNavigationButtons]="true"></dxo-pager>
             <dxo-sorting mode="multiple"></dxo-sorting>
             <dxo-filter-row [applyFilter]="currentFilter" [visible]="true"></dxo-filter-row>
@@ -31,6 +31,10 @@
             <dxi-column dataField="purpose" caption="Purpose">
                <dxo-lookup [dataSource]="purposes"></dxo-lookup>
             </dxi-column>
+
+            <dxi-column name="weapons" caption="Weapons" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="calculateWeapons"></dxi-column>
+            <dxi-column name="turrets" caption="Turrets" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="calculateTurrets"></dxi-column>
+            <dxi-column name="shields" caption="Shields" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="calculateShields"></dxi-column>
             <dxi-column dataField="people" caption="People" dataType="number"></dxi-column>
 
             <dxo-summary>

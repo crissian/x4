@@ -41,4 +41,20 @@ export class ShipsComponent extends EntityListComponent<Ship> implements OnInit 
          return this.router.navigate([ e.row.data.id ], { relativeTo: this.route });
       }
    }
+
+   calculateWeapons(entity: Ship) {
+      return entity.weapons ? entity.weapons.length : 0;
+   }
+
+   calculateTurrets(entity: Ship) {
+      return entity.turrets ? entity.turrets.length : 0;
+   }
+
+   calculateShields(entity: Ship) {
+      if (!entity.shields) {
+         return 0;
+      }
+
+      return entity.shields.filter(x => !x.group).length;
+   }
 }

@@ -128,6 +128,7 @@ export interface Ship {
   id: string;
   name: string;
   description: string;
+  size: string;
   explosionDamage?: number;
   hull: number;
   race?: Race;
