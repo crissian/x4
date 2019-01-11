@@ -1,5 +1,5 @@
-export const TransportType = {
-  container: 'Container',
-  liquid: 'Liquid',
-  solid: 'Solid'
-};
+export enum TransportType {
+  container = 'Container',
+  liquid = 'Liquid',
+  solid = 'Solid'
+}

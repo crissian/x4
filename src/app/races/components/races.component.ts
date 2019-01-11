@@ -1,5 +1,5 @@
 import { Race } from '../../shared/services/model/model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 import { RaceService } from '../../shared/services/race.service';
@@ -9,7 +9,10 @@ import { EntityListComponent } from '../../shared/components/entity-list.compone
   templateUrl: './races.component.html'
 })
 export class RacesComponent extends EntityListComponent<Race> implements OnInit {
-  constructor(private raceService: RaceService, private router: Router, private titleService: Title) {
+  constructor(private raceService: RaceService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private titleService: Title) {
     super(raceService);
   }
 
@@ -18,11 +21,9 @@ export class RacesComponent extends EntityListComponent<Race> implements OnInit 
     super.ngOnInit();
   }
 
-  filter(entity: Race, text: string): boolean {
-    return entity.name.toLowerCase().indexOf(text) > -1;
-  }
-
-  onSelectCore(item: Race) {
-    return this.router.navigate([ '/races', item.id ]);
-  }
+   onRowSelect(e: any) {
+      if (e.rowType == 'data') {
+         return this.router.navigate([ e.row.data.id ], { relativeTo: this.route });
+      }
+   }
 }

@@ -40,10 +40,10 @@ export class StationModulesComponent implements OnInit {
       .map(x => groupsObj[x])
       .sort((a, b) => this.wareService.compareGroups(a.group, b.group));
 
-    this.wareGroups.push({ name: ModuleTypes.habitation.name, modules: this.moduleService.getModulesByType(ModuleTypes.habitation) });
-    this.wareGroups.push({ name: ModuleTypes.dockarea.name, modules: this.moduleService.getModulesByType(ModuleTypes.dockarea) });
-    this.wareGroups.push({ name: ModuleTypes.pier.name, modules: this.moduleService.getModulesByType(ModuleTypes.pier) });
-    this.wareGroups.push({ name: ModuleTypes.storage.name, modules: this.moduleService.getModulesByType(ModuleTypes.storage) });
+    this.wareGroups.push({ name: ModuleTypes.habitation, modules: this.moduleService.getModulesByType(ModuleTypes.habitation) });
+    this.wareGroups.push({ name: ModuleTypes.dockarea, modules: this.moduleService.getModulesByType(ModuleTypes.dockarea) });
+    this.wareGroups.push({ name: ModuleTypes.pier, modules: this.moduleService.getModulesByType(ModuleTypes.pier) });
+    this.wareGroups.push({ name: ModuleTypes.storage, modules: this.moduleService.getModulesByType(ModuleTypes.storage) });
   }
 
   removeModule(item: StationModuleModel) {

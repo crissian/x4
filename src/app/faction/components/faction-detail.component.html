@@ -26,13 +26,12 @@
                 Licenses
               </div>
               <div class="card-body">
-                <ngx-datatable class="bootstrap"
-                               [rows]="entity.licenses"
-                               [rowHeight]="'auto'"
-                               [columnMode]="'force'">
-                  <ngx-datatable-column prop="name" name="Name"></ngx-datatable-column>
-                  <ngx-datatable-column prop="price" name="Price" [pipe]="numberPipe"></ngx-datatable-column>
-                </ngx-datatable>
+                 <dx-data-grid [dataSource]="entity.licenses" [showBorders]="true" [hoverStateEnabled]="true">
+                    <dxo-state-storing [enabled]="true" type="localStorage" storageKey="licenseGrid"></dxo-state-storing>
+
+                    <dxi-column dataField="name" caption="Name"></dxi-column>
+                    <dxi-column dataField="price" caption="Price" dataType="number" format="fixedPoint"></dxi-column>
+                 </dx-data-grid>
               </div>
             </div>
           </div>

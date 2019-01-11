@@ -1,20 +1,20 @@
-export class ShipType {
-  static miner = 'Miner';
-  static carrier = 'Carrier';
-  static fighter = 'Fighter';
-  static heavyfighter = 'Heavy Fighter';
-  static destroyer = 'Destroyer';
-  static largeminer = 'Large Miner';
-  static freighter = 'Freighter';
-  static bomber = 'Bomber';
-  static scavenger = 'Scavenger';
-  static frigate = 'Frigate';
-  static transporter = 'Transporter';
-  static interceptor = 'Interceptor';
-  static scout = 'Scout';
-  static courier = 'Courier';
-  static builder = 'Builder';
-  static corvette = 'Corvette';
-  static police = 'Police';
-  static battleship = 'Battleship';
+export enum ShipType {
+  miner = 'Miner',
+  carrier = 'Carrier',
+  fighter = 'Fighter',
+  heavyfighter = 'Heavy Fighter',
+  destroyer = 'Destroyer',
+  largeminer = 'Large Miner',
+  freighter = 'Freighter',
+  bomber = 'Bomber',
+  scavenger = 'Scavenger',
+  frigate = 'Frigate',
+  transporter = 'Transporter',
+  interceptor = 'Interceptor',
+  scout = 'Scout',
+  courier = 'Courier',
+  builder = 'Builder',
+  corvette = 'Corvette',
+  police = 'Police',
+  battleship = 'Battleship'
 }

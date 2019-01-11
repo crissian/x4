@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AllModules, Modules } from './data/modules-data';
-import { ModuleType, StationModule } from './model/model';
+import { StationModule } from './model/model';
 import { EntityService } from './entity.service';
 
 @Injectable()
 export class ModuleService implements EntityService<StationModule> {
-  getModulesByType(moduleType: string | ModuleType): StationModule[] {
-    const moduleTypeId = typeof moduleType == 'string' ? moduleType : moduleType.id;
-
+  getModulesByType(moduleType: string): StationModule[] {
     return this.getEntities()
-      .filter(x => x.type.id == moduleTypeId);
+      .filter(x => x.type == moduleType);
   }
 
   getEntity(id: string): StationModule {

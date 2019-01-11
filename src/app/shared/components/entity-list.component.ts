@@ -3,6 +3,7 @@ import { EntityService } from '../services/entity.service';
 import { ComponentBase } from './component-base';
 
 export abstract class EntityListComponent<T> extends ComponentBase implements OnInit {
+   currentFilter: string;
    filterText: string;
    entities: T[];
 
@@ -36,7 +37,10 @@ export abstract class EntityListComponent<T> extends ComponentBase implements On
       return { hover: true };
    }
 
-   abstract filter(entity: T, text: string): boolean;
+   filter(entity: T, text: string): boolean {
+      return true;
+   }
 
-   abstract onSelectCore(item: T);
+   onSelectCore(item: T) {
+   }
 }

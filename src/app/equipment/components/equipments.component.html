@@ -5,57 +5,40 @@
             Equipment
          </div>
          <div class="card-body">
-            <ngx-datatable class="bootstrap small"
-                           [rows]="entities"
-                           [selectionType]="'single'"
-                           [columnMode]="'force'"
-                           [rowClass]="rowClass"
-                           (select)="onSelect($event)"
-                           [summaryRow]="true"
-                           [summaryHeight]="50">
-               <ngx-datatable-column prop="name" name="Name" [summaryTemplate]="nameTemplate"></ngx-datatable-column>
-               <ngx-datatable-column prop="size" name="Size" [summaryTemplate]="sizeTemplate"></ngx-datatable-column>
-               <ngx-datatable-column prop="race.name" name="Race" [summaryTemplate]="raceTemplate"></ngx-datatable-column>
-               <ngx-datatable-column prop="type" name="Type" [summaryTemplate]="typeTemplate"></ngx-datatable-column>
-               <ngx-datatable-column prop="equipmentClass" name="Class" [summaryTemplate]="classTemplate"></ngx-datatable-column>
-            </ngx-datatable>
-            <ng-template #nameTemplate>
-               <div class="form-group mr-3">
-                  <input type="text" class="form-control form-control-sm" placeholder="Search Name" [(ngModel)]="nameFilter" (ngModelChange)="onFilterChanged()" />
-               </div>
-            </ng-template>
-            <ng-template #sizeTemplate>
-               <div class="form-group mr-3">
-                  <select class="form-control form-control-sm" [(ngModel)]="sizeFilter" (ngModelChange)="onFilterChanged()">
-                     <option value="">( Select )</option>
-                     <option *ngFor="let item of sizes" [value]="item">{{ item }}</option>
-                  </select>
-               </div>
-            </ng-template>
-            <ng-template #raceTemplate>
-               <div class="form-group mr-3">
-                  <select class="form-control form-control-sm" [(ngModel)]="raceFilter" (ngModelChange)="onFilterChanged()">
-                     <option value="">( Select )</option>
-                     <option *ngFor="let item of races" [value]="item.id">{{ item.name }}</option>
-                  </select>
-               </div>
-            </ng-template>
-            <ng-template #typeTemplate>
-               <div class="form-group mr-3">
-                  <select class="form-control form-control-sm" [(ngModel)]="typeFilter" (ngModelChange)="onFilterChanged()">
-                     <option value="">( Select )</option>
-                     <option *ngFor="let item of equipmentTypes" [value]="item">{{ item }}</option>
-                  </select>
-               </div>
-            </ng-template>
-            <ng-template #classTemplate>
-               <div class="form-group mr-3">
-                  <select class="form-control form-control-sm" [(ngModel)]="classFilter" (ngModelChange)="onFilterChanged()">
-                     <option value="">( Select )</option>
-                     <option *ngFor="let item of equipmentClasses" [value]="item">{{ item }}</option>
-                  </select>
-               </div>
-            </ng-template>
+            <dx-data-grid [dataSource]="entities"
+                          [allowColumnReordering]="true"
+                          [allowColumnResizing]="true"
+                          [showBorders]="true"
+                          [hoverStateEnabled]="true"
+                          (onCellClick)="onRowSelect($event)"
+                          keyExpr="id">
+               <dxo-state-storing [enabled]="true" type="localStorage" storageKey="equipmentGrid"></dxo-state-storing>
+               <dxo-pager [showPageSizeSelector]="true" [showNavigationButtons]="true"></dxo-pager>
+               <dxo-sorting mode="multiple"></dxo-sorting>
+               <dxo-filter-row [applyFilter]="currentFilter" [visible]="true"></dxo-filter-row>
+               <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+
+               <dxi-column dataField="name" caption="Name"></dxi-column>
+               <dxi-column dataField="size" caption="Size">
+                  <dxo-lookup [dataSource]="sizes"></dxo-lookup>
+               </dxi-column>
+               <dxi-column dataField="race.id" caption="Race">
+                  <dxo-lookup [dataSource]="races" valueExpr="id" displayExpr="name"></dxo-lookup>
+               </dxi-column>
+               <dxi-column dataField="type" caption="Type">
+                  <dxo-lookup [dataSource]="equipmentTypes"></dxo-lookup>
+               </dxi-column>
+               <dxi-column dataField="equipmentClass" caption="Class">
+                  <dxo-lookup [dataSource]="equipmentClasses"></dxo-lookup>
+               </dxi-column>
+
+               <dxo-summary>
+                  <dxi-total-item
+                     column="name"
+                     summaryType="count">
+                  </dxi-total-item>
+               </dxo-summary>
+            </dx-data-grid>
          </div>
       </div>
    </div>

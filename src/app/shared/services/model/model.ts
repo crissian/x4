@@ -67,11 +67,6 @@ export interface Faction {
   licenses?: License[];
 }
 
-export interface ModuleType {
-  id: string;
-  name: string;
-}
-
 export interface Cargo {
   max: number;
   type: CargoType;
@@ -93,7 +88,7 @@ export interface StationModule {
   owners?: Faction[];
   production: Production[];
   product?: Ware;
-  type: ModuleType;
+  type: string;
   cargo?: Cargo;
   workForce?: {
     max?: number;

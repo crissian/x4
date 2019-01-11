@@ -1,28 +1,40 @@
 <div class="row content-row">
-  <div class="col-md-12">
-    <div class="card shadow">
-      <div class="card-header shadow-sm" i18n="@@stationModules">
-        Station Modules
-      </div>
-      <div class="card-body">
-        <div class="form-group mb-2">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fa fa-search"></i></span>
-            </div>
-            <input type="text" class="form-control" placeholder="Search" i18n-placeholder="@@search" [(ngModel)]="filterText" (ngModelChange)="onFilterChanged()"/>
-          </div>
-        </div>
+   <div class="col-md-12">
+      <div class="card shadow">
+         <div class="card-header shadow-sm" i18n="@@stationModules">
+            Station Modules
+         </div>
+         <div class="card-body">
+            <dx-data-grid [dataSource]="entities"
+                          [allowColumnReordering]="true"
+                          [allowColumnResizing]="true"
+                          [showBorders]="true"
+                          [hoverStateEnabled]="true"
+                          (onCellClick)="onRowSelect($event)"
+                          keyExpr="id">
+               <dxo-state-storing [enabled]="true" type="localStorage" storageKey="modulesGrid"></dxo-state-storing>
+               <dxo-pager [showPageSizeSelector]="true" [showNavigationButtons]="true"></dxo-pager>
+               <dxo-sorting mode="multiple"></dxo-sorting>
+               <dxo-filter-row [applyFilter]="currentFilter" [visible]="true"></dxo-filter-row>
+               <dxo-filter-panel [visible]="true"></dxo-filter-panel>
 
-        <ngx-datatable class="bootstrap small"
-                       [rows]="entities"
-                       [columns]="columns"
-                       [selectionType]="'single'"
-                       [columnMode]="'force'"
-                       [rowClass]="rowClass"
-                       (select)="onSelect($event)">
-        </ngx-datatable>
+               <dxi-column dataField="name" caption="Name"></dxi-column>
+               <dxi-column dataField="type" caption="Type">
+                  <dxo-lookup [dataSource]="moduleTypes"></dxo-lookup>
+               </dxi-column>
+               <dxi-column dataField="makerRace.id" caption="Race">
+                  <dxo-lookup [dataSource]="races" valueExpr="id" displayExpr="name"></dxo-lookup>
+               </dxi-column>
+               <dxi-column dataField="product.name" caption="Product"></dxi-column>
+
+               <dxo-summary>
+                  <dxi-total-item
+                     column="name"
+                     summaryType="count">
+                  </dxi-total-item>
+               </dxo-summary>
+            </dx-data-grid>
+         </div>
       </div>
-    </div>
-  </div>
+   </div>
 </div>
