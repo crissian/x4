@@ -10,20 +10,14 @@ import { EntityListComponent } from '../../shared/components/entity-list.compone
 })
 export class RacesComponent extends EntityListComponent<Race> implements OnInit {
   constructor(private raceService: RaceService,
-              private router: Router,
-              private route: ActivatedRoute,
+              router: Router,
+              route: ActivatedRoute,
               private titleService: Title) {
-    super(raceService);
+    super(raceService, router, route);
   }
 
   ngOnInit(): void {
     this.titleService.setTitle('X4: Foundations - Races');
     super.ngOnInit();
   }
-
-   onRowSelect(e: any) {
-      if (e.rowType == 'data') {
-         return this.router.navigate([ e.row.data.id ], { relativeTo: this.route });
-      }
-   }
 }

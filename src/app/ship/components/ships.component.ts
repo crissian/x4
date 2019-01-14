@@ -20,10 +20,10 @@ export class ShipsComponent extends EntityListComponent<Ship> implements OnInit 
 
    constructor(entityService: ShipService,
                private raceService: RaceService,
-               private router: Router,
-               private route: ActivatedRoute,
+               router: Router,
+               route: ActivatedRoute,
                private titleService: Title) {
-      super(entityService);
+      super(entityService, router, route);
    }
 
    ngOnInit(): void {
@@ -35,12 +35,6 @@ export class ShipsComponent extends EntityListComponent<Ship> implements OnInit 
       this.purposes = Object.keys(ShipPurpose).map(x => ShipPurpose[x]);
 
       super.ngOnInit();
-   }
-
-   onRowSelect(e: any) {
-      if (e.rowType == 'data') {
-         return this.router.navigate([ e.row.data.id ], { relativeTo: this.route });
-      }
    }
 
    calculateWeapons(entity: Ship) {

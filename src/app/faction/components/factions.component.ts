@@ -10,24 +10,14 @@ import { FactionService } from '../../shared/services/faction.service';
 })
 export class FactionsComponent extends EntityListComponent<Faction> implements OnInit {
    constructor(factionService: FactionService,
-               private router: Router,
-               private titleService: Title,
-               private route: ActivatedRoute) {
-      super(factionService);
+               router: Router,
+               route: ActivatedRoute,
+               private titleService: Title) {
+      super(factionService, router, route);
    }
 
    ngOnInit(): void {
       this.titleService.setTitle('X4: Foundations - Factions');
       super.ngOnInit();
-   }
-
-   rowClass() {
-      return { hover: true };
-   }
-
-   onRowSelect(e: any) {
-      if (e.rowType == 'data') {
-         return this.router.navigate([ e.row.data.id ], { relativeTo: this.route });
-      }
    }
 }

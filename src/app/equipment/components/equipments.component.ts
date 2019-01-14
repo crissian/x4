@@ -20,10 +20,10 @@ export class EquipmentsComponent extends EntityListComponent<Equipment> implemen
 
    constructor(service: EquipmentService,
                private raceService: RaceService,
-               private router: Router,
-               private route: ActivatedRoute,
+               router: Router,
+               route: ActivatedRoute,
                private titleService: Title) {
-      super(service);
+      super(service, router, route);
    }
 
    ngOnInit(): void {

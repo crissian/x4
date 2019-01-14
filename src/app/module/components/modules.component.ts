@@ -16,10 +16,10 @@ export class ModulesComponent extends EntityListComponent<StationModule> impleme
 
    constructor(moduleService: ModuleService,
                private raceService: RaceService,
-               private router: Router,
-               private route: ActivatedRoute,
+               router: Router,
+               route: ActivatedRoute,
                private titleService: Title) {
-      super(moduleService);
+      super(moduleService, router, route);
    }
 
    ngOnInit(): void {
@@ -28,11 +28,5 @@ export class ModulesComponent extends EntityListComponent<StationModule> impleme
       this.races = this.raceService.getEntities();
       this.moduleTypes = Object.keys(ModuleTypes).map(x => ModuleTypes[x]);
       super.ngOnInit();
-   }
-
-   onRowSelect(e: any) {
-      if (e.rowType == 'data') {
-         return this.router.navigate([ e.row.data.id ], { relativeTo: this.route });
-      }
    }
 }

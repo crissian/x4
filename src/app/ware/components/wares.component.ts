@@ -13,10 +13,10 @@ export class WaresComponent extends EntityListComponent<Ware> implements OnInit 
    transportTypes: string[];
 
    constructor(wareService: WareService,
-               private router: Router,
-               private route: ActivatedRoute,
+               router: Router,
+               route: ActivatedRoute,
                private titleService: Title) {
-      super(wareService);
+      super(wareService, router, route);
    }
 
    ngOnInit(): void {
@@ -24,12 +24,6 @@ export class WaresComponent extends EntityListComponent<Ware> implements OnInit 
 
       this.transportTypes = Object.keys(TransportType).map(x => TransportType[x]);
       super.ngOnInit();
-   }
-
-   onRowSelect(e: any) {
-      if (e.rowType == 'data') {
-         return this.router.navigate([ e.row.data.id ], { relativeTo: this.route });
-      }
    }
 
    calculatePriceDiffPerVolume(ware: Ware) {
