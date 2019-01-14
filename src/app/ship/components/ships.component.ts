@@ -13,7 +13,7 @@ import { ShipPurpose } from '../../shared/services/data/ship-purpose-data';
    templateUrl: './ships.component.html'
 })
 export class ShipsComponent extends EntityListComponent<Ship> implements OnInit {
-   sizes = Size.all;
+   sizes: string[];
    races: Race[];
    shipTypes: string[];
    purposes: string[];
@@ -29,6 +29,7 @@ export class ShipsComponent extends EntityListComponent<Ship> implements OnInit 
    ngOnInit(): void {
       this.titleService.setTitle('X4: Foundations - Ships');
 
+      this.sizes = Object.keys(Size).map(x => Size[x]);
       this.races = this.raceService.getEntities();
       this.shipTypes = Object.keys(ShipType).map(x => ShipType[x]);
       this.purposes = Object.keys(ShipPurpose).map(x => ShipPurpose[x]);

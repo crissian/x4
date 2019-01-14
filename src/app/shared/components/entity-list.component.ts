@@ -4,7 +4,6 @@ import { ComponentBase } from './component-base';
 
 export abstract class EntityListComponent<T> extends ComponentBase implements OnInit {
    currentFilter: string;
-   filterText: string;
    entities: T[];
 
    protected constructor(protected service: EntityService<T>) {
@@ -13,34 +12,5 @@ export abstract class EntityListComponent<T> extends ComponentBase implements On
 
    ngOnInit(): void {
       this.entities = this.service.getEntities();
-   }
-
-   onSelect(event: any) {
-      if (event.selected && event.selected.length) {
-         const item: T = event.selected[0];
-         this.onSelectCore(item);
-      }
-   }
-
-   onFilterChanged() {
-      this.entities = this.service.getEntities();
-
-      const text = (this.filterText || '').trim().toLowerCase();
-
-      this.entities = this.entities
-         .filter(x => {
-            return this.filter(x, text);
-         });
-   }
-
-   rowClass() {
-      return { hover: true };
-   }
-
-   filter(entity: T, text: string): boolean {
-      return true;
-   }
-
-   onSelectCore(item: T) {
    }
 }

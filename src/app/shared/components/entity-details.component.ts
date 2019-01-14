@@ -27,6 +27,6 @@ export abstract class EntityDetailsComponent<T> extends ComponentBase implements
       });
   }
 
-  onEntityLoaded(entity: T) {
+  onEntityLoaded(value: T) {
   }
 }

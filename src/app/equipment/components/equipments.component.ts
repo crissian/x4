@@ -13,7 +13,7 @@ import { EquipmentClass } from '../../shared/services/data/equipment-class-data'
    templateUrl: './equipments.component.html'
 })
 export class EquipmentsComponent extends EntityListComponent<Equipment> implements OnInit {
-   sizes = Size.all;
+   sizes: string[];
    races: Race[];
    equipmentTypes: string[];
    equipmentClasses: string[];
@@ -29,6 +29,7 @@ export class EquipmentsComponent extends EntityListComponent<Equipment> implemen
    ngOnInit(): void {
       this.titleService.setTitle('X4: Foundations - Equipment');
 
+      this.sizes = Object.keys(Size).map(x => Size[x]);
       this.races = this.raceService.getEntities();
       this.equipmentTypes = Object.keys(EquipmentType).map(x => EquipmentType[x]);
       this.equipmentClasses = Object.keys(EquipmentClass).map(x => EquipmentClass[x]);
