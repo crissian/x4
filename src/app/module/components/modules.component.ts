@@ -6,6 +6,7 @@ import { ModuleService } from '../../shared/services/module.service';
 import { EntityListComponent } from '../../shared/components/entity-list.component';
 import { ModuleTypes } from '../../shared/services/data/module-types-data';
 import { RaceService } from '../../shared/services/race.service';
+import { EnumFn } from '../../core/services/enum-fn';
 
 @Component({
    templateUrl: './modules.component.html'
@@ -26,7 +27,7 @@ export class ModulesComponent extends EntityListComponent<StationModule> impleme
       this.titleService.setTitle('X4: Foundations - Modules');
 
       this.races = this.raceService.getEntities();
-      this.moduleTypes = Object.keys(ModuleTypes).map(x => ModuleTypes[x]);
+      this.moduleTypes = EnumFn.values(ModuleTypes);
       super.ngOnInit();
    }
 }

@@ -8,6 +8,7 @@ import { Size } from '../../shared/services/data/size-data';
 import { RaceService } from '../../shared/services/race.service';
 import { EquipmentType } from '../../shared/services/data/equipment-type-data';
 import { EquipmentClass } from '../../shared/services/data/equipment-class-data';
+import { EnumFn } from '../../core/services/enum-fn';
 
 @Component({
    templateUrl: './equipments.component.html'
@@ -29,10 +30,11 @@ export class EquipmentsComponent extends EntityListComponent<Equipment> implemen
    ngOnInit(): void {
       this.titleService.setTitle('X4: Foundations - Equipment');
 
-      this.sizes = Object.keys(Size).map(x => Size[x]);
+      this.sizes = EnumFn.values(Size);
+      this.equipmentTypes = EnumFn.values(EquipmentType);
+      this.equipmentClasses = EnumFn.values(EquipmentClass);
+
       this.races = this.raceService.getEntities();
-      this.equipmentTypes = Object.keys(EquipmentType).map(x => EquipmentType[x]);
-      this.equipmentClasses = Object.keys(EquipmentClass).map(x => EquipmentClass[x]);
 
       super.ngOnInit();
    }

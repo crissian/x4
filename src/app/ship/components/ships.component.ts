@@ -8,6 +8,7 @@ import { RaceService } from '../../shared/services/race.service';
 import { Size } from '../../shared/services/data/size-data';
 import { ShipType } from '../../shared/services/data/ship-type-data';
 import { ShipPurpose } from '../../shared/services/data/ship-purpose-data';
+import { EnumFn } from '../../core/services/enum-fn';
 
 @Component({
    templateUrl: './ships.component.html'
@@ -29,10 +30,10 @@ export class ShipsComponent extends EntityListComponent<Ship> implements OnInit 
    ngOnInit(): void {
       this.titleService.setTitle('X4: Foundations - Ships');
 
-      this.sizes = Object.keys(Size).map(x => Size[x]);
+      this.sizes = EnumFn.values(Size);
+      this.shipTypes = EnumFn.values(ShipType);
+      this.purposes = EnumFn.values(ShipPurpose);
       this.races = this.raceService.getEntities();
-      this.shipTypes = Object.keys(ShipType).map(x => ShipType[x]);
-      this.purposes = Object.keys(ShipPurpose).map(x => ShipPurpose[x]);
 
       super.ngOnInit();
    }
