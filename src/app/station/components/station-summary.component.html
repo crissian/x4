@@ -55,7 +55,7 @@
   <tr>
     <td colspan="2">
       <div class="form-check">
-        <input type="checkbox" id="is-hq" class="form-check-input" [(ngModel)]="isHq" (ngModelChange)="update()"/>
+        <input type="checkbox" id="is-hq" class="form-check-input" [(ngModel)]="isHq" (ngModelChange)="onChange()"/>
         <label class="form-check-label" for="is-hq" i18n="@@isHeadquarters">Headquarters (The HQ needs 200 workers for some reason)</label>
       </div>
     </td>
@@ -113,7 +113,7 @@
   <tr>
     <td colspan="2">
       <div class="form-check">
-        <input type="checkbox" id="basic-resources" class="form-check-input" [(ngModel)]="provideBasicResources" (ngModelChange)="update()"/>
+        <input type="checkbox" id="basic-resources" class="form-check-input" [(ngModel)]="provideBasicResources" (ngModelChange)="onChange()"/>
         <label class="form-check-label" for="basic-resources" i18n="@@minersProvideBasicResources">Miners provide basic resources</label>
       </div>
     </td>
@@ -130,7 +130,7 @@
               <ng-container *ngSwitchDefault>{{ resourcesPrice }}%</ng-container>
             </strong>
           </label>
-          <input type="range" class="form-control-range small" id="resources-price" min="0" max="100" step="5" [(ngModel)]="resourcesPrice"/>
+          <input type="range" class="form-control-range small" id="resources-price" min="0" max="100" step="5" [(ngModel)]="resourcesPrice" (ngModelChange)="onChange()"/>
         </div>
 
         <div class="form-group col">
@@ -142,7 +142,7 @@
               <ng-container *ngSwitchDefault>{{ productsPrice }}%</ng-container>
             </strong>
           </label>
-          <input type="range" class="form-control-range small" id="products-price" min="0" max="100" step="5" [(ngModel)]="productsPrice"/>
+          <input type="range" class="form-control-range small" id="products-price" min="0" max="100" step="5" [(ngModel)]="productsPrice" (ngModelChange)="onChange()"/>
         </div>
       </div>
     </td>
@@ -192,7 +192,7 @@
               <ng-container *ngSwitchDefault>{{ modulesResourcesPrice }}%</ng-container>
             </strong>
           </label>
-          <input type="range" class="form-control-range small" id="modules-resources-price" min="0" max="100" step="5" [(ngModel)]="modulesResourcesPrice"/>
+          <input type="range" class="form-control-range small" id="modules-resources-price" min="0" max="100" step="5" [(ngModel)]="modulesResourcesPrice" (ngModelChange)="onChange()"/>
         </div>
       </div>
     </td>

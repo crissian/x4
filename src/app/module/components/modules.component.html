@@ -12,7 +12,6 @@
                           [hoverStateEnabled]="true"
                           (onCellClick)="onRowSelect($event)"
                           keyExpr="id">
-               <dxo-state-storing [enabled]="true" type="localStorage" storageKey="modulesGrid"></dxo-state-storing>
                <dxo-pager [showPageSizeSelector]="true" [showNavigationButtons]="true"></dxo-pager>
                <dxo-sorting mode="multiple"></dxo-sorting>
                <dxo-filter-row [applyFilter]="currentFilter" [visible]="true"></dxo-filter-row>

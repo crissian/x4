@@ -27,8 +27,6 @@
               </div>
               <div class="card-body">
                  <dx-data-grid [dataSource]="entity.licenses" [showBorders]="true" [hoverStateEnabled]="true">
-                    <dxo-state-storing [enabled]="true" type="localStorage" storageKey="licenseGrid"></dxo-state-storing>
-
                     <dxi-column dataField="name" caption="Name"></dxi-column>
                     <dxi-column dataField="price" caption="Price" dataType="number" format="fixedPoint"></dxi-column>
                  </dx-data-grid>

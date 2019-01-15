@@ -17,171 +17,206 @@ import { StationModuleModel } from './station-calculator.model';
 import { StationSummaryComponent } from './station-summary.component';
 
 interface Updatable {
-  update();
+   update();
 }
 
 @Component({
-  selector: 'app-station-calculator',
-  templateUrl: './station-calculator.component.html'
+   selector: 'app-station-calculator',
+   templateUrl: './station-calculator.component.html'
 })
 export class StationCalculatorComponent extends ComponentBase implements OnInit {
-  layout: Layout;
-  messages: Message[] = [];
-  modules: StationModuleModel[] = [];
+   layout: Layout;
+   messages: Message[] = [];
+   modules: StationModuleModel[] = [];
 
-  @ViewChildren('stationResources,stationSummary')
-  components: QueryList<Updatable>;
+   @ViewChildren('stationResources,stationSummary')
+   components: QueryList<Updatable>;
 
-  @ViewChild(StationSummaryComponent) summaryComponent: StationSummaryComponent;
+   @ViewChild(StationSummaryComponent) summaryComponent: StationSummaryComponent;
 
-  constructor(private modal: NgbModal, private route: ActivatedRoute,
-              private layoutService: LayoutService,
-              private titleService: Title,
-              private wareService: WareService,
-              private moduleService: ModuleService) {
-    super();
-  }
+   constructor(private modal: NgbModal, private route: ActivatedRoute,
+               private layoutService: LayoutService,
+               private titleService: Title,
+               private wareService: WareService,
+               private moduleService: ModuleService) {
+      super();
+   }
 
-  ngOnInit(): void {
-    this.titleService.setTitle('X4: Foundations - Station Calculator');
+   ngOnInit(): void {
+      this.titleService.setTitle('X4: Foundations - Station Calculator');
 
-    this.route.queryParams
-      .pipe(
-        takeUntil(this.onDestroy)
-      )
-      .subscribe(data => {
-        if (data['l']) {
-          try {
-            const layout = data['l'].replace(/-/g, '=').replace(/,/g, '&');
-            const layoutData = urlon.parse(layout);
-            this.modules = layoutData.map(x => {
-              return new StationModuleModel(this.wareService, this.moduleService, x.module, x.count);
-            });
-          } catch (err) {
-            console.log(err);
-          }
-        }
-      });
-
-    if (this.modules.length === 0) {
-      this.modules.push(new StationModuleModel(this.wareService, this.moduleService));
-    }
-  }
-
-  onChange() {
-    this.components.forEach(x => {
-      x.update();
-    });
-  }
-
-  shareLayout() {
-    const modalRef = this.modal.open(ShareLayoutComponent);
-    const data = this.modules
-      .filter(x => x.count > 0 && x.moduleId)
-      .map(x => {
-        return {
-          module: x.moduleId,
-          count: x.count
-        };
-      });
-    const params = urlon.stringify(data).replace(/=/g, '-').replace(/&/g, ',');
-    const url = window.location.href.split('?')[0];
-    modalRef.componentInstance.url = `${url}?l=${params}`;
-  }
-
-  saveLayoutAs() {
-    const modalRef = this.modal.open(SaveLayoutComponent);
-    modalRef.result
-      .then(res => {
-        if (res) {
-          this.layout = {
-            name: res,
-            resourcesPrice: this.summaryComponent.resourcesPrice,
-            productsPrice: this.summaryComponent.productsPrice,
-            modulesResourcesPrice: this.summaryComponent.modulesResourcesPrice,
-            provideBasicResources: this.summaryComponent.provideBasicResources,
-            isHeadquarters: this.summaryComponent.isHq,
-            config: this.getModuleConfig()
-          };
-          this.layoutService.saveLayout(this.layout);
-          this.messages.push({
-            type: MessageType.success,
-            content: `<strong>${res}</strong> successfully saved.`
-          });
-        }
-      });
-  }
-
-  saveLayout() {
-    if (!this.layout || !this.layout.name) {
-      this.saveLayoutAs();
-    } else {
-      this.layout.config = this.getModuleConfig();
-      this.layout.resourcesPrice = this.summaryComponent.resourcesPrice;
-      this.layout.productsPrice = this.summaryComponent.productsPrice;
-      this.layout.modulesResourcesPrice = this.summaryComponent.modulesResourcesPrice;
-      this.layout.provideBasicResources = this.summaryComponent.provideBasicResources;
-      this.layout.isHeadquarters = this.summaryComponent.isHq;
-      this.layoutService.saveLayout(this.layout);
-      this.messages.push({
-        type: MessageType.success,
-        content: `<strong>${this.layout.name}</strong> successfully saved.`
-      });
-    }
-  }
-
-  newLayout() {
-    this.layout = null;
-    this.modules = [ new StationModuleModel(this.wareService, this.moduleService) ];
-  }
-
-  loadLayout() {
-    const modalRef = this.modal.open(LoadLayoutComponent);
-    modalRef.result
-      .then((data: LoadLayoutResult) => {
-        if (data) {
-          const layout = this.layoutService.getLayout(data.layoutName);
-          if (layout) {
-            const modules = this.getModules(layout.config);
-
-            if (data.type == LoadLayoutType.load) {
-              this.layout = layout;
-              this.modules = modules;
-              this.summaryComponent.productsPrice = layout.productsPrice == null ? 50 : layout.productsPrice;
-              this.summaryComponent.modulesResourcesPrice = layout.modulesResourcesPrice == null ? 50 : layout.modulesResourcesPrice;
-              this.summaryComponent.resourcesPrice = layout.resourcesPrice == null ? 50 : layout.resourcesPrice;
-              this.summaryComponent.provideBasicResources = layout.provideBasicResources;
-              this.summaryComponent.isHq = layout.isHeadquarters;
-            } else if (data.type == LoadLayoutType.add) {
-              const existingModules = this.modules.concat([]);
-              modules.forEach(x => {
-                const existing = existingModules.find(m => m.moduleId == x.moduleId);
-                if (existing == null) {
-                  existingModules.push(x);
-                } else {
-                  existing.count += x.count;
-                }
-              });
-              this.modules = existingModules;
+      this.route.queryParams
+         .pipe(
+            takeUntil(this.onDestroy)
+         )
+         .subscribe(data => {
+            if (data['l']) {
+               try {
+                  const layout = data['l'].replace(/-/g, '=').replace(/,/g, '&');
+                  const layoutData = urlon.parse(layout);
+                  this.modules = layoutData.map(x => {
+                     return new StationModuleModel(this.wareService, this.moduleService, x.module, x.count);
+                  });
+               } catch (err) {
+                  console.log(err);
+               }
             }
-          }
-        }
-      });
-  }
+         });
 
-  private getModuleConfig() {
-    return this.modules
-      .map<ModuleConfig>(x => {
-        return {
-          moduleId: x.moduleId,
-          count: x.count
-        };
-      });
-  }
+      const current = this.layoutService.getCurrentLayout();
+      if (current) {
+         this.loadLayoutInternal(current);
+         if (current.name != null) {
+            this.layout = current;
+         }
+      }
 
-  getModules(config: ModuleConfig[]) {
-    return config.map(x => {
-      return new StationModuleModel(this.wareService, this.moduleService, x.moduleId, x.count);
-    });
-  }
+      if (this.modules.length === 0) {
+         this.modules.push(new StationModuleModel(this.wareService, this.moduleService));
+      }
+   }
+
+   onChange() {
+      this.components.forEach(x => {
+         x.update();
+      });
+
+      this.saveCurrentLayout();
+   }
+
+   shareLayout() {
+      const modalRef = this.modal.open(ShareLayoutComponent);
+      const data = this.modules
+         .filter(x => x.count > 0 && x.moduleId)
+         .map(x => {
+            return {
+               module: x.moduleId,
+               count: x.count
+            };
+         });
+      const params = urlon.stringify(data).replace(/=/g, '-').replace(/&/g, ',');
+      const url = window.location.href.split('?')[0];
+      modalRef.componentInstance.url = `${url}?l=${params}`;
+   }
+
+   saveLayoutAs() {
+      const modalRef = this.modal.open(SaveLayoutComponent);
+      modalRef.result
+         .then(res => {
+            if (res) {
+               this.layout = {
+                  name: res,
+                  resourcesPrice: this.summaryComponent.resourcesPrice,
+                  productsPrice: this.summaryComponent.productsPrice,
+                  modulesResourcesPrice: this.summaryComponent.modulesResourcesPrice,
+                  provideBasicResources: this.summaryComponent.provideBasicResources,
+                  isHeadquarters: this.summaryComponent.isHq,
+                  config: this.getModuleConfig()
+               };
+               this.layoutService.saveLayout(this.layout);
+               this.messages.push({
+                  type: MessageType.success,
+                  content: `<strong>${res}</strong> successfully saved.`
+               });
+               this.layoutService.saveCurrentLayout(this.layout);
+            }
+         });
+   }
+
+   saveLayout() {
+      if (!this.layout || !this.layout.name) {
+         this.saveLayoutAs();
+      } else {
+         this.layout.config = this.getModuleConfig();
+         this.layout.resourcesPrice = this.summaryComponent.resourcesPrice;
+         this.layout.productsPrice = this.summaryComponent.productsPrice;
+         this.layout.modulesResourcesPrice = this.summaryComponent.modulesResourcesPrice;
+         this.layout.provideBasicResources = this.summaryComponent.provideBasicResources;
+         this.layout.isHeadquarters = this.summaryComponent.isHq;
+         this.layoutService.saveLayout(this.layout);
+         this.messages.push({
+            type: MessageType.success,
+            content: `<strong>${this.layout.name}</strong> successfully saved.`
+         });
+         this.layoutService.saveCurrentLayout(this.layout);
+      }
+   }
+
+   newLayout() {
+      this.layout = null;
+      this.modules = [ new StationModuleModel(this.wareService, this.moduleService) ];
+      this.layoutService.saveCurrentLayout(null);
+   }
+
+   loadLayout() {
+      const modalRef = this.modal.open(LoadLayoutComponent);
+      modalRef.result
+         .then((data: LoadLayoutResult) => {
+            if (data) {
+               const layout = this.layoutService.getLayout(data.layoutName);
+               if (layout) {
+                  if (data.type == LoadLayoutType.load) {
+                     this.layout = layout;
+                     this.loadLayoutInternal(layout);
+                     this.layoutService.saveCurrentLayout(layout);
+                  } else if (data.type == LoadLayoutType.add) {
+                     const existingModules = this.modules.concat([]);
+
+                     const modules = this.getModules(layout.config);
+                     modules.forEach(x => {
+                        const existing = existingModules.find(m => m.moduleId == x.moduleId);
+                        if (existing == null) {
+                           existingModules.push(x);
+                        } else {
+                           existing.count += x.count;
+                        }
+                     });
+                     this.modules = existingModules;
+                  }
+               }
+            }
+         });
+   }
+
+   saveCurrentLayout() {
+      const current = this.getCurrentLayout();
+      this.layoutService.saveCurrentLayout(current);
+   }
+
+   private getCurrentLayout() {
+      return {
+         name: this.layout == null ? null : this.layout.name,
+         resourcesPrice: this.summaryComponent.resourcesPrice,
+         productsPrice: this.summaryComponent.productsPrice,
+         modulesResourcesPrice: this.summaryComponent.modulesResourcesPrice,
+         provideBasicResources: this.summaryComponent.provideBasicResources,
+         isHeadquarters: this.summaryComponent.isHq,
+         config: this.getModuleConfig()
+      };
+   }
+
+   private loadLayoutInternal(layout) {
+      this.modules = this.getModules(layout.config);
+      this.summaryComponent.productsPrice = layout.productsPrice == null ? 50 : layout.productsPrice;
+      this.summaryComponent.modulesResourcesPrice = layout.modulesResourcesPrice == null ? 50 : layout.modulesResourcesPrice;
+      this.summaryComponent.resourcesPrice = layout.resourcesPrice == null ? 50 : layout.resourcesPrice;
+      this.summaryComponent.provideBasicResources = layout.provideBasicResources;
+      this.summaryComponent.isHq = layout.isHeadquarters;
+   }
+
+   private getModuleConfig() {
+      return this.modules
+         .map<ModuleConfig>(x => {
+            return {
+               moduleId: x.moduleId,
+               count: x.count
+            };
+         });
+   }
+
+   private getModules(config: ModuleConfig[]) {
+      return config.map(x => {
+         return new StationModuleModel(this.wareService, this.moduleService, x.moduleId, x.count);
+      });
+   }
 }
