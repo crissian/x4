@@ -26,7 +26,12 @@
                   <dxo-lookup [dataSource]="races" valueExpr="id" displayExpr="name"></dxo-lookup>
                </dxi-column>
                <dxi-column dataField="product.name" caption="Product"></dxi-column>
-
+               <dxi-column [calculateDisplayValue]="calculateMaxEfficiencyDisplay"
+                           [calculateSortValue]="calculateMaxEfficiency"
+                           [allowSorting]="true"
+                           [allowFiltering]="true"
+                           caption="Max Efficiency"
+                           name="maxEfficiency"></dxi-column>
                <dxo-summary>
                   <dxi-total-item
                      column="name"
