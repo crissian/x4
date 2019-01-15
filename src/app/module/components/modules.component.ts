@@ -58,11 +58,13 @@ export class ModulesComponent extends EntityListComponent<StationModule> impleme
                .map(x => x.product);
 
             if (effect.length > 0) {
-               return 100 * (1 + Math.max(...effect));
+               return 100 * (1 + Math.max(...effect)) + '%';
             }
          }
 
-         return 100;
+         return '100%';
       }
+
+      return '-';
    }
 }
