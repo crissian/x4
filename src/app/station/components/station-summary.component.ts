@@ -82,6 +82,7 @@ export class StationSummaryComponent {
    private _modules: StationModuleModel[];
 
    provideBasicResources = false;
+   provideAllResources = false;
    isHq = false;
    resourcesPrice = 50;
    productsPrice = 50;
@@ -162,7 +163,9 @@ export class StationSummaryComponent {
       resources.forEach(x => {
          if (x.amount < 0) {
             let warePrice: number = null;
-            if (this.provideBasicResources && StationSummaryComponent.basicResources.indexOf(x.ware.group) >= 0) {
+            if (this.provideAllResources) {
+               warePrice = 0;
+            } else if (this.provideBasicResources && StationSummaryComponent.basicResources.indexOf(x.ware.group) >= 0) {
                warePrice = 0;
             }
             const model = new ResourceSummaryModel(x, this, ResourcePriceType.expense, warePrice);

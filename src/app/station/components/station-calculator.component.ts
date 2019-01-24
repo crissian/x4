@@ -110,6 +110,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
                   productsPrice: this.summaryComponent.productsPrice,
                   modulesResourcesPrice: this.summaryComponent.modulesResourcesPrice,
                   provideBasicResources: this.summaryComponent.provideBasicResources,
+                  provideAllResources: this.summaryComponent.provideAllResources,
                   isHeadquarters: this.summaryComponent.isHq,
                   config: this.getModuleConfig()
                };
@@ -132,6 +133,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
          this.layout.productsPrice = this.summaryComponent.productsPrice;
          this.layout.modulesResourcesPrice = this.summaryComponent.modulesResourcesPrice;
          this.layout.provideBasicResources = this.summaryComponent.provideBasicResources;
+         this.layout.provideAllResources = this.summaryComponent.provideAllResources;
          this.layout.isHeadquarters = this.summaryComponent.isHq;
          this.layoutService.saveLayout(this.layout);
          this.messages.push({
@@ -143,9 +145,14 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
    }
 
    newLayout() {
-      this.layout = null;
-      this.modules = [ new StationModuleModel(this.wareService, this.moduleService) ];
-      this.layoutService.saveCurrentLayout(null);
+      this.layout = {
+         name: null,
+         config: [
+            { moduleId: '', count: 1 }
+         ]
+      };
+      this.loadLayoutInternal(this.layout);
+      this.layoutService.saveCurrentLayout(this.layout);
    }
 
    loadLayout() {
@@ -190,17 +197,19 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
          productsPrice: this.summaryComponent.productsPrice,
          modulesResourcesPrice: this.summaryComponent.modulesResourcesPrice,
          provideBasicResources: this.summaryComponent.provideBasicResources,
+         provideAllResources: this.summaryComponent.provideAllResources,
          isHeadquarters: this.summaryComponent.isHq,
          config: this.getModuleConfig()
       };
    }
 
-   private loadLayoutInternal(layout) {
+   private loadLayoutInternal(layout: Layout) {
       this.modules = this.getModules(layout.config);
       this.summaryComponent.productsPrice = layout.productsPrice == null ? 50 : layout.productsPrice;
       this.summaryComponent.modulesResourcesPrice = layout.modulesResourcesPrice == null ? 50 : layout.modulesResourcesPrice;
       this.summaryComponent.resourcesPrice = layout.resourcesPrice == null ? 50 : layout.resourcesPrice;
       this.summaryComponent.provideBasicResources = layout.provideBasicResources;
+      this.summaryComponent.provideAllResources = layout.provideAllResources;
       this.summaryComponent.isHq = layout.isHeadquarters;
    }
 

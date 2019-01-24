@@ -119,6 +119,14 @@
     </td>
   </tr>
   <tr>
+     <td colspan="2">
+        <div class="form-check">
+           <input type="checkbox" id="all-resources" class="form-check-input" [(ngModel)]="provideAllResources" (ngModelChange)="onChange()"/>
+           <label class="form-check-label" for="all-resources" i18n="@@rovideAllResources">Resources are provided by other stations</label>
+        </div>
+     </td>
+  </tr>
+  <tr>
     <td colspan="2">
       <div class="row">
         <div class="form-group col">
