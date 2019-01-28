@@ -12,7 +12,6 @@ import { AnalyticsService } from '../../google-analytics/services/analytics.serv
 export class LayoutService {
    private static version = 2;
    private static storageKey = 'layouts';
-   private static currentStorageKey = 'currentLayout';
 
    private readonly services: LayoutVersionService[];
 
@@ -56,14 +55,6 @@ export class LayoutService {
 
       this.analytics.event({ label: layout.name, category: 'Layouts', action: 'Save Layout' });
       this.saveLayoutsInternal(layouts);
-   }
-
-   getCurrentLayout(): Layout {
-      return this.storageService.get(LayoutService.currentStorageKey);
-   }
-
-   saveCurrentLayout(layout: Layout) {
-      this.storageService.add(LayoutService.currentStorageKey, layout);
    }
 
    deleteLayout(name: string) {
