@@ -37,7 +37,6 @@ import 'core-js/es6/set';
 /**
  * If the application will be indexed by Google Search, the following is requirements.
  * Googlebot uses a renderer based on Chrome 41.
- * https://economie.hotnews.ro/stiri-it-22948157-amazon-depasit-premiera-pragul-anual-vanzari-200-miliarde-dolari.htm
  **/
 import 'core-js/es6/array';
 
