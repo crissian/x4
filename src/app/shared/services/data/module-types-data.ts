@@ -6,5 +6,6 @@ export enum ModuleTypes {
    habitation = 'Habitation',
    pier = 'Pier',
    storage = 'Storage',
+   buildmodule = 'Build Module',
    ventureplatform = 'Venture Platform'
 }

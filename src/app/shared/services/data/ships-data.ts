@@ -39,13 +39,14 @@ export const Ships = [
          { size: Size.large, hittable: false },
          { group: 'group_back_up_mid', size: Size.medium, hittable: true },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_up_mid_mid', size: Size.medium, hittable: true },
       ],
       weapons: [
          { size: Size.large, hittable: false, types: [ TurretType.standard ] },
          { size: Size.large, hittable: false, types: [ TurretType.standard ] },
       ],
       turrets: [
-         { group: 'group_back_up_mid', size: Size.large, hittable: false, types: [ TurretType.standard ] },
+         { group: 'group_up_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard ] },
          { group: 'group_front_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_mid_down_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_mid_down_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -64,6 +65,8 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.hatikvah,
+         Factions.scaleplate,
       ],
       price: { min: 4895057, max: 6622724, avg: 5758890 },
       production: [
@@ -110,13 +113,14 @@ export const Ships = [
          { size: Size.large, hittable: false },
          { group: 'group_back_up_mid', size: Size.medium, hittable: true },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_up_mid_mid', size: Size.medium, hittable: true },
       ],
       weapons: [
          { size: Size.large, hittable: false, types: [ TurretType.standard ] },
          { size: Size.large, hittable: false, types: [ TurretType.standard ] },
       ],
       turrets: [
-         { group: 'group_back_up_mid', size: Size.large, hittable: false, types: [ TurretType.standard ] },
+         { group: 'group_up_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard ] },
          { group: 'group_front_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_mid_down_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_mid_down_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -197,6 +201,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.hatikvah,
       ],
       price: { min: 1349018, max: 1825142, avg: 1587080 },
       production: [
@@ -259,6 +264,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.hatikvah,
       ],
       price: { min: 1639667, max: 2218373, avg: 1929020 },
       production: [
@@ -323,6 +329,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.hatikvah,
       ],
       price: { min: 1345695, max: 1820646, avg: 1583170 },
       production: [
@@ -387,6 +394,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.hatikvah,
       ],
       price: { min: 1636344, max: 2213877, avg: 1925110 },
       production: [
@@ -1346,6 +1354,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.hatikvah,
       ],
       price: { min: 130535, max: 176606, avg: 153570 },
       production: [
@@ -1395,6 +1404,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.hatikvah,
       ],
       price: { min: 165138, max: 223422, avg: 194280 },
       production: [
@@ -1447,6 +1457,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.hatikvah,
       ],
       price: { min: 135021, max: 182678, avg: 158850 },
       production: [
@@ -1499,6 +1510,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.hatikvah,
       ],
       price: { min: 159554, max: 215867, avg: 187710 },
       production: [
@@ -1837,6 +1849,9 @@ export const Ships = [
       cargo: [
          { max: 150, types: [ CargoTypes.container ] },
       ],
+      docks: [
+         { capacity: 10, size: Size.extrasmall },
+      ],
       owners: [
          Factions.alliance,
          Factions.argon,
@@ -1881,6 +1896,9 @@ export const Ships = [
       ],
       cargo: [
          { max: 180, types: [ CargoTypes.container ] },
+      ],
+      docks: [
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.antigone,
@@ -2091,6 +2109,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
          Factions.argon,
+         Factions.hatikvah,
       ],
       price: { min: 85621, max: 115840, avg: 100730 },
       production: [
@@ -2141,6 +2160,8 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.argon,
+         Factions.hatikvah,
+         Factions.scaleplate,
       ],
       price: { min: 90075, max: 121866, avg: 105970 },
       production: [
@@ -2190,6 +2211,8 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.hatikvah,
+         Factions.scaleplate,
       ],
       price: { min: 108953, max: 147407, avg: 128180 },
       production: [
@@ -2240,6 +2263,7 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.argon,
+         Factions.scaleplate,
       ],
       price: { min: 160140, max: 216660, avg: 188400 },
       production: [
@@ -2289,6 +2313,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.scaleplate,
       ],
       price: { min: 191250, max: 258750, avg: 225000 },
       production: [
@@ -2339,6 +2364,7 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.argon,
+         Factions.scaleplate,
       ],
       price: { min: 82297, max: 111343, avg: 96820 },
       production: [
@@ -2388,6 +2414,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.scaleplate,
       ],
       price: { min: 101210, max: 136931, avg: 119070 },
       production: [
@@ -2991,6 +3018,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.paranid,
       ],
       price: { min: 1191479, max: 1612001, avg: 1401740 },
@@ -3051,6 +3079,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.holyorder,
       ],
       price: { min: 1439985, max: 1948215, avg: 1694100 },
@@ -3097,42 +3126,12 @@ export const Ships = [
          { group: 'group_front_up_mid2', size: Size.medium, hittable: true },
       ],
       turrets: [
-         {
-            group: 'group_front_up_mid',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_front_up_mid',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_back_down_middle',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_back_down_middle',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_front_down_mid',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_front_down_mid',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
+         { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_back_down_middle', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_back_down_middle', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_front_down_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_front_down_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
          { group: 'group_front_up_mid2', size: Size.large, hittable: true, types: [ TurretType.mining ] },
       ],
       cargo: [
@@ -3143,6 +3142,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.paranid,
       ],
       price: { min: 1191479, max: 1612001, avg: 1401740 },
@@ -3189,42 +3189,12 @@ export const Ships = [
          { group: 'group_front_up_mid2', size: Size.medium, hittable: true },
       ],
       turrets: [
-         {
-            group: 'group_front_up_mid',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_front_up_mid',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_back_down_middle',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_back_down_middle',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_front_down_mid',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_front_down_mid',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
+         { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_back_down_middle', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_back_down_middle', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_front_down_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_front_down_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
          { group: 'group_front_up_mid2', size: Size.large, hittable: true, types: [ TurretType.mining ] },
       ],
       cargo: [
@@ -3235,6 +3205,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.holyorder,
       ],
       price: { min: 1439985, max: 1948215, avg: 1694100 },
@@ -3766,6 +3737,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.paranid,
       ],
       price: { min: 136119, max: 184161, avg: 160140 },
@@ -3815,6 +3787,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.holyorder,
       ],
       price: { min: 166269, max: 224952, avg: 195610 },
@@ -3857,8 +3830,8 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       turrets: [
-         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
-         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
          { max: 4500, types: [ CargoTypes.solid ] },
@@ -3867,6 +3840,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.paranid,
       ],
       price: { min: 136119, max: 184161, avg: 160140 },
@@ -3909,8 +3883,8 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       turrets: [
-         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
-         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
          { max: 5400, types: [ CargoTypes.solid ] },
@@ -3919,6 +3893,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.holyorder,
       ],
       price: { min: 166269, max: 224952, avg: 195610 },
@@ -4363,6 +4338,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.holyorder,
          Factions.paranid,
       ],
@@ -4515,6 +4491,7 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.paranid,
+         Factions.scaleplate,
       ],
       price: { min: 154556, max: 209105, avg: 181830 },
       production: [
@@ -4565,6 +4542,7 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.scaleplate,
       ],
       price: { min: 189023, max: 255737, avg: 222380 },
       production: [
@@ -5075,6 +5053,7 @@ export const Ships = [
          { capacity: 40, size: Size.small },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.teladi,
       ],
       price: { min: 1550927, max: 2098313, avg: 1824620 },
@@ -5141,6 +5120,7 @@ export const Ships = [
          { capacity: 40, size: Size.small },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.ministry,
       ],
       price: { min: 1861551, max: 2518569, avg: 2190060 },
@@ -5193,40 +5173,15 @@ export const Ships = [
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
-         {
-            group: 'group_back_bottom_right',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_back_top_center',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_back_bottom_left',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
+         { group: 'group_back_bottom_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_back_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_back_bottom_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
          { group: 'group_front_bottom_right', size: Size.medium, hittable: true, types: [ TurretType.mining ] },
          { group: 'group_front_bottom_left', size: Size.medium, hittable: true, types: [ TurretType.mining ] },
          { group: 'group_front_top_center', size: Size.medium, hittable: true, types: [ TurretType.mining ] },
-         {
-            group: 'group_back_top_center',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         { group: 'group_back_bottom_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         {
-            group: 'group_back_bottom_left',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
+         { group: 'group_back_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_back_bottom_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_back_bottom_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
          { max: 24000, types: [ CargoTypes.solid ] },
@@ -5235,6 +5190,7 @@ export const Ships = [
          { capacity: 40, size: Size.small },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.teladi,
       ],
       price: { min: 1550927, max: 2098313, avg: 1824620 },
@@ -5287,40 +5243,15 @@ export const Ships = [
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
-         {
-            group: 'group_back_bottom_right',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_back_top_center',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         {
-            group: 'group_back_bottom_left',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
+         { group: 'group_back_bottom_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_back_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_back_bottom_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
          { group: 'group_front_bottom_right', size: Size.medium, hittable: true, types: [ TurretType.mining ] },
          { group: 'group_front_bottom_left', size: Size.medium, hittable: true, types: [ TurretType.mining ] },
          { group: 'group_front_top_center', size: Size.medium, hittable: true, types: [ TurretType.mining ] },
-         {
-            group: 'group_back_top_center',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
-         { group: 'group_back_bottom_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         {
-            group: 'group_back_bottom_left',
-            size: Size.medium,
-            hittable: true,
-            types: [ TurretType.standard, TurretType.missile, TurretType.mining ]
-         },
+         { group: 'group_back_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_back_bottom_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { group: 'group_back_bottom_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
          { max: 28800, types: [ CargoTypes.solid ] },
@@ -5329,6 +5260,7 @@ export const Ships = [
          { capacity: 40, size: Size.small },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.ministry,
       ],
       price: { min: 1861551, max: 2518569, avg: 2190060 },
@@ -5869,6 +5801,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.teladi,
       ],
       price: { min: 169592, max: 229448, avg: 199520 },
@@ -5919,6 +5852,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.ministry,
       ],
       price: { min: 204196, max: 276265, avg: 240230 },
@@ -5972,6 +5906,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.teladi,
       ],
       price: { min: 169592, max: 229448, avg: 199520 },
@@ -6025,6 +5960,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.ministry,
       ],
       price: { min: 204196, max: 276265, avg: 240230 },
@@ -6273,6 +6209,8 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
+         Factions.scaleplate,
          Factions.teladi,
       ],
       price: { min: 169014, max: 228666, avg: 198840 },
@@ -6323,7 +6261,9 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.ministry,
+         Factions.scaleplate,
       ],
       price: { min: 201255, max: 272286, avg: 236770 },
       production: [
@@ -6474,6 +6414,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.ministry,
          Factions.teladi,
       ],
@@ -6524,6 +6465,8 @@ export const Ships = [
       ],
       owners: [
          Factions.alliance,
+         Factions.hatikvah,
+         Factions.scaleplate,
          Factions.teladi,
       ],
       price: { min: 94529, max: 127892, avg: 111210 },
@@ -6572,7 +6515,9 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.hatikvah,
          Factions.ministry,
+         Factions.scaleplate,
       ],
       price: { min: 113441, max: 153479, avg: 133460 },
       production: [
@@ -6723,6 +6668,7 @@ export const Ships = [
       ],
       owners: [
          Factions.alliance,
+         Factions.scaleplate,
          Factions.teladi,
       ],
       price: { min: 173468, max: 234692, avg: 204080 },
@@ -6773,6 +6719,7 @@ export const Ships = [
       ],
       owners: [
          Factions.ministry,
+         Factions.scaleplate,
       ],
       price: { min: 205709, max: 278312, avg: 242010 },
       production: [
@@ -7056,356 +7003,6 @@ export const Ships = [
             wares: [
                { ware: 'energycells', amount: 3568 },
                { ware: 'hullparts', amount: 12559 },
-            ],
-         },
-      ]
-   },
-   {
-      id: 'ship_xen_m_fighter_01_a',
-      name: 'P',
-      description: 'No information available',
-      size: Size.medium,
-      race: Races.xenon,
-      hull: 10000,
-      purpose: ShipPurpose.fight,
-      thruster: Size.medium,
-      type: ShipType.corvette,
-      mass: 25.959,
-      inertia: { pitch: 4.561, yaw: 4.561, roll: 3.649 },
-      drag: { forward: 4.944, reverse: 19.777, horizontal: 14.641, vertical: 14.641, pitch: 8.99, yaw: 8.99, roll: 8.99 },
-      engines: [
-         { size: Size.medium, hittable: false },
-      ],
-      shields: [
-         { size: Size.medium, hittable: false },
-         { size: Size.medium, hittable: false },
-      ],
-      weapons: [
-         { size: Size.medium, hittable: false, types: [ TurretType.standard ] },
-         { size: Size.medium, hittable: false, types: [ TurretType.standard ] },
-      ],
-      turrets: [
-         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
-         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
-      ],
-      owners: [
-         Factions.xenon,
-      ],
-      price: { min: 33414, max: 45207, avg: 39310 },
-      production: [
-         {
-            time: 17,
-            amount: 1,
-            method: 'default',
-            name: 'Xenon',
-            wares: [
-               { ware: 'energycells', amount: 94 },
-               { ware: 'ore', amount: 79 },
-               { ware: 'silicon', amount: 79 },
-            ],
-         },
-      ]
-   },
-   {
-      id: 'ship_xen_m_miner_01_a',
-      name: 'S',
-      description: 'No information available',
-      size: Size.medium,
-      race: Races.xenon,
-      hull: 6000,
-      purpose: ShipPurpose.mine,
-      thruster: Size.medium,
-      type: ShipType.miner,
-      mass: 49.951,
-      inertia: { pitch: 8.129, yaw: 8.129, roll: 6.503 },
-      drag: { forward: 8.243, reverse: 32.973, horizontal: 25.807, vertical: 25.807, pitch: 14.988, yaw: 14.988, roll: 14.988 },
-      engines: [
-         { size: Size.medium, hittable: false },
-      ],
-      shields: [
-         { size: Size.medium, hittable: false },
-         { size: Size.medium, hittable: false },
-      ],
-      weapons: [
-         { size: Size.medium, hittable: false, types: [ TurretType.mining ] },
-      ],
-      turrets: [
-         { size: Size.medium, hittable: false, types: [ TurretType.standard ] },
-      ],
-      cargo: [
-         { max: 6500, types: [ CargoTypes.container, CargoTypes.liquid, CargoTypes.solid ] },
-      ],
-      owners: [
-         Factions.xenon,
-      ],
-      price: { min: 30324, max: 41026, avg: 35675 },
-      production: [
-         {
-            time: 15,
-            amount: 1,
-            method: 'default',
-            name: 'Xenon',
-            wares: [
-               { ware: 'energycells', amount: 85 },
-               { ware: 'ore', amount: 71 },
-               { ware: 'silicon', amount: 72 },
-            ],
-         },
-      ]
-   },
-   {
-      id: 'ship_xen_s_fighter_01_a',
-      name: 'N',
-      description: 'No information available',
-      size: Size.small,
-      race: Races.xenon,
-      hull: 2500,
-      storage: { missile: 20, unit: 0 },
-      purpose: ShipPurpose.fight,
-      thruster: Size.small,
-      type: ShipType.fighter,
-      mass: 6.508,
-      inertia: { pitch: 1.49, yaw: 1.49, roll: 1.192 },
-      drag: { forward: 4.578, reverse: 17.262, horizontal: 3.723, vertical: 3.723, pitch: 2.971, yaw: 2.971, roll: 2.971 },
-      engines: [
-         { size: Size.small, hittable: false },
-         { size: Size.small, hittable: false },
-      ],
-      shields: [
-         { size: Size.small, hittable: false },
-      ],
-      weapons: [
-         { size: Size.small, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
-         { size: Size.small, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
-      ],
-      owners: [
-         Factions.xenon,
-      ],
-      price: { min: 14675, max: 19855, avg: 17265 },
-      production: [
-         {
-            time: 7,
-            amount: 1,
-            method: 'default',
-            name: 'Xenon',
-            wares: [
-               { ware: 'energycells', amount: 41 },
-               { ware: 'ore', amount: 34 },
-               { ware: 'silicon', amount: 35 },
-            ],
-         },
-      ]
-   },
-   {
-      id: 'ship_xen_s_fighter_02_a',
-      name: 'M',
-      description: 'No information available',
-      size: Size.small,
-      race: Races.xenon,
-      hull: 2900,
-      storage: { missile: 20, unit: 0 },
-      purpose: ShipPurpose.fight,
-      thruster: Size.small,
-      type: ShipType.heavyfighter,
-      mass: 7.622,
-      inertia: { pitch: 1.949, yaw: 1.949, roll: 1.559 },
-      drag: { forward: 6.544, reverse: 31.556, horizontal: 3.476, vertical: 3.476, pitch: 3.32, yaw: 3.32, roll: 3.32 },
-      engines: [
-         { size: Size.small, hittable: false },
-         { size: Size.small, hittable: false },
-         { size: Size.small, hittable: false },
-         { size: Size.small, hittable: false },
-      ],
-      shields: [
-         { size: Size.small, hittable: false },
-      ],
-      weapons: [
-         { size: Size.small, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
-         { size: Size.small, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
-      ],
-      owners: [
-         Factions.xenon,
-      ],
-      price: { min: 16932, max: 22908, avg: 19920 },
-      production: [
-         {
-            time: 9,
-            amount: 1,
-            method: 'default',
-            name: 'Xenon',
-            wares: [
-               { ware: 'energycells', amount: 48 },
-               { ware: 'ore', amount: 40 },
-               { ware: 'silicon', amount: 40 },
-            ],
-         },
-      ]
-   },
-   {
-      id: 'ship_xen_xl_carrier_01_a',
-      name: 'I',
-      description: 'No information available',
-      size: Size.extralarge,
-      race: Races.xenon,
-      hull: 340000,
-      purpose: ShipPurpose.fight,
-      thruster: Size.extralarge,
-      type: ShipType.battleship,
-      mass: 876.951,
-      inertia: { pitch: 958.525, yaw: 958.525, roll: 766.82 },
-      drag: { forward: 255.39, reverse: 1021.561, horizontal: 138.309, vertical: 138.309, pitch: 787.851, yaw: 787.851, roll: 787.851 },
-      engines: [
-         { group: 'group10', size: Size.extralarge, hittable: false },
-         { group: 'group11', size: Size.extralarge, hittable: false },
-      ],
-      shields: [
-         { group: 'group01', size: Size.medium, hittable: true },
-         { group: 'group03', size: Size.medium, hittable: true },
-         { group: 'group04', size: Size.medium, hittable: true },
-         { group: 'group02', size: Size.medium, hittable: true },
-         { group: 'group05', size: Size.medium, hittable: true },
-         { group: 'group06', size: Size.medium, hittable: true },
-         { group: 'group07', size: Size.medium, hittable: true },
-         { group: 'group07', size: Size.medium, hittable: true },
-         { group: 'group08', size: Size.medium, hittable: true },
-         { group: 'group10', size: Size.medium, hittable: true },
-         { group: 'group11', size: Size.medium, hittable: true },
-         { group: 'group09', size: Size.medium, hittable: true },
-         { group: 'group12', size: Size.medium, hittable: true },
-         { group: 'group12', size: Size.medium, hittable: true },
-         { group: 'group13', size: Size.medium, hittable: true },
-         { group: 'group13', size: Size.medium, hittable: true },
-         { group: 'group14', size: Size.medium, hittable: true },
-         { group: 'group15', size: Size.medium, hittable: true },
-         { group: 'group16', size: Size.medium, hittable: true },
-         { group: 'group14', size: Size.medium, hittable: true },
-         { group: 'group17', size: Size.medium, hittable: true },
-         { group: 'group17', size: Size.medium, hittable: true },
-         { size: Size.extralarge, hittable: false },
-         { size: Size.extralarge, hittable: false },
-         { size: Size.extralarge, hittable: false },
-         { size: Size.extralarge, hittable: false },
-         { size: Size.extralarge, hittable: false },
-      ],
-      turrets: [
-         { group: 'group01', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group02', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group03', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group04', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group05', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group06', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group07', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group07', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group07', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group07', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group08', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group08', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group10', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group10', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group10', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group11', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group11', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group11', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group09', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group09', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group12', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group12', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group13', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group13', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group14', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group14', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group15', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group15', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group15', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group15', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group16', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group16', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group16', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group16', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group14', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group14', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group17', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group17', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group17', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group17', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-      ],
-      owners: [
-         Factions.xenon,
-      ],
-      price: { min: 2150466, max: 2909454, avg: 2529960 },
-      production: [
-         {
-            time: 1094,
-            amount: 1,
-            method: 'default',
-            name: 'Xenon',
-            wares: [
-               { ware: 'energycells', amount: 6049 },
-               { ware: 'ore', amount: 5070 },
-               { ware: 'silicon', amount: 5090 },
-            ],
-         },
-      ]
-   },
-   {
-      id: 'ship_xen_xl_destroyer_01_a',
-      name: 'K',
-      description: 'No information available',
-      size: Size.large,
-      race: Races.xenon,
-      hull: 165000,
-      purpose: ShipPurpose.fight,
-      thruster: Size.large,
-      type: ShipType.destroyer,
-      mass: 421.625,
-      inertia: { pitch: 412.904, yaw: 412.904, roll: 330.323 },
-      drag: { forward: 164.325, reverse: 657.3, horizontal: 250.885, vertical: 250.885, pitch: 705.892, yaw: 705.892, roll: 705.892 },
-      engines: [
-         { group: 'group03', size: Size.extralarge, hittable: false },
-         { group: 'group03', size: Size.extralarge, hittable: false },
-      ],
-      shields: [
-         { group: 'group01', size: Size.medium, hittable: true },
-         { group: 'group02', size: Size.medium, hittable: true },
-         { group: 'group03', size: Size.medium, hittable: true },
-         { group: 'group03', size: Size.medium, hittable: true },
-         { group: 'group04', size: Size.medium, hittable: true },
-         { group: 'group05', size: Size.medium, hittable: true },
-         { group: 'group06', size: Size.medium, hittable: true },
-         { group: 'group07', size: Size.medium, hittable: true },
-         { group: 'group08', size: Size.medium, hittable: true },
-         { size: Size.extralarge, hittable: false },
-         { size: Size.extralarge, hittable: false },
-      ],
-      turrets: [
-         { group: 'group02', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group01', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group01', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group01', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group02', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group03', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group03', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group04', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group04', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group05', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group06', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group07', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-         { group: 'group08', size: Size.medium, hittable: true, types: [ TurretType.standard ] },
-      ],
-      owners: [
-         Factions.xenon,
-      ],
-      price: { min: 1033787, max: 1398653, avg: 1216220 },
-      production: [
-         {
-            time: 526,
-            amount: 1,
-            method: 'default',
-            name: 'Xenon',
-            wares: [
-               { ware: 'energycells', amount: 2908 },
-               { ware: 'ore', amount: 2437 },
-               { ware: 'silicon', amount: 2447 },
             ],
          },
       ]
