@@ -251,6 +251,17 @@ export const Modules = {
                { ware: 'hullparts', amount: 359 },
             ],
          },
+         {
+            time: 592,
+            amount: 1,
+            method: 'xenon',
+            name: 'Xenon',
+            wares: [
+               { ware: 'energycells', amount: 196 },
+               { ware: 'ore', amount: 496 },
+               { ware: 'silicon', amount: 290 },
+            ],
+         },
       ]
    },
    module_arg_def_tube_01: {
@@ -302,6 +313,17 @@ export const Modules = {
                { ware: 'claytronics', amount: 85 },
                { ware: 'energycells', amount: 170 },
                { ware: 'hullparts', amount: 312 },
+            ],
+         },
+         {
+            time: 514,
+            amount: 1,
+            method: 'xenon',
+            name: 'Xenon',
+            wares: [
+               { ware: 'energycells', amount: 170 },
+               { ware: 'ore', amount: 431 },
+               { ware: 'silicon', amount: 252 },
             ],
          },
       ]
@@ -500,6 +522,32 @@ export const Modules = {
                { ware: 'claytronics', amount: 75 },
                { ware: 'energycells', amount: 150 },
                { ware: 'hullparts', amount: 274 },
+            ],
+         },
+      ]
+   },
+   module_arg_dock_tradestation_02: {
+      id: 'module_arg_dock_tradestation_02',
+      name: '8M Standard Dock Area',
+      description: 'No information available',
+      type: ModuleTypes.dockarea,
+      explosionDamage: 0,
+      hull: 1100000,
+      price: { min: 630652, max: 853236, avg: 741944 },
+      owners: [
+         Factions.antigone,
+         Factions.argon,
+      ],
+      production: [
+         {
+            time: 1398,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 116 },
+               { ware: 'energycells', amount: 232 },
+               { ware: 'hullparts', amount: 424 },
             ],
          },
       ]
@@ -5456,6 +5504,7 @@ export const AllModules = [
    Modules.module_arg_dock_m_02,
    Modules.module_arg_dock_m_02_hightech,
    Modules.module_arg_dock_m_02_lowtech,
+   Modules.module_arg_dock_tradestation_02,
    Modules.module_arg_hab_l_01,
    Modules.module_arg_hab_m_01,
    Modules.module_arg_hab_s_01,

@@ -62,6 +62,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.argon,
@@ -136,6 +137,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.antigone,
@@ -193,11 +195,11 @@ export const Ships = [
          { group: 'group_front_left_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 21000, types: [ CargoTypes.liquid ] },
+         { max: 42000, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
-         { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.argon,
@@ -256,11 +258,11 @@ export const Ships = [
          { group: 'group_front_left_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 25200, types: [ CargoTypes.liquid ] },
+         { max: 50400, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
-         { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.antigone,
@@ -321,11 +323,11 @@ export const Ships = [
          { group: 'group_front_left_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 20000, types: [ CargoTypes.solid ] },
+         { max: 40000, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
-         { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.argon,
@@ -386,11 +388,11 @@ export const Ships = [
          { group: 'group_front_left_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 25200, types: [ CargoTypes.solid ] },
+         { max: 50400, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
-         { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.antigone,
@@ -452,6 +454,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.argon,
@@ -512,6 +515,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.antigone,
@@ -572,6 +576,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.argon,
@@ -632,6 +637,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.antigone,
@@ -693,6 +699,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.argon,
@@ -754,6 +761,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.antigone,
@@ -820,6 +828,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.argon,
@@ -886,6 +895,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.antigone,
@@ -952,6 +962,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.argon,
@@ -1018,6 +1029,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.antigone,
@@ -1347,7 +1359,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 5200, types: [ CargoTypes.liquid ] },
+         { max: 10400, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -1397,7 +1409,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 6240, types: [ CargoTypes.liquid ] },
+         { max: 12480, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -1450,7 +1462,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
-         { max: 4900, types: [ CargoTypes.solid ] },
+         { max: 9800, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -1503,7 +1515,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
-         { max: 5880, types: [ CargoTypes.solid ] },
+         { max: 11760, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -2101,7 +2113,7 @@ export const Ships = [
          { size: Size.small, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
-         { max: 1300, types: [ CargoTypes.solid ] },
+         { max: 2600, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -2475,6 +2487,7 @@ export const Ships = [
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.argon,
@@ -2538,6 +2551,7 @@ export const Ships = [
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.antigone,
@@ -2611,11 +2625,12 @@ export const Ships = [
          { group: 'group_back_down_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 11000, types: [ CargoTypes.container ] },
+         { max: 19000, types: [ CargoTypes.container ] },
       ],
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.argon,
@@ -2689,11 +2704,12 @@ export const Ships = [
          { group: 'group_back_down_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 13200, types: [ CargoTypes.container ] },
+         { max: 22800, types: [ CargoTypes.container ] },
       ],
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.antigone,
@@ -2708,6 +2724,134 @@ export const Ships = [
             wares: [
                { ware: 'energycells', amount: 3220 },
                { ware: 'hullparts', amount: 11335 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'ship_arg_xl_resupplier_01_a',
+      name: 'Nomad Vanguard',
+      description: 'Very quickly developed during the course of the latest defence against the Xenon, the Nomad is effectively a mobile equipment dock, allowing combat ships to repair and restock and get back to the fight more quickly. This has greatly helped the efficiency of both the Argon Federation and Antigone Republic fleets, and has already begun to see clones created across both Teladi and Paranid space.nnThe ship is not self-sufficient, requiring a defensive escort not to be torn apart in combat. If it can be defended though, the Nomad can prove a devastating support ship.',
+      size: Size.extralarge,
+      race: Races.argon,
+      explosionDamage: 12000,
+      hull: 116000,
+      storage: { missile: 40, unit: 100 },
+      people: 220,
+      purpose: ShipPurpose.auxiliary,
+      thruster: Size.extralarge,
+      type: ShipType.resupplier,
+      mass: 891.63,
+      inertia: { pitch: 603.604, yaw: 603.604, roll: 482.883 },
+      drag: { forward: 258.326, reverse: 1033.304, horizontal: 467.421, vertical: 467.421, pitch: 878.326, yaw: 878.326, roll: 878.326 },
+      engines: [
+         { group: 'group_back_mid_mid', size: Size.extralarge, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.extralarge, hittable: false },
+      ],
+      shields: [
+         { group: 'group_back_mid_left', size: Size.medium, hittable: true },
+         { group: 'group_front_mid_left', size: Size.medium, hittable: true },
+         { group: 'group_front_mid_right', size: Size.medium, hittable: true },
+         { group: 'group_back_mid_right', size: Size.medium, hittable: true },
+         { size: Size.extralarge, hittable: false },
+         { size: Size.extralarge, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'group_back_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      cargo: [
+         { max: 29000, types: [ CargoTypes.container ] },
+      ],
+      docks: [
+         { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.medium },
+         { capacity: 10, size: Size.extrasmall },
+      ],
+      owners: [
+         Factions.argon,
+      ],
+      price: { min: 8910100, max: 12054841, avg: 10482470 },
+      production: [
+         {
+            time: 414,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'energycells', amount: 2288 },
+               { ware: 'hullparts', amount: 8055 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'ship_arg_xl_resupplier_01_b',
+      name: 'Nomad Sentinel',
+      description: 'Very quickly developed during the course of the latest defence against the Xenon, the Nomad is effectively a mobile equipment dock, allowing combat ships to repair and restock and get back to the fight more quickly. This has greatly helped the efficiency of both the Argon Federation and Antigone Republic fleets, and has already begun to see clones created across both Teladi and Paranid space.nnThe ship is not self-sufficient, requiring a defensive escort not to be torn apart in combat. If it can be defended though, the Nomad can prove a devastating support ship.',
+      size: Size.extralarge,
+      race: Races.argon,
+      explosionDamage: 12000,
+      hull: 139000,
+      storage: { missile: 40, unit: 100 },
+      people: 183,
+      purpose: ShipPurpose.auxiliary,
+      thruster: Size.extralarge,
+      type: ShipType.resupplier,
+      mass: 1069.956,
+      inertia: { pitch: 628.114, yaw: 628.114, roll: 502.491 },
+      drag: { forward: 293.991, reverse: 1175.965, horizontal: 560.905, vertical: 560.905, pitch: 913.991, yaw: 913.991, roll: 913.991 },
+      engines: [
+         { group: 'group_back_mid_mid', size: Size.extralarge, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.extralarge, hittable: false },
+      ],
+      shields: [
+         { group: 'group_back_mid_left', size: Size.medium, hittable: true },
+         { group: 'group_front_mid_left', size: Size.medium, hittable: true },
+         { group: 'group_front_mid_right', size: Size.medium, hittable: true },
+         { group: 'group_back_mid_right', size: Size.medium, hittable: true },
+         { size: Size.extralarge, hittable: false },
+         { size: Size.extralarge, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'group_back_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      cargo: [
+         { max: 34800, types: [ CargoTypes.container ] },
+      ],
+      docks: [
+         { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.medium },
+         { capacity: 10, size: Size.extrasmall },
+      ],
+      owners: [
+         Factions.antigone,
+      ],
+      price: { min: 10684390, max: 14455351, avg: 12569870 },
+      production: [
+         {
+            time: 496,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'energycells', amount: 2744 },
+               { ware: 'hullparts', amount: 9659 },
             ],
          },
       ]
@@ -3011,7 +3155,7 @@ export const Ships = [
          { group: 'group_front_down_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 16000, types: [ CargoTypes.liquid ] },
+         { max: 32000, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
@@ -3072,7 +3216,7 @@ export const Ships = [
          { group: 'group_front_down_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 19200, types: [ CargoTypes.liquid ] },
+         { max: 38400, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
@@ -3135,7 +3279,7 @@ export const Ships = [
          { group: 'group_front_up_mid2', size: Size.large, hittable: true, types: [ TurretType.mining ] },
       ],
       cargo: [
-         { max: 16000, types: [ CargoTypes.solid ] },
+         { max: 32000, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
@@ -3198,7 +3342,7 @@ export const Ships = [
          { group: 'group_front_up_mid2', size: Size.large, hittable: true, types: [ TurretType.mining ] },
       ],
       cargo: [
-         { max: 19200, types: [ CargoTypes.solid ] },
+         { max: 38400, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
@@ -3731,7 +3875,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 4800, types: [ CargoTypes.liquid ] },
+         { max: 9600, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -3781,7 +3925,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 5760, types: [ CargoTypes.liquid ] },
+         { max: 11520, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -3834,7 +3978,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
-         { max: 4500, types: [ CargoTypes.solid ] },
+         { max: 9000, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -3887,7 +4031,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
-         { max: 5400, types: [ CargoTypes.solid ] },
+         { max: 11520, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -4332,7 +4476,7 @@ export const Ships = [
          { size: Size.small, hittable: false, types: [ TurretType.standard, TurretType.mining, TurretType.missile ] },
       ],
       cargo: [
-         { max: 1050, types: [ CargoTypes.solid ] },
+         { max: 2100, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -4603,6 +4747,7 @@ export const Ships = [
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.alliance,
@@ -4667,6 +4812,7 @@ export const Ships = [
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.holyorder,
@@ -4743,7 +4889,7 @@ export const Ships = [
          { group: 'group_mid_up_mid', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 12000, types: [ CargoTypes.container ] },
+         { max: 20000, types: [ CargoTypes.container ] },
       ],
       docks: [
          { capacity: 10, size: Size.medium },
@@ -4825,7 +4971,7 @@ export const Ships = [
          { group: 'group_mid_up_mid', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 14400, types: [ CargoTypes.container ] },
+         { max: 24000, types: [ CargoTypes.container ] },
       ],
       docks: [
          { capacity: 10, size: Size.medium },
@@ -4845,6 +4991,134 @@ export const Ships = [
             wares: [
                { ware: 'energycells', amount: 4190 },
                { ware: 'hullparts', amount: 14749 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'ship_par_xl_resupplier_01_a',
+      name: 'Atlas Vanguard',
+      description: 'No information available',
+      size: Size.extralarge,
+      race: Races.paranid,
+      hull: 130000,
+      storage: { missile: 40, unit: 100 },
+      people: 247,
+      purpose: ShipPurpose.auxiliary,
+      thruster: Size.extralarge,
+      type: ShipType.resupplier,
+      mass: 999.739,
+      inertia: { pitch: 693.45, yaw: 693.45, roll: 554.76 },
+      drag: { forward: 262.451, reverse: 1049.804, horizontal: 466.424, vertical: 466.424, pitch: 899.948, yaw: 899.948, roll: 899.948 },
+      engines: [
+         { group: 'group_back_up_mid', size: Size.extralarge, hittable: false },
+         { group: 'group_back_up_mid', size: Size.extralarge, hittable: false },
+         { group: 'group_back_up_mid', size: Size.extralarge, hittable: false },
+      ],
+      shields: [
+         { size: Size.extralarge, hittable: false },
+         { size: Size.extralarge, hittable: false },
+         { group: 'group_back_up_left', size: Size.medium, hittable: true },
+         { group: 'group_back_up_right', size: Size.medium, hittable: true },
+         { group: 'group_back_down_middle', size: Size.medium, hittable: true },
+         { group: 'group_front_up_middle', size: Size.medium, hittable: true },
+         { group: 'group_back_up_mid', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'group_back_up_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_down_middle', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_up_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_up_middle', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_up_middle', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_down_middle', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      cargo: [
+         { max: 29000, types: [ CargoTypes.container ] },
+      ],
+      docks: [
+         { capacity: 10, size: Size.medium },
+         { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
+      ],
+      owners: [
+         Factions.paranid,
+      ],
+      price: { min: 9987509, max: 13512512, avg: 11750010 },
+      production: [
+         {
+            time: 464,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'energycells', amount: 2565 },
+               { ware: 'hullparts', amount: 9029 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'ship_par_xl_resupplier_01_b',
+      name: 'Atlas Sentinel',
+      description: 'No information available',
+      size: Size.extralarge,
+      race: Races.paranid,
+      hull: 156000,
+      storage: { missile: 40, unit: 100 },
+      people: 205,
+      purpose: ShipPurpose.auxiliary,
+      thruster: Size.extralarge,
+      type: ShipType.resupplier,
+      mass: 1199.686,
+      inertia: { pitch: 724.264, yaw: 724.264, roll: 579.411 },
+      drag: { forward: 299.941, reverse: 1199.765, horizontal: 559.709, vertical: 559.709, pitch: 939.937, yaw: 939.937, roll: 939.937 },
+      engines: [
+         { group: 'group_back_up_mid', size: Size.extralarge, hittable: false },
+         { group: 'group_back_up_mid', size: Size.extralarge, hittable: false },
+         { group: 'group_back_up_mid', size: Size.extralarge, hittable: false },
+      ],
+      shields: [
+         { size: Size.extralarge, hittable: false },
+         { size: Size.extralarge, hittable: false },
+         { group: 'group_back_up_left', size: Size.medium, hittable: true },
+         { group: 'group_back_up_right', size: Size.medium, hittable: true },
+         { group: 'group_back_down_middle', size: Size.medium, hittable: true },
+         { group: 'group_front_up_middle', size: Size.medium, hittable: true },
+         { group: 'group_back_up_mid', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'group_back_up_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_down_middle', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_up_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_up_middle', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_up_middle', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_down_middle', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      cargo: [
+         { max: 34800, types: [ CargoTypes.container ] },
+      ],
+      docks: [
+         { capacity: 10, size: Size.medium },
+         { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
+      ],
+      owners: [
+         Factions.holyorder,
+      ],
+      price: { min: 11985230, max: 16215311, avg: 14100270 },
+      production: [
+         {
+            time: 557,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'energycells', amount: 3078 },
+               { ware: 'hullparts', amount: 10835 },
             ],
          },
       ]
@@ -4908,6 +5182,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.teladi,
@@ -4985,6 +5260,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.ministry,
@@ -5047,10 +5323,11 @@ export const Ships = [
          { group: 'group_front_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 22000, types: [ CargoTypes.liquid ] },
+         { max: 44000, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.hatikvah,
@@ -5114,10 +5391,11 @@ export const Ships = [
          { group: 'group_front_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 26400, types: [ CargoTypes.liquid ] },
+         { max: 52800, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.hatikvah,
@@ -5184,10 +5462,11 @@ export const Ships = [
          { group: 'group_back_bottom_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
-         { max: 24000, types: [ CargoTypes.solid ] },
+         { max: 48000, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.hatikvah,
@@ -5254,10 +5533,11 @@ export const Ships = [
          { group: 'group_back_bottom_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
-         { max: 28800, types: [ CargoTypes.solid ] },
+         { max: 57600, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.hatikvah,
@@ -5323,6 +5603,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.teladi,
@@ -5387,6 +5668,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.ministry,
@@ -5451,6 +5733,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.teladi,
@@ -5515,6 +5798,7 @@ export const Ships = [
       ],
       docks: [
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.ministry,
@@ -5795,7 +6079,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 5400, types: [ CargoTypes.liquid ] },
+         { max: 10800, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -5846,7 +6130,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 6480, types: [ CargoTypes.liquid ] },
+         { max: 12960, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -5900,7 +6184,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.mining ] },
       ],
       cargo: [
-         { max: 5000, types: [ CargoTypes.solid ] },
+         { max: 10000, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -5954,7 +6238,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.mining ] },
       ],
       cargo: [
-         { max: 6000, types: [ CargoTypes.solid ] },
+         { max: 12000, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -6408,7 +6692,7 @@ export const Ships = [
          { size: Size.small, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
-         { max: 1750, types: [ CargoTypes.solid ] },
+         { max: 3500, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -6780,6 +7064,7 @@ export const Ships = [
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.teladi,
@@ -6843,6 +7128,7 @@ export const Ships = [
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.ministry,
@@ -6911,11 +7197,12 @@ export const Ships = [
          { group: 'group_front_down_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 17000, types: [ CargoTypes.container ] },
+         { max: 28000, types: [ CargoTypes.container ] },
       ],
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.teladi,
@@ -6984,11 +7271,12 @@ export const Ships = [
          { group: 'group_front_down_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 20400, types: [ CargoTypes.container ] },
+         { max: 33600, types: [ CargoTypes.container ] },
       ],
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
          Factions.ministry,
@@ -7003,6 +7291,144 @@ export const Ships = [
             wares: [
                { ware: 'energycells', amount: 3568 },
                { ware: 'hullparts', amount: 12559 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'ship_tel_xl_resupplier_01_a',
+      name: 'Stork Vanguard',
+      description: 'No information available',
+      size: Size.extralarge,
+      race: Races.teladi,
+      hull: 105000,
+      storage: { missile: 40, unit: 100 },
+      people: 200,
+      purpose: ShipPurpose.auxiliary,
+      thruster: Size.extralarge,
+      type: ShipType.resupplier,
+      mass: 896.85,
+      inertia: { pitch: 547.074, yaw: 547.074, roll: 437.659 },
+      drag: { forward: 324.213, reverse: 1296.85, horizontal: 510.578, vertical: 510.578, pitch: 879.37, yaw: 879.37, roll: 879.37 },
+      engines: [
+         { group: 'group_back_bottom', size: Size.extralarge, hittable: false },
+         { group: 'group_back_bottom', size: Size.extralarge, hittable: false },
+         { group: 'group_back_bottom', size: Size.extralarge, hittable: false },
+      ],
+      shields: [
+         { size: Size.extralarge, hittable: false },
+         { group: 'group_back_top_center', size: Size.medium, hittable: true },
+         { group: 'group_center_top_center', size: Size.medium, hittable: true },
+         { size: Size.extralarge, hittable: false },
+         { group: 'group_back_bottom_left', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom_right', size: Size.medium, hittable: true },
+         { group: 'group_center_bottom_right', size: Size.medium, hittable: true },
+         { group: 'group_center_bottom_left', size: Size.medium, hittable: true },
+         { group: 'group_front_top_left', size: Size.medium, hittable: true },
+         { group: 'group_front_top_right', size: Size.medium, hittable: true },
+         { group: 'group_front_down_center', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'group_back_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_center_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_bottom_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_bottom_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_center_bottom_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_center_bottom_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_top_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_top_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_down_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      cargo: [
+         { max: 25000, types: [ CargoTypes.container ] },
+      ],
+      docks: [
+         { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.medium },
+         { capacity: 10, size: Size.extrasmall },
+      ],
+      owners: [
+         Factions.teladi,
+      ],
+      price: { min: 8065030, max: 10911511, avg: 9488270 },
+      production: [
+         {
+            time: 375,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'energycells', amount: 2072 },
+               { ware: 'hullparts', amount: 7291 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'ship_tel_xl_resupplier_01_b',
+      name: 'Stork Sentinel',
+      description: 'No information available',
+      size: Size.extralarge,
+      race: Races.teladi,
+      hull: 126000,
+      storage: { missile: 40, unit: 100 },
+      people: 166,
+      purpose: ShipPurpose.auxiliary,
+      thruster: Size.extralarge,
+      type: ShipType.resupplier,
+      mass: 1076.221,
+      inertia: { pitch: 569.392, yaw: 569.392, roll: 455.513 },
+      drag: { forward: 369.055, reverse: 1476.221, horizontal: 612.694, vertical: 612.694, pitch: 915.244, yaw: 915.244, roll: 915.244 },
+      engines: [
+         { group: 'group_back_bottom', size: Size.extralarge, hittable: false },
+         { group: 'group_back_bottom', size: Size.extralarge, hittable: false },
+         { group: 'group_back_bottom', size: Size.extralarge, hittable: false },
+      ],
+      shields: [
+         { size: Size.extralarge, hittable: false },
+         { group: 'group_back_top_center', size: Size.medium, hittable: true },
+         { group: 'group_center_top_center', size: Size.medium, hittable: true },
+         { size: Size.extralarge, hittable: false },
+         { group: 'group_back_bottom_left', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom_right', size: Size.medium, hittable: true },
+         { group: 'group_center_bottom_right', size: Size.medium, hittable: true },
+         { group: 'group_center_bottom_left', size: Size.medium, hittable: true },
+         { group: 'group_front_top_left', size: Size.medium, hittable: true },
+         { group: 'group_front_top_right', size: Size.medium, hittable: true },
+         { group: 'group_front_down_center', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'group_back_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_center_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_bottom_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_bottom_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_center_bottom_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_center_bottom_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_top_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_top_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_front_down_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      cargo: [
+         { max: 30000, types: [ CargoTypes.container ] },
+      ],
+      docks: [
+         { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.medium },
+         { capacity: 10, size: Size.extrasmall },
+      ],
+      owners: [
+         Factions.ministry,
+      ],
+      price: { min: 9678899, max: 13094981, avg: 11386940 },
+      production: [
+         {
+            time: 450,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'energycells', amount: 2486 },
+               { ware: 'hullparts', amount: 8750 },
             ],
          },
       ]

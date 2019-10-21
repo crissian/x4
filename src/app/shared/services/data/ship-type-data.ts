@@ -1,4 +1,5 @@
 export enum ShipType {
+   resupplier = 'Resupplier',
   miner = 'Miner',
   carrier = 'Carrier',
   fighter = 'Fighter',

@@ -1,6 +1,7 @@
 export enum ShipPurpose {
-  mine = 'Mine',
-  build = 'Build',
-  fight = 'Fight',
-  trade = 'Trade'
+   auxiliary = 'Auxiliary',
+   mine = 'Mine',
+   build = 'Build',
+   fight = 'Fight',
+   trade = 'Trade'
 }

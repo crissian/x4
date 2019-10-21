@@ -212,14 +212,14 @@ export const Wares = {
       description: 'Comprised of a number of different components that make up ship engines, engine parts are delivered straight to the end customer, most commonly shipyards and equipment docks, who then use them themselves to produce or repair engines. While naturally engine parts are a very necessary resource across the entire Jump Gate network, the ability to produce and repair engines on demand, instead of requiring an entirely separate production step for each, has greatly streamlined the universal economy.',
       factoryName: 'Engine Part Factory',
       icon: 'ware_engineparts',
-      volume: 30,
+      volume: 15,
       transport: TransportType.container,
-      price: { min: 255, max: 474, avg: 365 },
+      price: { min: 128, max: 237, avg: 182 },
       group: WareGroups.hightech,
       production: [
          {
             time: 900,
-            amount: 120,
+            amount: 240,
             method: 'default',
             name: 'Universal',
             wares: [
@@ -233,7 +233,7 @@ export const Wares = {
          },
          {
             time: 900,
-            amount: 120,
+            amount: 240,
             method: 'teladi',
             name: 'Teladi',
             wares: [
@@ -347,14 +347,14 @@ export const Wares = {
       description: 'Made from refined metals or teladianium, Hull Parts are most commonly used to build the hulls of ships and stations, though they do have some other uses such as in drones and weapons. Usually layered for additional protection, and using other compounds to further reinforce, Hull Parts are still cheap to produce - a bonus, considering their position as the most frequently used resource in the Jump Gate network.',
       factoryName: 'Hull Part Factory',
       icon: 'ware_hullparts',
-      volume: 25,
+      volume: 12,
       transport: TransportType.container,
-      price: { min: 220, max: 408, avg: 314 },
+      price: { min: 146, max: 272, avg: 209 },
       group: WareGroups.hightech,
       production: [
          {
             time: 900,
-            amount: 220,
+            amount: 330,
             method: 'default',
             name: 'Universal',
             wares: [
@@ -368,7 +368,7 @@ export const Wares = {
          },
          {
             time: 900,
-            amount: 220,
+            amount: 330,
             method: 'teladi',
             name: 'Teladi',
             wares: [
@@ -886,14 +886,14 @@ export const Wares = {
       description: 'A specialised form of microchip that contains a small amount of heuristic programming, these chips cannot allow a system to learn, but can allow for small, snap intelligent decision-making that assists in targeting systems and makes autonomous piloting more accurate. These chips are primarily used in guided missiles and drones.',
       factoryName: 'Smart Chip Factory',
       icon: 'ware_smartchips',
-      volume: 5,
+      volume: 2,
       transport: TransportType.container,
-      price: { min: 92, max: 137, avg: 114 },
+      price: { min: 46, max: 69, avg: 57 },
       group: WareGroups.shiptech,
       production: [
          {
             time: 600,
-            amount: 80,
+            amount: 160,
             method: 'default',
             name: 'Universal',
             wares: [
