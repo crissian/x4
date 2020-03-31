@@ -6,6 +6,7 @@ import { Effects } from './effects-data';
 export const Wares = {
    advancedcomposites: {
       id: 'advancedcomposites',
+      version: 0,
       name: 'Advanced Composites',
       description: 'Formed from some of the refined resources collected from mining ships, advanced composites is a general term for many compounds created to serve several purposes; most commonly used in the production of a variety of equipment parts.',
       factoryName: 'Advanced Composite Factory',
@@ -47,6 +48,7 @@ export const Wares = {
    },
    advancedelectronics: {
       id: 'advancedelectronics',
+      version: 0,
       name: 'Advanced Electronics',
       description: 'Designed specifically to work alongside weapon and turret components, it is a variety of advanced electronics that allow different weapons and turrets to have a range of turning speeds, fire rates and cooldowns. Whereas field coils for shields and antimatter converters for engines are more modular and can be used \'across the board\', different weapons and turrets expect different electronic systems to be used in order to ensure the correct properties. However, as all equipment is built and repaired on demand, all advanced electronics are shipped to shipyards and equipment docks together.',
       factoryName: 'Advanced Electronics Factory',
@@ -74,6 +76,7 @@ export const Wares = {
    },
    antimattercells: {
       id: 'antimattercells',
+      version: 0,
       name: 'Antimatter Cells',
       description: 'Highly advanced magnetic storage devices that carry antimatter. Due to the effect of Hawking radiation and their being self-powered, antimatter cells cannot store antimatter indefinitely. They are produced and filled using refined hydrogen and primarily used in the production of engine parts, and also can be miniaturised to be used in claytronics.',
       factoryName: 'Antimatter Cell Factory',
@@ -100,6 +103,7 @@ export const Wares = {
    },
    antimatterconverters: {
       id: 'antimatterconverters',
+      version: 0,
       name: 'Antimatter Converters',
       description: 'Attached to the antimatter cells used in engine parts for both main engines and thrusters, antimatter converters fine-tune the amount of energy used to a more specific configuration. It is the use of this component that allows so many variations of engine, as their number and set up greatly impact the power and efficiency of the final product.',
       factoryName: 'Antimatter Converter Factory',
@@ -127,6 +131,7 @@ export const Wares = {
    },
    claytronics: {
       id: 'claytronics',
+      version: 0,
       name: 'Claytronics',
       description: 'More commonly known as programmable matter, claytronics are made up of millions of individual nanometre-scale computers known as catoms. This technology lives at the heart of any non-Xenon station, used to build anything from internal wiring to computer systems and control mechanisms - effectively everything but the hull of the station itself. Claytronics are always in high-demand, as the universe rebuilds itself after the Jump Gate shutdown.',
       factoryName: 'Claytronics Factory',
@@ -155,6 +160,7 @@ export const Wares = {
    },
    dronecomponents: {
       id: 'dronecomponents',
+      version: 0,
       name: 'Drone Components',
       description: 'Much like weapon and turret components, drone components have been generalised and standardised across much of the Jump Gate network to be modularly used in all kinds of drone, making them a highly sought-after resource. Drone components are directly shipped to shipyards, equipment docks and stations to source drone-building, which is done on-demand as and when it is necessary.',
       factoryName: 'Drone Component Factory',
@@ -184,6 +190,7 @@ export const Wares = {
    },
    energycells: {
       id: 'energycells',
+      version: 0,
       name: 'Energy Cells',
       description: 'Contrary to common belief, Energy Cells are not simply glorified batteries; actually, they are sophisticated bio-chemical (or bio-mechanical, depending on technology) devices capable of storing energy near or at 100% efficiency.',
       factoryName: 'Solar Power Plant',
@@ -208,6 +215,7 @@ export const Wares = {
    },
    engineparts: {
       id: 'engineparts',
+      version: 0,
       name: 'Engine Parts',
       description: 'Comprised of a number of different components that make up ship engines, engine parts are delivered straight to the end customer, most commonly shipyards and equipment docks, who then use them themselves to produce or repair engines. While naturally engine parts are a very necessary resource across the entire Jump Gate network, the ability to produce and repair engines on demand, instead of requiring an entirely separate production step for each, has greatly streamlined the universal economy.',
       factoryName: 'Engine Part Factory',
@@ -249,6 +257,7 @@ export const Wares = {
    },
    fieldcoils: {
       id: 'fieldcoils',
+      version: 0,
       name: 'Field Coils',
       description: 'Used to fine-tune the arrays used on ship and station shielding, field coils allow for much more modulation than using shield components alone. As such shipyards have begun using them to build a much wider variety of shields than was previously available. Like many of the components used on ships - that aren\'t the hull itself - shield components are shipped straight to shipyards and equipment docks so that shields can be produced on-demand.',
       factoryName: 'Field Coil Factory',
@@ -276,6 +285,7 @@ export const Wares = {
    },
    foodrations: {
       id: 'foodrations',
+      version: 0,
       name: 'Food Rations',
       description: 'Food Rations come in a large variety; as far as rations for the species Homo sapiens are concerned, they mainly contain wheat, freeze-dried meat and different spices as well as vitamins and essential minerals.',
       factoryName: 'Food Ration Factory',
@@ -304,6 +314,7 @@ export const Wares = {
    },
    graphene: {
       id: 'graphene',
+      version: 0,
       name: 'Graphene',
       description: 'Produced from refined and heavily modified methane gas in the modern era, graphene is a semi-metal that has many uncommon properties. Due to its strength and resistance to heat and electricity, it is used to produce a variety of tech-level resources, and is also used to help in the reinforcement of hull parts.',
       factoryName: 'Graphene Refinery',
@@ -330,6 +341,7 @@ export const Wares = {
    },
    helium: {
       id: 'helium',
+      version: 0,
       name: 'Helium',
       description: 'A colourless, odourless and non-toxic noble gas, helium is found in great abundance in gas nebulas across the entire Jump Gate network and is usually collected by mining ships to be refined into superfluid coolant.',
       factoryName: 'Helium Extractor',
@@ -343,6 +355,7 @@ export const Wares = {
    },
    hullparts: {
       id: 'hullparts',
+      version: 0,
       name: 'Hull Parts',
       description: 'Made from refined metals or teladianium, Hull Parts are most commonly used to build the hulls of ships and stations, though they do have some other uses such as in drones and weapons. Usually layered for additional protection, and using other compounds to further reinforce, Hull Parts are still cheap to produce - a bonus, considering their position as the most frequently used resource in the Jump Gate network.',
       factoryName: 'Hull Part Factory',
@@ -384,6 +397,7 @@ export const Wares = {
    },
    hydrogen: {
       id: 'hydrogen',
+      version: 0,
       name: 'Hydrogen',
       description: 'Historically, Hydrogen has been used mainly in H-fusion generators. These days however, with the rise of sustainable M/AM mass conversion, Hydrogen is routinely converted into anti-Hydrogen for use in Antimatter Cells.',
       factoryName: 'Hydrogen Extractor',
@@ -397,6 +411,7 @@ export const Wares = {
    },
    ice: {
       id: 'ice',
+      version: 0,
       name: 'Ice',
       description: 'H2O in its solid state of aggregation, used for industrial water supplies and general consumption after treatment.',
       factoryName: 'Ice Mine',
@@ -410,6 +425,7 @@ export const Wares = {
    },
    majadust: {
       id: 'majadust',
+      version: 0,
       name: 'Maja Dust',
       description: 'Chemically processed from crushed maja snail shells, maja dust is a relaxant and hallucinogenic sold as a powder-substance that is inhaled. Though any official Paranid government would have the populous believe that maja dust is not commonly consumed, it is thought to be highly likely, particularly in light of the ongoing Paranid civil war, that many Paranid and non-Paranid alike are partaking in the outlawed substance.',
       factoryName: 'Maja Dust Factory',
@@ -437,6 +453,7 @@ export const Wares = {
    },
    majasnails: {
       id: 'majasnails',
+      version: 0,
       name: 'Maja Snails',
       description: 'Grown across many Paranid colonies, as well as in tanks across Paranid space, maja snails provide Paranid with a good number of the nutrients they need to survive. Commonly treated very well, once a snail dies its shell and flesh are both processed as part of soja husk, along with soja beans. The shell of the maja snail is also commonly used as the main ingredient of the drug known as maja dust.',
       factoryName: 'Maja Snail Farm',
@@ -463,6 +480,7 @@ export const Wares = {
    },
    meat: {
       id: 'meat',
+      version: 0,
       name: 'Meat',
       description: 'Though meat comes in a great variety, the most sought-after type as of late is so-called \'vegan meat\', synthesised and cloned not from real animals, but from cell cultures. However, real Argnu meat is still popular within the human population of many worlds.',
       factoryName: 'Meat Factory',
@@ -489,6 +507,7 @@ export const Wares = {
    },
    medicalsupplies: {
       id: 'medicalsupplies',
+      version: 0,
       name: 'Medical Supplies',
       description: 'Medical supplies contain a number of different concoctions and remedies used to keep station workforce healthier and happier during their time aboard. Completely natural in design, these supplies have been vetted by both the Argon Federation and Godrealm of the Paranid to ensure they are both legal and safe, and thus there is no licence necessary to carry or supply them.',
       factoryName: 'Medical Supply Factory',
@@ -547,6 +566,7 @@ export const Wares = {
    },
    methane: {
       id: 'methane',
+      version: 0,
       name: 'Methane',
       description: 'Found in ample supply in gas nebulas across the Jump Gate network, methane (CH4) is collected by mining ships and taken to refineries to be processed into graphene.',
       factoryName: 'Methane Extractor',
@@ -560,6 +580,7 @@ export const Wares = {
    },
    microchips: {
       id: 'microchips',
+      version: 0,
       name: 'Microchips',
       description: 'Used in a wide variety of equipment parts, micro-chips are produced using silicon wafers, which, while fragile, allows them to conduct at a much higher rate. This, in turn, allows far better processing in the equipment that uses the micro-chips, which includes many advanced electronics and components.',
       factoryName: 'Microchip Factory',
@@ -586,6 +607,7 @@ export const Wares = {
    },
    missilecomponents: {
       id: 'missilecomponents',
+      version: 0,
       name: 'Missile Components',
       description: 'Missile components are used in the construction of all missiles, often with a different number and configuration making up the construction of each missile. As with ship equipment, missiles are built on demand, and so missile components are bought at and found at shipyards and equipment docks, where most pilots can order missiles on demand.',
       factoryName: 'Missile Component Factory',
@@ -613,6 +635,7 @@ export const Wares = {
    },
    nividium: {
       id: 'nividium',
+      version: 0,
       name: 'Nividium',
       description: 'A rare metal found in small pockets in asteroids, Nividium has been cut out of any economic use by the improved efficiency with which businesses have been able to use ore and silicon, much easier to find and cheaper to process. However, Nividium is still valuable, and is often transported planet-side to be made into jewelry and art.',
       factoryName: 'Nividium Mine',
@@ -626,6 +649,7 @@ export const Wares = {
    },
    nostropoil: {
       id: 'nostropoil',
+      version: 0,
       name: 'Nostrop Oil',
       description: 'Nostrop oil is squeezed from the leaves of sunrise flowers and mixed with water. Though the Teladi favour it for its simplicity and nutrients, other species have clearly indicated that nostrop oil does not in fact taste at all pleasing.',
       factoryName: 'Nostrop Oil Factory',
@@ -654,6 +678,7 @@ export const Wares = {
    },
    ore: {
       id: 'ore',
+      version: 0,
       name: 'Ore',
       description: 'Today ore tends not to be mined on habitable worlds, but harvested from other celestial bodies, mainly asteroids. As could be expected, Ore must always be refined to be of any use.',
       factoryName: 'Ore Mine',
@@ -667,6 +692,7 @@ export const Wares = {
    },
    plasmaconductors: {
       id: 'plasmaconductors',
+      version: 0,
       name: 'Plasma Conductors',
       description: 'These conductors are designed to allow the flow of plasma through a component at the greatest possible efficiency. Though made relatively cheap to produce through years of research and development, plasma conductors remain highly complex pieces of technology. They are used primarily in the construction of weapon and shield components. ',
       factoryName: 'Plasma Conductor Factory',
@@ -708,6 +734,7 @@ export const Wares = {
    },
    quantumtubes: {
       id: 'quantumtubes',
+      version: 0,
       name: 'Quantum Tubes',
       description: 'An example of complex technology being made cheap through years of continuous research, no one outside of those manufacturing the technology quite knows how quantum tubes work. Though the outer wiring itself it easy to make and understand, the internal structure and what the wiring actually carries must be constructed only by those with countless hours of study and examination under their belts; otherwise risking catastrophic failures that can lead to entire shutdowns of the equipment in which they are used.',
       factoryName: 'Quantum Tube Factory',
@@ -749,6 +776,7 @@ export const Wares = {
    },
    refinedmetals: {
       id: 'refinedmetals',
+      version: 0,
       name: 'Refined Metals',
       description: 'Refined from ore found in countless asteroids across the Jump Gate network, these refined metals are cheap to produce and easy to reinforce, making them perfect for use in constructing all kinds of Hull Parts, not just for ships and stations, but also for smaller components that used across all of space.',
       factoryName: 'Ore Refinery',
@@ -775,6 +803,7 @@ export const Wares = {
    },
    scanningarrays: {
       id: 'scanningarrays',
+      version: 0,
       name: 'Scanning Arrays',
       description: 'Scanning arrays have seen elegant redesign over the years so that ships and stations do not risk fragile antennas being broken or destroyed by collisions. Now entirely internal systems, scanning arrays are used not just in ship and station scanners and radars, but are also used in the targeting systems supplied with turret and drone components. ',
       factoryName: 'Scanning Array Factory',
@@ -816,6 +845,7 @@ export const Wares = {
    },
    shieldcomponents: {
       id: 'shieldcomponents',
+      version: 0,
       name: 'Shield Components',
       description: 'From generators to coils that maintain energy over time, shield components are a wide arrange of technologies that provide everything necessary to build a variety of shields. Completely modular, each part can be used in each shield, which has led to a wide variety of new-generation shields being produced in recent years. As with all ship equipment, shields are built on-demand, and so shield components are produced in factories and shipped straight to shipyards and equipment docks where they can be more freely used for construction and repair.',
       factoryName: 'Shield Component Factory',
@@ -843,6 +873,7 @@ export const Wares = {
    },
    silicon: {
       id: 'silicon',
+      version: 0,
       name: 'Silicon',
       description: 'Silicon, required for the production of the most common types of silicon wafers, is usually mined or harvested from asteroids or other uninhabited celestial bodies.',
       factoryName: 'Silicon Mine',
@@ -856,6 +887,7 @@ export const Wares = {
    },
    siliconwafers: {
       id: 'siliconwafers',
+      version: 0,
       name: 'Silicon Wafers',
       description: 'If a technology requires any kind of chip, it is highly likely that is uses silicon wafers. Light, efficient and cheap to produce, these wafers are usually layered or constructed in hexagonal meshes to allow for quick transfer of data across a component.',
       factoryName: 'Silicon Refinery',
@@ -882,6 +914,7 @@ export const Wares = {
    },
    smartchips: {
       id: 'smartchips',
+      version: 0,
       name: 'Smart Chips',
       description: 'A specialised form of microchip that contains a small amount of heuristic programming, these chips cannot allow a system to learn, but can allow for small, snap intelligent decision-making that assists in targeting systems and makes autonomous piloting more accurate. These chips are primarily used in guided missiles and drones.',
       factoryName: 'Smart Chip Factory',
@@ -908,6 +941,7 @@ export const Wares = {
    },
    sojabeans: {
       id: 'sojabeans',
+      version: 0,
       name: 'Soja Beans',
       description: 'A small bean grown all across Paranid space, the soja bean add flavour and nutritional value to the soja husk; the Paranids\' primary food source. While this is its primary purpose, on many Paranid colonies it is also dried and ground into a powder and mixed with water, creating a flavoured and healthy drink that provides Paranid with ample energy.',
       factoryName: 'Soja Bean Farm',
@@ -934,6 +968,7 @@ export const Wares = {
    },
    sojahusk: {
       id: 'sojahusk',
+      version: 0,
       name: 'Soja Husk',
       description: 'A Paranid dish; soja beans that have been crushed into a paste and mixed with the flesh of the maja snail, then served in a maja snail shell, soja husk is accepted as both a tasteful and nutritious meal by the Paranid, though there are few non-Paranid who have dared try it.',
       factoryName: 'Soja Husk Factory',
@@ -962,6 +997,7 @@ export const Wares = {
    },
    spacefuel: {
       id: 'spacefuel',
+      version: 0,
       name: 'Spacefuel',
       description: 'Spacefuel is made from processing and distilling wheat, water and a blend of spices. It is a cheap but strong alcoholic beverage that has been made illegal to trade in bulk across the Jump Gate network in an attempt to avoid drunken accidents on both ships and stations. In order to sell spacefuel as a beverage, one must be a licenced bar owner.',
       factoryName: 'Spacefuel Factory',
@@ -989,6 +1025,7 @@ export const Wares = {
    },
    spaceweed: {
       id: 'spaceweed',
+      version: 0,
       name: 'Spaceweed',
       description: 'While seen as part of every-day life in Teladi society, spaceweed has been made illegal in both Argon and Paranid space, as it is seen as a dangerous narcotic. This point is argued heavily by many of those who partake in the drug, which is usually dried, crushed and then smoked, but attempts to legalise it have as of yet failed.',
       factoryName: 'Spaceweed Farm',
@@ -1016,6 +1053,7 @@ export const Wares = {
    },
    spices: {
       id: 'spices',
+      version: 0,
       name: 'Spices',
       description: 'Spices are used in many food and pharmaceutical products; primarily as an agent to add extra flavour, but also sometimes due to other properties that some are known to have, ranging from acting as a relaxant to a mild hallucinogenic. Factories that legally produce spices are commonly inspected to make sure their produce is in line with the local law, but as they are often shipped as a mixture, it is sometimes difficult to keep an eye on which spice is being used for which purpose.',
       factoryName: 'Spice Farm',
@@ -1042,6 +1080,7 @@ export const Wares = {
    },
    sunriseflowers: {
       id: 'sunriseflowers',
+      version: 0,
       name: 'Sunrise Flowers',
       description: 'Known to grow naturally only on Ianamus Zura, the Teladi mastered the art of bio-engineering a near-identical but still artificially grown sunrise flower long ago. When squeezed, the leaves of the sunrise flower produce a bitter-tasting oil that while despised by other species, the Teladi appreciate as an adequate food source.',
       factoryName: 'Sunrise Flower Farm',
@@ -1068,6 +1107,7 @@ export const Wares = {
    },
    superfluidcoolant: {
       id: 'superfluidcoolant',
+      version: 0,
       name: 'Superfluid Coolant',
       description: 'Designed with superfluidity to ensure both efficiency and endurance, this coolant is used in complex technical components such as plasma conductors and quantum tubes to protect said components from overheating. The losslessness of kinetic energy afforded by the coolant\'s superfluidity means that it can continue to circulate around the component for a much longer time before needing to be recycled. This has led to such components lifetimes being greatly increased.',
       factoryName: 'Helium Refinery',
@@ -1094,6 +1134,7 @@ export const Wares = {
    },
    swampplant: {
       id: 'swampplant',
+      version: 0,
       name: 'Swamp Plant',
       description: 'Cultivated in a warm and humid environment, swamp plant is a small moss-like plant known to have mildly narcotic properties; the reason it is dried and crushed to be used as space weed. Though it is widely known that swamp plant is the main ingredient of a drug made illegal throughout non-Teladi space, producing and trading it itself is not illegal, as it is only in the processing of the plant that the narcotic properties can be unlocked.',
       factoryName: 'Swamp Plant Farm',
@@ -1120,6 +1161,7 @@ export const Wares = {
    },
    teladianium: {
       id: 'teladianium',
+      version: 0,
       name: 'Teladianium',
       description: 'Teladianium is a hard, tough material used by the Teladi for station and, more commonly, ship construction. A lighter compound than the refined metals used in other races\' vessels, Teladianium is traditionally made from chemically treated Teladian mud. However, as the necessary chemicals are rarely found in space, and expensive to produce, the Teladi often replace them with the raw minerals found in asteroids.',
       factoryName: 'Teladianium Foundry',
@@ -1146,6 +1188,7 @@ export const Wares = {
    },
    turretcomponents: {
       id: 'turretcomponents',
+      version: 0,
       name: 'Turret Components',
       description: 'After the unification of the design process in station and capital ship weapon systems, many different turrets can be built from different configurations of these turret components.',
       factoryName: 'Turret Component Factory',
@@ -1174,6 +1217,7 @@ export const Wares = {
    },
    water: {
       id: 'water',
+      version: 0,
       name: 'Water',
       description: 'Essential to all known biological life forms, water has never become much of a catalyst for dispute amongst species, owing to its ubiquity in space. It is being used somewhere in the manufacturing process of nearly all goods available across space; especially, however, in the production of edible goods.',
       factoryName: 'Ice Refinery',
@@ -1200,6 +1244,7 @@ export const Wares = {
    },
    weaponcomponents: {
       id: 'weaponcomponents',
+      version: 0,
       name: 'Weapon Components',
       description: 'Made up from such things as trigger and reloading mechanisms, chambers and barrels, weapon components make up the mechanical part of all ship weapons. Combined with specialised advanced electronics, a number of different weapons can be made from the modular components, also across different size ranges. Shipped to shipyards and equipment docks as a single package, these components can then be put together relatively quickly and easily to make any weapon for the final customer on-demand.',
       factoryName: 'Weapon Component Factory',
@@ -1227,6 +1272,7 @@ export const Wares = {
    },
    wheat: {
       id: 'wheat',
+      version: 0,
       name: 'Wheat',
       description: 'A staple ingredient in food rations, wheat is grown across all of Argon space and consumed on a daily basis in the form of flatbread or bunyos. Where meat is still produced from Argnu, instead of synthesised or cloned, wheat is also fed to the animals, which results in meat of exceptional quality. ',
       factoryName: 'Wheat Farm',
@@ -1247,6 +1293,60 @@ export const Wares = {
             ],
             effects: [
                { type: Effects.work, product: 0.28 },
+            ],
+         },
+      ]
+   },
+   cheltmeat: {
+      id: 'cheltmeat',
+      version: 1,
+      name: 'Chelt Meat',
+      description: 'Chelts are sea-bound creatures that once roamed the seas and oceans of the Split home planet. The Split harvested them for meat, oil and their skins, which they used to create a tough leather like material. However, Chelts were eventually over-hunted and almost brought to extinction. Nowadays Chelts are grown in space, in Chelt Aquariums, and used to produce food for Split workers to consume.',
+      factoryName: 'Chelt Aquarium',
+      icon: 'ware_cheltmeat',
+      volume: 7,
+      transport: TransportType.container,
+      price: { min: 31, max: 72, avg: 51 },
+      group: WareGroups.agricultural,
+      production: [
+         {
+            time: 450,
+            amount: 250,
+            method: 'default',
+            name: 'Split',
+            wares: [
+               { ware: 'energycells', amount: 50 },
+               { ware: 'water', amount: 120 },
+            ],
+            effects: [
+               { type: Effects.work, product: 0.33 },
+            ],
+         },
+      ]
+   },
+   scruffinfruits: {
+      id: 'scruffinfruits',
+      version: 1,
+      name: 'Scruffin Fruit',
+      description: 'Scruffin are fruit similar to sweet potatoes. They are grown by Split farmers in large, open fields on a number of planets, as well as in space aboard large installations known as Scruffin Farms. Scruffin flesh is  a versatile foodstuff that, when processed, provides the basis of  a number of Split food types. Although Scruffin are traded both inside and outside Split territory, they are mainly in demand in areas where Split workers are in abundance.',
+      factoryName: 'Scruffin Farm',
+      icon: 'ware_scruffinfruit',
+      volume: 6,
+      transport: TransportType.container,
+      price: { min: 17, max: 40, avg: 28 },
+      group: WareGroups.agricultural,
+      production: [
+         {
+            time: 300,
+            amount: 300,
+            method: 'default',
+            name: 'Split',
+            wares: [
+               { ware: 'energycells', amount: 30 },
+               { ware: 'water', amount: 80 },
+            ],
+            effects: [
+               { type: Effects.work, product: 0.3 },
             ],
          },
       ]
@@ -1300,4 +1400,6 @@ export const AllWares = [
    Wares.water,
    Wares.weaponcomponents,
    Wares.wheat,
+   Wares.cheltmeat,
+   Wares.scruffinfruits,
 ];

@@ -10,6 +10,7 @@ import { TurretType } from './turret-type-data';
 export const Modules = {
    module_arg_conn_base_01: {
       id: 'module_arg_conn_base_01',
+      version: 0,
       name: 'Argon Base Connection Structure 01',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -36,6 +37,7 @@ export const Modules = {
    },
    module_arg_conn_base_02: {
       id: 'module_arg_conn_base_02',
+      version: 0,
       name: 'Argon Base Connection Structure 02',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -62,6 +64,7 @@ export const Modules = {
    },
    module_arg_conn_base_03: {
       id: 'module_arg_conn_base_03',
+      version: 0,
       name: 'Argon Base Connection Structure 03',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -88,6 +91,7 @@ export const Modules = {
    },
    module_arg_conn_cross_01: {
       id: 'module_arg_conn_cross_01',
+      version: 0,
       name: 'Argon Cross Connection Structure 01',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -114,6 +118,7 @@ export const Modules = {
    },
    module_arg_conn_vertical_01: {
       id: 'module_arg_conn_vertical_01',
+      version: 0,
       name: 'Argon Vertical Connection Structure 01',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -140,6 +145,7 @@ export const Modules = {
    },
    module_arg_conn_vertical_02: {
       id: 'module_arg_conn_vertical_02',
+      version: 0,
       name: 'Argon Vertical Connection Structure 02',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -166,6 +172,7 @@ export const Modules = {
    },
    module_arg_def_claim_01: {
       id: 'module_arg_def_claim_01',
+      version: 0,
       name: 'Argon Administrative Centre',
       description: 'No information available',
       type: ModuleTypes.defencemodule,
@@ -192,6 +199,7 @@ export const Modules = {
    },
    module_arg_def_disc_01: {
       id: 'module_arg_def_disc_01',
+      version: 0,
       name: 'Argon Disc Defence Platform',
       description: 'No information available',
       type: ModuleTypes.defencemodule,
@@ -266,6 +274,7 @@ export const Modules = {
    },
    module_arg_def_tube_01: {
       id: 'module_arg_def_tube_01',
+      version: 0,
       name: 'Argon Bridge Defence Platform',
       description: 'No information available',
       type: ModuleTypes.defencemodule,
@@ -330,6 +339,7 @@ export const Modules = {
    },
    module_arg_dock_m_01: {
       id: 'module_arg_dock_m_01',
+      version: 0,
       name: '1M6S Standard Dock Area',
       description: 'No information available',
       type: ModuleTypes.dockarea,
@@ -364,6 +374,7 @@ export const Modules = {
    },
    module_arg_dock_m_01_hightech: {
       id: 'module_arg_dock_m_01_hightech',
+      version: 0,
       name: '1M6S Luxury Dock Area',
       description: 'No information available',
       type: ModuleTypes.dockarea,
@@ -398,6 +409,7 @@ export const Modules = {
    },
    module_arg_dock_m_01_lowtech: {
       id: 'module_arg_dock_m_01_lowtech',
+      version: 0,
       name: '1M6S Basic Dock Area',
       description: 'No information available',
       type: ModuleTypes.dockarea,
@@ -432,6 +444,7 @@ export const Modules = {
    },
    module_arg_dock_m_02: {
       id: 'module_arg_dock_m_02',
+      version: 0,
       name: '3M6S Standard Dock Area',
       description: 'No information available',
       type: ModuleTypes.dockarea,
@@ -466,6 +479,7 @@ export const Modules = {
    },
    module_arg_dock_m_02_hightech: {
       id: 'module_arg_dock_m_02_hightech',
+      version: 0,
       name: '3M6S Luxury Dock Area',
       description: 'No information available',
       type: ModuleTypes.dockarea,
@@ -500,6 +514,7 @@ export const Modules = {
    },
    module_arg_dock_m_02_lowtech: {
       id: 'module_arg_dock_m_02_lowtech',
+      version: 0,
       name: '3M6S Basic Dock Area',
       description: 'No information available',
       type: ModuleTypes.dockarea,
@@ -534,6 +549,7 @@ export const Modules = {
    },
    module_arg_dock_tradestation_02: {
       id: 'module_arg_dock_tradestation_02',
+      version: 0,
       name: '8M Standard Dock Area',
       description: 'No information available',
       type: ModuleTypes.dockarea,
@@ -560,6 +576,7 @@ export const Modules = {
    },
    module_arg_hab_l_01: {
       id: 'module_arg_hab_l_01',
+      version: 0,
       name: 'Argon L Habitat',
       description: 'No information available',
       type: ModuleTypes.habitation,
@@ -591,6 +608,7 @@ export const Modules = {
    },
    module_arg_hab_m_01: {
       id: 'module_arg_hab_m_01',
+      version: 0,
       name: 'Argon M Habitat',
       description: 'No information available',
       type: ModuleTypes.habitation,
@@ -622,6 +640,7 @@ export const Modules = {
    },
    module_arg_hab_s_01: {
       id: 'module_arg_hab_s_01',
+      version: 0,
       name: 'Argon S Habitat',
       description: 'No information available',
       type: ModuleTypes.habitation,
@@ -653,6 +672,7 @@ export const Modules = {
    },
    module_arg_pier_l_01: {
       id: 'module_arg_pier_l_01',
+      version: 0,
       name: 'Argon 3-Dock T Pier',
       description: 'No information available',
       type: ModuleTypes.pier,
@@ -679,6 +699,7 @@ export const Modules = {
    },
    module_arg_pier_l_02: {
       id: 'module_arg_pier_l_02',
+      version: 0,
       name: 'Argon 1-Dock Pier',
       description: 'No information available',
       type: ModuleTypes.pier,
@@ -706,6 +727,7 @@ export const Modules = {
    },
    module_arg_pier_l_03: {
       id: 'module_arg_pier_l_03',
+      version: 0,
       name: 'Argon 3-Dock E Pier',
       description: 'No information available',
       type: ModuleTypes.pier,
@@ -732,6 +754,7 @@ export const Modules = {
    },
    module_arg_prod_foodrations_01: {
       id: 'module_arg_prod_foodrations_01',
+      version: 0,
       name: 'Food Ration Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -785,6 +808,7 @@ export const Modules = {
    },
    module_arg_prod_meat_01: {
       id: 'module_arg_prod_meat_01',
+      version: 0,
       name: 'Meat Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -838,6 +862,7 @@ export const Modules = {
    },
    module_arg_prod_medicalsupplies_01: {
       id: 'module_arg_prod_medicalsupplies_01',
+      version: 0,
       name: 'Argon Medical Supply Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -887,6 +912,7 @@ export const Modules = {
    },
    module_arg_prod_spacefuel_01: {
       id: 'module_arg_prod_spacefuel_01',
+      version: 0,
       name: 'Spacefuel Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -939,6 +965,7 @@ export const Modules = {
    },
    module_arg_prod_wheat_01: {
       id: 'module_arg_prod_wheat_01',
+      version: 0,
       name: 'Wheat Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -992,6 +1019,7 @@ export const Modules = {
    },
    module_arg_stor_container_l_01: {
       id: 'module_arg_stor_container_l_01',
+      version: 0,
       name: 'Argon L Container Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -1048,6 +1076,7 @@ export const Modules = {
    },
    module_arg_stor_container_m_01: {
       id: 'module_arg_stor_container_m_01',
+      version: 0,
       name: 'Argon M Container Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -1092,6 +1121,7 @@ export const Modules = {
    },
    module_arg_stor_container_s_01: {
       id: 'module_arg_stor_container_s_01',
+      version: 0,
       name: 'Argon S Container Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -1133,6 +1163,7 @@ export const Modules = {
    },
    module_arg_stor_liquid_l_01: {
       id: 'module_arg_stor_liquid_l_01',
+      version: 0,
       name: 'Argon L Liquid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -1189,6 +1220,7 @@ export const Modules = {
    },
    module_arg_stor_liquid_m_01: {
       id: 'module_arg_stor_liquid_m_01',
+      version: 0,
       name: 'Argon M Liquid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -1233,6 +1265,7 @@ export const Modules = {
    },
    module_arg_stor_liquid_s_01: {
       id: 'module_arg_stor_liquid_s_01',
+      version: 0,
       name: 'Argon S Liquid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -1271,6 +1304,7 @@ export const Modules = {
    },
    module_arg_stor_solid_l_01: {
       id: 'module_arg_stor_solid_l_01',
+      version: 0,
       name: 'Argon L Solid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -1327,6 +1361,7 @@ export const Modules = {
    },
    module_arg_stor_solid_m_01: {
       id: 'module_arg_stor_solid_m_01',
+      version: 0,
       name: 'Argon M Solid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -1371,6 +1406,7 @@ export const Modules = {
    },
    module_arg_stor_solid_s_01: {
       id: 'module_arg_stor_solid_s_01',
+      version: 0,
       name: 'Argon S Solid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -1412,6 +1448,7 @@ export const Modules = {
    },
    module_gen_build_dockarea_m_01: {
       id: 'module_gen_build_dockarea_m_01',
+      version: 0,
       name: 'S/M Ship Fabrication Bay',
       description: 'No information available',
       type: ModuleTypes.buildmodule,
@@ -1461,6 +1498,7 @@ export const Modules = {
    },
    module_gen_build_l_01: {
       id: 'module_gen_build_l_01',
+      version: 0,
       name: 'L Ship Fabrication Bay',
       description: 'No information available',
       type: ModuleTypes.buildmodule,
@@ -1494,6 +1532,7 @@ export const Modules = {
    },
    module_gen_build_xl_01: {
       id: 'module_gen_build_xl_01',
+      version: 0,
       name: 'XL Ship Fabrication Bay',
       description: 'No information available',
       type: ModuleTypes.buildmodule,
@@ -1527,6 +1566,7 @@ export const Modules = {
    },
    module_gen_equip_dockarea_m_01: {
       id: 'module_gen_equip_dockarea_m_01',
+      version: 0,
       name: 'S/M Ship Maintenance Bay',
       description: 'No information available',
       type: ModuleTypes.buildmodule,
@@ -1564,6 +1604,7 @@ export const Modules = {
    },
    module_gen_equip_l_01: {
       id: 'module_gen_equip_l_01',
+      version: 0,
       name: 'L Ship Maintenance Bay',
       description: 'No information available',
       type: ModuleTypes.buildmodule,
@@ -1597,6 +1638,7 @@ export const Modules = {
    },
    module_gen_equip_xl_01: {
       id: 'module_gen_equip_xl_01',
+      version: 0,
       name: 'XL Ship Maintenance Bay',
       description: 'No information available',
       type: ModuleTypes.buildmodule,
@@ -1630,6 +1672,7 @@ export const Modules = {
    },
    module_gen_prod_advancedcomposites_01: {
       id: 'module_gen_prod_advancedcomposites_01',
+      version: 0,
       name: 'Advanced Composite Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -1686,6 +1729,7 @@ export const Modules = {
    },
    module_gen_prod_advancedelectronics_01: {
       id: 'module_gen_prod_advancedelectronics_01',
+      version: 0,
       name: 'Advanced Electronics Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -1742,6 +1786,7 @@ export const Modules = {
    },
    module_gen_prod_antimattercells_01: {
       id: 'module_gen_prod_antimattercells_01',
+      version: 0,
       name: 'Antimatter Cell Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -1798,6 +1843,7 @@ export const Modules = {
    },
    module_gen_prod_antimatterconverters_01: {
       id: 'module_gen_prod_antimatterconverters_01',
+      version: 0,
       name: 'Antimatter Converter Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -1854,6 +1900,7 @@ export const Modules = {
    },
    module_gen_prod_claytronics_01: {
       id: 'module_gen_prod_claytronics_01',
+      version: 0,
       name: 'Claytronics Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -1909,6 +1956,7 @@ export const Modules = {
    },
    module_gen_prod_dronecomponents_01: {
       id: 'module_gen_prod_dronecomponents_01',
+      version: 0,
       name: 'Drone Component Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -1963,6 +2011,7 @@ export const Modules = {
    },
    module_gen_prod_energycells_01: {
       id: 'module_gen_prod_energycells_01',
+      version: 0,
       name: 'Energy Cell Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2007,6 +2056,7 @@ export const Modules = {
    },
    module_gen_prod_engineparts_01: {
       id: 'module_gen_prod_engineparts_01',
+      version: 0,
       name: 'Engine Part Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2062,6 +2112,7 @@ export const Modules = {
    },
    module_gen_prod_fieldcoils_01: {
       id: 'module_gen_prod_fieldcoils_01',
+      version: 0,
       name: 'Field Coil Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2111,6 +2162,7 @@ export const Modules = {
    },
    module_gen_prod_graphene_01: {
       id: 'module_gen_prod_graphene_01',
+      version: 0,
       name: 'Graphene Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2167,6 +2219,7 @@ export const Modules = {
    },
    module_gen_prod_hullparts_01: {
       id: 'module_gen_prod_hullparts_01',
+      version: 0,
       name: 'Hull Part Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2223,6 +2276,7 @@ export const Modules = {
    },
    module_gen_prod_microchips_01: {
       id: 'module_gen_prod_microchips_01',
+      version: 0,
       name: 'Microchip Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2279,6 +2333,7 @@ export const Modules = {
    },
    module_gen_prod_missilecomponents_01: {
       id: 'module_gen_prod_missilecomponents_01',
+      version: 0,
       name: 'Missile Component Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2334,6 +2389,7 @@ export const Modules = {
    },
    module_gen_prod_plasmaconductors_01: {
       id: 'module_gen_prod_plasmaconductors_01',
+      version: 0,
       name: 'Plasma Conductor Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2390,6 +2446,7 @@ export const Modules = {
    },
    module_gen_prod_quantumtubes_01: {
       id: 'module_gen_prod_quantumtubes_01',
+      version: 0,
       name: 'Quantum Tube Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2440,6 +2497,7 @@ export const Modules = {
    },
    module_gen_prod_refinedmetals_01: {
       id: 'module_gen_prod_refinedmetals_01',
+      version: 0,
       name: 'Refined Metal Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2496,6 +2554,7 @@ export const Modules = {
    },
    module_gen_prod_scanningarrays_01: {
       id: 'module_gen_prod_scanningarrays_01',
+      version: 0,
       name: 'Scanning Array Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2552,6 +2611,7 @@ export const Modules = {
    },
    module_gen_prod_shieldcomponents_01: {
       id: 'module_gen_prod_shieldcomponents_01',
+      version: 0,
       name: 'Shield Component Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2608,6 +2668,7 @@ export const Modules = {
    },
    module_gen_prod_siliconwafers_01: {
       id: 'module_gen_prod_siliconwafers_01',
+      version: 0,
       name: 'Silicon Wafer Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2660,6 +2721,7 @@ export const Modules = {
    },
    module_gen_prod_smartchips_01: {
       id: 'module_gen_prod_smartchips_01',
+      version: 0,
       name: 'Smart Chip Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2708,6 +2770,7 @@ export const Modules = {
    },
    module_gen_prod_spices_01: {
       id: 'module_gen_prod_spices_01',
+      version: 0,
       name: 'Spice Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2761,6 +2824,7 @@ export const Modules = {
    },
    module_gen_prod_superfluidcoolant_01: {
       id: 'module_gen_prod_superfluidcoolant_01',
+      version: 0,
       name: 'Superfluid Coolant Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2814,6 +2878,7 @@ export const Modules = {
    },
    module_gen_prod_turretcomponents_01: {
       id: 'module_gen_prod_turretcomponents_01',
+      version: 0,
       name: 'Turret Component Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2865,6 +2930,7 @@ export const Modules = {
    },
    module_gen_prod_water_01: {
       id: 'module_gen_prod_water_01',
+      version: 0,
       name: 'Water Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2921,6 +2987,7 @@ export const Modules = {
    },
    module_gen_prod_weaponcomponents_01: {
       id: 'module_gen_prod_weaponcomponents_01',
+      version: 0,
       name: 'Weapon Component Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -2975,6 +3042,7 @@ export const Modules = {
    },
    module_par_conn_base_01: {
       id: 'module_par_conn_base_01',
+      version: 0,
       name: 'Paranid Base Connection Structure 01',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -3002,6 +3070,7 @@ export const Modules = {
    },
    module_par_conn_base_02: {
       id: 'module_par_conn_base_02',
+      version: 0,
       name: 'Paranid Base Connection Structure 02',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -3029,6 +3098,7 @@ export const Modules = {
    },
    module_par_conn_base_03: {
       id: 'module_par_conn_base_03',
+      version: 0,
       name: 'Paranid Base Connection Structure 03',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -3056,6 +3126,7 @@ export const Modules = {
    },
    module_par_conn_cross_01: {
       id: 'module_par_conn_cross_01',
+      version: 0,
       name: 'Paranid Cross Connection Structure 01',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -3083,6 +3154,7 @@ export const Modules = {
    },
    module_par_conn_cross_02: {
       id: 'module_par_conn_cross_02',
+      version: 0,
       name: 'Paranid Cross Connection Structure 02',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -3110,6 +3182,7 @@ export const Modules = {
    },
    module_par_conn_cross_03: {
       id: 'module_par_conn_cross_03',
+      version: 0,
       name: 'Paranid Cross Connection Structure 03',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -3137,6 +3210,7 @@ export const Modules = {
    },
    module_par_conn_vertical_01: {
       id: 'module_par_conn_vertical_01',
+      version: 0,
       name: 'Paranid Vertical Connection Structure 01',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -3164,6 +3238,7 @@ export const Modules = {
    },
    module_par_conn_vertical_02: {
       id: 'module_par_conn_vertical_02',
+      version: 0,
       name: 'Paranid Vertical Connection Structure 02',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -3191,6 +3266,7 @@ export const Modules = {
    },
    module_par_def_claim_01: {
       id: 'module_par_def_claim_01',
+      version: 0,
       name: 'Paranid Administrative Centre',
       description: 'No information available',
       type: ModuleTypes.defencemodule,
@@ -3218,6 +3294,7 @@ export const Modules = {
    },
    module_par_def_disc_01: {
       id: 'module_par_def_disc_01',
+      version: 0,
       name: 'Paranid Disc Defence Platform',
       description: 'No information available',
       type: ModuleTypes.defencemodule,
@@ -3278,6 +3355,7 @@ export const Modules = {
    },
    module_par_def_tube_01: {
       id: 'module_par_def_tube_01',
+      version: 0,
       name: 'Paranid Bridge Defence Platform',
       description: 'No information available',
       type: ModuleTypes.defencemodule,
@@ -3332,6 +3410,7 @@ export const Modules = {
    },
    module_par_hab_l_01: {
       id: 'module_par_hab_l_01',
+      version: 0,
       name: 'Paranid L Dome',
       description: 'No information available',
       type: ModuleTypes.habitation,
@@ -3364,6 +3443,7 @@ export const Modules = {
    },
    module_par_hab_m_01: {
       id: 'module_par_hab_m_01',
+      version: 0,
       name: 'Paranid M Dome',
       description: 'No information available',
       type: ModuleTypes.habitation,
@@ -3396,6 +3476,7 @@ export const Modules = {
    },
    module_par_hab_s_01: {
       id: 'module_par_hab_s_01',
+      version: 0,
       name: 'Paranid S Dome',
       description: 'No information available',
       type: ModuleTypes.habitation,
@@ -3428,6 +3509,7 @@ export const Modules = {
    },
    module_par_pier_l_01: {
       id: 'module_par_pier_l_01',
+      version: 0,
       name: 'Paranid 3-Dock T Pier',
       description: 'No information available',
       type: ModuleTypes.pier,
@@ -3455,6 +3537,7 @@ export const Modules = {
    },
    module_par_pier_l_02: {
       id: 'module_par_pier_l_02',
+      version: 0,
       name: 'Paranid 1-Dock Pier',
       description: 'No information available',
       type: ModuleTypes.pier,
@@ -3483,6 +3566,7 @@ export const Modules = {
    },
    module_par_pier_l_03: {
       id: 'module_par_pier_l_03',
+      version: 0,
       name: 'Paranid 3-Dock E Pier',
       description: 'No information available',
       type: ModuleTypes.pier,
@@ -3510,6 +3594,7 @@ export const Modules = {
    },
    module_par_prod_majadust_01: {
       id: 'module_par_prod_majadust_01',
+      version: 0,
       name: 'Maja Dust Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -3557,6 +3642,7 @@ export const Modules = {
    },
    module_par_prod_majasnails_01: {
       id: 'module_par_prod_majasnails_01',
+      version: 0,
       name: 'Maja Snail Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -3605,6 +3691,7 @@ export const Modules = {
    },
    module_par_prod_medicalsupplies_01: {
       id: 'module_par_prod_medicalsupplies_01',
+      version: 0,
       name: 'Paranid Medical Supply Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -3656,6 +3743,7 @@ export const Modules = {
    },
    module_par_prod_sojabeans_01: {
       id: 'module_par_prod_sojabeans_01',
+      version: 0,
       name: 'Soja Bean Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -3710,6 +3798,7 @@ export const Modules = {
    },
    module_par_prod_sojahusk_01: {
       id: 'module_par_prod_sojahusk_01',
+      version: 0,
       name: 'Soja Husk Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -3761,6 +3850,7 @@ export const Modules = {
    },
    module_par_stor_container_l_01: {
       id: 'module_par_stor_container_l_01',
+      version: 0,
       name: 'Paranid L Container Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -3806,6 +3896,7 @@ export const Modules = {
    },
    module_par_stor_container_m_01: {
       id: 'module_par_stor_container_m_01',
+      version: 0,
       name: 'Paranid M Container Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -3851,6 +3942,7 @@ export const Modules = {
    },
    module_par_stor_container_s_01: {
       id: 'module_par_stor_container_s_01',
+      version: 0,
       name: 'Paranid S Container Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -3895,6 +3987,7 @@ export const Modules = {
    },
    module_par_stor_liquid_l_01: {
       id: 'module_par_stor_liquid_l_01',
+      version: 0,
       name: 'Paranid L Liquid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -3939,6 +4032,7 @@ export const Modules = {
    },
    module_par_stor_liquid_m_01: {
       id: 'module_par_stor_liquid_m_01',
+      version: 0,
       name: 'Paranid M Liquid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -3983,6 +4077,7 @@ export const Modules = {
    },
    module_par_stor_liquid_s_01: {
       id: 'module_par_stor_liquid_s_01',
+      version: 0,
       name: 'Paranid S Liquid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -4027,6 +4122,7 @@ export const Modules = {
    },
    module_par_stor_solid_l_01: {
       id: 'module_par_stor_solid_l_01',
+      version: 0,
       name: 'Paranid L Solid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -4072,6 +4168,7 @@ export const Modules = {
    },
    module_par_stor_solid_m_01: {
       id: 'module_par_stor_solid_m_01',
+      version: 0,
       name: 'Paranid M Solid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -4117,6 +4214,7 @@ export const Modules = {
    },
    module_par_stor_solid_s_01: {
       id: 'module_par_stor_solid_s_01',
+      version: 0,
       name: 'Paranid S Solid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -4162,6 +4260,7 @@ export const Modules = {
    },
    module_tel_conn_base_01: {
       id: 'module_tel_conn_base_01',
+      version: 0,
       name: 'Teladi Base Connection Structure 01',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -4187,6 +4286,7 @@ export const Modules = {
    },
    module_tel_conn_base_02: {
       id: 'module_tel_conn_base_02',
+      version: 0,
       name: 'Teladi Base Connection Structure 02',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -4212,6 +4312,7 @@ export const Modules = {
    },
    module_tel_conn_base_03: {
       id: 'module_tel_conn_base_03',
+      version: 0,
       name: 'Teladi Base Connection Structure 03',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -4237,6 +4338,7 @@ export const Modules = {
    },
    module_tel_conn_cross_01: {
       id: 'module_tel_conn_cross_01',
+      version: 0,
       name: 'Teladi Cross Connection Structure 01',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -4262,6 +4364,7 @@ export const Modules = {
    },
    module_tel_conn_vertical_01: {
       id: 'module_tel_conn_vertical_01',
+      version: 0,
       name: 'Teladi Vertical Connection Structure 01',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -4287,6 +4390,7 @@ export const Modules = {
    },
    module_tel_conn_vertical_02: {
       id: 'module_tel_conn_vertical_02',
+      version: 0,
       name: 'Teladi Vertical Connection Structure 02',
       description: 'No information available',
       type: ModuleTypes.connectionmodule,
@@ -4312,6 +4416,7 @@ export const Modules = {
    },
    module_tel_def_claim_01: {
       id: 'module_tel_def_claim_01',
+      version: 0,
       name: 'Teladi Administrative Centre',
       description: 'No information available',
       type: ModuleTypes.defencemodule,
@@ -4338,6 +4443,7 @@ export const Modules = {
    },
    module_tel_def_disc_01: {
       id: 'module_tel_def_disc_01',
+      version: 0,
       name: 'Teladi Disc Defence Platform',
       description: 'No information available',
       type: ModuleTypes.defencemodule,
@@ -4395,6 +4501,7 @@ export const Modules = {
    },
    module_tel_def_tube_01: {
       id: 'module_tel_def_tube_01',
+      version: 0,
       name: 'Teladi Bridge Defence Platform',
       description: 'No information available',
       type: ModuleTypes.defencemodule,
@@ -4448,6 +4555,7 @@ export const Modules = {
    },
    module_tel_hab_l_01: {
       id: 'module_tel_hab_l_01',
+      version: 0,
       name: 'Teladi L Biome',
       description: 'No information available',
       type: ModuleTypes.habitation,
@@ -4478,6 +4586,7 @@ export const Modules = {
    },
    module_tel_hab_m_01: {
       id: 'module_tel_hab_m_01',
+      version: 0,
       name: 'Teladi M Biome',
       description: 'No information available',
       type: ModuleTypes.habitation,
@@ -4508,6 +4617,7 @@ export const Modules = {
    },
    module_tel_hab_s_01: {
       id: 'module_tel_hab_s_01',
+      version: 0,
       name: 'Teladi S Biome',
       description: 'No information available',
       type: ModuleTypes.habitation,
@@ -4538,6 +4648,7 @@ export const Modules = {
    },
    module_tel_pier_l_01: {
       id: 'module_tel_pier_l_01',
+      version: 0,
       name: 'Teladi 3-Dock T Pier',
       description: 'No information available',
       type: ModuleTypes.pier,
@@ -4565,6 +4676,7 @@ export const Modules = {
    },
    module_tel_pier_l_02: {
       id: 'module_tel_pier_l_02',
+      version: 0,
       name: 'Teladi 1-Dock Pier',
       description: 'No information available',
       type: ModuleTypes.pier,
@@ -4592,6 +4704,7 @@ export const Modules = {
    },
    module_tel_pier_l_03: {
       id: 'module_tel_pier_l_03',
+      version: 0,
       name: 'Teladi 3-Dock E Pier',
       description: 'No information available',
       type: ModuleTypes.pier,
@@ -4619,6 +4732,7 @@ export const Modules = {
    },
    module_tel_prod_advancedcomposites_01: {
       id: 'module_tel_prod_advancedcomposites_01',
+      version: 0,
       name: 'Teladi Advanced Composite Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -4671,6 +4785,7 @@ export const Modules = {
    },
    module_tel_prod_engineparts_01: {
       id: 'module_tel_prod_engineparts_01',
+      version: 0,
       name: 'Teladi Engine Part Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -4723,6 +4838,7 @@ export const Modules = {
    },
    module_tel_prod_hullparts_01: {
       id: 'module_tel_prod_hullparts_01',
+      version: 0,
       name: 'Teladi Hull Part Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -4775,6 +4891,7 @@ export const Modules = {
    },
    module_tel_prod_medicalsupplies_01: {
       id: 'module_tel_prod_medicalsupplies_01',
+      version: 0,
       name: 'Teladi Medical Supply Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -4824,6 +4941,7 @@ export const Modules = {
    },
    module_tel_prod_nostropoil_01: {
       id: 'module_tel_prod_nostropoil_01',
+      version: 0,
       name: 'Nostrop Oil Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -4876,6 +4994,7 @@ export const Modules = {
    },
    module_tel_prod_scanningarrays_01: {
       id: 'module_tel_prod_scanningarrays_01',
+      version: 0,
       name: 'Teladi Scanning Array Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -4928,6 +5047,7 @@ export const Modules = {
    },
    module_tel_prod_spaceweed_01: {
       id: 'module_tel_prod_spaceweed_01',
+      version: 0,
       name: 'Spaceweed Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -4976,6 +5096,7 @@ export const Modules = {
    },
    module_tel_prod_sunriseflowers_01: {
       id: 'module_tel_prod_sunriseflowers_01',
+      version: 0,
       name: 'Sunrise Flower Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -5022,6 +5143,7 @@ export const Modules = {
    },
    module_tel_prod_swampplant_01: {
       id: 'module_tel_prod_swampplant_01',
+      version: 0,
       name: 'Swamp Plant Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -5074,6 +5196,7 @@ export const Modules = {
    },
    module_tel_prod_teladianium_01: {
       id: 'module_tel_prod_teladianium_01',
+      version: 0,
       name: 'Teladianium Production',
       description: 'No information available',
       type: ModuleTypes.production,
@@ -5123,6 +5246,7 @@ export const Modules = {
    },
    module_tel_stor_container_l_01: {
       id: 'module_tel_stor_container_l_01',
+      version: 0,
       name: 'Teladi L Container Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -5178,6 +5302,7 @@ export const Modules = {
    },
    module_tel_stor_container_m_01: {
       id: 'module_tel_stor_container_m_01',
+      version: 0,
       name: 'Teladi M Container Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -5227,6 +5352,7 @@ export const Modules = {
    },
    module_tel_stor_container_s_01: {
       id: 'module_tel_stor_container_s_01',
+      version: 0,
       name: 'Teladi S Container Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -5273,6 +5399,7 @@ export const Modules = {
    },
    module_tel_stor_liquid_l_01: {
       id: 'module_tel_stor_liquid_l_01',
+      version: 0,
       name: 'Teladi L Liquid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -5328,6 +5455,7 @@ export const Modules = {
    },
    module_tel_stor_liquid_m_01: {
       id: 'module_tel_stor_liquid_m_01',
+      version: 0,
       name: 'Teladi M Liquid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -5377,6 +5505,7 @@ export const Modules = {
    },
    module_tel_stor_liquid_s_01: {
       id: 'module_tel_stor_liquid_s_01',
+      version: 0,
       name: 'Teladi S Liquid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -5423,6 +5552,7 @@ export const Modules = {
    },
    module_tel_stor_solid_l_01: {
       id: 'module_tel_stor_solid_l_01',
+      version: 0,
       name: 'Teladi L Solid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -5478,6 +5608,7 @@ export const Modules = {
    },
    module_tel_stor_solid_m_01: {
       id: 'module_tel_stor_solid_m_01',
+      version: 0,
       name: 'Teladi M Solid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -5527,6 +5658,7 @@ export const Modules = {
    },
    module_tel_stor_solid_s_01: {
       id: 'module_tel_stor_solid_s_01',
+      version: 0,
       name: 'Teladi S Solid Storage',
       description: 'No information available',
       type: ModuleTypes.storage,
@@ -5567,6 +5699,912 @@ export const Modules = {
                { ware: 'claytronics', amount: 51 },
                { ware: 'energycells', amount: 102 },
                { ware: 'hullparts', amount: 187 },
+            ],
+         },
+      ]
+   },
+   module_spl_conn_base_01: {
+      id: 'module_spl_conn_base_01',
+      version: 1,
+      name: 'Split Base Connection Structure 01',
+      description: 'No information available',
+      type: ModuleTypes.connectionmodule,
+      hull: 237000,
+      makerRace: Races.split,
+      price: { min: 92363, max: 124961, avg: 108662 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 103,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 17 },
+               { ware: 'energycells', amount: 34 },
+               { ware: 'hullparts', amount: 62 },
+            ],
+         },
+      ]
+   },
+   module_spl_conn_base_02: {
+      id: 'module_spl_conn_base_02',
+      version: 1,
+      name: 'Split Base Connection Structure 02',
+      description: 'No information available',
+      type: ModuleTypes.connectionmodule,
+      hull: 150000,
+      makerRace: Races.split,
+      price: { min: 75585, max: 102263, avg: 88924 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 82,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 14 },
+               { ware: 'energycells', amount: 27 },
+               { ware: 'hullparts', amount: 50 },
+            ],
+         },
+      ]
+   },
+   module_spl_conn_base_03: {
+      id: 'module_spl_conn_base_03',
+      version: 1,
+      name: 'Split Base Connection Structure 03',
+      description: 'No information available',
+      type: ModuleTypes.connectionmodule,
+      hull: 280000,
+      makerRace: Races.split,
+      price: { min: 98841, max: 133727, avg: 116284 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 112,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 18 },
+               { ware: 'energycells', amount: 37 },
+               { ware: 'hullparts', amount: 68 },
+            ],
+         },
+      ]
+   },
+   module_spl_conn_cross_01: {
+      id: 'module_spl_conn_cross_01',
+      version: 1,
+      name: 'Split Cross Connection Structure 01',
+      description: 'No information available',
+      type: ModuleTypes.connectionmodule,
+      hull: 120000,
+      makerRace: Races.split,
+      price: { min: 65300, max: 88348, avg: 76824 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 73,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 12 },
+               { ware: 'energycells', amount: 24 },
+               { ware: 'hullparts', amount: 44 },
+            ],
+         },
+      ]
+   },
+   module_spl_conn_vertical_01: {
+      id: 'module_spl_conn_vertical_01',
+      version: 1,
+      name: 'Split Vertical Connection Structure 01',
+      description: 'No information available',
+      type: ModuleTypes.connectionmodule,
+      hull: 79000,
+      makerRace: Races.split,
+      price: { min: 54125, max: 73227, avg: 63676 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 59,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 10 },
+               { ware: 'energycells', amount: 20 },
+               { ware: 'hullparts', amount: 36 },
+            ],
+         },
+      ]
+   },
+   module_spl_conn_vertical_02: {
+      id: 'module_spl_conn_vertical_02',
+      version: 1,
+      name: 'Split Vertical Connection Structure 02',
+      description: 'No information available',
+      type: ModuleTypes.connectionmodule,
+      hull: 143000,
+      makerRace: Races.split,
+      price: { min: 70888, max: 95908, avg: 83398 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 80,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 13 },
+               { ware: 'energycells', amount: 26 },
+               { ware: 'hullparts', amount: 48 },
+            ],
+         },
+      ]
+   },
+   module_spl_def_claim_01: {
+      id: 'module_spl_def_claim_01',
+      version: 1,
+      name: 'Split Administrative Centre',
+      description: 'No information available',
+      type: ModuleTypes.defencemodule,
+      hull: 520000,
+      makerRace: Races.split,
+      price: { min: 750516, max: 1015404, avg: 882960 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 833,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 138 },
+               { ware: 'energycells', amount: 276 },
+               { ware: 'hullparts', amount: 505 },
+            ],
+         },
+      ]
+   },
+   module_spl_def_disc_01: {
+      id: 'module_spl_def_disc_01',
+      version: 1,
+      name: 'Split Disc Defence Platform',
+      description: 'No information available',
+      type: ModuleTypes.defencemodule,
+      explosionDamage: 12000,
+      hull: 197400,
+      makerRace: Races.split,
+      price: { min: 570940, max: 772448, avg: 671694 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      shields: [
+         { group: 'group01', size: Size.medium, hittable: true },
+         { group: 'group04', size: Size.medium, hittable: true },
+         { group: 'group06', size: Size.medium, hittable: true },
+         { group: 'group02', size: Size.medium, hittable: true },
+         { group: 'group05', size: Size.medium, hittable: true },
+         { group: 'group03', size: Size.medium, hittable: true },
+         { group: 'group11', size: Size.large, hittable: false },
+         { group: 'group12', size: Size.large, hittable: false },
+         { group: 'group07', size: Size.large, hittable: false },
+         { group: 'group08', size: Size.large, hittable: false },
+         { group: 'group09', size: Size.large, hittable: false },
+         { group: 'group10', size: Size.large, hittable: false },
+      ],
+      turrets: [
+         { group: 'group11', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group04', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group04', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group06', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group06', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group05', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group05', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group03', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group03', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group11', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group10', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group10', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group12', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group12', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group07', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group07', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group08', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group08', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group09', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group09', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      production: [
+         {
+            time: 632,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 105 },
+               { ware: 'energycells', amount: 210 },
+               { ware: 'hullparts', amount: 384 },
+            ],
+         },
+      ]
+   },
+   module_spl_def_tube_01: {
+      id: 'module_spl_def_tube_01',
+      version: 1,
+      name: 'Split Bridge Defence Platform',
+      description: 'No information available',
+      type: ModuleTypes.defencemodule,
+      explosionDamage: 12000,
+      hull: 148800,
+      makerRace: Races.split,
+      price: { min: 570940, max: 772448, avg: 671694 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      shields: [
+         { group: 'group06', size: Size.large, hittable: false },
+         { group: 'group05', size: Size.large, hittable: false },
+         { group: 'group08', size: Size.large, hittable: false },
+         { group: 'group07', size: Size.large, hittable: false },
+         { group: 'group01', size: Size.medium, hittable: true },
+         { group: 'group04', size: Size.medium, hittable: true },
+         { group: 'group02', size: Size.medium, hittable: true },
+         { group: 'group03', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'group06', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group06', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group05', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group05', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group08', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group07', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group07', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group08', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group04', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group04', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group03', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group03', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      production: [
+         {
+            time: 632,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 105 },
+               { ware: 'energycells', amount: 210 },
+               { ware: 'hullparts', amount: 384 },
+            ],
+         },
+      ]
+   },
+   module_spl_hab_l_01: {
+      id: 'module_spl_hab_l_01',
+      version: 1,
+      name: 'Split L Parlour',
+      description: 'No information available',
+      type: ModuleTypes.habitation,
+      hull: 178582,
+      makerRace: Races.split,
+      workForce: {
+         capacity: 1000,
+         race: Races.split
+      },
+      price: { min: 16627714, max: 22496318, avg: 19562016 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 1155,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 191 },
+               { ware: 'energycells', amount: 383 },
+               { ware: 'hullparts', amount: 700 },
+            ],
+         },
+      ]
+   },
+   module_spl_hab_m_01: {
+      id: 'module_spl_hab_m_01',
+      version: 1,
+      name: 'Split M Parlour',
+      description: 'No information available',
+      type: ModuleTypes.habitation,
+      hull: 183126,
+      makerRace: Races.split,
+      workForce: {
+         capacity: 500,
+         race: Races.split
+      },
+      price: { min: 11754290, max: 15902862, avg: 13828576 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 816,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 135 },
+               { ware: 'energycells', amount: 271 },
+               { ware: 'hullparts', amount: 495 },
+            ],
+         },
+      ]
+   },
+   module_spl_hab_s_01: {
+      id: 'module_spl_hab_s_01',
+      version: 1,
+      name: 'Split S Parlour',
+      description: 'No information available',
+      type: ModuleTypes.habitation,
+      hull: 148471,
+      makerRace: Races.split,
+      workForce: {
+         capacity: 250,
+         race: Races.split
+      },
+      price: { min: 8172621, max: 11057075, avg: 9614848 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 566,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 94 },
+               { ware: 'energycells', amount: 188 },
+               { ware: 'hullparts', amount: 343 },
+            ],
+         },
+      ]
+   },
+   module_spl_pier_l_01: {
+      id: 'module_spl_pier_l_01',
+      version: 1,
+      name: 'Split 4-Dock T Pier',
+      description: 'No information available',
+      type: ModuleTypes.pier,
+      hull: 750000,
+      makerRace: Races.split,
+      price: { min: 2946171, max: 3985997, avg: 3466084 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 1155,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 542 },
+               { ware: 'energycells', amount: 1083 },
+               { ware: 'hullparts', amount: 1980 },
+            ],
+         },
+      ]
+   },
+   module_spl_pier_l_02: {
+      id: 'module_spl_pier_l_02',
+      version: 1,
+      name: 'Split 1-Dock Pier',
+      description: 'No information available',
+      type: ModuleTypes.pier,
+      hull: 250000,
+      makerRace: Races.split,
+      price: { min: 1701192, max: 2301612, avg: 2001402 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 667,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 313 },
+               { ware: 'energycells', amount: 625 },
+               { ware: 'hullparts', amount: 1143 },
+            ],
+         },
+      ]
+   },
+   module_spl_pier_l_03: {
+      id: 'module_spl_pier_l_03',
+      version: 1,
+      name: 'Split 3-Dock E Pier',
+      description: 'No information available',
+      type: ModuleTypes.pier,
+      hull: 1000000,
+      makerRace: Races.split,
+      price: { min: 3399016, max: 4598668, avg: 3998842 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 1333,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 625 },
+               { ware: 'energycells', amount: 1250 },
+               { ware: 'hullparts', amount: 2287 },
+            ],
+         },
+      ]
+   },
+   module_spl_prod_cheltmeat_01: {
+      id: 'module_spl_prod_cheltmeat_01',
+      version: 1,
+      name: 'Chelt Production',
+      description: 'No information available',
+      type: ModuleTypes.production,
+      product: Wares.cheltmeat,
+      explosionDamage: 10000,
+      hull: 320000,
+      makerRace: Races.split,
+      workForce: {
+         max: 90
+      },
+      price: { min: 698188, max: 944608, avg: 821398 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      shields: [
+         { group: 'top_rear_01', size: Size.medium, hittable: true },
+         { group: 'mid_left_01', size: Size.medium, hittable: true },
+         { group: 'mid_left_02', size: Size.medium, hittable: true },
+         { group: 'top_right_01', size: Size.medium, hittable: true },
+         { group: 'mid_right_02', size: Size.medium, hittable: true },
+         { group: 'mid_right_01', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'top_rear_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_rear_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'mid_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'mid_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'mid_left_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'mid_left_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'mid_right_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'mid_right_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'mid_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'mid_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      production: [
+         {
+            time: 774,
+            amount: 1,
+            method: 'default',
+            name: 'Split',
+            wares: [
+               { ware: 'claytronics', amount: 282 },
+               { ware: 'energycells', amount: 256 },
+               { ware: 'hullparts', amount: 1158 },
+            ],
+         },
+      ]
+   },
+   module_spl_prod_medicalsupplies_01: {
+      id: 'module_spl_prod_medicalsupplies_01',
+      version: 1,
+      name: 'Split Medical Supply Production',
+      description: 'No information available',
+      type: ModuleTypes.production,
+      product: Wares.medicalsupplies,
+      explosionDamage: 10000,
+      hull: 197000,
+      makerRace: Races.split,
+      workForce: {
+         max: 90
+      },
+      price: { min: 1223505, max: 1655331, avg: 1439418 },
+      owners: [
+         Factions.split,
+      ],
+      shields: [
+         { group: 'top_01', size: Size.medium, hittable: true },
+         { group: 'left_01', size: Size.medium, hittable: true },
+         { group: 'right_01', size: Size.medium, hittable: true },
+         { group: 'front_01', size: Size.medium, hittable: true },
+         { group: 'back_01', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      production: [
+         {
+            time: 1138,
+            amount: 1,
+            method: 'default',
+            name: 'Split',
+            wares: [
+               { ware: 'claytronics', amount: 248 },
+               { ware: 'energycells', amount: 451 },
+               { ware: 'hullparts', amount: 910 },
+            ],
+         },
+      ]
+   },
+   module_spl_prod_scruffinfruits_01: {
+      id: 'module_spl_prod_scruffinfruits_01',
+      version: 1,
+      name: 'Scruffin Production',
+      description: 'No information available',
+      type: ModuleTypes.production,
+      product: Wares.scruffinfruits,
+      explosionDamage: 10000,
+      hull: 280000,
+      makerRace: Races.split,
+      workForce: {
+         max: 90
+      },
+      price: { min: 829662, max: 1122484, avg: 976073 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      shields: [
+         { group: 'top_right_02', size: Size.medium, hittable: true },
+         { group: 'down_01', size: Size.medium, hittable: true },
+         { group: 'top_left_01', size: Size.medium, hittable: true },
+         { group: 'top_right_01', size: Size.medium, hittable: true },
+         { group: 'down_01', size: Size.medium, hittable: true },
+         { group: 'top_left_02', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'top_right_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_right_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'down_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'down_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'down_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'down_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_left_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_left_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      production: [
+         {
+            time: 920,
+            amount: 1,
+            method: 'default',
+            name: 'Split',
+            wares: [
+               { ware: 'claytronics', amount: 335 },
+               { ware: 'energycells', amount: 305 },
+               { ware: 'hullparts', amount: 1377 },
+            ],
+         },
+      ]
+   },
+   module_spl_stor_container_l_01: {
+      id: 'module_spl_stor_container_l_01',
+      version: 1,
+      name: 'Split L Container Storage',
+      description: 'No information available',
+      type: ModuleTypes.storage,
+      explosionDamage: 10000,
+      hull: 778000,
+      makerRace: Races.split,
+      cargo: { max: 1000000, type: CargoTypes.container },
+      price: { min: 734191, max: 993317, avg: 863754 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 1052,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 135 },
+               { ware: 'energycells', amount: 270 },
+               { ware: 'hullparts', amount: 494 },
+            ],
+         },
+      ]
+   },
+   module_spl_stor_container_m_01: {
+      id: 'module_spl_stor_container_m_01',
+      version: 1,
+      name: 'Split M Container Storage',
+      description: 'No information available',
+      type: ModuleTypes.storage,
+      explosionDamage: 8000,
+      hull: 345000,
+      makerRace: Races.split,
+      cargo: { max: 100000, type: CargoTypes.container },
+      price: { min: 489314, max: 662014, avg: 575664 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 700,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 90 },
+               { ware: 'energycells', amount: 180 },
+               { ware: 'hullparts', amount: 329 },
+            ],
+         },
+      ]
+   },
+   module_spl_stor_container_s_01: {
+      id: 'module_spl_stor_container_s_01',
+      version: 1,
+      name: 'Split S Container Storage',
+      description: 'No information available',
+      type: ModuleTypes.storage,
+      explosionDamage: 5000,
+      hull: 157000,
+      makerRace: Races.split,
+      cargo: { max: 25000, type: CargoTypes.container },
+      price: { min: 331199, max: 448093, avg: 389646 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 473,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 61 },
+               { ware: 'energycells', amount: 121 },
+               { ware: 'hullparts', amount: 222 },
+            ],
+         },
+      ]
+   },
+   module_spl_stor_liquid_l_01: {
+      id: 'module_spl_stor_liquid_l_01',
+      version: 1,
+      name: 'Split L Liquid Storage',
+      description: 'No information available',
+      type: ModuleTypes.storage,
+      explosionDamage: 10000,
+      hull: 778000,
+      makerRace: Races.split,
+      cargo: { max: 1000000, type: CargoTypes.liquid },
+      price: { min: 734191, max: 993317, avg: 863754 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 1052,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 135 },
+               { ware: 'energycells', amount: 270 },
+               { ware: 'hullparts', amount: 494 },
+            ],
+         },
+      ]
+   },
+   module_spl_stor_liquid_m_01: {
+      id: 'module_spl_stor_liquid_m_01',
+      version: 1,
+      name: 'Split M Liquid Storage',
+      description: 'No information available',
+      type: ModuleTypes.storage,
+      explosionDamage: 8000,
+      hull: 345000,
+      makerRace: Races.split,
+      cargo: { max: 500000, type: CargoTypes.liquid },
+      price: { min: 489314, max: 662014, avg: 575664 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 700,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 90 },
+               { ware: 'energycells', amount: 180 },
+               { ware: 'hullparts', amount: 329 },
+            ],
+         },
+      ]
+   },
+   module_spl_stor_liquid_s_01: {
+      id: 'module_spl_stor_liquid_s_01',
+      version: 1,
+      name: 'Split S Liquid Storage',
+      description: 'No information available',
+      type: ModuleTypes.storage,
+      explosionDamage: 5000,
+      hull: 157000,
+      makerRace: Races.split,
+      cargo: { max: 100000, type: CargoTypes.liquid },
+      price: { min: 331199, max: 448093, avg: 389646 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 473,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 61 },
+               { ware: 'energycells', amount: 121 },
+               { ware: 'hullparts', amount: 222 },
+            ],
+         },
+      ]
+   },
+   module_spl_stor_solid_l_01: {
+      id: 'module_spl_stor_solid_l_01',
+      version: 1,
+      name: 'Split L Solid Storage',
+      description: 'No information available',
+      type: ModuleTypes.storage,
+      explosionDamage: 10000,
+      hull: 778000,
+      makerRace: Races.split,
+      cargo: { max: 1000000, type: CargoTypes.solid },
+      price: { min: 734191, max: 993317, avg: 863754 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 1052,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 135 },
+               { ware: 'energycells', amount: 270 },
+               { ware: 'hullparts', amount: 494 },
+            ],
+         },
+      ]
+   },
+   module_spl_stor_solid_m_01: {
+      id: 'module_spl_stor_solid_m_01',
+      version: 1,
+      name: 'Split M Solid Storage',
+      description: 'No information available',
+      type: ModuleTypes.storage,
+      explosionDamage: 8000,
+      hull: 345000,
+      makerRace: Races.split,
+      cargo: { max: 500000, type: CargoTypes.solid },
+      price: { min: 489314, max: 662014, avg: 575664 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 700,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 90 },
+               { ware: 'energycells', amount: 180 },
+               { ware: 'hullparts', amount: 329 },
+            ],
+         },
+      ]
+   },
+   module_spl_stor_solid_s_01: {
+      id: 'module_spl_stor_solid_s_01',
+      version: 1,
+      name: 'Split S Solid Storage',
+      description: 'No information available',
+      type: ModuleTypes.storage,
+      explosionDamage: 5000,
+      hull: 157000,
+      makerRace: Races.split,
+      cargo: { max: 100000, type: CargoTypes.solid },
+      price: { min: 331199, max: 448093, avg: 389646 },
+      owners: [
+         Factions.freesplit,
+         Factions.split,
+      ],
+      production: [
+         {
+            time: 473,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'claytronics', amount: 61 },
+               { ware: 'energycells', amount: 121 },
+               { ware: 'hullparts', amount: 222 },
             ],
          },
       ]
@@ -5706,4 +6744,31 @@ export const AllModules = [
    Modules.module_tel_stor_solid_l_01,
    Modules.module_tel_stor_solid_m_01,
    Modules.module_tel_stor_solid_s_01,
+   Modules.module_spl_conn_base_01,
+   Modules.module_spl_conn_base_02,
+   Modules.module_spl_conn_base_03,
+   Modules.module_spl_conn_cross_01,
+   Modules.module_spl_conn_vertical_01,
+   Modules.module_spl_conn_vertical_02,
+   Modules.module_spl_def_claim_01,
+   Modules.module_spl_def_disc_01,
+   Modules.module_spl_def_tube_01,
+   Modules.module_spl_hab_l_01,
+   Modules.module_spl_hab_m_01,
+   Modules.module_spl_hab_s_01,
+   Modules.module_spl_pier_l_01,
+   Modules.module_spl_pier_l_02,
+   Modules.module_spl_pier_l_03,
+   Modules.module_spl_prod_cheltmeat_01,
+   Modules.module_spl_prod_medicalsupplies_01,
+   Modules.module_spl_prod_scruffinfruits_01,
+   Modules.module_spl_stor_container_l_01,
+   Modules.module_spl_stor_container_m_01,
+   Modules.module_spl_stor_container_s_01,
+   Modules.module_spl_stor_liquid_l_01,
+   Modules.module_spl_stor_liquid_m_01,
+   Modules.module_spl_stor_liquid_s_01,
+   Modules.module_spl_stor_solid_l_01,
+   Modules.module_spl_stor_solid_m_01,
+   Modules.module_spl_stor_solid_s_01,
 ];

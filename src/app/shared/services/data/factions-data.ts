@@ -4,6 +4,7 @@ import { Races } from './race-data';
 const entities = {
    player: {
       id: 'player',
+      version: 0,
       name: 'Player',
       description: 'No information available',
       race: Races.argon,
@@ -13,6 +14,7 @@ const entities = {
    },
    alliance: {
       id: 'alliance',
+      version: 0,
       name: 'Alliance of the Word',
       description: 'No information available',
       race: Races.paranid,
@@ -32,6 +34,7 @@ const entities = {
    },
    antigone: {
       id: 'antigone',
+      version: 0,
       name: 'Antigone Republic',
       description: 'The Antigone Republic is made up of representatives of several sectors that were cut off from the Argon Federation during the Gate Shutdown. The fledgling republic was named after the system in which it resides, the system itself paying tribute to the Argon station whose loss is recorded in history as one of the greatest horrors of the Xenon wars. While the Antigone Republic is a distinct entity detached from the Argon Federation, and they are wary of returning back into the Federation, they maintain close ties, and cooperate on many levels. Sandwell, for example, is a planet of the Antigone Memorial system, which hosts the Argon Federation\'s biggest data archive. The Antigone Republic and the Argon Federation frequently conduct joint military operations to beat back Xenon invasions, and they trade freely and often.',
       race: Races.argon,
@@ -55,6 +58,7 @@ const entities = {
    },
    argon: {
       id: 'argon',
+      version: 0,
       name: 'Argon Federation',
       description: 'The Argon Federation was founded by the descendants of Terran settlers cut off from their home system and stranded in deep space during the Terraformer wars. The settlers\' colonised planet, Argon Prime, is the Federation\'s heart, and a cultural and industrial hotspot to this day. The Federation tries to maintain good relations with the other races, if they deem these relations to be mutually beneficial, but ever since the Gate Shutdown, diplomatic relations on all sides are deteriorating, and conflicts, such as the war with Holy Order of the Pontifex, emerge.',
       race: Races.argon,
@@ -80,6 +84,7 @@ const entities = {
    },
    buccaneers: {
       id: 'buccaneers',
+      version: 0,
       name: 'Duke\'s Buccaneers',
       description: 'No information available',
       race: Races.paranid,
@@ -104,6 +109,7 @@ const entities = {
    },
    hatikvah: {
       id: 'hatikvah',
+      version: 0,
       name: 'Hatikvah Free League',
       description: 'No information available',
       race: Races.argon,
@@ -124,6 +130,7 @@ const entities = {
    },
    holyorder: {
       id: 'holyorder',
+      version: 0,
       name: 'Holy Order of the Pontifex',
       description: 'The Holy Order of the Pontifex established itself as an authority on Paranid religious affairs and took control of systems during the tumultuous times of the Gate Shutdown. Their Pontifex is shrouded in mystery and defends this radical new interpretation of the Paranid faith with a zealous frenzy. The Holy Order is steadfast in their beliefs, which puts them at odds with the Godrealm of the Paranid. They do not wish to eradicate the Godrealm, but to convert them to their beliefs. Their fanatic attitude is less accommodating towards non-Paranid heretics.',
       race: Races.paranid,
@@ -148,6 +155,7 @@ const entities = {
    },
    khaak: {
       id: 'khaak',
+      version: 0,
       name: 'Kha\'ak',
       description: 'No information available',
       race: Races.khaak,
@@ -157,6 +165,7 @@ const entities = {
    },
    ministry: {
       id: 'ministry',
+      version: 0,
       name: 'Ministry of Finance',
       description: 'No information available',
       race: Races.teladi,
@@ -182,6 +191,7 @@ const entities = {
    },
    paranid: {
       id: 'paranid',
+      version: 0,
       name: 'Godrealm of the Paranid',
       description: 'The Godrealm of the Paranid is a theocratic feudal society worshipping the concept of the three-dimensionality. They refer to their ancient holy texts to justify their archaic power structure and pervasive authority. Although this Godrealm has been cut off from Paranid Prime, they understand themselves to be the true purveyors of the Paranid faith. After the Gates realigned, their strict interpretation of this faith resulted in tensions with the Holy Order of the Pontifex, and eventually, a civil war broke out. Still, the Godrealm maintains that the ultimate goal is not to exterminate the Paranids fighting for Holy Order, but to welcome them back into the fold.',
       race: Races.paranid,
@@ -206,6 +216,7 @@ const entities = {
    },
    scaleplate: {
       id: 'scaleplate',
+      version: 0,
       name: 'Scale Plate Pact',
       description: 'No information available',
       race: Races.teladi,
@@ -226,6 +237,7 @@ const entities = {
    },
    teladi: {
       id: 'teladi',
+      version: 0,
       name: 'Teladi Company',
       description: 'No information available',
       race: Races.teladi,
@@ -251,6 +263,7 @@ const entities = {
    },
    trinity: {
       id: 'trinity',
+      version: 0,
       name: 'Realm of the Trinity',
       description: 'No information available',
       race: Races.paranid,
@@ -275,11 +288,97 @@ const entities = {
    },
    xenon: {
       id: 'xenon',
+      version: 0,
       name: 'Xenon',
       description: 'No information available',
       race: Races.xenon,
       icon: 'faction_xenon',
       licenses: [
+      ],
+   },
+   court: {
+      id: 'court',
+      version: 1,
+      name: 'Court of Curbs',
+      description: 'No information available',
+      race: Races.split,
+      icon: 'faction_cabal',
+      licenses: [
+         { type: 'capitalequipment', name: 'Court of Curbs Capital Equipment Licence', icon: 'bse_star', price: 0 },
+         { type: 'capitalship', name: 'Court of Curbs Capital Ship Licence', icon: 'bse_star', price: 0 },
+         { type: 'ceremonyally', name: 'Courtier of the Curbs', icon: '', price: 0 },
+         { type: 'ceremonyfriend', name: 'Court Debutant', icon: '', price: 0 },
+         { type: 'generaluseequipment', name: 'Court of Curbs General Use Equipment Licence', icon: '', price: 0 },
+         { type: 'generaluseship', name: 'Court of Curbs General Use Ship Licence', icon: '', price: 0 },
+         { type: 'militaryequipment', name: 'Court of Curbs Military Equipment Licence', icon: 'bse_star', price: 0 },
+         { type: 'militaryship', name: 'Court of Curbs Military Ship Licence', icon: 'bse_star', price: 0 },
+         { type: 'police', name: 'Court of Curbs Police Licence', icon: '', price: 175000 },
+         { type: 'station_equip_lxl', name: 'Court of Curbs Capital Ship Building Module Licence', icon: '', price: 0 },
+         { type: 'station_equip_sm', name: 'Court of Curbs Ancillary Ship Building Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_advanced', name: 'Court of Curbs Advanced Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_basic', name: 'Court of Curbs Basic Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_intermediate', name: 'Court of Curbs Intermediate Module Licence', icon: '', price: 0 },
+         { type: 'tradesubscription', name: 'Court of Curbs Trade Offer Subscription', icon: '', price: 10000000 },
+      ],
+   },
+   fallensplit: {
+      id: 'fallensplit',
+      version: 1,
+      name: 'Fallen Families',
+      description: 'No information available',
+      race: Races.split,
+      icon: 'faction_fallensplit',
+      licenses: [
+      ],
+   },
+   freesplit: {
+      id: 'freesplit',
+      version: 1,
+      name: 'Free Families',
+      description: 'The Empire of Patriarch Rhonkar was in disarray even before the Gate shutdown fractured the Empire. When the systems disconnected, the smaller families rebelled against the Patriarch of all Split and fought an intense war for independence. They persevered and managed to establish a different kind of Split society in their systems, one that is not lorded over by one Patriarch. Instead, every family is governed autonomously by their own Patriarchs. Now that the Jump Gates have reconnected, this new way of governance is opposed by the Patriarchy. After the Fires  the patriarchal empire seeks to unite the Split under a single family once again.',
+      race: Races.split,
+      icon: 'faction_freesplit',
+      licenses: [
+         { type: 'capitalequipment', name: 'Free Split Capital Equipment Licence', icon: 'bse_star', price: 0 },
+         { type: 'capitalship', name: 'Free Split Capital Ship Licence', icon: 'bse_star', price: 0 },
+         { type: 'ceremonyally', name: 'Strong Arm of the Families', icon: '', price: 0 },
+         { type: 'ceremonyfriend', name: 'Friend of the Families', icon: '', price: 0 },
+         { type: 'generaluseequipment', name: 'Free Split General Use Equipment Licence', icon: '', price: 0 },
+         { type: 'generaluseship', name: 'Free Split General Use Ship Licence', icon: '', price: 0 },
+         { type: 'militaryequipment', name: 'Free Split Military Equipment Licence', icon: 'bse_star', price: 0 },
+         { type: 'militaryship', name: 'Free Split Military Ship Licence', icon: 'bse_star', price: 0 },
+         { type: 'police', name: 'Free Split Police Licence', icon: '', price: 125000 },
+         { type: 'station_equip_lxl', name: 'Free Split Capital Ship Building Module Licence', icon: '', price: 0 },
+         { type: 'station_equip_sm', name: 'Free Split Ancillary Ship Building Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_advanced', name: 'Free Split Advanced Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_basic', name: 'Free Split Basic Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_intermediate', name: 'Free Split Intermediate Module Licence', icon: '', price: 0 },
+         { type: 'tradesubscription', name: 'Free Split Trade Offer Subscription', icon: '', price: 10000000 },
+      ],
+   },
+   split: {
+      id: 'split',
+      version: 1,
+      name: 'Zyarth Patriarchy',
+      description: 'Patriarch Zyarth has always been known to be a hardened warrior. He served under Patriarch Rhonkar before the Gates shut down, but due to his system\'s close proximity to Xenon space, he learned how to be self-sufficient. This familiarity with self-reliance would become his biggest asset when, as the larger Split empire was disconnected, he rose to power, unifying the neighbouring Patriarchs under him. When the Gates reconnected, the Zyarth Patriarchy emerged as the clear victor. Many long-established Patriarchs had died during those tumultuous times. While many families in close proximity came together under the Zyarth, other families seized the same opportunity to declare their independence from the former Patriarch Rhonkar. Now the ambitious Zyarth seeks to unify all Split, even the Free Families, under his banner.',
+      race: Races.split,
+      icon: 'faction_split',
+      licenses: [
+         { type: 'capitalequipment', name: 'Patriarchy Capital Equipment Licence', icon: 'bse_star', price: 0 },
+         { type: 'capitalship', name: 'Patriarchy Capital Ship Licence', icon: 'bse_star', price: 0 },
+         { type: 'ceremonyally', name: 'Patriarch\'s Confidant', icon: '', price: 0 },
+         { type: 'ceremonyfriend', name: 'Spear of the Patriarch', icon: '', price: 0 },
+         { type: 'generaluseequipment', name: 'Patriarchy General Use Equipment Licence', icon: '', price: 0 },
+         { type: 'generaluseship', name: 'Patriarchy General Use Ship Licence', icon: '', price: 0 },
+         { type: 'militaryequipment', name: 'Patriarchy Military Equipment Licence', icon: 'bse_star', price: 0 },
+         { type: 'militaryship', name: 'Patriarchy Military Ship Licence', icon: 'bse_star', price: 0 },
+         { type: 'police', name: 'Patriarchy Police Licence', icon: '', price: 125000 },
+         { type: 'station_equip_lxl', name: 'Patriarchy Capital Ship Building Module Licence', icon: '', price: 0 },
+         { type: 'station_equip_sm', name: 'Patriarchy Ancillary Ship Building Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_advanced', name: 'Patriarchy Advanced Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_basic', name: 'Patriarchy Basic Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_intermediate', name: 'Patriarchy Intermediate Module Licence', icon: '', price: 0 },
+         { type: 'tradesubscription', name: 'Patriarchy Trade Offer Subscription', icon: '', price: 10000000 },
       ],
    },
 };
@@ -301,5 +400,9 @@ export const Factions = {
       entities.teladi,
       entities.trinity,
       entities.xenon,
+      entities.court,
+      entities.fallensplit,
+      entities.freesplit,
+      entities.split,
    ]
 };
