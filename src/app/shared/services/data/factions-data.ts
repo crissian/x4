@@ -33,7 +33,7 @@ const entities = {
    antigone: {
       id: 'antigone',
       name: 'Antigone Republic',
-      description: 'No information available',
+      description: 'The Antigone Republic is made up of representatives of several sectors that were cut off from the Argon Federation during the Gate Shutdown. The fledgling republic was named after the system in which it resides, the system itself paying tribute to the Argon station whose loss is recorded in history as one of the greatest horrors of the Xenon wars. While the Antigone Republic is a distinct entity detached from the Argon Federation, and they are wary of returning back into the Federation, they maintain close ties, and cooperate on many levels. Sandwell, for example, is a planet of the Antigone Memorial system, which hosts the Argon Federation\'s biggest data archive. The Antigone Republic and the Argon Federation frequently conduct joint military operations to beat back Xenon invasions, and they trade freely and often.',
       race: Races.argon,
       icon: 'faction_antigone',
       licenses: [
@@ -56,7 +56,7 @@ const entities = {
    argon: {
       id: 'argon',
       name: 'Argon Federation',
-      description: 'No information available',
+      description: 'The Argon Federation was founded by the descendants of Terran settlers cut off from their home system and stranded in deep space during the Terraformer wars. The settlers\' colonised planet, Argon Prime, is the Federation\'s heart, and a cultural and industrial hotspot to this day. The Federation tries to maintain good relations with the other races, if they deem these relations to be mutually beneficial, but ever since the Gate Shutdown, diplomatic relations on all sides are deteriorating, and conflicts, such as the war with Holy Order of the Pontifex, emerge.',
       race: Races.argon,
       icon: 'faction_argon',
       licenses: [
@@ -76,6 +76,30 @@ const entities = {
          { type: 'station_gen_intermediate', name: 'Federation Intermediate Module Licence', icon: '', price: 0 },
          { type: 'subgroupfriend', name: 'Argon Secret Service Membership', icon: '', price: 0 },
          { type: 'tradesubscription', name: 'Federation Trade Offer Subscription', icon: '', price: 10000000 },
+      ],
+   },
+   buccaneers: {
+      id: 'buccaneers',
+      name: 'Duke\'s Buccaneers',
+      description: 'No information available',
+      race: Races.paranid,
+      icon: 'faction_buccaneers',
+      licenses: [
+         { type: 'capitalequipment', name: 'Duke\'s Capital Equipment Licence', icon: 'bse_star', price: 0 },
+         { type: 'capitalship', name: 'Duke\'s Capital Ship Licence', icon: 'bse_star', price: 0 },
+         { type: 'ceremonyally', name: 'Duke\'s Honour Guard', icon: '', price: 0 },
+         { type: 'ceremonyfriend', name: 'Duke\'s Buccaneer', icon: '', price: 0 },
+         { type: 'generaluseequipment', name: 'Duke\'s General Use Equipment Licence', icon: '', price: 0 },
+         { type: 'generaluseship', name: 'Duke\'s General Use Ship Licence', icon: '', price: 0 },
+         { type: 'militaryequipment', name: 'Duke\'s Military Equipment Licence', icon: 'bse_star', price: 0 },
+         { type: 'militaryship', name: 'Duke\'s Military Ship Licence', icon: 'bse_star', price: 0 },
+         { type: 'police', name: 'Duke\'s Police Licence', icon: '', price: 156000 },
+         { type: 'station_equip_lxl', name: 'Duke\'s Capital Ship Building Module Licence', icon: '', price: 0 },
+         { type: 'station_equip_sm', name: 'Duke\'s Ancillary Ship Building Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_advanced', name: 'Duke\'s Advanced Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_basic', name: 'Duke\'s Basic Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_intermediate', name: 'Duke\'s Intermediate Module Licence', icon: '', price: 0 },
+         { type: 'tradesubscription', name: 'Duke\'s Trade Offer Subscription', icon: '', price: 12000000 },
       ],
    },
    hatikvah: {
@@ -101,7 +125,7 @@ const entities = {
    holyorder: {
       id: 'holyorder',
       name: 'Holy Order of the Pontifex',
-      description: 'No information available',
+      description: 'The Holy Order of the Pontifex established itself as an authority on Paranid religious affairs and took control of systems during the tumultuous times of the Gate Shutdown. Their Pontifex is shrouded in mystery and defends this radical new interpretation of the Paranid faith with a zealous frenzy. The Holy Order is steadfast in their beliefs, which puts them at odds with the Godrealm of the Paranid. They do not wish to eradicate the Godrealm, but to convert them to their beliefs. Their fanatic attitude is less accommodating towards non-Paranid heretics.',
       race: Races.paranid,
       icon: 'faction_holyorder',
       licenses: [
@@ -159,7 +183,7 @@ const entities = {
    paranid: {
       id: 'paranid',
       name: 'Godrealm of the Paranid',
-      description: 'No information available',
+      description: 'The Godrealm of the Paranid is a theocratic feudal society worshipping the concept of the three-dimensionality. They refer to their ancient holy texts to justify their archaic power structure and pervasive authority. Although this Godrealm has been cut off from Paranid Prime, they understand themselves to be the true purveyors of the Paranid faith. After the Gates realigned, their strict interpretation of this faith resulted in tensions with the Holy Order of the Pontifex, and eventually, a civil war broke out. Still, the Godrealm maintains that the ultimate goal is not to exterminate the Paranids fighting for Holy Order, but to welcome them back into the fold.',
       race: Races.paranid,
       icon: 'faction_paranid',
       licenses: [
@@ -225,6 +249,30 @@ const entities = {
          { type: 'tradesubscription', name: 'Company Trade Offer Subscription', icon: '', price: 16000000 },
       ],
    },
+   trinity: {
+      id: 'trinity',
+      name: 'Realm of the Trinity',
+      description: 'No information available',
+      race: Races.paranid,
+      icon: 'faction_trinity',
+      licenses: [
+         { type: 'capitalequipment', name: 'Paranid Capital Equipment Licence', icon: 'bse_star', price: 0 },
+         { type: 'capitalship', name: 'Paranid Capital Ship Licence', icon: 'bse_star', price: 0 },
+         { type: 'ceremonyally', name: 'Seeker of the Holy Light', icon: '', price: 0 },
+         { type: 'ceremonyfriend', name: 'Creature of Merit', icon: '', price: 0 },
+         { type: 'generaluseequipment', name: 'Paranid General Use Equipment Licence', icon: '', price: 0 },
+         { type: 'generaluseship', name: 'Paranid General Use Ship Licence', icon: '', price: 0 },
+         { type: 'militaryequipment', name: 'Paranid Military Equipment Licence', icon: 'bse_star', price: 0 },
+         { type: 'militaryship', name: 'Paranid Military Ship Licence', icon: 'bse_star', price: 0 },
+         { type: 'police', name: 'Paranid Police Licence', icon: '', price: 156000 },
+         { type: 'station_equip_lxl', name: 'Paranid Capital Ship Building Module Licence', icon: '', price: 0 },
+         { type: 'station_equip_sm', name: 'Paranid Ancillary Ship Building Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_advanced', name: 'Paranid Advanced Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_basic', name: 'Paranid Basic Module Licence', icon: '', price: 0 },
+         { type: 'station_gen_intermediate', name: 'Paranid Intermediate Module Licence', icon: '', price: 0 },
+         { type: 'tradesubscription', name: 'Paranid Trade Offer Subscription', icon: '', price: 12000000 },
+      ],
+   },
    xenon: {
       id: 'xenon',
       name: 'Xenon',
@@ -243,6 +291,7 @@ export const Factions = {
       entities.alliance,
       entities.antigone,
       entities.argon,
+      entities.buccaneers,
       entities.hatikvah,
       entities.holyorder,
       entities.khaak,
@@ -250,6 +299,7 @@ export const Factions = {
       entities.paranid,
       entities.scaleplate,
       entities.teladi,
+      entities.trinity,
       entities.xenon,
    ]
 };

@@ -857,7 +857,7 @@ export const Wares = {
    siliconwafers: {
       id: 'siliconwafers',
       name: 'Silicon Wafers',
-      description: 'If a technology requires any kind of chip, it is highly lightly that is uses silicon wafers. Light, efficient and cheap to produce, these wafers are usually layered or constructed in hexagonal meshes to allow for quick transfer of data across a component.',
+      description: 'If a technology requires any kind of chip, it is highly likely that is uses silicon wafers. Light, efficient and cheap to produce, these wafers are usually layered or constructed in hexagonal meshes to allow for quick transfer of data across a component.',
       factoryName: 'Silicon Refinery',
       icon: 'ware_siliconwafers',
       volume: 18,

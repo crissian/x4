@@ -169,7 +169,7 @@ export const Modules = {
       name: 'Argon Administrative Centre',
       description: 'No information available',
       type: ModuleTypes.defencemodule,
-      hull: 128000,
+      hull: 512000,
       makerRace: Races.argon,
       price: { min: 744928, max: 1007844, avg: 876386 },
       owners: [
@@ -196,7 +196,7 @@ export const Modules = {
       description: 'No information available',
       type: ModuleTypes.defencemodule,
       explosionDamage: 12000,
-      hull: 65800,
+      hull: 197400,
       makerRace: Races.argon,
       price: { min: 533140, max: 721308, avg: 627224 },
       owners: [
@@ -270,7 +270,7 @@ export const Modules = {
       description: 'No information available',
       type: ModuleTypes.defencemodule,
       explosionDamage: 12000,
-      hull: 49600,
+      hull: 148800,
       makerRace: Races.argon,
       price: { min: 462691, max: 625993, avg: 544342 },
       owners: [
@@ -342,6 +342,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       docks: [
          { capacity: 10, size: Size.medium },
@@ -375,6 +376,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       docks: [
          { capacity: 10, size: Size.medium },
@@ -408,6 +410,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       docks: [
          { capacity: 10, size: Size.medium },
@@ -441,6 +444,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       docks: [
          { capacity: 10, size: Size.medium },
@@ -474,6 +478,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       docks: [
          { capacity: 10, size: Size.medium },
@@ -507,6 +512,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       docks: [
          { capacity: 10, size: Size.medium },
@@ -1411,6 +1417,9 @@ export const Modules = {
       type: ModuleTypes.buildmodule,
       explosionDamage: 100000,
       hull: 1020000,
+      workForce: {
+         max: 800
+      },
       price: { min: 86008820, max: 116364875, avg: 101186848 },
       owners: [
          Factions.antigone,
@@ -1418,6 +1427,8 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
+         Factions.xenon,
       ],
       docks: [
          { capacity: 30, size: Size.medium },
@@ -1435,6 +1446,17 @@ export const Modules = {
                { ware: 'hullparts', amount: 12112 },
             ],
          },
+         {
+            time: 830,
+            amount: 1,
+            method: 'xenon',
+            name: 'Xenon',
+            wares: [
+               { ware: 'energycells', amount: 6620 },
+               { ware: 'ore', amount: 6952 },
+               { ware: 'silicon', amount: 4062 },
+            ],
+         },
       ]
    },
    module_gen_build_l_01: {
@@ -1445,7 +1467,7 @@ export const Modules = {
       explosionDamage: 100000,
       hull: 324000,
       workForce: {
-         max: 500
+         max: 700
       },
       price: { min: 180147181, max: 243728539, avg: 211937860 },
       owners: [
@@ -1454,6 +1476,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       production: [
          {
@@ -1477,7 +1500,7 @@ export const Modules = {
       explosionDamage: 100000,
       hull: 551000,
       workForce: {
-         max: 500
+         max: 700
       },
       price: { min: 183235129, max: 247906351, avg: 215570740 },
       owners: [
@@ -1486,6 +1509,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       production: [
          {
@@ -1508,6 +1532,9 @@ export const Modules = {
       type: ModuleTypes.buildmodule,
       explosionDamage: 100000,
       hull: 1020000,
+      workForce: {
+         max: 400
+      },
       price: { min: 26053880, max: 35249367, avg: 30651624 },
       owners: [
          Factions.antigone,
@@ -1515,6 +1542,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       docks: [
          { capacity: 30, size: Size.medium },
@@ -1551,6 +1579,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       production: [
          {
@@ -1583,6 +1612,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       production: [
          {
@@ -1616,6 +1646,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -1671,6 +1702,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -1726,6 +1758,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -1781,6 +1814,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -1835,6 +1869,7 @@ export const Modules = {
          Factions.argon,
          Factions.holyorder,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -1888,6 +1923,7 @@ export const Modules = {
          Factions.argon,
          Factions.holyorder,
          Factions.ministry,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -1943,6 +1979,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -1985,6 +2022,7 @@ export const Modules = {
          Factions.argon,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2038,6 +2076,7 @@ export const Modules = {
          Factions.antigone,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2088,6 +2127,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2143,6 +2183,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2198,6 +2239,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2252,6 +2294,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.ministry,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2307,6 +2350,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2362,6 +2406,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2411,6 +2456,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2466,6 +2512,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2521,6 +2568,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2576,6 +2624,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2625,6 +2674,7 @@ export const Modules = {
          Factions.antigone,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'left_01', size: Size.medium, hittable: true },
@@ -2674,6 +2724,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2726,6 +2777,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'down_01', size: Size.medium, hittable: true },
@@ -2776,6 +2828,7 @@ export const Modules = {
          Factions.argon,
          Factions.ministry,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2828,6 +2881,7 @@ export const Modules = {
          Factions.holyorder,
          Factions.paranid,
          Factions.teladi,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2881,6 +2935,7 @@ export const Modules = {
          Factions.argon,
          Factions.holyorder,
          Factions.ministry,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -2929,6 +2984,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -2955,6 +3011,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -2981,6 +3038,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -3007,6 +3065,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -3033,6 +3092,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -3059,6 +3119,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -3085,6 +3146,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -3111,6 +3173,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -3131,12 +3194,13 @@ export const Modules = {
       name: 'Paranid Administrative Centre',
       description: 'No information available',
       type: ModuleTypes.defencemodule,
-      hull: 133000,
+      hull: 532000,
       makerRace: Races.paranid,
       price: { min: 760801, max: 1029319, avg: 895060 },
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -3158,12 +3222,13 @@ export const Modules = {
       description: 'No information available',
       type: ModuleTypes.defencemodule,
       explosionDamage: 12000,
-      hull: 65800,
+      hull: 197400,
       makerRace: Races.paranid,
       price: { min: 533140, max: 721308, avg: 627224 },
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'group05', size: Size.medium, hittable: true },
@@ -3217,12 +3282,13 @@ export const Modules = {
       description: 'No information available',
       type: ModuleTypes.defencemodule,
       explosionDamage: 12000,
-      hull: 49600,
+      hull: 148800,
       makerRace: Races.paranid,
       price: { min: 462691, max: 625993, avg: 544342 },
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'group01', size: Size.medium, hittable: true },
@@ -3280,6 +3346,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -3311,6 +3378,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -3342,6 +3410,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -3368,6 +3437,7 @@ export const Modules = {
       price: { min: 3060886, max: 4141198, avg: 3601042 },
       owners: [
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -3395,6 +3465,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       production: [
          {
@@ -3421,6 +3492,7 @@ export const Modules = {
       price: { min: 3534314, max: 4781718, avg: 4158016 },
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
       production: [
          {
@@ -3499,6 +3571,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -3546,6 +3619,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -3596,6 +3670,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -3649,6 +3724,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -3696,6 +3772,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'left_01', size: Size.medium, hittable: true },
@@ -3740,6 +3817,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -3783,6 +3861,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'left_01', size: Size.medium, hittable: true },
@@ -3826,6 +3905,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'left_01', size: Size.medium, hittable: true },
@@ -3869,6 +3949,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -3912,6 +3993,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'left_01', size: Size.medium, hittable: true },
@@ -3956,6 +4038,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'left_01', size: Size.medium, hittable: true },
@@ -4000,6 +4083,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'top_01', size: Size.medium, hittable: true },
@@ -4044,6 +4128,7 @@ export const Modules = {
       owners: [
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
       shields: [
          { group: 'left_01', size: Size.medium, hittable: true },
@@ -4230,7 +4315,7 @@ export const Modules = {
       name: 'Teladi Administrative Centre',
       description: 'No information available',
       type: ModuleTypes.defencemodule,
-      hull: 129000,
+      hull: 516000,
       makerRace: Races.teladi,
       price: { min: 749625, max: 1014199, avg: 881912 },
       owners: [
@@ -4257,7 +4342,7 @@ export const Modules = {
       description: 'No information available',
       type: ModuleTypes.defencemodule,
       explosionDamage: 12000,
-      hull: 65800,
+      hull: 197400,
       makerRace: Races.teladi,
       price: { min: 533140, max: 721308, avg: 627224 },
       owners: [
@@ -4314,7 +4399,7 @@ export const Modules = {
       description: 'No information available',
       type: ModuleTypes.defencemodule,
       explosionDamage: 12000,
-      hull: 49600,
+      hull: 148800,
       makerRace: Races.teladi,
       price: { min: 462691, max: 625993, avg: 544342 },
       owners: [

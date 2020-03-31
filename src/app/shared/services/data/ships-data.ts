@@ -40,17 +40,19 @@ export const Ships = [
          { group: 'group_back_up_mid', size: Size.medium, hittable: true },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true },
          { group: 'group_up_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_up_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_front_mid_mid', size: Size.medium, hittable: true },
       ],
       weapons: [
          { size: Size.large, hittable: false, types: [ TurretType.standard ] },
          { size: Size.large, hittable: false, types: [ TurretType.standard ] },
       ],
       turrets: [
-         { group: 'group_up_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard ] },
+         { group: 'group_up_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_mid_down_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_mid_down_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_front_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard ] },
+         { group: 'group_front_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_up_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_up_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -69,7 +71,7 @@ export const Ships = [
          Factions.hatikvah,
          Factions.scaleplate,
       ],
-      price: { min: 4895057, max: 6622724, avg: 5758890 },
+      price: { min: 4006156, max: 5420094, avg: 4713125 },
       production: [
          {
             time: 182,
@@ -115,17 +117,19 @@ export const Ships = [
          { group: 'group_back_up_mid', size: Size.medium, hittable: true },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true },
          { group: 'group_up_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_up_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_front_mid_mid', size: Size.medium, hittable: true },
       ],
       weapons: [
          { size: Size.large, hittable: false, types: [ TurretType.standard ] },
          { size: Size.large, hittable: false, types: [ TurretType.standard ] },
       ],
       turrets: [
-         { group: 'group_up_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard ] },
+         { group: 'group_up_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_mid_down_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_mid_down_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_front_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard ] },
+         { group: 'group_front_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_up_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_up_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -142,7 +146,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 5859033, max: 7926927, avg: 6892980 },
+      price: { min: 4795063, max: 6487438, avg: 5641250 },
       production: [
          {
             time: 218,
@@ -185,10 +189,11 @@ export const Ships = [
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true },
          { group: 'group_front_left_mid', size: Size.medium, hittable: true },
          { size: Size.large, hittable: false },
+         { group: 'group_mid_up_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_back_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_mid_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_left_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_back_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -205,7 +210,7 @@ export const Ships = [
          Factions.argon,
          Factions.hatikvah,
       ],
-      price: { min: 1349018, max: 1825142, avg: 1587080 },
+      price: { min: 1111460, max: 1503740, avg: 1307600 },
       production: [
          {
             time: 83,
@@ -248,10 +253,11 @@ export const Ships = [
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true },
          { group: 'group_front_left_mid', size: Size.medium, hittable: true },
          { size: Size.large, hittable: false },
+         { group: 'group_mid_up_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_back_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_mid_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_left_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_back_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -268,7 +274,7 @@ export const Ships = [
          Factions.antigone,
          Factions.hatikvah,
       ],
-      price: { min: 1639667, max: 2218373, avg: 1929020 },
+      price: { min: 1350914, max: 1827707, avg: 1589310 },
       production: [
          {
             time: 101,
@@ -304,7 +310,7 @@ export const Ships = [
       ],
       shields: [
          { size: Size.large, hittable: false },
-         { group: 'group_front_up_mid', size: Size.medium, hittable: true },
+         { group: 'group_mid_up_mid', size: Size.medium, hittable: true },
          { group: 'group_front_left_mid', size: Size.medium, hittable: true },
          { group: 'group_back_up_mid', size: Size.medium, hittable: true },
          { group: 'group_back_mid', size: Size.medium, hittable: true },
@@ -312,11 +318,13 @@ export const Ships = [
          { group: 'group_front_left_mid', size: Size.medium, hittable: true },
          { size: Size.large, hittable: false },
          { group: 'group_front_down_mid', size: Size.medium, hittable: true },
+         { group: 'group_front_up_mid', size: Size.medium, hittable: true },
+         { group: 'group_front_down_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_down_mid', size: Size.large, hittable: false, types: [ TurretType.mining ] },
          { group: 'group_back_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_mid_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_left_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_back_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -333,7 +341,7 @@ export const Ships = [
          Factions.argon,
          Factions.hatikvah,
       ],
-      price: { min: 1345695, max: 1820646, avg: 1583170 },
+      price: { min: 1108727, max: 1500043, avg: 1304385 },
       production: [
          {
             time: 83,
@@ -369,7 +377,7 @@ export const Ships = [
       ],
       shields: [
          { size: Size.large, hittable: false },
-         { group: 'group_front_up_mid', size: Size.medium, hittable: true },
+         { group: 'group_mid_up_mid', size: Size.medium, hittable: true },
          { group: 'group_front_left_mid', size: Size.medium, hittable: true },
          { group: 'group_back_up_mid', size: Size.medium, hittable: true },
          { group: 'group_back_mid', size: Size.medium, hittable: true },
@@ -377,11 +385,13 @@ export const Ships = [
          { group: 'group_front_left_mid', size: Size.medium, hittable: true },
          { size: Size.large, hittable: false },
          { group: 'group_front_down_mid', size: Size.medium, hittable: true },
+         { group: 'group_front_up_mid', size: Size.medium, hittable: true },
+         { group: 'group_front_down_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_down_mid', size: Size.large, hittable: false, types: [ TurretType.mining ] },
          { group: 'group_back_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_mid_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_left_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_back_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -398,7 +408,7 @@ export const Ships = [
          Factions.antigone,
          Factions.hatikvah,
       ],
-      price: { min: 1636344, max: 2213877, avg: 1925110 },
+      price: { min: 1348181, max: 1824009, avg: 1586095 },
       production: [
          {
             time: 101,
@@ -429,8 +439,8 @@ export const Ships = [
       inertia: { pitch: 175.799, yaw: 175.799, roll: 140.64 },
       drag: { forward: 128.187, reverse: 512.747, horizontal: 95.125, vertical: 95.125, pitch: 155.187, yaw: 155.187, roll: 155.187 },
       engines: [
-         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
-         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_up', size: Size.large, hittable: false },
+         { group: 'group_back_mid_up', size: Size.large, hittable: false },
       ],
       shields: [
          { size: Size.large, hittable: false },
@@ -439,6 +449,7 @@ export const Ships = [
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true },
          { size: Size.large, hittable: false },
+         { group: 'group_back_mid_up', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -459,7 +470,7 @@ export const Ships = [
       owners: [
          Factions.argon,
       ],
-      price: { min: 3162842, max: 4279139, avg: 3720990 },
+      price: { min: 2605841, max: 3525549, avg: 3065695 },
       production: [
          {
             time: 195,
@@ -490,8 +501,8 @@ export const Ships = [
       inertia: { pitch: 195.78, yaw: 195.78, roll: 156.624 },
       drag: { forward: 145.824, reverse: 583.296, horizontal: 114.15, vertical: 114.15, pitch: 172.824, yaw: 172.824, roll: 172.824 },
       engines: [
-         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
-         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_up', size: Size.large, hittable: false },
+         { group: 'group_back_mid_up', size: Size.large, hittable: false },
       ],
       shields: [
          { size: Size.large, hittable: false },
@@ -500,6 +511,7 @@ export const Ships = [
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true },
          { size: Size.large, hittable: false },
+         { group: 'group_back_mid_up', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -520,7 +532,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 3811842, max: 5157198, avg: 4484520 },
+      price: { min: 3140563, max: 4248997, avg: 3694780 },
       production: [
          {
             time: 235,
@@ -551,25 +563,26 @@ export const Ships = [
       inertia: { pitch: 176.471, yaw: 176.471, roll: 141.177 },
       drag: { forward: 122.63, reverse: 490.52, horizontal: 75.814, vertical: 75.814, pitch: 149.63, yaw: 149.63, roll: 149.63 },
       engines: [
-         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
-         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_up', size: Size.large, hittable: false },
+         { group: 'group_back_mid_up', size: Size.large, hittable: false },
       ],
       shields: [
          { size: Size.large, hittable: false },
          { group: 'group_front_mid_right', size: Size.medium, hittable: true },
          { group: 'group_front_mid_left', size: Size.medium, hittable: true },
-         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true },
          { size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_mid_up', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_back_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_back_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
          { max: 33000, types: [ CargoTypes.container ] },
@@ -581,7 +594,7 @@ export const Ships = [
       owners: [
          Factions.argon,
       ],
-      price: { min: 3283754, max: 4442726, avg: 3863240 },
+      price: { min: 2705448, max: 3660312, avg: 3182880 },
       production: [
          {
             time: 203,
@@ -612,25 +625,26 @@ export const Ships = [
       inertia: { pitch: 195.962, yaw: 195.962, roll: 156.769 },
       drag: { forward: 139.156, reverse: 556.624, horizontal: 90.977, vertical: 90.977, pitch: 166.156, yaw: 166.156, roll: 166.156 },
       engines: [
-         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
-         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_up', size: Size.large, hittable: false },
+         { group: 'group_back_mid_up', size: Size.large, hittable: false },
       ],
       shields: [
          { size: Size.large, hittable: false },
          { group: 'group_front_mid_right', size: Size.medium, hittable: true },
          { group: 'group_front_mid_left', size: Size.medium, hittable: true },
-         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true },
          { size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_mid_up', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_back_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_back_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
          { max: 39600, types: [ CargoTypes.container ] },
@@ -642,7 +656,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 3946049, max: 5338772, avg: 4642410 },
+      price: { min: 3251101, max: 4398549, avg: 3824825 },
       production: [
          {
             time: 244,
@@ -704,7 +718,7 @@ export const Ships = [
       owners: [
          Factions.argon,
       ],
-      price: { min: 3195014, max: 4322666, avg: 3758840 },
+      price: { min: 2632348, max: 3561412, avg: 3096880 },
       production: [
          {
             time: 197,
@@ -766,7 +780,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 5157503, max: 6977798, avg: 6067650 },
+      price: { min: 4249222, max: 5748948, avg: 4999085 },
       production: [
          {
             time: 319,
@@ -811,12 +825,13 @@ export const Ships = [
          { group: 'group_front_mid_left', size: Size.medium, hittable: true },
          { group: 'group_front_mid_right', size: Size.medium, hittable: true },
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_back_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_mid_up', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_back_mid_top', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_back_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_back_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_up', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -824,7 +839,7 @@ export const Ships = [
          { group: 'group_front_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 46000, types: [ CargoTypes.container ] },
+         { max: 37000, types: [ CargoTypes.container ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
@@ -833,7 +848,7 @@ export const Ships = [
       owners: [
          Factions.argon,
       ],
-      price: { min: 4663814, max: 6309866, avg: 5486840 },
+      price: { min: 3842459, max: 5198621, avg: 4520540 },
       production: [
          {
             time: 288,
@@ -878,12 +893,13 @@ export const Ships = [
          { group: 'group_front_mid_left', size: Size.medium, hittable: true },
          { group: 'group_front_mid_right', size: Size.medium, hittable: true },
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_back_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_mid_up', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_back_mid_top', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_back_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_back_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_up', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -891,7 +907,7 @@ export const Ships = [
          { group: 'group_front_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 55200, types: [ CargoTypes.container ] },
+         { max: 44400, types: [ CargoTypes.container ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
@@ -900,7 +916,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 5601271, max: 7578190, avg: 6589730 },
+      price: { min: 4614858, max: 6243632, avg: 5429245 },
       production: [
          {
             time: 346,
@@ -945,12 +961,13 @@ export const Ships = [
          { group: 'group_front_mid_left', size: Size.medium, hittable: true },
          { group: 'group_front_mid_right', size: Size.medium, hittable: true },
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_back_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_mid_up', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_back_mid_up', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_back_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_back_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_up', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -958,7 +975,7 @@ export const Ships = [
          { group: 'group_front_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 36000, types: [ CargoTypes.container ] },
+         { max: 29000, types: [ CargoTypes.container ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
@@ -967,7 +984,7 @@ export const Ships = [
       owners: [
          Factions.argon,
       ],
-      price: { min: 3700900, max: 5007100, avg: 4354000 },
+      price: { min: 3049154, max: 4125326, avg: 3587240 },
       production: [
          {
             time: 229,
@@ -1012,12 +1029,13 @@ export const Ships = [
          { group: 'group_front_mid_left', size: Size.medium, hittable: true },
          { group: 'group_front_mid_right', size: Size.medium, hittable: true },
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_back_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_mid_up', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_back_mid_up', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_back_mid_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_back_back_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_up', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -1025,7 +1043,7 @@ export const Ships = [
          { group: 'group_front_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 43200, types: [ CargoTypes.container ] },
+         { max: 34800, types: [ CargoTypes.container ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
@@ -1034,7 +1052,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 4430863, max: 5994697, avg: 5212780 },
+      price: { min: 3650555, max: 4938986, avg: 4294770 },
       production: [
          {
             time: 274,
@@ -1060,7 +1078,7 @@ export const Ships = [
       people: 9,
       purpose: ShipPurpose.fight,
       thruster: Size.medium,
-      type: ShipType.bomber,
+      type: ShipType.gunboat,
       mass: 29.587,
       inertia: { pitch: 5.723, yaw: 5.723, roll: 4.578 },
       drag: { forward: 5.443, reverse: 21.773, horizontal: 13.85, vertical: 13.85, pitch: 9.897, yaw: 9.897, roll: 9.897 },
@@ -1090,7 +1108,7 @@ export const Ships = [
       owners: [
          Factions.argon,
       ],
-      price: { min: 780878, max: 1056482, avg: 918680 },
+      price: { min: 637993, max: 863167, avg: 750580 },
       production: [
          {
             time: 24,
@@ -1116,7 +1134,7 @@ export const Ships = [
       people: 7,
       purpose: ShipPurpose.fight,
       thruster: Size.medium,
-      type: ShipType.bomber,
+      type: ShipType.gunboat,
       mass: 35.505,
       inertia: { pitch: 6.578, yaw: 6.578, roll: 5.263 },
       drag: { forward: 6.257, reverse: 25.028, horizontal: 16.62, vertical: 16.62, pitch: 11.376, yaw: 11.376, roll: 11.376 },
@@ -1146,7 +1164,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 924273, max: 1250487, avg: 1087380 },
+      price: { min: 755166, max: 1021695, avg: 888430 },
       production: [
          {
             time: 29,
@@ -1197,10 +1215,11 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.hatikvah,
          Factions.scaleplate,
       ],
-      price: { min: 770942, max: 1043039, avg: 906990 },
+      price: { min: 629863, max: 852167, avg: 741015 },
       production: [
          {
             time: 24,
@@ -1259,7 +1278,7 @@ export const Ships = [
       owners: [
          Factions.argon,
       ],
-      price: { min: 1002567, max: 1356414, avg: 1179490 },
+      price: { min: 819115, max: 1108215, avg: 963665 },
       production: [
          {
             time: 31,
@@ -1318,7 +1337,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 1191190, max: 1611610, avg: 1401400 },
+      price: { min: 973250, max: 1316750, avg: 1145000 },
       production: [
          {
             time: 37,
@@ -1334,7 +1353,7 @@ export const Ships = [
    },
    {
       id: 'ship_arg_m_miner_liquid_01_a',
-      name: 'Sunder Vanguard',
+      name: 'Sunder (Gas) Vanguard',
       description: 'Jonferco\'s response to the PMC\'s Drill design, the Sunder fulfils a similar role to its sister ship but handles gas collection instead of asteroid mining. It is fitted with a non-modular scoop that allows natural gases to be safely placed inside the ship\'s cargo hold. For all the gratitude received by PMC for their work in advancing asteroid mining, Jonferco\'s reply sent the mining community into a complete frenzy, with the possibilities for collecting, refining and utilising natural gases spurring the economy, not just in Argon space but across the entire Jump Gate network, to a brand new high.',
       size: Size.medium,
       race: Races.argon,
@@ -1368,7 +1387,7 @@ export const Ships = [
          Factions.argon,
          Factions.hatikvah,
       ],
-      price: { min: 130535, max: 176606, avg: 153570 },
+      price: { min: 108413, max: 146677, avg: 127545 },
       production: [
          {
             time: 12,
@@ -1384,7 +1403,7 @@ export const Ships = [
    },
    {
       id: 'ship_arg_m_miner_liquid_01_b',
-      name: 'Sunder Sentinel',
+      name: 'Sunder (Gas) Sentinel',
       description: 'Jonferco\'s response to the PMC\'s Drill design, the Sunder fulfils a similar role to its sister ship but handles gas collection instead of asteroid mining. It is fitted with a non-modular scoop that allows natural gases to be safely placed inside the ship\'s cargo hold. For all the gratitude received by PMC for their work in advancing asteroid mining, Jonferco\'s reply sent the mining community into a complete frenzy, with the possibilities for collecting, refining and utilising natural gases spurring the economy, not just in Argon space but across the entire Jump Gate network, to a brand new high.',
       size: Size.medium,
       race: Races.argon,
@@ -1418,7 +1437,7 @@ export const Ships = [
          Factions.antigone,
          Factions.hatikvah,
       ],
-      price: { min: 165138, max: 223422, avg: 194280 },
+      price: { min: 137173, max: 185587, avg: 161380 },
       production: [
          {
             time: 15,
@@ -1434,7 +1453,7 @@ export const Ships = [
    },
    {
       id: 'ship_arg_m_miner_solid_01_a',
-      name: 'Drill Vanguard',
+      name: 'Drill (Mineral) Vanguard',
       description: 'Towards the end of the last era, the Plutarch Mining Corporation called for a shift away from static station-based asteroid mining towards the far more efficient method of using ships to identify and break down asteroids and bring them to refineries in far less time than it took for a refinery to be attached to a much bigger asteroid. Though it is now different from the PMC\'s original design, the Drill has been in service ever since, inspiring a train of different mining ships to be released all across the old and new Jump Gate network.',
       size: Size.medium,
       race: Races.argon,
@@ -1471,7 +1490,7 @@ export const Ships = [
          Factions.argon,
          Factions.hatikvah,
       ],
-      price: { min: 135021, max: 182678, avg: 158850 },
+      price: { min: 112170, max: 151760, avg: 131965 },
       production: [
          {
             time: 12,
@@ -1487,7 +1506,7 @@ export const Ships = [
    },
    {
       id: 'ship_arg_m_miner_solid_01_b',
-      name: 'Drill Sentinel',
+      name: 'Drill (Mineral) Sentinel',
       description: 'Towards the end of the last era, the Plutarch Mining Corporation called for a shift away from static station-based asteroid mining towards the far more efficient method of using ships to identify and break down asteroids and bring them to refineries in far less time than it took for a refinery to be attached to a much bigger asteroid. Though it is now different from the PMC\'s original design, the Drill has been in service ever since, inspiring a train of different mining ships to be released all across the old and new Jump Gate network.',
       size: Size.medium,
       race: Races.argon,
@@ -1524,7 +1543,7 @@ export const Ships = [
          Factions.antigone,
          Factions.hatikvah,
       ],
-      price: { min: 159554, max: 215867, avg: 187710 },
+      price: { min: 132528, max: 179302, avg: 155915 },
       production: [
          {
             time: 15,
@@ -1574,7 +1593,7 @@ export const Ships = [
          Factions.alliance,
          Factions.argon,
       ],
-      price: { min: 177404, max: 240017, avg: 208710 },
+      price: { min: 147352, max: 199358, avg: 173355 },
       production: [
          {
             time: 16,
@@ -1623,7 +1642,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 213104, max: 288317, avg: 250710 },
+      price: { min: 177000, max: 239470, avg: 208235 },
       production: [
          {
             time: 20,
@@ -1673,7 +1692,7 @@ export const Ships = [
          Factions.alliance,
          Factions.argon,
       ],
-      price: { min: 177404, max: 240017, avg: 208710 },
+      price: { min: 147352, max: 199358, avg: 173355 },
       production: [
          {
             time: 16,
@@ -1722,7 +1741,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 213104, max: 288317, avg: 250710 },
+      price: { min: 177000, max: 239470, avg: 208235 },
       production: [
          {
             time: 20,
@@ -1771,7 +1790,7 @@ export const Ships = [
       owners: [
          Factions.argon,
       ],
-      price: { min: 135677, max: 183563, avg: 159620 },
+      price: { min: 112175, max: 151766, avg: 131970 },
       production: [
          {
             time: 10,
@@ -1820,7 +1839,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 164594, max: 222686, avg: 193640 },
+      price: { min: 136085, max: 184115, avg: 160100 },
       production: [
          {
             time: 12,
@@ -1868,7 +1887,7 @@ export const Ships = [
          Factions.alliance,
          Factions.argon,
       ],
-      price: { min: 78940, max: 106801, avg: 92870 },
+      price: { min: 65242, max: 88268, avg: 76755 },
       production: [
          {
             time: 6,
@@ -1915,7 +1934,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 95625, max: 129375, avg: 112500 },
+      price: { min: 79042, max: 106939, avg: 92990 },
       production: [
          {
             time: 7,
@@ -1969,7 +1988,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 116765, max: 157976, avg: 137370 },
+      price: { min: 96530, max: 130600, avg: 113565 },
       production: [
          {
             time: 9,
@@ -1991,7 +2010,7 @@ export const Ships = [
       race: Races.argon,
       hull: 1700,
       storage: { missile: 20, unit: 0 },
-      people: 2,
+      people: 3,
       purpose: ShipPurpose.fight,
       thruster: Size.small,
       type: ShipType.heavyfighter,
@@ -2020,7 +2039,7 @@ export const Ships = [
       owners: [
          Factions.argon,
       ],
-      price: { min: 103403, max: 139898, avg: 121650 },
+      price: { min: 85463, max: 115627, avg: 100545 },
       production: [
          {
             time: 8,
@@ -2072,7 +2091,7 @@ export const Ships = [
       owners: [
          Factions.argon,
       ],
-      price: { min: 174565, max: 236176, avg: 205370 },
+      price: { min: 144283, max: 195207, avg: 169745 },
       production: [
          {
             time: 13,
@@ -2123,7 +2142,7 @@ export const Ships = [
          Factions.argon,
          Factions.hatikvah,
       ],
-      price: { min: 85621, max: 115840, avg: 100730 },
+      price: { min: 70775, max: 95755, avg: 83265 },
       production: [
          {
             time: 6,
@@ -2175,7 +2194,7 @@ export const Ships = [
          Factions.hatikvah,
          Factions.scaleplate,
       ],
-      price: { min: 90075, max: 121866, avg: 105970 },
+      price: { min: 74464, max: 100746, avg: 87605 },
       production: [
          {
             time: 7,
@@ -2226,7 +2245,7 @@ export const Ships = [
          Factions.hatikvah,
          Factions.scaleplate,
       ],
-      price: { min: 108953, max: 147407, avg: 128180 },
+      price: { min: 90041, max: 121820, avg: 105930 },
       production: [
          {
             time: 8,
@@ -2277,7 +2296,7 @@ export const Ships = [
          Factions.argon,
          Factions.scaleplate,
       ],
-      price: { min: 160140, max: 216660, avg: 188400 },
+      price: { min: 132396, max: 179124, avg: 155760 },
       production: [
          {
             time: 12,
@@ -2327,7 +2346,7 @@ export const Ships = [
          Factions.antigone,
          Factions.scaleplate,
       ],
-      price: { min: 191250, max: 258750, avg: 225000 },
+      price: { min: 158083, max: 213877, avg: 185980 },
       production: [
          {
             time: 14,
@@ -2378,7 +2397,7 @@ export const Ships = [
          Factions.argon,
          Factions.scaleplate,
       ],
-      price: { min: 82297, max: 111343, avg: 96820 },
+      price: { min: 68043, max: 92058, avg: 80050 },
       production: [
          {
             time: 6,
@@ -2428,7 +2447,7 @@ export const Ships = [
          Factions.antigone,
          Factions.scaleplate,
       ],
-      price: { min: 101210, max: 136931, avg: 119070 },
+      price: { min: 83687, max: 113223, avg: 98455 },
       production: [
          {
             time: 8,
@@ -2492,7 +2511,7 @@ export const Ships = [
       owners: [
          Factions.argon,
       ],
-      price: { min: 9452145, max: 12788196, avg: 11120170 },
+      price: { min: 7755200, max: 10492330, avg: 9123765 },
       production: [
          {
             time: 439,
@@ -2556,7 +2575,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 11342553, max: 15345807, avg: 13344180 },
+      price: { min: 9306200, max: 12590741, avg: 10948470 },
       production: [
          {
             time: 527,
@@ -2604,9 +2623,11 @@ export const Ships = [
          { size: Size.extralarge, hittable: false },
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_up_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_up_mid_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
-         { group: 'group_back_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_up_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_back_up_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -2635,7 +2656,7 @@ export const Ships = [
       owners: [
          Factions.argon,
       ],
-      price: { min: 10453215, max: 14142585, avg: 12297900 },
+      price: { min: 8576543, max: 11603558, avg: 10090050 },
       production: [
          {
             time: 486,
@@ -2683,9 +2704,11 @@ export const Ships = [
          { size: Size.extralarge, hittable: false },
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_up_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_up_mid_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
-         { group: 'group_back_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_up_mid_mid', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_back_up_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -2714,7 +2737,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 12538308, max: 16963593, avg: 14750950 },
+      price: { min: 10287274, max: 13918076, avg: 12102675 },
       production: [
          {
             time: 583,
@@ -2778,7 +2801,7 @@ export const Ships = [
       owners: [
          Factions.argon,
       ],
-      price: { min: 8910100, max: 12054841, avg: 10482470 },
+      price: { min: 7310438, max: 9890592, avg: 8600515 },
       production: [
          {
             time: 414,
@@ -2842,7 +2865,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
       ],
-      price: { min: 10684390, max: 14455351, avg: 12569870 },
+      price: { min: 8766199, max: 11860151, avg: 10313175 },
       production: [
          {
             time: 496,
@@ -2891,7 +2914,7 @@ export const Ships = [
       owners: [
          Factions.alliance,
       ],
-      price: { min: 78659, max: 106421, avg: 92540 },
+      price: { min: 65986, max: 89275, avg: 77630 },
       production: [
          {
             time: 10,
@@ -2940,7 +2963,7 @@ export const Ships = [
       owners: [
          Factions.alliance,
       ],
-      price: { min: 96645, max: 130755, avg: 113700 },
+      price: { min: 81082, max: 109699, avg: 95390 },
       production: [
          {
             time: 13,
@@ -2988,6 +3011,11 @@ export const Ships = [
          { group: 'group_rear_down_mid', size: Size.medium, hittable: true },
          { group: 'group_rear_up_mid', size: Size.medium, hittable: true },
          { group: 'group_front_up_mid2', size: Size.medium, hittable: true },
+         { group: 'group_front_up_mid2', size: Size.medium, hittable: true },
+         { group: 'group_front_down_down', size: Size.medium, hittable: true },
+         { group: 'group_front_down_down', size: Size.medium, hittable: true },
+         { group: 'group_front_down_down', size: Size.medium, hittable: true },
+         { group: 'group_rear_down_mid', size: Size.medium, hittable: true },
       ],
       weapons: [
          { size: Size.large, hittable: false, types: [ TurretType.standard ] },
@@ -3021,8 +3049,9 @@ export const Ships = [
       ],
       owners: [
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 5225188, max: 7069372, avg: 6147280 },
+      price: { min: 4276299, max: 5785581, avg: 5030940 },
       production: [
          {
             time: 195,
@@ -3070,6 +3099,11 @@ export const Ships = [
          { group: 'group_rear_down_mid', size: Size.medium, hittable: true },
          { group: 'group_rear_up_mid', size: Size.medium, hittable: true },
          { group: 'group_front_up_mid2', size: Size.medium, hittable: true },
+         { group: 'group_front_up_mid2', size: Size.medium, hittable: true },
+         { group: 'group_front_down_down', size: Size.medium, hittable: true },
+         { group: 'group_front_down_down', size: Size.medium, hittable: true },
+         { group: 'group_front_down_down', size: Size.medium, hittable: true },
+         { group: 'group_rear_down_mid', size: Size.medium, hittable: true },
       ],
       weapons: [
          { size: Size.large, hittable: false, types: [ TurretType.standard ] },
@@ -3103,8 +3137,9 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 6275338, max: 8490163, avg: 7382750 },
+      price: { min: 5135781, max: 6948409, avg: 6042095 },
       production: [
          {
             time: 234,
@@ -3164,8 +3199,9 @@ export const Ships = [
       owners: [
          Factions.hatikvah,
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 1191479, max: 1612001, avg: 1401740 },
+      price: { min: 981657, max: 1328124, avg: 1154890 },
       production: [
          {
             time: 74,
@@ -3225,8 +3261,9 @@ export const Ships = [
       owners: [
          Factions.hatikvah,
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 1439985, max: 1948215, avg: 1694100 },
+      price: { min: 1186405, max: 1605136, avg: 1395770 },
       production: [
          {
             time: 89,
@@ -3268,6 +3305,7 @@ export const Ships = [
          { group: 'group_front_down_mid', size: Size.medium, hittable: true },
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
          { group: 'group_front_up_mid2', size: Size.medium, hittable: true },
+         { group: 'group_front_up_mid2', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
@@ -3288,8 +3326,9 @@ export const Ships = [
       owners: [
          Factions.hatikvah,
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 1191479, max: 1612001, avg: 1401740 },
+      price: { min: 981657, max: 1328124, avg: 1154890 },
       production: [
          {
             time: 74,
@@ -3331,6 +3370,7 @@ export const Ships = [
          { group: 'group_front_down_mid', size: Size.medium, hittable: true },
          { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
          { group: 'group_front_up_mid2', size: Size.medium, hittable: true },
+         { group: 'group_front_up_mid2', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
@@ -3351,8 +3391,9 @@ export const Ships = [
       owners: [
          Factions.hatikvah,
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 1439985, max: 1948215, avg: 1694100 },
+      price: { min: 1186405, max: 1605136, avg: 1395770 },
       production: [
          {
             time: 89,
@@ -3383,9 +3424,9 @@ export const Ships = [
       inertia: { pitch: 92.135, yaw: 92.135, roll: 73.708 },
       drag: { forward: 91.477, reverse: 365.906, horizontal: 140.475, vertical: 140.475, pitch: 124.575, yaw: 124.575, roll: 124.575 },
       engines: [
-         { group: 'group_back_down_mid', size: Size.large, hittable: false },
-         { group: 'group_back_down_mid', size: Size.large, hittable: false },
-         { group: 'group_back_down_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
       ],
       shields: [
          { size: Size.large, hittable: false },
@@ -3394,6 +3435,9 @@ export const Ships = [
          { group: 'group_back_down_left', size: Size.medium, hittable: true },
          { group: 'group_back_down_right', size: Size.medium, hittable: true },
          { group: 'group_back_down_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_down_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -3413,8 +3457,9 @@ export const Ships = [
       ],
       owners: [
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 2059006, max: 2785714, avg: 2422360 },
+      price: { min: 1696396, max: 2295124, avg: 1995760 },
       production: [
          {
             time: 127,
@@ -3445,9 +3490,9 @@ export const Ships = [
       inertia: { pitch: 100.651, yaw: 100.651, roll: 80.521 },
       drag: { forward: 102.272, reverse: 409.087, horizontal: 168.57, vertical: 168.57, pitch: 136.09, yaw: 136.09, roll: 136.09 },
       engines: [
-         { group: 'group_back_down_mid', size: Size.large, hittable: false },
-         { group: 'group_back_down_mid', size: Size.large, hittable: false },
-         { group: 'group_back_down_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
       ],
       shields: [
          { size: Size.large, hittable: false },
@@ -3456,6 +3501,9 @@ export const Ships = [
          { group: 'group_back_down_left', size: Size.medium, hittable: true },
          { group: 'group_back_down_right', size: Size.medium, hittable: true },
          { group: 'group_back_down_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_down_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -3475,8 +3523,9 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 2487219, max: 3365061, avg: 2926140 },
+      price: { min: 2049189, max: 2772432, avg: 2410810 },
       production: [
          {
             time: 154,
@@ -3507,17 +3556,19 @@ export const Ships = [
       inertia: { pitch: 87.877, yaw: 87.877, roll: 70.301 },
       drag: { forward: 86.079, reverse: 344.316, horizontal: 126.428, vertical: 126.428, pitch: 118.817, yaw: 118.817, roll: 118.817 },
       engines: [
-         { group: 'group_back_down_mid', size: Size.large, hittable: false },
-         { group: 'group_back_down_mid', size: Size.large, hittable: false },
-         { group: 'group_back_down_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
       ],
       shields: [
          { size: Size.large, hittable: false },
          { group: 'group_front_up_mid', size: Size.medium, hittable: true },
-         { group: 'group_back_up_mid', size: Size.medium, hittable: true },
          { group: 'group_back_down_left', size: Size.medium, hittable: true },
          { group: 'group_back_down_right', size: Size.medium, hittable: true },
          { group: 'group_back_down_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_up_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -3537,8 +3588,9 @@ export const Ships = [
       ],
       owners: [
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 2059006, max: 2785714, avg: 2422360 },
+      price: { min: 1696396, max: 2295124, avg: 1995760 },
       production: [
          {
             time: 127,
@@ -3569,17 +3621,19 @@ export const Ships = [
       inertia: { pitch: 95.542, yaw: 95.542, roll: 76.433 },
       drag: { forward: 95.795, reverse: 383.179, horizontal: 151.713, vertical: 151.713, pitch: 129.181, yaw: 129.181, roll: 129.181 },
       engines: [
-         { group: 'group_back_down_mid', size: Size.large, hittable: false },
-         { group: 'group_back_down_mid', size: Size.large, hittable: false },
-         { group: 'group_back_down_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
+         { group: 'group_back_mid_mid', size: Size.large, hittable: false },
       ],
       shields: [
          { size: Size.large, hittable: false },
          { group: 'group_front_up_mid', size: Size.medium, hittable: true },
-         { group: 'group_back_up_mid', size: Size.medium, hittable: true },
          { group: 'group_back_down_left', size: Size.medium, hittable: true },
          { group: 'group_back_down_right', size: Size.medium, hittable: true },
          { group: 'group_back_down_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_mid_mid', size: Size.medium, hittable: true },
+         { group: 'group_back_up_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_front_up_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -3599,8 +3653,9 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 2487219, max: 3365061, avg: 2926140 },
+      price: { min: 2049189, max: 2772432, avg: 2410810 },
       production: [
          {
             time: 154,
@@ -3656,8 +3711,9 @@ export const Ships = [
       ],
       owners: [
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 647420, max: 875921, avg: 761670 },
+      price: { min: 528951, max: 715639, avg: 622295 },
       production: [
          {
             time: 20,
@@ -3713,8 +3769,9 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 776458, max: 1050502, avg: 913480 },
+      price: { min: 634372, max: 858268, avg: 746320 },
       production: [
          {
             time: 24,
@@ -3773,8 +3830,9 @@ export const Ships = [
       ],
       owners: [
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 1142638, max: 1545922, avg: 1344280 },
+      price: { min: 933555, max: 1263045, avg: 1098300 },
       production: [
          {
             time: 35,
@@ -3833,8 +3891,9 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 1376456, max: 1862264, avg: 1619360 },
+      price: { min: 1124584, max: 1521496, avg: 1323040 },
       production: [
          {
             time: 43,
@@ -3883,8 +3942,9 @@ export const Ships = [
       owners: [
          Factions.hatikvah,
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 136119, max: 184161, avg: 160140 },
+      price: { min: 113059, max: 152962, avg: 133010 },
       production: [
          {
             time: 12,
@@ -3933,8 +3993,9 @@ export const Ships = [
       owners: [
          Factions.hatikvah,
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 166269, max: 224952, avg: 195610 },
+      price: { min: 138129, max: 186881, avg: 162505 },
       production: [
          {
             time: 15,
@@ -3986,8 +4047,9 @@ export const Ships = [
       owners: [
          Factions.hatikvah,
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 136119, max: 184161, avg: 160140 },
+      price: { min: 113059, max: 152962, avg: 133010 },
       production: [
          {
             time: 12,
@@ -4039,8 +4101,9 @@ export const Ships = [
       owners: [
          Factions.hatikvah,
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 166269, max: 224952, avg: 195610 },
+      price: { min: 138129, max: 186881, avg: 162505 },
       production: [
          {
             time: 15,
@@ -4088,8 +4151,9 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 180761, max: 244559, avg: 212660 },
+      price: { min: 150153, max: 203148, avg: 176650 },
       production: [
          {
             time: 17,
@@ -4136,8 +4200,9 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 234345, max: 317055, avg: 275700 },
+      price: { min: 194693, max: 263408, avg: 229050 },
       production: [
          {
             time: 22,
@@ -4185,8 +4250,9 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 180761, max: 244559, avg: 212660 },
+      price: { min: 150153, max: 203148, avg: 176650 },
       production: [
          {
             time: 17,
@@ -4233,8 +4299,9 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 234345, max: 317055, avg: 275700 },
+      price: { min: 194693, max: 263408, avg: 229050 },
       production: [
          {
             time: 22,
@@ -4283,8 +4350,9 @@ export const Ships = [
       ],
       owners: [
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 161237, max: 218144, avg: 189690 },
+      price: { min: 133284, max: 180326, avg: 156805 },
       production: [
          {
             time: 12,
@@ -4333,8 +4401,9 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 193477, max: 261763, avg: 227620 },
+      price: { min: 159928, max: 216373, avg: 188150 },
       production: [
          {
             time: 14,
@@ -4383,8 +4452,9 @@ export const Ships = [
       ],
       owners: [
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 182376, max: 246744, avg: 214560 },
+      price: { min: 150773, max: 203987, avg: 177380 },
       production: [
          {
             time: 13,
@@ -4433,8 +4503,9 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 217940, max: 294860, avg: 256400 },
+      price: { min: 180149, max: 243731, avg: 211940 },
       production: [
          {
             time: 16,
@@ -4444,6 +4515,61 @@ export const Ships = [
             wares: [
                { ware: 'energycells', amount: 89 },
                { ware: 'hullparts', amount: 196 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'ship_par_s_heavyfighter_01_a',
+      name: 'Ares',
+      description: 'No information available',
+      size: Size.small,
+      race: Races.paranid,
+      hull: 4700,
+      storage: { missile: 20, unit: 0 },
+      people: 2,
+      purpose: ShipPurpose.fight,
+      thruster: Size.small,
+      type: ShipType.heavyfighter,
+      mass: 12.038,
+      inertia: { pitch: 3.269, yaw: 3.269, roll: 2.615 },
+      drag: { forward: 8.258, reverse: 40.892, horizontal: 3.726, vertical: 3.726, pitch: 4.699, yaw: 4.699, roll: 4.699 },
+      engines: [
+         { size: Size.small, hittable: false },
+         { size: Size.small, hittable: false },
+         { size: Size.small, hittable: false },
+      ],
+      shields: [
+         { size: Size.small, hittable: false },
+         { size: Size.small, hittable: false },
+         { size: Size.small, hittable: false },
+      ],
+      weapons: [
+         { size: Size.small, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { size: Size.small, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { size: Size.small, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { size: Size.small, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      cargo: [
+         { max: 270, types: [ CargoTypes.container ] },
+      ],
+      docks: [
+         { capacity: 10, size: Size.extrasmall },
+      ],
+      owners: [
+         Factions.holyorder,
+         Factions.trinity,
+      ],
+      price: { min: 207009, max: 280071, avg: 243540 },
+      production: [
+         {
+            time: 12,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'energycells', amount: 66 },
+               { ware: 'hullparts', amount: 228 },
             ],
          },
       ]
@@ -4485,8 +4611,9 @@ export const Ships = [
          Factions.hatikvah,
          Factions.holyorder,
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 85621, max: 115840, avg: 100730 },
+      price: { min: 70775, max: 95755, avg: 83265 },
       production: [
          {
             time: 6,
@@ -4535,8 +4662,9 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 82297, max: 111343, avg: 96820 },
+      price: { min: 68043, max: 92058, avg: 80050 },
       production: [
          {
             time: 6,
@@ -4584,8 +4712,9 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 100079, max: 135401, avg: 117740 },
+      price: { min: 82731, max: 111930, avg: 97330 },
       production: [
          {
             time: 7,
@@ -4636,8 +4765,9 @@ export const Ships = [
          Factions.alliance,
          Factions.paranid,
          Factions.scaleplate,
+         Factions.trinity,
       ],
-      price: { min: 154556, max: 209105, avg: 181830 },
+      price: { min: 127751, max: 172839, avg: 150295 },
       production: [
          {
             time: 11,
@@ -4687,8 +4817,9 @@ export const Ships = [
       owners: [
          Factions.holyorder,
          Factions.scaleplate,
+         Factions.trinity,
       ],
-      price: { min: 189023, max: 255737, avg: 222380 },
+      price: { min: 156239, max: 211382, avg: 183810 },
       production: [
          {
             time: 14,
@@ -4752,8 +4883,9 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 9452145, max: 12788196, avg: 11120170 },
+      price: { min: 7755200, max: 10492330, avg: 9123765 },
       production: [
          {
             time: 439,
@@ -4816,8 +4948,9 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 11342553, max: 15345807, avg: 13344180 },
+      price: { min: 9306200, max: 12590741, avg: 10948470 },
       production: [
          {
             time: 527,
@@ -4866,6 +4999,7 @@ export const Ships = [
          { group: 'group_middle_up', size: Size.medium, hittable: true },
          { group: 'group_back_up_mid', size: Size.medium, hittable: true },
          { group: 'group_mid_up_mid', size: Size.medium, hittable: true },
+         { group: 'group_mid_up_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_back_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -4898,8 +5032,9 @@ export const Ships = [
       ],
       owners: [
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 13600230, max: 18400311, avg: 16000270 },
+      price: { min: 11158558, max: 15096872, avg: 13127715 },
       production: [
          {
             time: 632,
@@ -4948,6 +5083,7 @@ export const Ships = [
          { group: 'group_middle_up', size: Size.medium, hittable: true },
          { group: 'group_back_up_mid', size: Size.medium, hittable: true },
          { group: 'group_mid_up_mid', size: Size.medium, hittable: true },
+         { group: 'group_mid_up_mid', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_back_up_left', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -4980,8 +5116,9 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 16314739, max: 22072882, avg: 19193810 },
+      price: { min: 13385719, max: 18110091, avg: 15747905 },
       production: [
          {
             time: 758,
@@ -5044,8 +5181,9 @@ export const Ships = [
       ],
       owners: [
          Factions.paranid,
+         Factions.trinity,
       ],
-      price: { min: 9987509, max: 13512512, avg: 11750010 },
+      price: { min: 8194429, max: 11086581, avg: 9640505 },
       production: [
          {
             time: 464,
@@ -5108,8 +5246,9 @@ export const Ships = [
       ],
       owners: [
          Factions.holyorder,
+         Factions.trinity,
       ],
-      price: { min: 11985230, max: 16215311, avg: 14100270 },
+      price: { min: 9833493, max: 13304137, avg: 11568815 },
       production: [
          {
             time: 557,
@@ -5187,7 +5326,7 @@ export const Ships = [
       owners: [
          Factions.teladi,
       ],
-      price: { min: 5476958, max: 7410002, avg: 6443480 },
+      price: { min: 4482356, max: 6064364, avg: 5273360 },
       production: [
          {
             time: 204,
@@ -5265,7 +5404,7 @@ export const Ships = [
       owners: [
          Factions.ministry,
       ],
-      price: { min: 6551401, max: 8863660, avg: 7707530 },
+      price: { min: 5361719, max: 7254091, avg: 6307905 },
       production: [
          {
             time: 244,
@@ -5333,7 +5472,7 @@ export const Ships = [
          Factions.hatikvah,
          Factions.teladi,
       ],
-      price: { min: 1550927, max: 2098313, avg: 1824620 },
+      price: { min: 1277814, max: 1728807, avg: 1503310 },
       production: [
          {
             time: 96,
@@ -5401,7 +5540,7 @@ export const Ships = [
          Factions.hatikvah,
          Factions.ministry,
       ],
-      price: { min: 1861551, max: 2518569, avg: 2190060 },
+      price: { min: 1533732, max: 2075049, avg: 1804390 },
       production: [
          {
             time: 115,
@@ -5472,7 +5611,7 @@ export const Ships = [
          Factions.hatikvah,
          Factions.teladi,
       ],
-      price: { min: 1550927, max: 2098313, avg: 1824620 },
+      price: { min: 1277814, max: 1728807, avg: 1503310 },
       production: [
          {
             time: 96,
@@ -5543,7 +5682,7 @@ export const Ships = [
          Factions.hatikvah,
          Factions.ministry,
       ],
-      price: { min: 1861551, max: 2518569, avg: 2190060 },
+      price: { min: 1533732, max: 2075049, avg: 1804390 },
       production: [
          {
             time: 115,
@@ -5608,7 +5747,7 @@ export const Ships = [
       owners: [
          Factions.teladi,
       ],
-      price: { min: 2912143, max: 3939958, avg: 3426050 },
+      price: { min: 2254893, max: 3050737, avg: 2652815 },
       production: [
          {
             time: 169,
@@ -5673,7 +5812,7 @@ export const Ships = [
       owners: [
          Factions.ministry,
       ],
-      price: { min: 3477920, max: 4705421, avg: 4091670 },
+      price: { min: 2719180, max: 3678890, avg: 3199035 },
       production: [
          {
             time: 204,
@@ -5738,7 +5877,7 @@ export const Ships = [
       owners: [
          Factions.teladi,
       ],
-      price: { min: 2935407, max: 3971433, avg: 3453420 },
+      price: { min: 2071119, max: 2802102, avg: 2436610 },
       production: [
          {
             time: 155,
@@ -5803,7 +5942,7 @@ export const Ships = [
       owners: [
          Factions.ministry,
       ],
-      price: { min: 3533357, max: 4780424, avg: 4156890 },
+      price: { min: 2472416, max: 3345034, avg: 2908725 },
       production: [
          {
             time: 185,
@@ -5829,7 +5968,7 @@ export const Ships = [
       people: 9,
       purpose: ShipPurpose.fight,
       thruster: Size.medium,
-      type: ShipType.bomber,
+      type: ShipType.gunboat,
       mass: 28.434,
       inertia: { pitch: 5.34, yaw: 5.34, roll: 4.272 },
       drag: { forward: 8.72, reverse: 34.879, horizontal: 14.177, vertical: 14.177, pitch: 9.609, yaw: 9.609, roll: 9.609 },
@@ -5861,7 +6000,7 @@ export const Ships = [
       owners: [
          Factions.teladi,
       ],
-      price: { min: 765425, max: 1035575, avg: 900500 },
+      price: { min: 625354, max: 846067, avg: 735710 },
       production: [
          {
             time: 24,
@@ -5887,7 +6026,7 @@ export const Ships = [
       people: 7,
       purpose: ShipPurpose.fight,
       thruster: Size.medium,
-      type: ShipType.bomber,
+      type: ShipType.gunboat,
       mass: 34.121,
       inertia: { pitch: 6.13, yaw: 6.13, roll: 4.904 },
       drag: { forward: 10.01, reverse: 40.04, horizontal: 17.012, vertical: 17.012, pitch: 11.03, yaw: 11.03, roll: 11.03 },
@@ -5919,7 +6058,7 @@ export const Ships = [
       owners: [
          Factions.ministry,
       ],
-      price: { min: 905531, max: 1225130, avg: 1065330 },
+      price: { min: 739861, max: 1000989, avg: 870425 },
       production: [
          {
             time: 28,
@@ -5978,7 +6117,7 @@ export const Ships = [
       owners: [
          Factions.teladi,
       ],
-      price: { min: 1086377, max: 1469804, avg: 1278090 },
+      price: { min: 887574, max: 1200836, avg: 1044205 },
       production: [
          {
             time: 34,
@@ -6037,7 +6176,7 @@ export const Ships = [
       owners: [
          Factions.ministry,
       ],
-      price: { min: 1314712, max: 1778728, avg: 1546720 },
+      price: { min: 1074162, max: 1453278, avg: 1263720 },
       production: [
          {
             time: 41,
@@ -6088,7 +6227,7 @@ export const Ships = [
          Factions.hatikvah,
          Factions.teladi,
       ],
-      price: { min: 169592, max: 229448, avg: 199520 },
+      price: { min: 101035, max: 136695, avg: 118865 },
       production: [
          {
             time: 11,
@@ -6139,7 +6278,7 @@ export const Ships = [
          Factions.hatikvah,
          Factions.ministry,
       ],
-      price: { min: 204196, max: 276265, avg: 240230 },
+      price: { min: 122349, max: 165531, avg: 143940 },
       production: [
          {
             time: 14,
@@ -6193,7 +6332,7 @@ export const Ships = [
          Factions.hatikvah,
          Factions.teladi,
       ],
-      price: { min: 169592, max: 229448, avg: 199520 },
+      price: { min: 101035, max: 136695, avg: 118865 },
       production: [
          {
             time: 11,
@@ -6247,7 +6386,7 @@ export const Ships = [
          Factions.hatikvah,
          Factions.ministry,
       ],
-      price: { min: 204196, max: 276265, avg: 240230 },
+      price: { min: 122349, max: 165531, avg: 143940 },
       production: [
          {
             time: 14,
@@ -6297,7 +6436,7 @@ export const Ships = [
          Factions.alliance,
          Factions.teladi,
       ],
-      price: { min: 272238, max: 368322, avg: 320280 },
+      price: { min: 226117, max: 305923, avg: 266020 },
       production: [
          {
             time: 25,
@@ -6346,7 +6485,7 @@ export const Ships = [
       owners: [
          Factions.ministry,
       ],
-      price: { min: 315784, max: 427237, avg: 371510 },
+      price: { min: 262323, max: 354907, avg: 308615 },
       production: [
          {
             time: 29,
@@ -6396,7 +6535,7 @@ export const Ships = [
          Factions.alliance,
          Factions.teladi,
       ],
-      price: { min: 272238, max: 368322, avg: 320280 },
+      price: { min: 226117, max: 305923, avg: 266020 },
       production: [
          {
             time: 25,
@@ -6445,7 +6584,7 @@ export const Ships = [
       owners: [
          Factions.ministry,
       ],
-      price: { min: 315784, max: 427237, avg: 371510 },
+      price: { min: 262323, max: 354907, avg: 308615 },
       production: [
          {
             time: 29,
@@ -6455,6 +6594,60 @@ export const Ships = [
             wares: [
                { ware: 'energycells', amount: 161 },
                { ware: 'hullparts', amount: 283 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'ship_tel_m_trans_container_03_a',
+      name: 'Cormorant Vanguard',
+      description: 'No information available',
+      size: Size.medium,
+      race: Races.teladi,
+      explosionDamage: 1000,
+      hull: 10000,
+      storage: { missile: 20, unit: 0 },
+      people: 17,
+      purpose: ShipPurpose.trade,
+      thruster: Size.medium,
+      type: ShipType.transporter,
+      mass: 65.536,
+      inertia: { pitch: 13.437, yaw: 13.437, roll: 10.75 },
+      drag: { forward: 17.137, reverse: 68.549, horizontal: 18.864, vertical: 18.864, pitch: 25.493, yaw: 25.493, roll: 25.493 },
+      engines: [
+         { size: Size.medium, hittable: false },
+         { size: Size.medium, hittable: false },
+      ],
+      shields: [
+         { size: Size.medium, hittable: false },
+         { size: Size.medium, hittable: false },
+      ],
+      weapons: [
+         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      turrets: [
+         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+      ],
+      cargo: [
+         { max: 7900, types: [ CargoTypes.container ] },
+      ],
+      docks: [
+         { capacity: 10, size: Size.extrasmall },
+      ],
+      owners: [
+         Factions.ministry,
+      ],
+      price: { min: 356006, max: 481655, avg: 418830 },
+      production: [
+         {
+            time: 26,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'energycells', amount: 141 },
+               { ware: 'hullparts', amount: 390 },
             ],
          },
       ]
@@ -6497,7 +6690,7 @@ export const Ships = [
          Factions.scaleplate,
          Factions.teladi,
       ],
-      price: { min: 169014, max: 228666, avg: 198840 },
+      price: { min: 139706, max: 189014, avg: 164360 },
       production: [
          {
             time: 13,
@@ -6549,7 +6742,7 @@ export const Ships = [
          Factions.ministry,
          Factions.scaleplate,
       ],
-      price: { min: 201255, max: 272286, avg: 236770 },
+      price: { min: 166349, max: 225061, avg: 195705 },
       production: [
          {
             time: 15,
@@ -6600,7 +6793,7 @@ export const Ships = [
       owners: [
          Factions.teladi,
       ],
-      price: { min: 162333, max: 219627, avg: 190980 },
+      price: { min: 134173, max: 181528, avg: 157850 },
       production: [
          {
             time: 12,
@@ -6651,7 +6844,7 @@ export const Ships = [
       owners: [
          Factions.ministry,
       ],
-      price: { min: 195704, max: 264776, avg: 230240 },
+      price: { min: 161772, max: 218868, avg: 190320 },
       production: [
          {
             time: 14,
@@ -6702,7 +6895,7 @@ export const Ships = [
          Factions.ministry,
          Factions.teladi,
       ],
-      price: { min: 93398, max: 126362, avg: 109880 },
+      price: { min: 77197, max: 104443, avg: 90820 },
       production: [
          {
             time: 7,
@@ -6753,7 +6946,7 @@ export const Ships = [
          Factions.scaleplate,
          Factions.teladi,
       ],
-      price: { min: 94529, max: 127892, avg: 111210 },
+      price: { min: 78153, max: 105737, avg: 91945 },
       production: [
          {
             time: 7,
@@ -6803,7 +6996,7 @@ export const Ships = [
          Factions.ministry,
          Factions.scaleplate,
       ],
-      price: { min: 113441, max: 153479, avg: 133460 },
+      price: { min: 93798, max: 126903, avg: 110350 },
       production: [
          {
             time: 8,
@@ -6854,7 +7047,7 @@ export const Ships = [
          Factions.alliance,
          Factions.teladi,
       ],
-      price: { min: 143455, max: 194086, avg: 168770 },
+      price: { min: 118596, max: 160454, avg: 139525 },
       production: [
          {
             time: 11,
@@ -6904,7 +7097,7 @@ export const Ships = [
       owners: [
          Factions.ministry,
       ],
-      price: { min: 171241, max: 231679, avg: 201460 },
+      price: { min: 141551, max: 191510, avg: 166530 },
       production: [
          {
             time: 13,
@@ -6955,7 +7148,7 @@ export const Ships = [
          Factions.scaleplate,
          Factions.teladi,
       ],
-      price: { min: 173468, max: 234692, avg: 204080 },
+      price: { min: 143395, max: 194005, avg: 168700 },
       production: [
          {
             time: 13,
@@ -7005,7 +7198,7 @@ export const Ships = [
          Factions.ministry,
          Factions.scaleplate,
       ],
-      price: { min: 205709, max: 278312, avg: 242010 },
+      price: { min: 170038, max: 230052, avg: 200045 },
       production: [
          {
             time: 15,
@@ -7069,7 +7262,7 @@ export const Ships = [
       owners: [
          Factions.teladi,
       ],
-      price: { min: 9452145, max: 12788196, avg: 11120170 },
+      price: { min: 7755200, max: 10492330, avg: 9123765 },
       production: [
          {
             time: 439,
@@ -7133,7 +7326,7 @@ export const Ships = [
       owners: [
          Factions.ministry,
       ],
-      price: { min: 11342553, max: 15345807, avg: 13344180 },
+      price: { min: 9306200, max: 12590741, avg: 10948470 },
       production: [
          {
             time: 527,
@@ -7180,6 +7373,10 @@ export const Ships = [
          { group: 'group_front_top_right', size: Size.medium, hittable: true },
          { group: 'group_front_down_center', size: Size.medium, hittable: true },
          { group: 'group_center_bottom', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom', size: Size.medium, hittable: true },
+         { group: 'group_center_bottom', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_back_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -7207,7 +7404,7 @@ export const Ships = [
       owners: [
          Factions.teladi,
       ],
-      price: { min: 11572631, max: 15657089, avg: 13614860 },
+      price: { min: 9494968, max: 12846133, avg: 11170550 },
       production: [
          {
             time: 538,
@@ -7254,6 +7451,10 @@ export const Ships = [
          { group: 'group_front_top_right', size: Size.medium, hittable: true },
          { group: 'group_front_down_center', size: Size.medium, hittable: true },
          { group: 'group_center_bottom', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom', size: Size.medium, hittable: true },
+         { group: 'group_center_bottom', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_back_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -7281,7 +7482,7 @@ export const Ships = [
       owners: [
          Factions.ministry,
       ],
-      price: { min: 13892256, max: 18795405, avg: 16343830 },
+      price: { min: 11398156, max: 15421034, avg: 13409595 },
       production: [
          {
             time: 645,
@@ -7327,6 +7528,9 @@ export const Ships = [
          { group: 'group_front_top_left', size: Size.medium, hittable: true },
          { group: 'group_front_top_right', size: Size.medium, hittable: true },
          { group: 'group_front_down_center', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_back_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -7350,7 +7554,7 @@ export const Ships = [
       owners: [
          Factions.teladi,
       ],
-      price: { min: 8065030, max: 10911511, avg: 9488270 },
+      price: { min: 6617127, max: 8952583, avg: 7784855 },
       production: [
          {
             time: 375,
@@ -7396,6 +7600,9 @@ export const Ships = [
          { group: 'group_front_top_left', size: Size.medium, hittable: true },
          { group: 'group_front_top_right', size: Size.medium, hittable: true },
          { group: 'group_front_down_center', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom', size: Size.medium, hittable: true },
+         { group: 'group_back_bottom', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_back_top_center', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -7419,7 +7626,7 @@ export const Ships = [
       owners: [
          Factions.ministry,
       ],
-      price: { min: 9678899, max: 13094981, avg: 11386940 },
+      price: { min: 7941236, max: 10744025, avg: 9342630 },
       production: [
          {
             time: 450,
