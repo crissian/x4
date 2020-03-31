@@ -17,7 +17,7 @@ export class FactionsComponent extends EntityListComponent<Faction> implements O
    }
 
    ngOnInit(): void {
-      this.titleService.setTitle('X4: Foundations - Factions');
+      this.titleService.setTitle('X4: Foundations / Split Vendetta - Factions');
       super.ngOnInit();
    }
 }

@@ -17,7 +17,7 @@ export class RacesComponent extends EntityListComponent<Race> implements OnInit 
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('X4: Foundations - Races');
+    this.titleService.setTitle('X4: Foundations / Split Vendetta - Races');
     super.ngOnInit();
   }
 }

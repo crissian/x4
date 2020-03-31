@@ -31,12 +31,12 @@ export class ModuleDetailComponent extends EntityDetailsComponent<StationModule>
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('X4: Foundations - Modules');
+    this.titleService.setTitle('X4: Foundations / Split Vendetta - Modules');
     super.ngOnInit();
   }
 
   onEntityLoaded(entity: StationModule) {
-    this.titleService.setTitle(`X4: Foundations - Modules - ${this.entity.name}`);
+    this.titleService.setTitle(`X4: Foundations / Split Vendetta - Modules - ${this.entity.name}`);
 
     this.entityProduction = this.entity.production
       .map<ProductionData>(x => {

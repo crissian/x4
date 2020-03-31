@@ -43,7 +43,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
    }
 
    ngOnInit(): void {
-      this.titleService.setTitle('X4: Foundations - Station Calculator');
+      this.titleService.setTitle('X4: Foundations / Split Vendetta - Station Calculator');
 
       this.route.queryParams
          .pipe(

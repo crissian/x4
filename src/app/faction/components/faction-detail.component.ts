@@ -16,11 +16,11 @@ export class FactionDetailComponent extends EntityDetailsComponent<Faction> impl
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('X4: Foundations - Factions');
+    this.titleService.setTitle('X4: Foundations / Split Vendetta - Factions');
     super.ngOnInit();
   }
 
   onEntityLoaded(entity: Faction) {
-    this.titleService.setTitle(`X4: Foundations - Factions - ${this.entity.name}`);
+    this.titleService.setTitle(`X4: Foundations / Split Vendetta - ${this.entity.name}`);
   }
 }

@@ -25,7 +25,7 @@ export class ModulesComponent extends EntityListComponent<StationModule> impleme
    }
 
    ngOnInit(): void {
-      this.titleService.setTitle('X4: Foundations - Modules');
+      this.titleService.setTitle('X4: Foundations / Split Vendetta - Modules');
 
       this.races = this.raceService.getEntities();
       this.moduleTypes = EnumFn.values(ModuleTypes);

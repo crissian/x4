@@ -28,7 +28,7 @@ export class EquipmentsComponent extends EntityListComponent<Equipment> implemen
    }
 
    ngOnInit(): void {
-      this.titleService.setTitle('X4: Foundations - Equipment');
+      this.titleService.setTitle('X4: Foundations / Split Vendetta - Equipment');
 
       this.sizes = EnumFn.values(Size);
       this.equipmentTypes = EnumFn.values(EquipmentType);

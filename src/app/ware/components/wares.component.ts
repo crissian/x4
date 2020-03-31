@@ -21,7 +21,7 @@ export class WaresComponent extends EntityListComponent<Ware> implements OnInit 
    }
 
    ngOnInit(): void {
-      this.titleService.setTitle('X4: Foundations - Wares');
+      this.titleService.setTitle('X4: Foundations / Split Vendetta - Wares');
 
       this.transportTypes = EnumFn.values(TransportType);
       super.ngOnInit();

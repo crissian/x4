@@ -39,12 +39,12 @@ export class WareDetailComponent extends EntityDetailsComponent<Ware> implements
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('X4: Foundations - Wares');
+    this.titleService.setTitle('X4: Foundations / Split Vendetta - Wares');
     super.ngOnInit();
   }
 
   onEntityLoaded(entity: Ware) {
-    this.titleService.setTitle(`X4: Foundations - Wares - ${this.entity.name}`);
+    this.titleService.setTitle(`X4: Foundations / Split Vendetta - ${this.entity.name}`);
     this.entityProduction = this.entity.production
       .map<ProductionData>(x => {
         return {

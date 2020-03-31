@@ -28,7 +28,7 @@ export class ShipsComponent extends EntityListComponent<Ship> implements OnInit 
    }
 
    ngOnInit(): void {
-      this.titleService.setTitle('X4: Foundations - Ships');
+      this.titleService.setTitle('X4: Foundations / Split Vendetta - Ships');
 
       this.sizes = EnumFn.values(Size);
       this.shipTypes = EnumFn.values(ShipType);
