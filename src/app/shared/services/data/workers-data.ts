@@ -26,6 +26,15 @@ export const Workers = {
       { ware: Wares.medicalsupplies, amount: 270 }
     ]
   },
+   split: {
+      race: Races.split,
+      amount: 400,
+      consumption: [
+         { ware: Wares.cheltmeat, amount: 100 },
+         { ware: Wares.scruffinfruits, amount: 140 },
+         { ware: Wares.medicalsupplies, amount: 270 }
+      ]
+   },
 
   get(method: string) {
     return Workers[method] || Workers.argon;

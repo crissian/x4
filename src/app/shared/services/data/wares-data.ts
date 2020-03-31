@@ -562,6 +562,21 @@ export const Wares = {
                { type: Effects.work, product: 0.28 },
             ],
          },
+         {
+            time: 300,
+            amount: 120,
+            method: 'split',
+            name: 'Split',
+            wares: [
+               { ware: 'energycells', amount: 40 },
+               { ware: 'scruffinfruits', amount: 21 },
+               { ware: 'spices', amount: 30 },
+               { ware: 'water', amount: 60 },
+            ],
+            effects: [
+               { type: Effects.work, product: 0.28 },
+            ],
+         },
       ]
    },
    methane: {
