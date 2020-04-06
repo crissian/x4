@@ -14,6 +14,11 @@ interface ResourcePricePercentage {
    productsPrice: number;
 }
 
+interface ResourceAmount {
+   ware: Ware;
+   value: number;
+}
+
 class ResourceSummaryModel {
    constructor(private model: StationResourceModel,
                private pricePercentage: ResourcePricePercentage,
@@ -98,6 +103,8 @@ export class StationSummaryComponent {
    resourcesProduced: ResourceSummaryModel[] = [];
    moduleCosts: ModuleCostModel[];
 
+   totalModuleResourceCosts: ResourceAmount[] = [];
+
    @Output()
    change = new EventEmitter();
 
@@ -152,7 +159,7 @@ export class StationSummaryComponent {
          if (item.module != null) {
             const cost = this.getModuleCost(item);
             if (cost != null) {
-               this.moduleCosts.push(this.getModuleCost(item));
+               this.moduleCosts.push(cost);
             }
          }
       });
@@ -174,6 +181,20 @@ export class StationSummaryComponent {
             const model = new ResourceSummaryModel(x, this, ResourcePriceType.product);
             this.resourcesProduced.push(model);
          }
+      });
+
+      this.totalModuleResourceCosts = [];
+
+      this.moduleCosts.forEach(cost => {
+         cost.items.forEach(item => {
+            let resourceCost = this.totalModuleResourceCosts.find(x => x.ware.id == item.ware.id);
+            if (resourceCost == null) {
+               resourceCost = { ware: item.ware, value: cost.count * item.amount };
+               this.totalModuleResourceCosts.push(resourceCost);
+            } else {
+               resourceCost.value += cost.count * item.amount;
+            }
+         });
       });
    }
 
@@ -205,16 +226,6 @@ export class StationSummaryComponent {
       });
 
       return total;
-   }
-
-   get totalModuleResourceCosts() {
-      const map = new Map<string, number>();
-      this.moduleCosts
-         .map(item => item.items)
-         .reduce((items1, items2) => items1.concat(items2), [])
-         .forEach(item => map.has(item.ware.name) ? map.set(item.ware.name, map.get(item.ware.name) + item.amount) : map.set(item.ware.name, item.amount));
-
-      return map;
    }
 
    private getModuleCost(item: StationModuleModel) {
