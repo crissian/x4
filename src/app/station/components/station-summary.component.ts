@@ -207,6 +207,16 @@ export class StationSummaryComponent {
       return total;
    }
 
+   get totalModuleResourceCosts() {
+      const map = new Map<string, number>();
+      this.moduleCosts
+         .map(item => item.items)
+         .reduce((items1, items2) => items1.concat(items2), [])
+         .forEach(item => map.has(item.ware.name) ? map.set(item.ware.name, map.get(item.ware.name) + item.amount) : map.set(item.ware.name, item.amount));
+
+      return map;
+   }
+
    private getModuleCost(item: StationModuleModel) {
       const production = item.module.production[0];
       if (!production) {

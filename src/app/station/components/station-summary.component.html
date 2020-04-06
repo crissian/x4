@@ -188,6 +188,11 @@
     <th class="text-right" i18n="@@total">Total:</th>
     <th class="text-right">{{ totalModuleCost | number:'1.0-0' }}</th>
   </tr>
+  <tr *ngFor="let item of totalModuleResourceCosts | keyvalue">
+     <td class="text-right">{{ item.key }}</td>
+     <td class="text-right">{{ item.value | number:'1.0-0' }}</td>
+  </tr>
+
   <tr>
     <td colspan="2">
       <div class="row">
