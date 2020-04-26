@@ -33,11 +33,18 @@
                <dxo-lookup [dataSource]="purposes"></dxo-lookup>
             </dxi-column>
 
+
             <dxi-column name="weapons" caption="Weapons" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="weaponCount"></dxi-column>
             <dxi-column name="turrets" caption="Turrets" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="turretCount"></dxi-column>
             <dxi-column name="shields" caption="Shields" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="shieldCount"></dxi-column>
             <dxi-column name="max_speed" caption="Max. Speed *" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="maxSpeed"></dxi-column>
             <dxi-column name="max_acceleration" caption="Max. Acceleration *" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="maxForwardAcceleration"></dxi-column>
+
+            <dxi-column dataField="cargo[0].types[0].id" caption="Cargo Type">
+               <dxo-lookup [dataSource]="cargoTypes" valueExpr="id" displayExpr="name"></dxo-lookup>
+            </dxi-column>
+            <dxi-column name="cargoSize" caption="Cargo Size" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="cargoSize"></dxi-column>
+
             <dxi-column dataField="people" caption="People" dataType="number"></dxi-column>
 
             <dxo-summary>
@@ -50,7 +57,6 @@
       </div>
        <div class="card-body">
           <p>* The Speed and Acceleration was calculted with the fastest engine available. At the moment it is Split Combat MK4</p>
-          <p>** The Travel Speed was calculated with the fastest engine available. At the moment it is the </p>
        </div>
     </div>
   </div>

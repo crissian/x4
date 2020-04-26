@@ -11,6 +11,7 @@ import { ShipPurpose } from '../../shared/services/data/ship-purpose-data';
 import { EnumFn } from '../../core/services/enum-fn';
 import {EquipmentService} from '../../shared/services/equipment.service';
 import {EquipmentType} from '../../shared/services/data/equipment-type-data';
+import {CargoTypes} from '../../shared/services/data/cargo-types-data';
 
 @Component({
    templateUrl: './ships.component.html'
@@ -22,6 +23,7 @@ export class ShipsComponent extends EntityListComponent<Ship> implements OnInit 
    engines: Equipment[];
    thrusters: Equipment[];
    purposes: string[];
+   cargoTypes: CargoTypes[];
 
    constructor(entityService: ShipService,
                private raceService: RaceService,
@@ -38,6 +40,7 @@ export class ShipsComponent extends EntityListComponent<Ship> implements OnInit 
       this.sizes = EnumFn.values(Size);
       this.shipTypes = EnumFn.values(ShipType);
       this.purposes = EnumFn.values(ShipPurpose);
+      this.cargoTypes = EnumFn.values(CargoTypes);
       this.races = this.raceService.getEntities();
 
       this.engines = this.equipmentService.getEntities().filter(e => e.type === EquipmentType.engines);
@@ -53,7 +56,7 @@ export class ShipsComponent extends EntityListComponent<Ship> implements OnInit 
          .reduce((max, x) => (x > max) ? x : max, 0);
    }
 
-   // TODO parse the required data from engine macro (travel section). Optional boost section. After adding the data, the code can be uncommented.
+   // TODO parse the required data from engine macro (travel section). Optional boost section. After adding the data, the code in line 64 can be uncommented.
    maxTravelSpeed = (entity: Ship) => {
       const compatibleEngines = this.compatibleEngines(entity);
       // calculate speed for each engine and take the fastest one.
@@ -96,6 +99,10 @@ export class ShipsComponent extends EntityListComponent<Ship> implements OnInit 
       }
 
       return entity.shields.filter(x => !x.group).length;
+   }
+
+   cargoSize(entity: Ship) {
+      return entity.cargo ? entity.cargo[0].max : 0;
    }
 
    private calculateMaxForwardSpeed(engine: Equipment, ship: Ship) {
