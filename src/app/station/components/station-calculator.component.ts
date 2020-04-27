@@ -14,7 +14,7 @@ import { Title } from '@angular/platform-browser';
 import { WareService } from '../../shared/services/ware.service';
 import { ModuleService } from '../../shared/services/module.service';
 import { StationModuleModel } from './station-calculator.model';
-import { StationSummaryComponent } from './station-summary.component';
+import { StationSummaryComponent } from './station-summary/station-summary.component';
 
 interface Updatable {
    update();
