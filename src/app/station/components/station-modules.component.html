@@ -11,12 +11,7 @@
     <td>
       <div class="form-group">
         <!--suppress HtmlFormInputWithoutLabel -->
-        <select class="form-control form-control-sm" [(ngModel)]="item.moduleId" (ngModelChange)="onChange()">
-          <option value="" i18n="@@select">( Select )</option>
-          <optgroup *ngFor="let group of wareGroups" label="{{ group.name }}">
-            <option *ngFor="let module of group.modules" [value]="module.id">{{ module.name }}</option>
-          </optgroup>
-        </select>
+        <app-autocomplete [id]="item.moduleId" [groups]="wareGroups" (selectModule)="onSelectModule($event, item)"></app-autocomplete>
       </div>
     </td>
     <td>

@@ -67,4 +67,14 @@ export class StationModulesComponent implements OnInit {
    onChange() {
       this.change.emit();
    }
+
+	/**
+	 * on module selected
+	 *
+	 * @param {string} id module id
+	 */
+   onSelectModule(id: string, item: StationModuleModel) {
+      this.modules[this.modules.indexOf(item)].moduleId = id;
+      this.onChange();
+   }
 }
