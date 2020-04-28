@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { StationModuleModel, WareGroupModel } from './station-calculator.model';
+import {ResourceCalculator, StationModuleModel, StationResourceModel, WareGroupModel} from './station-calculator.model';
 import { ModuleTypes } from '../../shared/services/data/module-types-data';
 import { StationModule } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
@@ -66,5 +66,43 @@ export class StationModulesComponent implements OnInit {
 
    onChange() {
       this.change.emit();
+   }
+
+   backfillModules() {
+      while (true) {
+         const resources: StationResourceModel[] = ResourceCalculator.calculate(this.modules, 0, 0);
+         let didChange = false;
+
+         const modules = this.modules;
+
+         for (const resource of resources) {
+            if (resource.amount >= 0) {
+               continue;
+            }
+
+            const module = this.moduleService.getModuleByWare(resource.ware.id);
+            if (module == null) {
+               continue;
+            }
+            didChange = true;
+
+            const productionWare = module.product.production.find(p => p.method == 'default');
+            const productionPerHour = productionWare.amount * (3600 / productionWare.time);
+            const moduleCount = Math.ceil(-resource.amount / productionPerHour);
+
+            const existingModule = modules.find(m => m.module.id == module.id);
+            if (existingModule == null) {
+               modules.push(new StationModuleModel(this.wareService, this.moduleService, module.id, moduleCount));
+            } else {
+               existingModule.count += moduleCount;
+            }
+         }
+
+         if (!didChange) {
+            break;
+         }
+      }
+
+      this.onChange();
    }
 }

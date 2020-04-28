@@ -1,20 +1,20 @@
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ShareLayoutComponent } from './share-layout.component';
+import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ShareLayoutComponent} from './share-layout.component';
 import * as urlon from 'urlon';
-import { ActivatedRoute } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
-import { ComponentBase } from '../../shared/components/component-base';
-import { Layout, ModuleConfig } from '../../shared/services/module-config';
-import { LayoutService } from '../services/layout-service';
-import { SaveLayoutComponent } from './save-layout.component';
-import { Message, MessageType } from '../../shared/services/message';
-import { LoadLayoutComponent, LoadLayoutResult, LoadLayoutType } from './load-layout.component';
-import { Title } from '@angular/platform-browser';
-import { WareService } from '../../shared/services/ware.service';
-import { ModuleService } from '../../shared/services/module.service';
-import { ResourceCalculator, StationModuleModel, StationResourceModel } from './station-calculator.model';
-import { StationSummaryComponent } from './station-summary.component';
+import {ActivatedRoute} from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
+import {ComponentBase} from '../../shared/components/component-base';
+import {Layout, ModuleConfig} from '../../shared/services/module-config';
+import {LayoutService} from '../services/layout-service';
+import {SaveLayoutComponent} from './save-layout.component';
+import {Message, MessageType} from '../../shared/services/message';
+import {LoadLayoutComponent, LoadLayoutResult, LoadLayoutType} from './load-layout.component';
+import {Title} from '@angular/platform-browser';
+import {WareService} from '../../shared/services/ware.service';
+import {ModuleService} from '../../shared/services/module.service';
+import {StationModuleModel} from './station-calculator.model';
+import {StationSummaryComponent} from './station-summary.component';
 
 interface Updatable {
    update();
@@ -169,41 +169,6 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
                }
             }
          });
-   }
-
-   backfillModules() {
-      while (true) {
-         const resources: StationResourceModel[] = ResourceCalculator.calculate(this.modules, /*totalWorkforce=*/0, /*totalWorkforceCapacity=*/0);
-         let didChange = false;
-         const newModules = this.modules.concat([]);
-         for (const resource of resources) {
-            if (resource.amount >= 0) {
-               continue;
-            }
-
-            const module = this.moduleService.getModuleByWare(resource.ware.id);
-            if (module == null) {
-               continue;
-            }
-            didChange = true;
-
-            const productionWare = module.product.production.find(p => p.method == 'default');
-            const productionPerHour = productionWare.amount * (3600 / productionWare.time);
-            const moduleCount = Math.ceil(-resource.amount / productionPerHour);
-
-            const existingModule = newModules.find(m => m.module.id == module.id);
-            if (existingModule == null) {
-               newModules.push(new StationModuleModel(this.wareService, this.moduleService, module.id, moduleCount));
-            } else {
-               existingModule.count += moduleCount;
-            }
-         }
-
-         this.modules = newModules;
-         if (!didChange) {
-            break;
-         }
-      }
    }
 
    private loadLayoutInternal(layout: Layout) {
