@@ -40,8 +40,8 @@ export class StationModuleModel {
   module: StationModule;
   needs: { amount: number, ware: Ware }[];
   production: { amount: number, ware: Ware, value: Production };
-  count: number;
 
+  private _count: number;
   private _moduleId: string;
 
   constructor(private wareService: WareService, private moduleService: ModuleService, moduleId: string = '', count: number = 1) {
@@ -56,6 +56,17 @@ export class StationModuleModel {
   set moduleId(value: string) {
     if (value != this._moduleId) {
       this._moduleId = value;
+      this.update();
+    }
+  }
+
+  get count() {
+    return this._count;
+  }
+
+  set count(value: number) {
+    if (value != this._count) {
+      this._count = value;
       this.update();
     }
   }

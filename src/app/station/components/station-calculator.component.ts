@@ -13,7 +13,7 @@ import { LoadLayoutComponent, LoadLayoutResult, LoadLayoutType } from './load-la
 import { Title } from '@angular/platform-browser';
 import { WareService } from '../../shared/services/ware.service';
 import { ModuleService } from '../../shared/services/module.service';
-import { StationModuleModel } from './station-calculator.model';
+import { ResourceCalculator, StationModuleModel, StationResourceModel } from './station-calculator.model';
 import { StationSummaryComponent } from './station-summary.component';
 
 interface Updatable {
@@ -169,6 +169,41 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
                }
             }
          });
+   }
+
+   backfillModules() {
+      while (true) {
+         const resources: StationResourceModel[] = ResourceCalculator.calculate(this.modules, /*totalWorkforce=*/0, /*totalWorkforceCapacity=*/0);
+         let didChange = false;
+         const newModules = this.modules.concat([]);
+         for (const resource of resources) {
+            if (resource.amount >= 0) {
+               continue;
+            }
+
+            const module = this.moduleService.getModuleByWare(resource.ware.id);
+            if (module == null) {
+               continue;
+            }
+            didChange = true;
+
+            const productionWare = module.product.production.find(p => p.method == 'default');
+            const productionPerHour = productionWare.amount * (3600 / productionWare.time);
+            const moduleCount = Math.ceil(-resource.amount / productionPerHour);
+
+            const existingModule = newModules.find(m => m.module.id == module.id);
+            if (existingModule == null) {
+               newModules.push(new StationModuleModel(this.wareService, this.moduleService, module.id, moduleCount));
+            } else {
+               existingModule.count += moduleCount;
+            }
+         }
+
+         this.modules = newModules;
+         if (!didChange) {
+            break;
+         }
+      }
    }
 
    private loadLayoutInternal(layout: Layout) {
