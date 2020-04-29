@@ -1,15 +1,15 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ModuleTypes } from '../../shared/services/data/module-types-data';
-import { StationModule } from '../../shared/services/model/model';
-import { ModuleService } from '../../shared/services/module.service';
-import { WareService } from '../../shared/services/ware.service';
-import { ResourceCalculator, StationModuleModel, StationResourceModel, WareGroupModel } from './station-calculator.model';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ModuleTypes} from '../../shared/services/data/module-types-data';
+import {StationModule} from '../../shared/services/model/model';
+import {ModuleService} from '../../shared/services/module.service';
+import {WareService} from '../../shared/services/ware.service';
+import {ResourceCalculator, StationModuleModel, StationResourceModel, WareGroupModel} from './station-calculator.model';
 
 @Component({
    selector: 'app-station-modules',
    templateUrl: './station-modules.component.html',
-	styleUrls: ['./station-modules.component.scss'],
+   styleUrls: ['./station-modules.component.scss'],
 })
 export class StationModulesComponent implements OnInit {
    private _modules: StationModuleModel[];
@@ -46,12 +46,12 @@ export class StationModulesComponent implements OnInit {
          .map(x => groupsObj[x])
          .sort((a, b) => this.wareService.compareGroups(a.group, b.group));
 
-      this.wareGroups.push({ name: ModuleTypes.habitation, modules: this.moduleService.getModulesByType(ModuleTypes.habitation) });
-      this.wareGroups.push({ name: ModuleTypes.buildmodule, modules: this.moduleService.getModulesByType(ModuleTypes.buildmodule) });
-      this.wareGroups.push({ name: ModuleTypes.dockarea, modules: this.moduleService.getModulesByType(ModuleTypes.dockarea) });
-      this.wareGroups.push({ name: ModuleTypes.pier, modules: this.moduleService.getModulesByType(ModuleTypes.pier) });
-      this.wareGroups.push({ name: ModuleTypes.storage, modules: this.moduleService.getModulesByType(ModuleTypes.storage) });
-      this.wareGroups.push({ name: ModuleTypes.defencemodule, modules: this.moduleService.getModulesByType(ModuleTypes.defencemodule) });
+      this.wareGroups.push({name: ModuleTypes.habitation, modules: this.moduleService.getModulesByType(ModuleTypes.habitation)});
+      this.wareGroups.push({name: ModuleTypes.buildmodule, modules: this.moduleService.getModulesByType(ModuleTypes.buildmodule)});
+      this.wareGroups.push({name: ModuleTypes.dockarea, modules: this.moduleService.getModulesByType(ModuleTypes.dockarea)});
+      this.wareGroups.push({name: ModuleTypes.pier, modules: this.moduleService.getModulesByType(ModuleTypes.pier)});
+      this.wareGroups.push({name: ModuleTypes.storage, modules: this.moduleService.getModulesByType(ModuleTypes.storage)});
+      this.wareGroups.push({name: ModuleTypes.defencemodule, modules: this.moduleService.getModulesByType(ModuleTypes.defencemodule)});
    }
 
    removeModule(item: StationModuleModel) {
@@ -107,21 +107,24 @@ export class StationModulesComponent implements OnInit {
 
       this.onChange();
    }
-	/**
-	 * on module selected
-	 *
-	 * @param {string} id module id
-	 */
+
+   /**
+    * on module selected
+    *
+    * @param id module id
+    * @param item the station module item
+    */
    onSelectModule(id: string, item: StationModuleModel) {
       this.modules[this.modules.indexOf(item)].moduleId = id;
       this.onChange();
    }
-	/**
-	 * move item in modules on drop
-	 *
-	 * @param {CdkDragDrop<StationModuleModel[]>} event drop event
-	 */
+
+   /**
+    * move item in modules on drop
+    *
+    * @param event drop event
+    */
    drop(event: CdkDragDrop<StationModuleModel[]>) {
-     moveItemInArray(this._modules, event.previousIndex, event.currentIndex);
+      moveItemInArray(this._modules, event.previousIndex, event.currentIndex);
    }
 }

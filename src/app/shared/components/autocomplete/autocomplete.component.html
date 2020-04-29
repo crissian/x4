@@ -1,24 +1,22 @@
 <div class="autocomplete-container">
-	<input
-		type="search"
-		class="form-control form-control-sm"
-		i18n-placeholder="@@select"
-		placeholder="( Select )"
-		[(ngModel)]="inputString"
-		(ngModelChange)="changed($event)"
-		(focus)="onFocus()"
-		(blur)="onBlur()"
-	/>
-	<div tabindex="0" *ngIf="visible" class="autocomplete" (focus)="onFocus()" (blur)="onBlur()">
-		<ng-container *ngFor="let group of filteredGroups">
-			<div class="autocomplete__group-container" *ngIf="group.modules.length > 0">
-				<label class="autocomplete__group-title"
-					><b>{{ group.name }}</b></label
-				>
-				<div class="autocomplete__group-item" *ngFor="let module of group.modules" (click)="onClick(module)">
-					<label>{{ module.name }}</label>
-				</div>
-			</div>
-		</ng-container>
-	</div>
+   <input
+      type="search"
+      class="form-control form-control-sm"
+      i18n-placeholder="@@select"
+      placeholder="( Select )"
+      [(ngModel)]="inputString"
+      (ngModelChange)="changed($event)"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+   />
+   <div tabindex="0" *ngIf="visible" class="autocomplete" (focus)="onFocus()" (blur)="onBlur()">
+      <ng-container *ngFor="let group of filteredGroups">
+         <div class="autocomplete__group-container" *ngIf="group.modules.length > 0">
+            <label class="autocomplete__group-title"><b>{{ group.name }}</b></label>
+            <div class="autocomplete__group-item" *ngFor="let module of group.modules" (click)="onClick(module)">
+               <label>{{ module.name }}</label>
+            </div>
+         </div>
+      </ng-container>
+   </div>
 </div>
