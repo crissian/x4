@@ -1,42 +1,48 @@
 <table class="table table-sm table-hover small">
-  <thead>
-  <tr class="bg-light">
-    <th i18n="@@module" scope="col">Module</th>
-    <th i18n="@@count" scope="col">Count</th>
-    <th scope="col"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></th>
-    <th scope="col"><i class="fa fa-trash" aria-hidden="true"></i></th>
-  </tr>
-  </thead>
-  <tbody cdkDropList (cdkDropListDropped)="drop($event)">
-    <tr cdkDrag cdkDragBoundary=".table" *ngFor="let item of modules">
-      <div *cdkDragPreview>
-        {{ item.module.name }}
-      </div>
+   <thead>
+   <tr class="bg-light">
+      <th i18n="@@module" scope="col">Module</th>
+      <th i18n="@@count" scope="col">Count</th>
+      <th scope="col"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></th>
+      <th scope="col"><i class="fa fa-trash" aria-hidden="true"></i></th>
+   </tr>
+   </thead>
+   <tbody cdkDropList (cdkDropListDropped)="drop($event)">
+   <tr cdkDrag cdkDragBoundary=".table" *ngFor="let item of modules">
       <td>
-        <div class="form-group">
-          <!--suppress HtmlFormInputWithoutLabel -->
-          <app-autocomplete [id]="item.moduleId" [groups]="wareGroups" (selectModule)="onSelectModule($event, item)"></app-autocomplete>
-        </div>
+         <div *cdkDragPreview>
+            {{ item.module.name }}
+         </div>
+         <div class="form-group">
+            <!--suppress HtmlFormInputWithoutLabel -->
+            <app-autocomplete [id]="item.moduleId" [groups]="wareGroups"
+                              (selectModule)="onSelectModule($event, item)"></app-autocomplete>
+         </div>
       </td>
       <td>
-        <div class="form-group">
-          <input type="number" class="form-control form-control-sm" placeholder="Module Count" [(ngModel)]="item.count" min="0" (ngModelChange)="onChange()"/>
-        </div>
+         <div class="form-group">
+            <input type="number" class="form-control form-control-sm" placeholder="Module Count"
+                   [(ngModel)]="item.count" min="0" (ngModelChange)="onChange()"/>
+         </div>
       </td>
       <td>
-        <i class="fa fa-ellipsis-v move" cdkDragHandle></i>
+         <i class="fa fa-ellipsis-v move" cdkDragHandle></i>
       </td>
       <td>
-        <i class="fa fa-trash hover" aria-hidden="true" (click)="removeModule(item)"></i>
+         <i class="fa fa-trash hover" aria-hidden="true" (click)="removeModule(item)"></i>
       </td>
-    </tr>
-  </tbody>
-  <tfoot>
-  <tr>
-    <th>
-      <button (click)="addModule()" class="btn btn-secondary btn-sm" i18n="@@addModule" type="button"><i class="fa fa-plus-square"></i>&nbsp;Add Module</button>&nbsp;
-       <button (click)="backfillModules()" class="btn btn-sm btn-info" type="button"><i class="fa fa-list"></i>&nbsp;<span i18n="@@backfillModules">Autofill Modules</span></button>
-    </th>
-  </tr>
-  </tfoot>
+   </tr>
+   </tbody>
+   <tfoot>
+   <tr>
+      <th>
+         <button (click)="addModule()" class="btn btn-secondary btn-sm" i18n="@@addModule" type="button"><i
+            class="fa fa-plus-square"></i>&nbsp;Add Module
+         </button>&nbsp;
+         <button (click)="backfillModules()" class="btn btn-sm btn-info" type="button"><i
+            class="fa fa-list"></i>&nbsp;<span i18n="@@backfillModules">Autofill Modules</span>
+         </button>
+      </th>
+   </tr>
+   </tfoot>
 </table>
