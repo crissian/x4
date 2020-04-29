@@ -1,11 +1,14 @@
+.autocomplete-container {
+    position: relative;
+}
 .autocomplete {
-    max-height: 40vh;
     overflow: hidden;
     overflow-y: scroll;
     position: absolute;
     background-color: white;
     border-radius: .2rem;
     border: 1px solid #ced4da;
+    z-index: 1;
 }
 .autocomplete__group-title {
     color: rgba(0, 0, 0, 0.7);

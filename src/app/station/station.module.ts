@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -19,7 +20,8 @@ import { StationRoutingModule } from './station-routing.module';
     CommonModule,
     FormsModule,
     SharedModule,
-    StationRoutingModule
+    StationRoutingModule,
+    DragDropModule
   ],
   declarations: [
     LoadLayoutComponent,

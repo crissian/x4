@@ -51,6 +51,7 @@ export class AutocompleteComponent implements OnInit {
 	 */
 	ngOnInit() {
 		this.filteredGroups = this.groups.map((x) => Object.assign({}, x));
+		this.setName();
 	}
 
 	/**
@@ -92,14 +93,7 @@ export class AutocompleteComponent implements OnInit {
 	 */
 	onBlur() {
 		this.timeout = setTimeout(() => {
-			if (this.id) {
-				this.groups.forEach(group => {
-					let module = group.modules.filter(m => m.id === this.id)[0];
-					if (module) {
-						this.inputString = module.name;
-					}
-				});
-			}
+			this.setName();
 			this.visible = false;
 		}, 100);
 	}
@@ -112,5 +106,19 @@ export class AutocompleteComponent implements OnInit {
 		this.inputString = module.name;
 		this.filterModules(this.inputString);
 		this.selectModule.emit(module.id);
+		this.visible = false;
+	}
+	/**
+	 * set name from id
+	 */
+	setName() {
+		if (this.id) {
+			this.groups.forEach((group) => {
+				let module = group.modules.filter((m) => m.id === this.id)[0];
+				if (module) {
+					this.inputString = module.name;
+				}
+			});
+		}
 	}
 }
