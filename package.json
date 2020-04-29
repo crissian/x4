@@ -15,6 +15,7 @@
    "private": true,
    "dependencies": {
       "@angular/animations": "~7.1.2",
+      "@angular/cdk": "^7.1.1",
       "@angular/common": "~7.1.2",
       "@angular/compiler": "~7.1.2",
       "@angular/core": "~7.1.2",
@@ -28,7 +29,7 @@
       "font-awesome": "~4.7.0",
       "ngx-i18nsupport": "^0.17.1",
       "rxjs": "~6.3.3",
-      "tslib": "^1.9.3",
+      "tslib": "^1.11.1",
       "urlon": "~3.0.1",
       "vis": "~4.21.0",
       "zone.js": "~0.8.26",

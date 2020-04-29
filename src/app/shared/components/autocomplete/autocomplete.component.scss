@@ -1,0 +1,36 @@
+.autocomplete-container {
+    position: relative;
+}
+.autocomplete {
+    max-height: 40vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    background-color: white;
+    border-radius: .2rem;
+    border: 1px solid #ced4da;
+    z-index: 1;
+}
+.autocomplete__group-title {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 1.15em;
+    padding-left: 10px;
+}
+.autocomplete__group-item {
+    font-size: 1.1em;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+.autocomplete__group-item:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    label {
+        cursor: pointer;
+    }
+}
+label {
+    margin: 0px;
+}
+input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+}

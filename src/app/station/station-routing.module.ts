@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
-import {StationCalculatorComponent} from './components/station-calculator.component';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { StationCalculatorComponent } from './components/station-calculator.component';
 
 @NgModule({
   imports: [
