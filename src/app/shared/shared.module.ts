@@ -12,6 +12,7 @@ import { FactionService } from './services/faction.service';
 import { ShipService } from './services/ship.service';
 import { CommonModule } from '@angular/common';
 import { EquipmentService } from './services/equipment.service';
+import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 
 @NgModule({
    imports: [
@@ -31,14 +32,16 @@ import { EquipmentService } from './services/equipment.service';
    ],
    declarations: [
       MessagesComponent,
-      ConfirmComponent
+      ConfirmComponent,
+      AutocompleteComponent
    ],
    entryComponents: [
       ConfirmComponent
    ],
    exports: [
       MessagesComponent,
-      ConfirmComponent
+      ConfirmComponent,
+      AutocompleteComponent
    ]
 })
 export class SharedModule {
