@@ -1,13 +1,15 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {ResourceCalculator, StationModuleModel, StationResourceModel, WareGroupModel} from './station-calculator.model';
 import { ModuleTypes } from '../../shared/services/data/module-types-data';
 import { StationModule } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
 import { WareService } from '../../shared/services/ware.service';
+import { ResourceCalculator, StationModuleModel, StationResourceModel, WareGroupModel } from './station-calculator.model';
 
 @Component({
    selector: 'app-station-modules',
-   templateUrl: './station-modules.component.html'
+   templateUrl: './station-modules.component.html',
+	styleUrls: ['./station-modules.component.scss'],
 })
 export class StationModulesComponent implements OnInit {
    private _modules: StationModuleModel[];
@@ -104,5 +106,22 @@ export class StationModulesComponent implements OnInit {
       }
 
       this.onChange();
+   }
+	/**
+	 * on module selected
+	 *
+	 * @param {string} id module id
+	 */
+   onSelectModule(id: string, item: StationModuleModel) {
+      this.modules[this.modules.indexOf(item)].moduleId = id;
+      this.onChange();
+   }
+	/**
+	 * move item in modules on drop
+	 *
+	 * @param {CdkDragDrop<StationModuleModel[]>} event drop event
+	 */
+   drop(event: CdkDragDrop<StationModuleModel[]>) {
+     moveItemInArray(this._modules, event.previousIndex, event.currentIndex);
    }
 }
