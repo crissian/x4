@@ -1,20 +1,20 @@
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ShareLayoutComponent } from './share-layout.component';
-import * as urlon from 'urlon';
-import { ActivatedRoute } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
-import { ComponentBase } from '../../shared/components/component-base';
-import { Layout, ModuleConfig } from '../../shared/services/module-config';
-import { LayoutService } from '../services/layout-service';
-import { SaveLayoutComponent } from './save-layout.component';
-import { Message, MessageType } from '../../shared/services/message';
-import { LoadLayoutComponent, LoadLayoutResult, LoadLayoutType } from './load-layout.component';
 import { Title } from '@angular/platform-browser';
-import { WareService } from '../../shared/services/ware.service';
+import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { takeUntil } from 'rxjs/operators';
+import * as urlon from 'urlon';
+import { ComponentBase } from '../../shared/components/component-base';
+import { Message, MessageType } from '../../shared/services/message';
+import { Layout, ModuleConfig } from '../../shared/services/module-config';
 import { ModuleService } from '../../shared/services/module.service';
+import { WareService } from '../../shared/services/ware.service';
+import { LayoutService } from '../services/layout-service';
+import { LoadLayoutComponent, LoadLayoutResult, LoadLayoutType } from './load-layout.component';
+import { SaveLayoutComponent } from './save-layout.component';
+import { ShareLayoutComponent } from './share-layout.component';
 import { StationModuleModel } from './station-calculator.model';
-import { StationSummaryComponent } from './station-summary.component';
+import { StationSummaryComponent } from './station-summary/station-summary.component';
 
 interface Updatable {
    update();
