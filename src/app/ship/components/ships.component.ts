@@ -56,12 +56,11 @@ export class ShipsComponent extends EntityListComponent<Ship> implements OnInit 
          .reduce((max, x) => (x > max) ? x : max, 0);
    }
 
-   // TODO parse the required data from engine macro (travel section). Optional boost section. After adding the data, the code in line 64 can be uncommented.
    maxTravelSpeed = (entity: Ship) => {
       const compatibleEngines = this.compatibleEngines(entity);
       // calculate speed for each engine and take the fastest one.
       return compatibleEngines
-         .map(engine => this.calculateMaxForwardSpeed(engine, entity) /* * engine.travel.thrust*/) // Missing data for travel thrust
+         .map(engine => this.calculateMaxForwardSpeed(engine, entity) * engine.travel.thrust)
          .reduce((max, x) => (x > max) ? x : max, 0);
    }
 

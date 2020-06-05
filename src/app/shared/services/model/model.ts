@@ -178,6 +178,13 @@ export interface Thrust {
    reverse: number;
 }
 
+export interface Travel {
+   thrust: number;
+   attack: number;
+   charge: number;
+   release: number;
+}
+
 export interface Equipment {
    id: string;
    name: string;
@@ -189,6 +196,7 @@ export interface Equipment {
    hull?: number;
    price?: Price;
    thrust?: Thrust;
+   travel?: Travel;
    owners?: Faction[];
    production?: Production[];
 }
