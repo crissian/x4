@@ -51,6 +51,7 @@ export const Equipments = [
       price: { min: 321518, max: 392966, avg: 357242 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
       thrust: { forward: 4206, reverse: 4627 },
+      travel: { thrust: 31, attack: 75, charge: 20, release: 0 },
       production: [
          {
             time: 20,
@@ -78,6 +79,7 @@ export const Equipments = [
       price: { min: 337593, max: 412614, avg: 375104 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 4006, reverse: 3605 },
+      travel: { thrust: 33, attack: 85, charge: 20, release: 0 },
       production: [
          {
             time: 20,
@@ -104,6 +106,7 @@ export const Equipments = [
       price: { min: 11767, max: 14382, avg: 13074 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
       thrust: { forward: 1002, reverse: 952 },
+      travel: { thrust: 9, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 15,
@@ -130,6 +133,7 @@ export const Equipments = [
       price: { min: 58166, max: 71092, avg: 64629 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 1212, reverse: 1228 },
+      travel: { thrust: 9, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 15,
@@ -156,6 +160,7 @@ export const Equipments = [
       price: { min: 287722, max: 351660, avg: 319691 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 1353, reverse: 1413 },
+      travel: { thrust: 9, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 15,
@@ -182,6 +187,7 @@ export const Equipments = [
       price: { min: 14357, max: 17547, avg: 15952 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
       thrust: { forward: 1052, reverse: 1105 },
+      travel: { thrust: 8, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 15,
@@ -208,6 +214,7 @@ export const Equipments = [
       price: { min: 69711, max: 85202, avg: 77457 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 1273, reverse: 1471 },
+      travel: { thrust: 8, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 15,
@@ -234,6 +241,7 @@ export const Equipments = [
       price: { min: 345444, max: 422209, avg: 383827 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 1420, reverse: 1715 },
+      travel: { thrust: 8, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 15,
@@ -260,6 +268,7 @@ export const Equipments = [
       price: { min: 13062, max: 15964, avg: 14513 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
       thrust: { forward: 1002, reverse: 902 },
+      travel: { thrust: 12, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 15,
@@ -286,6 +295,7 @@ export const Equipments = [
       price: { min: 65234, max: 79730, avg: 72482 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 1212, reverse: 1091 },
+      travel: { thrust: 12, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 15,
@@ -312,6 +322,7 @@ export const Equipments = [
       price: { min: 331013, max: 404572, avg: 367793 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 1353, reverse: 1217 },
+      travel: { thrust: 12, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 15,
@@ -338,6 +349,7 @@ export const Equipments = [
       price: { min: 5526, max: 6754, avg: 6140 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
       thrust: { forward: 396, reverse: 416 },
+      travel: { thrust: 14, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 10,
@@ -363,6 +375,7 @@ export const Equipments = [
       price: { min: 26370, max: 32230, avg: 29300 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 479, reverse: 574 },
+      travel: { thrust: 14, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 10,
@@ -389,6 +402,7 @@ export const Equipments = [
       price: { min: 123301, max: 150701, avg: 137001 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 535, reverse: 679 },
+      travel: { thrust: 14, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 10,
@@ -415,6 +429,7 @@ export const Equipments = [
       price: { min: 8116, max: 9919, avg: 9017 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
       thrust: { forward: 416, reverse: 499 },
+      travel: { thrust: 12, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 10,
@@ -440,6 +455,7 @@ export const Equipments = [
       price: { min: 40504, max: 49505, avg: 45005 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 503, reverse: 710 },
+      travel: { thrust: 12, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 10,
@@ -466,6 +482,7 @@ export const Equipments = [
       price: { min: 181023, max: 221250, avg: 201137 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 561, reverse: 850 },
+      travel: { thrust: 12, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 10,
@@ -492,6 +509,7 @@ export const Equipments = [
       price: { min: 6821, max: 8336, avg: 7579 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
       thrust: { forward: 396, reverse: 396 },
+      travel: { thrust: 18, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 10,
@@ -517,6 +535,7 @@ export const Equipments = [
       price: { min: 34732, max: 42450, avg: 38591 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 479, reverse: 499 },
+      travel: { thrust: 18, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 10,
@@ -543,6 +562,7 @@ export const Equipments = [
       price: { min: 166592, max: 203613, avg: 185103 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 535, reverse: 568 },
+      travel: { thrust: 18, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 10,
@@ -570,6 +590,7 @@ export const Equipments = [
       price: { min: 424061, max: 518297, avg: 471179 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 11076, reverse: 12184 },
+      travel: { thrust: 31, attack: 75, charge: 30, release: 0 },
       production: [
          {
             time: 30,
@@ -597,6 +618,7 @@ export const Equipments = [
       price: { min: 445263, max: 544210, avg: 494737 },
       owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
       thrust: { forward: 10549, reverse: 9494 },
+      travel: { thrust: 33, attack: 85, charge: 30, release: 0 },
       production: [
          {
             time: 30,
@@ -623,6 +645,7 @@ export const Equipments = [
       price: { min: 1, max: 1, avg: 1 },
       owners: [ Factions.khaak ],
       thrust: { forward: 1400, reverse: 1600 },
+      travel: { thrust: 7, attack: 10, charge: 3, release: 0 },
       production: [
       ]
    },
@@ -638,6 +661,7 @@ export const Equipments = [
       price: { min: 1, max: 1, avg: 1 },
       owners: [ Factions.khaak ],
       thrust: { forward: 1400, reverse: 1662 },
+      travel: { thrust: 7, attack: 10, charge: 3, release: 0 },
       production: [
       ]
    },
@@ -653,6 +677,7 @@ export const Equipments = [
       price: { min: 1, max: 1, avg: 1 },
       owners: [ Factions.khaak ],
       thrust: { forward: 500, reverse: 770 },
+      travel: { thrust: 7, attack: 10, charge: 2, release: 0 },
       production: [
       ]
    },
@@ -669,6 +694,7 @@ export const Equipments = [
       price: { min: 324732, max: 396895, avg: 360814 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 4332, reverse: 4766 },
+      travel: { thrust: 29, attack: 75, charge: 20, release: 0 },
       production: [
          {
             time: 20,
@@ -696,6 +722,7 @@ export const Equipments = [
       price: { min: 340969, max: 416740, avg: 378855 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 4126, reverse: 3713 },
+      travel: { thrust: 31, attack: 85, charge: 20, release: 0 },
       production: [
          {
             time: 20,
@@ -722,6 +749,7 @@ export const Equipments = [
       price: { min: 11767, max: 14382, avg: 13074 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1032, reverse: 980 },
+      travel: { thrust: 8, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 15,
@@ -748,6 +776,7 @@ export const Equipments = [
       price: { min: 58166, max: 71092, avg: 64629 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1249, reverse: 1265 },
+      travel: { thrust: 8, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 15,
@@ -774,6 +803,7 @@ export const Equipments = [
       price: { min: 287722, max: 351660, avg: 319691 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1393, reverse: 1455 },
+      travel: { thrust: 8, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 15,
@@ -800,6 +830,7 @@ export const Equipments = [
       price: { min: 14357, max: 17547, avg: 15952 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1084, reverse: 1138 },
+      travel: { thrust: 7, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 15,
@@ -826,6 +857,7 @@ export const Equipments = [
       price: { min: 69711, max: 85202, avg: 77457 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1311, reverse: 1515 },
+      travel: { thrust: 7, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 15,
@@ -852,6 +884,7 @@ export const Equipments = [
       price: { min: 345444, max: 422209, avg: 383827 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1463, reverse: 1766 },
+      travel: { thrust: 7, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 15,
@@ -878,6 +911,7 @@ export const Equipments = [
       price: { min: 13062, max: 15964, avg: 14513 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1032, reverse: 929 },
+      travel: { thrust: 11, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 15,
@@ -904,6 +938,7 @@ export const Equipments = [
       price: { min: 65234, max: 79730, avg: 72482 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1249, reverse: 1124 },
+      travel: { thrust: 11, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 15,
@@ -930,6 +965,7 @@ export const Equipments = [
       price: { min: 331013, max: 404572, avg: 367793 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1393, reverse: 1254 },
+      travel: { thrust: 11, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 15,
@@ -956,6 +992,7 @@ export const Equipments = [
       price: { min: 5526, max: 6754, avg: 6140 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 408, reverse: 428 },
+      travel: { thrust: 13, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 10,
@@ -981,6 +1018,7 @@ export const Equipments = [
       price: { min: 26370, max: 32230, avg: 29300 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 494, reverse: 591 },
+      travel: { thrust: 13, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 10,
@@ -1007,6 +1045,7 @@ export const Equipments = [
       price: { min: 123301, max: 150701, avg: 137001 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 551, reverse: 700 },
+      travel: { thrust: 13, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 10,
@@ -1033,6 +1072,7 @@ export const Equipments = [
       price: { min: 8116, max: 9919, avg: 9017 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 428, reverse: 514 },
+      travel: { thrust: 11, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 10,
@@ -1058,6 +1098,7 @@ export const Equipments = [
       price: { min: 40504, max: 49505, avg: 45005 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 518, reverse: 731 },
+      travel: { thrust: 11, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 10,
@@ -1084,6 +1125,7 @@ export const Equipments = [
       price: { min: 181023, max: 221250, avg: 201137 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 578, reverse: 876 },
+      travel: { thrust: 11, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 10,
@@ -1110,6 +1152,7 @@ export const Equipments = [
       price: { min: 6821, max: 8336, avg: 7579 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 408, reverse: 408 },
+      travel: { thrust: 17, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 10,
@@ -1135,6 +1178,7 @@ export const Equipments = [
       price: { min: 34732, max: 42450, avg: 38591 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 494, reverse: 514 },
+      travel: { thrust: 17, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 10,
@@ -1161,6 +1205,7 @@ export const Equipments = [
       price: { min: 166592, max: 203613, avg: 185103 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 551, reverse: 585 },
+      travel: { thrust: 17, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 10,
@@ -1188,6 +1233,7 @@ export const Equipments = [
       price: { min: 428301, max: 523479, avg: 475890 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 11408, reverse: 12549 },
+      travel: { thrust: 29, attack: 75, charge: 30, release: 0 },
       production: [
          {
             time: 30,
@@ -1215,6 +1261,7 @@ export const Equipments = [
       price: { min: 449716, max: 549653, avg: 499685 },
       owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 10865, reverse: 9779 },
+      travel: { thrust: 31, attack: 85, charge: 30, release: 0 },
       production: [
          {
             time: 30,
@@ -1242,6 +1289,7 @@ export const Equipments = [
       price: { min: 321235, max: 392621, avg: 356928 },
       owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
       thrust: { forward: 4080, reverse: 4488 },
+      travel: { thrust: 31, attack: 60, charge: 20, release: 0 },
       production: [
          {
             time: 20,
@@ -1269,6 +1317,7 @@ export const Equipments = [
       price: { min: 337296, max: 412251, avg: 374774 },
       owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
       thrust: { forward: 3886, reverse: 3497 },
+      travel: { thrust: 33, attack: 68, charge: 20, release: 0 },
       production: [
          {
             time: 20,
@@ -1295,6 +1344,7 @@ export const Equipments = [
       price: { min: 11757, max: 14370, avg: 13064 },
       owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
       thrust: { forward: 972, reverse: 923 },
+      travel: { thrust: 9, attack: 24, charge: 1, release: 0 },
       production: [
          {
             time: 15,
@@ -1321,6 +1371,7 @@ export const Equipments = [
       price: { min: 58118, max: 71033, avg: 64575 },
       owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
       thrust: { forward: 1176, reverse: 1192 },
+      travel: { thrust: 9, attack: 24, charge: 1, release: 0 },
       production: [
          {
             time: 15,
@@ -1347,6 +1398,7 @@ export const Equipments = [
       price: { min: 287479, max: 351363, avg: 319421 },
       owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
       thrust: { forward: 1312, reverse: 1370 },
+      travel: { thrust: 9, attack: 24, charge: 1, release: 0 },
       production: [
          {
             time: 15,
@@ -1373,6 +1425,7 @@ export const Equipments = [
       price: { min: 14345, max: 17533, avg: 15939 },
       owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
       thrust: { forward: 1021, reverse: 1072 },
+      travel: { thrust: 8, attack: 12, charge: 0, release: 0 },
       production: [
          {
             time: 15,
@@ -1399,6 +1452,7 @@ export const Equipments = [
       price: { min: 69652, max: 85131, avg: 77391 },
       owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
       thrust: { forward: 1235, reverse: 1427 },
+      travel: { thrust: 8, attack: 12, charge: 0, release: 0 },
       production: [
          {
             time: 15,
@@ -1425,6 +1479,7 @@ export const Equipments = [
       price: { min: 345151, max: 421851, avg: 383501 },
       owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
       thrust: { forward: 1378, reverse: 1663 },
+      travel: { thrust: 8, attack: 12, charge: 0, release: 0 },
       production: [
          {
             time: 15,
@@ -1451,6 +1506,7 @@ export const Equipments = [
       price: { min: 13051, max: 15952, avg: 14501 },
       owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
       thrust: { forward: 972, reverse: 875 },
+      travel: { thrust: 12, attack: 36, charge: 3, release: 0 },
       production: [
          {
             time: 15,
@@ -1477,6 +1533,7 @@ export const Equipments = [
       price: { min: 65179, max: 79663, avg: 72421 },
       owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
       thrust: { forward: 1176, reverse: 1058 },
+      travel: { thrust: 12, attack: 36, charge: 3, release: 0 },
       production: [
          {
             time: 15,
@@ -1503,6 +1560,7 @@ export const Equipments = [
       price: { min: 330733, max: 404229, avg: 367481 },
       owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
       thrust: { forward: 1312, reverse: 1181 },
+      travel: { thrust: 12, attack: 30, charge: 3, release: 0 },
       production: [
          {
             time: 15,
@@ -1529,6 +1587,7 @@ export const Equipments = [
       price: { min: 5522, max: 6749, avg: 6135 },
       owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
       thrust: { forward: 384, reverse: 403 },
+      travel: { thrust: 14, attack: 24, charge: 1, release: 0 },
       production: [
          {
             time: 10,
@@ -1554,6 +1613,7 @@ export const Equipments = [
       price: { min: 26348, max: 32203, avg: 29276 },
       owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
       thrust: { forward: 465, reverse: 557 },
+      travel: { thrust: 14, attack: 24, charge: 1, release: 0 },
       production: [
          {
             time: 10,
@@ -1580,6 +1640,7 @@ export const Equipments = [
       price: { min: 123197, max: 150574, avg: 136885 },
       owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
       thrust: { forward: 519, reverse: 659 },
+      travel: { thrust: 14, attack: 24, charge: 1, release: 0 },
       production: [
          {
             time: 10,
@@ -1606,6 +1667,7 @@ export const Equipments = [
       price: { min: 8110, max: 9912, avg: 9011 },
       owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
       thrust: { forward: 403, reverse: 484 },
+      travel: { thrust: 12, attack: 12, charge: 0, release: 0 },
       production: [
          {
             time: 10,
@@ -1631,6 +1693,7 @@ export const Equipments = [
       price: { min: 40471, max: 49464, avg: 44967 },
       owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
       thrust: { forward: 488, reverse: 688 },
+      travel: { thrust: 12, attack: 12, charge: 0, release: 0 },
       production: [
          {
             time: 10,
@@ -1657,6 +1720,7 @@ export const Equipments = [
       price: { min: 180869, max: 221062, avg: 200966 },
       owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
       thrust: { forward: 544, reverse: 825 },
+      travel: { thrust: 12, attack: 12, charge: 0, release: 0 },
       production: [
          {
             time: 10,
@@ -1683,6 +1747,7 @@ export const Equipments = [
       price: { min: 6816, max: 8330, avg: 7573 },
       owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
       thrust: { forward: 384, reverse: 384 },
+      travel: { thrust: 18, attack: 36, charge: 3, release: 0 },
       production: [
          {
             time: 10,
@@ -1708,6 +1773,7 @@ export const Equipments = [
       price: { min: 34703, max: 42415, avg: 38559 },
       owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
       thrust: { forward: 465, reverse: 484 },
+      travel: { thrust: 18, attack: 36, charge: 3, release: 0 },
       production: [
          {
             time: 10,
@@ -1734,6 +1800,7 @@ export const Equipments = [
       price: { min: 166451, max: 203440, avg: 184946 },
       owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
       thrust: { forward: 519, reverse: 551 },
+      travel: { thrust: 18, attack: 36, charge: 3, release: 0 },
       production: [
          {
             time: 10,
@@ -1761,6 +1828,7 @@ export const Equipments = [
       price: { min: 423689, max: 517843, avg: 470766 },
       owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
       thrust: { forward: 10744, reverse: 11818 },
+      travel: { thrust: 31, attack: 60, charge: 30, release: 0 },
       production: [
          {
             time: 30,
@@ -1788,6 +1856,7 @@ export const Equipments = [
       price: { min: 444873, max: 543734, avg: 494304 },
       owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
       thrust: { forward: 10232, reverse: 9209 },
+      travel: { thrust: 33, attack: 68, charge: 30, release: 0 },
       production: [
          {
             time: 30,
@@ -1815,6 +1884,7 @@ export const Equipments = [
       price: { min: 321322, max: 392726, avg: 357024 },
       owners: [ Factions.xenon ],
       thrust: { forward: 4206, reverse: 4627 },
+      travel: { thrust: 25, attack: 49, charge: 20, release: 0 },
       production: [
          {
             time: 8,
@@ -1841,6 +1911,7 @@ export const Equipments = [
       price: { min: 15811, max: 19325, avg: 17568 },
       owners: [ Factions.xenon ],
       thrust: { forward: 1286, reverse: 1486 },
+      travel: { thrust: 8, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 4,
@@ -1867,6 +1938,7 @@ export const Equipments = [
       price: { min: 14256, max: 17424, avg: 15840 },
       owners: [ Factions.xenon ],
       thrust: { forward: 1224, reverse: 1102 },
+      travel: { thrust: 12, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 10,
@@ -1893,6 +1965,7 @@ export const Equipments = [
       price: { min: 6134, max: 7498, avg: 6816 },
       owners: [ Factions.xenon ],
       thrust: { forward: 503, reverse: 768 },
+      travel: { thrust: 18, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 2,
@@ -1920,6 +1993,7 @@ export const Equipments = [
       price: { min: 424138, max: 518390, avg: 471264 },
       owners: [ Factions.xenon ],
       thrust: { forward: 11076, reverse: 12184 },
+      travel: { thrust: 25, attack: 49, charge: 30, release: 0 },
       production: [
          {
             time: 16,
@@ -8014,6 +8088,7 @@ export const Equipments = [
       price: { min: 258153, max: 480054, avg: 368448 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 5678, reverse: 6246 },
+      travel: { thrust: 12, attack: 75, charge: 20, release: 0 },
       production: [
          {
             time: 20,
@@ -8041,6 +8116,7 @@ export const Equipments = [
       price: { min: 266600, max: 496641, avg: 380897 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 5408, reverse: 4867 },
+      travel: { thrust: 14, attack: 85, charge: 20, release: 0 },
       production: [
          {
             time: 20,
@@ -8067,6 +8143,7 @@ export const Equipments = [
       price: { min: 8721, max: 16644, avg: 12654 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 1353, reverse: 1285 },
+      travel: { thrust: 5, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 15,
@@ -8092,6 +8169,7 @@ export const Equipments = [
       price: { min: 43115, max: 81054, avg: 61948 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 1637, reverse: 1658 },
+      travel: { thrust: 5, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 15,
@@ -8118,6 +8196,7 @@ export const Equipments = [
       price: { min: 210854, max: 392833, avg: 301234 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 1826, reverse: 1907 },
+      travel: { thrust: 5, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 15,
@@ -8144,6 +8223,7 @@ export const Equipments = [
       price: { min: 10078, max: 19374, avg: 14695 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 1420, reverse: 1491 },
+      travel: { thrust: 5, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 15,
@@ -8169,6 +8249,7 @@ export const Equipments = [
       price: { min: 51756, max: 96917, avg: 74180 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 1719, reverse: 1986 },
+      travel: { thrust: 5, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 15,
@@ -8195,6 +8276,7 @@ export const Equipments = [
       price: { min: 253468, max: 472712, avg: 362360 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 1917, reverse: 2315 },
+      travel: { thrust: 5, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 15,
@@ -8221,6 +8303,7 @@ export const Equipments = [
       price: { min: 1267862, max: 2363619, avg: 1811825 },
       owners: [ Factions.court, Factions.split ],
       thrust: { forward: 2017, reverse: 2480 },
+      travel: { thrust: 5, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 15,
@@ -8247,6 +8330,7 @@ export const Equipments = [
       price: { min: 9348, max: 18023, avg: 13657 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 1353, reverse: 1217 },
+      travel: { thrust: 7, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 15,
@@ -8272,6 +8356,7 @@ export const Equipments = [
       price: { min: 48165, max: 90288, avg: 69084 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 1637, reverse: 1473 },
+      travel: { thrust: 7, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 15,
@@ -8298,6 +8383,7 @@ export const Equipments = [
       price: { min: 243287, max: 452449, avg: 347073 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 1826, reverse: 1644 },
+      travel: { thrust: 7, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 15,
@@ -8324,6 +8410,7 @@ export const Equipments = [
       price: { min: 3443, max: 6812, avg: 5119 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 535, reverse: 561 },
+      travel: { thrust: 8, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 10,
@@ -8349,6 +8436,7 @@ export const Equipments = [
       price: { min: 19551, max: 37244, avg: 28340 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 647, reverse: 775 },
+      travel: { thrust: 8, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 10,
@@ -8375,6 +8463,7 @@ export const Equipments = [
       price: { min: 91360, max: 171342, avg: 131077 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 722, reverse: 917 },
+      travel: { thrust: 8, attack: 30, charge: 1, release: 0 },
       production: [
          {
             time: 10,
@@ -8401,6 +8490,7 @@ export const Equipments = [
       price: { min: 4902, max: 9513, avg: 7193 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 561, reverse: 674 },
+      travel: { thrust: 7, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 10,
@@ -8426,6 +8516,7 @@ export const Equipments = [
       price: { min: 29617, max: 55883, avg: 42659 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 679, reverse: 958 },
+      travel: { thrust: 7, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 10,
@@ -8452,6 +8543,7 @@ export const Equipments = [
       price: { min: 134474, max: 250800, avg: 192227 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 758, reverse: 1148 },
+      travel: { thrust: 7, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 10,
@@ -8478,6 +8570,7 @@ export const Equipments = [
       price: { min: 672885, max: 1254040, avg: 961168 },
       owners: [ Factions.court, Factions.split ],
       thrust: { forward: 797, reverse: 1243 },
+      travel: { thrust: 7, attack: 15, charge: 0, release: 0 },
       production: [
          {
             time: 10,
@@ -8504,6 +8597,7 @@ export const Equipments = [
       price: { min: 4172, max: 8162, avg: 6156 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 535, reverse: 535 },
+      travel: { thrust: 11, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 10,
@@ -8529,6 +8623,7 @@ export const Equipments = [
       price: { min: 25342, max: 47977, avg: 36583 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 647, reverse: 674 },
+      travel: { thrust: 11, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 10,
@@ -8555,6 +8650,7 @@ export const Equipments = [
       price: { min: 123724, max: 230850, avg: 176882 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 722, reverse: 767 },
+      travel: { thrust: 11, attack: 45, charge: 3, release: 0 },
       production: [
          {
             time: 10,
@@ -8582,6 +8678,7 @@ export const Equipments = [
       price: { min: 340974, max: 633834, avg: 486335 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 14953, reverse: 16448 },
+      travel: { thrust: 12, attack: 75, charge: 30, release: 0 },
       production: [
          {
             time: 30,
@@ -8609,6 +8706,7 @@ export const Equipments = [
       price: { min: 352716, max: 656275, avg: 503356 },
       owners: [ Factions.court, Factions.freesplit, Factions.split ],
       thrust: { forward: 14241, reverse: 12817 },
+      travel: { thrust: 14, attack: 85, charge: 30, release: 0 },
       production: [
          {
             time: 30,
