@@ -60,7 +60,7 @@ export class ShipsComponent extends EntityListComponent<Ship> implements OnInit 
       const compatibleEngines = this.compatibleEngines(entity);
       // calculate speed for each engine and take the fastest one.
       return compatibleEngines
-         .map(engine => this.calculateMaxForwardSpeed(engine, entity) * engine.travel.thrust)
+         .map(engine => this.calculateMaxTraveldSpeed(engine, entity))
          .reduce((max, x) => (x > max) ? x : max, 0);
    }
 
@@ -110,5 +110,9 @@ export class ShipsComponent extends EntityListComponent<Ship> implements OnInit 
 
    private calculateMaxForwardAcceleration(engine: Equipment, ship: Ship) {
       return Math.floor(engine.thrust.forward * this.engineCount(ship) / ship.mass);
+   }
+
+   private calculateMaxTraveldSpeed(engine: Equipment, ship: Ship) {
+      return Math.floor(engine.thrust.forward * this.engineCount(ship) / ship.drag.forward * engine.travel.thrust);
    }
 }
