@@ -67,9 +67,11 @@ export interface Faction {
   licenses?: License[];
 }
 
+// INFO: Should this be split into StationCargo and ShipCargo interface?
 export interface Cargo {
   max: number;
-  type: CargoType;
+  type?: CargoType;     // Station-Module Cargo
+  types?: CargoType[];  // Ship Cargo
 }
 
 export interface CargoType {
@@ -143,6 +145,7 @@ export interface Ship {
   mass: number;
   inertia: Inertia;
   drag: Drag;
+  cargo?: Cargo[];
   docks?: Dock[];
   engines: Slot[];
   shields: Slot[];
@@ -175,6 +178,13 @@ export interface Thrust {
    reverse: number;
 }
 
+export interface Travel {
+   thrust: number;
+   attack: number;
+   charge: number;
+   release: number;
+}
+
 export interface Equipment {
    id: string;
    name: string;
@@ -186,6 +196,7 @@ export interface Equipment {
    hull?: number;
    price?: Price;
    thrust?: Thrust;
+   travel?: Travel;
    owners?: Faction[];
    production?: Production[];
 }
