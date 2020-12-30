@@ -357,6 +357,7 @@ export const Modules = {
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       production: [
          {
@@ -392,6 +393,7 @@ export const Modules = {
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       production: [
          {
@@ -427,6 +429,7 @@ export const Modules = {
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       production: [
          {
@@ -462,6 +465,7 @@ export const Modules = {
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       production: [
          {
@@ -497,6 +501,7 @@ export const Modules = {
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       production: [
          {
@@ -532,6 +537,7 @@ export const Modules = {
       docks: [
          { capacity: 10, size: Size.medium },
          { capacity: 40, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       production: [
          {
@@ -559,6 +565,10 @@ export const Modules = {
       owners: [
          Factions.antigone,
          Factions.argon,
+      ],
+      docks: [
+         { capacity: 10, size: Size.medium },
+         { capacity: 10, size: Size.extrasmall },
       ],
       production: [
          {
@@ -1470,6 +1480,7 @@ export const Modules = {
       docks: [
          { capacity: 30, size: Size.medium },
          { capacity: 100, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       production: [
          {
@@ -1587,6 +1598,7 @@ export const Modules = {
       docks: [
          { capacity: 30, size: Size.medium },
          { capacity: 100, size: Size.small },
+         { capacity: 10, size: Size.extrasmall },
       ],
       production: [
          {
@@ -6115,6 +6127,7 @@ export const Modules = {
       name: 'Split 4-Dock T Pier',
       description: 'No information available',
       type: ModuleTypes.pier,
+      explosionDamage: 10000,
       hull: 750000,
       makerRace: Races.split,
       price: { min: 2946171, max: 3985997, avg: 3466084 },
@@ -6142,6 +6155,7 @@ export const Modules = {
       name: 'Split 1-Dock Pier',
       description: 'No information available',
       type: ModuleTypes.pier,
+      explosionDamage: 10000,
       hull: 250000,
       makerRace: Races.split,
       price: { min: 1701192, max: 2301612, avg: 2001402 },
@@ -6169,6 +6183,7 @@ export const Modules = {
       name: 'Split 3-Dock E Pier',
       description: 'No information available',
       type: ModuleTypes.pier,
+      explosionDamage: 10000,
       hull: 1000000,
       makerRace: Races.split,
       price: { min: 3399016, max: 4598668, avg: 3998842 },
@@ -6363,6 +6378,34 @@ export const Modules = {
          Factions.freesplit,
          Factions.split,
       ],
+      shields: [
+         { group: 'top_left_01', size: Size.medium, hittable: true },
+         { group: 'top_right_01', size: Size.medium, hittable: true },
+         { group: 'bottom_right_01', size: Size.medium, hittable: true },
+         { group: 'bottom_left_01', size: Size.medium, hittable: true },
+         { group: 'front_01', size: Size.medium, hittable: true },
+         { group: 'back_01', size: Size.medium, hittable: true },
+         { group: 'top_01', size: Size.medium, hittable: true },
+         { group: 'front_02', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'top_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
       production: [
          {
             time: 1052,
@@ -6391,6 +6434,22 @@ export const Modules = {
       owners: [
          Factions.freesplit,
          Factions.split,
+      ],
+      shields: [
+         { group: 'right_01', size: Size.medium, hittable: true },
+         { group: 'left_01', size: Size.medium, hittable: true },
+         { group: 'back_01', size: Size.medium, hittable: true },
+         { group: 'front_01', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       production: [
          {
@@ -6421,6 +6480,19 @@ export const Modules = {
          Factions.freesplit,
          Factions.split,
       ],
+      shields: [
+         { group: 'left_01', size: Size.medium, hittable: true },
+         { group: 'top_01', size: Size.medium, hittable: true },
+         { group: 'bottom_01', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
       production: [
          {
             time: 473,
@@ -6449,6 +6521,34 @@ export const Modules = {
       owners: [
          Factions.freesplit,
          Factions.split,
+      ],
+      shields: [
+         { group: 'top_left_01', size: Size.medium, hittable: true },
+         { group: 'top_right_01', size: Size.medium, hittable: true },
+         { group: 'bottom_right_01', size: Size.medium, hittable: true },
+         { group: 'bottom_left_01', size: Size.medium, hittable: true },
+         { group: 'front_01', size: Size.medium, hittable: true },
+         { group: 'back_01', size: Size.medium, hittable: true },
+         { group: 'top_01', size: Size.medium, hittable: true },
+         { group: 'front_02', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'top_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       production: [
          {
@@ -6479,6 +6579,22 @@ export const Modules = {
          Factions.freesplit,
          Factions.split,
       ],
+      shields: [
+         { group: 'right_01', size: Size.medium, hittable: true },
+         { group: 'left_01', size: Size.medium, hittable: true },
+         { group: 'back_01', size: Size.medium, hittable: true },
+         { group: 'front_01', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
       production: [
          {
             time: 700,
@@ -6507,6 +6623,19 @@ export const Modules = {
       owners: [
          Factions.freesplit,
          Factions.split,
+      ],
+      shields: [
+         { group: 'left_01', size: Size.medium, hittable: true },
+         { group: 'top_01', size: Size.medium, hittable: true },
+         { group: 'bottom_01', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       production: [
          {
@@ -6537,6 +6666,34 @@ export const Modules = {
          Factions.freesplit,
          Factions.split,
       ],
+      shields: [
+         { group: 'top_left_01', size: Size.medium, hittable: true },
+         { group: 'top_right_01', size: Size.medium, hittable: true },
+         { group: 'bottom_right_01', size: Size.medium, hittable: true },
+         { group: 'bottom_left_01', size: Size.medium, hittable: true },
+         { group: 'front_01', size: Size.medium, hittable: true },
+         { group: 'back_01', size: Size.medium, hittable: true },
+         { group: 'top_01', size: Size.medium, hittable: true },
+         { group: 'front_02', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'top_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_02', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
       production: [
          {
             time: 1052,
@@ -6566,6 +6723,22 @@ export const Modules = {
          Factions.freesplit,
          Factions.split,
       ],
+      shields: [
+         { group: 'right_01', size: Size.medium, hittable: true },
+         { group: 'left_01', size: Size.medium, hittable: true },
+         { group: 'back_01', size: Size.medium, hittable: true },
+         { group: 'front_01', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'right_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'back_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'front_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+      ],
       production: [
          {
             time: 700,
@@ -6594,6 +6767,19 @@ export const Modules = {
       owners: [
          Factions.freesplit,
          Factions.split,
+      ],
+      shields: [
+         { group: 'left_01', size: Size.medium, hittable: true },
+         { group: 'top_01', size: Size.medium, hittable: true },
+         { group: 'bottom_01', size: Size.medium, hittable: true },
+      ],
+      turrets: [
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'left_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'bottom_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       production: [
          {

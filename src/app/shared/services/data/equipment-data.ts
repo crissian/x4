@@ -49,7 +49,7 @@ export const Equipments = [
       size: Size.large,
       hull: 4033,
       price: { min: 321518, max: 392966, avg: 357242 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       thrust: { forward: 4206, reverse: 4627 },
       travel: { thrust: 31, attack: 75, charge: 20, release: 0 },
       production: [
@@ -77,7 +77,7 @@ export const Equipments = [
       size: Size.large,
       hull: 4033,
       price: { min: 337593, max: 412614, avg: 375104 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 4006, reverse: 3605 },
       travel: { thrust: 33, attack: 85, charge: 20, release: 0 },
       production: [
@@ -104,7 +104,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 11767, max: 14382, avg: 13074 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       thrust: { forward: 1002, reverse: 952 },
       travel: { thrust: 9, attack: 30, charge: 1, release: 0 },
       production: [
@@ -131,7 +131,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 58166, max: 71092, avg: 64629 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 1212, reverse: 1228 },
       travel: { thrust: 9, attack: 30, charge: 1, release: 0 },
       production: [
@@ -158,7 +158,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 287722, max: 351660, avg: 319691 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 1353, reverse: 1413 },
       travel: { thrust: 9, attack: 30, charge: 1, release: 0 },
       production: [
@@ -185,7 +185,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 14357, max: 17547, avg: 15952 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       thrust: { forward: 1052, reverse: 1105 },
       travel: { thrust: 8, attack: 15, charge: 0, release: 0 },
       production: [
@@ -212,7 +212,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 69711, max: 85202, avg: 77457 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 1273, reverse: 1471 },
       travel: { thrust: 8, attack: 15, charge: 0, release: 0 },
       production: [
@@ -239,7 +239,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 345444, max: 422209, avg: 383827 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 1420, reverse: 1715 },
       travel: { thrust: 8, attack: 15, charge: 0, release: 0 },
       production: [
@@ -266,7 +266,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 13062, max: 15964, avg: 14513 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       thrust: { forward: 1002, reverse: 902 },
       travel: { thrust: 12, attack: 45, charge: 3, release: 0 },
       production: [
@@ -293,7 +293,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 65234, max: 79730, avg: 72482 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 1212, reverse: 1091 },
       travel: { thrust: 12, attack: 45, charge: 3, release: 0 },
       production: [
@@ -320,7 +320,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 331013, max: 404572, avg: 367793 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 1353, reverse: 1217 },
       travel: { thrust: 12, attack: 45, charge: 3, release: 0 },
       production: [
@@ -347,7 +347,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 5526, max: 6754, avg: 6140 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       thrust: { forward: 396, reverse: 416 },
       travel: { thrust: 14, attack: 30, charge: 1, release: 0 },
       production: [
@@ -373,7 +373,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 26370, max: 32230, avg: 29300 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 479, reverse: 574 },
       travel: { thrust: 14, attack: 30, charge: 1, release: 0 },
       production: [
@@ -400,7 +400,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 123301, max: 150701, avg: 137001 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 535, reverse: 679 },
       travel: { thrust: 14, attack: 30, charge: 1, release: 0 },
       production: [
@@ -427,7 +427,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 8116, max: 9919, avg: 9017 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       thrust: { forward: 416, reverse: 499 },
       travel: { thrust: 12, attack: 15, charge: 0, release: 0 },
       production: [
@@ -453,7 +453,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 40504, max: 49505, avg: 45005 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 503, reverse: 710 },
       travel: { thrust: 12, attack: 15, charge: 0, release: 0 },
       production: [
@@ -480,7 +480,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 181023, max: 221250, avg: 201137 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 561, reverse: 850 },
       travel: { thrust: 12, attack: 15, charge: 0, release: 0 },
       production: [
@@ -507,7 +507,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 6821, max: 8336, avg: 7579 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       thrust: { forward: 396, reverse: 396 },
       travel: { thrust: 18, attack: 45, charge: 3, release: 0 },
       production: [
@@ -533,7 +533,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 34732, max: 42450, avg: 38591 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 479, reverse: 499 },
       travel: { thrust: 18, attack: 45, charge: 3, release: 0 },
       production: [
@@ -560,7 +560,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 166592, max: 203613, avg: 185103 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 535, reverse: 568 },
       travel: { thrust: 18, attack: 45, charge: 3, release: 0 },
       production: [
@@ -588,7 +588,7 @@ export const Equipments = [
       size: Size.extralarge,
       hull: 12193,
       price: { min: 424061, max: 518297, avg: 471179 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 11076, reverse: 12184 },
       travel: { thrust: 31, attack: 75, charge: 30, release: 0 },
       production: [
@@ -616,7 +616,7 @@ export const Equipments = [
       size: Size.extralarge,
       hull: 9955,
       price: { min: 445263, max: 544210, avg: 494737 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       thrust: { forward: 10549, reverse: 9494 },
       travel: { thrust: 33, attack: 85, charge: 30, release: 0 },
       production: [
@@ -692,7 +692,7 @@ export const Equipments = [
       size: Size.large,
       hull: 4018,
       price: { min: 324732, max: 396895, avg: 360814 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 4332, reverse: 4766 },
       travel: { thrust: 29, attack: 75, charge: 20, release: 0 },
       production: [
@@ -720,7 +720,7 @@ export const Equipments = [
       size: Size.large,
       hull: 4018,
       price: { min: 340969, max: 416740, avg: 378855 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 4126, reverse: 3713 },
       travel: { thrust: 31, attack: 85, charge: 20, release: 0 },
       production: [
@@ -747,7 +747,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 11767, max: 14382, avg: 13074 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1032, reverse: 980 },
       travel: { thrust: 8, attack: 30, charge: 1, release: 0 },
       production: [
@@ -774,7 +774,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 58166, max: 71092, avg: 64629 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1249, reverse: 1265 },
       travel: { thrust: 8, attack: 30, charge: 1, release: 0 },
       production: [
@@ -801,7 +801,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 287722, max: 351660, avg: 319691 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1393, reverse: 1455 },
       travel: { thrust: 8, attack: 30, charge: 1, release: 0 },
       production: [
@@ -828,7 +828,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 14357, max: 17547, avg: 15952 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1084, reverse: 1138 },
       travel: { thrust: 7, attack: 15, charge: 0, release: 0 },
       production: [
@@ -855,7 +855,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 69711, max: 85202, avg: 77457 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1311, reverse: 1515 },
       travel: { thrust: 7, attack: 15, charge: 0, release: 0 },
       production: [
@@ -882,7 +882,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 345444, max: 422209, avg: 383827 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1463, reverse: 1766 },
       travel: { thrust: 7, attack: 15, charge: 0, release: 0 },
       production: [
@@ -909,7 +909,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 13062, max: 15964, avg: 14513 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1032, reverse: 929 },
       travel: { thrust: 11, attack: 45, charge: 3, release: 0 },
       production: [
@@ -936,7 +936,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 65234, max: 79730, avg: 72482 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1249, reverse: 1124 },
       travel: { thrust: 11, attack: 45, charge: 3, release: 0 },
       production: [
@@ -963,7 +963,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 331013, max: 404572, avg: 367793 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1393, reverse: 1254 },
       travel: { thrust: 11, attack: 45, charge: 3, release: 0 },
       production: [
@@ -990,7 +990,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 5526, max: 6754, avg: 6140 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 408, reverse: 428 },
       travel: { thrust: 13, attack: 30, charge: 1, release: 0 },
       production: [
@@ -1016,7 +1016,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 26370, max: 32230, avg: 29300 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 494, reverse: 591 },
       travel: { thrust: 13, attack: 30, charge: 1, release: 0 },
       production: [
@@ -1043,7 +1043,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 123301, max: 150701, avg: 137001 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 551, reverse: 700 },
       travel: { thrust: 13, attack: 30, charge: 1, release: 0 },
       production: [
@@ -1070,7 +1070,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 8116, max: 9919, avg: 9017 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 428, reverse: 514 },
       travel: { thrust: 11, attack: 15, charge: 0, release: 0 },
       production: [
@@ -1096,7 +1096,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 40504, max: 49505, avg: 45005 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 518, reverse: 731 },
       travel: { thrust: 11, attack: 15, charge: 0, release: 0 },
       production: [
@@ -1123,7 +1123,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 181023, max: 221250, avg: 201137 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 578, reverse: 876 },
       travel: { thrust: 11, attack: 15, charge: 0, release: 0 },
       production: [
@@ -1150,7 +1150,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 6821, max: 8336, avg: 7579 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 408, reverse: 408 },
       travel: { thrust: 17, attack: 45, charge: 3, release: 0 },
       production: [
@@ -1176,7 +1176,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 34732, max: 42450, avg: 38591 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 494, reverse: 514 },
       travel: { thrust: 17, attack: 45, charge: 3, release: 0 },
       production: [
@@ -1203,7 +1203,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 166592, max: 203613, avg: 185103 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 551, reverse: 585 },
       travel: { thrust: 17, attack: 45, charge: 3, release: 0 },
       production: [
@@ -1231,7 +1231,7 @@ export const Equipments = [
       size: Size.extralarge,
       hull: 9899,
       price: { min: 428301, max: 523479, avg: 475890 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 11408, reverse: 12549 },
       travel: { thrust: 29, attack: 75, charge: 30, release: 0 },
       production: [
@@ -1259,7 +1259,7 @@ export const Equipments = [
       size: Size.extralarge,
       hull: 9955,
       price: { min: 449716, max: 549653, avg: 499685 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 10865, reverse: 9779 },
       travel: { thrust: 31, attack: 85, charge: 30, release: 0 },
       production: [
@@ -2608,7 +2608,7 @@ export const Equipments = [
       hull: 2000,
       recharge: { max: 38844, rate: 173, delay: 0 },
       price: { min: 42166, max: 51536, avg: 46851 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       production: [
          {
             time: 20,
@@ -2635,7 +2635,7 @@ export const Equipments = [
       hull: 2000,
       recharge: { max: 46282, rate: 268, delay: 0 },
       price: { min: 205644, max: 251343, avg: 228494 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 20,
@@ -2662,7 +2662,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 5147, rate: 26, delay: 0.5 },
       price: { min: 12838, max: 15691, avg: 14264 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       production: [
          {
             time: 10,
@@ -2689,7 +2689,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 6133, rate: 41, delay: 0.5 },
       price: { min: 62115, max: 75918, avg: 69017 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -2716,7 +2716,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 5147, rate: 26, delay: 0.5 },
       price: { min: 12838, max: 15691, avg: 14264 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       production: [
          {
             time: 20,
@@ -2743,7 +2743,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 6133, rate: 41, delay: 0.5 },
       price: { min: 61597, max: 75285, avg: 68441 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 20,
@@ -2751,7 +2751,7 @@ export const Equipments = [
             method: 'default',
             name: 'Universal',
             wares: [
-               { ware: 'energycells', amount: 25 },
+               { ware: 'energycells', amount: 40 },
                { ware: 'fieldcoils', amount: 15 },
                { ware: 'shieldcomponents', amount: 25 },
             ],
@@ -2769,7 +2769,7 @@ export const Equipments = [
       size: Size.small,
       recharge: { max: 827, rate: 82, delay: 12.1 },
       price: { min: 1218, max: 1489, avg: 1354 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       production: [
          {
             time: 10,
@@ -2794,7 +2794,7 @@ export const Equipments = [
       size: Size.small,
       recharge: { max: 988, rate: 128, delay: 12.1 },
       price: { min: 10186, max: 12449, avg: 11318 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -2820,7 +2820,7 @@ export const Equipments = [
       size: Size.small,
       recharge: { max: 1411, rate: 219, delay: 12.1 },
       price: { min: 49892, max: 60979, avg: 55436 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -2847,7 +2847,7 @@ export const Equipments = [
       hull: 6000,
       recharge: { max: 129481, rate: 492, delay: 0 },
       price: { min: 225671, max: 275820, avg: 250745 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 20,
@@ -2865,7 +2865,7 @@ export const Equipments = [
    {
       id: 'shield_kha_m_standard_01_mk1',
       version: 0,
-      name: 'KHA S Shield Generator Mk1',
+      name: 'KHA M Shield Generator Mk1',
       description: 'No information available',
       race: Races.khaak,
       type: EquipmentType.shields,
@@ -2880,7 +2880,7 @@ export const Equipments = [
    {
       id: 'shield_kha_s_standard_01_mk1',
       version: 0,
-      name: 'KHA M Shield Generator Mk1',
+      name: 'KHA S Shield Generator Mk1',
       description: 'No information available',
       race: Races.khaak,
       type: EquipmentType.shields,
@@ -2904,7 +2904,7 @@ export const Equipments = [
       hull: 2000,
       recharge: { max: 34960, rate: 184, delay: 0 },
       price: { min: 42166, max: 51536, avg: 46851 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 20,
@@ -2931,7 +2931,7 @@ export const Equipments = [
       hull: 2000,
       recharge: { max: 41654, rate: 284, delay: 0 },
       price: { min: 205644, max: 251343, avg: 228494 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 20,
@@ -2958,7 +2958,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 4632, rate: 28, delay: 0.42 },
       price: { min: 12838, max: 15691, avg: 14264 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -2985,7 +2985,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 5520, rate: 43, delay: 0.42 },
       price: { min: 62115, max: 75918, avg: 69017 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -3012,7 +3012,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 4632, rate: 28, delay: 0.42 },
       price: { min: 12015, max: 14685, avg: 13350 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -3039,7 +3039,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 5520, rate: 43, delay: 0.42 },
       price: { min: 26058, max: 31849, avg: 28954 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -3047,9 +3047,9 @@ export const Equipments = [
             method: 'default',
             name: 'Universal',
             wares: [
-               { ware: 'energycells', amount: 25 },
-               { ware: 'fieldcoils', amount: 9 },
-               { ware: 'shieldcomponents', amount: 6 },
+               { ware: 'energycells', amount: 40 },
+               { ware: 'fieldcoils', amount: 15 },
+               { ware: 'shieldcomponents', amount: 25 },
             ],
          },
       ]
@@ -3065,7 +3065,7 @@ export const Equipments = [
       size: Size.small,
       recharge: { max: 745, rate: 87, delay: 10.2 },
       price: { min: 1218, max: 1489, avg: 1354 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -3090,7 +3090,7 @@ export const Equipments = [
       size: Size.small,
       recharge: { max: 889, rate: 135, delay: 10.2 },
       price: { min: 10186, max: 12449, avg: 11318 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -3116,7 +3116,7 @@ export const Equipments = [
       size: Size.small,
       recharge: { max: 1270, rate: 232, delay: 10.2 },
       price: { min: 49892, max: 60979, avg: 55436 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -3143,7 +3143,7 @@ export const Equipments = [
       hull: 6000,
       recharge: { max: 116532, rate: 521, delay: 0 },
       price: { min: 225671, max: 275820, avg: 250745 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 20,
@@ -3313,9 +3313,9 @@ export const Equipments = [
             method: 'default',
             name: 'Universal',
             wares: [
-               { ware: 'energycells', amount: 25 },
-               { ware: 'fieldcoils', amount: 9 },
-               { ware: 'shieldcomponents', amount: 6 },
+               { ware: 'energycells', amount: 40 },
+               { ware: 'fieldcoils', amount: 15 },
+               { ware: 'shieldcomponents', amount: 25 },
             ],
          },
       ]
@@ -3674,7 +3674,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.ship_xs,
       hull: 281,
       price: { min: 9707, max: 13133, avg: 11420 },
-      owners: [ Factions.antigone, Factions.argon ],
+      owners: [ Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 60,
@@ -3902,7 +3902,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.ship_xs,
       hull: 281,
       price: { min: 9707, max: 13133, avg: 11420 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 60,
@@ -4795,7 +4795,7 @@ export const Equipments = [
       size: Size.large,
       hull: 2300,
       price: { min: 135464, max: 165567, avg: 150515 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -4821,7 +4821,7 @@ export const Equipments = [
       size: Size.large,
       hull: 5000,
       price: { min: 67905, max: 82995, avg: 75450 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -4847,7 +4847,7 @@ export const Equipments = [
       size: Size.large,
       hull: 5000,
       price: { min: 78261, max: 95652, avg: 86957 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -4873,7 +4873,7 @@ export const Equipments = [
       size: Size.large,
       hull: 2300,
       price: { min: 52289, max: 63909, avg: 58099 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       production: [
          {
             time: 10,
@@ -4899,7 +4899,7 @@ export const Equipments = [
       size: Size.large,
       hull: 2300,
       price: { min: 49166, max: 60092, avg: 54629 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       production: [
          {
             time: 10,
@@ -4925,7 +4925,7 @@ export const Equipments = [
       size: Size.large,
       hull: 2300,
       price: { min: 93055, max: 113734, avg: 103395 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -4950,7 +4950,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 45385, max: 55471, avg: 50428 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -4976,7 +4976,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 45385, max: 55471, avg: 50428 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -5002,7 +5002,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1100,
       price: { min: 22865, max: 27946, avg: 25406 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -5027,7 +5027,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 41730, max: 87581, avg: 64655 },
-      owners: [ Factions.alliance, Factions.argon ],
+      owners: [ Factions.alliance, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -5053,7 +5053,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 41730, max: 87581, avg: 64655 },
-      owners: [ Factions.alliance, Factions.argon ],
+      owners: [ Factions.alliance, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -5078,7 +5078,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 24665, max: 30147, avg: 27406 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -5104,7 +5104,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 22857, max: 27936, avg: 25397 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -5130,7 +5130,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1100,
       price: { min: 26317, max: 32166, avg: 29242 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -5155,7 +5155,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 21378, max: 26128, avg: 23753 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       production: [
          {
             time: 10,
@@ -5181,7 +5181,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 21378, max: 26128, avg: 23753 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       production: [
          {
             time: 10,
@@ -5206,7 +5206,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 16446, max: 20101, avg: 18274 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       production: [
          {
             time: 10,
@@ -5232,7 +5232,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 16446, max: 20101, avg: 18274 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah ],
       production: [
          {
             time: 10,
@@ -5257,7 +5257,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 31249, max: 38193, avg: 34721 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -5283,7 +5283,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 31249, max: 38193, avg: 34721 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -5308,7 +5308,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 22857, max: 27936, avg: 25397 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -5334,7 +5334,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 24665, max: 30147, avg: 27406 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -5375,7 +5375,7 @@ export const Equipments = [
       size: Size.large,
       hull: 3450,
       price: { min: 135464, max: 165567, avg: 150515 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5401,7 +5401,7 @@ export const Equipments = [
       size: Size.large,
       hull: 7500,
       price: { min: 67905, max: 82995, avg: 75450 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5427,7 +5427,7 @@ export const Equipments = [
       size: Size.large,
       hull: 7500,
       price: { min: 78261, max: 95652, avg: 86957 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5453,7 +5453,7 @@ export const Equipments = [
       size: Size.large,
       hull: 3450,
       price: { min: 52289, max: 63909, avg: 58099 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5479,7 +5479,7 @@ export const Equipments = [
       size: Size.large,
       hull: 3450,
       price: { min: 49166, max: 60092, avg: 54629 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5505,7 +5505,7 @@ export const Equipments = [
       size: Size.large,
       hull: 3450,
       price: { min: 93055, max: 113734, avg: 103395 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5530,7 +5530,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 45385, max: 55471, avg: 50428 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5556,7 +5556,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 750,
       price: { min: 24665, max: 30147, avg: 27406 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5582,7 +5582,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1650,
       price: { min: 31249, max: 38193, avg: 34721 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5607,7 +5607,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 24665, max: 30147, avg: 27406 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5633,7 +5633,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 750,
       price: { min: 26317, max: 32166, avg: 29242 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5659,7 +5659,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1650,
       price: { min: 45385, max: 55471, avg: 50428 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5684,7 +5684,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 21378, max: 26128, avg: 23753 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5710,7 +5710,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 750,
       price: { min: 16446, max: 20101, avg: 18274 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5735,7 +5735,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 16446, max: 20101, avg: 18274 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5761,7 +5761,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 750,
       price: { min: 22857, max: 27936, avg: 25397 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5786,7 +5786,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 31249, max: 38193, avg: 34721 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5812,7 +5812,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 750,
       price: { min: 21378, max: 26128, avg: 23753 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5837,7 +5837,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 22857, max: 27936, avg: 25397 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5863,7 +5863,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 750,
       price: { min: 22865, max: 27946, avg: 25406 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -6505,7 +6505,7 @@ export const Equipments = [
       size: Size.large,
       hull: 8000,
       price: { min: 936709, max: 1144866, avg: 1040788 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -6530,7 +6530,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 302254, max: 597081, avg: 449667 },
-      owners: [ Factions.alliance, Factions.argon ],
+      owners: [ Factions.alliance, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -6555,7 +6555,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 931956, max: 1819218, avg: 1375587 },
-      owners: [ Factions.alliance, Factions.argon ],
+      owners: [ Factions.alliance, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -6580,7 +6580,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 160820, max: 319189, avg: 240004 },
-      owners: [ Factions.alliance, Factions.argon ],
+      owners: [ Factions.alliance, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -6605,7 +6605,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 777281, max: 1543247, avg: 1160264 },
-      owners: [ Factions.alliance, Factions.argon ],
+      owners: [ Factions.alliance, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -6732,7 +6732,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 25530, max: 31203, avg: 28367 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -6757,7 +6757,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 127132, max: 155383, avg: 141257 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -6782,7 +6782,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 22558, max: 27571, avg: 25064 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 5,
@@ -6807,7 +6807,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 111753, max: 136587, avg: 124170 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 5,
@@ -6832,7 +6832,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 23928, max: 29245, avg: 26586 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -6857,7 +6857,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 119121, max: 145592, avg: 132356 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -6882,7 +6882,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 44770, max: 54719, avg: 49745 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 5,
@@ -6907,7 +6907,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 222815, max: 272330, avg: 247572 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 5,
@@ -6932,7 +6932,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 20763, max: 25377, avg: 23070 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -6957,7 +6957,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 103297, max: 126252, avg: 114775 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -6982,7 +6982,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 16016, max: 19575, avg: 17796 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7007,7 +7007,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 79562, max: 97243, avg: 88402 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7032,7 +7032,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 30277, max: 37005, avg: 33641 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7057,7 +7057,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 150867, max: 184393, avg: 167630 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7082,7 +7082,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 22365, max: 27335, avg: 24850 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7107,7 +7107,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 111308, max: 136043, avg: 123676 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7132,7 +7132,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 78039, max: 95381, avg: 86710 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 5,
@@ -7157,7 +7157,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 389160, max: 475640, avg: 432400 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 5,
@@ -7182,7 +7182,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 23948, max: 29269, avg: 26609 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7207,7 +7207,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 104979, max: 128308, avg: 116643 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7232,7 +7232,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 18582, max: 39398, avg: 28990 },
-      owners: [ Factions.alliance, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7257,7 +7257,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 56299, max: 108078, avg: 82188 },
-      owners: [ Factions.alliance, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7281,7 +7281,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       price: { min: 40538, max: 81008, avg: 60773 },
-      owners: [ Factions.holyorder, Factions.ministry, Factions.trinity ],
+      owners: [ Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7305,7 +7305,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       price: { min: 57963, max: 111999, avg: 84981 },
-      owners: [ Factions.holyorder, Factions.ministry, Factions.trinity ],
+      owners: [ Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7330,7 +7330,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 6695, max: 8183, avg: 7439 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 5,
@@ -7355,7 +7355,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 13370, max: 16341, avg: 14855 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 5,
@@ -7380,7 +7380,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 43055, max: 52623, avg: 47839 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7405,7 +7405,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 214756, max: 262480, avg: 238618 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7430,7 +7430,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 8277, max: 10117, avg: 9197 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 5,
@@ -7455,7 +7455,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 40349, max: 49316, avg: 44832 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 5,
@@ -7480,7 +7480,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 16056, max: 19624, avg: 17840 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7505,7 +7505,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 79761, max: 97485, avg: 88623 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7530,7 +7530,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 6522, max: 7971, avg: 7247 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7555,7 +7555,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 32092, max: 39223, avg: 35658 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7580,7 +7580,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 12851, max: 15707, avg: 14279 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7605,7 +7605,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 55827, max: 68233, avg: 62030 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7630,7 +7630,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 27152, max: 33186, avg: 30169 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7655,7 +7655,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 135242, max: 165296, avg: 150269 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7680,7 +7680,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 22558, max: 27571, avg: 25064 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 5,
@@ -7705,7 +7705,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 111753, max: 136587, avg: 124170 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
       production: [
          {
             time: 5,
@@ -7760,7 +7760,7 @@ export const Equipments = [
       size: Size.large,
       hull: 8000,
       price: { min: 1000201, max: 1222468, avg: 1111335 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7785,7 +7785,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 304352, max: 600045, avg: 452198 },
-      owners: [ Factions.alliance, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7810,7 +7810,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 1188194, max: 2380428, avg: 1784311 },
-      owners: [ Factions.alliance, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7835,7 +7835,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 163448, max: 329181, avg: 246314 },
-      owners: [ Factions.alliance, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7860,7 +7860,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 860045, max: 1724780, avg: 1292412 },
-      owners: [ Factions.alliance, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,

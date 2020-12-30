@@ -69,6 +69,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
          Factions.hatikvah,
          Factions.scaleplate,
       ],
@@ -147,6 +148,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 4795063, max: 6487438, avg: 5641250 },
       production: [
@@ -211,6 +213,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
          Factions.hatikvah,
       ],
       price: { min: 1111460, max: 1503740, avg: 1307600 },
@@ -276,6 +279,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
          Factions.hatikvah,
       ],
       price: { min: 1350914, max: 1827707, avg: 1589310 },
@@ -344,6 +348,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
          Factions.hatikvah,
       ],
       price: { min: 1108727, max: 1500043, avg: 1304385 },
@@ -412,6 +417,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
          Factions.hatikvah,
       ],
       price: { min: 1348181, max: 1824009, avg: 1586095 },
@@ -476,6 +482,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 2605841, max: 3525549, avg: 3065695 },
       production: [
@@ -539,6 +546,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 3140563, max: 4248997, avg: 3694780 },
       production: [
@@ -602,6 +610,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 2705448, max: 3660312, avg: 3182880 },
       production: [
@@ -665,6 +674,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 3251101, max: 4398549, avg: 3824825 },
       production: [
@@ -728,6 +738,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 2632348, max: 3561412, avg: 3096880 },
       production: [
@@ -791,6 +802,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 4249222, max: 5748948, avg: 4999085 },
       production: [
@@ -860,6 +872,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 3842459, max: 5198621, avg: 4520540 },
       production: [
@@ -929,6 +942,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 4614858, max: 6243632, avg: 5429245 },
       production: [
@@ -998,6 +1012,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 3049154, max: 4125326, avg: 3587240 },
       production: [
@@ -1067,6 +1082,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 3650555, max: 4938986, avg: 4294770 },
       production: [
@@ -1124,6 +1140,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 637993, max: 863167, avg: 750580 },
       production: [
@@ -1181,6 +1198,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 755166, max: 1021695, avg: 888430 },
       production: [
@@ -1279,8 +1297,8 @@ export const Ships = [
          { size: Size.medium, hittable: false },
       ],
       weapons: [
-         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
-         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
       ],
       turrets: [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
@@ -1297,6 +1315,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 819115, max: 1108215, avg: 963665 },
       production: [
@@ -1339,8 +1358,8 @@ export const Ships = [
          { size: Size.medium, hittable: false },
       ],
       weapons: [
-         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
-         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
+         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
       ],
       turrets: [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
@@ -1357,6 +1376,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 973250, max: 1316750, avg: 1145000 },
       production: [
@@ -1407,6 +1427,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
          Factions.hatikvah,
       ],
       price: { min: 108413, max: 146677, avg: 127545 },
@@ -1458,6 +1479,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
          Factions.hatikvah,
       ],
       price: { min: 137173, max: 185587, avg: 161380 },
@@ -1512,6 +1534,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
          Factions.hatikvah,
       ],
       price: { min: 112170, max: 151760, avg: 131965 },
@@ -1566,6 +1589,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
          Factions.hatikvah,
       ],
       price: { min: 132528, max: 179302, avg: 155915 },
@@ -1618,6 +1642,7 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 147352, max: 199358, avg: 173355 },
       production: [
@@ -1668,6 +1693,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 177000, max: 239470, avg: 208235 },
       production: [
@@ -1719,6 +1745,7 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 147352, max: 199358, avg: 173355 },
       production: [
@@ -1769,6 +1796,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 177000, max: 239470, avg: 208235 },
       production: [
@@ -1819,6 +1847,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 112175, max: 151766, avg: 131970 },
       production: [
@@ -1869,6 +1898,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 136085, max: 184115, avg: 160100 },
       production: [
@@ -1918,6 +1948,7 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 65242, max: 88268, avg: 76755 },
       production: [
@@ -1966,6 +1997,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 79042, max: 106939, avg: 92990 },
       production: [
@@ -2021,6 +2053,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 96530, max: 130600, avg: 113565 },
       production: [
@@ -2073,6 +2106,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 85463, max: 115627, avg: 100545 },
       production: [
@@ -2126,6 +2160,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 144283, max: 195207, avg: 169745 },
       production: [
@@ -2177,6 +2212,7 @@ export const Ships = [
       owners: [
          Factions.antigone,
          Factions.argon,
+         Factions.buccaneers,
          Factions.hatikvah,
       ],
       price: { min: 70775, max: 95755, avg: 83265 },
@@ -2229,6 +2265,7 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.argon,
+         Factions.buccaneers,
          Factions.hatikvah,
          Factions.scaleplate,
       ],
@@ -2281,6 +2318,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
          Factions.hatikvah,
          Factions.scaleplate,
       ],
@@ -2334,6 +2372,7 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.argon,
+         Factions.buccaneers,
          Factions.scaleplate,
       ],
       price: { min: 132396, max: 179124, avg: 155760 },
@@ -2385,6 +2424,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
          Factions.scaleplate,
       ],
       price: { min: 158083, max: 213877, avg: 185980 },
@@ -2437,6 +2477,7 @@ export const Ships = [
       owners: [
          Factions.alliance,
          Factions.argon,
+         Factions.buccaneers,
          Factions.scaleplate,
       ],
       price: { min: 68043, max: 92058, avg: 80050 },
@@ -2488,6 +2529,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
          Factions.scaleplate,
       ],
       price: { min: 83687, max: 113223, avg: 98455 },
@@ -2554,6 +2596,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 7755200, max: 10492330, avg: 9123765 },
       production: [
@@ -2619,6 +2662,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 9306200, max: 12590741, avg: 10948470 },
       production: [
@@ -2701,6 +2745,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 8576543, max: 11603558, avg: 10090050 },
       production: [
@@ -2783,6 +2828,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 10287274, max: 13918076, avg: 12102675 },
       production: [
@@ -2848,6 +2894,7 @@ export const Ships = [
       ],
       owners: [
          Factions.argon,
+         Factions.buccaneers,
       ],
       price: { min: 7310438, max: 9890592, avg: 8600515 },
       production: [
@@ -2913,6 +2960,7 @@ export const Ships = [
       ],
       owners: [
          Factions.antigone,
+         Factions.buccaneers,
       ],
       price: { min: 8766199, max: 11860151, avg: 10313175 },
       production: [
@@ -3100,6 +3148,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.paranid,
          Factions.trinity,
       ],
@@ -3189,6 +3238,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -3251,6 +3301,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.hatikvah,
          Factions.paranid,
          Factions.trinity,
@@ -3314,6 +3365,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.hatikvah,
          Factions.holyorder,
          Factions.trinity,
@@ -3380,6 +3432,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.hatikvah,
          Factions.paranid,
          Factions.trinity,
@@ -3446,6 +3499,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.hatikvah,
          Factions.holyorder,
          Factions.trinity,
@@ -3514,6 +3568,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.paranid,
          Factions.trinity,
       ],
@@ -3581,6 +3636,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -3647,6 +3703,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.paranid,
          Factions.trinity,
       ],
@@ -3713,6 +3770,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -3772,6 +3830,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.paranid,
          Factions.trinity,
       ],
@@ -3831,6 +3890,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -3893,6 +3953,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.paranid,
          Factions.trinity,
       ],
@@ -3955,6 +4016,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -4006,6 +4068,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.hatikvah,
          Factions.paranid,
          Factions.trinity,
@@ -4058,6 +4121,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.hatikvah,
          Factions.holyorder,
          Factions.trinity,
@@ -4113,6 +4177,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.hatikvah,
          Factions.paranid,
          Factions.trinity,
@@ -4168,6 +4233,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.hatikvah,
          Factions.holyorder,
          Factions.trinity,
@@ -4220,6 +4286,7 @@ export const Ships = [
       ],
       owners: [
          Factions.alliance,
+         Factions.buccaneers,
          Factions.paranid,
          Factions.trinity,
       ],
@@ -4270,6 +4337,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -4321,6 +4389,7 @@ export const Ships = [
       ],
       owners: [
          Factions.alliance,
+         Factions.buccaneers,
          Factions.paranid,
          Factions.trinity,
       ],
@@ -4371,6 +4440,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -4423,6 +4493,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.paranid,
          Factions.trinity,
       ],
@@ -4475,6 +4546,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -4527,6 +4599,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.paranid,
          Factions.trinity,
       ],
@@ -4579,6 +4652,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -4635,6 +4709,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -4687,6 +4762,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.hatikvah,
          Factions.holyorder,
          Factions.paranid,
@@ -4741,6 +4817,7 @@ export const Ships = [
       ],
       owners: [
          Factions.alliance,
+         Factions.buccaneers,
          Factions.paranid,
          Factions.trinity,
       ],
@@ -4792,6 +4869,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -4845,6 +4923,7 @@ export const Ships = [
       ],
       owners: [
          Factions.alliance,
+         Factions.buccaneers,
          Factions.paranid,
          Factions.scaleplate,
          Factions.trinity,
@@ -4898,6 +4977,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.scaleplate,
          Factions.trinity,
@@ -4966,6 +5046,7 @@ export const Ships = [
       ],
       owners: [
          Factions.alliance,
+         Factions.buccaneers,
          Factions.paranid,
          Factions.trinity,
       ],
@@ -5032,6 +5113,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -5117,6 +5199,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.paranid,
          Factions.trinity,
       ],
@@ -5202,6 +5285,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -5268,6 +5352,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.paranid,
          Factions.trinity,
       ],
@@ -5334,6 +5419,7 @@ export const Ships = [
          { capacity: 10, size: Size.extrasmall },
       ],
       owners: [
+         Factions.buccaneers,
          Factions.holyorder,
          Factions.trinity,
       ],
@@ -7792,7 +7878,7 @@ export const Ships = [
          { group: 'group_back_up_mid', size: Size.large, hittable: false },
       ],
       shields: [
-         { group: 'group_back_up_mid', size: Size.medium, hittable: true },
+         { group: 'group_up_back_mid', size: Size.medium, hittable: true },
          { group: 'group_front_up_mid', size: Size.medium, hittable: true },
          { size: Size.large, hittable: false },
          { group: 'group_back_up_mid', size: Size.medium, hittable: true },
@@ -7890,8 +7976,8 @@ export const Ships = [
          { group: 'group_back_mid_right', size: Size.medium, hittable: true },
          { group: 'group_front_mid_left', size: Size.medium, hittable: true },
          { group: 'group_front_mid_right', size: Size.medium, hittable: true },
-         { group: 'group_front_mid_right_2', size: Size.medium, hittable: true },
-         { group: 'group_front_mid_left_2', size: Size.medium, hittable: true },
+         { group: 'group_front_mid_right', size: Size.medium, hittable: true },
+         { group: 'group_front_mid_left', size: Size.medium, hittable: true },
       ],
       turrets: [
          { group: 'group_back_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
@@ -7904,7 +7990,7 @@ export const Ships = [
          { group: 'group_front_mid_right', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 11000, types: [ CargoTypes.liquid ] },
+         { max: 22000, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
@@ -7974,7 +8060,7 @@ export const Ships = [
          { group: 'group_front_mid_left_2', size: Size.large, hittable: false, types: [ TurretType.mining ] },
       ],
       cargo: [
-         { max: 10000, types: [ CargoTypes.solid ] },
+         { max: 20000, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 40, size: Size.small },
@@ -8277,7 +8363,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
       ],
       cargo: [
-         { max: 3800, types: [ CargoTypes.liquid ] },
+         { max: 7600, types: [ CargoTypes.liquid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -8334,7 +8420,7 @@ export const Ships = [
          { size: Size.medium, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
-         { max: 3500, types: [ CargoTypes.solid ] },
+         { max: 7000, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -8706,7 +8792,7 @@ export const Ships = [
          { size: Size.small, hittable: false, types: [ TurretType.standard, TurretType.missile, TurretType.mining ] },
       ],
       cargo: [
-         { max: 860, types: [ CargoTypes.solid ] },
+         { max: 1720, types: [ CargoTypes.solid ] },
       ],
       docks: [
          { capacity: 10, size: Size.extrasmall },
@@ -9056,14 +9142,14 @@ export const Ships = [
          { group: 'group_front_mid_top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_front_mid_top_01', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
-         { group: 'group_mid_left_top_l', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group_mid_left_top_l', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group_mid_left_bottom_l', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group_mid_left_bottom_l', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group_mid_right_bottom_l', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group_mid_right_bottom_l', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group_mid_right_top_l', size: Size.large, hittable: false, types: [ TurretType.standard ] },
-         { group: 'group_mid_right_top_l', size: Size.large, hittable: false, types: [ TurretType.standard ] },
+         { group: 'group_mid_left_top_l', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_mid_left_top_l', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_mid_left_bottom_l', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_mid_left_bottom_l', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_mid_right_bottom_l', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_mid_right_bottom_l', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_mid_right_top_l', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
+         { group: 'group_mid_right_top_l', size: Size.large, hittable: false, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_mid_left_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_mid_left_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
          { group: 'group_mid_right_mid', size: Size.medium, hittable: true, types: [ TurretType.standard, TurretType.missile ] },
