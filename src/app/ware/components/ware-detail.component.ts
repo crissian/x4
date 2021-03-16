@@ -7,6 +7,7 @@ import { ModuleService } from '../../shared/services/module.service';
 import { EntityDetailsComponent } from '../../shared/components/entity-details.component';
 import { Effects } from '../../shared/services/data/effects-data';
 import { ShipService } from '../../shared/services/ship.service';
+import {BASE_TITLE} from '../../shared/services/constants';
 
 export interface ProductionWareData {
   ware: Ware;
@@ -39,12 +40,12 @@ export class WareDetailComponent extends EntityDetailsComponent<Ware> implements
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('X4: Foundations / Split Vendetta - Wares');
+    this.titleService.setTitle(`${BASE_TITLE} - Wares`);
     super.ngOnInit();
   }
 
   onEntityLoaded(entity: Ware) {
-    this.titleService.setTitle(`X4: Foundations / Split Vendetta - ${this.entity.name}`);
+    this.titleService.setTitle(`${BASE_TITLE} - ${this.entity.name}`);
     this.entityProduction = this.entity.production
       .map<ProductionData>(x => {
         return {

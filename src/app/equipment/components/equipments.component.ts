@@ -9,6 +9,7 @@ import { RaceService } from '../../shared/services/race.service';
 import { EquipmentType } from '../../shared/services/data/equipment-type-data';
 import { EquipmentClass } from '../../shared/services/data/equipment-class-data';
 import { EnumFn } from '../../core/services/enum-fn';
+import {BASE_TITLE} from '../../shared/services/constants';
 
 @Component({
    templateUrl: './equipments.component.html'
@@ -28,7 +29,7 @@ export class EquipmentsComponent extends EntityListComponent<Equipment> implemen
    }
 
    ngOnInit(): void {
-      this.titleService.setTitle('X4: Foundations / Split Vendetta - Equipment');
+      this.titleService.setTitle(`${BASE_TITLE} - Equipment`);
 
       this.sizes = EnumFn.values(Size);
       this.equipmentTypes = EnumFn.values(EquipmentType);

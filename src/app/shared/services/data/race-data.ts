@@ -53,6 +53,12 @@ const entities = {
       description: 'The Xenon are a mechanical race resulting from past Terran terraformer ships which eventually evolved intelligence. A constant threat in many areas of the galaxy, it is thought that the Jump Gate shutdown may stem their movements but given their disregard of time it is possible they may simply travel between stars. The Xenon have no known allies and communication with them is often relegated to folklore.',
       icon: 'race_xenon',
    },
+   none: {
+      id: '',
+      name: '(none)',
+      description: '',
+      icon: 'race_none'
+   }
 };
 
 export const Races = {

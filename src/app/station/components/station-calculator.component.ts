@@ -1,20 +1,21 @@
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { takeUntil } from 'rxjs/operators';
+import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Title} from '@angular/platform-browser';
+import {ActivatedRoute} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {takeUntil} from 'rxjs/operators';
 import * as urlon from 'urlon';
-import { ComponentBase } from '../../shared/components/component-base';
-import { Message, MessageType } from '../../shared/services/message';
-import { Layout, ModuleConfig } from '../../shared/services/module-config';
-import { ModuleService } from '../../shared/services/module.service';
-import { WareService } from '../../shared/services/ware.service';
-import { LayoutService } from '../services/layout-service';
-import { LoadLayoutComponent, LoadLayoutResult, LoadLayoutType } from './load-layout.component';
-import { SaveLayoutComponent } from './save-layout.component';
-import { ShareLayoutComponent } from './share-layout.component';
-import { StationModuleModel } from './station-calculator.model';
-import { StationSummaryComponent } from './station-summary/station-summary.component';
+import {ComponentBase} from '../../shared/components/component-base';
+import {Message, MessageType} from '../../shared/services/message';
+import {Layout, ModuleConfig} from '../../shared/services/module-config';
+import {ModuleService} from '../../shared/services/module.service';
+import {WareService} from '../../shared/services/ware.service';
+import {LayoutService} from '../services/layout-service';
+import {LoadLayoutComponent, LoadLayoutResult, LoadLayoutType} from './load-layout.component';
+import {SaveLayoutComponent} from './save-layout.component';
+import {ShareLayoutComponent} from './share-layout.component';
+import {StationModuleModel} from './station-calculator.model';
+import {StationSummaryComponent} from './station-summary/station-summary.component';
+import {BASE_TITLE} from '../../shared/services/constants';
 
 interface Updatable {
    update();
@@ -43,7 +44,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
    }
 
    ngOnInit(): void {
-      this.titleService.setTitle('X4: Foundations / Split Vendetta - Station Calculator');
+      this.titleService.setTitle(`${BASE_TITLE} - Station Calculator`);
 
       this.route.queryParams
          .pipe(
@@ -136,7 +137,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       this.layout = {
          name: null,
          config: [
-            { moduleId: '', count: 1 }
+            {moduleId: '', count: 1}
          ]
       };
       this.loadLayoutInternal(this.layout);

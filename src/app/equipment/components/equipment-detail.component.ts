@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { EquipmentService } from '../../shared/services/equipment.service';
 import { Title } from '@angular/platform-browser';
 import { WareService } from '../../shared/services/ware.service';
+import {BASE_TITLE} from '../../shared/services/constants';
 
 interface ProductionWareData {
    ware: Ware;
@@ -32,12 +33,12 @@ export class EquipmentDetailComponent extends EntityDetailsComponent<Equipment> 
    }
 
    ngOnInit(): void {
-      this.titleService.setTitle('X4: Foundations / Split Vendetta - Equipment');
+      this.titleService.setTitle(`${BASE_TITLE} - Equipment`);
       super.ngOnInit();
    }
 
    onEntityLoaded(entity: Equipment) {
-      this.titleService.setTitle(`X4: Foundations / Split Vendetta - ${entity.name}`);
+      this.titleService.setTitle(`${BASE_TITLE} - ${entity.name}`);
       this.entityProduction = entity.production
          .map<ProductionData>(x => {
             return {

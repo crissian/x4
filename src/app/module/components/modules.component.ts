@@ -8,6 +8,7 @@ import { ModuleTypes } from '../../shared/services/data/module-types-data';
 import { RaceService } from '../../shared/services/race.service';
 import { EnumFn } from '../../core/services/enum-fn';
 import { Effects } from '../../shared/services/data/effects-data';
+import {BASE_TITLE} from '../../shared/services/constants';
 
 @Component({
    templateUrl: './modules.component.html'
@@ -25,7 +26,7 @@ export class ModulesComponent extends EntityListComponent<StationModule> impleme
    }
 
    ngOnInit(): void {
-      this.titleService.setTitle('X4: Foundations / Split Vendetta - Modules');
+      this.titleService.setTitle(`${BASE_TITLE} - Modules`);
 
       this.races = this.raceService.getEntities();
       this.moduleTypes = EnumFn.values(ModuleTypes);
