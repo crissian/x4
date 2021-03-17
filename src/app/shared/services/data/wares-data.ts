@@ -2,6 +2,7 @@
 import { WareGroups } from './ware-groups-data';
 import { TransportType } from './transport-data';
 import { Effects } from './effects-data';
+import { Factions } from './factions-data';
 
 export const Wares = {
    advancedcomposites: {
@@ -205,6 +206,18 @@ export const Wares = {
             amount: 175,
             method: 'default',
             name: 'Universal',
+            wares: [
+            ],
+            effects: [
+               { type: Effects.sunlight, product: 1 },
+               { type: Effects.work, product: 0.43 },
+            ],
+         },
+         {
+            time: 60,
+            amount: 50,
+            method: 'terran',
+            name: 'Terran',
             wares: [
             ],
             effects: [
@@ -433,6 +446,7 @@ export const Wares = {
       icon: 'ware_majadust',
       volume: 6,
       transport: TransportType.container,
+      illegal: [ Factions.holyorder, Factions.paranid ],
       price: { min: 94, max: 323, avg: 208 },
       group: WareGroups.pharmaceutical,
       production: [
@@ -561,6 +575,35 @@ export const Wares = {
             ],
             effects: [
                { type: Effects.work, product: 0.28 },
+            ],
+         },
+         {
+            time: 300,
+            amount: 208,
+            method: 'split',
+            name: 'Split',
+            wares: [
+               { ware: 'energycells', amount: 100 },
+               { ware: 'scruffinfruits', amount: 30 },
+               { ware: 'spices', amount: 60 },
+               { ware: 'water', amount: 60 },
+            ],
+            effects: [
+               { type: Effects.work, product: 0.28 },
+            ],
+         },
+         {
+            time: 300,
+            amount: 140,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 100 },
+               { ware: 'ice', amount: 50 },
+               { ware: 'proteinpaste', amount: 24 },
+            ],
+            effects: [
+               { type: Effects.work, product: 0.59 },
             ],
          },
       ]
@@ -977,6 +1020,7 @@ export const Wares = {
       icon: 'ware_spacefuel',
       volume: 2,
       transport: TransportType.container,
+      illegal: [ Factions.antigone, Factions.argon, Factions.pioneers, Factions.terran ],
       price: { min: 60, max: 207, avg: 133 },
       group: WareGroups.pharmaceutical,
       production: [
@@ -1005,6 +1049,7 @@ export const Wares = {
       icon: 'ware_spaceweed',
       volume: 3,
       transport: TransportType.container,
+      illegal: [ Factions.antigone, Factions.argon, Factions.holyorder, Factions.paranid, Factions.terran ],
       price: { min: 75, max: 257, avg: 166 },
       group: WareGroups.pharmaceutical,
       production: [
@@ -1447,6 +1492,7 @@ export const Wares = {
       icon: 'ware_stimulants',
       volume: 12,
       transport: TransportType.container,
+      illegal: [ Factions.terran ],
       price: { min: 153, max: 527, avg: 340 },
       group: WareGroups.pharmaceutical,
       production: [

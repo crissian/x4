@@ -17,6 +17,7 @@ export interface Ware {
   price: Price;
   group?: WareGroup;
   production?: Production[];
+  illegal?: Faction[];
 }
 
 export interface Price {
