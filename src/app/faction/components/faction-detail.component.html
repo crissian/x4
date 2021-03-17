@@ -19,7 +19,7 @@
           </dd>
         </dl>
 
-        <div class="row mt-2 mb-2">
+        <div class="row mt-2 mb-2" *ngIf="entity.licenses && entity.licenses.length > 0">
           <div class="col-12">
             <div class="card shadow-sm">
               <div class="card-header">
