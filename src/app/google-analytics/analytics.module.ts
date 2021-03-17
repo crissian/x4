@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class AnalyticsModule {
-  static forRoot(config: AnalyticsConfig): ModuleWithProviders {
+  static forRoot(config: AnalyticsConfig): ModuleWithProviders<AnalyticsModule> {
     return {
       ngModule: AnalyticsModule,
       providers: [

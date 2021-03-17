@@ -4,6 +4,11 @@
    "newProjectRoot": "projects",
    "projects": {
       "X4": {
+      "i18n": {
+        "locales": {
+          "zh-Hans": "src/i18n/messages.zh-Hans.xlf"
+        }
+      },
          "root": "",
          "sourceRoot": "src",
          "projectType": "application",
@@ -13,6 +18,7 @@
             "build": {
                "builder": "@angular-devkit/build-angular:browser",
                "options": {
+            "aot": true,
                   "outputPath": "dist/X4",
                   "index": "src/index.html",
                   "main": "src/main.ts",
@@ -39,6 +45,9 @@
                            "with": "src/environments/environment.prod.ts"
                         }
                      ],
+            "localize": [
+              "zh-Hans"
+            ],
                      "optimization": true,
                      "outputHashing": "all",
                      "sourceMap": false,
@@ -52,14 +61,14 @@
                            "type": "initial",
                            "maximumWarning": "2mb",
                            "maximumError": "5mb"
-                        }
+                        },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                      ],
                      "aot": true,
-                     "outputPath": "dist/X4/zh-Hans/",
-                     "baseHref": "/zh-Hans/",
-                     "i18nFile": "src/i18n/messages.zh-Hans.xlf",
-                     "i18nFormat": "xlf",
-                     "i18nLocale": "zh-Hans",
+                     "outputPath": "dist/X4",
                      "i18nMissingTranslation": "warning"
                   },
                   "production": {
@@ -83,7 +92,11 @@
                            "type": "initial",
                            "maximumWarning": "2mb",
                            "maximumError": "5mb"
-                        }
+                        },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                      ]
                   }
                }
@@ -127,27 +140,27 @@
    "schematics": {
       "@schematics/angular:component": {
          "prefix": "app",
-         "spec": false,
+         "skipTests": true,
          "inlineStyle": true
       },
       "@schematics/angular:class": {
-         "spec": false
+         "skipTests": true
       },
       "@schematics/angular:directive": {
          "prefix": "app",
-         "spec": false
+         "skipTests": true
       },
       "@schematics/angular:guard": {
-         "spec": false
+         "skipTests": true
       },
       "@schematics/angular:module": {
-         "spec": false
+         "skipTests": true
       },
       "@schematics/angular:pipe": {
-         "spec": false
+         "skipTests": true
       },
       "@schematics/angular:service": {
-         "spec": false
+         "skipTests": true
       }
    }
 }
