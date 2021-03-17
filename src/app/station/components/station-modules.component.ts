@@ -92,7 +92,7 @@ export class StationModulesComponent implements OnInit {
             const productionPerHour = productionWare.amount * (3600 / productionWare.time);
             const moduleCount = Math.ceil(-resource.amount / productionPerHour);
 
-            const existingModule = modules.find(m => m.module.id == module.id);
+            const existingModule = modules.find(m => m.module?.id == module.id);
             if (existingModule == null) {
                modules.push(new StationModuleModel(this.wareService, this.moduleService, module.id, moduleCount));
             } else {

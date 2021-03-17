@@ -39,9 +39,10 @@
                </dd>
             </dl>
 
-            <ngb-tabset>
-               <ngb-tab title="Construction">
-                  <ng-template ngbTabContent>
+            <ul #nav="ngbNav" ngbNav class="nav-tabs">
+               <li ngbNavItem>
+                  <a ngbNavLink>Construction</a>
+                  <ng-template ngbNavContent>
                      <div *ngIf="entityProduction && entityProduction.length" class="row mt-2 mb-2">
                         <div class="col-md-6 col-sm-6 col-lg-4" *ngFor="let production of entityProduction">
                            <div class="card shadow-sm">
@@ -149,9 +150,10 @@
                         </div>
                      </div>
                   </ng-template>
-               </ngb-tab>
-               <ngb-tab title="Required For">
-                  <ng-template ngbTabContent>
+               </li>
+               <li ngbNavItem title="Required For">
+                  <a ngbNavLink>Required For</a>
+                  <ng-template ngbNavContent>
                      <div class="row mt-2 mb-2">
                         <div class="col-md-4 col-sm-12">
                            <div class="card small">
@@ -202,8 +204,9 @@
                         </div>
                      </div>
                   </ng-template>
-               </ngb-tab>
-            </ngb-tabset>
+               </li>
+            </ul>
+            <div [ngbNavOutlet]="nav"></div>
          </div>
       </div>
    </div>

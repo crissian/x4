@@ -45,13 +45,12 @@
                            "with": "src/environments/environment.prod.ts"
                         }
                      ],
-            "localize": [
-              "zh-Hans"
-            ],
+                     "localize": [
+                        "zh-Hans"
+                     ],
                      "optimization": true,
                      "outputHashing": "all",
                      "sourceMap": false,
-                     "extractCss": true,
                      "namedChunks": false,
                      "extractLicenses": true,
                      "vendorChunk": false,
@@ -62,10 +61,10 @@
                            "maximumWarning": "2mb",
                            "maximumError": "5mb"
                         },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
+                        {
+                           "type": "anyComponentStyle",
+                           "maximumWarning": "6kb"
+                        }
                      ],
                      "aot": true,
                      "outputPath": "dist/X4",
@@ -81,7 +80,6 @@
                      "optimization": true,
                      "outputHashing": "all",
                      "sourceMap": false,
-                     "extractCss": true,
                      "namedChunks": false,
                      "aot": true,
                      "extractLicenses": true,
@@ -93,10 +91,10 @@
                            "maximumWarning": "2mb",
                            "maximumError": "5mb"
                         },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
+                        {
+                           "type": "anyComponentStyle",
+                           "maximumWarning": "6kb"
+                        }
                      ]
                   }
                }
