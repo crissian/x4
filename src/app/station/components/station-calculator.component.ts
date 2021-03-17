@@ -33,7 +33,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
    @ViewChildren('stationResources,stationSummary')
    components: QueryList<Updatable>;
 
-   @ViewChild(StationSummaryComponent) summaryComponent: StationSummaryComponent;
+   @ViewChild(StationSummaryComponent, { static: true }) summaryComponent: StationSummaryComponent;
 
    constructor(private modal: NgbModal, private route: ActivatedRoute,
                private layoutService: LayoutService,
