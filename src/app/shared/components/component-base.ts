@@ -1,6 +1,7 @@
-import { OnDestroy } from '@angular/core';
+import {Directive, OnDestroy} from '@angular/core';
 import { Subject } from 'rxjs';
 
+@Directive()
 export class ComponentBase implements OnDestroy {
   onDestroy: Subject<void> = new Subject();
 

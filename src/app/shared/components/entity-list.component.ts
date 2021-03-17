@@ -1,8 +1,9 @@
-import { OnInit } from '@angular/core';
+import { OnInit, Directive } from '@angular/core';
 import { EntityService } from '../services/entity.service';
 import { ComponentBase } from './component-base';
 import { ActivatedRoute, Router } from '@angular/router';
 
+@Directive()
 export abstract class EntityListComponent<T> extends ComponentBase implements OnInit {
    currentFilter: string;
    entities: T[];
