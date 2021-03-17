@@ -146,7 +146,7 @@ export interface Ship {
   drag: Drag;
   docks?: Dock[];
   engines: Slot[];
-  shields: Slot[];
+  shields?: Slot[];
   weapons?: TurretSlot[];
   turrets?: TurretSlot[];
 }
