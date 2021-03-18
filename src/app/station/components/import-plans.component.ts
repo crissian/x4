@@ -78,6 +78,10 @@ export class ImportPlansComponent extends ComponentBase implements OnInit {
       const layouts: string[] = [];
 
       for (const plan of result.plans.plan) {
+         if (plan.entry == null || plan.entry.length === 0) {
+            continue;
+         }
+
          const name = plan.$.name;
 
          const modules: ModuleConfig[] = [];
