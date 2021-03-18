@@ -81,6 +81,7 @@ export interface CargoType {
 export interface StationModule {
   id: string;
   name: string;
+  macro: string;
   description: string;
   explosionDamage?: number;
   hull: number;

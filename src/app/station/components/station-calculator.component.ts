@@ -16,6 +16,7 @@ import {ShareLayoutComponent} from './share-layout.component';
 import {StationModuleModel} from './station-calculator.model';
 import {StationSummaryComponent} from './station-summary/station-summary.component';
 import {BASE_TITLE} from '../../shared/services/constants';
+import { ImportPlansComponent, ImportResult } from './import-plans.component';
 
 interface Updatable {
    update();
@@ -167,6 +168,26 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
                      });
                      this.modules = existingModules;
                   }
+               }
+            }
+         });
+   }
+
+   importPlans() {
+      const modalRef = this.modal.open(ImportPlansComponent);
+      modalRef.result
+         .then((data: ImportResult) => {
+            if (data != null) {
+               if (data.error) {
+                  if (data.layouts && data.layouts.length > 0) {
+                     const layouts = data.layouts.join(', ');
+                     this.messages.push({ type: 'warning', content: `Imported layouts ${layouts}, but errors occurred trying to import the other layouts` });
+                  } else {
+                     this.messages.push({ type: 'danger', content: 'Failed to import layouts' });
+                  }
+               } else {
+                  const layouts = data.layouts.join(', ');
+                  this.messages.push({ type: 'success', content: `Successfully imported layouts ${layouts}` });
                }
             }
          });

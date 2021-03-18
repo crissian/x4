@@ -9,3 +9,14 @@ export enum ModuleTypes {
    buildmodule = 'Build Module',
    ventureplatform = 'Venture Platform'
 }
+
+export const AllModuleTypes = [
+   ModuleTypes.habitation,
+   ModuleTypes.buildmodule,
+   ModuleTypes.dockarea,
+   ModuleTypes.pier,
+   ModuleTypes.storage,
+   ModuleTypes.defencemodule,
+   ModuleTypes.connectionmodule
+   // ModuleTypes.ventureplatform
+];

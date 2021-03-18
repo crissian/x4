@@ -1,41 +1,42 @@
 <div class="row content-row">
-  <div class="col-md-12">
-    <div class="card shadow">
-      <div class="card-header shadow-sm">
-        <button (click)="newLayout()" class="btn btn-sm btn-info" type="button"><i class="fa fa-file"></i>&nbsp;<span i18n="@@newLayout">New</span></button>&nbsp;
-        <button (click)="saveLayout()" class="btn btn-sm btn-primary" type="button"><i class="fa fa-save"></i>&nbsp;<span i18n="@@save">Save</span></button>&nbsp;
-        <button (click)="saveLayoutAs()" class="btn btn-sm btn-primary" type="button"><i class="fa fa-save"></i>&nbsp;<span i18n="@@saveAs">Save As</span></button>&nbsp;
-        <button (click)="loadLayout()" class="btn btn-sm btn-info" type="button"><i class="fa fa-folder-open"></i>&nbsp;<span i18n="@@load">Load</span></button>&nbsp;
-        <button (click)="shareLayout()" class="btn btn-sm btn-secondary" type="button"><i class="fa fa-share-square"></i>&nbsp;<span i18n="@@share">Share</span></button>
+   <div class="col-md-12">
+      <div class="card shadow">
+         <div class="card-header shadow-sm">
+            <button (click)="newLayout()" class="btn btn-sm btn-info" type="button"><i class="fa fa-file"></i>&nbsp;<span i18n="@@newLayout">New</span></button>&nbsp;
+            <button (click)="saveLayout()" class="btn btn-sm btn-primary" type="button"><i class="fa fa-save"></i>&nbsp;<span i18n="@@save">Save</span></button>&nbsp;
+            <button (click)="saveLayoutAs()" class="btn btn-sm btn-primary" type="button"><i class="fa fa-save"></i>&nbsp;<span i18n="@@saveAs">Save As</span></button>&nbsp;
+            <button (click)="loadLayout()" class="btn btn-sm btn-info" type="button"><i class="fa fa-folder-open"></i>&nbsp;<span i18n="@@load">Load</span></button>&nbsp;
+            <button (click)="shareLayout()" class="btn btn-sm btn-secondary" type="button"><i class="fa fa-share-square"></i>&nbsp;<span i18n="@@share">Share</span></button>&nbsp;
+            <button (click)="importPlans()" class="btn btn-sm btn-dark" type="button"><i class="fa fa-file-text"></i>&nbsp;<span i18n="@@share">Import</span></button>
+         </div>
+         <div class="card-body">
+            <div class="row" *ngIf="messages.length">
+               <div class="col">
+                  <app-messages [messages]="messages"></app-messages>
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="col-md-4 col-sm-12">
+                  <h6 class="card-title">
+                     <span *ngIf="!layout" i18n="@@stationModules">Station Modules</span>
+                     <span *ngIf="layout" class="text-primary">{{ layout.name }}</span>
+                  </h6>
+
+                  <app-station-modules [modules]="modules" (change)="onChange()"></app-station-modules>
+               </div>
+               <div class="col-md-4 col-sm-12">
+                  <h6 class="card-title" i18n="@@stationResources">Station Resources</h6>
+
+                  <app-station-resources #stationResources [modules]="modules"></app-station-resources>
+               </div>
+               <div class="col-md-4 col-sm-12">
+                  <h6 class="card-title" i18n="@@stationSummary">Station Summary</h6>
+
+                  <app-station-summary #stationSummary [modules]="modules"></app-station-summary>
+               </div>
+            </div>
+         </div>
       </div>
-      <div class="card-body">
-        <div class="row" *ngIf="messages.length">
-          <div class="col">
-            <app-messages [messages]="messages"></app-messages>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-4 col-sm-12">
-            <h6 class="card-title">
-              <span *ngIf="!layout" i18n="@@stationModules">Station Modules</span>
-              <span *ngIf="layout" class="text-primary">{{ layout.name }}</span>
-            </h6>
-
-            <app-station-modules [modules]="modules" (change)="onChange()"></app-station-modules>
-          </div>
-          <div class="col-md-4 col-sm-12">
-            <h6 class="card-title" i18n="@@stationResources">Station Resources</h6>
-
-            <app-station-resources #stationResources [modules]="modules"></app-station-resources>
-          </div>
-          <div class="col-md-4 col-sm-12">
-            <h6 class="card-title" i18n="@@stationSummary">Station Summary</h6>
-
-            <app-station-summary #stationSummary [modules]="modules"></app-station-summary>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+   </div>
 </div>
