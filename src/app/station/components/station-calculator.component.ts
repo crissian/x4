@@ -146,7 +146,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
    }
 
    loadLayout() {
-      const modalRef = this.modal.open(LoadLayoutComponent);
+      const modalRef = this.modal.open(LoadLayoutComponent, { size: 'lg' });
       modalRef.result
          .then((data: LoadLayoutResult) => {
             if (data) {
