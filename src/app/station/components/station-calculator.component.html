@@ -10,9 +10,10 @@
             <button (click)="importPlans()" class="btn btn-sm btn-dark" type="button"><i class="fa fa-file-text"></i>&nbsp;<span i18n="@@share">Import</span></button>
          </div>
          <div class="card-body">
-            <div class="row" *ngIf="messages.length">
+            <div class="row" *ngIf="messages.length || importResult">
                <div class="col">
                   <app-messages [messages]="messages"></app-messages>
+                  <app-import-result [result]="importResult" (selectPlan)="onSelectPlan($event)"></app-import-result>
                </div>
             </div>
 

@@ -30,6 +30,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
    layout: Layout;
    messages: Message[] = [];
    modules: StationModuleModel[] = [];
+   importResult: ImportResult;
 
    @ViewChildren('stationResources,stationSummary')
    components: QueryList<Updatable>;
@@ -175,22 +176,8 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
 
    importPlans() {
       const modalRef = this.modal.open(ImportPlansComponent);
-      modalRef.result
-         .then((data: ImportResult) => {
-            if (data != null) {
-               if (data.error) {
-                  if (data.layouts && data.layouts.length > 0) {
-                     const layouts = data.layouts.join(', ');
-                     this.messages.push({ type: 'warning', content: `Imported layouts ${layouts}, but errors occurred trying to import the other layouts` });
-                  } else {
-                     this.messages.push({ type: 'danger', content: 'Failed to import layouts' });
-                  }
-               } else {
-                  const layouts = data.layouts.join(', ');
-                  this.messages.push({ type: 'success', content: `Successfully imported layouts ${layouts}` });
-               }
-            }
-         });
+      void modalRef.result
+         .then(data => this.importResult = data);
    }
 
    private loadLayoutInternal(layout: Layout) {
@@ -217,5 +204,12 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       return config.map(x => {
          return new StationModuleModel(this.wareService, this.moduleService, x.moduleId, x.count);
       });
+   }
+
+   onSelectPlan(item: string) {
+      const layout = this.layoutService.getLayout(item);
+      if (layout) {
+         this.loadLayoutInternal(layout);
+      }
    }
 }

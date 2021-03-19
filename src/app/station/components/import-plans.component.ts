@@ -4,7 +4,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as xml2js from 'xml2js';
 import { ModuleService } from '../../shared/services/module.service';
 import { LayoutService } from '../services/layout-service';
-import { AllModuleTypes } from '../../shared/services/data/module-types-data';
 import { Layout, ModuleConfig } from '../../shared/services/module-config';
 
 interface EntryAttribute {
@@ -57,6 +56,7 @@ export class ImportPlansComponent extends ComponentBase implements OnInit {
       xml2js.parseString(this.xml, (err, result: ConstructionPlan) => {
          if (err) {
             console.error(err);
+            this.activeModal.close({ error: 'Failed to load plans', layouts: null });
          } else if (!result || !result.plans || !result.plans.plan) {
             return;
          } else {
