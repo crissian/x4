@@ -74,18 +74,24 @@ export class StationModulesComponent implements OnInit {
 
          const modules = this.modules;
 
+         const habitat = this.modules.find(x => x.module.type === ModuleTypes.habitation);
+         let method = 'default';
+         if (habitat) {
+            method = habitat.module.makerRace.id;
+         }
+
          for (const resource of resources) {
             if (resource.amount >= 0) {
                continue;
             }
 
-            const module = this.moduleService.getModuleByWare(resource.ware.id);
+            const module = this.moduleService.getModuleByWare(resource.ware.id, method) || this.moduleService.getModuleByWare(resource.ware.id);
             if (module == null) {
                continue;
             }
             didChange = true;
 
-            const productionWare = module.product.production.find(p => p.method == 'default');
+            const productionWare = module.product.production.find(p => p.method == method) || module.product.production.find(p => p.method == 'default');
             const productionPerHour = productionWare.amount * (3600 / productionWare.time);
             const moduleCount = Math.ceil(-resource.amount / productionPerHour);
 

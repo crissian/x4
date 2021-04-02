@@ -13,203 +13,220 @@ import { StationSummaryService } from './services/station-summary.service';
  * The Station Summary component
  */
 @Component({
-	selector: 'app-station-summary',
-	templateUrl: './station-summary.component.html',
+   selector: 'app-station-summary',
+   templateUrl: './station-summary.component.html',
 })
 export class StationSummaryComponent {
-	static basicResources = [WareGroups.gases, WareGroups.minerals, WareGroups.ice];
+   static basicResources = [ WareGroups.gases, WareGroups.minerals, WareGroups.ice ];
 
-	expandState: { [key: string]: boolean } = {};
-	private _modules: StationModuleModel[];
+   expandState: { [key: string]: boolean } = {};
+   private _modules: StationModuleModel[];
 
-	provideBasicResources = false;
-	provideAllResources = false;
-	isHq = false;
-	resourcesPrice = 50;
-	productsPrice = 50;
-	modulesResourcesPrice = 50;
+   provideBasicResources = false;
+   provideAllResources = false;
+   isHq = false;
+   resourcesPrice = 50;
+   productsPrice = 50;
+   modulesResourcesPrice = 50;
 
-	private _totalWorkforce = 0;
-	totalWorkforceCapacity = 0;
-	partialWorkforce = 0;
+   private _totalWorkforce = 0;
+   totalWorkforceCapacity = 0;
+   partialWorkforce = 0;
 
-	workforceNeeded: { amount: number; name: string; count: number }[] = [];
-	workforceCapacity: { amount: number; name: string; count: number }[] = [];
+   workforceNeeded: { amount: number; name: string; count: number }[] = [];
+   workforceCapacity: { amount: number; name: string; count: number }[] = [];
 
-	resourcesNeeded: ResourceSummary[] = [];
-	resourcesProduced: ResourceSummary[] = [];
-	moduleCosts: ModuleCost[];
+   resourcesNeeded: ResourceSummary[] = [];
+   resourcesProduced: ResourceSummary[] = [];
+   moduleCosts: ModuleCost[];
 
-	totalModuleResourceCosts: ResourceAmount[] = [];
+   totalModuleResourceCosts: ResourceAmount[] = [];
 
-	@Output()
-	change = new EventEmitter();
+   @Output()
+   change = new EventEmitter();
 
-	constructor(private wareService: WareService, private stationSummaryService: StationSummaryService) {}
+   constructor(private wareService: WareService, private stationSummaryService: StationSummaryService) {
+   }
 
-	get modules() {
-		return this._modules;
-	}
+   get modules() {
+      return this._modules;
+   }
 
-	@Input()
-	set modules(value: StationModuleModel[]) {
-		this._modules = value;
-		this.update();
-	}
+   @Input()
+   set modules(value: StationModuleModel[]) {
+      this._modules = value;
+      this.update();
+   }
 
-	get totalWorkforce() {
-		return this._totalWorkforce + (this.isHq ? 200 : 0);
-	}
+   get totalWorkforce() {
+      return this._totalWorkforce + (this.isHq ? 200 : 0);
+   }
 
-	onChange() {
-		this.update();
-		this.change.emit();
-	}
+   onChange() {
+      this.update();
+      this.change.emit();
+   }
 
-	update() {
-		this._totalWorkforce = 0;
+   update() {
+      this._totalWorkforce = 0;
 
-		this.workforceNeeded = [];
-		this.workforceCapacity = [];
+      this.workforceNeeded = [];
+      this.workforceCapacity = [];
 
-		this.resourcesNeeded = [];
-		this.resourcesProduced = [];
-		this.moduleCosts = [];
+      this.resourcesNeeded = [];
+      this.resourcesProduced = [];
+      this.moduleCosts = [];
 
-		if (this.modules == null) {
-			return;
-		}
+      if (this.modules == null) {
+         return;
+      }
 
-		this.modules.forEach((item) => {
-			if (item.module != null && item.module.workForce != null) {
-				if (item.module.workForce.max != null) {
-					this._totalWorkforce += item.count * item.module.workForce.max;
-					this.workforceNeeded.push({
-						amount: item.module.workForce.max,
-						name: item.module.name,
-						count: item.count,
-					});
-				}
-				if (item.module.workForce.capacity != null) {
-					this.workforceCapacity.push({
-						amount: item.module.workForce.capacity,
-						name: item.module.name,
-						count: item.count,
-					});
-				}
-			}
-			if (item.module != null) {
-				const cost = this.getModuleCost(item);
-				if (cost != null) {
-					this.moduleCosts.push(cost);
-				}
-			}
-		});
-		
-		let workforce = this.modules.reduce((acc, item) => {
-			if (item.module && item.module.workForce && item.module.workForce.capacity) {
-				return acc + item.count * item.module.workForce.capacity;
-			}
-			return acc;
-		}, 0);
-		if (this.totalWorkforceCapacity != workforce) {
-			this.totalWorkforceCapacity = workforce;
-			this.partialWorkforce = workforce;
-		}
-		this.stationSummaryService.setPartialWorkforce(this.partialWorkforce);
+      this.modules.forEach((item) => {
+         if (item.module != null && item.module.workForce != null) {
+            if (item.module.workForce.max != null) {
+               this._totalWorkforce += item.count * item.module.workForce.max;
+               this.workforceNeeded.push({
+                  amount: item.module.workForce.max,
+                  name: item.module.name,
+                  count: item.count,
+               });
+            }
+            if (item.module.workForce.capacity != null) {
+               this.workforceCapacity.push({
+                  amount: item.module.workForce.capacity,
+                  name: item.module.name,
+                  count: item.count,
+               });
+            }
+         }
+         if (item.module != null) {
+            const cost = this.getModuleCost(item);
+            if (cost != null) {
+               this.moduleCosts.push(cost);
+            }
+         }
+      });
 
-		const resources = ResourceCalculator.calculate(this.modules, this._totalWorkforce, this.partialWorkforce);
-		resources.sort((a, b) => this.wareService.compareWares(a.ware, b.ware));
+      const workforce = this.modules.reduce((acc, item) => {
+         if (item.module && item.module.workForce && item.module.workForce.capacity) {
+            return acc + item.count * item.module.workForce.capacity;
+         }
+         return acc;
+      }, 0);
+      if (this.totalWorkforceCapacity != workforce) {
+         this.totalWorkforceCapacity = workforce;
+         this.partialWorkforce = workforce;
+      }
+      this.stationSummaryService.setPartialWorkforce(this.partialWorkforce);
 
-		resources.forEach((x) => {
-			if (x.amount < 0) {
-				let warePrice: number = null;
-				if (this.provideAllResources) {
-					warePrice = 0;
-				} else if (
-					this.provideBasicResources &&
-					StationSummaryComponent.basicResources.indexOf(x.ware.group) >= 0
-				) {
-					warePrice = 0;
-				}
-				const model = new ResourceSummary(x, this, ResourcePriceType.expense, warePrice);
-				this.resourcesNeeded.push(model);
-			} else if (x.amount > 0) {
-				const model = new ResourceSummary(x, this, ResourcePriceType.product);
-				this.resourcesProduced.push(model);
-			}
-		});
+      const resources = ResourceCalculator.calculate(this.modules, this._totalWorkforce, this.partialWorkforce);
+      resources.sort((a, b) => this.wareService.compareWares(a.ware, b.ware));
 
-		this.totalModuleResourceCosts = [];
+      resources.forEach((x) => {
+         if (x.amount < 0) {
+            let warePrice: number = null;
+            if (this.provideAllResources) {
+               warePrice = 0;
+            } else if (
+               this.provideBasicResources &&
+               StationSummaryComponent.basicResources.indexOf(x.ware.group) >= 0
+            ) {
+               warePrice = 0;
+            }
+            const model = new ResourceSummary(x, this, ResourcePriceType.expense, warePrice);
+            this.resourcesNeeded.push(model);
+         } else if (x.amount > 0) {
+            const model = new ResourceSummary(x, this, ResourcePriceType.product);
+            this.resourcesProduced.push(model);
+         }
+      });
 
-		this.moduleCosts.forEach((cost) => {
-			cost.items.forEach((item) => {
-				let resourceCost = this.totalModuleResourceCosts.find((x) => x.ware.id == item.ware.id);
-				if (resourceCost == null) {
-					resourceCost = {
-						ware: item.ware,
-						value: cost.count * item.amount,
-					};
-					this.totalModuleResourceCosts.push(resourceCost);
-				} else {
-					resourceCost.value += cost.count * item.amount;
-				}
-			});
-		});
-	}
+      this.totalModuleResourceCosts = [];
 
-	get totalExpenses() {
-		let totalExpenses = 0;
+      this.moduleCosts.forEach((cost) => {
+         cost.items.forEach((item) => {
+            let resourceCost = this.totalModuleResourceCosts.find((x) => x.ware.id == item.ware.id);
+            if (resourceCost == null) {
+               resourceCost = {
+                  ware: item.ware,
+                  value: cost.count * item.amount,
+               };
+               this.totalModuleResourceCosts.push(resourceCost);
+            } else {
+               resourceCost.value += cost.count * item.amount;
+            }
+         });
+      });
+   }
 
-		this.resourcesNeeded.forEach((x) => {
-			totalExpenses += x.amount * x.price;
-		});
+   get workforceStep() {
+      if (this.totalWorkforceCapacity === 0) {
+         return 1;
+      }
 
-		return totalExpenses;
-	}
+      return this.totalWorkforceCapacity / 20;
+   }
 
-	get totalProfits() {
-		let totalProfits = 0;
+   get workforcePercent() {
+      if (this.totalWorkforceCapacity === 0) {
+         return '0%';
+      }
 
-		this.resourcesProduced.forEach((x) => {
-			totalProfits += x.amount * x.price;
-		});
+      return Math.round(100 * this.partialWorkforce / this.totalWorkforceCapacity) + '%';
+   }
 
-		return totalProfits;
-	}
+   get totalExpenses() {
+      let totalExpenses = 0;
 
-	get totalModuleCost() {
-		let total = 0;
+      this.resourcesNeeded.forEach((x) => {
+         totalExpenses += x.amount * x.price;
+      });
 
-		this.moduleCosts.forEach((x) => {
-			total += x.price;
-		});
+      return totalExpenses;
+   }
 
-		return total;
-	}
+   get totalProfits() {
+      let totalProfits = 0;
 
-	private getModuleCost(item: StationModuleModel) {
-		const production = item.module.production[0];
-		if (!production) {
-			return null;
-		}
+      this.resourcesProduced.forEach((x) => {
+         totalProfits += x.amount * x.price;
+      });
 
-		let totalMin = 0;
-		let totalMax = 0;
+      return totalProfits;
+   }
 
-		const items: ModuleCostItem[] = [];
-		production.wares.forEach((x) => {
-			const ware = this.wareService.getEntity(x.ware);
-			totalMin += ware.price.min * x.amount;
-			totalMax += ware.price.max * x.amount;
+   get totalModuleCost() {
+      let total = 0;
 
-			items.push(new ModuleCostItem(ware, x.amount, this));
-		});
+      this.moduleCosts.forEach((x) => {
+         total += x.price;
+      });
 
-		return new ModuleCost(item, this, totalMin, totalMax, items);
-	}
+      return total;
+   }
 
-	toggleExpanded(key: string) {
-		this.expandState[key] = !this.expandState[key];
-	}
+   private getModuleCost(item: StationModuleModel) {
+      const production = item.module.production[0];
+      if (!production) {
+         return null;
+      }
+
+      let totalMin = 0;
+      let totalMax = 0;
+
+      const items: ModuleCostItem[] = [];
+      production.wares.forEach((x) => {
+         const ware = this.wareService.getEntity(x.ware);
+         totalMin += ware.price.min * x.amount;
+         totalMax += ware.price.max * x.amount;
+
+         items.push(new ModuleCostItem(ware, x.amount, this));
+      });
+
+      return new ModuleCost(item, this, totalMin, totalMax, items);
+   }
+
+   toggleExpanded(key: string) {
+      this.expandState[key] = !this.expandState[key];
+   }
 }
