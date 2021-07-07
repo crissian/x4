@@ -2,634 +2,735 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="stationCalculator" datatype="html">
-        <source>Station Calculator</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/components/header.component.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="wares" datatype="html">
-        <source>Wares</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/components/header.component.html</context>
-          <context context-type="linenumber">11</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/ware/components/wares.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="stationModules" datatype="html">
-        <source>Station Modules</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/components/header.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-calculator.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/module/components/modules.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ships" datatype="html">
-        <source>Ships</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/components/header.component.html</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/ship/components/ships.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="races" datatype="html">
-        <source>Races</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/components/header.component.html</context>
-          <context context-type="linenumber">20</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/races/components/races.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="factions" datatype="html">
-        <source>Factions</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/components/header.component.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/faction/components/factions.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="ngb.alert.close" datatype="html">
         <source>Close</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/alert/alert.d.ts</context>
-          <context context-type="linenumber">2</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/alert/alert.ts</context>
+          <context context-type="linenumber">58,61</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.carousel.slide-number" datatype="html">
+        <source> Slide <x id="INTERPOLATION" equiv-text="private _pauseO"/> of <x id="INTERPOLATION_1" equiv-text="Subject(false);"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/carousel/carousel.ts</context>
+          <context context-type="linenumber">114,118</context>
+        </context-group>
+        <note priority="1" from="description">Currently selected slide number read by screen reader</note>
       </trans-unit>
       <trans-unit id="ngb.carousel.previous" datatype="html">
         <source>Previous</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/carousel/carousel.d.ts</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/carousel/carousel.ts</context>
+          <context context-type="linenumber">132,133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.carousel.next" datatype="html">
         <source>Next</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/carousel/carousel.d.ts</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ngb.datepicker.previous-month" datatype="html">
-        <source>Previous month</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ngb.datepicker.next-month" datatype="html">
-        <source>Next month</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
-          <context context-type="linenumber">26</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/carousel/carousel.ts</context>
+          <context context-type="linenumber">147,151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.datepicker.select-month" datatype="html">
         <source>Select month</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation-select.ts</context>
+          <context context-type="linenumber">43,47</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation-select.ts</context>
+          <context context-type="linenumber">49,50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.datepicker.select-year" datatype="html">
         <source>Select year</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation-select.ts</context>
+          <context context-type="linenumber">59,63</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation-select.ts</context>
+          <context context-type="linenumber">72,74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.previous-month" datatype="html">
+        <source>Previous month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation.ts</context>
+          <context context-type="linenumber">24,27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation.ts</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.next-month" datatype="html">
+        <source>Next month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation.ts</context>
+          <context context-type="linenumber">44,48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation.ts</context>
+          <context context-type="linenumber">57,61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.pagination.first" datatype="html">
         <source>««</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ngb.pagination.first-aria" datatype="html">
-        <source>First</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">147,148</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.pagination.previous" datatype="html">
         <source>«</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ngb.pagination.previous-aria" datatype="html">
-        <source>Previous</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">153,154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.pagination.next" datatype="html">
         <source>»</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ngb.pagination.next-aria" datatype="html">
-        <source>Next</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">158,159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.pagination.last" datatype="html">
         <source>»»</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">164,165</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.first-aria" datatype="html">
+        <source>First</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">168,172</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.previous-aria" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">176,177</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.next-aria" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">188,189</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.pagination.last-aria" datatype="html">
         <source>Last</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">195,200</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.progressbar.value" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{getPercentValue()}}"/>%</source>
+        <source><x id="INTERPOLATION" equiv-text="turn this._max;"/></source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/progressbar/progressbar.d.ts</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.increment-hours" datatype="html">
-        <source>Increment hours</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/progressbar/progressbar.ts</context>
+          <context context-type="linenumber">31,38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.timepicker.HH" datatype="html">
         <source>HH</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">40,41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.timepicker.hours" datatype="html">
         <source>Hours</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.decrement-hours" datatype="html">
-        <source>Decrement hours</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.increment-minutes" datatype="html">
-        <source>Increment minutes</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">45,46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.timepicker.MM" datatype="html">
         <source>MM</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">52,53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.timepicker.minutes" datatype="html">
         <source>Minutes</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-hours" datatype="html">
+        <source>Increment hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">62,63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-hours" datatype="html">
+        <source>Decrement hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">67,68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-minutes" datatype="html">
+        <source>Increment minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">75,76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.timepicker.decrement-minutes" datatype="html">
         <source>Decrement minutes</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">38</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.increment-seconds" datatype="html">
-        <source>Increment seconds</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.timepicker.SS" datatype="html">
         <source>SS</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">85,87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.timepicker.seconds" datatype="html">
         <source>Seconds</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">90,92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-seconds" datatype="html">
+        <source>Increment seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">98,99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.timepicker.decrement-seconds" datatype="html">
         <source>Decrement seconds</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.PM" datatype="html">
-        <source>PM</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">105,109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.timepicker.AM" datatype="html">
-        <source>AM</source>
+        <source><x id="INTERPOLATION" equiv-text="Step: number;
+
+"/></source>
         <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">116,123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.PM" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="sible.
+   */
+  "/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">125,130</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.toast.close-aria" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/src/toast/toast.ts</context>
+          <context context-type="linenumber">76,85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="about" datatype="html">
+        <source> About </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/about.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="equipment" datatype="html">
+        <source> Equipment </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/equipment/components/equipments.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="factions" datatype="html">
+        <source> Factions </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/faction/components/factions.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stationCalculator" datatype="html">
+        <source>Station Calculator</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="wares" datatype="html">
+        <source>Wares</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/wares.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stationModules" datatype="html">
+        <source>Station Modules</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/modules.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ships.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ships" datatype="html">
+        <source>Ships</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="races" datatype="html">
+        <source>Races</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/races/components/races.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="select" datatype="html">
+        <source>( Select )</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/autocomplete/autocomplete.component.html</context>
+          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="yes" datatype="html">
         <source>Yes</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/components/confirm.component.html</context>
+          <context context-type="sourcefile">src/app/shared/components/confirm.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="no" datatype="html">
         <source>No</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/components/confirm.component.html</context>
+          <context context-type="sourcefile">src/app/shared/components/confirm.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="loadLayout" datatype="html">
-        <source>Load Layout</source>
+      <trans-unit id="importPlans" datatype="html">
+        <source>Import Plans</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/load-layout.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/import-plans.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="delete" datatype="html">
-        <source>Delete</source>
+      <trans-unit id="importPlansMessage" datatype="html">
+        <source>Paste the <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;font-italic text-info&quot;&gt;"/>constructionplans.xml<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt; "/> content below. The plans will be added to your saved layout list.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/load-layout.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="sourcefile">src/app/station/components/import-plans.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="importPlansMessageFile" datatype="html">
+        <source>File can be found in Documents\Egosoft\X4\[12345678]\constructionplans.xml</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/import-plans.component.html</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cancel" datatype="html">
         <source>Cancel</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/load-layout.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="sourcefile">src/app/station/components/import-plans.component.html</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/save-layout.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/load-layout.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/save-layout.component.html</context>
           <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="loadLayout" datatype="html">
+        <source>Load Layout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/load-layout.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/load-layout.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="addLayout" datatype="html">
+        <source>Add Layout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/load-layout.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deleteLayout" datatype="html">
+        <source>Delete Layout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/load-layout.component.html</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="saveLayout" datatype="html">
         <source>Save Layout</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/save-layout.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/save-layout.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
       <trans-unit id="save" datatype="html">
         <source>Save</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/save-layout.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/save-layout.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-calculator.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shareLayout" datatype="html">
         <source>Share Layout</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/share-layout.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/share-layout.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
       <trans-unit id="copy" datatype="html">
         <source>Copy</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/share-layout.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/share-layout.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ok" datatype="html">
         <source>Ok</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/share-layout.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/share-layout.component.html</context>
           <context context-type="linenumber">16</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="workforce" datatype="html">
-        <source>Workforce</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="value" datatype="html">
-        <source>Value</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="neededWorkforce" datatype="html">
-        <source> Needed Workforce</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="workforceCapacity" datatype="html">
-        <source> Workforce Capacity</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">35</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="productionPerHour" datatype="html">
-        <source>Production Per Hour</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">54</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="amount" datatype="html">
-        <source>Amount</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">55</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">142</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-resources.component.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="expenses" datatype="html">
-        <source> Expenses</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">63</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="production" datatype="html">
-        <source> Production</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">80</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="profit" datatype="html">
-        <source> Profit</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">94</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="minersProvideBasicResources" datatype="html">
-        <source>Miners provide basic resources</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">102</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="resourcePrice" datatype="html">
-        <source>Resources Price:</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">110</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="min" datatype="html">
-        <source>Min</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">112</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">124</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">174</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="average" datatype="html">
-        <source>Average</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">113</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">125</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">175</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="max" datatype="html">
-        <source>Max</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">114</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">126</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">176</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="productsPrice" datatype="html">
-        <source>Products Price:</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">122</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="stationCosts" datatype="html">
-        <source>Station Costs</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">141</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="total" datatype="html">
-        <source>Total:</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">165</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="resourcesPrice" datatype="html">
-        <source>Resources Price:</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-summary.component.html</context>
-          <context context-type="linenumber">172</context>
         </context-group>
       </trans-unit>
       <trans-unit id="newLayout" datatype="html">
         <source>New</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-calculator.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="saveAs" datatype="html">
         <source>Save As</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-calculator.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="load" datatype="html">
         <source>Load</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-calculator.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share" datatype="html">
         <source>Share</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-calculator.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context>
           <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="import" datatype="html">
+        <source>Import</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stationResources" datatype="html">
         <source>Station Resources</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-calculator.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="stationSummary" datatype="html">
         <source>Station Summary</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-calculator.component.html</context>
-          <context context-type="linenumber">33</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="resources" datatype="html">
-        <source>Resource</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-resources.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="at" datatype="html">
-        <source>at</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-resources.component.html</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="efficiency" datatype="html">
-        <source>efficiency</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-resources.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="module" datatype="html">
         <source>Module</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-modules.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/station-modules.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="count" datatype="html">
         <source>Count</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-modules.component.html</context>
+          <context context-type="sourcefile">src/app/station/components/station-modules.component.html</context>
           <context context-type="linenumber">5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="select" datatype="html">
-        <source>( Select )</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-modules.component.html</context>
-          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="addModule" datatype="html">
         <source>Add Module</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/station/components/station-modules.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="sourcefile">src/app/station/components/station-modules.component.html</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="search" datatype="html">
-        <source>Search</source>
+      <trans-unit id="autofillModules" datatype="html">
+        <source>Autofill Modules</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/ware/components/wares.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="sourcefile">src/app/station/components/station-modules.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="resources" datatype="html">
+        <source>Resource</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-resources/station-resources.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="amount" datatype="html">
+        <source>Amount</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-resources/station-resources.component.html</context>
+          <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/module/components/modules.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">247</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="at" datatype="html">
+        <source> at</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-resources/station-resources.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="efficiency" datatype="html">
+        <source>efficiency</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-resources/station-resources.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="workforce" datatype="html">
+        <source>Workforce</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="value" datatype="html">
+        <source>Value</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="neededWorkforce" datatype="html">
+        <source> Needed Workforce </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">19,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="workforceCapacity" datatype="html">
+        <source> Workforce Capacity </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">48,49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="isHeadquarters" datatype="html">
+        <source>Headquarters (The HQ needs 200 workers for some reason)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">73,74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="actualWorkforce" datatype="html">
+        <source>Actual Workforce:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="productionPerHour" datatype="html">
+        <source>Production Per Hour</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="expenses" datatype="html">
+        <source> Expenses</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="production" datatype="html">
+        <source> Production</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">145</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="profit" datatype="html">
+        <source> Profit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">156</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="minersProvideBasicResources" datatype="html">
+        <source>Miners provide basic resources</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">171,172</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="rovideAllResources" datatype="html">
+        <source>Resources are provided by other stations</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">186,187</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="resourcePrice" datatype="html">
+        <source>Resources Price:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">196</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="min" datatype="html">
+        <source>Min</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">198</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">220</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">287</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="average" datatype="html">
+        <source>Average</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">199</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">221</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">288</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="max" datatype="html">
+        <source>Max</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">200</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">222</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">289</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="productsPrice" datatype="html">
+        <source>Products Price:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">218</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stationCosts" datatype="html">
+        <source>Station Costs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">246</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="total" datatype="html">
+        <source>Total:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">272</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="resourcesPrice" datatype="html">
+        <source>Resources Price:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">285</context>
         </context-group>
       </trans-unit>
     </body>
