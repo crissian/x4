@@ -321,10 +321,6 @@
           <context context-type="linenumber">5,6</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ship/components/ships.component.html</context>
-          <context context-type="linenumber">5,6</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
@@ -338,6 +334,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/header.component.html</context>
           <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ships.component.html</context>
+          <context context-type="linenumber">5,6</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
@@ -361,12 +365,20 @@
           <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="type" datatype="html">
         <source>Type</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
           <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="product" datatype="html">
@@ -389,12 +401,20 @@
           <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
           <context context-type="linenumber">41</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="explosionDamage" datatype="html">
         <source>Explosion Damage</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
           <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="workforceNeeded" datatype="html">
@@ -421,12 +441,20 @@
           <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
           <context context-type="linenumber">60</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="turrets" datatype="html">
         <source>Turrets</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
           <context context-type="linenumber">73</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shields" datatype="html">
@@ -445,6 +473,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
           <context context-type="linenumber">125</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">129</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
@@ -466,6 +502,10 @@
           <context context-type="linenumber">91</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">95</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
           <context context-type="linenumber">55</context>
         </context-group>
@@ -477,8 +517,105 @@
           <context context-type="linenumber">95</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
           <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="min" datatype="html">
+        <source>Min</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">198</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">220</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">287</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="max" datatype="html">
+        <source>Max</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">200</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">222</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
+          <context context-type="linenumber">289</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">121</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">134</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="avg" datatype="html">
+        <source>Avg</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">119</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="total" datatype="html">
@@ -486,6 +623,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
           <context context-type="linenumber">113</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">117</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
@@ -501,6 +642,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
           <context context-type="linenumber">129</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="select" datatype="html">
@@ -522,6 +667,76 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/components/confirm.component.html</context>
           <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="size" datatype="html">
+        <source>Size</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="missileStorage" datatype="html">
+        <source>Missile Storage</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="droneStorage" datatype="html">
+        <source>Drone Storage</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="people" datatype="html">
+        <source>People</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="purpose" datatype="html">
+        <source>Purpose</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="engines" datatype="html">
+        <source>Engines</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="docks" datatype="html">
+        <source>Docks</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="weapons" datatype="html">
+        <source>Weapons</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mainShields" datatype="html">
+        <source>Main Shields</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="additionalShields" datatype="html">
+        <source>Additional Shields</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context>
+          <context context-type="linenumber">81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="importPlans" datatype="html">
@@ -814,33 +1029,6 @@
           <context context-type="linenumber">196</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="min" datatype="html">
-        <source>Min</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
-          <context context-type="linenumber">198</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
-          <context context-type="linenumber">220</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
-          <context context-type="linenumber">287</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">60</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">117</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">130</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="average" datatype="html">
         <source>Average</source>
         <context-group purpose="location">
@@ -854,33 +1042,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
           <context context-type="linenumber">288</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="max" datatype="html">
-        <source>Max</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
-          <context context-type="linenumber">200</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
-          <context context-type="linenumber">222</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
-          <context context-type="linenumber">289</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">61</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">121</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="productsPrice" datatype="html">
@@ -948,21 +1109,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
           <context context-type="linenumber">44</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="avg" datatype="html">
-        <source>Avg</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">62</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">119</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cycleTime" datatype="html">
