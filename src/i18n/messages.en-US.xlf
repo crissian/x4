@@ -9,16 +9,16 @@
       <trans-unit id="wares" datatype="html">
         <source>Wares</source><target state="final">Wares</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">8</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/wares.component.html</context><context context-type="linenumber">5</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">8</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">161</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/wares.component.html</context><context context-type="linenumber">5</context></context-group></trans-unit>
       <trans-unit id="stationModules" datatype="html">
         <source>Station Modules</source><target state="final">Station Modules</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">11</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/module/components/modules.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ship/components/ships.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context><context context-type="linenumber">23</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">11</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/module/components/modules.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ship/components/ships.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context><context context-type="linenumber">23</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">193</context></context-group></trans-unit>
       <trans-unit id="ships" datatype="html">
         <source>Ships</source><target state="final">Ships</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">14</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">14</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">177</context></context-group></trans-unit>
       <trans-unit id="races" datatype="html">
         <source>Races</source><target state="final">Races</target>
         
@@ -296,7 +296,7 @@
       <trans-unit id="production" datatype="html">
         <source> Production</source><target state="final"> Production</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">145</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">145</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">93</context></context-group></trans-unit>
       <trans-unit id="profit" datatype="html">
         <source> Profit</source><target state="final"> Profit</target>
         
@@ -320,7 +320,7 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">198</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">220</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">287</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">198</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">220</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">287</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">60</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">118</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">134</context></context-group></trans-unit>
       <trans-unit id="average" datatype="html">
         <source>Average</source><target state="final">Average</target>
         
@@ -332,7 +332,7 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">200</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">222</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">289</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">200</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">222</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">289</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">61</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">124</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">140</context></context-group></trans-unit>
       <trans-unit id="productsPrice" datatype="html">
         <source>Products Price:</source><target state="final">Products Price:</target>
         
@@ -344,11 +344,119 @@
       <trans-unit id="total" datatype="html">
         <source>Total:</source><target state="final">Total:</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">272</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">272</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">81</context></context-group></trans-unit>
       <trans-unit id="resourcesPrice" datatype="html">
         <source>Resources Price:</source><target state="final">Resources Price:</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">285</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">285</context></context-group></trans-unit><trans-unit id="price" datatype="html">
+        <source>Price</source><target state="final">Price</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit><trans-unit id="difference" datatype="html">
+        <source>(difference: <x id="INTERPOLATION" equiv-text="{{ entity.price.max - entity.price.min | number }}"/> )</source><target state="final">(difference: <x id="INTERPOLATION" equiv-text="{{ entity.price.max - entity.price.min | number }}"/> )</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">15,16</context>
+        </context-group>
+      </trans-unit><trans-unit id="volume" datatype="html">
+        <source>Volume</source><target state="final">Volume</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit><trans-unit id="transport" datatype="html">
+        <source>Transport</source><target state="final">Transport</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit><trans-unit id="illegal" datatype="html">
+        <source>Illegal</source><target state="final">Illegal</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit><trans-unit id="construction" datatype="html">
+        <source>Construction</source><target state="final">Construction</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit><trans-unit id="requirements" datatype="html">
+        <source>Requirements</source><target state="final">Requirements</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit><trans-unit id="resource" datatype="html">
+        <source>Resource</source><target state="final">Resource</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit><trans-unit id="avg" datatype="html">
+        <source>Avg</source><target state="final">Avg</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">121,122</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">137,138</context>
+        </context-group>
+      </trans-unit><trans-unit id="cycleTime" datatype="html">
+        <source>Cycle Time</source><target state="final">Cycle Time</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit><trans-unit id="batchSize" datatype="html">
+        <source>Batch Size</source><target state="final">Batch Size</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+      </trans-unit><trans-unit id="productsPerHour" datatype="html">
+        <source>Products per Hour</source><target state="final">Products per Hour</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+      </trans-unit><trans-unit id="maxEfficiency" datatype="html">
+        <source>Max Efficiency</source><target state="final">Max Efficiency</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit><trans-unit id="profitPerHour100" datatype="html">
+        <source>Profit per Hour (100% Efficiency)</source><target state="final">Profit per Hour (100% Efficiency)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+      </trans-unit><trans-unit id="profitPerHourN" datatype="html">
+        <source>Profit per Hour (<x id="INTERPOLATION" equiv-text="{{ production.efficiency.product * 100 + 100 }}"/>% Efficiency) </source><target state="final">Profit per Hour (<x id="INTERPOLATION" equiv-text="{{ production.efficiency.product * 100 + 100 }}"/>% Efficiency) </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">129,131</context>
+        </context-group>
+      </trans-unit><trans-unit id="requiredFor" datatype="html">
+        <source>Required For</source><target state="final">Required For</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
+          <context context-type="linenumber">155</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="newLayout" datatype="html">
         <source>New</source><target state="final">New</target>
         

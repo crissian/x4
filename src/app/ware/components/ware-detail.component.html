@@ -2,7 +2,7 @@
    <div class="col-md-12">
       <div class="card shadow" *ngIf="entity">
          <div class="card-header shadow-sm">
-            <a routerLink="/wares">Wares</a> - {{ entity.name }}
+            <a routerLink="/wares" i18n="@@wares">Wares</a> - {{ entity.name }}
          </div>
          <div class="card-body" *ngIf="entity">
             <div class="form-group row">
@@ -10,22 +10,22 @@
             </div>
 
             <dl class="row">
-               <dt class="col-sm-2">Price</dt>
+               <dt class="col-sm-2" i18n="@@price">Price</dt>
                <dd class="col-sm-10">
-                  {{ entity.price.min | number }} - {{ entity.price.max | number }} <span class="text-success">(difference: {{ entity.price.max - entity.price.min | number }}
+                  {{ entity.price.min | number }} - {{ entity.price.max | number }} <span class="text-success" i18n="@@difference">(difference: {{ entity.price.max - entity.price.min | number }}
                   )</span>
                </dd>
 
-               <dt class="col-sm-2">Volume</dt>
+               <dt class="col-sm-2" i18n="@@volume">Volume</dt>
                <dd class="col-sm-10">{{ entity.volume }}</dd>
 
-               <dt class="col-sm-2">Transport</dt>
+               <dt class="col-sm-2" i18n="@@transport">Transport</dt>
                <dd class="col-sm-10">{{ entity.transport }}</dd>
 
-               <dt class="col-sm-2">Type</dt>
+               <dt class="col-sm-2" i18n="@@transport">Type</dt>
                <dd class="col-sm-10">{{ entity.group.name }}</dd>
 
-               <dt class="col-sm-2">Illegal</dt>
+               <dt class="col-sm-2" i18n="@@illegal">Illegal</dt>
                <dd class="col-sm-10">
                   <ng-container *ngIf="entity.illegal && entity.illegal.length > 0; else noIllegal">
                     <span *ngFor="let item of entity.illegal; let last = last">
@@ -41,25 +41,25 @@
 
             <ul #nav="ngbNav" ngbNav class="nav-tabs">
                <li ngbNavItem>
-                  <a ngbNavLink>Construction</a>
+                  <a ngbNavLink i18n="@@construction">Construction</a>
                   <ng-template ngbNavContent>
                      <div *ngIf="entityProduction && entityProduction.length" class="row mt-2 mb-2">
                         <div class="col-md-6 col-sm-6 col-lg-4" *ngFor="let production of entityProduction">
                            <div class="card shadow-sm">
-                              <div class="card-header small">
-                                 {{ production.name }}
+                              <div class="card-header">
+                                 <span i18n='@@production'>Production</span>: <em>{{ production.name }}</em>
                               </div>
                               <div class="card-body small">
                                  <div class="row" *ngIf="production.wares.length">
                                     <div class="col">
-                                       <h6>Requirements</h6>
+                                       <h6 i18n="@@requirements">Requirements</h6>
                                        <table class="table table-sm">
                                           <thead>
                                           <tr>
-                                             <th>Resource</th>
-                                             <th class="text-right">Min</th>
-                                             <th class="text-right">Max</th>
-                                             <th class="text-right">Avg</th>
+                                             <th i18n="@@resource">Resource</th>
+                                             <th class="text-right" i18n="@@min">Min</th>
+                                             <th class="text-right" i18n="@@max">Max</th>
+                                             <th class="text-right" i18n="@@avg">Avg</th>
                                           </tr>
                                           </thead>
                                           <tbody>
@@ -78,7 +78,7 @@
                                           </tbody>
                                           <tfoot>
                                           <tr>
-                                             <th class="text-right">Total</th>
+                                             <th class="text-right" i18n="@@total">Total</th>
                                              <th class="text-right">{{ getTotalMin(production) | number }}</th>
                                              <th class="text-right">{{ getTotalMax(production) | number }}</th>
                                              <th class="text-right">{{ getTotalAvg(production) | number }}</th>
@@ -90,55 +90,49 @@
 
                                  <div class="row">
                                     <div class="col">
-                                       <h6>Production</h6>
+                                       <h6 i18n="@@production">Production</h6>
                                        <table class="table table-sm">
                                           <tbody>
                                           <tr>
-                                             <td>Cycle Time</td>
+                                             <td i18n="@@cycleTime">Cycle Time</td>
                                              <td class="text-right">{{ getProductionTime(production.time) }}</td>
                                           </tr>
                                           <tr>
-                                             <td>Batch Size</td>
+                                             <td i18n="@@batchSize">Batch Size</td>
                                              <td class="text-right">{{ production.amount }}</td>
                                           </tr>
                                           <tr>
-                                             <td>Products per Hour</td>
+                                             <td i18n="@@productsPerHour">Products per Hour</td>
                                              <td
                                                 class="text-right">{{ (3600 / production.time) * production.amount | number:'1.0' }}</td>
                                           </tr>
                                           <tr *ngIf="production.efficiency">
-                                             <td>Max Efficiency</td>
+                                             <td i18n="@@maxEfficiency">Max Efficiency</td>
                                              <td class="text-right">{{ production.efficiency.product * 100 + 100 }}%
                                              </td>
                                           </tr>
                                           <tr>
-                                             <td>Profit per Hour (100% Efficiency)</td>
+                                             <td i18n="@@profitPerHour100">Profit per Hour (100% Efficiency)</td>
                                              <td class="text-right">
-                                <span class="text-danger">
-                                    Min: <strong>{{ entity.price.min * (3600 / production.time) * production.amount | number:'1.0-0' }}</strong> /
-                                </span>
-                                                <span class="text-primary">
-                                    Avg: <strong>{{ entity.price.avg * (3600 / production.time) * production.amount | number:'1.0-0' }}</strong> /
-                                </span>
-                                                <span class="text-success">
-                                    Max: <strong>{{ entity.price.max * (3600 / production.time) * production.amount | number:'1.0-0' }}</strong>
-                                </span>
+                                <span class="text-danger" i18n="@@min">Min</span>
+                                <span class="text-danger">: <strong>{{ entity.price.min * (3600 / production.time) * production.amount | number:'1.0-0' }}</strong></span> /
+                                                <span class="text-primary" i18n="@@avg">Avg</span>
+                                <span class="text-primary">: <strong>{{ entity.price.avg * (3600 / production.time) * production.amount | number:'1.0-0' }}</strong></span> /
+                                                <span class="text-success" i18n="@@max">Max</span>
+                                <span class="text-success">: <strong>{{ entity.price.max * (3600 / production.time) * production.amount | number:'1.0-0' }}</strong></span>
                                              </td>
                                           </tr>
                                           <tr *ngIf="production.efficiency">
-                                             <td>Profit per Hour ({{ production.efficiency.product * 100 + 100 }}%
+                                             <td i18n="@@profitPerHourN">Profit per Hour ({{ production.efficiency.product * 100 + 100 }}%
                                                 Efficiency)
                                              </td>
                                              <td class="text-right">
-                                <span class="text-danger">
-                                    Min: <strong>{{ entity.price.min * (3600 / production.time) * production.amount * (1 + production.efficiency.product) | number:'1.0-0' }}</strong> /
-                                </span>
-                                                <span class="text-primary">
-                                    Avg: <strong>{{ entity.price.avg * (3600 / production.time) * production.amount * (1 + production.efficiency.product) | number:'1.0-0' }}</strong> /
-                                </span>
-                                                <span class="text-success">
-                                    Max: <strong>{{ entity.price.max * (3600 / production.time) * production.amount * (1 + production.efficiency.product) | number:'1.0-0' }}</strong>
-                                </span>
+                                <span class="text-danger" i18n="@@min">Min</span>
+                                <span class="text-danger">: <strong>{{ entity.price.min * (3600 / production.time) * production.amount * (1 + production.efficiency.product) | number:'1.0-0' }}</strong></span> /
+                                <span class="text-primary" i18n="@@avg">Avg</span>
+                                <span class="text-primary">: <strong>{{ entity.price.avg * (3600 / production.time) * production.amount * (1 + production.efficiency.product) | number:'1.0-0' }}</strong></span> /
+                                <span class="text-success" i18n="@@max">Max</span>
+                                <span class="text-success">: <strong>{{ entity.price.max * (3600 / production.time) * production.amount * (1 + production.efficiency.product) | number:'1.0-0' }}</strong></span>
                                              </td>
                                           </tr>
                                           </tbody>
@@ -152,12 +146,12 @@
                   </ng-template>
                </li>
                <li ngbNavItem title="Required For">
-                  <a ngbNavLink>Required For</a>
+                  <a ngbNavLink i18n="@@requiredFor">Required For</a>
                   <ng-template ngbNavContent>
                      <div class="row mt-2 mb-2">
                         <div class="col-md-4 col-sm-12">
                            <div class="card small">
-                              <div class="card-header">
+                              <div class="card-header" i18n="@@wares">
                                  Wares
                               </div>
                               <div class="card-body">
@@ -173,7 +167,7 @@
 
                         <div class="col-md-4 col-sm-12">
                            <div class="card small">
-                              <div class="card-header">
+                              <div class="card-header" i18n="@@ships">
                                  Ships
                               </div>
                               <div class="card-body">
@@ -189,7 +183,7 @@
 
                         <div class="col-md-4 col-sm-12">
                            <div class="card small">
-                              <div class="card-header">
+                              <div class="card-header" i18n="@@stationModules">
                                  Station Modules
                               </div>
                               <div class="card-body">
