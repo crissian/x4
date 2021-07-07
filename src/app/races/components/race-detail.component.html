@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="card shadow" *ngIf="entity">
       <div class="card-header shadow-sm">
-        <a routerLink="/races">Races</a> - {{ entity.name }}
+        <a routerLink="/races" i18n="@@races">Races</a> - {{ entity.name }}
       </div>
       <div class="card-body small" *ngIf="entity">
         <div class="form-group row" *ngIf="entity.description != 'No information available'">

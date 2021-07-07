@@ -22,10 +22,16 @@
       <trans-unit id="races" datatype="html">
         <source>Races</source><target state="final">Races</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">20</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/races/components/races.component.html</context><context context-type="linenumber">5</context></context-group></trans-unit><trans-unit id="race" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">20</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/races/components/race-detail.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/races/components/races.component.html</context><context context-type="linenumber">5</context></context-group></trans-unit><trans-unit id="race" datatype="html">
         <source>Race</source><target state="final">Race</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/module/components/module-detail.component.html</context><context context-type="linenumber">14</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context><context context-type="linenumber">15</context></context-group></trans-unit><trans-unit id="type" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/faction/components/faction-detail.component.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/module/components/module-detail.component.html</context><context context-type="linenumber">14</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context><context context-type="linenumber">15</context></context-group></trans-unit><trans-unit id="licenses" datatype="html">
+        <source> Licenses </source><target state="final"> Licenses </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/faction/components/faction-detail.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit><trans-unit id="type" datatype="html">
         <source>Type</source><target state="final">Type</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/module/components/module-detail.component.html</context><context context-type="linenumber">22</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ship/components/ship-detail.component.html</context><context context-type="linenumber">23</context></context-group></trans-unit><trans-unit id="product" datatype="html">
@@ -57,9 +63,9 @@
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/about.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">26</context></context-group></trans-unit>
       <trans-unit id="factions" datatype="html">
-        <source> Factions </source><target state="final"> Factions </target>
+        <source>Factions</source><target state="final">Factions</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/faction/components/factions.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">23</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/faction/components/faction-detail.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/faction/components/factions.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">23</context></context-group></trans-unit>
       <trans-unit id="ngb.alert.close" datatype="html">
         <source>Close</source><target state="final">Close</target>
         
