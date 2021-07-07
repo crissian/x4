@@ -9,20 +9,62 @@
       <trans-unit id="wares" datatype="html">
         <source>Wares</source><target state="final">货物</target>
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">8</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">161</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/wares.component.html</context><context context-type="linenumber">5</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">8</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">155</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/wares.component.html</context><context context-type="linenumber">5</context></context-group></trans-unit>
       <trans-unit id="stationModules" datatype="html">
         <source>Station Modules</source><target state="final">空间站模块</target>
 
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">11</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/module/components/modules.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ship/components/ships.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context><context context-type="linenumber">23</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">193</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">11</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/module/components/module-detail.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/module/components/modules.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ship/components/ships.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-calculator.component.html</context><context context-type="linenumber">23</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">187</context></context-group></trans-unit>
       <trans-unit id="ships" datatype="html">
         <source>Ships</source><target state="final">舰船</target>
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">14</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">177</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">14</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">171</context></context-group></trans-unit>
       <trans-unit id="races" datatype="html">
         <source>Races</source><target state="final">种族</target>
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">20</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/races/components/races.component.html</context><context context-type="linenumber">5</context></context-group></trans-unit><trans-unit id="about" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">20</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/races/components/races.component.html</context><context context-type="linenumber">5</context></context-group></trans-unit><trans-unit id="race" datatype="html">
+        <source>Race</source><target state="new">种族</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit><trans-unit id="type" datatype="html">
+        <source>Type</source><target state="new">类型</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit><trans-unit id="product" datatype="html">
+        <source>Product</source><target state="new">产品</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit><trans-unit id="storageCapacity" datatype="html">
+        <source>Storage Capacity</source><target state="new">存储容量</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit><trans-unit id="hull" datatype="html">
+        <source>Hull</source><target state="new">船体</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit><trans-unit id="explosionDamage" datatype="html">
+        <source>Explosion Damage</source><target state="new">爆炸伤害</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit><trans-unit id="workforceNeeded" datatype="html">
+        <source>Workforce Needed</source><target state="new">劳动力需求</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit><trans-unit id="about" datatype="html">
         <source> About </source><target state="new">关于</target>
 
       <context-group purpose="location"><context context-type="sourcefile">src/app/about.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/header.component.html</context><context context-type="linenumber">26</context></context-group></trans-unit>
@@ -266,9 +308,27 @@ Minutes</target>
 
       <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">19</context></context-group></trans-unit>
       <trans-unit id="workforceCapacity" datatype="html">
-        <source> Workforce Capacity </source><target state="translated">劳动力储备量</target>
+        <source>Workforce Capacity</source><target state="translated">劳动力储备量</target>
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">48</context></context-group></trans-unit><trans-unit id="isHeadquarters" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/module/components/module-detail.component.html</context><context context-type="linenumber">56</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">48</context></context-group></trans-unit><trans-unit id="owners" datatype="html">
+        <source>Owners</source><target state="new">拥有者</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit><trans-unit id="turrets" datatype="html">
+        <source>Turrets</source><target state="new">炮塔</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit><trans-unit id="shields" datatype="html">
+        <source>Shields</source><target state="new">护盾</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit><trans-unit id="isHeadquarters" datatype="html">
         <source>Headquarters (The HQ needs 200 workers for some reason)</source><target state="new">总部（总部出于某种原因需要200名工人）</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context>
@@ -296,9 +356,9 @@ Minutes</target>
 
       <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">123</context></context-group></trans-unit>
       <trans-unit id="production" datatype="html">
-        <source> Production</source><target state="final">产品</target>
+        <source>Production</source><target state="translated">产品</target>
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">145</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">93</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/module/components/module-detail.component.html</context><context context-type="linenumber">86</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/module/components/module-detail.component.html</context><context context-type="linenumber">125</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">145</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">50</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">93</context></context-group></trans-unit>
       <trans-unit id="profit" datatype="html">
         <source> Profit</source><target state="final">利润</target>
 
@@ -322,7 +382,7 @@ Minutes</target>
 
 
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">198</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">220</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">287</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">60</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">118</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">134</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">198</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">220</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">287</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">60</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">117</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">130</context></context-group></trans-unit>
       <trans-unit id="average" datatype="html">
         <source>Average</source><target state="final">平均值</target>
 
@@ -334,7 +394,7 @@ Minutes</target>
 
 
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">200</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">222</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">289</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">61</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">124</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">140</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">200</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">222</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">289</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">61</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">121</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">134</context></context-group></trans-unit>
       <trans-unit id="productsPrice" datatype="html">
         <source>Products Price:</source><target state="final">产品定价:</target>
 
@@ -344,9 +404,15 @@ Minutes</target>
 
       <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">246</context></context-group></trans-unit>
       <trans-unit id="total" datatype="html">
-        <source>Total:</source><target state="final">合计:</target>
+        <source>Total</source><target state="translated">合计:</target>
 
-      <context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">272</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">81</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/module/components/module-detail.component.html</context><context context-type="linenumber">113</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/station/components/station-summary/station-summary.component.html</context><context context-type="linenumber">272</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">81</context></context-group></trans-unit><trans-unit id="time" datatype="html">
+        <source>Time</source><target state="new">时间</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/components/module-detail.component.html</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="resourcesPrice" datatype="html">
         <source>Resources Price:</source><target state="final">资源定价:</target>
 
@@ -392,31 +458,16 @@ Minutes</target>
         </context-group>
       </trans-unit><trans-unit id="requirements" datatype="html">
         <source>Requirements</source><target state="new">需求</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">55</context>
-        </context-group>
-      </trans-unit><trans-unit id="resource" datatype="html">
+
+      <context-group purpose="location"><context context-type="sourcefile">src/app/module/components/module-detail.component.html</context><context context-type="linenumber">91</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">55</context></context-group></trans-unit><trans-unit id="resource" datatype="html">
         <source>Resource</source><target state="new">资源</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-      </trans-unit><trans-unit id="avg" datatype="html">
+
+      <context-group purpose="location"><context context-type="sourcefile">src/app/module/components/module-detail.component.html</context><context context-type="linenumber">95</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">59</context></context-group></trans-unit><trans-unit id="avg" datatype="html">
         <source>Avg</source><target state="new">平均值</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">62</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">121,122</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">137,138</context>
-        </context-group>
-      </trans-unit><trans-unit id="cycleTime" datatype="html">
+
+
+
+      <context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">62</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">119</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">132</context></context-group></trans-unit><trans-unit id="cycleTime" datatype="html">
         <source>Cycle Time</source><target state="new">周期</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
@@ -448,17 +499,11 @@ Minutes</target>
         </context-group>
       </trans-unit><trans-unit id="profitPerHourN" datatype="html">
         <source>Profit per Hour (<x id="INTERPOLATION" equiv-text="{{ production.efficiency.product * 100 + 100 }}"/>% Efficiency) </source><target state="new">每小时利润 (<x id="INTERPOLATION" equiv-text="{{ production.efficiency.product * 100 + 100 }}"/>% 效率) </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">129,131</context>
-        </context-group>
-      </trans-unit><trans-unit id="requiredFor" datatype="html">
+
+      <context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">126</context></context-group></trans-unit><trans-unit id="requiredFor" datatype="html">
         <source>Required For</source><target state="new">需求</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context>
-          <context context-type="linenumber">155</context>
-        </context-group>
-      </trans-unit>
+
+      <context-group purpose="location"><context context-type="sourcefile">src/app/ware/components/ware-detail.component.html</context><context context-type="linenumber">149</context></context-group></trans-unit>
       <trans-unit id="newLayout" datatype="html">
         <source>New</source><target state="final">新建</target>
 
