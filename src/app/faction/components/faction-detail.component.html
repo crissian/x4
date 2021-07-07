@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="card shadow" *ngIf="entity">
       <div class="card-header shadow-sm">
-        <a routerLink="/factions">Factions</a> - {{ entity.name }}
+        <a routerLink="/factions" i18n="@@factions">Factions</a> - {{ entity.name }}
       </div>
       <div class="card-body small" *ngIf="entity">
         <div class="form-group row" *ngIf="entity.description != 'No information available'">
@@ -10,7 +10,7 @@
         </div>
 
         <dl class="row">
-          <dt class="col-sm-2">Race</dt>
+          <dt class="col-sm-2" i18n="@@race">Race</dt>
           <dd class="col-sm-10">
             <span *ngIf="entity.race">
               <a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
@@ -22,7 +22,7 @@
         <div class="row mt-2 mb-2" *ngIf="entity.licenses && entity.licenses.length > 0">
           <div class="col-12">
             <div class="card shadow-sm">
-              <div class="card-header">
+              <div class="card-header" i18n="@@licenses">
                 Licenses
               </div>
               <div class="card-body">

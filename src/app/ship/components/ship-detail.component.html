@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="card shadow" *ngIf="entity">
       <div class="card-header shadow-sm">
-        <a routerLink="/ships">Ships</a> - {{ entity.name }}
+        <a routerLink="/ships" i18n="@@ships">Ships</a> - {{ entity.name }}
       </div>
       <div class="card-body small" *ngIf="entity">
         <div class="form-group row" *ngIf="entity.description != 'No information available'">
@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-md-4 col-sm-12">
             <dl class="row">
-              <dt class="col-5">Race</dt>
+              <dt class="col-5" i18n="@@race">Race</dt>
               <dd class="col-7">
                 <span *ngIf="entity.race">
                   <a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
@@ -20,23 +20,23 @@
                 <span *ngIf="!entity.race"> - </span>
               </dd>
 
-              <dt class="col-5">Type</dt>
+              <dt class="col-5" i18n="@@type">Type</dt>
               <dd class="col-7">
                 <span>{{ entity.type || '-' }}</span>
               </dd>
 
-              <dt class="col-5">Size</dt>
+              <dt class="col-5" i18n="@@size">Size</dt>
               <dd class="col-7">{{ entity.size }}</dd>
 
-              <dt class="col-5">Hull</dt>
+              <dt class="col-5" i18n="@@hull">Hull</dt>
               <dd class="col-7">{{ entity.hull | number }}</dd>
 
-              <dt class="col-5">Explosion Damage</dt>
+              <dt class="col-5" i18n="@@explosionDamage">Explosion Damage</dt>
               <dd class="col-7">
                 <span>{{ (entity.explosionDamage | number) || '-' }}</span>
               </dd>
 
-              <dt class="col-5">Owners</dt>
+              <dt class="col-5" i18n="@@owners">Owners</dt>
               <dd class="col-7">
                 <ul class="list-unstyled">
                   <li *ngFor="let item of entity.owners">
@@ -48,37 +48,37 @@
           </div>
           <div class="col-md-4 col-sm-12">
             <dl class="row">
-              <dt class="col-5">Missile Storage</dt>
+              <dt class="col-5" i18n="@@missileStorage">Missile Storage</dt>
               <dd class="col-7">{{ entity.storage?.missile ? (entity.storage?.missile | number) : '-' }}</dd>
 
-              <dt class="col-5">Drone Storage</dt>
+              <dt class="col-5" i18n="@@droneStorage">Drone Storage</dt>
               <dd class="col-7">{{ entity.storage?.unit ? (entity.storage?.unit | number) : '-' }}</dd>
 
-              <dt class="col-5">People</dt>
+              <dt class="col-5" i18n="@@people">People</dt>
               <dd class="col-7">{{ (entity.people | number) || '-' }}</dd>
 
-              <dt class="col-5">Purpose</dt>
+              <dt class="col-5" i18n="@@purpose">Purpose</dt>
               <dd class="col-7">{{ entity.purpose }}</dd>
             </dl>
           </div>
           <div class="col-md-4 col-sm-12">
             <dl class="row">
-              <dt class="col-5">Engines</dt>
+              <dt class="col-5" i18n="@@engines">Engines</dt>
               <dd class="col-7">{{ getSlotsStr(entity.engines) }}</dd>
 
-              <dt class="col-5">Docks</dt>
+              <dt class="col-5" i18n="@@docks">Docks</dt>
               <dd class="col-7">{{ getSlotsStr(entity.docks) }}</dd>
 
-              <dt class="col-5">Weapons</dt>
+              <dt class="col-5" i18n="@@weapons">Weapons</dt>
               <dd class="col-7">{{ getSlotsStr(entity.weapons) }}</dd>
 
-              <dt class="col-5">Turrets</dt>
+              <dt class="col-5" i18n="@@turrets">Turrets</dt>
               <dd class="col-7">{{ getSlotsStr(entity.turrets) }}</dd>
 
-              <dt class="col-5">Main Shields</dt>
+              <dt class="col-5" i18n="@@mainShields">Main Shields</dt>
               <dd class="col-7">{{ getSlotsStr(mainShields) }}</dd>
 
-              <dt class="col-5">Additional Shields</dt>
+              <dt class="col-5" i18n="@@additionalShields">Additional Shields</dt>
               <dd class="col-7">{{ getSlotsStr(additionalShields) }}</dd>
             </dl>
           </div>
@@ -86,20 +86,20 @@
         <div *ngIf="entityProduction && entityProduction.length" class="row mt-2 mb-2">
           <div class="col-md-6 col-sm-6 col-lg-4" *ngFor="let production of entityProduction">
             <div class="card shadow-sm">
-              <div class="card-header">
-                Production: <em>{{ production.name }}</em>
-              </div>
+               <div class="card-header">
+                  <span i18n='@@production'>Production</span>: <em>{{ production.name }}</em>
+               </div>
               <div class="card-body">
                 <div class="row" *ngIf="production.wares.length">
                   <div class="col">
-                    <h6>Requirements</h6>
+                    <h6 i18n="@@requirements">Requirements</h6>
                     <table class="table table-sm">
                       <thead>
                       <tr>
-                        <th>Resource</th>
-                        <th class="text-right">Min</th>
-                        <th class="text-right">Max</th>
-                        <th class="text-right">Avg</th>
+                         <th i18n="@@resource">Resource</th>
+                         <th class="text-right" i18n="@@min">Min</th>
+                         <th class="text-right" i18n="@@max">Max</th>
+                         <th class="text-right" i18n="@@avg">Avg</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -114,7 +114,7 @@
                       </tbody>
                       <tfoot>
                       <tr>
-                        <th class="text-right">Total</th>
+                        <th class="text-right" i18n="@@total">Total</th>
                         <th class="text-right">{{ getTotalMin(production) | number }}</th>
                         <th class="text-right">{{ getTotalMax(production) | number }}</th>
                         <th class="text-right">{{ getTotalAvg(production) | number }}</th>
@@ -126,11 +126,11 @@
 
                 <div class="row">
                   <div class="col">
-                    <h6>Production</h6>
+                    <h6 i18n="@@production">Production</h6>
                     <table class="table table-sm">
                       <tbody>
                       <tr>
-                        <td>Time</td>
+                        <td i18n="@@time">Time</td>
                         <td class="text-right">{{ getProductionTime(production.time) }}</td>
                       </tr>
                       </tbody>
