@@ -24,7 +24,11 @@
                <dxi-column dataField="makerRace.id" caption="Race">
                   <dxo-lookup [dataSource]="races" valueExpr="id" displayExpr="name"></dxo-lookup>
                </dxi-column>
-               <dxi-column dataField="product.name" caption="Product"></dxi-column>
+               <dxi-column [calculateDisplayValue]="calculateProduct"
+                           [allowSorting]="true"
+                           [allowFiltering]="true"
+                           caption="Product"
+                           name="productName"></dxi-column>
                <dxi-column [calculateDisplayValue]="calculateMaxEfficiencyDisplay"
                            [calculateSortValue]="calculateMaxEfficiency"
                            [allowSorting]="true"

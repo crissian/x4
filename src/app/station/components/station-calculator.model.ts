@@ -82,25 +82,27 @@ export class StationModuleModel {
       this.production = null;
 
       if (this.module.type == ModuleTypes.production) {
-        const ware = this.module.product;
+        const wares = this.module.product;
 
-        let currentProd: Production;
-        if (this.module.makerRace == null) {
-          currentProd = ware.production.find(x => x.method == ProductionMethods.default);
-        } else {
-          currentProd = ware.production.find(x => x.method == this.module.makerRace.id) ||
-            ware.production.find(x => x.method == ProductionMethods.default);
+        for (let ware of wares) {
+           let currentProd: Production;
+           if (this.module.makerRace == null) {
+              currentProd = ware.production.find(x => x.method == ProductionMethods.default);
+           } else {
+              currentProd = ware.production.find(x => x.method == this.module.makerRace.id) ||
+                 ware.production.find(x => x.method == ProductionMethods.default);
+           }
+
+           // cycles per hour
+           const cycles = 3600 / currentProd.time;
+
+           this.production = { amount: currentProd.amount * cycles, ware: ware, value: currentProd };
+           currentProd.wares
+              .forEach(x => {
+                 const neededWare = this.wareService.getEntity(x.ware);
+                 this.needs.push({ amount: x.amount * cycles, ware: neededWare });
+              });
         }
-
-        // cycles per hour
-        const cycles = 3600 / currentProd.time;
-
-        this.production = { amount: currentProd.amount * cycles, ware: ware, value: currentProd };
-        currentProd.wares
-          .forEach(x => {
-            const neededWare = this.wareService.getEntity(x.ware);
-            this.needs.push({ amount: x.amount * cycles, ware: neededWare });
-          });
       } else if (this.module.type == ModuleTypes.habitation) {
         const capacity = this.module.workForce.capacity;
         const worker: ModuleWorker = Workers.get(this.module.workForce.race.id);

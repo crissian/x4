@@ -157,6 +157,19 @@ export const Wares = {
                { type: Effects.work, product: 0.34 },
             ],
          },
+         {
+            time: 300,
+            amount: 60,
+            method: 'recycling',
+            name: 'Recycling',
+            wares: [
+               { ware: 'energycells', amount: 12000 },
+               { ware: 'scrapmetal', amount: 300 },
+            ],
+            effects: [
+               { type: Effects.work, product: 0.34 },
+            ],
+         },
       ]
    },
    dronecomponents: {
@@ -306,6 +319,7 @@ export const Wares = {
       icon: 'ware_foodrations',
       volume: 1,
       transport: TransportType.container,
+      illegal: [ Factions.loanshark ],
       price: { min: 12, max: 29, avg: 21 },
       group: WareGroups.food,
       production: [
@@ -407,6 +421,19 @@ export const Wares = {
                { type: Effects.work, product: 0.37 },
             ],
          },
+         {
+            time: 300,
+            amount: 200,
+            method: 'recycling',
+            name: 'Recycling',
+            wares: [
+               { ware: 'energycells', amount: 3500 },
+               { ware: 'scrapmetal', amount: 75 },
+            ],
+            effects: [
+               { type: Effects.work, product: 0.37 },
+            ],
+         },
       ]
    },
    hydrogen: {
@@ -432,6 +459,7 @@ export const Wares = {
       icon: 'ware_ice',
       volume: 8,
       transport: TransportType.solid,
+      illegal: [ Factions.loanshark ],
       price: { min: 26, max: 35, avg: 30 },
       group: WareGroups.ice,
       production: [
@@ -790,6 +818,20 @@ export const Wares = {
          },
       ]
    },
+   rawscrap: {
+      id: 'rawscrap',
+      version: 0,
+      name: 'Raw Scrap',
+      description: 'Raw Scrap is found in wrecks. It is extracted from the wrecks of capital ships and stations, and broken down into Scrap Cubes by Compactor ships. These Scrap Cubes, as well as whole smaller wrecks, can be collected by Tug ships and taken to Scrap Processors, where they are melted down into Scrap Metal for further recycling.',
+      factoryName: '',
+      icon: 'ware_scrapmetal',
+      volume: 10,
+      transport: TransportType.solid,
+      price: { min: 153, max: 207, avg: 180 },
+      group: WareGroups.refined,
+      production: [
+      ]
+   },
    refinedmetals: {
       id: 'refinedmetals',
       version: 0,
@@ -855,6 +897,32 @@ export const Wares = {
             ],
             effects: [
                { type: Effects.work, product: 0.38 },
+            ],
+         },
+      ]
+   },
+   scrapmetal: {
+      id: 'scrapmetal',
+      version: 0,
+      name: 'Scrap Metal',
+      description: 'Scrap Metal has become established as a vital part of severely resource-deprived economies. Usually obtained from salvaged station segments or recovered ship wrecks, Scrap Metal can be recycled into other, more valuable, materials.',
+      factoryName: 'Scrap Processing Factory',
+      icon: 'ware_scrapmetal',
+      volume: 10,
+      transport: TransportType.solid,
+      price: { min: 318, max: 431, avg: 375 },
+      group: WareGroups.refined,
+      production: [
+         {
+            time: 60,
+            amount: 1,
+            method: 'processing',
+            name: 'Processing',
+            wares: [
+               { ware: 'energycells', amount: 10 },
+               { ware: 'rawscrap', amount: 1 },
+            ],
+            effects: [
             ],
          },
       ]
@@ -1242,6 +1310,7 @@ export const Wares = {
       icon: 'ware_water',
       volume: 6,
       transport: TransportType.container,
+      illegal: [ Factions.loanshark ],
       price: { min: 32, max: 74, avg: 53 },
       group: WareGroups.water,
       production: [
@@ -1396,6 +1465,19 @@ export const Wares = {
                { type: Effects.work, product: 0.1 },
             ],
          },
+         {
+            time: 300,
+            amount: 50,
+            method: 'recycling',
+            name: 'Recycling',
+            wares: [
+               { ware: 'energycells', amount: 12500 },
+               { ware: 'scrapmetal', amount: 1000 },
+            ],
+            effects: [
+               { type: Effects.work, product: 0.1 },
+            ],
+         },
       ]
    },
    metallicmicrolattice: {
@@ -1476,6 +1558,19 @@ export const Wares = {
                { ware: 'metallicmicrolattice', amount: 2 },
                { ware: 'methane', amount: 400 },
                { ware: 'silicon', amount: 300 },
+            ],
+            effects: [
+               { type: Effects.work, product: 0.2 },
+            ],
+         },
+         {
+            time: 300,
+            amount: 60,
+            method: 'recycling',
+            name: 'Recycling',
+            wares: [
+               { ware: 'energycells', amount: 4000 },
+               { ware: 'scrapmetal', amount: 250 },
             ],
             effects: [
                { type: Effects.work, product: 0.2 },
@@ -1569,8 +1664,10 @@ export const AllWares = [
    Wares.ore,
    Wares.plasmaconductors,
    Wares.quantumtubes,
+   Wares.rawscrap,
    Wares.refinedmetals,
    Wares.scanningarrays,
+   Wares.scrapmetal,
    Wares.shieldcomponents,
    Wares.silicon,
    Wares.siliconwafers,

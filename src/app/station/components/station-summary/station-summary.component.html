@@ -214,8 +214,8 @@
             </div>
 
             <div class="form-group col">
-               <label for="products-price"
-               ><span i18n="@@productsPrice">Products Price:</span>&nbsp;
+               <label for="products-price">
+                  <span>Products Price:</span>&nbsp;
                   <strong [ngSwitch]="productsPrice">
                      <ng-container *ngSwitchCase="0"><span i18n="@@min">Min</span></ng-container>
                      <ng-container *ngSwitchCase="50"><span i18n="@@average">Average</span></ng-container>

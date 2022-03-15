@@ -13,4 +13,9 @@ export class CargoTypes {
     id: 'container',
     name: 'Container'
   };
+
+  static readonly condensate = {
+     id: 'condensate',
+     name: 'Condensate'
+  }
 }

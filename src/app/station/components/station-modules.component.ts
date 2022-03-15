@@ -33,12 +33,14 @@ export class StationModulesComponent implements OnInit {
    ngOnInit(): void {
       const groupsObj = this.moduleService.getModulesByType(ModuleTypes.production)
          .reduce((obj, item: StationModule) => {
-            obj[item.product.group.id] = obj[item.product.group.id] || {
-               name: item.product.group.name,
-               group: item.product.group,
-               modules: []
-            };
-            obj[item.product.group.id].modules.push(item);
+            for (let product of item.product) {
+               obj[product.group.id] = obj[product.group.id] || {
+                  name: product.group.name,
+                  group: product.group,
+                  modules: []
+               };
+               obj[product.group.id].modules.push(item);
+            }
             return obj;
          }, []);
 
@@ -91,7 +93,9 @@ export class StationModulesComponent implements OnInit {
             }
             didChange = true;
 
-            const productionWare = module.product.production.find(p => p.method == method) || module.product.production.find(p => p.method == 'default');
+            const product = module.product.find(x => x.id == resource.ware.id);
+
+            const productionWare = product.production.find(p => p.method == method) || product.production.find(p => p.method == 'default');
             const productionPerHour = productionWare.amount * (3600 / productionWare.time);
             const moduleCount = Math.ceil(-resource.amount / productionPerHour);
 

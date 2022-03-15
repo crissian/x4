@@ -89,7 +89,7 @@ export interface StationModule {
   price: Price;
   owners?: Faction[];
   production: Production[];
-  product?: Ware;
+  product?: Ware[];
   type: string;
   cargo?: Cargo;
   workForce?: {

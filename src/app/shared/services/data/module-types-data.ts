@@ -7,7 +7,8 @@ export enum ModuleTypes {
    pier = 'Pier',
    storage = 'Storage',
    buildmodule = 'Build Module',
-   ventureplatform = 'Venture Platform'
+   ventureplatform = 'Venture Platform',
+   processingmodule = 'Processing'
 }
 
 export const AllModuleTypes = [
@@ -17,6 +18,7 @@ export const AllModuleTypes = [
    ModuleTypes.pier,
    ModuleTypes.storage,
    ModuleTypes.defencemodule,
-   ModuleTypes.connectionmodule
+   ModuleTypes.connectionmodule,
+   ModuleTypes.processingmodule
    // ModuleTypes.ventureplatform
 ];

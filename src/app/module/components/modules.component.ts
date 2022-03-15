@@ -17,12 +17,21 @@ export class ModulesComponent extends EntityListComponent<StationModule> impleme
    moduleTypes: string[];
    races: Race[];
 
+   calculateMaxEfficiency: (item) => number;
+   calculateMaxEfficiencyDisplay: (item) => string;
+   calculateProduct: (item) => string;
+
    constructor(moduleService: ModuleService,
                private raceService: RaceService,
                router: Router,
                route: ActivatedRoute,
                private titleService: Title) {
       super(moduleService, router, route);
+
+      this.calculateMaxEfficiency = item => this.calculateMaxEfficiencyCore(item);
+      this.calculateMaxEfficiencyDisplay = item => this.calculateMaxEfficiencyDisplayCore(item);
+
+      this.calculateProduct = item => this.calculateProductCore(item);
    }
 
    ngOnInit(): void {
@@ -33,39 +42,33 @@ export class ModulesComponent extends EntityListComponent<StationModule> impleme
       super.ngOnInit();
    }
 
-   calculateMaxEfficiency(item: StationModule) {
-      if (item.product != null) {
-         if (item.product.production != null) {
-            const effect = item.product.production
-               .map(x => x.effects == null ? null : x.effects.find(y => y.type == Effects.work))
-               .filter(x => x != null)
-               .map(x => x.product);
+   calculateProductCore(item: StationModule) {
+      return item.product?.map(x => x.name)
+         .join(', ');
+   }
 
-            if (effect.length > 0) {
-               return 100 * (1 + Math.max(...effect));
-            }
+   calculateMaxEfficiencyCore(item: StationModule) {
+      if (item.product != null) {
+         const effect = item.product
+            .map(x => x.production?.map(x => x.effects?.find(y => y.type === Effects.work)))
+            .map(x => x[0])
+            .filter(x => x != null)
+            .map(x => x.product);
+
+         if (effect?.length > 0) {
+            return 100 * (1 + Math.max(...effect));
          }
       }
 
       return 100;
    }
 
-   calculateMaxEfficiencyDisplay(item: StationModule) {
-      if (item.product != null) {
-         if (item.product.production != null) {
-            const effect = item.product.production
-               .map(x => x.effects == null ? null : x.effects.find(y => y.type == Effects.work))
-               .filter(x => x != null)
-               .map(x => x.product);
-
-            if (effect.length > 0) {
-               return 100 * (1 + Math.max(...effect)) + '%';
-            }
-         }
-
-         return '100%';
+   calculateMaxEfficiencyDisplayCore(item: StationModule) {
+      if (item.product == null) {
+         return '-';
       }
 
-      return '-';
+      const value = this.calculateMaxEfficiencyCore(item);
+      return `${value}%`;
    }
 }

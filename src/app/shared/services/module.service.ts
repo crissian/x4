@@ -22,15 +22,16 @@ export class ModuleService implements EntityService<StationModule> {
    getModuleByWare(wareId: string, productionMethod: string = 'default'): StationModule {
       if (productionMethod === 'default') {
          let module = this.getEntities()
-            .find(x => x.product != null && x.product.id == wareId && x.makerRace == null);
+            .find(x => x.product != null && x.product.find(y => y.id == wareId) != null && x.makerRace == null);
+
          if (module == null) {
             module = this.getEntities()
-               .find(x => x.product != null && x.product.id == wareId);
+               .find(x => x.product != null && x.product.find(y => y.id == wareId) != null);
          }
          return module;
       } else {
          return this.getEntities()
-            .find(x => x.product != null && x.product.id == wareId && x.makerRace != null && x.makerRace.id == productionMethod);
+            .find(x => x.product != null && x.product.find(y => y.id == wareId) != null && x.makerRace != null && x.makerRace.id == productionMethod);
       }
    }
 
