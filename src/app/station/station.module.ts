@@ -15,6 +15,7 @@ import { LayoutService } from './services/layout-service';
 import { StationRoutingModule } from './station-routing.module';
 import { ImportPlansComponent } from './components/import-plans.component';
 import { ImportPlanResultComponent } from './components/import-plan-result.component';
+import { ExportPlanComponent } from './components/export-plan.component';
 
 @NgModule({
    imports: [
@@ -34,7 +35,8 @@ import { ImportPlanResultComponent } from './components/import-plan-result.compo
       StationModulesComponent,
       StationSummaryComponent,
       ImportPlansComponent,
-      ImportPlanResultComponent
+      ImportPlanResultComponent,
+      ExportPlanComponent
    ],
    entryComponents: [
       LoadLayoutComponent,

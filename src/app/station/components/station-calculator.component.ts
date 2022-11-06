@@ -17,6 +17,7 @@ import {StationModuleModel} from './station-calculator.model';
 import {StationSummaryComponent} from './station-summary/station-summary.component';
 import {BASE_TITLE} from '../../shared/services/constants';
 import { ImportPlansComponent, ImportResult } from './import-plans.component';
+import { ExportPlanComponent } from './export-plan.component';
 
 interface Updatable {
    update();
@@ -178,6 +179,27 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       const modalRef = this.modal.open(ImportPlansComponent);
       void modalRef.result
          .then(data => this.importResult = data);
+   }
+
+   exportPlan() {
+      // put in kickback clause for empty
+      // console.log(this);
+      const plan = [];
+      for (const item of this.modules) {
+         const stationModule = {
+            macro: item.module.macro,
+            count: item.count
+         }
+         plan.push(stationModule);
+      };
+
+      const modalRef = this.modal.open(ExportPlanComponent);
+      modalRef.componentInstance.macros = plan;
+      void modalRef.result
+         .then(data => {
+            if (data){
+            console.log(data)}
+      });
    }
 
    private loadLayoutInternal(layout: Layout) {
