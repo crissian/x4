@@ -198,7 +198,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
       void modalRef.result
          .then(data => {
             if (data){
-            console.log(data)}
+            console.log("success")}
       });
    }
 

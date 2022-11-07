@@ -28,12 +28,18 @@ export class ExportPlanComponent extends ComponentBase implements OnInit {
    }
 
    exportPlan() {
-      const plan = this.exportCore(this)
+      this.stationName = this.stationName ? this.stationName : "New Station";
+      const plan = this.exportCore(this);
+      const hiddenElement = document.createElement('a');
+      hiddenElement.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURI(plan));
+      hiddenElement.target = '_blank';
+      hiddenElement.setAttribute('download', `${this.stationName}.xml`);
+      hiddenElement.click();
       this.activeModal.close(plan);
    }
 
    private exportCore(plan: ConstructionPlan) {
-      const name = plan.stationName;
+      const name = plan.stationName ? plan.stationName : "New Station";
       let entries = "";
       let count = 1;
       const stationId = Math.random().toString(36).slice(2);
