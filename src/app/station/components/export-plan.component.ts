@@ -6,7 +6,7 @@ import { LayoutService } from '../services/layout-service';
 import { Layout, ModuleConfig } from '../../shared/services/module-config';
 
 interface ConstructionPlan {
-   macros: string[];
+   macros: any;
    stationName: string;
 }
 
@@ -15,7 +15,7 @@ interface ConstructionPlan {
    templateUrl: './export-plan.component.html'
 })
 export class ExportPlanComponent extends ComponentBase implements OnInit {
-   macros: string[];
+   macros: any[];
    stationName: string;
 
    constructor(public activeModal: NgbActiveModal,
@@ -33,8 +33,29 @@ export class ExportPlanComponent extends ComponentBase implements OnInit {
    }
 
    private exportCore(plan: ConstructionPlan) {
-      const value = plan;
-      return value;
+      const name = plan.stationName;
+      let entries = "";
+      let count = 1;
+      const stationId = Math.random().toString(36).slice(2);
+
+      for (const macro of plan.macros) {
+         let entryCount = 1;
+         while (entryCount <= macro.count){
+            entries += `
+                  <entry index="${count}" macro="${macro.macro}">
+                  </entry>`;
+            count++;
+            entryCount++;
+         }
+      }
+
+      const xml = `<?xml version="1.0" encoding="UTF-8"?>
+         <plans>
+            <plan id="${stationId}" name="${name}" description="">${entries}
+            </plan>
+         </plans>`
+
+      return xml;
    }
 
    get canExport() {
