@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentBase } from '../../shared/components/component-base';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModuleService } from '../../shared/services/module.service';
-import { LayoutService } from '../services/layout-service';
-import { Layout, ModuleConfig } from '../../shared/services/module-config';
 
 interface ConstructionPlan {
-   macros: any;
+   macros: any[];
    stationName: string;
 }
 
@@ -18,9 +15,7 @@ export class ExportPlanComponent extends ComponentBase implements OnInit {
    macros: any[];
    stationName: string;
 
-   constructor(public activeModal: NgbActiveModal,
-               private moduleService: ModuleService,
-               private layoutService: LayoutService) {
+   constructor(public activeModal: NgbActiveModal) {
       super();
    }
 
@@ -32,14 +27,14 @@ export class ExportPlanComponent extends ComponentBase implements OnInit {
       const plan = this.exportCore(this);
       const hiddenElement = document.createElement('a');
       hiddenElement.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURI(plan));
-      hiddenElement.target = '_blank';
+      hiddenElement.setAttribute('target', '_blank');
       hiddenElement.setAttribute('download', `${this.stationName}.xml`);
       hiddenElement.click();
+      hiddenElement.remove();
       this.activeModal.close(plan);
    }
 
    private exportCore(plan: ConstructionPlan) {
-      const name = plan.stationName ? plan.stationName : "New Station";
       let entries = "";
       let count = 1;
       const stationId = Math.random().toString(36).slice(2);
@@ -48,23 +43,19 @@ export class ExportPlanComponent extends ComponentBase implements OnInit {
          let entryCount = 1;
          while (entryCount <= macro.count){
             entries += `
-                  <entry index="${count}" macro="${macro.macro}">
-                  </entry>`;
+         <entry index="${count}" macro="${macro.macro}">
+         </entry>`;
             count++;
             entryCount++;
          }
       }
 
       const xml = `<?xml version="1.0" encoding="UTF-8"?>
-         <plans>
-            <plan id="${stationId}" name="${name}" description="">${entries}
-            </plan>
-         </plans>`
+   <plans>
+      <plan id="${stationId}" name="${plan.stationName}" description="Buy me a beer, not a coffee">${entries}
+      </plan>
+   </plans>`
 
       return xml;
-   }
-
-   get canExport() {
-      return this.macros;
    }
 }

@@ -7,11 +7,9 @@
 <div class="modal-body">
   <div>
     Your construction plan is ready to be exported.
-    <br />
-    Select a name for your station:
   </div>
   <!-- 42 instead of 50, you know why -->
-  <textarea class="w-100 mt-2" rows="1" maxlength="42" [(ngModel)]="stationName" placeholder="Station Name"></textarea>
+  <textarea class="w-100 mt-2" rows="1" maxlength="42" [(ngModel)]="stationName" placeholder="Station Name" (keydown.enter)="exportPlan()"></textarea>
   <div class="small text-secondary">Place file in the folder: Documents\Egosoft\X4\[12345678]\constructionplan</div>
 </div>
 <div class="modal-footer">

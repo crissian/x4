@@ -182,8 +182,6 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
    }
 
    exportPlan() {
-      // put in kickback clause for empty
-      // console.log(this);
       const plan = [];
       for (const item of this.modules) {
          const stationModule = {
@@ -192,14 +190,8 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
          }
          plan.push(stationModule);
       };
-
       const modalRef = this.modal.open(ExportPlanComponent);
       modalRef.componentInstance.macros = plan;
-      void modalRef.result
-         .then(data => {
-            if (data){
-            console.log("success")}
-      });
    }
 
    private loadLayoutInternal(layout: Layout) {
