@@ -17,7 +17,7 @@ export class FactionsComponent extends EntityListComponent<Faction> implements O
       super(factionService, router, route);
    }
 
-   ngOnInit(): void {
+  override ngOnInit(): void {
       this.titleService.setTitle(`${BASE_TITLE} - Factions`);
       super.ngOnInit();
    }

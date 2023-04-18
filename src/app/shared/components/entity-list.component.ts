@@ -23,6 +23,8 @@ export abstract class EntityListComponent<T> extends ComponentBase implements On
          const id = this.getId(e.row.data);
          return this.router.navigate([ id ], { relativeTo: this.route });
       }
+
+      return null;
    }
 
    getId(value: any) {

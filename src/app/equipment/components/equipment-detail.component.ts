@@ -32,12 +32,12 @@ export class EquipmentDetailComponent extends EntityDetailsComponent<Equipment> 
 
    }
 
-   ngOnInit(): void {
+  override ngOnInit(): void {
       this.titleService.setTitle(`${BASE_TITLE} - Equipment`);
       super.ngOnInit();
    }
 
-   onEntityLoaded(entity: Equipment) {
+  override onEntityLoaded(entity: Equipment) {
       this.titleService.setTitle(`${BASE_TITLE} - ${entity.name}`);
       this.entityProduction = entity.production
          .map<ProductionData>(x => {

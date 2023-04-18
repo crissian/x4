@@ -31,12 +31,12 @@ export class ModuleDetailComponent extends EntityDetailsComponent<StationModule>
     super(moduleService, route);
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.titleService.setTitle(`${BASE_TITLE} - Modules`);
     super.ngOnInit();
   }
 
-  onEntityLoaded(entity: StationModule) {
+  override onEntityLoaded(entity: StationModule) {
     this.titleService.setTitle(`${BASE_TITLE} - Modules - ${this.entity.name}`);
 
     this.entityProduction = this.entity.production

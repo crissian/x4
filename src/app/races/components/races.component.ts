@@ -17,7 +17,7 @@ export class RacesComponent extends EntityListComponent<Race> implements OnInit 
     super(raceService, router, route);
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.titleService.setTitle(`${BASE_TITLE} - Races`);
     super.ngOnInit();
   }

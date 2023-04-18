@@ -21,7 +21,7 @@ export class WaresComponent extends EntityListComponent<Ware> implements OnInit 
       super(wareService, router, route);
    }
 
-   ngOnInit(): void {
+  override ngOnInit(): void {
       this.titleService.setTitle(`${BASE_TITLE} - Wares`);
 
       this.transportTypes = EnumFn.values(TransportType);

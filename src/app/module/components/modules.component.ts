@@ -34,7 +34,7 @@ export class ModulesComponent extends EntityListComponent<StationModule> impleme
       this.calculateProduct = item => this.calculateProductCore(item);
    }
 
-   ngOnInit(): void {
+  override ngOnInit(): void {
       this.titleService.setTitle(`${BASE_TITLE} - Modules`);
 
       this.races = this.raceService.getEntities();

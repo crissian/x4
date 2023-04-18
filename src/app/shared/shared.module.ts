@@ -12,37 +12,31 @@ import { FactionService } from './services/faction.service';
 import { ShipService } from './services/ship.service';
 import { CommonModule } from '@angular/common';
 import { EquipmentService } from './services/equipment.service';
-import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 
 @NgModule({
-   imports: [
-      CommonModule,
-      FormsModule,
-      CoreModule,
-      RouterModule,
-      NgbDropdownModule
-   ],
-   providers: [
-      WareService,
-      ModuleService,
-      RaceService,
-      FactionService,
-      ShipService,
-      EquipmentService,
-   ],
-   declarations: [
-      MessagesComponent,
-      ConfirmComponent,
-      AutocompleteComponent
-   ],
-   entryComponents: [
-      ConfirmComponent
-   ],
-   exports: [
-      MessagesComponent,
-      ConfirmComponent,
-      AutocompleteComponent
-   ]
+  imports: [
+    CommonModule,
+    FormsModule,
+    CoreModule,
+    RouterModule,
+    NgbDropdownModule
+  ],
+  providers: [
+    WareService,
+    ModuleService,
+    RaceService,
+    FactionService,
+    ShipService,
+    EquipmentService,
+  ],
+  declarations: [
+    MessagesComponent,
+    ConfirmComponent,
+  ],
+  exports: [
+    MessagesComponent,
+    ConfirmComponent
+  ]
 })
 export class SharedModule {
 }

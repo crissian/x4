@@ -1,164 +1,133 @@
 {
-   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-   "version": 1,
-   "newProjectRoot": "projects",
-   "projects": {
-      "X4": {
-      "i18n": {
-        "locales": {
-          "zh-Hans": "src/i18n/messages.zh-Hans.xlf"
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "x4-new": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
         }
       },
-         "root": "",
-         "sourceRoot": "src",
-         "projectType": "application",
-         "prefix": "app",
-         "schematics": {},
-         "architect": {
-            "build": {
-               "builder": "@angular-devkit/build-angular:browser",
-               "options": {
-            "aot": true,
-                  "outputPath": "dist/X4",
-                  "index": "src/index.html",
-                  "main": "src/main.ts",
-                  "polyfills": "src/polyfills.ts",
-                  "tsConfig": "src/tsconfig.app.json",
-                  "assets": [
-                     "src/favicon.ico",
-                     "src/assets"
-                  ],
-                  "styles": [
-                     "src/assets/styles/dx.common.css",
-                     "src/assets/styles/generic.light.custom.css",
-                     "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                     "node_modules/font-awesome/css/font-awesome.min.css",
-                     "src/styles.scss"
-                  ],
-                  "scripts": []
-               },
-               "configurations": {
-                  "zh-Hans": {
-                     "fileReplacements": [
-                        {
-                           "replace": "src/environments/environment.ts",
-                           "with": "src/environments/environment.prod.ts"
-                        }
-                     ],
-                     "localize": [
-                        "zh-Hans"
-                     ],
-                     "optimization": true,
-                     "outputHashing": "all",
-                     "sourceMap": false,
-                     "namedChunks": false,
-                     "extractLicenses": true,
-                     "vendorChunk": false,
-                     "buildOptimizer": true,
-                     "budgets": [
-                        {
-                           "type": "initial",
-                           "maximumWarning": "2mb",
-                           "maximumError": "5mb"
-                        },
-                        {
-                           "type": "anyComponentStyle",
-                           "maximumWarning": "6kb"
-                        }
-                     ],
-                     "aot": true,
-                     "outputPath": "dist/X4",
-                     "i18nMissingTranslation": "warning"
-                  },
-                  "production": {
-                     "fileReplacements": [
-                        {
-                           "replace": "src/environments/environment.ts",
-                           "with": "src/environments/environment.prod.ts"
-                        }
-                     ],
-                     "optimization": true,
-                     "outputHashing": "all",
-                     "sourceMap": false,
-                     "namedChunks": false,
-                     "aot": true,
-                     "extractLicenses": true,
-                     "vendorChunk": false,
-                     "buildOptimizer": true,
-                     "budgets": [
-                        {
-                           "type": "initial",
-                           "maximumWarning": "2mb",
-                           "maximumError": "5mb"
-                        },
-                        {
-                           "type": "anyComponentStyle",
-                           "maximumWarning": "6kb"
-                        }
-                     ]
-                  }
-               }
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/x4-new",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "node_modules/devextreme/dist/css/dx.light.css",
+              "src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ]
             },
-            "serve": {
-               "builder": "@angular-devkit/build-angular:dev-server",
-               "options": {
-                  "browserTarget": "X4:build"
-               },
-               "configurations": {
-                  "zh-Hans": {
-                     "browserTarget": "X4:build:zh-Hans"
-                  },
-                  "production": {
-                     "browserTarget": "X4:build:production"
-                  }
-               }
-            },
-            "extract-i18n": {
-               "builder": "@angular-devkit/build-angular:extract-i18n",
-               "options": {
-                  "browserTarget": "X4:build"
-               }
-            },
-            "lint": {
-               "builder": "@angular-devkit/build-angular:tslint",
-               "options": {
-                  "tsConfig": [
-                     "src/tsconfig.app.json",
-                     "src/tsconfig.spec.json"
-                  ],
-                  "exclude": [
-                     "**/node_modules/**"
-                  ]
-               }
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-         }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "x4-new:build:production"
+            },
+            "development": {
+              "browserTarget": "x4-new:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "x4-new:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
       }
-   },
-   "defaultProject": "X4",
-   "schematics": {
-      "@schematics/angular:component": {
-         "prefix": "app",
-         "skipTests": true,
-         "inlineStyle": true
-      },
-      "@schematics/angular:class": {
-         "skipTests": true
-      },
-      "@schematics/angular:directive": {
-         "prefix": "app",
-         "skipTests": true
-      },
-      "@schematics/angular:guard": {
-         "skipTests": true
-      },
-      "@schematics/angular:module": {
-         "skipTests": true
-      },
-      "@schematics/angular:pipe": {
-         "skipTests": true
-      },
-      "@schematics/angular:service": {
-         "skipTests": true
-      }
-   }
+    }
+  }
 }

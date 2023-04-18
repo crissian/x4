@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentBase } from '../../shared/components/component-base';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as xml2js from 'xml2js';
+// import * as convert from 'xml-js';
 import { ModuleService } from '../../shared/services/module.service';
 import { LayoutService } from '../services/layout-service';
 import { Layout, ModuleConfig } from '../../shared/services/module-config';
@@ -53,25 +53,8 @@ export class ImportPlansComponent extends ComponentBase implements OnInit {
    }
 
    importPlans() {
-      xml2js.parseString(this.xml, (err, result: ConstructionPlan) => {
-         if (err) {
-            console.error(err);
-            this.activeModal.close({ error: 'Failed to load plans', layouts: null });
-         } else if (!result || !result.plans || !result.plans.plan) {
-            return;
-         } else {
-            let layouts: string[];
-            let error: string = null;
-
-            try {
-               layouts = this.importCore(result);
-            } catch (e) {
-               error = 'Failed to import layouts';
-            }
-
-            this.activeModal.close({ error: error, layouts: layouts });
-         }
-      });
+     // const converted = convert.xml2js(this.xml, { compact: true });
+     // console.log(converted);
    }
 
    private importCore(result: ConstructionPlan) {

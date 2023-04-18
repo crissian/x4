@@ -5,44 +5,44 @@
         Ships
       </div>
       <div class="card-body">
-         <dx-data-grid [dataSource]="entities"
-                       [allowColumnReordering]="true"
-                       [allowColumnResizing]="true"
-                       [showBorders]="true"
-                       [hoverStateEnabled]="true"
-                       (onCellClick)="onRowSelect($event)"
-                       keyExpr="id">
-            <dxo-pager [showPageSizeSelector]="true" [showNavigationButtons]="true"></dxo-pager>
-            <dxo-sorting mode="multiple"></dxo-sorting>
-            <dxo-filter-row [applyFilter]="currentFilter" [visible]="true"></dxo-filter-row>
-            <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+        <dx-data-grid [dataSource]="entities"
+                      [allowColumnReordering]="true"
+                      [allowColumnResizing]="true"
+                      [showBorders]="true"
+                      [hoverStateEnabled]="true"
+                      (onCellClick)="onRowSelect($event)"
+                      keyExpr="id">
+          <dxo-pager [showPageSizeSelector]="true" [showNavigationButtons]="true"></dxo-pager>
+          <dxo-sorting mode="multiple"></dxo-sorting>
+          <dxo-filter-row [applyFilter]="currentFilter" [visible]="true"></dxo-filter-row>
+          <dxo-filter-panel [visible]="true"></dxo-filter-panel>
 
-            <dxi-column dataField="name" caption="Name"></dxi-column>
-            <dxi-column dataField="race.id" caption="Race">
-               <dxo-lookup [dataSource]="races" valueExpr="id" displayExpr="name"></dxo-lookup>
-            </dxi-column>
-            <dxi-column dataField="type" caption="Type">
-               <dxo-lookup [dataSource]="shipTypes"></dxo-lookup>
-            </dxi-column>
-            <dxi-column dataField="size" caption="Size">
-               <dxo-lookup [dataSource]="sizes"></dxo-lookup>
-            </dxi-column>
-            <dxi-column dataField="purpose" caption="Purpose">
-               <dxo-lookup [dataSource]="purposes"></dxo-lookup>
-            </dxi-column>
+          <dxi-column dataField="name" caption="Name"></dxi-column>
+          <dxi-column dataField="race.id" caption="Race">
+            <dxo-lookup [dataSource]="races" valueExpr="id" displayExpr="name"></dxo-lookup>
+          </dxi-column>
+          <dxi-column dataField="type" caption="Type">
+            <dxo-lookup [dataSource]="shipTypes"></dxo-lookup>
+          </dxi-column>
+          <dxi-column dataField="size" caption="Size">
+            <dxo-lookup [dataSource]="sizes"></dxo-lookup>
+          </dxi-column>
+          <dxi-column dataField="purpose" caption="Purpose">
+            <dxo-lookup [dataSource]="purposes"></dxo-lookup>
+          </dxi-column>
 
-            <dxi-column name="weapons" caption="Weapons" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="calculateWeapons"></dxi-column>
-            <dxi-column name="turrets" caption="Turrets" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="calculateTurrets"></dxi-column>
-            <dxi-column name="shields" caption="Shields" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="calculateShields"></dxi-column>
-            <dxi-column dataField="people" caption="People" dataType="number"></dxi-column>
+          <dxi-column name="weapons" caption="Weapons" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="calculateWeapons"></dxi-column>
+          <dxi-column name="turrets" caption="Turrets" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="calculateTurrets"></dxi-column>
+          <dxi-column name="shields" caption="Shields" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="calculateShields"></dxi-column>
+          <dxi-column dataField="people" caption="People" dataType="number"></dxi-column>
 
-            <dxo-summary>
-               <dxi-total-item
-                  column="name"
-                  summaryType="count">
-               </dxi-total-item>
-            </dxo-summary>
-         </dx-data-grid>
+          <dxo-summary>
+            <dxi-total-item
+              column="name"
+              summaryType="count">
+            </dxi-total-item>
+          </dxo-summary>
+        </dx-data-grid>
       </div>
     </div>
   </div>

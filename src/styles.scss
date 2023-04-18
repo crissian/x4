@@ -1,3 +1,7 @@
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+@import "font-awesome/scss/font-awesome";
+
 .hover {
   cursor: pointer;
 }
@@ -10,10 +14,11 @@
   width: 40px;
 }
 
-.cursor-pointer{
-   cursor: pointer;
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .link {
-   text-decoration: underline;
+  text-decoration: underline;
 }
+
