@@ -52,7 +52,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/devextreme/dist/css/dx.light.css",
+              "node_modules/devextreme/dist/css/dx.dark.css",
               "src/styles.scss"
             ],
             "scripts": []

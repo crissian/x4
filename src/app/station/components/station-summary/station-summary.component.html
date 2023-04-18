@@ -1,6 +1,6 @@
 <table class="table table-sm small table-hover">
    <thead>
-   <tr class="bg-light">
+   <tr>
       <th i18n="@@workforce" scope="col">Workforce</th>
       <th class="text-right" i18n="@@value" scope="col">Value</th>
    </tr>
@@ -110,7 +110,7 @@
 
 <table class="table table-sm small table-hover">
    <thead>
-   <tr class="bg-light">
+   <tr>
       <th scope="col" i18n="@@productionPerHour">Production Per Hour</th>
       <th scope="col" class="text-right" i18n="@@amount">Amount</th>
    </tr>
@@ -200,7 +200,7 @@
                      <ng-container *ngSwitchCase="100"><span i18n="@@max">Max</span></ng-container>
                      <ng-container *ngSwitchDefault>{{ resourcesPrice }}%</ng-container>
                   </strong>
-               </label>
+               </label><br>
                <input
                   type="range"
                   class="form-control-range small"
@@ -222,7 +222,7 @@
                      <ng-container *ngSwitchCase="100"><span i18n="@@max">Max</span></ng-container>
                      <ng-container *ngSwitchDefault>{{ productsPrice }}%</ng-container>
                   </strong>
-               </label>
+               </label><br>
                <input
                   type="range"
                   class="form-control-range small"
@@ -242,7 +242,7 @@
 
 <table class="table table-sm small table-hover">
    <thead>
-   <tr class="bg-light">
+   <tr>
       <th scope="col" i18n="@@stationCosts">Station Costs</th>
       <th scope="col" class="text-right" i18n="@@amount">Amount</th>
    </tr>
@@ -281,15 +281,14 @@
       <td colspan="2">
          <div class="row">
             <div class="form-group col">
-               <label for="modules-resources-price"
-               ><span i18n="@@resourcesPrice">Resources Price:</span>&nbsp;
+               <label for="modules-resources-price"><span i18n="@@resourcesPrice">Resources Price:</span>&nbsp;
                   <strong [ngSwitch]="modulesResourcesPrice">
                      <ng-container *ngSwitchCase="0"><span i18n="@@min">Min</span></ng-container>
                      <ng-container *ngSwitchCase="50"><span i18n="@@average">Average</span></ng-container>
                      <ng-container *ngSwitchCase="100"><span i18n="@@max">Max</span></ng-container>
                      <ng-container *ngSwitchDefault>{{ modulesResourcesPrice }}%</ng-container>
                   </strong>
-               </label>
+               </label><br/>
                <input
                   type="range"
                   class="form-control-range small"
