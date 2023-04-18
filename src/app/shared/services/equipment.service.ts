@@ -6,10 +6,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class EquipmentService implements EntityService<Equipment> {
    getEntities(): Equipment[] {
-      return Equipments;
+      return Equipments as any[];
    }
 
    getEntity(id: any): Equipment {
-      return Equipments.find(x => x.id == id);
+      return Equipments.find(x => x.id == id) as Equipment;
    }
 }

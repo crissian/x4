@@ -6,7 +6,7 @@ import { Faction } from './model/model';
 @Injectable()
 export class FactionService implements EntityService<Faction> {
   getEntities() {
-    return Factions.all;
+    return Factions.all as any[];
   }
 
   getEntity(id: any): Faction {
