@@ -49,7 +49,7 @@ export const Workers = {
         consumption: [
             { ware: Wares.bofu, amount: 90 },
             { ware: Wares.medicalsupplies, amount: 198 },
-            { ware: Wares.water, amount: 108 }
+            { ware: Wares.water, amount: 162 }
         ]
     },
     get(method: string) {
