@@ -4,9 +4,7 @@ import { AllModuleTypes, ModuleTypes } from '../../shared/services/data/module-t
 import { StationModule } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
 import { WareService } from '../../shared/services/ware.service';
-import { ResourceCalculator, StationModuleModel, StationResourceModel, WareGroupModel } from './station-calculator.model';
-
-const RECYCLING_MODULES = [ 'module_gen_prod_scrap_recycler', 'module_ter_prod_scrap_recycler' ];
+import { RECYCLING_MODULES, ResourceCalculator, StationModuleModel, StationResourceModel, WareGroupModel } from './station-calculator.model';
 
 @Component({
     selector: 'app-station-modules',

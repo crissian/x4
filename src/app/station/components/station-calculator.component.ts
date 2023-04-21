@@ -73,9 +73,7 @@ export class StationCalculatorComponent extends ComponentBase implements OnInit 
     }
 
     onChange() {
-        this.components.forEach(x => {
-            x.update();
-        });
+        this.components.forEach(x => x.update());
     }
 
     shareLayout() {

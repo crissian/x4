@@ -7,6 +7,8 @@ import { Workers } from '../../shared/services/data/workers-data';
 import { Effects } from '../../shared/services/data/effects-data';
 import { Wares } from "../../shared/services/data/wares-data";
 
+export const RECYCLING_MODULES = [ 'module_gen_prod_scrap_recycler', 'module_ter_prod_scrap_recycler' ];
+
 export interface StationResourceItemModel {
     ware: Ware;
     count: number;
@@ -37,10 +39,16 @@ export interface WareProductionData {
     total: number;
 }
 
+export interface StationProduction {
+    amount: number;
+    ware: Ware;
+    value: Production;
+}
+
 export class StationModuleModel {
     module: StationModule;
     needs: { amount: number, ware: Ware }[];
-    production: { amount: number, ware: Ware, value: Production };
+    production: StationProduction[];
 
     private _count: number;
     private _moduleId: string;
@@ -80,24 +88,31 @@ export class StationModuleModel {
         } else {
             this.module = this.moduleService.getEntity(this.moduleId);
             this.needs = [];
-            this.production = null;
+            this.production = [];
 
             if (this.module.type == ModuleTypes.production) {
                 const wares = this.module.product;
 
                 for (let ware of wares) {
-                    let currentProd: Production;
-                    if (this.module.makerRace == null) {
-                        currentProd = ware.production.find(x => x.method == ProductionMethods.default);
-                    } else {
-                        currentProd = ware.production.find(x => x.method == this.module.makerRace.id) ||
-                            ware.production.find(x => x.method == ProductionMethods.default);
+                    let currentProd: Production = null;
+
+                    if (RECYCLING_MODULES.includes(this.module.id)) {
+                        currentProd = ware.production.find(x => x.method == ProductionMethods.recycling);
+                    }
+
+                    if (currentProd == null) {
+                        if (this.module.makerRace == null) {
+                            currentProd = ware.production.find(x => x.method == ProductionMethods.default);
+                        } else {
+                            currentProd = ware.production.find(x => x.method == this.module.makerRace.id) ||
+                                ware.production.find(x => x.method == ProductionMethods.default);
+                        }
                     }
 
                     // cycles per hour
                     const cycles = 3600 / currentProd.time;
 
-                    this.production = { amount: currentProd.amount * cycles, ware: ware, value: currentProd };
+                    this.production.push({ amount: currentProd.amount * cycles, ware: ware, value: currentProd });
                     currentProd.wares
                         .forEach(x => {
                             const neededWare = this.wareService.getEntity(x.ware);
@@ -137,6 +152,7 @@ export class ResourceCalculator {
 
     static calculate(modules: StationModuleModel[], sunlight: number) {
         let work = this.calculateWorkforce(modules);
+
         let multiplier = (work.capacity == 0 || work.value == 0) ? 0 : (work.capacity / work.value);
         if (multiplier > 1) {
             multiplier = 1;
@@ -146,39 +162,41 @@ export class ResourceCalculator {
         if (modules.length > 0) {
             data = modules
                 .map<WareProductionData[]>(x => {
-                    const values: StationResourceItemModel[] = x.needs.map(y => {
-                        return {
-                            ware: y.ware,
-                            count: x.count,
-                            amount: -y.amount,
-                            efficiency: 100,
-                            name: x.module.name,
-                            total: x.count * -y.amount
-                        };
-                    });
+                    const values: StationResourceItemModel[] = x.needs
+                        .map(y => ({
+                                ware: y.ware,
+                                count: x.count,
+                                amount: -y.amount,
+                                efficiency: 100,
+                                name: x.module.name,
+                                total: x.count * -y.amount
+                            })
+                        );
 
                     if (x.production) {
-                        const effect = x.production.value.effects ? x.production.value.effects.find(e => e.type == Effects.work) : null;
-                        let efficiency = effect == null ? 1 : (1 + effect.product * multiplier);
+                        for (let production of x.production) {
+                            const effect = production.value.effects ? production.value.effects.find(e => e.type == Effects.work) : null;
+                            let efficiency = effect == null ? 1 : (1 + effect.product * multiplier);
 
-                        if (x.production.ware.id === Wares.energycells.id) {
-                            // add sunlight for energy cells
-                            let sun = parseInt(sunlight as any);
-                            if (isNaN(sun) || sun < 0) {
-                                sun = 100;
+                            if (production.ware.id === Wares.energycells.id) {
+                                // add sunlight for energy cells
+                                let sun = parseInt(sunlight as any);
+                                if (isNaN(sun) || sun < 0) {
+                                    sun = 100;
+                                }
+
+                                efficiency = efficiency * sun / 100;
                             }
 
-                            efficiency = efficiency * sun / 100;
+                            values.push({
+                                ware: production.ware,
+                                count: x.count,
+                                amount: production.amount,
+                                efficiency: efficiency * 100,
+                                name: x.module.name,
+                                total: x.count * production.amount * efficiency
+                            });
                         }
-
-                        values.push({
-                            ware: x.production.ware,
-                            count: x.count,
-                            amount: x.production.amount,
-                            efficiency: efficiency * 100,
-                            name: x.module.name,
-                            total: x.count * x.production.amount * efficiency
-                        });
                     }
 
                     return values;
