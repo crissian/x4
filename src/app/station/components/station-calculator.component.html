@@ -1,43 +1,51 @@
 <div class="row content-row">
-   <div class="col-md-12">
-      <div class="card shadow">
-         <div class="card-header shadow-sm">
-            <button (click)="newLayout()" class="btn btn-sm btn-info" type="button"><i class="fa fa-file"></i>&nbsp;<span i18n="@@newLayout">New</span></button>&nbsp;
-            <button (click)="saveLayout()" class="btn btn-sm btn-primary" type="button"><i class="fa fa-save"></i>&nbsp;<span i18n="@@save">Save</span></button>&nbsp;
-            <button (click)="saveLayoutAs()" class="btn btn-sm btn-primary" type="button"><i class="fa fa-save"></i>&nbsp;<span i18n="@@saveAs">Save As</span></button>&nbsp;
-            <button (click)="loadLayout()" class="btn btn-sm btn-info" type="button"><i class="fa fa-folder-open"></i>&nbsp;<span i18n="@@load">Load</span></button>&nbsp;
-            <button (click)="shareLayout()" class="btn btn-sm btn-secondary" type="button"><i class="fa fa-share-square"></i>&nbsp;<span i18n="@@share">Share</span></button>&nbsp;
-            <button (click)="importPlans()" class="btn btn-sm btn-dark" type="button"><i class="fa fa-file-text"></i>&nbsp;<span i18n="@@share">Import</span></button>
-         </div>
-         <div class="card-body">
-            <div class="row" *ngIf="messages.length || importResult">
-               <div class="col">
-                  <app-messages [messages]="messages"></app-messages>
-                  <app-import-result [result]="importResult" (selectPlan)="onSelectPlan($event)"></app-import-result>
-               </div>
+    <div class="col-md-12">
+        <div class="card shadow">
+            <div class="card-header shadow-sm">
+                <button (click)="newLayout()" class="btn btn-sm btn-info" type="button"><i class="fa fa-file"></i>&nbsp;<span i18n="@@newLayout">New</span></button>&nbsp;
+                <button (click)="saveLayout()" class="btn btn-sm btn-primary" type="button"><i class="fa fa-save"></i>&nbsp;<span i18n="@@save">Save</span></button>&nbsp;
+                <button (click)="saveLayoutAs()" class="btn btn-sm btn-primary" type="button"><i class="fa fa-save"></i>&nbsp;<span i18n="@@saveAs">Save As</span></button>&nbsp;
+                <button (click)="loadLayout()" class="btn btn-sm btn-info" type="button"><i class="fa fa-folder-open"></i>&nbsp;<span i18n="@@load">Load</span></button>&nbsp;
+                <button (click)="shareLayout()" class="btn btn-sm btn-secondary" type="button"><i class="fa fa-share-square"></i>&nbsp;<span i18n="@@share">Share</span></button>&nbsp;
+                <button (click)="importPlans()" class="btn btn-sm btn-dark" type="button"><i class="fa fa-file-text"></i>&nbsp;<span i18n="@@share">Import</span></button>
             </div>
+            <div class="card-body">
+                <div class="row" *ngIf="messages.length || importResult">
+                    <div class="col">
+                        <app-messages [messages]="messages"></app-messages>
+                        <app-import-result [result]="importResult" (selectPlan)="onSelectPlan($event)"></app-import-result>
+                    </div>
+                </div>
 
-            <div class="row">
-               <div class="col-md-4 col-sm-12">
-                  <h6 class="card-title">
-                     <span *ngIf="!layout" i18n="@@stationModules">Station Modules</span>
-                     <span *ngIf="layout" class="text-primary">{{ layout.name }}</span>
-                  </h6>
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                        <h6 class="card-title d-flex align-items-center">
+                            <span *ngIf="!layout" class="flex-fill">Station Modules</span>
+                            <span *ngIf="layout" class="flex-fill">{{ layout.name }}</span>
+                            <div class="d-flex align-items-center">
+                                <label class="form-label text-nowrap px-2">Sun Light</label>
 
-                  <app-station-modules [modules]="modules" (change)="onChange()"></app-station-modules>
-               </div>
-               <div class="col-md-4 col-sm-12">
-                  <h6 class="card-title" i18n="@@stationResources">Station Resources</h6>
+                                <div class="input-group">
+                                    <input type="text" id="sun-light" name="sunlight" class="form-control" style="width: 70px" [(ngModel)]="sunlight">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                        </h6>
 
-                  <app-station-resources #stationResources [modules]="modules"></app-station-resources>
-               </div>
-               <div class="col-md-4 col-sm-12">
-                  <h6 class="card-title" i18n="@@stationSummary">Station Summary</h6>
+                        <app-station-modules [modules]="modules" (change)="onChange()" [sunlight]="sunlight"></app-station-modules>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <h6 class="card-title">Station Resources</h6>
 
-                  <app-station-summary #stationSummary [modules]="modules"></app-station-summary>
-               </div>
+                        <app-station-resources #stationResources [modules]="modules" [sunlight]="sunlight"></app-station-resources>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <h6 class="card-title">Station Summary</h6>
+
+                        <app-station-summary #stationSummary [modules]="modules" [sunlight]="sunlight"></app-station-summary>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>

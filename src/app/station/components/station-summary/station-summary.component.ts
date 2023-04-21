@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { WareGroups } from '../../../shared/services/data/ware-groups-data';
 import { WareService } from '../../../shared/services/ware.service';
 import { ResourceCalculator, StationModuleModel } from '../station-calculator.model';
@@ -16,11 +16,10 @@ import { StationSummaryService } from './services/station-summary.service';
    selector: 'app-station-summary',
    templateUrl: './station-summary.component.html',
 })
-export class StationSummaryComponent {
+export class StationSummaryComponent implements OnChanges {
    static basicResources = [ WareGroups.gases, WareGroups.minerals, WareGroups.ice ];
 
    expandState: { [key: string]: boolean } = {};
-   private _modules: StationModuleModel[];
 
    provideBasicResources = false;
    provideAllResources = false;
@@ -45,20 +44,20 @@ export class StationSummaryComponent {
    @Output()
    change = new EventEmitter();
 
+    @Input()
+    modules: StationModuleModel[];
+
+    @Input()
+    sunlight = 100;
+
    constructor(private wareService: WareService, private stationSummaryService: StationSummaryService) {
    }
 
-   get modules() {
-      return this._modules;
+   ngOnChanges() {
+       this.update();
    }
 
-   @Input()
-   set modules(value: StationModuleModel[]) {
-      this._modules = value;
-      this.update();
-   }
-
-   get totalWorkforce() {
+    get totalWorkforce() {
       return this._totalWorkforce + (this.isHq ? 200 : 0);
    }
 
@@ -119,7 +118,7 @@ export class StationSummaryComponent {
       }
       this.stationSummaryService.setPartialWorkforce(this.partialWorkforce);
 
-      const resources = ResourceCalculator.calculate(this.modules, this._totalWorkforce, this.partialWorkforce);
+      const resources = ResourceCalculator.calculate(this.modules, this.sunlight);
       resources.sort((a, b) => this.wareService.compareWares(a.ware, b.ware));
 
       resources.forEach((x) => {

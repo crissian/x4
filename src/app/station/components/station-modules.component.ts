@@ -12,22 +12,18 @@ import { ResourceCalculator, StationModuleModel, StationResourceModel, WareGroup
    styleUrls: [ './station-modules.component.scss' ],
 })
 export class StationModulesComponent implements OnInit {
-   private _modules: StationModuleModel[];
    wareGroups: WareGroupModel[];
 
    @Output()
    change = new EventEmitter();
 
+    @Input()
+    modules: StationModuleModel[];
+
+    @Input()
+    sunlight = 100;
+
    constructor(private moduleService: ModuleService, private wareService: WareService) {
-   }
-
-   get modules() {
-      return this._modules;
-   }
-
-   @Input()
-   set modules(value: StationModuleModel[]) {
-      this._modules = value;
    }
 
    ngOnInit(): void {
@@ -70,17 +66,17 @@ export class StationModulesComponent implements OnInit {
    }
 
    backfillModules() {
+       const habitat = this.modules.find(x => x.module?.type === ModuleTypes.habitation);
+       let method = 'default';
+       if (habitat) {
+           method = habitat.module.makerRace.id;
+       }
+
       while (true) {
-         const resources: StationResourceModel[] = ResourceCalculator.calculate(this.modules, 0, 0);
+         const resources: StationResourceModel[] = ResourceCalculator.calculate(this.modules, this.sunlight);
          let didChange = false;
 
          const modules = this.modules;
-
-         const habitat = this.modules.find(x => x.module.type === ModuleTypes.habitation);
-         let method = 'default';
-         if (habitat) {
-            method = habitat.module.makerRace.id;
-         }
 
          for (const resource of resources) {
             if (resource.amount >= 0) {
@@ -91,6 +87,7 @@ export class StationModulesComponent implements OnInit {
             if (module == null) {
                continue;
             }
+
             didChange = true;
 
             const product = module.product.find(x => x.id == resource.ware.id);
@@ -132,6 +129,6 @@ export class StationModulesComponent implements OnInit {
     * @param event drop event
     */
    drop(event: CdkDragDrop<StationModuleModel[]>) {
-      moveItemInArray(this._modules, event.previousIndex, event.currentIndex);
+      moveItemInArray(this.modules, event.previousIndex, event.currentIndex);
    }
 }
