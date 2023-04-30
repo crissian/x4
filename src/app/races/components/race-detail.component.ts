@@ -15,12 +15,12 @@ export class RaceDetailComponent extends EntityDetailsComponent<Race> implements
     super(raceService, route);
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.titleService.setTitle(`${BASE_TITLE} - Races`);
     super.ngOnInit();
   }
 
-  onEntityLoaded(entity: Race) {
+  override onEntityLoaded(entity: Race) {
     this.titleService.setTitle(`${BASE_TITLE} - Races - ${entity.name}`);
   }
 }

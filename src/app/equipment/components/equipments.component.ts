@@ -28,7 +28,7 @@ export class EquipmentsComponent extends EntityListComponent<Equipment> implemen
       super(service, router, route);
    }
 
-   ngOnInit(): void {
+  override ngOnInit(): void {
       this.titleService.setTitle(`${BASE_TITLE} - Equipment`);
 
       this.sizes = EnumFn.values(Size);
@@ -40,9 +40,11 @@ export class EquipmentsComponent extends EntityListComponent<Equipment> implemen
       super.ngOnInit();
    }
 
-   onRowSelect(e: any) {
+  override onRowSelect(e: any) {
       if (e.rowType == 'data') {
          return this.router.navigate([ e.row.data.id ], { relativeTo: this.route });
       }
+
+      return null;
    }
 }

@@ -16,12 +16,12 @@ export class FactionDetailComponent extends EntityDetailsComponent<Faction> impl
       super(service, route);
    }
 
-   ngOnInit(): void {
+  override ngOnInit(): void {
       this.titleService.setTitle(`${BASE_TITLE} - Factions`);
       super.ngOnInit();
    }
 
-   onEntityLoaded(entity: Faction) {
+  override onEntityLoaded(entity: Faction) {
       this.titleService.setTitle(`${BASE_TITLE} - ${this.entity.name}`);
    }
 }

@@ -1,117 +1,109 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentBase } from '../../shared/components/component-base';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as xml2js from 'xml2js';
+import * as convert from 'xml-js';
 import { ModuleService } from '../../shared/services/module.service';
 import { LayoutService } from '../services/layout-service';
 import { Layout, ModuleConfig } from '../../shared/services/module-config';
 
 interface EntryAttribute {
-   macro: string;
+    macro: string;
 }
 
 interface Entry {
-   $: EntryAttribute;
+    _attributes: EntryAttribute;
 }
 
 interface PlanAttribute {
-   name: string;
+    name: string;
 }
 
 interface Plan {
-   $: PlanAttribute;
-   entry: Entry[];
+    _attributes: PlanAttribute;
+    entry: Entry[];
 }
 
 interface PlanList {
-   plan: Plan[];
+    plan: Plan[];
 }
 
 interface ConstructionPlan {
-   plans: PlanList;
+    plans: PlanList;
 }
 
 export interface ImportResult {
-   error: string;
-   layouts: string[];
+    error: string;
+    layouts: string[];
 }
 
 @Component({
-   selector: 'app-import-plans',
-   templateUrl: './import-plans.component.html'
+    selector: 'app-import-plans',
+    templateUrl: './import-plans.component.html'
 })
 export class ImportPlansComponent extends ComponentBase implements OnInit {
-   xml: string;
+    xml: string;
 
-   constructor(public activeModal: NgbActiveModal,
-               private moduleService: ModuleService,
-               private layoutService: LayoutService) {
-      super();
-   }
+    constructor(public activeModal: NgbActiveModal,
+                private moduleService: ModuleService,
+                private layoutService: LayoutService) {
+        super();
+    }
 
-   ngOnInit(): void {
-   }
+    ngOnInit(): void {
+    }
 
-   importPlans() {
-      xml2js.parseString(this.xml, (err, result: ConstructionPlan) => {
-         if (err) {
-            console.error(err);
-            this.activeModal.close({ error: 'Failed to load plans', layouts: null });
-         } else if (!result || !result.plans || !result.plans.plan) {
-            return;
-         } else {
-            let layouts: string[];
-            let error: string = null;
+    importPlans() {
+        let layouts: string[];
+        let error: string = null;
 
-            try {
-               layouts = this.importCore(result);
-            } catch (e) {
-               error = 'Failed to import layouts';
+        try {
+            const result = convert.xml2js(this.xml, { compact: true }) as any;
+            layouts = this.importCore(result);
+        } catch (e) {
+            error = 'Failed to import layouts';
+        }
+
+        this.activeModal.close({ error: error, layouts: layouts });
+    }
+
+    private importCore(result: ConstructionPlan) {
+        const layouts: string[] = [];
+
+        for (const plan of result.plans.plan) {
+            if (plan.entry == null || plan.entry.length === 0) {
+                continue;
             }
 
-            this.activeModal.close({ error: error, layouts: layouts });
-         }
-      });
-   }
+            const name = plan._attributes?.name || 'Imported Plan';
 
-   private importCore(result: ConstructionPlan) {
-      const layouts: string[] = [];
+            const modules: ModuleConfig[] = [];
 
-      for (const plan of result.plans.plan) {
-         if (plan.entry == null || plan.entry.length === 0) {
-            continue;
-         }
-
-         const name = plan.$.name;
-
-         const modules: ModuleConfig[] = [];
-
-         for (const item of plan.entry) {
-            const [ module ] = this.moduleService.getModulesByMacro(item.$.macro);
-            if (module) {
-               const existing = modules.find(x => x.moduleId === module.id);
-               if (!existing) {
-                  modules.push({ moduleId: module.id, count: 1 });
-               } else {
-                  existing.count++;
-               }
+            for (const item of plan.entry) {
+                const [ module ] = this.moduleService.getModulesByMacro(item._attributes.macro);
+                if (module) {
+                    const existing = modules.find(x => x.moduleId === module.id);
+                    if (!existing) {
+                        modules.push({ moduleId: module.id, count: 1 });
+                    } else {
+                        existing.count++;
+                    }
+                }
             }
-         }
 
-         const layout: Layout = {
-            name: name,
-            config: modules
-         };
+            const layout: Layout = {
+                name: name,
+                config: modules
+            };
 
-         this.layoutService.saveLayout(layout);
+            this.layoutService.saveLayout(layout);
 
-         layouts.push(name);
-      }
+            layouts.push(name);
+        }
 
-      return layouts;
-   }
+        return layouts;
+    }
 
-   get canImport() {
-      return this.xml;
-   }
+    get canImport() {
+        return this.xml;
+    }
 }

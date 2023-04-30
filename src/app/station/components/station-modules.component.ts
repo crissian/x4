@@ -4,134 +4,141 @@ import { AllModuleTypes, ModuleTypes } from '../../shared/services/data/module-t
 import { StationModule } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
 import { WareService } from '../../shared/services/ware.service';
-import { ResourceCalculator, StationModuleModel, StationResourceModel, WareGroupModel } from './station-calculator.model';
+import { RECYCLING_MODULES, ResourceCalculator, StationModuleModel, StationResourceModel, WareGroupModel } from './station-calculator.model';
 
 @Component({
-   selector: 'app-station-modules',
-   templateUrl: './station-modules.component.html',
-   styleUrls: [ './station-modules.component.scss' ],
+    selector: 'app-station-modules',
+    templateUrl: './station-modules.component.html',
+    styleUrls: [ './station-modules.component.scss' ],
 })
 export class StationModulesComponent implements OnInit {
-   private _modules: StationModuleModel[];
-   wareGroups: WareGroupModel[];
+    wareGroups: WareGroupModel[];
 
-   @Output()
-   change = new EventEmitter();
+    @Output()
+    change = new EventEmitter();
 
-   constructor(private moduleService: ModuleService, private wareService: WareService) {
-   }
+    @Input()
+    modules: StationModuleModel[];
 
-   get modules() {
-      return this._modules;
-   }
+    @Input()
+    sunlight = 100;
 
-   @Input()
-   set modules(value: StationModuleModel[]) {
-      this._modules = value;
-   }
+    constructor(private moduleService: ModuleService, private wareService: WareService) {
+    }
 
-   ngOnInit(): void {
-      const groupsObj = this.moduleService.getModulesByType(ModuleTypes.production)
-         .reduce((obj, item: StationModule) => {
-            for (let product of item.product) {
-               obj[product.group.id] = obj[product.group.id] || {
-                  name: product.group.name,
-                  group: product.group,
-                  modules: []
-               };
-               obj[product.group.id].modules.push(item);
-            }
-            return obj;
-         }, []);
+    ngOnInit(): void {
+        const groupsObj = this.moduleService.getModulesByType(ModuleTypes.production)
+            .reduce((obj, item: StationModule) => {
+                if (RECYCLING_MODULES.includes(item.id)) {
+                    obj[ModuleTypes.recycling] = obj[ModuleTypes.recycling] || {
+                        name: ModuleTypes.recycling,
+                        group: ModuleTypes.recycling,
+                        modules: []
+                    };
+                    obj[ModuleTypes.recycling].modules.push(item);
+                    return obj;
+                }
 
-      this.wareGroups = Object.keys(groupsObj)
-         .map(x => groupsObj[x])
-         .sort((a, b) => this.wareService.compareGroups(a.group, b.group));
+                for (let product of item.product) {
+                    obj[product.group.id] = obj[product.group.id] || {
+                        name: product.group.name,
+                        group: product.group,
+                        modules: []
+                    };
+                    obj[product.group.id].modules.push(item);
+                }
+                return obj;
+            }, []);
 
-      for (const type of AllModuleTypes) {
-         this.wareGroups.push({ name: type, modules: this.moduleService.getModulesByType(type) });
-      }
-   }
+        this.wareGroups = Object.keys(groupsObj)
+            .map(x => groupsObj[x])
+            .sort((a, b) => this.wareService.compareGroups(a.group, b.group));
 
-   removeModule(item: StationModuleModel) {
-      const index = this.modules.indexOf(item);
-      if (index >= 0) {
-         this.modules.splice(index, 1);
-         this.onChange();
-      }
-   }
+        for (const type of AllModuleTypes) {
+            this.wareGroups.push({ name: type, modules: this.moduleService.getModulesByType(type) });
+        }
+    }
 
-   addModule() {
-      this.modules.push(new StationModuleModel(this.wareService, this.moduleService));
-   }
+    removeModule(item: StationModuleModel) {
+        const index = this.modules.indexOf(item);
+        if (index >= 0) {
+            this.modules.splice(index, 1);
+            this.onChange();
+        }
+    }
 
-   onChange() {
-      this.change.emit();
-   }
+    addModule() {
+        this.modules.push(new StationModuleModel(this.wareService, this.moduleService));
+    }
 
-   backfillModules() {
-      while (true) {
-         const resources: StationResourceModel[] = ResourceCalculator.calculate(this.modules, 0, 0);
-         let didChange = false;
+    onChange() {
+        this.change.emit();
+    }
 
-         const modules = this.modules;
-
-         const habitat = this.modules.find(x => x.module.type === ModuleTypes.habitation);
-         let method = 'default';
-         if (habitat) {
+    backfillModules() {
+        const habitat = this.modules.find(x => x.module?.type === ModuleTypes.habitation);
+        let method = 'default';
+        if (habitat) {
             method = habitat.module.makerRace.id;
-         }
+        }
 
-         for (const resource of resources) {
-            if (resource.amount >= 0) {
-               continue;
+        while (true) {
+            const resources: StationResourceModel[] = ResourceCalculator.calculate(this.modules, this.sunlight);
+            let didChange = false;
+
+            const modules = this.modules;
+
+            for (const resource of resources) {
+                if (resource.amount >= 0) {
+                    continue;
+                }
+
+                const module = this.moduleService.getModuleByWare(resource.ware.id, method) || this.moduleService.getModuleByWare(resource.ware.id);
+                if (module == null) {
+                    continue;
+                }
+
+                didChange = true;
+
+                const product = module.product.find(x => x.id == resource.ware.id);
+
+                const productionWare = product.production.find(p => p.method == method) || product.production.find(p => p.method == 'default');
+                const productionPerHour = productionWare.amount * (3600 / productionWare.time);
+                const moduleCount = Math.ceil(-resource.amount / productionPerHour);
+
+                const existingModule = modules.find(m => m.module?.id == module.id);
+                if (existingModule == null) {
+                    modules.push(new StationModuleModel(this.wareService, this.moduleService, module.id, moduleCount));
+                } else {
+                    existingModule.count += moduleCount;
+                }
             }
 
-            const module = this.moduleService.getModuleByWare(resource.ware.id, method) || this.moduleService.getModuleByWare(resource.ware.id);
-            if (module == null) {
-               continue;
+            if (!didChange) {
+                break;
             }
-            didChange = true;
+        }
 
-            const product = module.product.find(x => x.id == resource.ware.id);
+        this.onChange();
+    }
 
-            const productionWare = product.production.find(p => p.method == method) || product.production.find(p => p.method == 'default');
-            const productionPerHour = productionWare.amount * (3600 / productionWare.time);
-            const moduleCount = Math.ceil(-resource.amount / productionPerHour);
+    /**
+     * on module selected
+     *
+     * @param id module id
+     * @param item the station module item
+     */
+    onSelectModule(id: string, item: StationModuleModel) {
+        this.modules[this.modules.indexOf(item)].moduleId = id;
+        this.onChange();
+    }
 
-            const existingModule = modules.find(m => m.module?.id == module.id);
-            if (existingModule == null) {
-               modules.push(new StationModuleModel(this.wareService, this.moduleService, module.id, moduleCount));
-            } else {
-               existingModule.count += moduleCount;
-            }
-         }
-
-         if (!didChange) {
-            break;
-         }
-      }
-
-      this.onChange();
-   }
-
-   /**
-    * on module selected
-    *
-    * @param id module id
-    * @param item the station module item
-    */
-   onSelectModule(id: string, item: StationModuleModel) {
-      this.modules[this.modules.indexOf(item)].moduleId = id;
-      this.onChange();
-   }
-
-   /**
-    * move item in modules on drop
-    *
-    * @param event drop event
-    */
-   drop(event: CdkDragDrop<StationModuleModel[]>) {
-      moveItemInArray(this._modules, event.previousIndex, event.currentIndex);
-   }
+    /**
+     * move item in modules on drop
+     *
+     * @param event drop event
+     */
+    drop(event: CdkDragDrop<StationModuleModel[]>) {
+        moveItemInArray(this.modules, event.previousIndex, event.currentIndex);
+    }
 }

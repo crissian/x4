@@ -7,6 +7,8 @@ import { AnalyticsService } from './google-analytics/services/analytics.service'
   templateUrl: './app.component.html'
 })
 export class AppComponent {
+  theme = 'dark';
+
   constructor(router: Router, analytics: AnalyticsService) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

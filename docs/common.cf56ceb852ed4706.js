@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkx4_new=self.webpackChunkx4_new||[]).push([[592],{1814:(n,s,u)=>{u.d(s,{w:()=>a});class a{static values(e){return Object.keys(e).map(c=>e[c])}}}}]);

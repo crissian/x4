@@ -9,49 +9,49 @@ import { Size } from '../../shared/services/data/size-data';
 import { ShipType } from '../../shared/services/data/ship-type-data';
 import { ShipPurpose } from '../../shared/services/data/ship-purpose-data';
 import { EnumFn } from '../../core/services/enum-fn';
-import {BASE_TITLE} from '../../shared/services/constants';
+import { BASE_TITLE } from '../../shared/services/constants';
 
 @Component({
-   templateUrl: './ships.component.html'
+  templateUrl: './ships.component.html'
 })
 export class ShipsComponent extends EntityListComponent<Ship> implements OnInit {
-   sizes: string[];
-   races: Race[];
-   shipTypes: string[];
-   purposes: string[];
+  sizes: string[];
+  races: Race[];
+  shipTypes: string[];
+  purposes: string[];
 
-   constructor(entityService: ShipService,
-               private raceService: RaceService,
-               router: Router,
-               route: ActivatedRoute,
-               private titleService: Title) {
-      super(entityService, router, route);
-   }
+  constructor(entityService: ShipService,
+              private raceService: RaceService,
+              router: Router,
+              route: ActivatedRoute,
+              private titleService: Title) {
+    super(entityService, router, route);
+  }
 
-   ngOnInit(): void {
-      this.titleService.setTitle(`${BASE_TITLE} - Ships`);
+  override ngOnInit(): void {
+    this.titleService.setTitle(`${BASE_TITLE} - Ships`);
 
-      this.sizes = EnumFn.values(Size);
-      this.shipTypes = EnumFn.values(ShipType);
-      this.purposes = EnumFn.values(ShipPurpose);
-      this.races = this.raceService.getEntities();
+    this.sizes = EnumFn.values(Size);
+    this.shipTypes = EnumFn.values(ShipType);
+    this.purposes = EnumFn.values(ShipPurpose);
+    this.races = this.raceService.getEntities();
 
-      super.ngOnInit();
-   }
+    super.ngOnInit();
+  }
 
-   calculateWeapons(entity: Ship) {
-      return entity.weapons ? entity.weapons.length : 0;
-   }
+  calculateWeapons(entity: Ship) {
+    return entity.weapons ? entity.weapons.length : 0;
+  }
 
-   calculateTurrets(entity: Ship) {
-      return entity.turrets ? entity.turrets.length : 0;
-   }
+  calculateTurrets(entity: Ship) {
+    return entity.turrets ? entity.turrets.length : 0;
+  }
 
-   calculateShields(entity: Ship) {
-      if (!entity.shields) {
-         return 0;
-      }
+  calculateShields(entity: Ship) {
+    if (!entity.shields) {
+      return 0;
+    }
 
-      return entity.shields.filter(x => !x.group).length;
-   }
+    return entity.shields.filter(x => !x.group).length;
+  }
 }

@@ -16,6 +16,7 @@ import { StationRoutingModule } from './station-routing.module';
 import { ImportPlansComponent } from './components/import-plans.component';
 import { ImportPlanResultComponent } from './components/import-plan-result.component';
 import { ExportPlanComponent } from './components/export-plan.component';
+import { AutocompleteComponent } from "./components/autocomplete/autocomplete.component";
 
 @NgModule({
    imports: [
@@ -36,12 +37,8 @@ import { ExportPlanComponent } from './components/export-plan.component';
       StationSummaryComponent,
       ImportPlansComponent,
       ImportPlanResultComponent,
+      AutocompleteComponent,
       ExportPlanComponent
-   ],
-   entryComponents: [
-      LoadLayoutComponent,
-      SaveLayoutComponent,
-      ShareLayoutComponent
    ],
    providers: [
       LayoutService

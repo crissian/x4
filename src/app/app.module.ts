@@ -1,28 +1,29 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { AnalyticsModule } from './google-analytics/analytics.module';
-import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-import { AboutComponent } from './about.component';
-import { HeaderComponent } from './header.component';
+import { AppComponent } from './app.component';
+import { environment } from "../environments/environment";
+import { AnalyticsModule } from "./google-analytics/analytics.module";
+import { HeaderComponent } from "./header.component";
+import { AboutComponent } from "./about.component";
+import { FormsModule } from "@angular/forms";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    AboutComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule,
     AppRoutingModule,
-    AnalyticsModule.forRoot({ trackingId: environment.googleAnalytics })
+    AnalyticsModule.forRoot({ trackingId: environment.googleAnalytics }),
+    NgbModule
   ],
-  declarations: [
-    AppComponent,
-    AboutComponent,
-    HeaderComponent
-  ],
+  providers: [],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ShipService implements EntityService<Ship> {
   getEntities(): Ship[] {
-    return Ships;
+    return Ships as any[];
   }
 
   getEntity(id: any): Ship {
