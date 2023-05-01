@@ -16,6 +16,7 @@ export interface StationResourceItemModel {
     efficiency: number;
     name: string;
     total: number;
+    type: String;
 }
 
 export interface StationResourceModel {
@@ -37,6 +38,7 @@ export interface WareProductionData {
     efficiency: number;
     name: string;
     total: number;
+    type: String;
 }
 
 export interface StationProduction {
@@ -150,10 +152,11 @@ export class ResourceCalculator {
         return { value: totalWorkforce, capacity: workforce };
     }
 
-    static calculate(modules: StationModuleModel[], sunlight: number) {
+    static calculate(modules: StationModuleModel[], sunlight: number, partialWorkforce: number) {
         let work = this.calculateWorkforce(modules);
 
-        let multiplier = (work.capacity == 0 || work.value == 0) ? 0 : (work.capacity / work.value);
+        let multiplier = (work.capacity == 0 || work.value == 0) ? 0 : (partialWorkforce / work.value);
+
         if (multiplier > 1) {
             multiplier = 1;
         }
@@ -162,14 +165,26 @@ export class ResourceCalculator {
         if (modules.length > 0) {
             data = modules
                 .map<WareProductionData[]>(x => {
+                    let modifier = 1
+                    if(x.module?.type === "Habitation") {
+                        let capacity = x.module.workForce.capacity * x.count
+                        if(partialWorkforce >= capacity) {
+                            partialWorkforce -= capacity
+                        } else {
+                            modifier = partialWorkforce / capacity
+                            partialWorkforce = 0
+                        }
+                    }
+
                     const values: StationResourceItemModel[] = x.needs
                         .map(y => ({
                                 ware: y.ware,
                                 count: x.count,
                                 amount: -y.amount,
-                                efficiency: 100,
+                                efficiency: modifier * 100,
                                 name: x.module.name,
-                                total: x.count * -y.amount
+                                total: x.count * -y.amount * modifier,
+                                type: x.module.type
                             })
                         );
 
@@ -194,7 +209,8 @@ export class ResourceCalculator {
                                 amount: production.amount,
                                 efficiency: efficiency * 100,
                                 name: x.module.name,
-                                total: x.count * production.amount * efficiency
+                                total: x.count * production.amount * efficiency,
+                                type: x.module.type
                             });
                         }
                     }

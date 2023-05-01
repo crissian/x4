@@ -118,7 +118,7 @@ export class StationSummaryComponent implements OnChanges {
       }
       this.stationSummaryService.setPartialWorkforce(this.partialWorkforce);
 
-      const resources = ResourceCalculator.calculate(this.modules, this.sunlight);
+      const resources = ResourceCalculator.calculate(this.modules, this.sunlight, this.partialWorkforce);
       resources.sort((a, b) => this.wareService.compareWares(a.ware, b.ware));
 
       resources.forEach((x) => {

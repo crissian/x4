@@ -73,7 +73,7 @@ export class StationResourcesComponent implements OnChanges, OnDestroy {
             this.partialWorkforce = workforce;
         }
 
-        this.resources = ResourceCalculator.calculate(this.modules, this.sunlight);
+        this.resources = ResourceCalculator.calculate(this.modules, this.sunlight, this.partialWorkforce);
         this.resources.forEach((x) => {
             x.expanded = this.expandState[x.items[0].ware.id];
         });
