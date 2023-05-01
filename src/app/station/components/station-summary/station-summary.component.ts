@@ -112,13 +112,21 @@ export class StationSummaryComponent implements OnChanges {
          }
          return acc;
       }, 0);
+
+       const workforceNeeded = this.modules.reduce((acc, item) => {
+           if (item.module && item.module.workForce && item.module.workForce.max) {
+               return acc + item.count * item.module.workForce.max;
+           }
+           return acc;
+       }, 0);
+
       if (this.totalWorkforceCapacity != workforce) {
          this.totalWorkforceCapacity = workforce;
-         this.partialWorkforce = workforce;
+         this.partialWorkforce = workforceNeeded;
       }
       this.stationSummaryService.setPartialWorkforce(this.partialWorkforce);
 
-      const resources = ResourceCalculator.calculate(this.modules, this.sunlight);
+      const resources = ResourceCalculator.calculate(this.modules, this.sunlight, this.partialWorkforce);
       resources.sort((a, b) => this.wareService.compareWares(a.ware, b.ware));
 
       resources.forEach((x) => {
