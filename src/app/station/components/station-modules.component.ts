@@ -5,6 +5,7 @@ import { StationModule } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
 import { WareService } from '../../shared/services/ware.service';
 import { RECYCLING_MODULES, ResourceCalculator, StationModuleModel, StationResourceModel, WareGroupModel } from './station-calculator.model';
+import { StationSummaryService } from './station-summary/services/station-summary.service';
 
 @Component({
     selector: 'app-station-modules',
@@ -23,7 +24,7 @@ export class StationModulesComponent implements OnInit {
     @Input()
     sunlight = 100;
 
-    constructor(private moduleService: ModuleService, private wareService: WareService) {
+    constructor(private moduleService: ModuleService, private wareService: WareService, private stationSummaryService: StationSummaryService) {
     }
 
     ngOnInit(): void {
@@ -83,7 +84,8 @@ export class StationModulesComponent implements OnInit {
         }
 
         while (true) {
-            const resources: StationResourceModel[] = ResourceCalculator.calculate(this.modules, this.sunlight);
+
+            const resources: StationResourceModel[] = ResourceCalculator.calculate(this.modules, this.sunlight, this.stationSummaryService.$partialWorkforce);
             let didChange = false;
 
             const modules = this.modules;
