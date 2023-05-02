@@ -120,7 +120,7 @@ export class StationSummaryComponent implements OnChanges {
            return acc;
        }, 0);
 
-      if (this.totalWorkforceCapacity != workforce) {
+      if (this.totalWorkforceCapacity != workforce || this.partialWorkforce != workforceNeeded) {
          this.totalWorkforceCapacity = workforce;
          this.partialWorkforce = workforceNeeded;
       }
