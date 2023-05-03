@@ -23,6 +23,9 @@
           <ng-container *ngIf="moduleRes.total > 0">
             <span i18n="@@at"> at</span>&nbsp;<strong>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong>&nbsp;<span i18n="@@efficiency">efficiency</span>
           </ng-container>
+          <ng-container *ngIf="moduleRes.type === 'Habitation'">
+              <span i18n="@@at"> at</span>&nbsp;<strong>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong>&nbsp;<span i18n="@@capacity">capacity</span>
+          </ng-container>
         </td>
         <td class="text-right">{{ (moduleRes.total) | number:'1.0-0' }}</td>
       </tr>
