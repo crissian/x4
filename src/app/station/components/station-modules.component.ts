@@ -75,7 +75,7 @@ export class StationModulesComponent implements OnInit {
         this.change.emit();
     }
 
-    backfillModules() {
+    autofillModules() {
         const habitat = this.modules.find(x => x.module?.type === ModuleTypes.habitation);
         let method = 'default';
         if (habitat) {
