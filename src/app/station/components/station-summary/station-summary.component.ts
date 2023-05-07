@@ -31,7 +31,7 @@ export class StationSummaryComponent implements OnChanges {
    private _totalWorkforce = 0;
    totalWorkforceCapacity = 0;
    partialWorkforce = 0;
-   autoWorkforce = false
+   autoWorkforce = true
 
    workforceNeeded: { amount: number; name: string; count: number }[] = [];
    workforceCapacity: { amount: number; name: string; count: number }[] = [];
