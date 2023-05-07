@@ -31,7 +31,7 @@ export class StationSummaryComponent implements OnChanges {
    private _totalWorkforce = 0;
    totalWorkforceCapacity = 0;
    partialWorkforce = 0;
-   autoWorkforce = true
+   autoWorkforce = true;
 
    workforceNeeded: { amount: number; name: string; count: number }[] = [];
    workforceCapacity: { amount: number; name: string; count: number }[] = [];
@@ -121,9 +121,9 @@ export class StationSummaryComponent implements OnChanges {
            return acc;
        }, 0);
 
-      this.totalWorkforceCapacity = workforceCapacity
-      if(this.autoWorkforce) {
-          this.partialWorkforce = workforceNeeded > workforceCapacity ? workforceCapacity : workforceNeeded
+      this.totalWorkforceCapacity = workforceCapacity;
+      if (this.autoWorkforce) {
+          this.partialWorkforce = workforceNeeded > workforceCapacity ? workforceCapacity : workforceNeeded;
       } else if (this.partialWorkforce > workforceCapacity) {
          this.partialWorkforce = workforceCapacity;
       }
