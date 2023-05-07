@@ -91,6 +91,7 @@
                         class="form-control-range small"
                         id="workforce-slider"
                         min="0"
+                        [disabled]="autoWorkforce"
                         [max]="totalWorkforceCapacity"
                         [attr.step]="workforceStep"
                         [(ngModel)]="partialWorkforce"
@@ -101,6 +102,16 @@
                      {{ workforcePercent }}
                   </div>
                </div>
+                <div class="form-check">
+                    <input
+                        type="checkbox"
+                        id="auto-workforce-check-box"
+                        class="form-check-input"
+                        [(ngModel)]="autoWorkforce"
+                        (ngModelChange)="onChange()"
+                    />
+                    <label class="form-check-label" for="auto-workforce-check-box" i18n="@@isAutoWorkforce">Auto</label>
+                </div>
             </div>
          </div>
       </td>
