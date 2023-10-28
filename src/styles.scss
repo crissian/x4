@@ -1,3 +1,7 @@
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+@import "font-awesome/scss/font-awesome";
+
 .hover {
   cursor: pointer;
 }
@@ -9,3 +13,14 @@
 .navbar-logo {
   width: 40px;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.link {
+  text-decoration: underline;
+}
+
+html, body { height: 100%; background-color: #444444 }
+

@@ -7,94 +7,102 @@ import { StationModule } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
 
 interface LayoutModule {
-  count: number;
-  module: StationModule;
+   count: number;
+   module: StationModule;
 }
 
 interface LayoutData {
-  name: string;
-  modules: LayoutModule[];
+   name: string;
+   modules: LayoutModule[];
 }
 
 export enum LoadLayoutType {
-  load,
-  add
+   load,
+   add
 }
 
 export interface LoadLayoutResult {
-  layoutName: string;
-  type: LoadLayoutType;
+   layoutName: string;
+   type: LoadLayoutType;
 }
 
 @Component({
-  templateUrl: './load-layout.component.html'
+   templateUrl: './load-layout.component.html'
 })
 export class LoadLayoutComponent extends ComponentBase implements OnInit {
-  entities: LayoutData[];
+   entities: LayoutData[];
 
-  constructor(public activeModal: NgbActiveModal, private modal: NgbModal,
-              private layoutService: LayoutService,
-              private moduleService: ModuleService) {
-    super();
-  }
+   constructor(public activeModal: NgbActiveModal, private modal: NgbModal,
+               private layoutService: LayoutService,
+               private moduleService: ModuleService) {
+      super();
+   }
 
-  ngOnInit(): void {
-    this.entities = this.layoutService
-      .getLayouts()
-      .map<LayoutData>(x => {
-        return {
-          name: x.name,
-          modules: x.config
-            .map<LayoutModule>(y => {
-              return { count: y.count, module: this.moduleService.getEntity(y.moduleId)};
-            })
-        };
-      });
-  }
+   ngOnInit(): void {
+      this.entities = this.layoutService
+         .getLayouts()
+         .map<LayoutData>(x => {
+            return {
+               name: x.name,
+               modules: x.config
+                  .map<LayoutModule>(y => {
+                     return { count: y.count, module: this.moduleService.getEntity(y.moduleId) };
+                  })
+            };
+         });
+   }
 
-  // noinspection JSMethodCanBeStatic
-  getModules(item: LayoutData) {
-    return item.modules.map(x => x.count + ' x ' + (x.module == null ? '' : x.module.name)).join(', ');
-  }
+   // noinspection JSMethodCanBeStatic
+   getModules(item: LayoutData) {
+      let hasMore = false;
 
-  loadLayout(event: any, item: LayoutData) {
-    event.preventDefault();
-    event.stopPropagation();
+      let modules = item.modules;
+      if (modules.length > 3) {
+         modules = modules.slice(0, 3);
+         hasMore = true;
+      }
 
-    const result: LoadLayoutResult = {
-      layoutName: item.name,
-      type: LoadLayoutType.load
-    };
+      return modules.map(x => x.count + ' x ' + (x.module == null ? '' : x.module.name)).join(', ') + (hasMore ? '...' : '');
+   }
 
-    this.activeModal.close(result);
-  }
+   loadLayout(event: any, item: LayoutData) {
+      event.preventDefault();
+      event.stopPropagation();
 
-  addLayout(event: any, item: LayoutData) {
-    event.preventDefault();
-    event.stopPropagation();
+      const result: LoadLayoutResult = {
+         layoutName: item.name,
+         type: LoadLayoutType.load
+      };
 
-    const result: LoadLayoutResult = {
-      layoutName: item.name,
-      type: LoadLayoutType.add
-    };
+      this.activeModal.close(result);
+   }
 
-    this.activeModal.close(result);
-  }
+   addLayout(event: any, item: LayoutData) {
+      event.preventDefault();
+      event.stopPropagation();
 
-  deleteLayout(event: any, item: LayoutData) {
-    event.preventDefault();
-    event.stopPropagation();
+      const result: LoadLayoutResult = {
+         layoutName: item.name,
+         type: LoadLayoutType.add
+      };
 
-    const modalRef = this.modal.open(ConfirmComponent);
-    modalRef.componentInstance.title = 'Confirm Delete';
-    modalRef.componentInstance.message = `Are you sure you want to delete <strong>${item.name}</strong>?`;
+      this.activeModal.close(result);
+   }
 
-    modalRef.result
-      .then(res => {
-        if (res) {
-          this.layoutService.deleteLayout(item.name);
-          this.ngOnInit();
-        }
-      });
-  }
+   deleteLayout(event: any, item: LayoutData) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const modalRef = this.modal.open(ConfirmComponent);
+      modalRef.componentInstance.title = 'Confirm Delete';
+      modalRef.componentInstance.message = `Are you sure you want to delete <strong>${item.name}</strong>?`;
+
+      modalRef.result
+         .then(res => {
+            if (res) {
+               this.layoutService.deleteLayout(item.name);
+               this.ngOnInit();
+            }
+         });
+   }
 }

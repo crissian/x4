@@ -1,6 +1,6 @@
 <table class="table table-sm small table-hover">
    <thead>
-   <tr class="bg-light">
+   <tr>
       <th i18n="@@workforce" scope="col">Workforce</th>
       <th class="text-right" i18n="@@value" scope="col">Value</th>
    </tr>
@@ -81,18 +81,37 @@
          <div class="row">
             <div class="form-group col">
                <label for="workforce-slider">
-                  <span
-                     i18n="@@actualWorkforce">Actual Workforce:</span>&nbsp;<strong>{{ partialWorkforce }}</strong></label>
-               <input
-                  type="range"
-                  class="form-control-range small"
-                  id="workforce-slider"
-                  min="0"
-                  [max]="totalWorkforceCapacity"
-                  step="1"
-                  [(ngModel)]="partialWorkforce"
-                  (ngModelChange)="onChange()"
-               />
+                  <span>Actual Workforce:</span>&nbsp;<strong>{{ partialWorkforce | number:'1.0-0' }}</strong>
+               </label>
+
+               <div class="d-flex flex-row">
+                  <div class="flex-grow-1">
+                     <input
+                        type="range"
+                        class="form-control-range small"
+                        id="workforce-slider"
+                        min="0"
+                        [disabled]="autoWorkforce"
+                        [max]="totalWorkforceCapacity"
+                        [attr.step]="workforceStep"
+                        [(ngModel)]="partialWorkforce"
+                        (ngModelChange)="onChange()"
+                     />
+                  </div>
+                  <div class="ml-1">
+                     {{ workforcePercent }}
+                  </div>
+               </div>
+                <div class="form-check">
+                    <input
+                        type="checkbox"
+                        id="auto-workforce-check-box"
+                        class="form-check-input"
+                        [(ngModel)]="autoWorkforce"
+                        (ngModelChange)="onChange()"
+                    />
+                    <label class="form-check-label" for="auto-workforce-check-box" i18n="@@isAutoWorkforce">Auto</label>
+                </div>
             </div>
          </div>
       </td>
@@ -102,7 +121,7 @@
 
 <table class="table table-sm small table-hover">
    <thead>
-   <tr class="bg-light">
+   <tr>
       <th scope="col" i18n="@@productionPerHour">Production Per Hour</th>
       <th scope="col" class="text-right" i18n="@@amount">Amount</th>
    </tr>
@@ -192,7 +211,7 @@
                      <ng-container *ngSwitchCase="100"><span i18n="@@max">Max</span></ng-container>
                      <ng-container *ngSwitchDefault>{{ resourcesPrice }}%</ng-container>
                   </strong>
-               </label>
+               </label><br>
                <input
                   type="range"
                   class="form-control-range small"
@@ -206,15 +225,15 @@
             </div>
 
             <div class="form-group col">
-               <label for="products-price"
-               ><span i18n="@@productsPrice">Products Price:</span>&nbsp;
+               <label for="products-price">
+                  <span>Products Price:</span>&nbsp;
                   <strong [ngSwitch]="productsPrice">
                      <ng-container *ngSwitchCase="0"><span i18n="@@min">Min</span></ng-container>
                      <ng-container *ngSwitchCase="50"><span i18n="@@average">Average</span></ng-container>
                      <ng-container *ngSwitchCase="100"><span i18n="@@max">Max</span></ng-container>
                      <ng-container *ngSwitchDefault>{{ productsPrice }}%</ng-container>
                   </strong>
-               </label>
+               </label><br>
                <input
                   type="range"
                   class="form-control-range small"
@@ -234,7 +253,7 @@
 
 <table class="table table-sm small table-hover">
    <thead>
-   <tr class="bg-light">
+   <tr>
       <th scope="col" i18n="@@stationCosts">Station Costs</th>
       <th scope="col" class="text-right" i18n="@@amount">Amount</th>
    </tr>
@@ -273,15 +292,14 @@
       <td colspan="2">
          <div class="row">
             <div class="form-group col">
-               <label for="modules-resources-price"
-               ><span i18n="@@resourcesPrice">Resources Price:</span>&nbsp;
+               <label for="modules-resources-price"><span i18n="@@resourcesPrice">Resources Price:</span>&nbsp;
                   <strong [ngSwitch]="modulesResourcesPrice">
                      <ng-container *ngSwitchCase="0"><span i18n="@@min">Min</span></ng-container>
                      <ng-container *ngSwitchCase="50"><span i18n="@@average">Average</span></ng-container>
                      <ng-container *ngSwitchCase="100"><span i18n="@@max">Max</span></ng-container>
                      <ng-container *ngSwitchDefault>{{ modulesResourcesPrice }}%</ng-container>
                   </strong>
-               </label>
+               </label><br/>
                <input
                   type="range"
                   class="form-control-range small"

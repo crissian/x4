@@ -1,0 +1,43 @@
+<ng-container *ngIf="result">
+   <!-- No plan was imported -->
+   <div class="alert alert-danger" *ngIf="result.error && (!result.layouts || result.layouts.length === 0)">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="result = null">
+         <span aria-hidden="true">&times;</span>
+      </button>
+      <div>
+         Failed to import plans.
+      </div>
+   </div>
+
+   <!-- Some plans were imported -->
+   <div class="alert alert-warning" *ngIf="result.error && result.layouts && result.layouts.length > 0">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="result = null">
+         <span aria-hidden="true">&times;</span>
+      </button>
+      <div>
+         Imported plans, but errors occurred trying to import some of them.
+         <div class="small">
+            <ng-container *ngFor="let item of result.layouts; let last = last">
+               <a (click)="selectLayout(item)" class="cursor-pointer link text-primary">{{ item }}</a>
+               <span *ngIf="!last"> | </span>
+            </ng-container>
+         </div>
+      </div>
+   </div>
+
+   <!-- All plans were imported -->
+   <div class="alert alert-success" *ngIf="!result.error && result.layouts && result.layouts.length > 0">
+      <button type="button" class="close pull-right" data-dismiss="alert" aria-label="Close" (click)="result = null">
+         <span aria-hidden="true">&times;</span>
+      </button>
+      <div>
+         Successfully imported plans
+         <div class="small">
+            <ng-container *ngFor="let item of result.layouts; let last = last">
+               <a (click)="selectLayout(item)" class="cursor-pointer link text-primary">{{ item }}</a>
+               <span *ngIf="!last"> | </span>
+            </ng-container>
+         </div>
+      </div>
+   </div>
+</ng-container>

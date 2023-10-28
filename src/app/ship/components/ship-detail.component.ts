@@ -5,6 +5,7 @@ import { WareService } from '../../shared/services/ware.service';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { ShipService } from '../../shared/services/ship.service';
+import { BASE_TITLE } from '../../shared/services/constants';
 
 interface ProductionWareData {
   ware: Ware;
@@ -30,13 +31,13 @@ export class ShipDetailComponent extends EntityDetailsComponent<Ship> implements
     super(entityService, route);
   }
 
-  ngOnInit(): void {
-    this.titleService.setTitle('X4: Foundations / Split Vendetta - Ships');
+  override ngOnInit(): void {
+    this.titleService.setTitle(`${BASE_TITLE} - Ships`);
     super.ngOnInit();
   }
 
-  onEntityLoaded(entity: Ship) {
-    this.titleService.setTitle(`X4: Foundations / Split Vendetta - ${entity.name}`);
+  override onEntityLoaded(entity: Ship) {
+    this.titleService.setTitle(`${BASE_TITLE} - ${entity.name}`);
 
     this.entityProduction = entity.production
       .map<ProductionData>(x => {
@@ -132,7 +133,9 @@ export class ShipDetailComponent extends EntityDetailsComponent<Ship> implements
     }
 
     const valueObj = value.reduce((obj, slot) => {
+      // @ts-ignore
       obj[slot.size] = obj[slot.size] || 0;
+      // @ts-ignore
       obj[slot.size] += (<Dock>slot).capacity || 1;
       return obj;
     }, {});
@@ -140,6 +143,7 @@ export class ShipDetailComponent extends EntityDetailsComponent<Ship> implements
     const slots: SlotSummary[] = [];
     Object.keys(valueObj)
       .forEach(key => {
+        // @ts-ignore
         slots.push({ size: key, capacity: valueObj[key] });
       });
 

@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { AnalyticsConfig } from './analytics.config';
+
 declare var gtag: any;
 
 export interface PageInfo {
@@ -32,9 +33,11 @@ export class AnalyticsService {
     };
 
     if (page.location) {
+      // @ts-ignore
       args['page_location'] = page.path;
     }
     if (page.title) {
+      // @ts-ignore
       args['page_title'] = page.title;
     }
     gtag('config', this.config.trackingId, args);

@@ -5,33 +5,33 @@
         Ships
       </div>
       <div class="card-body">
-         <dx-data-grid [dataSource]="entities"
-                       [allowColumnReordering]="true"
-                       [allowColumnResizing]="true"
-                       [showBorders]="true"
-                       [hoverStateEnabled]="true"
-                       (onCellClick)="onRowSelect($event)"
-                       keyExpr="id">
+        <dx-data-grid [dataSource]="entities"
+                      [allowColumnReordering]="true"
+                      [allowColumnResizing]="true"
+                      [showBorders]="true"
+                      [hoverStateEnabled]="true"
+                      (onCellClick)="onRowSelect($event)"
+                      keyExpr="id">
             <dxo-state-storing [enabled]="true" type="localStorage" storageKey="shipFilter"></dxo-state-storing>
             <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
-            <dxo-pager [showPageSizeSelector]="true" [showNavigationButtons]="true"></dxo-pager>
-            <dxo-sorting mode="multiple"></dxo-sorting>
-            <dxo-filter-row [applyFilter]="currentFilter" [visible]="true"></dxo-filter-row>
-            <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+          <dxo-pager [showPageSizeSelector]="true" [showNavigationButtons]="true"></dxo-pager>
+          <dxo-sorting mode="multiple"></dxo-sorting>
+          <dxo-filter-row [applyFilter]="currentFilter" [visible]="true"></dxo-filter-row>
+          <dxo-filter-panel [visible]="true"></dxo-filter-panel>
 
-            <dxi-column dataField="name" caption="Name"></dxi-column>
-            <dxi-column dataField="race.id" caption="Race">
-               <dxo-lookup [dataSource]="races" valueExpr="id" displayExpr="name"></dxo-lookup>
-            </dxi-column>
-            <dxi-column dataField="type" caption="Type">
-               <dxo-lookup [dataSource]="shipTypes"></dxo-lookup>
-            </dxi-column>
-            <dxi-column dataField="size" caption="Size">
-               <dxo-lookup [dataSource]="sizes"></dxo-lookup>
-            </dxi-column>
-            <dxi-column dataField="purpose" caption="Purpose">
-               <dxo-lookup [dataSource]="purposes"></dxo-lookup>
-            </dxi-column>
+          <dxi-column dataField="name" caption="Name"></dxi-column>
+          <dxi-column dataField="race.id" caption="Race">
+            <dxo-lookup [dataSource]="races" valueExpr="id" displayExpr="name"></dxo-lookup>
+          </dxi-column>
+          <dxi-column dataField="type" caption="Type">
+            <dxo-lookup [dataSource]="shipTypes"></dxo-lookup>
+          </dxi-column>
+          <dxi-column dataField="size" caption="Size">
+            <dxo-lookup [dataSource]="sizes"></dxo-lookup>
+          </dxi-column>
+          <dxi-column dataField="purpose" caption="Purpose">
+            <dxo-lookup [dataSource]="purposes"></dxo-lookup>
+          </dxi-column>
 
 
             <dxi-column name="weapons" caption="Weapons" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="weaponCount"></dxi-column>
@@ -46,21 +46,21 @@
             </dxi-column>
             <dxi-column name="cargoSize" caption="Cargo Size" dataType="number" [allowSorting]="true" [allowFiltering]="true" [calculateCellValue]="cargoSize"></dxi-column>
 
-            <dxi-column dataField="people" caption="People" dataType="number"></dxi-column>
+          <dxi-column dataField="people" caption="People" dataType="number"></dxi-column>
 
             <dxi-column dataField="storage.unit" caption="Drones" dataType="number"></dxi-column>
             <dxi-column dataField="storage.missile" caption="Missiles" dataType="number"></dxi-column>
 
-            <dxo-summary>
-               <dxi-total-item
-                  column="name"
-                  summaryType="count">
-               </dxi-total-item>
-            </dxo-summary>
-         </dx-data-grid>
+          <dxo-summary>
+            <dxi-total-item
+              column="name"
+              summaryType="count">
+            </dxi-total-item>
+          </dxo-summary>
+        </dx-data-grid>
       </div>
        <div class="card-body">
-          <p>* The Speed and Acceleration was calculted with the fastest engine available. At the moment it is Split Combat MK4</p>
+          <p>* The Speed and Acceleration was calculated with the fastest engine available. At the moment it is Split Combat MK4</p>
        </div>
     </div>
   </div>

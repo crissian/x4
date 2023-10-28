@@ -18,5 +18,7 @@ export enum ShipType {
    corvette = 'Corvette',
    police = 'Police',
    battleship = 'Battleship',
-   gunboat = 'Gunboat'
+   gunboat = 'Gunboat',
+   tug = 'Tug',
+   compactor = 'Compactor'
 }

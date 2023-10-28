@@ -1,9 +1,10 @@
 import { ComponentBase } from './component-base';
-import { OnInit } from '@angular/core';
+import { OnInit, Directive } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { EntityService } from '../services/entity.service';
 import { ActivatedRoute } from '@angular/router';
 
+@Directive()
 export abstract class EntityDetailsComponent<T> extends ComponentBase implements OnInit {
   public entity: T;
 

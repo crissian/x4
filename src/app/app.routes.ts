@@ -13,30 +13,30 @@ export const appRoutes: Routes = [
    },
    {
       path: 'ships',
-      loadChildren: './ship/ships.module#ShipsModule'
+      loadChildren: () => import('./ship/ships.module').then(m => m.ShipsModule)
    },
    {
       path: 'equipment',
-      loadChildren: './equipment/equipment.module#EquipmentModule'
+      loadChildren: () => import('./equipment/equipment.module').then(m => m.EquipmentModule)
    },
    {
       path: 'factions',
-      loadChildren: './faction/faction.module#FactionModule'
+      loadChildren: () => import('./faction/faction.module').then(m => m.FactionModule)
    },
    {
       path: 'races',
-      loadChildren: './races/race.module#RaceModule'
+      loadChildren: () => import('./races/race.module').then(m => m.RaceModule)
    },
    {
       path: 'modules',
-      loadChildren: './module/module.module#ModuleModule'
+      loadChildren: () => import('./module/module.module').then(m => m.ModuleModule)
    },
    {
       path: 'station-calculator',
-      loadChildren: './station/station.module#StationModule'
+      loadChildren: () => import('./station/station.module').then(m => m.StationModule)
    },
    {
       path: 'wares',
-      loadChildren: './ware/ware.module#WareModule'
+      loadChildren: () => import('./ware/ware.module').then(m => m.WareModule)
    }
 ];

@@ -27,9 +27,11 @@
 
               <dt class="col-5">Product</dt>
               <dd class="col-7">
-                <span *ngIf="entity.product">
-                  <a [routerLink]="['/wares/', entity.product.id ]">{{ entity.product.name }}</a>
-                </span>
+                <div *ngIf="entity.product && entity.product.length">
+                   <div *ngFor="let prod of entity.product">
+                     <a [routerLink]="['/wares/', prod.id ]">{{ prod.name }}</a>
+                   </div>
+                </div>
                 <span *ngIf="!entity.product"> - </span>
               </dd>
 

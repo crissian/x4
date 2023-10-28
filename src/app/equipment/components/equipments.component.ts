@@ -9,6 +9,7 @@ import { RaceService } from '../../shared/services/race.service';
 import { EquipmentType } from '../../shared/services/data/equipment-type-data';
 import { EquipmentClass } from '../../shared/services/data/equipment-class-data';
 import { EnumFn } from '../../core/services/enum-fn';
+import {BASE_TITLE} from '../../shared/services/constants';
 
 @Component({
    templateUrl: './equipments.component.html'
@@ -27,8 +28,8 @@ export class EquipmentsComponent extends EntityListComponent<Equipment> implemen
       super(service, router, route);
    }
 
-   ngOnInit(): void {
-      this.titleService.setTitle('X4: Foundations / Split Vendetta - Equipment');
+  override ngOnInit(): void {
+      this.titleService.setTitle(`${BASE_TITLE} - Equipment`);
 
       this.sizes = EnumFn.values(Size);
       this.equipmentTypes = EnumFn.values(EquipmentType);
@@ -39,9 +40,11 @@ export class EquipmentsComponent extends EntityListComponent<Equipment> implemen
       super.ngOnInit();
    }
 
-   onRowSelect(e: any) {
+  override onRowSelect(e: any) {
       if (e.rowType == 'data') {
          return this.router.navigate([ e.row.data.id ], { relativeTo: this.route });
       }
+
+      return null;
    }
 }

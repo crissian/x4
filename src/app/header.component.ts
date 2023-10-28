@@ -1,4 +1,4 @@
-import {Component, Inject, LOCALE_ID} from '@angular/core';
+﻿import {Component, Inject, LOCALE_ID} from '@angular/core';
 import {environment} from '../environments/environment';
 
 @Component({
@@ -6,8 +6,4 @@ import {environment} from '../environments/environment';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-  languages = environment.languages;
-
-  constructor(@Inject(LOCALE_ID) public localeId: string) {
-  }
 }

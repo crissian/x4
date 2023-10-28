@@ -1,6 +1,6 @@
 <table class="table table-sm table-hover small">
    <thead>
-   <tr class="bg-light">
+   <tr>
       <th i18n="@@module" scope="col">Module</th>
       <th i18n="@@count" scope="col">Count</th>
       <th scope="col"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></th>
@@ -36,12 +36,8 @@
    <tfoot>
    <tr>
       <th>
-         <button (click)="addModule()" class="btn btn-secondary btn-sm" i18n="@@addModule" type="button"><i
-            class="fa fa-plus-square"></i>&nbsp;Add Module
-         </button>&nbsp;
-         <button (click)="backfillModules()" class="btn btn-sm btn-info" type="button"><i
-            class="fa fa-list"></i>&nbsp;<span i18n="@@backfillModules">Autofill Modules</span>
-         </button>
+         <button (click)="addModule()" class="btn btn-secondary btn-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp;Add Module</button>&nbsp;
+         <button (click)="autofillModules()" class="btn btn-sm btn-info" type="button"><i class="fa fa-list"></i>&nbsp;<span>Autofill Modules</span></button>
       </th>
    </tr>
    </tfoot>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { WareGroups } from '../../../shared/services/data/ware-groups-data';
 import { WareService } from '../../../shared/services/ware.service';
 import { ResourceCalculator, StationModuleModel } from '../station-calculator.model';
@@ -13,203 +13,231 @@ import { StationSummaryService } from './services/station-summary.service';
  * The Station Summary component
  */
 @Component({
-	selector: 'app-station-summary',
-	templateUrl: './station-summary.component.html',
+   selector: 'app-station-summary',
+   templateUrl: './station-summary.component.html',
 })
-export class StationSummaryComponent {
-	static basicResources = [WareGroups.gases, WareGroups.minerals, WareGroups.ice];
+export class StationSummaryComponent implements OnChanges {
+   static basicResources = [ WareGroups.gases, WareGroups.minerals, WareGroups.ice ];
 
-	expandState: { [key: string]: boolean } = {};
-	private _modules: StationModuleModel[];
+   expandState: { [key: string]: boolean } = {};
 
-	provideBasicResources = false;
-	provideAllResources = false;
-	isHq = false;
-	resourcesPrice = 50;
-	productsPrice = 50;
-	modulesResourcesPrice = 50;
+   provideBasicResources = false;
+   provideAllResources = false;
+   isHq = false;
+   resourcesPrice = 50;
+   productsPrice = 50;
+   modulesResourcesPrice = 50;
 
-	private _totalWorkforce = 0;
-	totalWorkforceCapacity = 0;
-	partialWorkforce = 0;
+   private _totalWorkforce = 0;
+   totalWorkforceCapacity = 0;
+   partialWorkforce = 0;
+   autoWorkforce = true;
 
-	workforceNeeded: { amount: number; name: string; count: number }[] = [];
-	workforceCapacity: { amount: number; name: string; count: number }[] = [];
+   workforceNeeded: { amount: number; name: string; count: number }[] = [];
+   workforceCapacity: { amount: number; name: string; count: number }[] = [];
 
-	resourcesNeeded: ResourceSummary[] = [];
-	resourcesProduced: ResourceSummary[] = [];
-	moduleCosts: ModuleCost[];
+   resourcesNeeded: ResourceSummary[] = [];
+   resourcesProduced: ResourceSummary[] = [];
+   moduleCosts: ModuleCost[];
 
-	totalModuleResourceCosts: ResourceAmount[] = [];
+   totalModuleResourceCosts: ResourceAmount[] = [];
 
-	@Output()
-	change = new EventEmitter();
+   @Output()
+   change = new EventEmitter();
 
-	constructor(private wareService: WareService, private stationSummaryService: StationSummaryService) {}
+    @Input()
+    modules: StationModuleModel[];
 
-	get modules() {
-		return this._modules;
-	}
+    @Input()
+    sunlight = 100;
 
-	@Input()
-	set modules(value: StationModuleModel[]) {
-		this._modules = value;
-		this.update();
-	}
+   constructor(private wareService: WareService, private stationSummaryService: StationSummaryService) {
+   }
 
-	get totalWorkforce() {
-		return this._totalWorkforce + (this.isHq ? 200 : 0);
-	}
+   ngOnChanges() {
+       this.update();
+   }
 
-	onChange() {
-		this.update();
-		this.change.emit();
-	}
+    get totalWorkforce() {
+      return this._totalWorkforce + (this.isHq ? 200 : 0);
+   }
 
-	update() {
-		this._totalWorkforce = 0;
+   onChange() {
+      this.update();
+      this.change.emit();
+   }
 
-		this.workforceNeeded = [];
-		this.workforceCapacity = [];
+   update() {
+      this._totalWorkforce = 0;
 
-		this.resourcesNeeded = [];
-		this.resourcesProduced = [];
-		this.moduleCosts = [];
+      this.workforceNeeded = [];
+      this.workforceCapacity = [];
 
-		if (this.modules == null) {
-			return;
-		}
+      this.resourcesNeeded = [];
+      this.resourcesProduced = [];
+      this.moduleCosts = [];
 
-		this.modules.forEach((item) => {
-			if (item.module != null && item.module.workForce != null) {
-				if (item.module.workForce.max != null) {
-					this._totalWorkforce += item.count * item.module.workForce.max;
-					this.workforceNeeded.push({
-						amount: item.module.workForce.max,
-						name: item.module.name,
-						count: item.count,
-					});
-				}
-				if (item.module.workForce.capacity != null) {
-					this.workforceCapacity.push({
-						amount: item.module.workForce.capacity,
-						name: item.module.name,
-						count: item.count,
-					});
-				}
-			}
-			if (item.module != null) {
-				const cost = this.getModuleCost(item);
-				if (cost != null) {
-					this.moduleCosts.push(cost);
-				}
-			}
-		});
-		
-		let workforce = this.modules.reduce((acc, item) => {
-			if (item.module && item.module.workForce && item.module.workForce.capacity) {
-				return acc + item.count * item.module.workForce.capacity;
-			}
-			return acc;
-		}, 0);
-		if (this.totalWorkforceCapacity != workforce) {
-			this.totalWorkforceCapacity = workforce;
-			this.partialWorkforce = workforce;
-		}
-		this.stationSummaryService.setPartialWorkforce(this.partialWorkforce);
+      if (this.modules == null) {
+         return;
+      }
 
-		const resources = ResourceCalculator.calculate(this.modules, this._totalWorkforce, this.partialWorkforce);
-		resources.sort((a, b) => this.wareService.compareWares(a.ware, b.ware));
+      this.modules.forEach((item) => {
+         if (item.module != null && item.module.workForce != null) {
+            if (item.module.workForce.max != null) {
+               this._totalWorkforce += item.count * item.module.workForce.max;
+               this.workforceNeeded.push({
+                  amount: item.module.workForce.max,
+                  name: item.module.name,
+                  count: item.count,
+               });
+            }
+            if (item.module.workForce.capacity != null) {
+               this.workforceCapacity.push({
+                  amount: item.module.workForce.capacity,
+                  name: item.module.name,
+                  count: item.count,
+               });
+            }
+         }
+         if (item.module != null) {
+            const cost = this.getModuleCost(item);
+            if (cost != null) {
+               this.moduleCosts.push(cost);
+            }
+         }
+      });
 
-		resources.forEach((x) => {
-			if (x.amount < 0) {
-				let warePrice: number = null;
-				if (this.provideAllResources) {
-					warePrice = 0;
-				} else if (
-					this.provideBasicResources &&
-					StationSummaryComponent.basicResources.indexOf(x.ware.group) >= 0
-				) {
-					warePrice = 0;
-				}
-				const model = new ResourceSummary(x, this, ResourcePriceType.expense, warePrice);
-				this.resourcesNeeded.push(model);
-			} else if (x.amount > 0) {
-				const model = new ResourceSummary(x, this, ResourcePriceType.product);
-				this.resourcesProduced.push(model);
-			}
-		});
+      const workforceCapacity = this.modules.reduce((acc, item) => {
+         if (item.module && item.module.workForce && item.module.workForce.capacity) {
+            return acc + item.count * item.module.workForce.capacity;
+         }
+         return acc;
+      }, 0);
 
-		this.totalModuleResourceCosts = [];
+       const workforceNeeded = this.modules.reduce((acc, item) => {
+           if (item.module && item.module.workForce && item.module.workForce.max) {
+               return acc + item.count * item.module.workForce.max;
+           }
+           return acc;
+       }, 0);
 
-		this.moduleCosts.forEach((cost) => {
-			cost.items.forEach((item) => {
-				let resourceCost = this.totalModuleResourceCosts.find((x) => x.ware.id == item.ware.id);
-				if (resourceCost == null) {
-					resourceCost = {
-						ware: item.ware,
-						value: cost.count * item.amount,
-					};
-					this.totalModuleResourceCosts.push(resourceCost);
-				} else {
-					resourceCost.value += cost.count * item.amount;
-				}
-			});
-		});
-	}
+      this.totalWorkforceCapacity = workforceCapacity;
+      if (this.autoWorkforce) {
+          this.partialWorkforce = workforceNeeded > workforceCapacity ? workforceCapacity : workforceNeeded;
+      } else if (this.partialWorkforce > workforceCapacity) {
+         this.partialWorkforce = workforceCapacity;
+      }
 
-	get totalExpenses() {
-		let totalExpenses = 0;
+      this.stationSummaryService.setPartialWorkforce(this.partialWorkforce);
 
-		this.resourcesNeeded.forEach((x) => {
-			totalExpenses += x.amount * x.price;
-		});
+      const resources = ResourceCalculator.calculate(this.modules, this.sunlight, this.partialWorkforce);
+      resources.sort((a, b) => this.wareService.compareWares(a.ware, b.ware));
 
-		return totalExpenses;
-	}
+      resources.forEach((x) => {
+         if (x.amount < 0) {
+            let warePrice: number = null;
+            if (this.provideAllResources) {
+               warePrice = 0;
+            } else if (
+               this.provideBasicResources &&
+               StationSummaryComponent.basicResources.indexOf(x.ware.group) >= 0
+            ) {
+               warePrice = 0;
+            }
+            const model = new ResourceSummary(x, this, ResourcePriceType.expense, warePrice);
+            this.resourcesNeeded.push(model);
+         } else if (x.amount > 0) {
+            const model = new ResourceSummary(x, this, ResourcePriceType.product);
+            this.resourcesProduced.push(model);
+         }
+      });
 
-	get totalProfits() {
-		let totalProfits = 0;
+      this.totalModuleResourceCosts = [];
 
-		this.resourcesProduced.forEach((x) => {
-			totalProfits += x.amount * x.price;
-		});
+      this.moduleCosts.forEach((cost) => {
+         cost.items.forEach((item) => {
+            let resourceCost = this.totalModuleResourceCosts.find((x) => x.ware.id == item.ware.id);
+            if (resourceCost == null) {
+               resourceCost = {
+                  ware: item.ware,
+                  value: cost.count * item.amount,
+               };
+               this.totalModuleResourceCosts.push(resourceCost);
+            } else {
+               resourceCost.value += cost.count * item.amount;
+            }
+         });
+      });
+   }
 
-		return totalProfits;
-	}
+   get workforceStep() {
+      if (this.totalWorkforceCapacity === 0) {
+         return 1;
+      }
 
-	get totalModuleCost() {
-		let total = 0;
+      return this.totalWorkforceCapacity / 20;
+   }
 
-		this.moduleCosts.forEach((x) => {
-			total += x.price;
-		});
+   get workforcePercent() {
+      if (this.totalWorkforceCapacity === 0) {
+         return '0%';
+      }
 
-		return total;
-	}
+      return Math.round(100 * this.partialWorkforce / this.totalWorkforceCapacity) + '%';
+   }
 
-	private getModuleCost(item: StationModuleModel) {
-		const production = item.module.production[0];
-		if (!production) {
-			return null;
-		}
+   get totalExpenses() {
+      let totalExpenses = 0;
 
-		let totalMin = 0;
-		let totalMax = 0;
+      this.resourcesNeeded.forEach((x) => {
+         totalExpenses += x.amount * x.price;
+      });
 
-		const items: ModuleCostItem[] = [];
-		production.wares.forEach((x) => {
-			const ware = this.wareService.getEntity(x.ware);
-			totalMin += ware.price.min * x.amount;
-			totalMax += ware.price.max * x.amount;
+      return totalExpenses;
+   }
 
-			items.push(new ModuleCostItem(ware, x.amount, this));
-		});
+   get totalProfits() {
+      let totalProfits = 0;
 
-		return new ModuleCost(item, this, totalMin, totalMax, items);
-	}
+      this.resourcesProduced.forEach((x) => {
+         totalProfits += x.amount * x.price;
+      });
 
-	toggleExpanded(key: string) {
-		this.expandState[key] = !this.expandState[key];
-	}
+      return totalProfits;
+   }
+
+   get totalModuleCost() {
+      let total = 0;
+
+      this.moduleCosts.forEach((x) => {
+         total += x.price;
+      });
+
+      return total;
+   }
+
+   private getModuleCost(item: StationModuleModel) {
+      const production = item.module.production[0];
+      if (!production) {
+         return null;
+      }
+
+      let totalMin = 0;
+      let totalMax = 0;
+
+      const items: ModuleCostItem[] = [];
+      production.wares.forEach((x) => {
+         const ware = this.wareService.getEntity(x.ware);
+         totalMin += ware.price.min * x.amount;
+         totalMax += ware.price.max * x.amount;
+
+         items.push(new ModuleCostItem(ware, x.amount, this));
+      });
+
+      return new ModuleCost(item, this, totalMin, totalMax, items);
+   }
+
+   toggleExpanded(key: string) {
+      this.expandState[key] = !this.expandState[key];
+   }
 }

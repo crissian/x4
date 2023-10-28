@@ -36,6 +36,26 @@ export const Equipments = [
                { ware: 'silicon', amount: 3 },
             ],
          },
+         {
+            time: 1,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 90 },
+               { ware: 'metallicmicrolattice', amount: 20 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 30 },
+               { ware: 'hullparts', amount: 1 },
+            ],
+         },
       ]
    },
    {
@@ -49,7 +69,7 @@ export const Equipments = [
       size: Size.large,
       hull: 4033,
       price: { min: 321518, max: 392966, avg: 357242 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 4206, reverse: 4627 },
       travel: { thrust: 31, attack: 75, charge: 20, release: 0 },
       production: [
@@ -62,6 +82,17 @@ export const Equipments = [
                { ware: 'antimatterconverters', amount: 147 },
                { ware: 'energycells', amount: 25 },
                { ware: 'engineparts', amount: 67 },
+            ],
+         },
+         {
+            time: 20,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 19 },
+               { ware: 'energycells', amount: 206 },
+               { ware: 'hullparts', amount: 108 },
             ],
          },
       ]
@@ -77,7 +108,7 @@ export const Equipments = [
       size: Size.large,
       hull: 4033,
       price: { min: 337593, max: 412614, avg: 375104 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 4006, reverse: 3605 },
       travel: { thrust: 33, attack: 85, charge: 20, release: 0 },
       production: [
@@ -92,6 +123,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 76 },
             ],
          },
+         {
+            time: 20,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 19 },
+               { ware: 'energycells', amount: 304 },
+               { ware: 'hullparts', amount: 111 },
+            ],
+         },
       ]
    },
    {
@@ -104,7 +146,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 11767, max: 14382, avg: 13074 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 1002, reverse: 952 },
       travel: { thrust: 9, attack: 30, charge: 1, release: 0 },
       production: [
@@ -119,6 +161,16 @@ export const Equipments = [
                { ware: 'engineparts', amount: 5 },
             ],
          },
+         {
+            time: 15,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 99 },
+               { ware: 'hullparts', amount: 3 },
+            ],
+         },
       ]
    },
    {
@@ -131,7 +183,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 58166, max: 71092, avg: 64629 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 1212, reverse: 1228 },
       travel: { thrust: 9, attack: 30, charge: 1, release: 0 },
       production: [
@@ -146,6 +198,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 22 },
             ],
          },
+         {
+            time: 15,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 3 },
+               { ware: 'energycells', amount: 61 },
+               { ware: 'hullparts', amount: 18 },
+            ],
+         },
       ]
    },
    {
@@ -158,7 +221,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 287722, max: 351660, avg: 319691 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 1353, reverse: 1413 },
       travel: { thrust: 9, attack: 30, charge: 1, release: 0 },
       production: [
@@ -173,6 +236,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 110 },
             ],
          },
+         {
+            time: 15,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 15 },
+               { ware: 'energycells', amount: 241 },
+               { ware: 'hullparts', amount: 88 },
+            ],
+         },
       ]
    },
    {
@@ -185,7 +259,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 14357, max: 17547, avg: 15952 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 1052, reverse: 1105 },
       travel: { thrust: 8, attack: 15, charge: 0, release: 0 },
       production: [
@@ -200,6 +274,16 @@ export const Equipments = [
                { ware: 'engineparts', amount: 7 },
             ],
          },
+         {
+            time: 15,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 109 },
+               { ware: 'hullparts', amount: 4 },
+            ],
+         },
       ]
    },
    {
@@ -212,7 +296,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 69711, max: 85202, avg: 77457 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 1273, reverse: 1471 },
       travel: { thrust: 8, attack: 15, charge: 0, release: 0 },
       production: [
@@ -227,6 +311,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 26 },
             ],
          },
+         {
+            time: 15,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 3 },
+               { ware: 'energycells', amount: 156 },
+               { ware: 'hullparts', amount: 21 },
+            ],
+         },
       ]
    },
    {
@@ -239,7 +334,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 345444, max: 422209, avg: 383827 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 1420, reverse: 1715 },
       travel: { thrust: 8, attack: 15, charge: 0, release: 0 },
       production: [
@@ -254,6 +349,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 130 },
             ],
          },
+         {
+            time: 15,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 18 },
+               { ware: 'energycells', amount: 293 },
+               { ware: 'hullparts', amount: 106 },
+            ],
+         },
       ]
    },
    {
@@ -266,7 +372,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 13062, max: 15964, avg: 14513 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 1002, reverse: 902 },
       travel: { thrust: 12, attack: 45, charge: 3, release: 0 },
       production: [
@@ -281,6 +387,16 @@ export const Equipments = [
                { ware: 'engineparts', amount: 6 },
             ],
          },
+         {
+            time: 15,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 97 },
+               { ware: 'hullparts', amount: 4 },
+            ],
+         },
       ]
    },
    {
@@ -293,7 +409,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 65234, max: 79730, avg: 72482 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 1212, reverse: 1091 },
       travel: { thrust: 12, attack: 45, charge: 3, release: 0 },
       production: [
@@ -308,6 +424,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 25 },
             ],
          },
+         {
+            time: 15,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 3 },
+               { ware: 'energycells', amount: 113 },
+               { ware: 'hullparts', amount: 20 },
+            ],
+         },
       ]
    },
    {
@@ -320,7 +447,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 331013, max: 404572, avg: 367793 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 1353, reverse: 1217 },
       travel: { thrust: 12, attack: 45, charge: 3, release: 0 },
       production: [
@@ -335,6 +462,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 125 },
             ],
          },
+         {
+            time: 15,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 17 },
+               { ware: 'energycells', amount: 318 },
+               { ware: 'hullparts', amount: 101 },
+            ],
+         },
       ]
    },
    {
@@ -347,7 +485,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 5526, max: 6754, avg: 6140 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 396, reverse: 416 },
       travel: { thrust: 14, attack: 30, charge: 1, release: 0 },
       production: [
@@ -359,6 +497,16 @@ export const Equipments = [
             wares: [
                { ware: 'energycells', amount: 10 },
                { ware: 'engineparts', amount: 4 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 42 },
+               { ware: 'hullparts', amount: 1 },
             ],
          },
       ]
@@ -373,7 +521,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 26370, max: 32230, avg: 29300 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 479, reverse: 574 },
       travel: { thrust: 14, attack: 30, charge: 1, release: 0 },
       production: [
@@ -388,6 +536,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 10 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 79 },
+               { ware: 'hullparts', amount: 8 },
+            ],
+         },
       ]
    },
    {
@@ -400,7 +559,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 123301, max: 150701, avg: 137001 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 535, reverse: 679 },
       travel: { thrust: 14, attack: 30, charge: 1, release: 0 },
       production: [
@@ -415,6 +574,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 45 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 6 },
+               { ware: 'energycells', amount: 176 },
+               { ware: 'hullparts', amount: 38 },
+            ],
+         },
       ]
    },
    {
@@ -427,7 +597,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 8116, max: 9919, avg: 9017 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 416, reverse: 499 },
       travel: { thrust: 12, attack: 15, charge: 0, release: 0 },
       production: [
@@ -439,6 +609,16 @@ export const Equipments = [
             wares: [
                { ware: 'energycells', amount: 10 },
                { ware: 'engineparts', amount: 6 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 52 },
+               { ware: 'hullparts', amount: 2 },
             ],
          },
       ]
@@ -453,7 +633,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 40504, max: 49505, avg: 45005 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 503, reverse: 710 },
       travel: { thrust: 12, attack: 15, charge: 0, release: 0 },
       production: [
@@ -468,6 +648,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 16 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 2 },
+               { ware: 'energycells', amount: 56 },
+               { ware: 'hullparts', amount: 12 },
+            ],
+         },
       ]
    },
    {
@@ -480,7 +671,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 181023, max: 221250, avg: 201137 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 561, reverse: 850 },
       travel: { thrust: 12, attack: 15, charge: 0, release: 0 },
       production: [
@@ -495,6 +686,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 65 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 9 },
+               { ware: 'energycells', amount: 228 },
+               { ware: 'hullparts', amount: 56 },
+            ],
+         },
       ]
    },
    {
@@ -507,7 +709,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 6821, max: 8336, avg: 7579 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 396, reverse: 396 },
       travel: { thrust: 18, attack: 45, charge: 3, release: 0 },
       production: [
@@ -519,6 +721,16 @@ export const Equipments = [
             wares: [
                { ware: 'energycells', amount: 10 },
                { ware: 'engineparts', amount: 5 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 54 },
+               { ware: 'hullparts', amount: 1 },
             ],
          },
       ]
@@ -533,7 +745,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 34732, max: 42450, avg: 38591 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 479, reverse: 499 },
       travel: { thrust: 18, attack: 45, charge: 3, release: 0 },
       production: [
@@ -548,6 +760,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 14 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 142 },
+               { ware: 'hullparts', amount: 10 },
+            ],
+         },
       ]
    },
    {
@@ -560,7 +783,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 166592, max: 203613, avg: 185103 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 535, reverse: 568 },
       travel: { thrust: 18, attack: 45, charge: 3, release: 0 },
       production: [
@@ -573,6 +796,17 @@ export const Equipments = [
                { ware: 'antimatterconverters', amount: 55 },
                { ware: 'energycells', amount: 40 },
                { ware: 'engineparts', amount: 60 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 9 },
+               { ware: 'energycells', amount: 126 },
+               { ware: 'hullparts', amount: 51 },
             ],
          },
       ]
@@ -588,7 +822,7 @@ export const Equipments = [
       size: Size.extralarge,
       hull: 12193,
       price: { min: 424061, max: 518297, avg: 471179 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 11076, reverse: 12184 },
       travel: { thrust: 31, attack: 75, charge: 30, release: 0 },
       production: [
@@ -601,6 +835,17 @@ export const Equipments = [
                { ware: 'antimatterconverters', amount: 193 },
                { ware: 'energycells', amount: 50 },
                { ware: 'engineparts', amount: 89 },
+            ],
+         },
+         {
+            time: 30,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 25 },
+               { ware: 'energycells', amount: 290 },
+               { ware: 'hullparts', amount: 142 },
             ],
          },
       ]
@@ -616,7 +861,7 @@ export const Equipments = [
       size: Size.extralarge,
       hull: 9955,
       price: { min: 445263, max: 544210, avg: 494737 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       thrust: { forward: 10549, reverse: 9494 },
       travel: { thrust: 33, attack: 85, charge: 30, release: 0 },
       production: [
@@ -631,6 +876,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 101 },
             ],
          },
+         {
+            time: 30,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 25 },
+               { ware: 'energycells', amount: 406 },
+               { ware: 'hullparts', amount: 147 },
+            ],
+         },
       ]
    },
    {
@@ -642,7 +898,7 @@ export const Equipments = [
       type: EquipmentType.engines,
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
-      price: { min: 1, max: 1, avg: 1 },
+      price: { min: 0, max: 0, avg: 0 },
       owners: [ Factions.khaak ],
       thrust: { forward: 1400, reverse: 1600 },
       travel: { thrust: 7, attack: 10, charge: 3, release: 0 },
@@ -658,7 +914,7 @@ export const Equipments = [
       type: EquipmentType.engines,
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
-      price: { min: 1, max: 1, avg: 1 },
+      price: { min: 0, max: 0, avg: 0 },
       owners: [ Factions.khaak ],
       thrust: { forward: 1400, reverse: 1662 },
       travel: { thrust: 7, attack: 10, charge: 3, release: 0 },
@@ -674,7 +930,7 @@ export const Equipments = [
       type: EquipmentType.engines,
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
-      price: { min: 1, max: 1, avg: 1 },
+      price: { min: 0, max: 0, avg: 0 },
       owners: [ Factions.khaak ],
       thrust: { forward: 500, reverse: 770 },
       travel: { thrust: 7, attack: 10, charge: 2, release: 0 },
@@ -692,7 +948,7 @@ export const Equipments = [
       size: Size.large,
       hull: 4018,
       price: { min: 324732, max: 396895, avg: 360814 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 4332, reverse: 4766 },
       travel: { thrust: 29, attack: 75, charge: 20, release: 0 },
       production: [
@@ -720,7 +976,7 @@ export const Equipments = [
       size: Size.large,
       hull: 4018,
       price: { min: 340969, max: 416740, avg: 378855 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 4126, reverse: 3713 },
       travel: { thrust: 31, attack: 85, charge: 20, release: 0 },
       production: [
@@ -747,7 +1003,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 11767, max: 14382, avg: 13074 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1032, reverse: 980 },
       travel: { thrust: 8, attack: 30, charge: 1, release: 0 },
       production: [
@@ -774,7 +1030,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 58166, max: 71092, avg: 64629 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1249, reverse: 1265 },
       travel: { thrust: 8, attack: 30, charge: 1, release: 0 },
       production: [
@@ -801,7 +1057,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 287722, max: 351660, avg: 319691 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1393, reverse: 1455 },
       travel: { thrust: 8, attack: 30, charge: 1, release: 0 },
       production: [
@@ -828,7 +1084,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 14357, max: 17547, avg: 15952 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
       thrust: { forward: 1084, reverse: 1138 },
       travel: { thrust: 7, attack: 15, charge: 0, release: 0 },
       production: [
@@ -855,7 +1111,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 69711, max: 85202, avg: 77457 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1311, reverse: 1515 },
       travel: { thrust: 7, attack: 15, charge: 0, release: 0 },
       production: [
@@ -882,7 +1138,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 345444, max: 422209, avg: 383827 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1463, reverse: 1766 },
       travel: { thrust: 7, attack: 15, charge: 0, release: 0 },
       production: [
@@ -909,7 +1165,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 13062, max: 15964, avg: 14513 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1032, reverse: 929 },
       travel: { thrust: 11, attack: 45, charge: 3, release: 0 },
       production: [
@@ -936,7 +1192,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 65234, max: 79730, avg: 72482 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1249, reverse: 1124 },
       travel: { thrust: 11, attack: 45, charge: 3, release: 0 },
       production: [
@@ -963,7 +1219,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.medium,
       price: { min: 331013, max: 404572, avg: 367793 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 1393, reverse: 1254 },
       travel: { thrust: 11, attack: 45, charge: 3, release: 0 },
       production: [
@@ -990,7 +1246,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 5526, max: 6754, avg: 6140 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 408, reverse: 428 },
       travel: { thrust: 13, attack: 30, charge: 1, release: 0 },
       production: [
@@ -1016,7 +1272,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 26370, max: 32230, avg: 29300 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 494, reverse: 591 },
       travel: { thrust: 13, attack: 30, charge: 1, release: 0 },
       production: [
@@ -1043,7 +1299,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 123301, max: 150701, avg: 137001 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 551, reverse: 700 },
       travel: { thrust: 13, attack: 30, charge: 1, release: 0 },
       production: [
@@ -1070,7 +1326,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 8116, max: 9919, avg: 9017 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 428, reverse: 514 },
       travel: { thrust: 11, attack: 15, charge: 0, release: 0 },
       production: [
@@ -1096,7 +1352,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 40504, max: 49505, avg: 45005 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
       thrust: { forward: 518, reverse: 731 },
       travel: { thrust: 11, attack: 15, charge: 0, release: 0 },
       production: [
@@ -1123,7 +1379,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 181023, max: 221250, avg: 201137 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
       thrust: { forward: 578, reverse: 876 },
       travel: { thrust: 11, attack: 15, charge: 0, release: 0 },
       production: [
@@ -1150,7 +1406,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 6821, max: 8336, avg: 7579 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 408, reverse: 408 },
       travel: { thrust: 17, attack: 45, charge: 3, release: 0 },
       production: [
@@ -1176,7 +1432,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 34732, max: 42450, avg: 38591 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 494, reverse: 514 },
       travel: { thrust: 17, attack: 45, charge: 3, release: 0 },
       production: [
@@ -1203,7 +1459,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.engine,
       size: Size.small,
       price: { min: 166592, max: 203613, avg: 185103 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 551, reverse: 585 },
       travel: { thrust: 17, attack: 45, charge: 3, release: 0 },
       production: [
@@ -1231,7 +1487,7 @@ export const Equipments = [
       size: Size.extralarge,
       hull: 9899,
       price: { min: 428301, max: 523479, avg: 475890 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 11408, reverse: 12549 },
       travel: { thrust: 29, attack: 75, charge: 30, release: 0 },
       production: [
@@ -1259,7 +1515,7 @@ export const Equipments = [
       size: Size.extralarge,
       hull: 9955,
       price: { min: 449716, max: 549653, avg: 499685 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       thrust: { forward: 10865, reverse: 9779 },
       travel: { thrust: 31, attack: 85, charge: 30, release: 0 },
       production: [
@@ -1384,6 +1640,17 @@ export const Equipments = [
                { ware: 'engineparts', amount: 22 },
             ],
          },
+         {
+            time: 15,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 3 },
+               { ware: 'energycells', amount: 61 },
+               { ware: 'hullparts', amount: 18 },
+            ],
+         },
       ]
    },
    {
@@ -1436,6 +1703,16 @@ export const Equipments = [
                { ware: 'antimatterconverters', amount: 3 },
                { ware: 'energycells', amount: 15 },
                { ware: 'engineparts', amount: 7 },
+            ],
+         },
+         {
+            time: 15,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 109 },
+               { ware: 'hullparts', amount: 4 },
             ],
          },
       ]
@@ -1571,6 +1848,17 @@ export const Equipments = [
                { ware: 'antimatterconverters', amount: 105 },
                { ware: 'energycells', amount: 60 },
                { ware: 'engineparts', amount: 125 },
+            ],
+         },
+         {
+            time: 15,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 17 },
+               { ware: 'energycells', amount: 318 },
+               { ware: 'hullparts', amount: 101 },
             ],
          },
       ]
@@ -2040,6 +2328,25 @@ export const Equipments = [
                { ware: 'silicon', amount: 3 },
             ],
          },
+         {
+            time: 3,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 30 },
+               { ware: 'metallicmicrolattice', amount: 27 },
+            ],
+         },
+         {
+            time: 3,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 37 },
+            ],
+         },
       ]
    },
    {
@@ -2072,6 +2379,25 @@ export const Equipments = [
                { ware: 'energycells', amount: 6 },
                { ware: 'ore', amount: 2 },
                { ware: 'silicon', amount: 1 },
+            ],
+         },
+         {
+            time: 1.5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 15 },
+               { ware: 'metallicmicrolattice', amount: 12 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 17 },
             ],
          },
       ]
@@ -2108,6 +2434,25 @@ export const Equipments = [
                { ware: 'silicon', amount: 1 },
             ],
          },
+         {
+            time: 1,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 7 },
+               { ware: 'metallicmicrolattice', amount: 31 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 10 },
+            ],
+         },
       ]
    },
    {
@@ -2140,6 +2485,25 @@ export const Equipments = [
                { ware: 'energycells', amount: 9 },
                { ware: 'ore', amount: 4 },
                { ware: 'silicon', amount: 3 },
+            ],
+         },
+         {
+            time: 1.5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 14 },
+               { ware: 'metallicmicrolattice', amount: 32 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 28 },
             ],
          },
       ]
@@ -2176,6 +2540,25 @@ export const Equipments = [
                { ware: 'silicon', amount: 1 },
             ],
          },
+         {
+            time: 1,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 5 },
+               { ware: 'metallicmicrolattice', amount: 4 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 6 },
+            ],
+         },
       ]
    },
    {
@@ -2210,6 +2593,25 @@ export const Equipments = [
                { ware: 'silicon', amount: 1 },
             ],
          },
+         {
+            time: 1.5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 10 },
+               { ware: 'metallicmicrolattice', amount: 10 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 13 },
+            ],
+         },
       ]
    },
    {
@@ -2242,6 +2644,25 @@ export const Equipments = [
                { ware: 'energycells', amount: 10 },
                { ware: 'ore', amount: 2 },
                { ware: 'silicon', amount: 1 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 10 },
+               { ware: 'metallicmicrolattice', amount: 16 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 16 },
             ],
          },
       ]
@@ -2279,6 +2700,26 @@ export const Equipments = [
                { ware: 'silicon', amount: 3 },
             ],
          },
+         {
+            time: 2,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 16 },
+               { ware: 'metallicmicrolattice', amount: 12 },
+               { ware: 'siliconcarbide', amount: 1 },
+            ],
+         },
+         {
+            time: 2,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 28 },
+            ],
+         },
       ]
    },
    {
@@ -2312,6 +2753,25 @@ export const Equipments = [
                { ware: 'energycells', amount: 10 },
                { ware: 'ore', amount: 2 },
                { ware: 'silicon', amount: 1 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 8 },
+               { ware: 'metallicmicrolattice', amount: 15 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 12 },
             ],
          },
       ]
@@ -2349,6 +2809,26 @@ export const Equipments = [
                { ware: 'silicon', amount: 4 },
             ],
          },
+         {
+            time: 4,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 20 },
+               { ware: 'metallicmicrolattice', amount: 17 },
+               { ware: 'siliconcarbide', amount: 1 },
+            ],
+         },
+         {
+            time: 4,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 34 },
+            ],
+         },
       ]
    },
    {
@@ -2382,6 +2862,25 @@ export const Equipments = [
                { ware: 'energycells', amount: 15 },
                { ware: 'ore', amount: 1 },
                { ware: 'silicon', amount: 1 },
+            ],
+         },
+         {
+            time: 2,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 10 },
+               { ware: 'metallicmicrolattice', amount: 17 },
+            ],
+         },
+         {
+            time: 2,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 15 },
             ],
          },
       ]
@@ -2419,6 +2918,26 @@ export const Equipments = [
                { ware: 'silicon', amount: 5 },
             ],
          },
+         {
+            time: 2,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 20 },
+               { ware: 'metallicmicrolattice', amount: 24 },
+               { ware: 'siliconcarbide', amount: 1 },
+            ],
+         },
+         {
+            time: 2,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 36 },
+            ],
+         },
       ]
    },
    {
@@ -2452,6 +2971,25 @@ export const Equipments = [
                { ware: 'energycells', amount: 10 },
                { ware: 'ore', amount: 3 },
                { ware: 'silicon', amount: 2 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 10 },
+               { ware: 'metallicmicrolattice', amount: 26 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 18 },
             ],
          },
       ]
@@ -2489,6 +3027,26 @@ export const Equipments = [
                { ware: 'silicon', amount: 3 },
             ],
          },
+         {
+            time: 2,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 20 },
+               { ware: 'metallicmicrolattice', amount: 11 },
+               { ware: 'siliconcarbide', amount: 1 },
+            ],
+         },
+         {
+            time: 2,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 33 },
+            ],
+         },
       ]
    },
    {
@@ -2522,6 +3080,25 @@ export const Equipments = [
                { ware: 'energycells', amount: 10 },
                { ware: 'ore', amount: 2 },
                { ware: 'silicon', amount: 2 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 10 },
+               { ware: 'metallicmicrolattice', amount: 20 },
+            ],
+         },
+         {
+            time: 1,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 16 },
             ],
          },
       ]
@@ -2559,6 +3136,28 @@ export const Equipments = [
                { ware: 'silicon', amount: 20 },
             ],
          },
+         {
+            time: 6,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 40 },
+               { ware: 'metallicmicrolattice', amount: 13 },
+               { ware: 'siliconcarbide', amount: 2 },
+            ],
+         },
+         {
+            time: 6,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 122 },
+               { ware: 'hullparts', amount: 5 },
+            ],
+         },
       ]
    },
    {
@@ -2594,6 +3193,27 @@ export const Equipments = [
                { ware: 'silicon', amount: 15 },
             ],
          },
+         {
+            time: 3,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 20 },
+               { ware: 'metallicmicrolattice', amount: 30 },
+               { ware: 'siliconcarbide', amount: 2 },
+            ],
+         },
+         {
+            time: 3,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 36 },
+               { ware: 'hullparts', amount: 1 },
+            ],
+         },
       ]
    },
    {
@@ -2608,7 +3228,7 @@ export const Equipments = [
       hull: 2000,
       recharge: { max: 38844, rate: 173, delay: 0 },
       price: { min: 42166, max: 51536, avg: 46851 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 20,
@@ -2619,6 +3239,17 @@ export const Equipments = [
                { ware: 'energycells', amount: 50 },
                { ware: 'fieldcoils', amount: 13 },
                { ware: 'shieldcomponents', amount: 10 },
+            ],
+         },
+         {
+            time: 20,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 2 },
+               { ware: 'energycells', amount: 77 },
+               { ware: 'hullparts', amount: 13 },
             ],
          },
       ]
@@ -2635,7 +3266,7 @@ export const Equipments = [
       hull: 2000,
       recharge: { max: 46282, rate: 268, delay: 0 },
       price: { min: 205644, max: 251343, avg: 228494 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 20,
@@ -2646,6 +3277,17 @@ export const Equipments = [
                { ware: 'energycells', amount: 100 },
                { ware: 'fieldcoils', amount: 65 },
                { ware: 'shieldcomponents', amount: 50 },
+            ],
+         },
+         {
+            time: 20,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 11 },
+               { ware: 'energycells', amount: 136 },
+               { ware: 'hullparts', amount: 63 },
             ],
          },
       ]
@@ -2662,7 +3304,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 5147, rate: 26, delay: 0.5 },
       price: { min: 12838, max: 15691, avg: 14264 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -2673,6 +3315,16 @@ export const Equipments = [
                { ware: 'energycells', amount: 20 },
                { ware: 'fieldcoils', amount: 3 },
                { ware: 'shieldcomponents', amount: 5 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 104 },
+               { ware: 'hullparts', amount: 4 },
             ],
          },
       ]
@@ -2689,7 +3341,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 6133, rate: 41, delay: 0.5 },
       price: { min: 62115, max: 75918, avg: 69017 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -2700,6 +3352,17 @@ export const Equipments = [
                { ware: 'energycells', amount: 40 },
                { ware: 'fieldcoils', amount: 15 },
                { ware: 'shieldcomponents', amount: 25 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 3 },
+               { ware: 'energycells', amount: 89 },
+               { ware: 'hullparts', amount: 19 },
             ],
          },
       ]
@@ -2716,7 +3379,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 5147, rate: 26, delay: 0.5 },
       price: { min: 12838, max: 15691, avg: 14264 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 20,
@@ -2727,6 +3390,16 @@ export const Equipments = [
                { ware: 'energycells', amount: 20 },
                { ware: 'fieldcoils', amount: 3 },
                { ware: 'shieldcomponents', amount: 5 },
+            ],
+         },
+         {
+            time: 20,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 104 },
+               { ware: 'hullparts', amount: 4 },
             ],
          },
       ]
@@ -2743,7 +3416,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 6133, rate: 41, delay: 0.5 },
       price: { min: 61597, max: 75285, avg: 68441 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 20,
@@ -2751,9 +3424,20 @@ export const Equipments = [
             method: 'default',
             name: 'Universal',
             wares: [
-               { ware: 'energycells', amount: 25 },
+               { ware: 'energycells', amount: 40 },
                { ware: 'fieldcoils', amount: 15 },
                { ware: 'shieldcomponents', amount: 25 },
+            ],
+         },
+         {
+            time: 20,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 3 },
+               { ware: 'energycells', amount: 89 },
+               { ware: 'hullparts', amount: 19 },
             ],
          },
       ]
@@ -2769,7 +3453,7 @@ export const Equipments = [
       size: Size.small,
       recharge: { max: 827, rate: 82, delay: 12.1 },
       price: { min: 1218, max: 1489, avg: 1354 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -2779,6 +3463,15 @@ export const Equipments = [
             wares: [
                { ware: 'energycells', amount: 5 },
                { ware: 'shieldcomponents', amount: 1 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 17 },
             ],
          },
       ]
@@ -2794,7 +3487,7 @@ export const Equipments = [
       size: Size.small,
       recharge: { max: 988, rate: 128, delay: 12.1 },
       price: { min: 10186, max: 12449, avg: 11318 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -2805,6 +3498,16 @@ export const Equipments = [
                { ware: 'energycells', amount: 10 },
                { ware: 'fieldcoils', amount: 2 },
                { ware: 'shieldcomponents', amount: 5 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 81 },
+               { ware: 'hullparts', amount: 3 },
             ],
          },
       ]
@@ -2820,7 +3523,7 @@ export const Equipments = [
       size: Size.small,
       recharge: { max: 1411, rate: 219, delay: 12.1 },
       price: { min: 49892, max: 60979, avg: 55436 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -2831,6 +3534,17 @@ export const Equipments = [
                { ware: 'energycells', amount: 20 },
                { ware: 'fieldcoils', amount: 10 },
                { ware: 'shieldcomponents', amount: 25 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 2 },
+               { ware: 'energycells', amount: 120 },
+               { ware: 'hullparts', amount: 15 },
             ],
          },
       ]
@@ -2847,7 +3561,7 @@ export const Equipments = [
       hull: 6000,
       recharge: { max: 129481, rate: 492, delay: 0 },
       price: { min: 225671, max: 275820, avg: 250745 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 20,
@@ -2860,19 +3574,45 @@ export const Equipments = [
                { ware: 'shieldcomponents', amount: 30 },
             ],
          },
+         {
+            time: 20,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 12 },
+               { ware: 'energycells', amount: 170 },
+               { ware: 'hullparts', amount: 70 },
+            ],
+         },
       ]
    },
    {
       id: 'shield_kha_m_standard_01_mk1',
       version: 0,
-      name: 'KHA S Shield Generator Mk1',
+      name: 'KHA M Shield Generator Mk1',
       description: 'No information available',
       race: Races.khaak,
       type: EquipmentType.shields,
       equipmentClass: EquipmentClass.shieldgenerator,
-      size: Size.small,
+      size: Size.medium,
       recharge: { max: 4632, rate: 25, delay: 0.57 },
-      price: { min: 1, max: 1, avg: 1 },
+      price: { min: 0, max: 0, avg: 0 },
+      owners: [ Factions.khaak ],
+      production: [
+      ]
+   },
+   {
+      id: 'shield_kha_m_standard_02_mk1',
+      version: 0,
+      name: 'KHA M Shield Generator Mk1',
+      description: 'No information available',
+      race: Races.khaak,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.medium,
+      recharge: { max: 4632, rate: 25, delay: 0.57 },
+      price: { min: 0, max: 0, avg: 0 },
       owners: [ Factions.khaak ],
       production: [
       ]
@@ -2880,14 +3620,14 @@ export const Equipments = [
    {
       id: 'shield_kha_s_standard_01_mk1',
       version: 0,
-      name: 'KHA M Shield Generator Mk1',
+      name: 'KHA S Shield Generator Mk1',
       description: 'No information available',
       race: Races.khaak,
       type: EquipmentType.shields,
       equipmentClass: EquipmentClass.shieldgenerator,
       size: Size.small,
       recharge: { max: 745, rate: 79, delay: 13.9 },
-      price: { min: 1, max: 1, avg: 1 },
+      price: { min: 0, max: 0, avg: 0 },
       owners: [ Factions.khaak ],
       production: [
       ]
@@ -2904,7 +3644,7 @@ export const Equipments = [
       hull: 2000,
       recharge: { max: 34960, rate: 184, delay: 0 },
       price: { min: 42166, max: 51536, avg: 46851 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 20,
@@ -2931,7 +3671,7 @@ export const Equipments = [
       hull: 2000,
       recharge: { max: 41654, rate: 284, delay: 0 },
       price: { min: 205644, max: 251343, avg: 228494 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 20,
@@ -2958,7 +3698,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 4632, rate: 28, delay: 0.42 },
       price: { min: 12838, max: 15691, avg: 14264 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -2985,7 +3725,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 5520, rate: 43, delay: 0.42 },
       price: { min: 62115, max: 75918, avg: 69017 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -3012,7 +3752,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 4632, rate: 28, delay: 0.42 },
       price: { min: 12015, max: 14685, avg: 13350 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -3039,7 +3779,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 5520, rate: 43, delay: 0.42 },
       price: { min: 26058, max: 31849, avg: 28954 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -3047,9 +3787,9 @@ export const Equipments = [
             method: 'default',
             name: 'Universal',
             wares: [
-               { ware: 'energycells', amount: 25 },
-               { ware: 'fieldcoils', amount: 9 },
-               { ware: 'shieldcomponents', amount: 6 },
+               { ware: 'energycells', amount: 40 },
+               { ware: 'fieldcoils', amount: 15 },
+               { ware: 'shieldcomponents', amount: 25 },
             ],
          },
       ]
@@ -3065,7 +3805,7 @@ export const Equipments = [
       size: Size.small,
       recharge: { max: 745, rate: 87, delay: 10.2 },
       price: { min: 1218, max: 1489, avg: 1354 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -3090,7 +3830,7 @@ export const Equipments = [
       size: Size.small,
       recharge: { max: 889, rate: 135, delay: 10.2 },
       price: { min: 10186, max: 12449, avg: 11318 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -3116,7 +3856,7 @@ export const Equipments = [
       size: Size.small,
       recharge: { max: 1270, rate: 232, delay: 10.2 },
       price: { min: 49892, max: 60979, avg: 55436 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -3143,7 +3883,7 @@ export const Equipments = [
       hull: 6000,
       recharge: { max: 116532, rate: 521, delay: 0 },
       price: { min: 225671, max: 275820, avg: 250745 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 20,
@@ -3237,6 +3977,16 @@ export const Equipments = [
                { ware: 'shieldcomponents', amount: 5 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 104 },
+               { ware: 'hullparts', amount: 4 },
+            ],
+         },
       ]
    },
    {
@@ -3251,7 +4001,7 @@ export const Equipments = [
       hull: 500,
       recharge: { max: 6746, rate: 39, delay: 0.57 },
       price: { min: 62115, max: 75918, avg: 69017 },
-      owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+      owners: [ Factions.alliance, Factions.ministry, Factions.teladi, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -3262,6 +4012,17 @@ export const Equipments = [
                { ware: 'energycells', amount: 40 },
                { ware: 'fieldcoils', amount: 15 },
                { ware: 'shieldcomponents', amount: 25 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 3 },
+               { ware: 'energycells', amount: 89 },
+               { ware: 'hullparts', amount: 19 },
             ],
          },
       ]
@@ -3313,9 +4074,9 @@ export const Equipments = [
             method: 'default',
             name: 'Universal',
             wares: [
-               { ware: 'energycells', amount: 25 },
-               { ware: 'fieldcoils', amount: 9 },
-               { ware: 'shieldcomponents', amount: 6 },
+               { ware: 'energycells', amount: 40 },
+               { ware: 'fieldcoils', amount: 15 },
+               { ware: 'shieldcomponents', amount: 25 },
             ],
          },
       ]
@@ -3382,7 +4143,7 @@ export const Equipments = [
       size: Size.small,
       recharge: { max: 1552, rate: 210, delay: 13.9 },
       price: { min: 49892, max: 60979, avg: 55436 },
-      owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+      owners: [ Factions.alliance, Factions.ministry, Factions.teladi, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -3674,7 +4435,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.ship_xs,
       hull: 281,
       price: { min: 9707, max: 13133, avg: 11420 },
-      owners: [ Factions.antigone, Factions.argon ],
+      owners: [ Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 60,
@@ -3685,6 +4446,16 @@ export const Equipments = [
                { ware: 'dronecomponents', amount: 1 },
                { ware: 'energycells', amount: 50 },
                { ware: 'smartchips', amount: 10 },
+            ],
+         },
+         {
+            time: 60,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 104 },
+               { ware: 'hullparts', amount: 3 },
             ],
          },
       ]
@@ -3721,6 +4492,28 @@ export const Equipments = [
                { ware: 'silicon', amount: 10 },
             ],
          },
+         {
+            time: 90,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 500 },
+               { ware: 'metallicmicrolattice', amount: 29 },
+               { ware: 'siliconcarbide', amount: 3 },
+            ],
+         },
+         {
+            time: 90,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 21 },
+               { ware: 'hullparts', amount: 5 },
+            ],
+         },
       ]
    },
    {
@@ -3753,6 +4546,27 @@ export const Equipments = [
                { ware: 'energycells', amount: 40 },
                { ware: 'ore', amount: 15 },
                { ware: 'silicon', amount: 10 },
+            ],
+         },
+         {
+            time: 30,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 500 },
+               { ware: 'metallicmicrolattice', amount: 33 },
+               { ware: 'siliconcarbide', amount: 3 },
+            ],
+         },
+         {
+            time: 30,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 126 },
+               { ware: 'hullparts', amount: 4 },
             ],
          },
       ]
@@ -3789,6 +4603,27 @@ export const Equipments = [
                { ware: 'silicon', amount: 10 },
             ],
          },
+         {
+            time: 30,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 500 },
+               { ware: 'metallicmicrolattice', amount: 33 },
+               { ware: 'siliconcarbide', amount: 3 },
+            ],
+         },
+         {
+            time: 30,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 126 },
+               { ware: 'hullparts', amount: 4 },
+            ],
+         },
       ]
    },
    {
@@ -3821,6 +4656,27 @@ export const Equipments = [
                { ware: 'energycells', amount: 14 },
                { ware: 'ore', amount: 20 },
                { ware: 'silicon', amount: 20 },
+            ],
+         },
+         {
+            time: 60,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 500 },
+               { ware: 'metallicmicrolattice', amount: 33 },
+               { ware: 'siliconcarbide', amount: 4 },
+            ],
+         },
+         {
+            time: 60,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 104 },
+               { ware: 'hullparts', amount: 3 },
             ],
          },
       ]
@@ -3857,6 +4713,27 @@ export const Equipments = [
                { ware: 'silicon', amount: 20 },
             ],
          },
+         {
+            time: 60,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 500 },
+               { ware: 'metallicmicrolattice', amount: 51 },
+               { ware: 'siliconcarbide', amount: 4 },
+            ],
+         },
+         {
+            time: 60,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 104 },
+               { ware: 'hullparts', amount: 3 },
+            ],
+         },
       ]
    },
    {
@@ -3891,6 +4768,27 @@ export const Equipments = [
                { ware: 'silicon', amount: 20 },
             ],
          },
+         {
+            time: 60,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 500 },
+               { ware: 'metallicmicrolattice', amount: 33 },
+               { ware: 'siliconcarbide', amount: 4 },
+            ],
+         },
+         {
+            time: 60,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 104 },
+               { ware: 'hullparts', amount: 3 },
+            ],
+         },
       ]
    },
    {
@@ -3902,7 +4800,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.ship_xs,
       hull: 281,
       price: { min: 9707, max: 13133, avg: 11420 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 60,
@@ -4188,6 +5086,29 @@ export const Equipments = [
                { ware: 'silicon', amount: 324 },
             ],
          },
+         {
+            time: 20,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 28 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 173 },
+               { ware: 'siliconcarbide', amount: 28 },
+            ],
+         },
+         {
+            time: 20,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 15 },
+               { ware: 'energycells', amount: 175 },
+               { ware: 'hullparts', amount: 86 },
+            ],
+         },
       ]
    },
    {
@@ -4221,6 +5142,29 @@ export const Equipments = [
                { ware: 'energycells', amount: 20 },
                { ware: 'ore', amount: 648 },
                { ware: 'silicon', amount: 648 },
+            ],
+         },
+         {
+            time: 20,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 144 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 724 },
+               { ware: 'siliconcarbide', amount: 124 },
+            ],
+         },
+         {
+            time: 20,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 75 },
+               { ware: 'energycells', amount: 859 },
+               { ware: 'hullparts', amount: 429 },
             ],
          },
       ]
@@ -4258,6 +5202,29 @@ export const Equipments = [
                { ware: 'silicon', amount: 1296 },
             ],
          },
+         {
+            time: 20,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 721 },
+               { ware: 'energycells', amount: 400 },
+               { ware: 'metallicmicrolattice', amount: 3571 },
+               { ware: 'siliconcarbide', amount: 621 },
+            ],
+         },
+         {
+            time: 20,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 376 },
+               { ware: 'energycells', amount: 4106 },
+               { ware: 'hullparts', amount: 2145 },
+            ],
+         },
       ]
    },
    {
@@ -4291,6 +5258,28 @@ export const Equipments = [
                { ware: 'energycells', amount: 5 },
                { ware: 'ore', amount: 15 },
                { ware: 'silicon', amount: 15 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 1 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 23 },
+               { ware: 'siliconcarbide', amount: 2 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 100 },
+               { ware: 'hullparts', amount: 3 },
             ],
          },
       ]
@@ -4328,6 +5317,29 @@ export const Equipments = [
                { ware: 'silicon', amount: 30 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 6 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 68 },
+               { ware: 'siliconcarbide', amount: 7 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 3 },
+               { ware: 'energycells', amount: 62 },
+               { ware: 'hullparts', amount: 18 },
+            ],
+         },
       ]
    },
    {
@@ -4361,6 +5373,29 @@ export const Equipments = [
                { ware: 'energycells', amount: 20 },
                { ware: 'ore', amount: 60 },
                { ware: 'silicon', amount: 60 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 32 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 191 },
+               { ware: 'siliconcarbide', amount: 31 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 15 },
+               { ware: 'energycells', amount: 282 },
+               { ware: 'hullparts', amount: 90 },
             ],
          },
       ]
@@ -4398,6 +5433,28 @@ export const Equipments = [
                { ware: 'silicon', amount: 19 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 1 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 37 },
+               { ware: 'siliconcarbide', amount: 4 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 131 },
+               { ware: 'hullparts', amount: 4 },
+            ],
+         },
       ]
    },
    {
@@ -4431,6 +5488,29 @@ export const Equipments = [
                { ware: 'energycells', amount: 10 },
                { ware: 'ore', amount: 38 },
                { ware: 'silicon', amount: 38 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 8 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 62 },
+               { ware: 'siliconcarbide', amount: 8 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 4 },
+               { ware: 'energycells', amount: 78 },
+               { ware: 'hullparts', amount: 24 },
             ],
          },
       ]
@@ -4468,6 +5548,29 @@ export const Equipments = [
                { ware: 'silicon', amount: 76 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 41 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 242 },
+               { ware: 'siliconcarbide', amount: 39 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 21 },
+               { ware: 'energycells', amount: 244 },
+               { ware: 'hullparts', amount: 119 },
+            ],
+         },
       ]
    },
    {
@@ -4500,6 +5603,27 @@ export const Equipments = [
                { ware: 'energycells', amount: 5 },
                { ware: 'ore', amount: 7 },
                { ware: 'silicon', amount: 7 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 19 },
+               { ware: 'siliconcarbide', amount: 3 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 37 },
+               { ware: 'hullparts', amount: 1 },
             ],
          },
       ]
@@ -4537,6 +5661,29 @@ export const Equipments = [
                { ware: 'silicon', amount: 14 },
             ],
          },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 9 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 62 },
+               { ware: 'siliconcarbide', amount: 10 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 4 },
+               { ware: 'energycells', amount: 84 },
+               { ware: 'hullparts', amount: 24 },
+            ],
+         },
       ]
    },
    {
@@ -4570,6 +5717,29 @@ export const Equipments = [
                { ware: 'energycells', amount: 20 },
                { ware: 'ore', amount: 28 },
                { ware: 'silicon', amount: 28 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 22 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 139 },
+               { ware: 'siliconcarbide', amount: 21 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 10 },
+               { ware: 'energycells', amount: 199 },
+               { ware: 'hullparts', amount: 60 },
             ],
          },
       ]
@@ -4607,6 +5777,27 @@ export const Equipments = [
                { ware: 'silicon', amount: 8 },
             ],
          },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 39 },
+               { ware: 'siliconcarbide', amount: 3 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 57 },
+               { ware: 'hullparts', amount: 2 },
+            ],
+         },
       ]
    },
    {
@@ -4640,6 +5831,29 @@ export const Equipments = [
                { ware: 'energycells', amount: 10 },
                { ware: 'ore', amount: 16 },
                { ware: 'silicon', amount: 16 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 4 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 48 },
+               { ware: 'siliconcarbide', amount: 5 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 2 },
+               { ware: 'energycells', amount: 67 },
+               { ware: 'hullparts', amount: 12 },
             ],
          },
       ]
@@ -4677,6 +5891,29 @@ export const Equipments = [
                { ware: 'silicon', amount: 32 },
             ],
          },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 17 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 123 },
+               { ware: 'siliconcarbide', amount: 18 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 8 },
+               { ware: 'energycells', amount: 162 },
+               { ware: 'hullparts', amount: 48 },
+            ],
+         },
       ]
    },
    {
@@ -4710,6 +5947,29 @@ export const Equipments = [
                { ware: 'energycells', amount: 10 },
                { ware: 'ore', amount: 687 },
                { ware: 'silicon', amount: 687 },
+            ],
+         },
+         {
+            time: 30,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 61 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 333 },
+               { ware: 'siliconcarbide', amount: 53 },
+            ],
+         },
+         {
+            time: 30,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 32 },
+               { ware: 'energycells', amount: 384 },
+               { ware: 'hullparts', amount: 183 },
             ],
          },
       ]
@@ -4747,6 +6007,29 @@ export const Equipments = [
                { ware: 'silicon', amount: 1374 },
             ],
          },
+         {
+            time: 30,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 306 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 1543 },
+               { ware: 'siliconcarbide', amount: 266 },
+            ],
+         },
+         {
+            time: 30,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 161 },
+               { ware: 'energycells', amount: 1737 },
+               { ware: 'hullparts', amount: 917 },
+            ],
+         },
       ]
    },
    {
@@ -4782,6 +6065,29 @@ export const Equipments = [
                { ware: 'silicon', amount: 2748 },
             ],
          },
+         {
+            time: 30,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 1533 },
+               { ware: 'energycells', amount: 400 },
+               { ware: 'metallicmicrolattice', amount: 7559 },
+               { ware: 'siliconcarbide', amount: 1323 },
+            ],
+         },
+         {
+            time: 30,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 805 },
+               { ware: 'energycells', amount: 8623 },
+               { ware: 'hullparts', amount: 4585 },
+            ],
+         },
       ]
    },
    {
@@ -4795,7 +6101,7 @@ export const Equipments = [
       size: Size.large,
       hull: 2300,
       price: { min: 135464, max: 165567, avg: 150515 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -4806,6 +6112,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 18 },
                { ware: 'energycells', amount: 10 },
                { ware: 'turretcomponents', amount: 30 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 7 },
+               { ware: 'energycells', amount: 195 },
+               { ware: 'hullparts', amount: 44 },
             ],
          },
       ]
@@ -4821,7 +6138,7 @@ export const Equipments = [
       size: Size.large,
       hull: 5000,
       price: { min: 67905, max: 82995, avg: 75450 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -4832,6 +6149,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 9 },
                { ware: 'energycells', amount: 10 },
                { ware: 'turretcomponents', amount: 15 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 3 },
+               { ware: 'energycells', amount: 166 },
+               { ware: 'hullparts', amount: 22 },
             ],
          },
       ]
@@ -4847,7 +6175,7 @@ export const Equipments = [
       size: Size.large,
       hull: 5000,
       price: { min: 78261, max: 95652, avg: 86957 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -4858,6 +6186,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 6 },
                { ware: 'energycells', amount: 10 },
                { ware: 'turretcomponents', amount: 30 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 4 },
+               { ware: 'energycells', amount: 79 },
+               { ware: 'hullparts', amount: 24 },
             ],
          },
       ]
@@ -4873,7 +6212,7 @@ export const Equipments = [
       size: Size.large,
       hull: 2300,
       price: { min: 52289, max: 63909, avg: 58099 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -4884,6 +6223,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 4 },
                { ware: 'energycells', amount: 10 },
                { ware: 'turretcomponents', amount: 20 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 2 },
+               { ware: 'energycells', amount: 141 },
+               { ware: 'hullparts', amount: 16 },
             ],
          },
       ]
@@ -4899,7 +6249,7 @@ export const Equipments = [
       size: Size.large,
       hull: 2300,
       price: { min: 49166, max: 60092, avg: 54629 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -4910,6 +6260,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 3 },
                { ware: 'energycells', amount: 10 },
                { ware: 'turretcomponents', amount: 21 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 2 },
+               { ware: 'energycells', amount: 121 },
+               { ware: 'hullparts', amount: 14 },
             ],
          },
       ]
@@ -4925,7 +6286,7 @@ export const Equipments = [
       size: Size.large,
       hull: 2300,
       price: { min: 93055, max: 113734, avg: 103395 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -4936,6 +6297,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 6 },
                { ware: 'energycells', amount: 10 },
                { ware: 'turretcomponents', amount: 39 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 4 },
+               { ware: 'energycells', amount: 180 },
+               { ware: 'hullparts', amount: 28 },
             ],
          },
       ]
@@ -4950,7 +6322,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 45385, max: 55471, avg: 50428 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -4961,6 +6333,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 6 },
                { ware: 'energycells', amount: 10 },
                { ware: 'turretcomponents', amount: 10 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 2 },
+               { ware: 'energycells', amount: 110 },
+               { ware: 'hullparts', amount: 15 },
             ],
          },
       ]
@@ -4976,7 +6359,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 45385, max: 55471, avg: 50428 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -4987,6 +6370,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 6 },
                { ware: 'energycells', amount: 10 },
                { ware: 'turretcomponents', amount: 10 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 2 },
+               { ware: 'energycells', amount: 110 },
+               { ware: 'hullparts', amount: 15 },
             ],
          },
       ]
@@ -5002,7 +6396,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1100,
       price: { min: 22865, max: 27946, avg: 25406 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -5013,6 +6407,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 3 },
                { ware: 'energycells', amount: 10 },
                { ware: 'turretcomponents', amount: 5 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 67 },
+               { ware: 'hullparts', amount: 7 },
             ],
          },
       ]
@@ -5027,7 +6432,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 41730, max: 87581, avg: 64655 },
-      owners: [ Factions.alliance, Factions.argon ],
+      owners: [ Factions.alliance, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -5038,6 +6443,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 5 },
                { ware: 'energycells', amount: 18 },
                { ware: 'turretcomponents', amount: 21 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 3 },
+               { ware: 'energycells', amount: 76 },
+               { ware: 'hullparts', amount: 18 },
             ],
          },
       ]
@@ -5053,7 +6469,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 41730, max: 87581, avg: 64655 },
-      owners: [ Factions.alliance, Factions.argon ],
+      owners: [ Factions.alliance, Factions.argon, Factions.buccaneers ],
       production: [
          {
             time: 10,
@@ -5078,7 +6494,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 24665, max: 30147, avg: 27406 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -5089,6 +6505,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 1 },
                { ware: 'energycells', amount: 5 },
                { ware: 'turretcomponents', amount: 12 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 54 },
+               { ware: 'hullparts', amount: 7 },
             ],
          },
       ]
@@ -5104,7 +6531,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 22857, max: 27936, avg: 25397 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -5115,6 +6542,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 2 },
                { ware: 'energycells', amount: 5 },
                { ware: 'turretcomponents', amount: 8 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 49 },
+               { ware: 'hullparts', amount: 7 },
             ],
          },
       ]
@@ -5130,7 +6568,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1100,
       price: { min: 26317, max: 32166, avg: 29242 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -5141,6 +6579,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 2 },
                { ware: 'energycells', amount: 10 },
                { ware: 'turretcomponents', amount: 10 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 75 },
+               { ware: 'hullparts', amount: 8 },
             ],
          },
       ]
@@ -5155,7 +6604,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 21378, max: 26128, avg: 23753 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -5166,6 +6615,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 1 },
                { ware: 'energycells', amount: 5 },
                { ware: 'turretcomponents', amount: 10 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 33 },
+               { ware: 'hullparts', amount: 6 },
             ],
          },
       ]
@@ -5181,7 +6641,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 21378, max: 26128, avg: 23753 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -5192,6 +6652,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 1 },
                { ware: 'energycells', amount: 5 },
                { ware: 'turretcomponents', amount: 10 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 33 },
+               { ware: 'hullparts', amount: 6 },
             ],
          },
       ]
@@ -5206,7 +6677,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 16446, max: 20101, avg: 18274 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -5217,6 +6688,16 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 1 },
                { ware: 'energycells', amount: 5 },
                { ware: 'turretcomponents', amount: 7 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 123 },
+               { ware: 'hullparts', amount: 5 },
             ],
          },
       ]
@@ -5232,7 +6713,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 16446, max: 20101, avg: 18274 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -5243,6 +6724,16 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 1 },
                { ware: 'energycells', amount: 5 },
                { ware: 'turretcomponents', amount: 7 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 123 },
+               { ware: 'hullparts', amount: 5 },
             ],
          },
       ]
@@ -5257,7 +6748,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 31249, max: 38193, avg: 34721 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -5268,6 +6759,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 2 },
                { ware: 'energycells', amount: 10 },
                { ware: 'turretcomponents', amount: 13 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 114 },
+               { ware: 'hullparts', amount: 9 },
             ],
          },
       ]
@@ -5283,7 +6785,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 31249, max: 38193, avg: 34721 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -5294,6 +6796,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 2 },
                { ware: 'energycells', amount: 10 },
                { ware: 'turretcomponents', amount: 13 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 114 },
+               { ware: 'hullparts', amount: 9 },
             ],
          },
       ]
@@ -5308,7 +6821,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 22857, max: 27936, avg: 25397 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -5319,6 +6832,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 2 },
                { ware: 'energycells', amount: 5 },
                { ware: 'turretcomponents', amount: 8 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 49 },
+               { ware: 'hullparts', amount: 7 },
             ],
          },
       ]
@@ -5334,7 +6858,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 500,
       price: { min: 24665, max: 30147, avg: 27406 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -5345,6 +6869,64 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 1 },
                { ware: 'energycells', amount: 5 },
                { ware: 'turretcomponents', amount: 12 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 54 },
+               { ware: 'hullparts', amount: 7 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_gen_m_scrapbeam_01_mk1',
+      version: 0,
+      name: 'Scrap Tractor',
+      description: 'The Scrap Tractor employs an array of graviton beams to leash an object to a towing ship. The beams automatically and independently adjust their focus to further enhance the gravitational forces as the distance between the two objects becomes greater, resulting in an elasticity effect. All resistance is not futile, however, since severe disruptions, such as being hit by weapon fire, will cause the connection to break. Likewise, the graviton beams are inherently unstable until the artificial gravitational field is fully engaged, and even minor distortions such as the lingering effects of depleted shields, or electrical currents behind the target\'s hull, will prompt them to lose focus. Because of these limitations, the Scrap Tractor is mainly used to tow ship wrecks below a certain size limit, to avoid exceeding the maximum energy output of the weapon mount. For reasons which are not entirely clear, the connection remains stable during Jump Gate traversals.nnThe modern Scrap Tractor has only recently been made available to the wider Gate Network by the Alliance of the Word. The Alliance received the designs for it by deep space messenger drone, sent from the Avarice system, which was once thought lost. It is, however, by no means an entirely new technology. Before the Terran Conflict, and even up until the Gate Shutdown, a predecessor of this weapon - or rather tool - was occasionally deployed by opportunistic scavengers, looking to profit from the ongoing destruction of advanced warships in conflict zones. However, due to the general abundance of resources in the well-connected Gate Network at the time, and the inherent danger of the profession, it never saw widespread use, and the factories necessary for its production were often dismantled as quickly as they sprung up.',
+      race: Races.argon,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.medium,
+      price: { min: 12154, max: 16444, avg: 14299 },
+      owners: [ Factions.alliance, Factions.scaleplate, Factions.teladi, Factions.pioneers, Factions.scavenger ],
+      production: [
+         {
+            time: 20,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'advancedelectronics', amount: 2 },
+               { ware: 'energycells', amount: 75 },
+               { ware: 'turretcomponents', amount: 10 },
+            ],
+         },
+         {
+            time: 20,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 46 },
+               { ware: 'siliconcarbide', amount: 2 },
+            ],
+         },
+         {
+            time: 20,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 127 },
+               { ware: 'hullparts', amount: 9 },
             ],
          },
       ]
@@ -5359,7 +6941,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       hull: 500,
-      price: { min: 1, max: 1, avg: 1 },
+      price: { min: 0, max: 0, avg: 0 },
       owners: [ Factions.khaak ],
       production: [
       ]
@@ -5375,7 +6957,7 @@ export const Equipments = [
       size: Size.large,
       hull: 3450,
       price: { min: 135464, max: 165567, avg: 150515 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5453,7 +7035,7 @@ export const Equipments = [
       size: Size.large,
       hull: 3450,
       price: { min: 52289, max: 63909, avg: 58099 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5479,7 +7061,7 @@ export const Equipments = [
       size: Size.large,
       hull: 3450,
       price: { min: 49166, max: 60092, avg: 54629 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5505,7 +7087,7 @@ export const Equipments = [
       size: Size.large,
       hull: 3450,
       price: { min: 93055, max: 113734, avg: 103395 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5530,7 +7112,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 45385, max: 55471, avg: 50428 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5556,7 +7138,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 750,
       price: { min: 24665, max: 30147, avg: 27406 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5607,7 +7189,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 24665, max: 30147, avg: 27406 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -5633,7 +7215,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 750,
       price: { min: 26317, max: 32166, avg: 29242 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -5684,7 +7266,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 21378, max: 26128, avg: 23753 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5710,7 +7292,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 750,
       price: { min: 16446, max: 20101, avg: 18274 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5735,7 +7317,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 16446, max: 20101, avg: 18274 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5761,7 +7343,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 750,
       price: { min: 22857, max: 27936, avg: 25397 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5786,7 +7368,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 31249, max: 38193, avg: 34721 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5812,7 +7394,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 750,
       price: { min: 21378, max: 26128, avg: 23753 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5837,7 +7419,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 22857, max: 27936, avg: 25397 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -5863,7 +7445,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 750,
       price: { min: 22865, max: 27946, avg: 25406 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -6134,6 +7716,17 @@ export const Equipments = [
                { ware: 'turretcomponents', amount: 12 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 54 },
+               { ware: 'hullparts', amount: 7 },
+            ],
+         },
       ]
    },
    {
@@ -6209,6 +7802,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 1 },
                { ware: 'energycells', amount: 5 },
                { ware: 'turretcomponents', amount: 10 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 33 },
+               { ware: 'hullparts', amount: 6 },
             ],
          },
       ]
@@ -6351,7 +7955,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       price: { min: 22856, max: 27935, avg: 25395 },
-      owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+      owners: [ Factions.alliance, Factions.ministry, Factions.teladi, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -6362,6 +7966,17 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 2 },
                { ware: 'energycells', amount: 5 },
                { ware: 'turretcomponents', amount: 8 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 49 },
+               { ware: 'hullparts', amount: 7 },
             ],
          },
       ]
@@ -6377,7 +7992,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 750,
       price: { min: 24664, max: 30145, avg: 27404 },
-      owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+      owners: [ Factions.alliance, Factions.ministry, Factions.teladi, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -6428,7 +8043,7 @@ export const Equipments = [
       equipmentClass: EquipmentClass.turret,
       size: Size.medium,
       hull: 800,
-      price: { min: 23242, max: 28406, avg: 25824 },
+      price: { min: 23243, max: 28407, avg: 25825 },
       owners: [ Factions.xenon ],
       production: [
          {
@@ -6500,12 +8115,13 @@ export const Equipments = [
       version: 0,
       name: 'Behemoth Main Battery',
       description: 'No information available',
+      race: Races.argon,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.large,
       hull: 8000,
       price: { min: 936709, max: 1144866, avg: 1040788 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.scaleplate ],
       production: [
          {
             time: 10,
@@ -6523,14 +8139,15 @@ export const Equipments = [
    {
       id: 'weapon_arg_m_ion_01_mk1',
       version: 0,
-      name: 'M Ion Blaster Mk1',
-      description: 'No information available',
+      name: 'ARG M Ion Blaster Mk1',
+      description: 'This Argon weapon was designed to be an effective anti-shield measure, carried by small and medium-sized ships. While the electrically charged particles it dispenses will eat through a shield in a remarkably short time, the velocity of the projectile itself is not quite as impressive. For this reason, and the fact that the projectiles are not as damaging once the target\'s shields have dropped and the projectiles are hitting the ship\'s hull, the Ion Blaster is often used by the first wave of vanguard ships. It is also effective when used in combination with weapons that are more suited to penetrating the hull. The technology behind this weapon was developed by the Argon Navy\'s Research and Development team, in cooperation with Jinko-Tekina Technologies. Their goal was to replicate the Boron-made Ion weapon technology, to which the Argon had lost all access during the Jump Gate shutdown. Their success was mixed; although they managed to apply the technology to make Blasters suitable for small ships, their team struggled to develop something suitable for outfitting larger vessels.nnThe Mk2 variant offers a significant boost in damage against shields, but actually deals less damage to a ship\'s hull than the Mk1, making it an even more specialised weapon.',
+      race: Races.argon,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 302254, max: 597081, avg: 449667 },
-      owners: [ Factions.alliance, Factions.argon ],
+      owners: [ Factions.alliance, Factions.argon, Factions.buccaneers, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -6548,14 +8165,15 @@ export const Equipments = [
    {
       id: 'weapon_arg_m_ion_01_mk2',
       version: 0,
-      name: 'M Ion Blaster Mk2',
-      description: 'No information available',
+      name: 'ARG M Ion Blaster Mk2',
+      description: 'This Argon weapon was designed to be an effective anti-shield measure, carried by small and medium-sized ships. While the electrically charged particles it dispenses will eat through a shield in a remarkably short time, the velocity of the projectile itself is not quite as impressive. For this reason, and the fact that the projectiles are not as damaging once the target\'s shields have dropped and the projectiles are hitting the ship\'s hull, the Ion Blaster is often used by the first wave of vanguard ships. It is also effective when used in combination with weapons that are more suited to penetrating the hull. The technology behind this weapon was developed by the Argon Navy\'s Research and Development team, in cooperation with Jinko-Tekina Technologies. Their goal was to replicate the Boron-made Ion weapon technology, to which the Argon had lost all access during the Jump Gate shutdown. Their success was mixed; although they managed to apply the technology to make Blasters suitable for small ships, their team struggled to develop something suitable for outfitting larger vessels.nnThe Mk2 variant offers a significant boost in damage against shields, but actually deals less damage to a ship\'s hull than the Mk1, making it an even more specialised weapon.',
+      race: Races.argon,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 931956, max: 1819218, avg: 1375587 },
-      owners: [ Factions.alliance, Factions.argon ],
+      owners: [ Factions.alliance, Factions.argon, Factions.buccaneers, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -6573,14 +8191,15 @@ export const Equipments = [
    {
       id: 'weapon_arg_s_ion_01_mk1',
       version: 0,
-      name: 'S Ion Blaster Mk1',
-      description: 'No information available',
+      name: 'ARG S Ion Blaster Mk1',
+      description: 'This Argon weapon was designed to be an effective anti-shield measure, carried by small and medium-sized ships. While the electrically charged particles it dispenses will eat through a shield in a remarkably short time, the velocity of the projectile itself is not quite as impressive. For this reason, and the fact that the projectiles are not as damaging once the target\'s shields have dropped and the projectiles are hitting the ship\'s hull, the Ion Blaster is often used by the first wave of vanguard ships. It is also effective when used in combination with weapons that are more suited to penetrating the hull. The technology behind this weapon was developed by the Argon Navy\'s Research and Development team, in cooperation with Jinko-Tekina Technologies. Their goal was to replicate the Boron-made Ion weapon technology, to which the Argon had lost all access during the Jump Gate shutdown. Their success was mixed; although they managed to apply the technology to make Blasters suitable for small ships, their team struggled to develop something suitable for outfitting larger vessels.nnThe Mk2 variant offers a significant boost in damage against shields, but actually deals less damage to a ship\'s hull than the Mk1, making it an even more specialised weapon.',
+      race: Races.argon,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 160820, max: 319189, avg: 240004 },
-      owners: [ Factions.alliance, Factions.argon ],
+      owners: [ Factions.alliance, Factions.argon, Factions.buccaneers, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -6598,14 +8217,15 @@ export const Equipments = [
    {
       id: 'weapon_arg_s_ion_01_mk2',
       version: 0,
-      name: 'S Ion Blaster Mk2',
-      description: 'No information available',
+      name: 'ARG S Ion Blaster Mk2',
+      description: 'This Argon weapon was designed to be an effective anti-shield measure, carried by small and medium-sized ships. While the electrically charged particles it dispenses will eat through a shield in a remarkably short time, the velocity of the projectile itself is not quite as impressive. For this reason, and the fact that the projectiles are not as damaging once the target\'s shields have dropped and the projectiles are hitting the ship\'s hull, the Ion Blaster is often used by the first wave of vanguard ships. It is also effective when used in combination with weapons that are more suited to penetrating the hull. The technology behind this weapon was developed by the Argon Navy\'s Research and Development team, in cooperation with Jinko-Tekina Technologies. Their goal was to replicate the Boron-made Ion weapon technology, to which the Argon had lost all access during the Jump Gate shutdown. Their success was mixed; although they managed to apply the technology to make Blasters suitable for small ships, their team struggled to develop something suitable for outfitting larger vessels.nnThe Mk2 variant offers a significant boost in damage against shields, but actually deals less damage to a ship\'s hull than the Mk1, making it an even more specialised weapon.',
+      race: Races.argon,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 777281, max: 1543247, avg: 1160264 },
-      owners: [ Factions.alliance, Factions.argon ],
+      owners: [ Factions.alliance, Factions.argon, Factions.buccaneers, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -6651,6 +8271,27 @@ export const Equipments = [
                { ware: 'ore', amount: 1 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 42 },
+               { ware: 'siliconcarbide', amount: 2 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 45 },
+               { ware: 'hullparts', amount: 1 },
+            ],
+         },
       ]
    },
    {
@@ -6683,6 +8324,27 @@ export const Equipments = [
             wares: [
                { ware: 'energycells', amount: 15 },
                { ware: 'ore', amount: 2 },
+            ],
+         },
+         {
+            time: 60,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 1 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 32 },
+            ],
+         },
+         {
+            time: 60,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 70 },
+               { ware: 'hullparts', amount: 2 },
             ],
          },
       ]
@@ -6720,19 +8382,41 @@ export const Equipments = [
                { ware: 'silicon', amount: 1 },
             ],
          },
+         {
+            time: 60,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 60 },
+               { ware: 'metallicmicrolattice', amount: 33 },
+               { ware: 'siliconcarbide', amount: 1 },
+            ],
+         },
+         {
+            time: 60,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 119 },
+               { ware: 'hullparts', amount: 4 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_m_beam_01_mk1',
       version: 0,
       name: 'M Beam Emitter Mk1',
-      description: 'No information available',
+      description: 'The Beam Emitter is a highly specialised anti-fighter weapon, notable for its high accuracy. It discharges high-velocity beams which hit their target almost immediately. However, somewhat counterintuitively, it achieves this instantaneous accuracy by restraining the energy that the beam puts out. Since the beam is not as intense as the projectiles fired by many of its contemporaries, it only inflicts damage gradually, which exposes the pilot to a counter-attack. Because of this, and the fact that the weapon inflicts more damage the nearer it is to its target, the Beam Emitter is mainly used on nimble fighters which are able to get up close and out-manoeuvre their target when necessary.nnThe Mk2 variant tries to rectify the weak damage output somewhat by ramping up the beam\'s intensity, but this comes at the cost of the weapon overheating more rapidly.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 25530, max: 31203, avg: 28367 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -6745,19 +8429,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 10 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 51 },
+               { ware: 'siliconcarbide', amount: 6 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 78 },
+               { ware: 'hullparts', amount: 8 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_m_beam_01_mk2',
       version: 0,
       name: 'M Beam Emitter Mk2',
-      description: 'No information available',
+      description: 'The Beam Emitter is a highly specialised anti-fighter weapon, notable for its high accuracy. It discharges high-velocity beams which hit their target almost immediately. However, somewhat counterintuitively, it achieves this instantaneous accuracy by restraining the energy that the beam puts out. Since the beam is not as intense as the projectiles fired by many of its contemporaries, it only inflicts damage gradually, which exposes the pilot to a counter-attack. Because of this, and the fact that the weapon inflicts more damage the nearer it is to its target, the Beam Emitter is mainly used on nimble fighters which are able to get up close and out-manoeuvre their target when necessary.nnThe Mk2 variant tries to rectify the weak damage output somewhat by ramping up the beam\'s intensity, but this comes at the cost of the weapon overheating more rapidly.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 127132, max: 155383, avg: 141257 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -6768,6 +8475,29 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 10 },
                { ware: 'energycells', amount: 10 },
                { ware: 'weaponcomponents', amount: 50 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 14 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 108 },
+               { ware: 'siliconcarbide', amount: 13 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 7 },
+               { ware: 'energycells', amount: 106 },
+               { ware: 'hullparts', amount: 41 },
             ],
          },
       ]
@@ -6782,7 +8512,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 22558, max: 27571, avg: 25064 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 5,
@@ -6793,6 +8523,29 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 3 },
                { ware: 'energycells', amount: 10 },
                { ware: 'weaponcomponents', amount: 5 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 26 },
+               { ware: 'siliconcarbide', amount: 4 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 70 },
+               { ware: 'hullparts', amount: 7 },
             ],
          },
       ]
@@ -6807,7 +8560,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 111753, max: 136587, avg: 124170 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 5,
@@ -6820,19 +8573,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 25 },
             ],
          },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 12 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 94 },
+               { ware: 'siliconcarbide', amount: 12 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 6 },
+               { ware: 'energycells', amount: 168 },
+               { ware: 'hullparts', amount: 37 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_m_gatling_01_mk1',
       version: 0,
       name: 'M Bolt Repeater Mk1',
-      description: 'No information available',
+      description: 'The Bolt Repeater\'s average damage output and cooling make it an excellent choice for the indecisive military pilot. It is often considered the logical next step after having familiarised oneself with the Pulse Laser. Its prolonged bursts can easily tear apart targets of a similar size, but the projectiles are larger and move at a slower pace than Pulse Laser particles. This means that the pilot needs to have experience in gauging when to expend their burst, and when to let the weapon cool down and wait for a better opportunity. When facing off against this weapon, nimble ships may be able to dodge its stream of bullets by strafing and making spiral movements. Against capital ships, the Bolt Repeater is a suitable choice for destroying surface elements such as turrets and shields, though it struggles to leave a lasting impact on the ship\'s hull.nnThe modern-day Bolt Repeater is the result of a development path taken by Argon military scientists from old Mass Driver designs; a weapon which first saw use during the era of the Kha\'ak threat. By stripping out the original weapon\'s ability to penetrate shields, and instead maximising the force of its continuous bullet output, they created a robust all-rounder that was soon adopted by the Federation\'s allies because of its sheer brutal efficiency.nnThe Mk2 variant uses even larger projectiles while maintaining the same projectile speed, resulting in a lower rate of fire but an increased level of overall trauma to the target\'s hull and shields.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 23928, max: 29245, avg: 26586 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -6845,19 +8621,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 12 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 44 },
+               { ware: 'siliconcarbide', amount: 5 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 63 },
+               { ware: 'hullparts', amount: 7 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_m_gatling_01_mk2',
       version: 0,
       name: 'M Bolt Repeater Mk2',
-      description: 'No information available',
+      description: 'The Bolt Repeater\'s average damage output and cooling make it an excellent choice for the indecisive military pilot. It is often considered the logical next step after having familiarised oneself with the Pulse Laser. Its prolonged bursts can easily tear apart targets of a similar size, but the projectiles are larger and move at a slower pace than Pulse Laser particles. This means that the pilot needs to have experience in gauging when to expend their burst, and when to let the weapon cool down and wait for a better opportunity. When facing off against this weapon, nimble ships may be able to dodge its stream of bullets by strafing and making spiral movements. Against capital ships, the Bolt Repeater is a suitable choice for destroying surface elements such as turrets and shields, though it struggles to leave a lasting impact on the ship\'s hull.nnThe modern-day Bolt Repeater is the result of a development path taken by Argon military scientists from old Mass Driver designs; a weapon which first saw use during the era of the Kha\'ak threat. By stripping out the original weapon\'s ability to penetrate shields, and instead maximising the force of its continuous bullet output, they created a robust all-rounder that was soon adopted by the Federation\'s allies because of its sheer brutal efficiency.nnThe Mk2 variant uses even larger projectiles while maintaining the same projectile speed, resulting in a lower rate of fire but an increased level of overall trauma to the target\'s hull and shields.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 119121, max: 145592, avg: 132356 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -6868,6 +8667,29 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 5 },
                { ware: 'energycells', amount: 10 },
                { ware: 'weaponcomponents', amount: 60 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 13 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 96 },
+               { ware: 'siliconcarbide', amount: 13 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 6 },
+               { ware: 'energycells', amount: 147 },
+               { ware: 'hullparts', amount: 37 },
             ],
          },
       ]
@@ -6882,7 +8704,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 44770, max: 54719, avg: 49745 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 5,
@@ -6893,6 +8715,29 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 6 },
                { ware: 'energycells', amount: 10 },
                { ware: 'weaponcomponents', amount: 10 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 4 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 75 },
+               { ware: 'siliconcarbide', amount: 8 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 2 },
+               { ware: 'energycells', amount: 117 },
+               { ware: 'hullparts', amount: 15 },
             ],
          },
       ]
@@ -6907,7 +8752,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 222815, max: 272330, avg: 247572 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 5,
@@ -6920,19 +8765,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 50 },
             ],
          },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 25 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 127 },
+               { ware: 'siliconcarbide', amount: 22 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 13 },
+               { ware: 'energycells', amount: 175 },
+               { ware: 'hullparts', amount: 75 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_m_laser_01_mk1',
       version: 0,
       name: 'M Pulse Laser Mk1',
-      description: 'No information available',
+      description: 'Many experienced pilots fondly remember the affordable and reliable Pulse Laser as their first weapon. Its pin-point accuracy and high projectile speed make it an excellent choice for fighting small and fast targets, handling fragile lockboxes, and for dealing with deployables like mines and lasertowers. Often initially scoffed at for its comparatively low damage output, its slow heat generation and sublime cooling result in a steady stream of disruptive fire, which in turn rewards pilots who can stay on target for an extended period. Faced with larger enemies, the Pulse Laser does not become obsolete as quickly as one might expect. Used in greater numbers, it can still be a formidable choice against frigates and corvettes, though an upgrade to a larger weapon mount may be advisable to maintain a level playing field. The Pulse Laser remains the preferred choice of commanders who favour versatility over optimisation against specific opponents, or who have little trust in the aim of their subordinates.nnThe technology behind the Pulse Laser is advanced and efficient. Within a shielded chamber, microscopic fragments of matter are superheated and accelerated by a pulsed neodymium laser. The weapon was originally designed by the Ministry of Finance to provide a robust loadout for their escort fleets, without having to invest time and resources into the maintenance of a well-rounded combined arms setup. Over time, and thanks to the Teladi Company\'s aggressive marketing, it has been adopted as the number one weapon of convenience by all other former members of the Community of Planets.nnThe Mk2 variant sports a slightly longer burst. This lowers the efficiency of the heat dissipation between bursts and thereby exponentially drives up the cost of the internal shielding, but results in an overall higher damage output.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 20763, max: 25377, avg: 23070 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -6945,19 +8813,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 10 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 30 },
+               { ware: 'siliconcarbide', amount: 3 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 41 },
+               { ware: 'hullparts', amount: 6 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_m_laser_01_mk2',
       version: 0,
       name: 'M Pulse Laser Mk2',
-      description: 'No information available',
+      description: 'Many experienced pilots fondly remember the affordable and reliable Pulse Laser as their first weapon. Its pin-point accuracy and high projectile speed make it an excellent choice for fighting small and fast targets, handling fragile lockboxes, and for dealing with deployables like mines and lasertowers. Often initially scoffed at for its comparatively low damage output, its slow heat generation and sublime cooling result in a steady stream of disruptive fire, which in turn rewards pilots who can stay on target for an extended period. Faced with larger enemies, the Pulse Laser does not become obsolete as quickly as one might expect. Used in greater numbers, it can still be a formidable choice against frigates and corvettes, though an upgrade to a larger weapon mount may be advisable to maintain a level playing field. The Pulse Laser remains the preferred choice of commanders who favour versatility over optimisation against specific opponents, or who have little trust in the aim of their subordinates.nnThe technology behind the Pulse Laser is advanced and efficient. Within a shielded chamber, microscopic fragments of matter are superheated and accelerated by a pulsed neodymium laser. The weapon was originally designed by the Ministry of Finance to provide a robust loadout for their escort fleets, without having to invest time and resources into the maintenance of a well-rounded combined arms setup. Over time, and thanks to the Teladi Company\'s aggressive marketing, it has been adopted as the number one weapon of convenience by all other former members of the Community of Planets.nnThe Mk2 variant sports a slightly longer burst. This lowers the efficiency of the heat dissipation between bursts and thereby exponentially drives up the cost of the internal shielding, but results in an overall higher damage output.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 103297, max: 126252, avg: 114775 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -6968,6 +8859,29 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 5 },
                { ware: 'energycells', amount: 10 },
                { ware: 'weaponcomponents', amount: 50 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 11 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 75 },
+               { ware: 'siliconcarbide', amount: 13 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 5 },
+               { ware: 'energycells', amount: 162 },
+               { ware: 'hullparts', amount: 32 },
             ],
          },
       ]
@@ -6982,7 +8896,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 16016, max: 19575, avg: 17796 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -6993,6 +8907,28 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 1 },
                { ware: 'energycells', amount: 5 },
                { ware: 'weaponcomponents', amount: 7 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 1 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 34 },
+               { ware: 'siliconcarbide', amount: 5 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 128 },
+               { ware: 'hullparts', amount: 5 },
             ],
          },
       ]
@@ -7007,7 +8943,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 79562, max: 97243, avg: 88402 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7020,19 +8956,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 35 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 8 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 73 },
+               { ware: 'siliconcarbide', amount: 12 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 4 },
+               { ware: 'energycells', amount: 114 },
+               { ware: 'hullparts', amount: 25 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_m_plasma_01_mk1',
       version: 0,
       name: 'M Plasma Cannon Mk1',
-      description: 'No information available',
+      description: 'The Plasma Cannon combines high damage output with long range. Its drawbacks, slow projectile speed and fire rate, made worse by high heat generation, can make landing hits as challenging as it is important. This results in its predominant use being against capital ships, where swarms of fighters deploy Plasma Cannons to great success. Unlike short ranged weapons such as the Shard Battery and the Split Tau Accelerator, which outperform it in damage output and are more suited to attacking capital ships from a blind spot, the Plasma Cannon\'s greatest advantage is its range. Skilled pilots are also able to hunt down smaller targets efficiently, either by deploying the Plasma Cannon at short range or by predicting the courses of the projectile and target. Similarly, skilled pilots are also able to evade and avoid being hit by such attempts.nnThe Plasma Cannon was developed during the early days of the Paranid Civil War, by the Holy Order of the Pontifex, building upon the High Energy Plasma Thrower. Like its predecessor, it suffers from high radiation build-up, and this needs to be purged between shots to prevent it from damaging itself. The blueprint for the Plasma Cannon was stolen by the Argon Secret Service and distributed throughout the Commonwealth when the Argon Federation joined the war effort.nnThe Mk2 variant has a higher rate of fire, lower heat generation and increased damage output.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 30277, max: 37005, avg: 33641 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7045,19 +9004,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 13 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 3 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 48 },
+               { ware: 'siliconcarbide', amount: 4 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 118 },
+               { ware: 'hullparts', amount: 9 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_m_plasma_01_mk2',
       version: 0,
       name: 'M Plasma Cannon Mk2',
-      description: 'No information available',
+      description: 'The Plasma Cannon combines high damage output with long range. Its drawbacks, slow projectile speed and fire rate, made worse by high heat generation, can make landing hits as challenging as it is important. This results in its predominant use being against capital ships, where swarms of fighters deploy Plasma Cannons to great success. Unlike short ranged weapons such as the Shard Battery and the Split Tau Accelerator, which outperform it in damage output and are more suited to attacking capital ships from a blind spot, the Plasma Cannon\'s greatest advantage is its range. Skilled pilots are also able to hunt down smaller targets efficiently, either by deploying the Plasma Cannon at short range or by predicting the courses of the projectile and target. Similarly, skilled pilots are also able to evade and avoid being hit by such attempts.nnThe Plasma Cannon was developed during the early days of the Paranid Civil War, by the Holy Order of the Pontifex, building upon the High Energy Plasma Thrower. Like its predecessor, it suffers from high radiation build-up, and this needs to be purged between shots to prevent it from damaging itself. The blueprint for the Plasma Cannon was stolen by the Argon Secret Service and distributed throughout the Commonwealth when the Argon Federation joined the war effort.nnThe Mk2 variant has a higher rate of fire, lower heat generation and increased damage output.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 150867, max: 184393, avg: 167630 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7070,19 +9052,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 65 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 17 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 111 },
+               { ware: 'siliconcarbide', amount: 14 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 8 },
+               { ware: 'energycells', amount: 155 },
+               { ware: 'hullparts', amount: 48 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_m_shotgun_01_mk1',
       version: 0,
       name: 'M Shard Battery Mk1',
-      description: 'No information available',
+      description: 'The Shard Battery is essentially a spaceborne shotgun, that makes up for its low effective range and accuracy by inflicting devastating trauma against shields and hull alike. At its core, it is functionally similar to the Bolt Repeater that it was originally developed from. However, the ejection of multiple projectiles at once requires a wider barrel aperture, a larger spacing between shots, and generates a higher energy drain. When it comes to its damage output, the Shard Battery has been compared to the Plasma Cannon, but it offers a slightly different range of applications. Skilled military pilots may occasionally make use of this weapon against small targets in an attempt to end the fight quickly, but it is generally agreed upon that one should try to avoid these situations. The Shard Battery reaches its fullest potential against larger and slower targets such as M-sized ships, which cannot as easily evade its projectiles. It is also especially effective against capital ship surface elements, provided that the pilot can find an opportunity to target them from the blind spots of nearby turrets.nnThe Mk2 variant fires fewer shards at a higher speed but with a shorter interval. This raises the overall damage output and improves the weapon\'s accuracy, especially against more nimble targets, but in turn incurs a quicker heat build-up.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 22365, max: 27335, avg: 24850 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7095,19 +9100,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 8 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 37 },
+               { ware: 'siliconcarbide', amount: 4 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 55 },
+               { ware: 'hullparts', amount: 7 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_m_shotgun_01_mk2',
       version: 0,
       name: 'M Shard Battery Mk2',
-      description: 'No information available',
+      description: 'The Shard Battery is essentially a spaceborne shotgun, that makes up for its low effective range and accuracy by inflicting devastating trauma against shields and hull alike. At its core, it is functionally similar to the Bolt Repeater that it was originally developed from. However, the ejection of multiple projectiles at once requires a wider barrel aperture, a larger spacing between shots, and generates a higher energy drain. When it comes to its damage output, the Shard Battery has been compared to the Plasma Cannon, but it offers a slightly different range of applications. Skilled military pilots may occasionally make use of this weapon against small targets in an attempt to end the fight quickly, but it is generally agreed upon that one should try to avoid these situations. The Shard Battery reaches its fullest potential against larger and slower targets such as M-sized ships, which cannot as easily evade its projectiles. It is also especially effective against capital ship surface elements, provided that the pilot can find an opportunity to target them from the blind spots of nearby turrets.nnThe Mk2 variant fires fewer shards at a higher speed but with a shorter interval. This raises the overall damage output and improves the weapon\'s accuracy, especially against more nimble targets, but in turn incurs a quicker heat build-up.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 111308, max: 136043, avg: 123676 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7118,6 +9146,29 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 10 },
                { ware: 'energycells', amount: 10 },
                { ware: 'weaponcomponents', amount: 40 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 12 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 88 },
+               { ware: 'siliconcarbide', amount: 13 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 6 },
+               { ware: 'energycells', amount: 121 },
+               { ware: 'hullparts', amount: 36 },
             ],
          },
       ]
@@ -7132,7 +9183,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 78039, max: 95381, avg: 86710 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 5,
@@ -7143,6 +9194,29 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 8 },
                { ware: 'energycells', amount: 10 },
                { ware: 'weaponcomponents', amount: 25 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 8 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 67 },
+               { ware: 'siliconcarbide', amount: 11 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 4 },
+               { ware: 'energycells', amount: 126 },
+               { ware: 'hullparts', amount: 25 },
             ],
          },
       ]
@@ -7157,7 +9231,7 @@ export const Equipments = [
       size: Size.medium,
       hull: 1001,
       price: { min: 389160, max: 475640, avg: 432400 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 5,
@@ -7170,19 +9244,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 125 },
             ],
          },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 44 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 225 },
+               { ware: 'siliconcarbide', amount: 38 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 22 },
+               { ware: 'energycells', amount: 305 },
+               { ware: 'hullparts', amount: 128 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_s_beam_01_mk1',
       version: 0,
       name: 'S Beam Emitter Mk1',
-      description: 'No information available',
+      description: 'The Beam Emitter is a highly specialised anti-fighter weapon, notable for its high accuracy. It discharges high-velocity beams which hit their target almost immediately. However, somewhat counterintuitively, it achieves this instantaneous accuracy by restraining the energy that the beam puts out. Since the beam is not as intense as the projectiles fired by many of its contemporaries, it only inflicts damage gradually, which exposes the pilot to a counter-attack. Because of this, and the fact that the weapon inflicts more damage the nearer it is to its target, the Beam Emitter is mainly used on nimble fighters which are able to get up close and out-manoeuvre their target when necessary.nnThe Mk2 variant tries to rectify the weak damage output somewhat by ramping up the beam\'s intensity, but this comes at the cost of the weapon overheating more rapidly.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 23948, max: 29269, avg: 26609 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7195,19 +9292,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 9 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 44 },
+               { ware: 'siliconcarbide', amount: 5 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 73 },
+               { ware: 'hullparts', amount: 7 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_s_beam_01_mk2',
       version: 0,
       name: 'S Beam Emitter Mk2',
-      description: 'No information available',
+      description: 'The Beam Emitter is a highly specialised anti-fighter weapon, notable for its high accuracy. It discharges high-velocity beams which hit their target almost immediately. However, somewhat counterintuitively, it achieves this instantaneous accuracy by restraining the energy that the beam puts out. Since the beam is not as intense as the projectiles fired by many of its contemporaries, it only inflicts damage gradually, which exposes the pilot to a counter-attack. Because of this, and the fact that the weapon inflicts more damage the nearer it is to its target, the Beam Emitter is mainly used on nimble fighters which are able to get up close and out-manoeuvre their target when necessary.nnThe Mk2 variant tries to rectify the weak damage output somewhat by ramping up the beam\'s intensity, but this comes at the cost of the weapon overheating more rapidly.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 104979, max: 128308, avg: 116643 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7220,19 +9340,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 36 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 11 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 84 },
+               { ware: 'siliconcarbide', amount: 14 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 6 },
+               { ware: 'energycells', amount: 76 },
+               { ware: 'hullparts', amount: 34 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_s_burst_01_mk1',
       version: 0,
       name: 'S Burst Ray Mk1',
-      description: 'No information available',
+      description: 'Because of its amplified destructive power against surface elements, the Burst Ray is the weapon of choice for daring fighter pilots who want to strip capital ships of their engines, shield generators and turrets. As the name suggests, it fires a sequenced burst of focused radiation to deliver several galvanic calefactions in quick succession, causing the target\'s surface material to lose cohesion on a molecular level. This niche ability comes at a cost, however: its short range and low energy output against the main shield and hull of its target make the Burst Ray an ineffective weapon for skirmishes with small and medium-sized ships. In a pinch, the fact that the individual beams deliver their damage instantaneously, may nevertheless prove useful against small and evasive targets.nnIt is said that the Priest Duke of Pious Mists himself ordered the development of a specialised anti-capital ship weapon to counter the overreliance on heavy fleets and long-range weaponry of the Holy Order of the Pontifex.nnThe Mk2 variant fires more often per burst, which increases the energy output significantly. In turn, the effective range drops slightly and the weapon becomes prone to overheating.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 18582, max: 39398, avg: 28990 },
-      owners: [ Factions.alliance, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7251,13 +9394,13 @@ export const Equipments = [
       id: 'weapon_gen_s_burst_01_mk2',
       version: 0,
       name: 'S Burst Ray Mk2',
-      description: 'No information available',
+      description: 'Because of its amplified destructive power against surface elements, the Burst Ray is the weapon of choice for daring fighter pilots who want to strip capital ships of their engines, shield generators and turrets. As the name suggests, it fires a sequenced burst of focused radiation to deliver several galvanic calefactions in quick succession, causing the target\'s surface material to lose cohesion on a molecular level. This niche ability comes at a cost, however: its short range and low energy output against the main shield and hull of its target make the Burst Ray an ineffective weapon for skirmishes with small and medium-sized ships. In a pinch, the fact that the individual beams deliver their damage instantaneously, may nevertheless prove useful against small and evasive targets.nnIt is said that the Priest Duke of Pious Mists himself ordered the development of a specialised anti-capital ship weapon to counter the overreliance on heavy fleets and long-range weaponry of the Holy Order of the Pontifex.nnThe Mk2 variant fires more often per burst, which increases the energy output significantly. In turn, the effective range drops slightly and the weapon becomes prone to overheating.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 56299, max: 108078, avg: 82188 },
-      owners: [ Factions.alliance, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7276,12 +9419,12 @@ export const Equipments = [
       id: 'weapon_gen_s_cannon_01_mk1',
       version: 0,
       name: 'S Blast Mortar Mk1',
-      description: 'No information available',
+      description: 'The Blast Mortar launches a tightly packed ball of high explosives, carefully separated from a layer of crushed and superheated asteroid matter. This swirling bubble of doom detonates on impact, or upon reaching its maximum effective range. Its decent blast radius, added to the already high damage per projectile, make it an excellent choice for taking out the engines, turrets and shield generators of capital ships. It is often favourably compared to the Plasma Cannon, a household standard in the post-realignment Jump Gate network, because it has the higher projectile speed of the two. This offers desperate pilots the ability to engage smaller targets when necessary. However, it is no flak cannon and, if given the choice, it is usually advisable to use this weapon against ships of at least medium size, which cannot evade its fire.nnBefore the Holy Order of the Pontifex was even officially proclaimed, its constituents began experimenting with equipment that would make efficient use of the limited resources available at the time. This resulted in weapons such as the Blast Mortar: surprisingly simple to produce, at least from the perspective of the superior Paranid intellect, yet at the same time brutally effective. Though they were initially ordered to build stronger beams for their visual effect, the priest engineers put their faith in what they most believed in: local maxima in the parameter space. Like a paradise yet untouched by mortal interference, the Blast Mortar works in perfect equilibrium as long as its careful calibration isn\'t disturbed. Bafflingly resistant to attempts at reverse engineering and improvement by foreign powers\' militaries, the mechanism tends to suffer drastic loss of efficiency if one dares to adjust its properties, even in the most miniscule way.nnThe Mk2 variant is the exception to this rule, being a creation by the very same priest engineers that designed the original. It is an upgrade as straightforward as it gets, simply offering significantly enhanced destructive power and slightly improved heat dissipation.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       price: { min: 40538, max: 81008, avg: 60773 },
-      owners: [ Factions.holyorder, Factions.ministry, Factions.trinity ],
+      owners: [ Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7300,12 +9443,12 @@ export const Equipments = [
       id: 'weapon_gen_s_cannon_01_mk2',
       version: 0,
       name: 'S Blast Mortar Mk2',
-      description: 'No information available',
+      description: 'The Blast Mortar launches a tightly packed ball of high explosives, carefully separated from a layer of crushed and superheated asteroid matter. This swirling bubble of doom detonates on impact, or upon reaching its maximum effective range. Its decent blast radius, added to the already high damage per projectile, make it an excellent choice for taking out the engines, turrets and shield generators of capital ships. It is often favourably compared to the Plasma Cannon, a household standard in the post-realignment Jump Gate network, because it has the higher projectile speed of the two. This offers desperate pilots the ability to engage smaller targets when necessary. However, it is no flak cannon and, if given the choice, it is usually advisable to use this weapon against ships of at least medium size, which cannot evade its fire.nnBefore the Holy Order of the Pontifex was even officially proclaimed, its constituents began experimenting with equipment that would make efficient use of the limited resources available at the time. This resulted in weapons such as the Blast Mortar: surprisingly simple to produce, at least from the perspective of the superior Paranid intellect, yet at the same time brutally effective. Though they were initially ordered to build stronger beams for their visual effect, the priest engineers put their faith in what they most believed in: local maxima in the parameter space. Like a paradise yet untouched by mortal interference, the Blast Mortar works in perfect equilibrium as long as its careful calibration isn\'t disturbed. Bafflingly resistant to attempts at reverse engineering and improvement by foreign powers\' militaries, the mechanism tends to suffer drastic loss of efficiency if one dares to adjust its properties, even in the most miniscule way.nnThe Mk2 variant is the exception to this rule, being a creation by the very same priest engineers that designed the original. It is an upgrade as straightforward as it gets, simply offering significantly enhanced destructive power and slightly improved heat dissipation.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       price: { min: 57963, max: 111999, avg: 84981 },
-      owners: [ Factions.holyorder, Factions.ministry, Factions.trinity ],
+      owners: [ Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7330,7 +9473,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 6695, max: 8183, avg: 7439 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 5,
@@ -7341,6 +9484,27 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 1 },
                { ware: 'energycells', amount: 10 },
                { ware: 'weaponcomponents', amount: 1 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 33 },
+               { ware: 'siliconcarbide', amount: 3 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 65 },
+               { ware: 'hullparts', amount: 2 },
             ],
          },
       ]
@@ -7355,7 +9519,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 13370, max: 16341, avg: 14855 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 5,
@@ -7368,19 +9532,41 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 5 },
             ],
          },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 1 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 40 },
+               { ware: 'siliconcarbide', amount: 1 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 120 },
+               { ware: 'hullparts', amount: 4 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_s_gatling_01_mk1',
       version: 0,
       name: 'S Bolt Repeater Mk1',
-      description: 'No information available',
+      description: 'The Bolt Repeater\'s average damage output and cooling make it an excellent choice for the indecisive military pilot. It is often considered the logical next step after having familiarised oneself with the Pulse Laser. Its prolonged bursts can easily tear apart targets of a similar size, but the projectiles are larger and move at a slower pace than Pulse Laser particles. This means that the pilot needs to have experience in gauging when to expend their burst, and when to let the weapon cool down and wait for a better opportunity. When facing off against this weapon, nimble ships may be able to dodge its stream of bullets by strafing and making spiral movements. Against capital ships, the Bolt Repeater is a suitable choice for destroying surface elements such as turrets and shields, though it struggles to leave a lasting impact on the ship\'s hull.nnThe modern-day Bolt Repeater is the result of a development path taken by Argon military scientists from old Mass Driver designs; a weapon which first saw use during the era of the Kha\'ak threat. By stripping out the original weapon\'s ability to penetrate shields, and instead maximising the force of its continuous bullet output, they created a robust all-rounder that was soon adopted by the Federation\'s allies because of its sheer brutal efficiency.nnThe Mk2 variant uses even larger projectiles while maintaining the same projectile speed, resulting in a lower rate of fire but an increased level of overall trauma to the target\'s hull and shields.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 43055, max: 52623, avg: 47839 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7393,19 +9579,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 3 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 4 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 53 },
+               { ware: 'siliconcarbide', amount: 8 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 2 },
+               { ware: 'energycells', amount: 115 },
+               { ware: 'hullparts', amount: 15 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_s_gatling_01_mk2',
       version: 0,
       name: 'S Bolt Repeater Mk2',
-      description: 'No information available',
+      description: 'The Bolt Repeater\'s average damage output and cooling make it an excellent choice for the indecisive military pilot. It is often considered the logical next step after having familiarised oneself with the Pulse Laser. Its prolonged bursts can easily tear apart targets of a similar size, but the projectiles are larger and move at a slower pace than Pulse Laser particles. This means that the pilot needs to have experience in gauging when to expend their burst, and when to let the weapon cool down and wait for a better opportunity. When facing off against this weapon, nimble ships may be able to dodge its stream of bullets by strafing and making spiral movements. Against capital ships, the Bolt Repeater is a suitable choice for destroying surface elements such as turrets and shields, though it struggles to leave a lasting impact on the ship\'s hull.nnThe modern-day Bolt Repeater is the result of a development path taken by Argon military scientists from old Mass Driver designs; a weapon which first saw use during the era of the Kha\'ak threat. By stripping out the original weapon\'s ability to penetrate shields, and instead maximising the force of its continuous bullet output, they created a robust all-rounder that was soon adopted by the Federation\'s allies because of its sheer brutal efficiency.nnThe Mk2 variant uses even larger projectiles while maintaining the same projectile speed, resulting in a lower rate of fire but an increased level of overall trauma to the target\'s hull and shields.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 214756, max: 262480, avg: 238618 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7416,6 +9625,29 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 40 },
                { ware: 'energycells', amount: 10 },
                { ware: 'weaponcomponents', amount: 15 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 24 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 145 },
+               { ware: 'siliconcarbide', amount: 22 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 13 },
+               { ware: 'energycells', amount: 175 },
+               { ware: 'hullparts', amount: 75 },
             ],
          },
       ]
@@ -7430,7 +9662,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 8277, max: 10117, avg: 9197 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 5,
@@ -7441,6 +9673,27 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 1 },
                { ware: 'energycells', amount: 10 },
                { ware: 'weaponcomponents', amount: 2 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 40 },
+               { ware: 'siliconcarbide', amount: 4 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 83 },
+               { ware: 'hullparts', amount: 2 },
             ],
          },
       ]
@@ -7455,7 +9708,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 40349, max: 49316, avg: 44832 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 5,
@@ -7468,19 +9721,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 10 },
             ],
          },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 4 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 30 },
+               { ware: 'siliconcarbide', amount: 5 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 2 },
+               { ware: 'energycells', amount: 90 },
+               { ware: 'hullparts', amount: 13 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_s_laser_01_mk1',
       version: 0,
       name: 'S Pulse Laser Mk1',
-      description: 'No information available',
+      description: 'Many experienced pilots fondly remember the affordable and reliable Pulse Laser as their first weapon. Its pin-point accuracy and high projectile speed make it an excellent choice for fighting small and fast targets, handling fragile lockboxes, and for dealing with deployables like mines and lasertowers. Often initially scoffed at for its comparatively low damage output, its slow heat generation and sublime cooling result in a steady stream of disruptive fire, which in turn rewards pilots who can stay on target for an extended period. Faced with larger enemies, the Pulse Laser does not become obsolete as quickly as one might expect. Used in greater numbers, it can still be a formidable choice against frigates and corvettes, though an upgrade to a larger weapon mount may be advisable to maintain a level playing field. The Pulse Laser remains the preferred choice of commanders who favour versatility over optimisation against specific opponents, or who have little trust in the aim of their subordinates.nnThe technology behind the Pulse Laser is advanced and efficient. Within a shielded chamber, microscopic fragments of matter are superheated and accelerated by a pulsed neodymium laser. The weapon was originally designed by the Ministry of Finance to provide a robust loadout for their escort fleets, without having to invest time and resources into the maintenance of a well-rounded combined arms setup. Over time, and thanks to the Teladi Company\'s aggressive marketing, it has been adopted as the number one weapon of convenience by all other former members of the Community of Planets.nnThe Mk2 variant sports a slightly longer burst. This lowers the efficiency of the heat dissipation between bursts and thereby exponentially drives up the cost of the internal shielding, but results in an overall higher damage output.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 16056, max: 19624, avg: 17840 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7493,19 +9769,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 1 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 1 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 35 },
+               { ware: 'siliconcarbide', amount: 5 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 20 },
+               { ware: 'hullparts', amount: 5 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_s_laser_01_mk2',
       version: 0,
       name: 'S Pulse Laser Mk2',
-      description: 'No information available',
+      description: 'Many experienced pilots fondly remember the affordable and reliable Pulse Laser as their first weapon. Its pin-point accuracy and high projectile speed make it an excellent choice for fighting small and fast targets, handling fragile lockboxes, and for dealing with deployables like mines and lasertowers. Often initially scoffed at for its comparatively low damage output, its slow heat generation and sublime cooling result in a steady stream of disruptive fire, which in turn rewards pilots who can stay on target for an extended period. Faced with larger enemies, the Pulse Laser does not become obsolete as quickly as one might expect. Used in greater numbers, it can still be a formidable choice against frigates and corvettes, though an upgrade to a larger weapon mount may be advisable to maintain a level playing field. The Pulse Laser remains the preferred choice of commanders who favour versatility over optimisation against specific opponents, or who have little trust in the aim of their subordinates.nnThe technology behind the Pulse Laser is advanced and efficient. Within a shielded chamber, microscopic fragments of matter are superheated and accelerated by a pulsed neodymium laser. The weapon was originally designed by the Ministry of Finance to provide a robust loadout for their escort fleets, without having to invest time and resources into the maintenance of a well-rounded combined arms setup. Over time, and thanks to the Teladi Company\'s aggressive marketing, it has been adopted as the number one weapon of convenience by all other former members of the Community of Planets.nnThe Mk2 variant sports a slightly longer burst. This lowers the efficiency of the heat dissipation between bursts and thereby exponentially drives up the cost of the internal shielding, but results in an overall higher damage output.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 79761, max: 97485, avg: 88623 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7516,6 +9815,29 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 15 },
                { ware: 'energycells', amount: 10 },
                { ware: 'weaponcomponents', amount: 5 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 8 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 77 },
+               { ware: 'siliconcarbide', amount: 12 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 4 },
+               { ware: 'energycells', amount: 174 },
+               { ware: 'hullparts', amount: 28 },
             ],
          },
       ]
@@ -7530,7 +9852,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 6522, max: 7971, avg: 7247 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7541,6 +9863,27 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 1 },
                { ware: 'energycells', amount: 5 },
                { ware: 'weaponcomponents', amount: 1 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 45 },
+               { ware: 'siliconcarbide', amount: 3 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 60 },
+               { ware: 'hullparts', amount: 2 },
             ],
          },
       ]
@@ -7555,7 +9898,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 32092, max: 39223, avg: 35658 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7568,19 +9911,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 5 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 3 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 44 },
+               { ware: 'siliconcarbide', amount: 5 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 145 },
+               { ware: 'hullparts', amount: 11 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_s_plasma_01_mk1',
       version: 0,
       name: 'S Plasma Cannon Mk1',
-      description: 'No information available',
+      description: 'The Plasma Cannon combines high damage output with long range. Its drawbacks, slow projectile speed and fire rate, made worse by high heat generation, can make landing hits as challenging as it is important. This results in its predominant use being against capital ships, where swarms of fighters deploy Plasma Cannons to great success. Unlike short ranged weapons such as the Shard Battery and the Split Tau Accelerator, which outperform it in damage output and are more suited to attacking capital ships from a blind spot, the Plasma Cannon\'s greatest advantage is its range. Skilled pilots are also able to hunt down smaller targets efficiently, either by deploying the Plasma Cannon at short range or by predicting the courses of the projectile and target. Similarly, skilled pilots are also able to evade and avoid being hit by such attempts.nnThe Plasma Cannon was developed during the early days of the Paranid Civil War, by the Holy Order of the Pontifex, building upon the High Energy Plasma Thrower. Like its predecessor, it suffers from high radiation build-up, and this needs to be purged between shots to prevent it from damaging itself. The blueprint for the Plasma Cannon was stolen by the Argon Secret Service and distributed throughout the Commonwealth when the Argon Federation joined the war effort.nnThe Mk2 variant has a higher rate of fire, lower heat generation and increased damage output.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 12851, max: 15707, avg: 14279 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7593,19 +9959,41 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 5 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 1 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 20 },
+               { ware: 'siliconcarbide', amount: 3 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 105 },
+               { ware: 'hullparts', amount: 4 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_s_plasma_01_mk2',
       version: 0,
       name: 'S Plasma Cannon Mk2',
-      description: 'No information available',
+      description: 'The Plasma Cannon combines high damage output with long range. Its drawbacks, slow projectile speed and fire rate, made worse by high heat generation, can make landing hits as challenging as it is important. This results in its predominant use being against capital ships, where swarms of fighters deploy Plasma Cannons to great success. Unlike short ranged weapons such as the Shard Battery and the Split Tau Accelerator, which outperform it in damage output and are more suited to attacking capital ships from a blind spot, the Plasma Cannon\'s greatest advantage is its range. Skilled pilots are also able to hunt down smaller targets efficiently, either by deploying the Plasma Cannon at short range or by predicting the courses of the projectile and target. Similarly, skilled pilots are also able to evade and avoid being hit by such attempts.nnThe Plasma Cannon was developed during the early days of the Paranid Civil War, by the Holy Order of the Pontifex, building upon the High Energy Plasma Thrower. Like its predecessor, it suffers from high radiation build-up, and this needs to be purged between shots to prevent it from damaging itself. The blueprint for the Plasma Cannon was stolen by the Argon Secret Service and distributed throughout the Commonwealth when the Argon Federation joined the war effort.nnThe Mk2 variant has a higher rate of fire, lower heat generation and increased damage output.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 55827, max: 68233, avg: 62030 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7618,19 +10006,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 20 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 6 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 46 },
+               { ware: 'siliconcarbide', amount: 6 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 3 },
+               { ware: 'energycells', amount: 66 },
+               { ware: 'hullparts', amount: 18 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_s_shotgun_01_mk1',
       version: 0,
       name: 'S Shard Battery Mk1',
-      description: 'No information available',
+      description: 'The Shard Battery is essentially a spaceborne shotgun, that makes up for its low effective range and accuracy by inflicting devastating trauma against shields and hull alike. At its core, it is functionally similar to the Bolt Repeater that it was originally developed from. However, the ejection of multiple projectiles at once requires a wider barrel aperture, a larger spacing between shots, and generates a higher energy drain. When it comes to its damage output, the Shard Battery has been compared to the Plasma Cannon, but it offers a slightly different range of applications. Skilled military pilots may occasionally make use of this weapon against small targets in an attempt to end the fight quickly, but it is generally agreed upon that one should try to avoid these situations. The Shard Battery reaches its fullest potential against larger and slower targets such as M-sized ships, which cannot as easily evade its projectiles. It is also especially effective against capital ship surface elements, provided that the pilot can find an opportunity to target them from the blind spots of nearby turrets.nnThe Mk2 variant fires fewer shards at a higher speed but with a shorter interval. This raises the overall damage output and improves the weapon\'s accuracy, especially against more nimble targets, but in turn incurs a quicker heat build-up.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 27152, max: 33186, avg: 30169 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7643,19 +10054,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 5 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 3 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 35 },
+               { ware: 'siliconcarbide', amount: 2 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 103 },
+               { ware: 'hullparts', amount: 9 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_gen_s_shotgun_01_mk2',
       version: 0,
       name: 'S Shard Battery Mk2',
-      description: 'No information available',
+      description: 'The Shard Battery is essentially a spaceborne shotgun, that makes up for its low effective range and accuracy by inflicting devastating trauma against shields and hull alike. At its core, it is functionally similar to the Bolt Repeater that it was originally developed from. However, the ejection of multiple projectiles at once requires a wider barrel aperture, a larger spacing between shots, and generates a higher energy drain. When it comes to its damage output, the Shard Battery has been compared to the Plasma Cannon, but it offers a slightly different range of applications. Skilled military pilots may occasionally make use of this weapon against small targets in an attempt to end the fight quickly, but it is generally agreed upon that one should try to avoid these situations. The Shard Battery reaches its fullest potential against larger and slower targets such as M-sized ships, which cannot as easily evade its projectiles. It is also especially effective against capital ship surface elements, provided that the pilot can find an opportunity to target them from the blind spots of nearby turrets.nnThe Mk2 variant fires fewer shards at a higher speed but with a shorter interval. This raises the overall damage output and improves the weapon\'s accuracy, especially against more nimble targets, but in turn incurs a quicker heat build-up.',
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 135242, max: 165296, avg: 150269 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.yaki, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 10,
@@ -7666,6 +10100,29 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 20 },
                { ware: 'energycells', amount: 10 },
                { ware: 'weaponcomponents', amount: 25 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 15 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 95 },
+               { ware: 'siliconcarbide', amount: 14 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 8 },
+               { ware: 'energycells', amount: 102 },
+               { ware: 'hullparts', amount: 46 },
             ],
          },
       ]
@@ -7680,7 +10137,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 22558, max: 27571, avg: 25064 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 5,
@@ -7691,6 +10148,29 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 3 },
                { ware: 'energycells', amount: 10 },
                { ware: 'weaponcomponents', amount: 5 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 26 },
+               { ware: 'siliconcarbide', amount: 4 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 1 },
+               { ware: 'energycells', amount: 70 },
+               { ware: 'hullparts', amount: 7 },
             ],
          },
       ]
@@ -7705,7 +10185,7 @@ export const Equipments = [
       size: Size.small,
       hull: 500,
       price: { min: 111753, max: 136587, avg: 124170 },
-      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.loanshark, Factions.scavenger ],
       production: [
          {
             time: 5,
@@ -7718,19 +10198,42 @@ export const Equipments = [
                { ware: 'weaponcomponents', amount: 25 },
             ],
          },
+         {
+            time: 5,
+            amount: 1,
+            method: 'terran',
+            name: 'Terran',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 12 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 94 },
+               { ware: 'siliconcarbide', amount: 12 },
+            ],
+         },
+         {
+            time: 5,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 6 },
+               { ware: 'energycells', amount: 168 },
+               { ware: 'hullparts', amount: 37 },
+            ],
+         },
       ]
    },
    {
       id: 'weapon_kha_m_laser_01_mk1',
       version: 0,
-      name: 'M Kyon Emitter Mk1',
+      name: 'KHA M Kyon Emitter Mk1',
       description: 'No information available',
       race: Races.khaak,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1000,
-      price: { min: 1, max: 1, avg: 1 },
+      price: { min: 0, max: 0, avg: 0 },
       owners: [ Factions.khaak ],
       production: [
       ]
@@ -7738,14 +10241,14 @@ export const Equipments = [
    {
       id: 'weapon_kha_s_laser_01_mk1',
       version: 0,
-      name: 'S Kyon Emitter Mk1',
+      name: 'KHA S Kyon Emitter Mk1',
       description: 'No information available',
       race: Races.khaak,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
-      price: { min: 1, max: 1, avg: 1 },
+      price: { min: 0, max: 0, avg: 0 },
       owners: [ Factions.khaak ],
       production: [
       ]
@@ -7755,12 +10258,13 @@ export const Equipments = [
       version: 0,
       name: 'Odysseus Main Battery',
       description: 'No information available',
+      race: Races.paranid,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.large,
       hull: 8000,
       price: { min: 1000201, max: 1222468, avg: 1111335 },
-      owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7778,14 +10282,15 @@ export const Equipments = [
    {
       id: 'weapon_par_m_railgun_01_mk1',
       version: 0,
-      name: 'M Mass Driver Mk1',
-      description: 'No information available',
+      name: 'PAR M Mass Driver Mk1',
+      description: 'The Mass Driver fires a single high energy projectile, which maintains its accuracy and destructive force over a very long distance. Heat accumulates almost instantaneously when the trigger is engaged, after which the pilot can release the shot immediately or take their time to aim. These unique features come at a cost, however: the weapon is mounted in a fixed forward-facing orientation, which makes automatic target tracking impossible and means that the pilot has to rely solely on their own skill. Over an extended period of time, the energy output of this weapon may appear relatively poor, but its strength lies in the initial attack, which can surprise the target and take out vital systems before a skirmish. It is therefore most commonly used in a combined arms approach, to support an already engaged force. On fast and nimble ships, which can reliably keep their opponents at a distance, the weapon\'s superior range may also allow the pilot to defeat their opponent without ever coming under fire themselves.nnThis weapon is not to be confused with pre-Shutdown versions of the Mass Driver, which fired constant streams of shield-penetrating projectiles. The militaries of both the Argon Federation and the Godrealm of the Paranid attempted to improve on the old design, and both developed weapons that now bear little resemblance to the original. The Paranid opted for a dual barrel, lined with perfectly synchronised, superconductive electromagnets. It appears curious, therefore, that the weapons development experts in Trinity Sanctum, upon presenting what was essentially an entirely new type of weapon, chose to keep the traditional name.nnThe Mk2 variant incorporates expensive, highly calibrated electromagnets, greatly reducing the weapon\'s heat build-up before each shot.',
+      race: Races.paranid,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 304352, max: 600045, avg: 452198 },
-      owners: [ Factions.alliance, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -7803,14 +10308,15 @@ export const Equipments = [
    {
       id: 'weapon_par_m_railgun_01_mk2',
       version: 0,
-      name: 'M Mass Driver Mk2',
-      description: 'No information available',
+      name: 'PAR M Mass Driver Mk2',
+      description: 'The Mass Driver fires a single high energy projectile, which maintains its accuracy and destructive force over a very long distance. Heat accumulates almost instantaneously when the trigger is engaged, after which the pilot can release the shot immediately or take their time to aim. These unique features come at a cost, however: the weapon is mounted in a fixed forward-facing orientation, which makes automatic target tracking impossible and means that the pilot has to rely solely on their own skill. Over an extended period of time, the energy output of this weapon may appear relatively poor, but its strength lies in the initial attack, which can surprise the target and take out vital systems before a skirmish. It is therefore most commonly used in a combined arms approach, to support an already engaged force. On fast and nimble ships, which can reliably keep their opponents at a distance, the weapon\'s superior range may also allow the pilot to defeat their opponent without ever coming under fire themselves.nnThis weapon is not to be confused with pre-Shutdown versions of the Mass Driver, which fired constant streams of shield-penetrating projectiles. The militaries of both the Argon Federation and the Godrealm of the Paranid attempted to improve on the old design, and both developed weapons that now bear little resemblance to the original. The Paranid opted for a dual barrel, lined with perfectly synchronised, superconductive electromagnets. It appears curious, therefore, that the weapons development experts in Trinity Sanctum, upon presenting what was essentially an entirely new type of weapon, chose to keep the traditional name.nnThe Mk2 variant incorporates expensive, highly calibrated electromagnets, greatly reducing the weapon\'s heat build-up before each shot.',
+      race: Races.paranid,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
       hull: 1001,
       price: { min: 1188194, max: 2380428, avg: 1784311 },
-      owners: [ Factions.alliance, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7828,14 +10334,15 @@ export const Equipments = [
    {
       id: 'weapon_par_s_railgun_01_mk1',
       version: 0,
-      name: 'S Mass Driver Mk1',
-      description: 'No information available',
+      name: 'PAR S Mass Driver Mk1',
+      description: 'The Mass Driver fires a single high energy projectile, which maintains its accuracy and destructive force over a very long distance. Heat accumulates almost instantaneously when the trigger is engaged, after which the pilot can release the shot immediately or take their time to aim. These unique features come at a cost, however: the weapon is mounted in a fixed forward-facing orientation, which makes automatic target tracking impossible and means that the pilot has to rely solely on their own skill. Over an extended period of time, the energy output of this weapon may appear relatively poor, but its strength lies in the initial attack, which can surprise the target and take out vital systems before a skirmish. It is therefore most commonly used in a combined arms approach, to support an already engaged force. On fast and nimble ships, which can reliably keep their opponents at a distance, the weapon\'s superior range may also allow the pilot to defeat their opponent without ever coming under fire themselves.nnThis weapon is not to be confused with pre-Shutdown versions of the Mass Driver, which fired constant streams of shield-penetrating projectiles. The militaries of both the Argon Federation and the Godrealm of the Paranid attempted to improve on the old design, and both developed weapons that now bear little resemblance to the original. The Paranid opted for a dual barrel, lined with perfectly synchronised, superconductive electromagnets. It appears curious, therefore, that the weapons development experts in Trinity Sanctum, upon presenting what was essentially an entirely new type of weapon, chose to keep the traditional name.nnThe Mk2 variant incorporates expensive, highly calibrated electromagnets, greatly reducing the weapon\'s heat build-up before each shot.',
+      race: Races.paranid,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 163448, max: 329181, avg: 246314 },
-      owners: [ Factions.alliance, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity, Factions.yaki ],
       production: [
          {
             time: 10,
@@ -7853,14 +10360,15 @@ export const Equipments = [
    {
       id: 'weapon_par_s_railgun_01_mk2',
       version: 0,
-      name: 'S Mass Driver Mk2',
-      description: 'No information available',
+      name: 'PAR S Mass Driver Mk2',
+      description: 'The Mass Driver fires a single high energy projectile, which maintains its accuracy and destructive force over a very long distance. Heat accumulates almost instantaneously when the trigger is engaged, after which the pilot can release the shot immediately or take their time to aim. These unique features come at a cost, however: the weapon is mounted in a fixed forward-facing orientation, which makes automatic target tracking impossible and means that the pilot has to rely solely on their own skill. Over an extended period of time, the energy output of this weapon may appear relatively poor, but its strength lies in the initial attack, which can surprise the target and take out vital systems before a skirmish. It is therefore most commonly used in a combined arms approach, to support an already engaged force. On fast and nimble ships, which can reliably keep their opponents at a distance, the weapon\'s superior range may also allow the pilot to defeat their opponent without ever coming under fire themselves.nnThis weapon is not to be confused with pre-Shutdown versions of the Mass Driver, which fired constant streams of shield-penetrating projectiles. The militaries of both the Argon Federation and the Godrealm of the Paranid attempted to improve on the old design, and both developed weapons that now bear little resemblance to the original. The Paranid opted for a dual barrel, lined with perfectly synchronised, superconductive electromagnets. It appears curious, therefore, that the weapons development experts in Trinity Sanctum, upon presenting what was essentially an entirely new type of weapon, chose to keep the traditional name.nnThe Mk2 variant incorporates expensive, highly calibrated electromagnets, greatly reducing the weapon\'s heat build-up before each shot.',
+      race: Races.paranid,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
       hull: 500,
       price: { min: 860045, max: 1724780, avg: 1292412 },
-      owners: [ Factions.alliance, Factions.paranid, Factions.trinity ],
+      owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
       production: [
          {
             time: 10,
@@ -7880,6 +10388,7 @@ export const Equipments = [
       version: 0,
       name: 'Phoenix Main Battery',
       description: 'No information available',
+      race: Races.teladi,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.large,
@@ -7903,8 +10412,9 @@ export const Equipments = [
    {
       id: 'weapon_tel_m_charge_01_mk1',
       version: 0,
-      name: 'M Muon Charger Mk1',
-      description: 'No information available',
+      name: 'TEL M Muon Charger Mk1',
+      description: 'The Muon Charger is a short range, high damage weapon. Its unusual handling requires the pilot to - as the name implies - manually charge every shot. It is recommended that it only be used when fully charged, as the damage potential is otherwise greatly reduced. Upon release, it fires multiple bolts, with a relatively small spread, which are able to stick to a target and deal damage over time. These bolts are sometimes deflected off the target entirely, resulting in them dealing little damage. If used correctly, the Muon Charger will never overheat, allowing for a continuous and consistent damage output.nnThe Ministry of Finance Science Division developed this weapon for all-round use, though arguably it can be difficult to deploy effectively in dogfights against fast targets. The ability to hold the charge and release at will was intended to give pilots more control over their weapon, and increase the fighter fleet\'s accuracy statistics. The unique characteristics of this weapon, however, mean that custom training is required, making it unsuitable for the Ministry\'s novice fighter program.nnThe Mk2 variant offers increased damage output.',
+      race: Races.teladi,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
@@ -7928,8 +10438,9 @@ export const Equipments = [
    {
       id: 'weapon_tel_m_charge_01_mk2',
       version: 0,
-      name: 'M Muon Charger Mk2',
-      description: 'No information available',
+      name: 'TEL M Muon Charger Mk2',
+      description: 'The Muon Charger is a short range, high damage weapon. Its unusual handling requires the pilot to - as the name implies - manually charge every shot. It is recommended that it only be used when fully charged, as the damage potential is otherwise greatly reduced. Upon release, it fires multiple bolts, with a relatively small spread, which are able to stick to a target and deal damage over time. These bolts are sometimes deflected off the target entirely, resulting in them dealing little damage. If used correctly, the Muon Charger will never overheat, allowing for a continuous and consistent damage output.nnThe Ministry of Finance Science Division developed this weapon for all-round use, though arguably it can be difficult to deploy effectively in dogfights against fast targets. The ability to hold the charge and release at will was intended to give pilots more control over their weapon, and increase the fighter fleet\'s accuracy statistics. The unique characteristics of this weapon, however, mean that custom training is required, making it unsuitable for the Ministry\'s novice fighter program.nnThe Mk2 variant offers increased damage output.',
+      race: Races.teladi,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.medium,
@@ -7953,8 +10464,9 @@ export const Equipments = [
    {
       id: 'weapon_tel_s_charge_01_mk1',
       version: 0,
-      name: 'S Muon Charger Mk1',
-      description: 'No information available',
+      name: 'TEL S Muon Charger Mk1',
+      description: 'The Muon Charger is a short range, high damage weapon. Its unusual handling requires the pilot to - as the name implies - manually charge every shot. It is recommended that it only be used when fully charged, as the damage potential is otherwise greatly reduced. Upon release, it fires multiple bolts, with a relatively small spread, which are able to stick to a target and deal damage over time. These bolts are sometimes deflected off the target entirely, resulting in them dealing little damage. If used correctly, the Muon Charger will never overheat, allowing for a continuous and consistent damage output.nnThe Ministry of Finance Science Division developed this weapon for all-round use, though arguably it can be difficult to deploy effectively in dogfights against fast targets. The ability to hold the charge and release at will was intended to give pilots more control over their weapon, and increase the fighter fleet\'s accuracy statistics. The unique characteristics of this weapon, however, mean that custom training is required, making it unsuitable for the Ministry\'s novice fighter program.nnThe Mk2 variant offers increased damage output.',
+      race: Races.teladi,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
@@ -7978,8 +10490,9 @@ export const Equipments = [
    {
       id: 'weapon_tel_s_charge_01_mk2',
       version: 0,
-      name: 'S Muon Charger Mk2',
-      description: 'No information available',
+      name: 'TEL S Muon Charger Mk2',
+      description: 'The Muon Charger is a short range, high damage weapon. Its unusual handling requires the pilot to - as the name implies - manually charge every shot. It is recommended that it only be used when fully charged, as the damage potential is otherwise greatly reduced. Upon release, it fires multiple bolts, with a relatively small spread, which are able to stick to a target and deal damage over time. These bolts are sometimes deflected off the target entirely, resulting in them dealing little damage. If used correctly, the Muon Charger will never overheat, allowing for a continuous and consistent damage output.nnThe Ministry of Finance Science Division developed this weapon for all-round use, though arguably it can be difficult to deploy effectively in dogfights against fast targets. The ability to hold the charge and release at will was intended to give pilots more control over their weapon, and increase the fighter fleet\'s accuracy statistics. The unique characteristics of this weapon, however, mean that custom training is required, making it unsuitable for the Ministry\'s novice fighter program.nnThe Mk2 variant offers increased damage output.',
+      race: Races.teladi,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.small,
@@ -8004,7 +10517,7 @@ export const Equipments = [
       id: 'weapon_xen_m_laser_01_mk1',
       version: 0,
       name: 'M Pulse Laser Mk1',
-      description: 'No information available',
+      description: 'Many experienced pilots fondly remember the affordable and reliable Pulse Laser as their first weapon. Its pin-point accuracy and high projectile speed make it an excellent choice for fighting small and fast targets, handling fragile lockboxes, and for dealing with deployables like mines and lasertowers. Often initially scoffed at for its comparatively low damage output, its slow heat generation and sublime cooling result in a steady stream of disruptive fire, which in turn rewards pilots who can stay on target for an extended period. Faced with larger enemies, the Pulse Laser does not become obsolete as quickly as one might expect. Used in greater numbers, it can still be a formidable choice against frigates and corvettes, though an upgrade to a larger weapon mount may be advisable to maintain a level playing field. The Pulse Laser remains the preferred choice of commanders who favour versatility over optimisation against specific opponents, or who have little trust in the aim of their subordinates.nnThe technology behind the Pulse Laser is advanced and efficient. Within a shielded chamber, microscopic fragments of matter are superheated and accelerated by a pulsed neodymium laser. The weapon was originally designed by the Ministry of Finance to provide a robust loadout for their escort fleets, without having to invest time and resources into the maintenance of a well-rounded combined arms setup. Over time, and thanks to the Teladi Company\'s aggressive marketing, it has been adopted as the number one weapon of convenience by all other former members of the Community of Planets.nnThe Mk2 variant sports a slightly longer burst. This lowers the efficiency of the heat dissipation between bursts and thereby exponentially drives up the cost of the internal shielding, but results in an overall higher damage output.',
       race: Races.xenon,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
@@ -8055,7 +10568,7 @@ export const Equipments = [
       id: 'weapon_xen_s_laser_01_mk1',
       version: 0,
       name: 'S Pulse Laser Mk1',
-      description: 'No information available',
+      description: 'Many experienced pilots fondly remember the affordable and reliable Pulse Laser as their first weapon. Its pin-point accuracy and high projectile speed make it an excellent choice for fighting small and fast targets, handling fragile lockboxes, and for dealing with deployables like mines and lasertowers. Often initially scoffed at for its comparatively low damage output, its slow heat generation and sublime cooling result in a steady stream of disruptive fire, which in turn rewards pilots who can stay on target for an extended period. Faced with larger enemies, the Pulse Laser does not become obsolete as quickly as one might expect. Used in greater numbers, it can still be a formidable choice against frigates and corvettes, though an upgrade to a larger weapon mount may be advisable to maintain a level playing field. The Pulse Laser remains the preferred choice of commanders who favour versatility over optimisation against specific opponents, or who have little trust in the aim of their subordinates.nnThe technology behind the Pulse Laser is advanced and efficient. Within a shielded chamber, microscopic fragments of matter are superheated and accelerated by a pulsed neodymium laser. The weapon was originally designed by the Ministry of Finance to provide a robust loadout for their escort fleets, without having to invest time and resources into the maintenance of a well-rounded combined arms setup. Over time, and thanks to the Teladi Company\'s aggressive marketing, it has been adopted as the number one weapon of convenience by all other former members of the Community of Planets.nnThe Mk2 variant sports a slightly longer burst. This lowers the efficiency of the heat dissipation between bursts and thereby exponentially drives up the cost of the internal shielding, but results in an overall higher damage output.',
       race: Races.xenon,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
@@ -8744,6 +11257,15 @@ export const Equipments = [
                { ware: 'smartchips', amount: 2 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 24 },
+            ],
+         },
       ]
    },
    {
@@ -8767,6 +11289,15 @@ export const Equipments = [
                { ware: 'energycells', amount: 12 },
                { ware: 'missilecomponents', amount: 11 },
                { ware: 'smartchips', amount: 1 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 22 },
             ],
          },
       ]
@@ -8793,6 +11324,15 @@ export const Equipments = [
                { ware: 'missilecomponents', amount: 24 },
             ],
          },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 19 },
+            ],
+         },
       ]
    },
    {
@@ -8816,6 +11356,15 @@ export const Equipments = [
                { ware: 'energycells', amount: 17 },
                { ware: 'missilecomponents', amount: 9 },
                { ware: 'smartchips', amount: 2 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'energycells', amount: 29 },
             ],
          },
       ]
@@ -9670,6 +12219,7 @@ export const Equipments = [
       version: 1,
       name: 'Rattlesnake Main Battery',
       description: 'No information available',
+      race: Races.split,
       type: EquipmentType.weapons,
       equipmentClass: EquipmentClass.weapon,
       size: Size.large,
@@ -9686,6 +12236,1526 @@ export const Equipments = [
                { ware: 'advancedelectronics', amount: 131 },
                { ware: 'energycells', amount: 29 },
                { ware: 'weaponcomponents', amount: 201 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_l_standard_01_mk1',
+      version: 2,
+      name: 'TER L Shield Generator Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.large,
+      hull: 2000,
+      recharge: { max: 40786, rate: 173, delay: 0 },
+      price: { min: 101270, max: 123775, avg: 112523 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 20,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 3 },
+               { ware: 'energycells', amount: 500 },
+               { ware: 'metallicmicrolattice', amount: 55 },
+               { ware: 'siliconcarbide', amount: 8 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_l_standard_01_mk2',
+      version: 2,
+      name: 'TER L Shield Generator Mk2',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.large,
+      hull: 2000,
+      recharge: { max: 48597, rate: 247, delay: 0 },
+      price: { min: 493645, max: 603344, avg: 548494 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 20,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 21 },
+               { ware: 'energycells', amount: 1000 },
+               { ware: 'metallicmicrolattice', amount: 152 },
+               { ware: 'siliconcarbide', amount: 22 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_l_standard_01_mk3',
+      version: 2,
+      name: 'TER L Shield Generator Mk3',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.large,
+      hull: 2000,
+      recharge: { max: 69424, rate: 424, delay: 0 },
+      price: { min: 1295367, max: 1752556, avg: 1523962 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 20,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 61 },
+               { ware: 'energycells', amount: 1500 },
+               { ware: 'metallicmicrolattice', amount: 393 },
+               { ware: 'siliconcarbide', amount: 61 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_m_standard_01_mk1',
+      version: 2,
+      name: 'TER M Shield Generator Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.medium,
+      hull: 500,
+      recharge: { max: 5405, rate: 29, delay: 0.47 },
+      price: { min: 30852, max: 37709, avg: 34281 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 1 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 28 },
+               { ware: 'siliconcarbide', amount: 1 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_m_standard_01_mk2',
+      version: 2,
+      name: 'TER M Shield Generator Mk2',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.medium,
+      hull: 500,
+      recharge: { max: 6439, rate: 45, delay: 0.47 },
+      price: { min: 149164, max: 182311, avg: 165737 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 6 },
+               { ware: 'energycells', amount: 400 },
+               { ware: 'metallicmicrolattice', amount: 62 },
+               { ware: 'siliconcarbide', amount: 7 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_m_standard_01_mk3',
+      version: 2,
+      name: 'TER M Shield Generator Mk3',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.medium,
+      hull: 500,
+      recharge: { max: 9199, rate: 77, delay: 0.47 },
+      price: { min: 673420, max: 911098, avg: 792259 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 32 },
+               { ware: 'energycells', amount: 600 },
+               { ware: 'metallicmicrolattice', amount: 206 },
+               { ware: 'siliconcarbide', amount: 32 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_m_standard_02_mk1',
+      version: 2,
+      name: 'TER M Shield Generator Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.medium,
+      hull: 500,
+      recharge: { max: 5405, rate: 29, delay: 0.47 },
+      price: { min: 30852, max: 37709, avg: 34281 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 20,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 1 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 28 },
+               { ware: 'siliconcarbide', amount: 1 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_m_standard_02_mk2',
+      version: 2,
+      name: 'TER M Shield Generator Mk2',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.medium,
+      hull: 500,
+      recharge: { max: 6439, rate: 45, delay: 0.47 },
+      price: { min: 147892, max: 180757, avg: 164325 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 20,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 6 },
+               { ware: 'energycells', amount: 250 },
+               { ware: 'metallicmicrolattice', amount: 70 },
+               { ware: 'siliconcarbide', amount: 8 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_m_standard_02_mk3',
+      version: 2,
+      name: 'TER M Shield Generator Mk3',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.medium,
+      hull: 500,
+      recharge: { max: 9199, rate: 77, delay: 0.47 },
+      price: { min: 673420, max: 911098, avg: 792259 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 32 },
+               { ware: 'energycells', amount: 600 },
+               { ware: 'metallicmicrolattice', amount: 206 },
+               { ware: 'siliconcarbide', amount: 32 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_s_standard_01_mk1',
+      version: 2,
+      name: 'TER S Shield Generator Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.small,
+      recharge: { max: 869, rate: 91, delay: 11.5 },
+      price: { min: 3014, max: 3684, avg: 3349 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 12 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_s_standard_01_mk2',
+      version: 2,
+      name: 'TER S Shield Generator Mk2',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.small,
+      recharge: { max: 1037, rate: 141, delay: 11.5 },
+      price: { min: 24519, max: 29968, avg: 27243 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 54 },
+               { ware: 'siliconcarbide', amount: 5 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_s_standard_01_mk3',
+      version: 2,
+      name: 'TER S Shield Generator Mk3',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.small,
+      recharge: { max: 1482, rate: 242, delay: 11.5 },
+      price: { min: 119811, max: 146436, avg: 133124 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 5 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 48 },
+               { ware: 'siliconcarbide', amount: 6 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_xl_standard_01_mk1',
+      version: 2,
+      name: 'TER XL Shield Generator Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.extralarge,
+      hull: 6000,
+      recharge: { max: 135955, rate: 544, delay: 0 },
+      price: { min: 541710, max: 662091, avg: 601900 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 20,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 23 },
+               { ware: 'energycells', amount: 1500 },
+               { ware: 'metallicmicrolattice', amount: 134 },
+               { ware: 'siliconcarbide', amount: 21 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_ter_xl_standard_01_mk2',
+      version: 2,
+      name: 'TER XL Shield Generator Mk2',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.extralarge,
+      hull: 8000,
+      recharge: { max: 161988, rate: 842, delay: 0 },
+      price: { min: 3060534, max: 4140723, avg: 3600629 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 20,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 150 },
+               { ware: 'energycells', amount: 2000 },
+               { ware: 'metallicmicrolattice', amount: 764 },
+               { ware: 'siliconcarbide', amount: 133 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'ship_ter_xs_police_01_a',
+      version: 2,
+      name: 'Terran Station Security Vessel',
+      description: 'No information available',
+      type: EquipmentType.drones,
+      equipmentClass: EquipmentClass.ship_xs,
+      hull: 300,
+      price: { min: 24676, max: 30160, avg: 27418 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 60,
+            amount: 1,
+            method: 'default',
+            name: 'Terran',
+            wares: [
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 2 },
+               { ware: 'siliconcarbide', amount: 2 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_l_beam_01_mk1',
+      version: 2,
+      name: 'TER L Beam Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.large,
+      hull: 3600,
+      price: { min: 325218, max: 397488, avg: 361353 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 15 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 100 },
+               { ware: 'siliconcarbide', amount: 14 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_l_dumbfire_01_mk1',
+      version: 2,
+      name: 'TER L Dumbfire Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.missileturret,
+      size: Size.large,
+      hull: 7800,
+      price: { min: 163005, max: 199229, avg: 181117 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 7 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 64 },
+               { ware: 'siliconcarbide', amount: 9 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_l_gatling_01_mk1',
+      version: 2,
+      name: 'TER L Bolt Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.large,
+      hull: 3600,
+      price: { min: 157080, max: 212520, avg: 184800 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 7 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 66 },
+               { ware: 'siliconcarbide', amount: 10 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_l_guided_01_mk1',
+      version: 2,
+      name: 'TER L Tracking Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.missileturret,
+      size: Size.large,
+      hull: 7800,
+      price: { min: 187858, max: 229604, avg: 208731 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 8 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 72 },
+               { ware: 'siliconcarbide', amount: 11 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_l_laser_01_mk1',
+      version: 2,
+      name: 'TER L Pulse Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.large,
+      hull: 3600,
+      price: { min: 125573, max: 153479, avg: 139526 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 5 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 77 },
+               { ware: 'siliconcarbide', amount: 8 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_l_mining_01_mk1',
+      version: 2,
+      name: 'TER L Mining Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.large,
+      hull: 3600,
+      price: { min: 118070, max: 144308, avg: 131189 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 5 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 64 },
+               { ware: 'siliconcarbide', amount: 6 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_m_beam_01_mk1',
+      version: 2,
+      name: 'TER M Beam Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.medium,
+      price: { min: 108959, max: 133172, avg: 121065 },
+      owners: [ Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 5 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 36 },
+               { ware: 'siliconcarbide', amount: 4 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_m_beam_02_mk1',
+      version: 2,
+      name: 'TER M Beam Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.medium,
+      hull: 800,
+      price: { min: 108959, max: 133172, avg: 121065 },
+      owners: [ Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 5 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 36 },
+               { ware: 'siliconcarbide', amount: 4 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_m_dumbfire_02_mk1',
+      version: 2,
+      name: 'TER M Dumbfire Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.missileturret,
+      size: Size.medium,
+      hull: 1700,
+      price: { min: 54983, max: 67201, avg: 61092 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 33 },
+               { ware: 'siliconcarbide', amount: 4 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_m_gatling_01_mk1',
+      version: 2,
+      name: 'TER M Bolt Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.medium,
+      price: { min: 59203, max: 72360, avg: 65782 },
+      owners: [ Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 60 },
+               { ware: 'siliconcarbide', amount: 5 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_m_gatling_02_mk1',
+      version: 2,
+      name: 'TER M Bolt Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.medium,
+      hull: 800,
+      price: { min: 54862, max: 67054, avg: 60958 },
+      owners: [ Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 48 },
+               { ware: 'siliconcarbide', amount: 4 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_m_guided_02_mk1',
+      version: 2,
+      name: 'TER M Tracking Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.missileturret,
+      size: Size.medium,
+      hull: 1700,
+      price: { min: 63237, max: 77289, avg: 70263 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 53 },
+               { ware: 'siliconcarbide', amount: 6 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_m_laser_01_mk1',
+      version: 2,
+      name: 'TER M Pulse Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.medium,
+      price: { min: 51378, max: 62796, avg: 57087 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 44 },
+               { ware: 'siliconcarbide', amount: 3 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_m_laser_02_mk1',
+      version: 2,
+      name: 'TER M Pulse Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.medium,
+      hull: 800,
+      price: { min: 51378, max: 62796, avg: 57087 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 44 },
+               { ware: 'siliconcarbide', amount: 3 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_m_mining_01_mk1',
+      version: 2,
+      name: 'TER M Mining Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.medium,
+      price: { min: 39497, max: 48274, avg: 43886 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 1 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 43 },
+               { ware: 'siliconcarbide', amount: 5 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_ter_m_mining_02_mk1',
+      version: 2,
+      name: 'TER M Mining Turret Mk1',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.medium,
+      hull: 800,
+      price: { min: 39497, max: 48274, avg: 43886 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 1 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 43 },
+               { ware: 'siliconcarbide', amount: 5 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_atf_xl_battleship_01_mk1',
+      version: 2,
+      name: 'ATF XL Main Battery',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.extralarge,
+      hull: 10000,
+      price: { min: 7888918, max: 9642011, avg: 8765465 },
+      owners: [ Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 373 },
+               { ware: 'energycells', amount: 1000 },
+               { ware: 'metallicmicrolattice', amount: 1862 },
+               { ware: 'siliconcarbide', amount: 322 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_clustermine_01',
+      version: 2,
+      name: 'Cluster Mine',
+      description: 'Cluster Mines are much like Friend/Foe Mines, but are used for area coverage. Instead of a single explosive device, deployment of a cluster package results in an array of such devices, each equipped with its own target detection and detonation mechanisms. The result is a deadly carpet of mines, which is hard to navigate through and even harder to disarm without the correct security codes.',
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.mine,
+      explosionDamage: 200,
+      hull: 100,
+      price: { min: 5812, max: 7862, avg: 6838 },
+      owners: [ Factions.yaki ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'energycells', amount: 6 },
+               { ware: 'weaponcomponents', amount: 4 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_ter_l_destroyer_01_mk1',
+      version: 2,
+      name: 'Terran Main Battery',
+      description: 'No information available',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.large,
+      hull: 8000,
+      price: { min: 2423602, max: 3278990, avg: 2851296 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 123 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'metallicmicrolattice', amount: 500 },
+               { ware: 'siliconcarbide', amount: 100 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_ter_m_beam_01_mk1',
+      version: 2,
+      name: 'TER M Meson Stream Mk1',
+      description: 'The Meson Stream is an incredibly powerful, and correspondingly expensive, weapon that fires a single transient beam that strikes almost instantly. Similar to other high precision weapons, the Meson Stream does not automatically track its target, and relies on the pilot\'s skill for aiming. In other respects, including its moderate range, it handles more similarly to beam weapons such as the Beam Emitter. The Meson Stream does not require charging, and can theoretically be fired without releasing the trigger. However, the ship\'s maximum heat capacity will usually prevent this kind of usage. Because of the weapon\'s extreme power consumption and heat generation, it can only be attached to high-energy weapon mounts.nnFor a variety of reasons, the Terran military had long since toyed with the idea of an oversized laser cannon. Despite requiring an entirely new, specialised platform, and bearing an abysmally wasteful energy profile, such a weapon\'s potential as a deterrent was never in question. Moreover, superweapons maintain a special place in the heart of Terran popular culture, and when the time came to develop the first small-scale prototype, there was overwhelming public support for the project. In light of this, the Meson Stream represented the first cautious, yet determined, steps of the Terran Protectorate towards fulfilling a long-harboured fantasy.nnIn return for massively increased material cost, the Mk2 variant manages to raise the energy output of the weapon to an even higher level.',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.medium,
+      hull: 1000,
+      price: { min: 917470, max: 1241282, avg: 1079376 },
+      owners: [ Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 46 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 230 },
+               { ware: 'siliconcarbide', amount: 40 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_ter_m_beam_01_mk2',
+      version: 2,
+      name: 'TER M Meson Stream Mk2',
+      description: 'The Meson Stream is an incredibly powerful, and correspondingly expensive, weapon that fires a single transient beam that strikes almost instantly. Similar to other high precision weapons, the Meson Stream does not automatically track its target, and relies on the pilot\'s skill for aiming. In other respects, including its moderate range, it handles more similarly to beam weapons such as the Beam Emitter. The Meson Stream does not require charging, and can theoretically be fired without releasing the trigger. However, the ship\'s maximum heat capacity will usually prevent this kind of usage. Because of the weapon\'s extreme power consumption and heat generation, it can only be attached to high-energy weapon mounts.nnFor a variety of reasons, the Terran military had long since toyed with the idea of an oversized laser cannon. Despite requiring an entirely new, specialised platform, and bearing an abysmally wasteful energy profile, such a weapon\'s potential as a deterrent was never in question. Moreover, superweapons maintain a special place in the heart of Terran popular culture, and when the time came to develop the first small-scale prototype, there was overwhelming public support for the project. In light of this, the Meson Stream represented the first cautious, yet determined, steps of the Terran Protectorate towards fulfilling a long-harboured fantasy.nnIn return for massively increased material cost, the Mk2 variant manages to raise the energy output of the weapon to an even higher level.',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.medium,
+      hull: 1000,
+      price: { min: 4559808, max: 6169148, avg: 5364478 },
+      owners: [ Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 141 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 713 },
+               { ware: 'siliconcarbide', amount: 121 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_ter_m_gatling_01_mk1',
+      version: 2,
+      name: 'TER M Proton Barrage Mk1',
+      description: 'The Terran Proton Barrage is a short range weapon which can only be attached to high-energy weapon mounts. It is considered the Terran high-energy variant of the Commonwealth Bolt Repeater. Compared to the Bolt Repeater, the Proton Barrage offers higher damage output and projectile speed, but forfeits some of its range. While providing more damage in total, the Barrage has a lower fire rate and focusses on delivering more powerful individual projectiles during its long bursts. Its main downsides are its compatibility restriction that limits it to Terran ship designs, and the fact that it is twice as expensive when compared to the weaker Commonwealth Bolt Repeater. The Proton Barrage is a generalist weapon which performs well against most reasonable targets.nnWith the reconnection of the Commonwealth, the Terran Secret Service acquired the Bolt Repeater blueprint, enabling Terran engineers to develop it into the Proton Barrage. They adjusted it for Terran high-energy mount compatibility, effectively increasing its power, while also preventing the Commonwealth from using it.nnThe Mk2 variant increases the damage output, despite reducing the rate of fire, by making the individual projectiles more powerful still.',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.medium,
+      hull: 1000,
+      price: { min: 140876, max: 190596, avg: 165736 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 44 },
+               { ware: 'siliconcarbide', amount: 5 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_ter_m_gatling_01_mk2',
+      version: 2,
+      name: 'TER M Proton Barrage Mk2',
+      description: 'The Terran Proton Barrage is a short range weapon which can only be attached to high-energy weapon mounts. It is considered the Terran high-energy variant of the Commonwealth Bolt Repeater. Compared to the Bolt Repeater, the Proton Barrage offers higher damage output and projectile speed, but forfeits some of its range. While providing more damage in total, the Barrage has a lower fire rate and focusses on delivering more powerful individual projectiles during its long bursts. Its main downsides are its compatibility restriction that limits it to Terran ship designs, and the fact that it is twice as expensive when compared to the weaker Commonwealth Bolt Repeater. The Proton Barrage is a generalist weapon which performs well against most reasonable targets.nnWith the reconnection of the Commonwealth, the Terran Secret Service acquired the Bolt Repeater blueprint, enabling Terran engineers to develop it into the Proton Barrage. They adjusted it for Terran high-energy mount compatibility, effectively increasing its power, while also preventing the Commonwealth from using it.nnThe Mk2 variant increases the damage output, despite reducing the rate of fire, by making the individual projectiles more powerful still.',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.medium,
+      hull: 1000,
+      price: { min: 700151, max: 947263, avg: 823707 },
+      owners: [ Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 13 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 96 },
+               { ware: 'siliconcarbide', amount: 13 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_ter_m_laser_01_mk1',
+      version: 2,
+      name: 'M Pulse Laser Mk1',
+      description: 'Many experienced pilots fondly remember the affordable and reliable Pulse Laser as their first weapon. Its pin-point accuracy and high projectile speed make it an excellent choice for fighting small and fast targets, handling fragile lockboxes, and for dealing with deployables like mines and lasertowers. Often initially scoffed at for its comparatively low damage output, its slow heat generation and sublime cooling result in a steady stream of disruptive fire, which in turn rewards pilots who can stay on target for an extended period. Faced with larger enemies, the Pulse Laser does not become obsolete as quickly as one might expect. Used in greater numbers, it can still be a formidable choice against frigates and corvettes, though an upgrade to a larger weapon mount may be advisable to maintain a level playing field. The Pulse Laser remains the preferred choice of commanders who favour versatility over optimisation against specific opponents, or who have little trust in the aim of their subordinates.nnThe technology behind the Pulse Laser is advanced and efficient. Within a shielded chamber, microscopic fragments of matter are superheated and accelerated by a pulsed neodymium laser. The weapon was originally designed by the Ministry of Finance to provide a robust loadout for their escort fleets, without having to invest time and resources into the maintenance of a well-rounded combined arms setup. Over time, and thanks to the Teladi Company\'s aggressive marketing, it has been adopted as the number one weapon of convenience by all other former members of the Community of Planets.nnThe Mk2 variant sports a slightly longer burst. This lowers the efficiency of the heat dissipation between bursts and thereby exponentially drives up the cost of the internal shielding, but results in an overall higher damage output.',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.medium,
+      hull: 1000,
+      price: { min: 47128, max: 63762, avg: 55445 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 2 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 30 },
+               { ware: 'siliconcarbide', amount: 3 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_ter_m_laser_01_mk2',
+      version: 2,
+      name: 'M Pulse Laser Mk2',
+      description: 'Many experienced pilots fondly remember the affordable and reliable Pulse Laser as their first weapon. Its pin-point accuracy and high projectile speed make it an excellent choice for fighting small and fast targets, handling fragile lockboxes, and for dealing with deployables like mines and lasertowers. Often initially scoffed at for its comparatively low damage output, its slow heat generation and sublime cooling result in a steady stream of disruptive fire, which in turn rewards pilots who can stay on target for an extended period. Faced with larger enemies, the Pulse Laser does not become obsolete as quickly as one might expect. Used in greater numbers, it can still be a formidable choice against frigates and corvettes, though an upgrade to a larger weapon mount may be advisable to maintain a level playing field. The Pulse Laser remains the preferred choice of commanders who favour versatility over optimisation against specific opponents, or who have little trust in the aim of their subordinates.nnThe technology behind the Pulse Laser is advanced and efficient. Within a shielded chamber, microscopic fragments of matter are superheated and accelerated by a pulsed neodymium laser. The weapon was originally designed by the Ministry of Finance to provide a robust loadout for their escort fleets, without having to invest time and resources into the maintenance of a well-rounded combined arms setup. Over time, and thanks to the Teladi Company\'s aggressive marketing, it has been adopted as the number one weapon of convenience by all other former members of the Community of Planets.nnThe Mk2 variant sports a slightly longer burst. This lowers the efficiency of the heat dissipation between bursts and thereby exponentially drives up the cost of the internal shielding, but results in an overall higher damage output.',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.medium,
+      hull: 1000,
+      price: { min: 234216, max: 316881, avg: 275549 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 11 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 75 },
+               { ware: 'siliconcarbide', amount: 13 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_ter_s_beam_01_mk1',
+      version: 2,
+      name: 'TER S Meson Stream Mk1',
+      description: 'The Meson Stream is an incredibly powerful, and correspondingly expensive, weapon that fires a single transient beam that strikes almost instantly. Similar to other high precision weapons, the Meson Stream does not automatically track its target, and relies on the pilot\'s skill for aiming. In other respects, including its moderate range, it handles more similarly to beam weapons such as the Beam Emitter. The Meson Stream does not require charging, and can theoretically be fired without releasing the trigger. However, the ship\'s maximum heat capacity will usually prevent this kind of usage. Because of the weapon\'s extreme power consumption and heat generation, it can only be attached to high-energy weapon mounts.nnFor a variety of reasons, the Terran military had long since toyed with the idea of an oversized laser cannon. Despite requiring an entirely new, specialised platform, and bearing an abysmally wasteful energy profile, such a weapon\'s potential as a deterrent was never in question. Moreover, superweapons maintain a special place in the heart of Terran popular culture, and when the time came to develop the first small-scale prototype, there was overwhelming public support for the project. In light of this, the Meson Stream represented the first cautious, yet determined, steps of the Terran Protectorate towards fulfilling a long-harboured fantasy.nnIn return for massively increased material cost, the Mk2 variant manages to raise the energy output of the weapon to an even higher level.',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.small,
+      hull: 500,
+      price: { min: 489788, max: 662654, avg: 576221 },
+      owners: [ Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 24 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 161 },
+               { ware: 'siliconcarbide', amount: 23 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_ter_s_beam_01_mk2',
+      version: 2,
+      name: 'TER S Meson Stream Mk2',
+      description: 'The Meson Stream is an incredibly powerful, and correspondingly expensive, weapon that fires a single transient beam that strikes almost instantly. Similar to other high precision weapons, the Meson Stream does not automatically track its target, and relies on the pilot\'s skill for aiming. In other respects, including its moderate range, it handles more similarly to beam weapons such as the Beam Emitter. The Meson Stream does not require charging, and can theoretically be fired without releasing the trigger. However, the ship\'s maximum heat capacity will usually prevent this kind of usage. Because of the weapon\'s extreme power consumption and heat generation, it can only be attached to high-energy weapon mounts.nnFor a variety of reasons, the Terran military had long since toyed with the idea of an oversized laser cannon. Despite requiring an entirely new, specialised platform, and bearing an abysmally wasteful energy profile, such a weapon\'s potential as a deterrent was never in question. Moreover, superweapons maintain a special place in the heart of Terran popular culture, and when the time came to develop the first small-scale prototype, there was overwhelming public support for the project. In light of this, the Meson Stream represented the first cautious, yet determined, steps of the Terran Protectorate towards fulfilling a long-harboured fantasy.nnIn return for massively increased material cost, the Mk2 variant manages to raise the energy output of the weapon to an even higher level.',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.small,
+      hull: 500,
+      price: { min: 2367396, max: 3202947, avg: 2785171 },
+      owners: [ Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 118 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 611 },
+               { ware: 'siliconcarbide', amount: 107 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_ter_s_gatling_01_mk1',
+      version: 2,
+      name: 'TER S Proton Barrage Mk1',
+      description: 'The Terran Proton Barrage is a short range weapon which can only be attached to high-energy weapon mounts. It is considered the Terran high-energy variant of the Commonwealth Bolt Repeater. Compared to the Bolt Repeater, the Proton Barrage offers higher damage output and projectile speed, but forfeits some of its range. While providing more damage in total, the Barrage has a lower fire rate and focusses on delivering more powerful individual projectiles during its long bursts. Its main downsides are its compatibility restriction that limits it to Terran ship designs, and the fact that it is twice as expensive when compared to the weaker Commonwealth Bolt Repeater. The Proton Barrage is a generalist weapon which performs well against most reasonable targets.nnWith the reconnection of the Commonwealth, the Terran Secret Service acquired the Bolt Repeater blueprint, enabling Terran engineers to develop it into the Proton Barrage. They adjusted it for Terran high-energy mount compatibility, effectively increasing its power, while also preventing the Commonwealth from using it.nnThe Mk2 variant increases the damage output, despite reducing the rate of fire, by making the individual projectiles more powerful still.',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.small,
+      hull: 500,
+      price: { min: 97679, max: 132154, avg: 114917 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 4 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 53 },
+               { ware: 'siliconcarbide', amount: 8 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_ter_s_gatling_01_mk2',
+      version: 2,
+      name: 'TER S Proton Barrage Mk2',
+      description: 'The Terran Proton Barrage is a short range weapon which can only be attached to high-energy weapon mounts. It is considered the Terran high-energy variant of the Commonwealth Bolt Repeater. Compared to the Bolt Repeater, the Proton Barrage offers higher damage output and projectile speed, but forfeits some of its range. While providing more damage in total, the Barrage has a lower fire rate and focusses on delivering more powerful individual projectiles during its long bursts. Its main downsides are its compatibility restriction that limits it to Terran ship designs, and the fact that it is twice as expensive when compared to the weaker Commonwealth Bolt Repeater. The Proton Barrage is a generalist weapon which performs well against most reasonable targets.nnWith the reconnection of the Commonwealth, the Terran Secret Service acquired the Bolt Repeater blueprint, enabling Terran engineers to develop it into the Proton Barrage. They adjusted it for Terran high-energy mount compatibility, effectively increasing its power, while also preventing the Commonwealth from using it.nnThe Mk2 variant increases the damage output, despite reducing the rate of fire, by making the individual projectiles more powerful still.',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.small,
+      hull: 500,
+      price: { min: 486903, max: 658751, avg: 572827 },
+      owners: [ Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 24 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 145 },
+               { ware: 'siliconcarbide', amount: 22 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_ter_s_laser_01_mk1',
+      version: 2,
+      name: 'S Pulse Laser Mk1',
+      description: 'Many experienced pilots fondly remember the affordable and reliable Pulse Laser as their first weapon. Its pin-point accuracy and high projectile speed make it an excellent choice for fighting small and fast targets, handling fragile lockboxes, and for dealing with deployables like mines and lasertowers. Often initially scoffed at for its comparatively low damage output, its slow heat generation and sublime cooling result in a steady stream of disruptive fire, which in turn rewards pilots who can stay on target for an extended period. Faced with larger enemies, the Pulse Laser does not become obsolete as quickly as one might expect. Used in greater numbers, it can still be a formidable choice against frigates and corvettes, though an upgrade to a larger weapon mount may be advisable to maintain a level playing field. The Pulse Laser remains the preferred choice of commanders who favour versatility over optimisation against specific opponents, or who have little trust in the aim of their subordinates.nnThe technology behind the Pulse Laser is advanced and efficient. Within a shielded chamber, microscopic fragments of matter are superheated and accelerated by a pulsed neodymium laser. The weapon was originally designed by the Ministry of Finance to provide a robust loadout for their escort fleets, without having to invest time and resources into the maintenance of a well-rounded combined arms setup. Over time, and thanks to the Teladi Company\'s aggressive marketing, it has been adopted as the number one weapon of convenience by all other former members of the Community of Planets.nnThe Mk2 variant sports a slightly longer burst. This lowers the efficiency of the heat dissipation between bursts and thereby exponentially drives up the cost of the internal shielding, but results in an overall higher damage output.',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.small,
+      hull: 500,
+      price: { min: 36516, max: 49404, avg: 42960 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 1 },
+               { ware: 'energycells', amount: 50 },
+               { ware: 'metallicmicrolattice', amount: 35 },
+               { ware: 'siliconcarbide', amount: 5 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_ter_s_laser_01_mk2',
+      version: 2,
+      name: 'S Pulse Laser Mk2',
+      description: 'Many experienced pilots fondly remember the affordable and reliable Pulse Laser as their first weapon. Its pin-point accuracy and high projectile speed make it an excellent choice for fighting small and fast targets, handling fragile lockboxes, and for dealing with deployables like mines and lasertowers. Often initially scoffed at for its comparatively low damage output, its slow heat generation and sublime cooling result in a steady stream of disruptive fire, which in turn rewards pilots who can stay on target for an extended period. Faced with larger enemies, the Pulse Laser does not become obsolete as quickly as one might expect. Used in greater numbers, it can still be a formidable choice against frigates and corvettes, though an upgrade to a larger weapon mount may be advisable to maintain a level playing field. The Pulse Laser remains the preferred choice of commanders who favour versatility over optimisation against specific opponents, or who have little trust in the aim of their subordinates.nnThe technology behind the Pulse Laser is advanced and efficient. Within a shielded chamber, microscopic fragments of matter are superheated and accelerated by a pulsed neodymium laser. The weapon was originally designed by the Ministry of Finance to provide a robust loadout for their escort fleets, without having to invest time and resources into the maintenance of a well-rounded combined arms setup. Over time, and thanks to the Teladi Company\'s aggressive marketing, it has been adopted as the number one weapon of convenience by all other former members of the Community of Planets.nnThe Mk2 variant sports a slightly longer burst. This lowers the efficiency of the heat dissipation between bursts and thereby exponentially drives up the cost of the internal shielding, but results in an overall higher damage output.',
+      race: Races.terran,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.small,
+      hull: 500,
+      price: { min: 180862, max: 244696, avg: 212779 },
+      owners: [ Factions.pioneers, Factions.terran ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'computronicsubstrate', amount: 8 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'metallicmicrolattice', amount: 77 },
+               { ware: 'siliconcarbide', amount: 12 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'engine_gen_m_yacht_01_mk1',
+      version: 2,
+      name: 'Astrid M Engine',
+      description: 'No information available',
+      race: Races.argon,
+      type: EquipmentType.engines,
+      equipmentClass: EquipmentClass.engine,
+      size: Size.medium,
+      price: { min: 601290, max: 813510, avg: 707400 },
+      owners: [ Factions.loanshark ],
+      thrust: { forward: 2415, reverse: 3139 },
+      travel: { thrust: 12, attack: 10, charge: 0, release: 0 },
+      production: [
+         {
+            time: 20,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'antimatterconverters', amount: 200 },
+               { ware: 'energycells', amount: 100 },
+               { ware: 'engineparts', amount: 250 },
+            ],
+         },
+         {
+            time: 20,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 34 },
+               { ware: 'energycells', amount: 460 },
+               { ware: 'hullparts', amount: 197 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'engine_pir_xl_battleship_01_allround_01_mk1',
+      version: 2,
+      name: 'Erlking XL Engine',
+      description: 'No information available',
+      race: Races.argon,
+      type: EquipmentType.engines,
+      equipmentClass: EquipmentClass.engine,
+      size: Size.extralarge,
+      hull: 10973,
+      price: { min: 45773, max: 61928, avg: 53850 },
+      owners: [ Factions.ownerless ],
+      thrust: { forward: 20560, reverse: 22616 },
+      travel: { thrust: 33, attack: 75, charge: 30, release: 0 },
+      production: [
+         {
+            time: 140,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'antimatterconverters', amount: 11 },
+               { ware: 'energycells', amount: 45 },
+               { ware: 'engineparts', amount: 93 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_gen_m_yacht_01_mk1',
+      version: 2,
+      name: 'Astrid M Shield Generator',
+      description: 'No information available',
+      race: Races.argon,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.medium,
+      recharge: { max: 50911, rate: 709, delay: 0.28 },
+      price: { min: 52958, max: 71650, avg: 62304 },
+      owners: [ Factions.loanshark ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'energycells', amount: 100 },
+               { ware: 'fieldcoils', amount: 50 },
+               { ware: 'shieldcomponents', amount: 20 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 7 },
+               { ware: 'energycells', amount: 168 },
+               { ware: 'hullparts', amount: 43 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'shield_pir_xl_battleship_01_standard_01_mk1',
+      version: 2,
+      name: 'Erlking XL Shield Generator',
+      description: 'No information available',
+      race: Races.argon,
+      type: EquipmentType.shields,
+      equipmentClass: EquipmentClass.shieldgenerator,
+      size: Size.extralarge,
+      hull: 8100,
+      recharge: { max: 158600, rate: 662, delay: 0 },
+      price: { min: 102082, max: 138110, avg: 120096 },
+      owners: [ Factions.ownerless ],
+      production: [
+         {
+            time: 20,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'energycells', amount: 200 },
+               { ware: 'fieldcoils', amount: 100 },
+               { ware: 'shieldcomponents', amount: 30 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_gen_m_yacht_01_mk1',
+      version: 2,
+      name: 'Astrid M Turret',
+      description: '"You won\'t believe how many pointless features this turret has that nobody asked for. I can also immediately tell, without looking at it, that the target acquisition code suffers from extreme spaghettification. It\'s unfathomable to me, how the designers can keep adding functions to each version before ironing out the countless flaws that have riddled it since its inception. I should have known better than to buy anything that comes out of Windfall these days. Those swindlers on Aurora are the worst of the bunch. Have I mentioned that the AI in this thing is atrocious? 7/10" - Anonymous',
+      race: Races.argon,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.medium,
+      price: { min: 81192, max: 109848, avg: 95520 },
+      owners: [ Factions.loanshark ],
+      production: [
+         {
+            time: 20,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'advancedelectronics', amount: 10 },
+               { ware: 'energycells', amount: 20 },
+               { ware: 'turretcomponents', amount: 20 },
+            ],
+         },
+         {
+            time: 20,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 4 },
+               { ware: 'energycells', amount: 145 },
+               { ware: 'hullparts', amount: 26 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_pir_l_battleship_01_laser_01_mk1',
+      version: 2,
+      name: 'Erlking L Turret',
+      description: 'The Erlking L Turret fires a single high speed projectile, superheated and accelerated by a custom pulsed laser. While fixed weapons usually outperform their turret counterparts of the same size, the Erlking\'s turrets are an unusual exception; the damage from this turret is comparable to, and might even exceed, that of L Pulse Laser weapons at close range. Over distance, however, the damage output falls off steeply, and at maximum range barely matches that of a standard L Pulse Laser turret. Although the Erlking is perfectly capable of defending itself at a distance, the high damage output of its turrets at short range makes it much more dangerous at close proximity, meaning that aggressive manoeuvres by the Erlking\'s pilot are rewarded. This exceptional performance is attributed to the Erlking\'s power core, from which the turrets draw energy.nnBoso Ta commented that this turret employs electronic redundancies designed to be especially robust against internal radiation damage, and that this is necessary due to its slight but continuous exposure to the power core. ',
+      race: Races.argon,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.large,
+      hull: 4140,
+      price: { min: 12105, max: 16378, avg: 14242 },
+      owners: [ Factions.ownerless ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'advancedelectronics', amount: 4 },
+               { ware: 'energycells', amount: 15 },
+               { ware: 'turretcomponents', amount: 6 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'turret_pir_m_battleship_01_gatling_02_mk1',
+      version: 2,
+      name: 'Erlking M Turret',
+      description: 'The Erlking M Turret fires bursts of high speed projectiles, reminiscent of Bolt Repeater burst fire. While fixed weapons usually outperform their turret counterparts of the same size, the Erlking\'s turrets are an unusual exception; the damage from this turret is comparable to, and might even exceed, that of M Bolt Repeater weapons at close range. Over distance, however, the damage output falls off steeply, and at maximum range barely matches that of a standard M Bolt Repeater turret. Although the Erlking is perfectly capable of defending itself at a distance, the high damage output of its turrets at short range makes it much more dangerous at close proximity, meaning that aggressive manoeuvres by the Erlking\'s pilot are rewarded. This exceptional performance is attributed to the Erlking\'s power core, from which the turrets draw energy.nnBoso Ta was particularly keen to go into detail about how this turret manages to rapidly access the power core, for only the blink of an eye at a time, before just as rapidly cutting the connection, thereby preventing an energy draining feedback loop capable of destroying the ship. Boso Ta also said not to worry, as the safety mechanisms will prevent this from happening most of the time.',
+      race: Races.argon,
+      type: EquipmentType.turrets,
+      equipmentClass: EquipmentClass.turret,
+      size: Size.medium,
+      hull: 900,
+      price: { min: 11451, max: 15492, avg: 13471 },
+      owners: [ Factions.ownerless ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'advancedelectronics', amount: 4 },
+               { ware: 'energycells', amount: 12 },
+               { ware: 'turretcomponents', amount: 5 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_gen_m_yacht_01_mk1',
+      version: 2,
+      name: 'Astrid Primary Weapon',
+      description: '"An ambitious, complex space weapon that allows you to do almost anything from pressing the trigger to letting go of the trigger." - Gungrinnn"I was well pleased." - Sydneenn"Received this weapon as a gift for my 18th birthday. Wish I\'d known what it was because as soon as I fired it, I split down the middle and became the CEO of a multi-billion credit enterprise. Minus 2 stars because it doesn\'t one-shot a Xenon I." - Sir Kitnn"It has a little something for everyone." - Envision Arms Network',
+      race: Races.argon,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.medium,
+      price: { min: 116382, max: 157458, avg: 136920 },
+      owners: [ Factions.loanshark ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'advancedelectronics', amount: 30 },
+               { ware: 'energycells', amount: 200 },
+               { ware: 'weaponcomponents', amount: 120 },
+            ],
+         },
+         {
+            time: 10,
+            amount: 1,
+            method: 'closedloop',
+            name: 'Closed Loop',
+            wares: [
+               { ware: 'claytronics', amount: 19 },
+               { ware: 'energycells', amount: 340 },
+               { ware: 'hullparts', amount: 113 },
+            ],
+         },
+      ]
+   },
+   {
+      id: 'weapon_pir_xl_battleship_01_mk1',
+      version: 2,
+      name: 'Erlking Main Battery',
+      description: 'The Erlking Main Battery is the only Erlking armament which does not suffer from decreased damage output over distance. This allows the Erlking to fight at range, or attack effectively while closing in on its target.nnBoso Ta claims that this weapon employs various kinds of titanium alloys and conductors to draw a large amount of energy from the power core, while disposing of excess hazardous radiation and keeping it from leaking into the ship. Unfortunately he wasn\'t so keen to go into detail about how it performs as a weapon.',
+      race: Races.argon,
+      type: EquipmentType.weapons,
+      equipmentClass: EquipmentClass.weapon,
+      size: Size.extralarge,
+      hull: 12000,
+      price: { min: 485683, max: 657101, avg: 571392 },
+      owners: [ Factions.ownerless ],
+      production: [
+         {
+            time: 10,
+            amount: 1,
+            method: 'default',
+            name: 'Universal',
+            wares: [
+               { ware: 'advancedelectronics', amount: 150 },
+               { ware: 'energycells', amount: 30 },
+               { ware: 'weaponcomponents', amount: 300 },
             ],
          },
       ]

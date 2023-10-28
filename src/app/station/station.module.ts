@@ -13,33 +13,34 @@ import { StationResourcesComponent } from './components/station-resources/statio
 import { StationSummaryComponent } from './components/station-summary/station-summary.component';
 import { LayoutService } from './services/layout-service';
 import { StationRoutingModule } from './station-routing.module';
+import { ImportPlansComponent } from './components/import-plans.component';
+import { ImportPlanResultComponent } from './components/import-plan-result.component';
+import { AutocompleteComponent } from "./components/autocomplete/autocomplete.component";
 
 @NgModule({
-  imports: [
-    NgbModalModule,
-    CommonModule,
-    FormsModule,
-    SharedModule,
-    StationRoutingModule,
-    DragDropModule
-  ],
-  declarations: [
-    LoadLayoutComponent,
-    SaveLayoutComponent,
-    ShareLayoutComponent,
-    StationCalculatorComponent,
-    StationResourcesComponent,
-    StationModulesComponent,
-    StationSummaryComponent
-  ],
-  entryComponents: [
-    LoadLayoutComponent,
-    SaveLayoutComponent,
-    ShareLayoutComponent
-  ],
-  providers: [
-    LayoutService
-  ]
+   imports: [
+      NgbModalModule,
+      CommonModule,
+      FormsModule,
+      SharedModule,
+      StationRoutingModule,
+      DragDropModule
+   ],
+   declarations: [
+      LoadLayoutComponent,
+      SaveLayoutComponent,
+      ShareLayoutComponent,
+      StationCalculatorComponent,
+      StationResourcesComponent,
+      StationModulesComponent,
+      StationSummaryComponent,
+      ImportPlansComponent,
+      ImportPlanResultComponent,
+     AutocompleteComponent
+   ],
+   providers: [
+      LayoutService
+   ]
 })
 export class StationModule {
 }

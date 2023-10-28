@@ -1,54 +1,75 @@
-<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bg-secondary shadow">
+﻿<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bg-secondary shadow">
   <div class="navbar-nav-scroll">
     <ul class="navbar-nav bd-navbar-nav flex-row">
-      <li class="navbar-brand">
-        <img src="../assets/images/x4-logo.png" alt="X4: Foundations" class="navbar-logo" />
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/station-calculator" routerLinkActive="active">Station Calculator</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" i18n="@@stationCalculator" routerLink="/station-calculator" routerLinkActive="active">Station Calculator</a>
+        <a class="nav-link" routerLink="/wares" routerLinkActive="active">Wares</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" i18n="@@wares" routerLink="/wares" routerLinkActive="active">Wares</a>
+        <a class="nav-link" routerLink="/modules" routerLinkActive="active">Station Modules</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" i18n="@@stationModules" routerLink="/modules" routerLinkActive="active">Station Modules</a>
+        <a class="nav-link" routerLink="/ships" routerLinkActive="active">Ships</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" i18n="@@ships" routerLink="/ships" routerLinkActive="active">Ships</a>
-      </li>
-       <li class="nav-item">
-          <a class="nav-link" i18n="@@equipment" routerLink="/equipment" routerLinkActive="active">Equipment</a>
-       </li>
-      <li class="nav-item">
-        <a class="nav-link" i18n="@@races" routerLink="/races" routerLinkActive="active">Races</a>
+        <a class="nav-link" routerLink="/equipment" routerLinkActive="active">Equipment</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" i18n="@@factions" routerLink="/factions" routerLinkActive="active">Factions</a>
+        <a class="nav-link" routerLink="/races" routerLinkActive="active">Races</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" i18n="@@about" routerLink="/about" routerLinkActive="active">About</a>
+        <a class="nav-link" routerLink="/factions" routerLinkActive="active">Factions</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
       </li>
     </ul>
   </div>
 
   <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
     <li class="nav-item">
-      <style>.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#ffffff !important;background-color:#FF813F !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 0 9px !important;letter-spacing:-0.08px !important;box-shadow: 0 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#ffffff !important;}</style><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/crissian"><img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a coffee"><span style="margin-left:5px">Buy me a coffee</span></a>
-    </li>
-  </ul>
+      <style>.bmc-button img {
+        width: 27px !important;
+        margin-bottom: 1px !important;
+        box-shadow: none !important;
+        border: none !important;
+        vertical-align: middle !important;
+      }
 
-  <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex" *ngIf="languages" ngbDropdown>
-    <li class="nav-item dropdown hover">
-      <a class="nav-item nav-link dropdown-toggle mr-md-2" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" id="languages" ngbDropdownToggle>
-        Languages
-      </a>
-      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languages" ngbDropdownMenu>
-        <a class="dropdown-item" [ngClass]="{ 'active': localeId == 'en-US' }" href="/">English</a>
-        <ng-container *ngFor="let lang of languages">
-          <!--suppress HtmlUnknownTarget -->
-          <a class="dropdown-item" [ngClass]="{ 'active': lang.code == localeId }" href="/{{ lang.code }}/">{{ lang.label }}</a>
-        </ng-container>
-      </div>
+      .bmc-button {
+        line-height: 36px !important;
+        height: 37px !important;
+        text-decoration: none !important;
+        display: inline-flex !important;
+        color: #ffffff !important;
+        background-color: #FF813F !important;
+        border-radius: 3px !important;
+        border: 1px solid transparent !important;
+        padding: 0 9px !important;
+        letter-spacing: -0.08px !important;
+        box-shadow: 0 1px 2px rgba(190, 190, 190, 0.5) !important;
+        -webkit-box-shadow: 0 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+        margin: 0 auto !important;
+        -webkit-box-sizing: border-box !important;
+        box-sizing: border-box !important;
+        -o-transition: 0.3s all linear !important;
+        -webkit-transition: 0.3s all linear !important;
+        -moz-transition: 0.3s all linear !important;
+        -ms-transition: 0.3s all linear !important;
+        transition: 0.3s all linear !important;
+      }
+
+      .bmc-button:hover, .bmc-button:active, .bmc-button:focus {
+        -webkit-box-shadow: 0 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+        text-decoration: none !important;
+        box-shadow: 0 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+        opacity: 0.85 !important;
+        color: #ffffff !important;
+      }</style>
+      <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/crissian"><img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a coffee"><span
+        style="margin-left:5px">Buy me a coffee</span></a>
     </li>
   </ul>
 </header>
