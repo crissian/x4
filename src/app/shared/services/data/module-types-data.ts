@@ -9,7 +9,8 @@ export enum ModuleTypes {
     buildmodule = 'Build Module',
     ventureplatform = 'Venture Platform',
     processingmodule = 'Processing',
-    recycling = 'Recycling'
+    recycling = 'Recycling',
+    radar = 'Radar'
 }
 
 export const AllModuleTypes = [
@@ -21,5 +22,6 @@ export const AllModuleTypes = [
     ModuleTypes.defencemodule,
     ModuleTypes.connectionmodule,
     ModuleTypes.processingmodule,
-    ModuleTypes.recycling
+    ModuleTypes.recycling,
+    ModuleTypes.radar,
 ];

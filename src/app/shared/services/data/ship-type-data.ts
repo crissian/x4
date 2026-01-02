@@ -20,5 +20,7 @@ export enum ShipType {
    battleship = 'Battleship',
    gunboat = 'Gunboat',
    tug = 'Tug',
-   compactor = 'Compactor'
+   compactor = 'Compactor',
+   expeditionary = 'Expeditionary',
+   envoy = 'Envoy'
 }
