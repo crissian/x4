@@ -32,8 +32,8 @@
     "font-awesome": "^4.7.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^15.2.6",
-    "@angular/cli": "~15.2.6",
+    "@angular-devkit/build-angular": "^21.1.0",
+    "@angular/cli": "~21.1.0",
     "@angular/compiler-cli": "^15.2.0",
     "@angular/localize": "^15.2.0",
     "@types/jasmine": "~4.3.0",
