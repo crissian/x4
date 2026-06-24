@@ -20,11 +20,11 @@ interface PlanAttribute {
 
 interface Plan {
     _attributes: PlanAttribute;
-    entry: Entry[];
+    entry: Entry | Entry[];
 }
 
 interface PlanList {
-    plan: Plan[];
+    plan: Plan | Plan[];
 }
 
 interface ConstructionPlan {
@@ -66,11 +66,19 @@ export class ImportPlansComponent extends ComponentBase implements OnInit {
         this.activeModal.close({ error: error, layouts: layouts });
     }
 
+    private toArray<T>(value: T | T[]): T[] {
+        if (value == null) {
+            return [];
+        }
+        return Array.isArray(value) ? value : [value];
+    }
+
     private importCore(result: ConstructionPlan) {
         const layouts: string[] = [];
 
-        for (const plan of result.plans.plan) {
-            if (plan.entry == null || plan.entry.length === 0) {
+        for (const plan of this.toArray(result.plans.plan)) {
+            const entries = this.toArray(plan.entry);
+            if (entries.length === 0) {
                 continue;
             }
 
@@ -78,7 +86,7 @@ export class ImportPlansComponent extends ComponentBase implements OnInit {
 
             const modules: ModuleConfig[] = [];
 
-            for (const item of plan.entry) {
+            for (const item of entries) {
                 const [ module ] = this.moduleService.getModulesByMacro(item._attributes.macro);
                 if (module) {
                     const existing = modules.find(x => x.moduleId === module.id);
