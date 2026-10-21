@@ -1,8 +1,8 @@
 <app-modal i18n-title="@@loadLayout" title="Load Layout">
-	<div class="divide-y divide-neutral-700 overflow-hidden rounded-md border border-neutral-700">
+	<div class="divide-y divide-line overflow-hidden rounded-md border border-line">
 		@for (entity of entities(); track entity.name) {
 			<div
-				class="cursor-pointer px-4 py-2.5 hover:bg-white/5"
+				class="cursor-pointer px-4 py-2.5 hover:bg-hover"
 				role="button"
 				tabindex="0"
 				(click)="close(entity, LoadLayoutType.load)"
@@ -13,7 +13,7 @@
 					<div class="text-xs">
 						<button
 							type="button"
-							class="link-button text-sky-400"
+							class="link-button text-link"
 							i18n="@@loadLayoutLink"
 							(click)="close(entity, LoadLayoutType.load, $event)"
 						>
@@ -22,7 +22,7 @@
 						|
 						<button
 							type="button"
-							class="link-button text-neutral-300"
+							class="link-button text-fg-soft"
 							i18n="@@addModules"
 							(click)="close(entity, LoadLayoutType.add, $event)"
 						>
@@ -31,7 +31,7 @@
 						|
 						<button
 							type="button"
-							class="link-button text-red-400"
+							class="link-button text-danger"
 							i18n="@@delete"
 							(click)="deleteLayout(entity, $event)"
 						>
@@ -39,10 +39,10 @@
 						</button>
 					</div>
 				</div>
-				<div class="text-xs text-neutral-400">{{ getModules(entity) }}</div>
+				<div class="text-xs text-fg-muted">{{ getModules(entity) }}</div>
 			</div>
 		} @empty {
-			<div class="px-4 py-3 text-neutral-400">No saved layouts.</div>
+			<div class="px-4 py-3 text-fg-muted">No saved layouts.</div>
 		}
 	</div>
 	<ng-container footer>

@@ -10,7 +10,7 @@
 	</thead>
 	<tbody>
 		<tr
-			class="cursor-pointer hover:bg-white/5"
+			class="cursor-pointer hover:bg-hover"
 			[attr.aria-expanded]="!!expanded['totalWorkforce']"
 			(click)="toggleExpanded('totalWorkforce')"
 		>
@@ -45,7 +45,7 @@
 		}
 
 		<tr
-			class="cursor-pointer hover:bg-white/5"
+			class="cursor-pointer hover:bg-hover"
 			[attr.aria-expanded]="!!expanded['totalWorkforceCapacity']"
 			(click)="toggleExpanded('totalWorkforceCapacity')"
 		>
@@ -116,7 +116,7 @@
 	</thead>
 	<tbody>
 		<tr
-			class="text-danger cursor-pointer hover:bg-white/5"
+			class="text-danger cursor-pointer hover:bg-hover"
 			[attr.aria-expanded]="!!expanded['totalExpenses']"
 			(click)="toggleExpanded('totalExpenses')"
 		>
@@ -140,7 +140,7 @@
 		}
 
 		<tr
-			class="text-primary cursor-pointer hover:bg-white/5"
+			class="text-primary cursor-pointer hover:bg-hover"
 			[attr.aria-expanded]="!!expanded['totalProfits']"
 			(click)="toggleExpanded('totalProfits')"
 		>
@@ -222,7 +222,7 @@
 	<tbody>
 		@for (cost of moduleCosts(); track cost.key) {
 			<tr
-				class="cursor-pointer hover:bg-white/5"
+				class="cursor-pointer hover:bg-hover"
 				[attr.aria-expanded]="!!expanded[cost.key]"
 				(click)="toggleExpanded(cost.key)"
 			>

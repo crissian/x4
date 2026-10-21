@@ -15,7 +15,7 @@ export function openDialog<R, D = unknown, C = unknown>(
 		data: options.data,
 		width: WIDTHS[options.size ?? 'md'],
 		maxWidth: 'calc(100vw - 2rem)',
-		panelClass: ['rounded-lg', 'border', 'border-neutral-700', 'bg-neutral-800', 'text-neutral-200', 'shadow-2xl'],
+		panelClass: ['rounded-lg', 'border', 'border-line', 'bg-raised', 'text-fg', 'shadow-2xl'],
 		backdropClass: ['cdk-overlay-dark-backdrop', 'backdrop-blur-[1px]'],
 		autoFocus: 'first-tabbable',
 	});

@@ -4,7 +4,7 @@
 		@if (result.layouts?.length) {
 			<div class="text-xs">
 				@for (item of result.layouts; track $index; let last = $last) {
-					<button type="button" class="link-button text-sky-400 underline" (click)="selectPlan.emit(item)">
+					<button type="button" class="link-button text-link underline" (click)="selectPlan.emit(item)">
 						{{ item }}
 					</button>
 					@if (!last) {

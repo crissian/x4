@@ -1,43 +1,121 @@
 @import 'tailwindcss';
 @import '@angular/cdk/overlay-prebuilt.css';
 
-@theme {
+/* `dark:` follows the `dark` class set on <html> by the ThemeService */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Theme tokens. Components use the semantic utilities (bg-surface, text-fg, border-line, text-danger...)
+ * so they work in both themes; the values switch with the `dark` class.
+ */
+:root {
+	--app-page: var(--color-neutral-100);
+	--app-surface: var(--color-white);
+	--app-surface-2: var(--color-neutral-100);
+	--app-raised: var(--color-white);
+	--app-input: var(--color-white);
+	--app-line: var(--color-neutral-200);
+	--app-line-strong: var(--color-neutral-300);
+	--app-fg: var(--color-neutral-700);
+	--app-fg-strong: var(--color-neutral-950);
+	--app-fg-soft: var(--color-neutral-600);
+	--app-fg-muted: var(--color-neutral-500);
+	--app-hover: rgb(0 0 0 / 0.04);
+	--app-nav: var(--color-neutral-200);
+	--app-nav-fg: var(--color-neutral-600);
+	--app-nav-active: rgb(0 0 0 / 0.07);
+	--app-link: var(--color-sky-700);
+	--app-link-hover: var(--color-sky-800);
+	--app-danger: var(--color-red-600);
+	--app-success: var(--color-emerald-700);
+	--app-primary: var(--color-sky-700);
+	--app-warning: var(--color-amber-600);
+	--app-info: var(--color-cyan-700);
+	color-scheme: light;
+}
+
+.dark {
+	--app-page: var(--color-neutral-800);
+	--app-surface: color-mix(in oklab, var(--color-neutral-900) 40%, var(--color-neutral-800));
+	--app-surface-2: color-mix(in oklab, var(--color-neutral-700) 40%, var(--app-surface));
+	--app-raised: var(--color-neutral-800);
+	--app-input: var(--color-neutral-900);
+	--app-line: var(--color-neutral-700);
+	--app-line-strong: var(--color-neutral-600);
+	--app-fg: var(--color-neutral-200);
+	--app-fg-strong: var(--color-neutral-100);
+	--app-fg-soft: var(--color-neutral-300);
+	--app-fg-muted: var(--color-neutral-400);
+	--app-hover: rgb(255 255 255 / 0.05);
+	--app-nav: var(--color-neutral-600);
+	--app-nav-fg: var(--color-neutral-300);
+	--app-nav-active: rgb(255 255 255 / 0.1);
+	--app-link: var(--color-sky-400);
+	--app-link-hover: var(--color-sky-300);
+	--app-danger: var(--color-red-400);
+	--app-success: var(--color-emerald-400);
+	--app-primary: var(--color-sky-400);
+	--app-warning: var(--color-amber-400);
+	--app-info: var(--color-cyan-400);
+	color-scheme: dark;
+}
+
+@theme inline {
 	--font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+	--color-page: var(--app-page);
+	--color-surface: var(--app-surface);
+	--color-surface-2: var(--app-surface-2);
+	--color-raised: var(--app-raised);
+	--color-input: var(--app-input);
+	--color-line: var(--app-line);
+	--color-line-strong: var(--app-line-strong);
+	--color-fg: var(--app-fg);
+	--color-fg-strong: var(--app-fg-strong);
+	--color-fg-soft: var(--app-fg-soft);
+	--color-fg-muted: var(--app-fg-muted);
+	--color-hover: var(--app-hover);
+	--color-nav: var(--app-nav);
+	--color-nav-fg: var(--app-nav-fg);
+	--color-nav-active: var(--app-nav-active);
+	--color-link: var(--app-link);
+	--color-link-hover: var(--app-link-hover);
+	--color-danger: var(--app-danger);
+	--color-success: var(--app-success);
+	--color-primary: var(--app-primary);
+	--color-warning: var(--app-warning);
+	--color-info: var(--app-info);
 }
 
 @layer base {
-	html {
-		color-scheme: dark;
-	}
-
 	body {
-		@apply min-h-screen bg-neutral-800 text-sm text-neutral-200 antialiased;
+		@apply min-h-screen bg-page text-sm text-fg antialiased;
 	}
 
 	a {
-		@apply text-sky-400 hover:text-sky-300 hover:underline;
+		@apply text-link hover:text-link-hover hover:underline;
 	}
 
 	h6 {
-		@apply mb-2 font-semibold text-neutral-100;
+		@apply mb-2 font-semibold text-fg-strong;
 	}
 
 	input[type='range'] {
-		@apply w-full accent-sky-500 disabled:opacity-50;
+		@apply w-full accent-sky-600 disabled:opacity-50 dark:accent-sky-500;
 	}
 
 	input[type='checkbox'] {
-		@apply size-4 rounded accent-sky-500;
+		@apply size-4 rounded accent-sky-600 dark:accent-sky-500;
 	}
 }
 
 @layer components {
 	.card {
-		@apply rounded-lg border border-neutral-700 bg-neutral-900/40 shadow-lg;
+		@apply rounded-lg border border-line bg-surface shadow-lg dark:shadow-black/40;
 	}
 
 	.card-header {
-		@apply rounded-t-lg border-b border-neutral-700 bg-neutral-700/40 px-4 py-2.5 font-medium text-neutral-100;
+		@apply rounded-t-lg border-b border-line bg-surface-2 px-4 py-2.5 font-medium text-fg-strong;
 	}
 
 	.card-body {
@@ -57,11 +135,11 @@
 	}
 
 	.btn-secondary {
-		@apply bg-neutral-600 hover:bg-neutral-500;
+		@apply bg-neutral-500 hover:bg-neutral-600 dark:bg-neutral-600 dark:hover:bg-neutral-500;
 	}
 
 	.btn-dark {
-		@apply bg-neutral-950 hover:bg-neutral-900;
+		@apply bg-neutral-800 hover:bg-neutral-700 dark:bg-neutral-950 dark:hover:bg-neutral-900;
 	}
 
 	.btn-success {
@@ -73,7 +151,7 @@
 	}
 
 	.input {
-		@apply block w-full rounded-md border border-neutral-600 bg-neutral-900 px-2 py-1 text-sm text-neutral-100 placeholder:text-neutral-500 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:outline-none disabled:opacity-50;
+		@apply block w-full rounded-md border border-line-strong bg-input px-2 py-1 text-sm text-fg-strong placeholder:text-fg-muted focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:outline-none disabled:opacity-50;
 	}
 
 	.table {
@@ -81,11 +159,11 @@
 
 		& th,
 		& td {
-			@apply border-b border-neutral-700 px-2 py-1.5 align-middle;
+			@apply border-b border-line px-2 py-1.5 align-middle;
 		}
 
 		& thead th {
-			@apply border-b-2 font-semibold text-neutral-100;
+			@apply border-b-2 font-semibold text-fg-strong;
 		}
 
 		& tfoot th {
@@ -94,36 +172,14 @@
 	}
 
 	.table-hover tbody tr {
-		@apply hover:bg-white/5;
+		@apply hover:bg-hover;
 	}
 
 	.details {
 		@apply grid grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-x-4 gap-y-1;
 
 		& dt {
-			@apply font-semibold text-neutral-100;
+			@apply font-semibold text-fg-strong;
 		}
-	}
-}
-
-@layer utilities {
-	.text-danger {
-		@apply text-red-400;
-	}
-
-	.text-success {
-		@apply text-emerald-400;
-	}
-
-	.text-primary {
-		@apply text-sky-400;
-	}
-
-	.text-warning {
-		@apply text-amber-400;
-	}
-
-	.text-info {
-		@apply text-cyan-400;
 	}
 }

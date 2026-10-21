@@ -11,7 +11,7 @@
 		@for (row of rows(); track row; let i = $index) {
 			<tr cdkDrag cdkDragLockAxis="y">
 				<td>
-					<div *cdkDragPreview class="rounded-md bg-neutral-700 px-5 py-4 text-neutral-100 shadow-2xl">
+					<div *cdkDragPreview class="rounded-md bg-raised px-5 py-4 text-fg-strong shadow-2xl">
 						{{ modules()[i]?.module?.name || '( Select )' }}
 					</div>
 					<app-autocomplete
@@ -30,12 +30,12 @@
 					/>
 				</td>
 				<td>
-					<i class="fa-solid fa-ellipsis-vertical cursor-move px-1 text-neutral-400" cdkDragHandle></i>
+					<i class="fa-solid fa-ellipsis-vertical cursor-move px-1 text-fg-muted" cdkDragHandle></i>
 				</td>
 				<td>
 					<button
 						type="button"
-						class="cursor-pointer text-neutral-400 hover:text-red-400"
+						class="cursor-pointer text-fg-muted hover:text-danger"
 						aria-label="Remove module"
 						(click)="removeModule(i)"
 					>

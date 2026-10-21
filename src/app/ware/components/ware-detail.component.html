@@ -28,7 +28,7 @@
 				</dd>
 			</dl>
 
-			<div class="flex border-b border-neutral-600" role="tablist">
+			<div class="flex border-b border-line-strong" role="tablist">
 				@for (tab of tabs; track tab.id) {
 					<button
 						type="button"
@@ -36,8 +36,8 @@
 						class="-mb-px cursor-pointer rounded-t-md border px-4 py-2"
 						[class]="
 							activeTab() === tab.id
-								? 'border-neutral-600 border-b-neutral-800 bg-neutral-800 text-white'
-								: 'border-transparent text-sky-400 hover:text-sky-300'
+								? 'border-line-strong border-b-surface bg-surface text-fg-strong'
+								: 'border-transparent text-link hover:text-link-hover'
 						"
 						[attr.aria-selected]="activeTab() === tab.id"
 						(click)="activeTab.set(tab.id)"

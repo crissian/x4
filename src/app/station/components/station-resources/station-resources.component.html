@@ -9,7 +9,7 @@
 		@for (item of sortedResources(); track item.ware.id) {
 			@let isExpanded = expanded()[item.ware.id];
 			<tr
-				class="cursor-pointer hover:bg-white/5"
+				class="cursor-pointer hover:bg-hover"
 				[class.text-danger]="item.amount < 0"
 				[class.text-success]="item.amount > 0"
 				[attr.aria-expanded]="!!isExpanded"

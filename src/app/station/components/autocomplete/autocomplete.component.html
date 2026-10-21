@@ -12,15 +12,15 @@
 	@if (visible()) {
 		<div
 			tabindex="0"
-			class="absolute z-10 mt-1 max-h-[40vh] min-w-full overflow-y-auto rounded-md border border-neutral-600 bg-neutral-700 py-1 shadow-xl"
+			class="absolute z-10 mt-1 max-h-[40vh] min-w-full overflow-y-auto rounded-md border border-line-strong bg-raised py-1 shadow-xl"
 			(focus)="onFocus()"
 			(blur)="onBlur()"
 		>
 			@for (group of filteredGroups(); track group.name) {
-				<div class="px-2.5 pt-1.5 font-bold text-neutral-200">{{ group.name }}</div>
+				<div class="px-2.5 pt-1.5 font-bold text-fg">{{ group.name }}</div>
 				@for (module of group.modules; track module.id) {
 					<div
-						class="cursor-pointer py-0.5 pr-2.5 pl-5 whitespace-nowrap hover:bg-black/20"
+						class="cursor-pointer py-0.5 pr-2.5 pl-5 whitespace-nowrap hover:bg-hover"
 						(mousedown)="$event.preventDefault()"
 						(click)="onClick(module)"
 					>
@@ -28,7 +28,7 @@
 					</div>
 				}
 			} @empty {
-				<div class="px-2.5 py-1 text-neutral-400">No modules found</div>
+				<div class="px-2.5 py-1 text-fg-muted">No modules found</div>
 			}
 		</div>
 	}

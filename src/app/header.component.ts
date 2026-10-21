@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ThemeService } from './core/services/theme.service';
 
 @Component({
 	selector: 'app-header',
@@ -7,6 +8,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 	templateUrl: './header.component.html',
 })
 export class HeaderComponent {
+	protected readonly theme = inject(ThemeService);
+
 	readonly links = [
 		{ path: '/station-calculator', label: 'Station Calculator' },
 		{ path: '/wares', label: 'Wares' },

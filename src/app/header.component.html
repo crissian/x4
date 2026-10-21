@@ -1,14 +1,30 @@
-<header class="flex items-center gap-4 bg-neutral-600 px-4 shadow-lg">
+<header class="flex items-center gap-3 bg-nav px-4 shadow-lg dark:shadow-black/40">
 	<nav class="-mb-px flex min-w-0 flex-1 overflow-x-auto">
 		@for (link of links; track link.path) {
 			<a
 				[routerLink]="link.path"
-				routerLinkActive="!text-white bg-white/10"
-				class="px-3 py-3 whitespace-nowrap text-neutral-300 hover:bg-white/5 hover:text-white hover:no-underline"
+				routerLinkActive="!text-fg-strong bg-nav-active"
+				class="px-3 py-3 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
 				>{{ link.label }}</a
 			>
 		}
 	</nav>
+
+	<button
+		type="button"
+		role="switch"
+		class="relative inline-flex h-7 w-13 shrink-0 cursor-pointer items-center rounded-full border border-line-strong bg-surface-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
+		[attr.aria-checked]="theme.isDark()"
+		aria-label="Dark theme"
+		[title]="theme.isDark() ? 'Switch to light theme' : 'Switch to dark theme'"
+		(click)="theme.toggle()"
+	>
+		<span
+			class="absolute top-0.5 left-0.5 flex size-5.5 items-center justify-center rounded-full bg-white text-xs text-amber-500 shadow transition-transform dark:translate-x-6 dark:bg-neutral-900 dark:text-sky-300"
+		>
+			<i class="fa-solid" [class.fa-sun]="!theme.isDark()" [class.fa-moon]="theme.isDark()"></i>
+		</span>
+	</button>
 
 	<a
 		class="hidden h-9 shrink-0 items-center gap-1.5 rounded border border-transparent bg-[#ff813f] px-2.5 text-white shadow transition hover:text-white hover:no-underline hover:opacity-85 md:inline-flex"
