@@ -1,20 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AnalyticsService } from './google-analytics/services/analytics.service';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    standalone: false
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	changeDetection: ChangeDetectionStrategy.Eager,
+	standalone: false,
 })
 export class AppComponent {
-  theme = 'dark';
+	theme = 'dark';
 
-  constructor(router: Router, analytics: AnalyticsService) {
-    router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        analytics.pageView({ path: event.urlAfterRedirects });
-      }
-    });
-  }
+	constructor(router: Router, analytics: AnalyticsService) {
+		router.events.subscribe((event) => {
+			if (event instanceof NavigationEnd) {
+				analytics.pageView({ path: event.urlAfterRedirects });
+			}
+		});
+	}
 }

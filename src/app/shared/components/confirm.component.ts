@@ -1,17 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-    templateUrl: './confirm.component.html',
-    standalone: false
+	templateUrl: './confirm.component.html',
+	changeDetection: ChangeDetectionStrategy.Eager,
+	standalone: false,
 })
 export class ConfirmComponent {
-  constructor(public activeModal: NgbActiveModal) {
-  }
+	constructor(public activeModal: NgbActiveModal) {}
 
-  @Input()
-  title: string;
+	@Input()
+	title: string;
 
-  @Input()
-  message: string;
+	@Input()
+	message: string;
 }

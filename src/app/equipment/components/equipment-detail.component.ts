@@ -1,104 +1,106 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { EntityDetailsComponent } from '../../shared/components/entity-details.component';
 import { Equipment, Ware } from '../../shared/services/model/model';
 import { ActivatedRoute } from '@angular/router';
 import { EquipmentService } from '../../shared/services/equipment.service';
 import { Title } from '@angular/platform-browser';
 import { WareService } from '../../shared/services/ware.service';
-import {BASE_TITLE} from '../../shared/services/constants';
+import { BASE_TITLE } from '../../shared/services/constants';
 
 interface ProductionWareData {
-   ware: Ware;
-   amount: number;
+	ware: Ware;
+	amount: number;
 }
 
 interface ProductionData {
-   time: number;
-   amount: number;
-   method: string;
-   name: string;
-   wares: ProductionWareData[];
+	time: number;
+	amount: number;
+	method: string;
+	name: string;
+	wares: ProductionWareData[];
 }
 
 @Component({
-    templateUrl: './equipment-detail.component.html',
-    standalone: false
+	templateUrl: './equipment-detail.component.html',
+	changeDetection: ChangeDetectionStrategy.Eager,
+	standalone: false,
 })
 export class EquipmentDetailComponent extends EntityDetailsComponent<Equipment> implements OnInit {
-   entityProduction: ProductionData[];
+	entityProduction: ProductionData[];
 
-   constructor(service: EquipmentService, private wareService: WareService,
-               route: ActivatedRoute, private titleService: Title) {
-      super(service, route);
+	constructor(
+		service: EquipmentService,
+		private wareService: WareService,
+		route: ActivatedRoute,
+		private titleService: Title
+	) {
+		super(service, route);
+	}
 
-   }
+	override ngOnInit(): void {
+		this.titleService.setTitle(`${BASE_TITLE} - Equipment`);
+		super.ngOnInit();
+	}
 
-  override ngOnInit(): void {
-      this.titleService.setTitle(`${BASE_TITLE} - Equipment`);
-      super.ngOnInit();
-   }
+	override onEntityLoaded(entity: Equipment) {
+		this.titleService.setTitle(`${BASE_TITLE} - ${entity.name}`);
+		this.entityProduction = entity.production.map<ProductionData>((x) => {
+			return {
+				amount: x.amount,
+				effects: x.effects,
+				method: x.method,
+				name: x.name,
+				time: x.time,
+				wares: x.wares.map((y) => {
+					return {
+						ware: this.wareService.getEntity(y.ware),
+						amount: y.amount,
+					};
+				}),
+			};
+		});
+	}
 
-  override onEntityLoaded(entity: Equipment) {
-      this.titleService.setTitle(`${BASE_TITLE} - ${entity.name}`);
-      this.entityProduction = entity.production
-         .map<ProductionData>(x => {
-            return {
-               amount: x.amount,
-               effects: x.effects,
-               method: x.method,
-               name: x.name,
-               time: x.time,
-               wares: x.wares.map(y => {
-                  return {
-                     ware: this.wareService.getEntity(y.ware),
-                     amount: y.amount
-                  };
-               })
-            };
-         });
-   }
+	getTotalMin(production: ProductionData) {
+		let total = 0;
+		production.wares.forEach((x) => {
+			total += x.amount * x.ware.price.min;
+		});
+		return total;
+	}
 
-   getTotalMin(production: ProductionData) {
-      let total = 0;
-      production.wares.forEach(x => {
-         total += x.amount * x.ware.price.min;
-      });
-      return total;
-   }
+	getTotalMax(production: ProductionData) {
+		let total = 0;
+		production.wares.forEach((x) => {
+			total += x.amount * x.ware.price.max;
+		});
+		return total;
+	}
 
-   getTotalMax(production: ProductionData) {
-      let total = 0;
-      production.wares.forEach(x => {
-         total += x.amount * x.ware.price.max;
-      });
-      return total;
-   }
+	getTotalAvg(production: ProductionData) {
+		let total = 0;
+		production.wares.forEach((x) => {
+			total += x.amount * x.ware.price.avg;
+		});
+		return total;
+	}
 
-   getTotalAvg(production: ProductionData) {
-      let total = 0;
-      production.wares.forEach(x => {
-         total += x.amount * x.ware.price.avg;
-      });
-      return total;
-   }
+	// noinspection JSMethodCanBeStatic
+	getProductionTime(amount: number) {
+		const minutes = Math.trunc(amount / 60);
+		const seconds = amount - minutes * 60;
 
-   // noinspection JSMethodCanBeStatic
-   getProductionTime(amount: number) {
-      const minutes = Math.trunc(amount / 60);
-      const seconds = amount - minutes * 60;
+		let result = '';
+		if (minutes > 0) {
+			result += minutes + (minutes === 1 ? ' minute' : ' minutes');
+		}
+		if (seconds > 0) {
+			if (minutes > 0) {
+				result += ' ';
+			}
+			result += seconds + (seconds === 1 ? ' second' : ' seconds');
+		}
 
-      let result = '';
-      if (minutes > 0) {
-         result += minutes + (minutes === 1 ? ' minute' : ' minutes');
-      }
-      if (seconds > 0) {
-         if (minutes > 0) {
-            result += ' ';
-         }
-         result += seconds + (seconds === 1 ? ' second' : ' seconds');
-      }
-
-      return result;
-   }
-
+		return result;
+	}
 }

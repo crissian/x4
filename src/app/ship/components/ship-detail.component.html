@@ -52,11 +52,19 @@
 								<dl class="row">
 									<dt class="col-5">Missile Storage</dt>
 									<dd class="col-7">
-										{{ entity.storage?.missile ? (entity.storage?.missile | number) : '-' }}
+										{{
+											entity.storage?.missile
+												? ($safeNavigationMigration(entity.storage?.missile) | number)
+												: '-'
+										}}
 									</dd>
 									<dt class="col-5">Drone Storage</dt>
 									<dd class="col-7">
-										{{ entity.storage?.unit ? (entity.storage?.unit | number) : '-' }}
+										{{
+											entity.storage?.unit
+												? ($safeNavigationMigration(entity.storage?.unit) | number)
+												: '-'
+										}}
 									</dd>
 									<dt class="col-5">People</dt>
 									<dd class="col-7">{{ (entity.people | number) || '-' }}</dd>

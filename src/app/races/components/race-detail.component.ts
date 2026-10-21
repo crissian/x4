@@ -1,27 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { EntityDetailsComponent } from '../../shared/components/entity-details.component';
 import { Race } from '../../shared/services/model/model';
 import { RaceService } from '../../shared/services/race.service';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import {environment} from '../../../environments/environment';
-import {BASE_TITLE} from '../../shared/services/constants';
+import { environment } from '../../../environments/environment';
+import { BASE_TITLE } from '../../shared/services/constants';
 
 @Component({
-    templateUrl: 'race-detail.component.html',
-    standalone: false
+	templateUrl: 'race-detail.component.html',
+	changeDetection: ChangeDetectionStrategy.Eager,
+	standalone: false,
 })
 export class RaceDetailComponent extends EntityDetailsComponent<Race> implements OnInit {
-  constructor(raceService: RaceService, route: ActivatedRoute, private titleService: Title) {
-    super(raceService, route);
-  }
+	constructor(
+		raceService: RaceService,
+		route: ActivatedRoute,
+		private titleService: Title
+	) {
+		super(raceService, route);
+	}
 
-  override ngOnInit(): void {
-    this.titleService.setTitle(`${BASE_TITLE} - Races`);
-    super.ngOnInit();
-  }
+	override ngOnInit(): void {
+		this.titleService.setTitle(`${BASE_TITLE} - Races`);
+		super.ngOnInit();
+	}
 
-  override onEntityLoaded(entity: Race) {
-    this.titleService.setTitle(`${BASE_TITLE} - Races - ${entity.name}`);
-  }
+	override onEntityLoaded(entity: Race) {
+		this.titleService.setTitle(`${BASE_TITLE} - Races - ${entity.name}`);
+	}
 }

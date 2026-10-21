@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-    templateUrl: './about.component.html',
-    standalone: false
+	templateUrl: './about.component.html',
+	changeDetection: ChangeDetectionStrategy.Eager,
+	standalone: false,
 })
-export class AboutComponent {
-}
+export class AboutComponent {}

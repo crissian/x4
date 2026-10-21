@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentBase } from '../../shared/components/component-base';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as convert from 'xml-js';
@@ -7,112 +7,114 @@ import { LayoutService } from '../services/layout-service';
 import { Layout, ModuleConfig } from '../../shared/services/module-config';
 
 interface EntryAttribute {
-    macro: string;
+	macro: string;
 }
 
 interface Entry {
-    _attributes: EntryAttribute;
+	_attributes: EntryAttribute;
 }
 
 interface PlanAttribute {
-    name: string;
+	name: string;
 }
 
 interface Plan {
-    _attributes: PlanAttribute;
-    entry: Entry | Entry[];
+	_attributes: PlanAttribute;
+	entry: Entry | Entry[];
 }
 
 interface PlanList {
-    plan: Plan | Plan[];
+	plan: Plan | Plan[];
 }
 
 interface ConstructionPlan {
-    plans: PlanList;
+	plans: PlanList;
 }
 
 export interface ImportResult {
-    error: string;
-    layouts: string[];
+	error: string;
+	layouts: string[];
 }
 
 @Component({
-    selector: 'app-import-plans',
-    templateUrl: './import-plans.component.html',
-    standalone: false
+	selector: 'app-import-plans',
+	templateUrl: './import-plans.component.html',
+	changeDetection: ChangeDetectionStrategy.Eager,
+	standalone: false,
 })
 export class ImportPlansComponent extends ComponentBase implements OnInit {
-    xml: string;
+	xml: string;
 
-    constructor(public activeModal: NgbActiveModal,
-                private moduleService: ModuleService,
-                private layoutService: LayoutService) {
-        super();
-    }
+	constructor(
+		public activeModal: NgbActiveModal,
+		private moduleService: ModuleService,
+		private layoutService: LayoutService
+	) {
+		super();
+	}
 
-    ngOnInit(): void {
-    }
+	ngOnInit(): void {}
 
-    importPlans() {
-        let layouts: string[];
-        let error: string = null;
+	importPlans() {
+		let layouts: string[];
+		let error: string = null;
 
-        try {
-            const result = convert.xml2js(this.xml, { compact: true }) as any;
-            layouts = this.importCore(result);
-        } catch (e) {
-            error = 'Failed to import layouts';
-        }
+		try {
+			const result = convert.xml2js(this.xml, { compact: true }) as any;
+			layouts = this.importCore(result);
+		} catch (e) {
+			error = 'Failed to import layouts';
+		}
 
-        this.activeModal.close({ error: error, layouts: layouts });
-    }
+		this.activeModal.close({ error: error, layouts: layouts });
+	}
 
-    private toArray<T>(value: T | T[]): T[] {
-        if (value == null) {
-            return [];
-        }
-        return Array.isArray(value) ? value : [value];
-    }
+	private toArray<T>(value: T | T[]): T[] {
+		if (value == null) {
+			return [];
+		}
+		return Array.isArray(value) ? value : [value];
+	}
 
-    private importCore(result: ConstructionPlan) {
-        const layouts: string[] = [];
+	private importCore(result: ConstructionPlan) {
+		const layouts: string[] = [];
 
-        for (const plan of this.toArray(result.plans.plan)) {
-            const entries = this.toArray(plan.entry);
-            if (entries.length === 0) {
-                continue;
-            }
+		for (const plan of this.toArray(result.plans.plan)) {
+			const entries = this.toArray(plan.entry);
+			if (entries.length === 0) {
+				continue;
+			}
 
-            const name = plan._attributes?.name || 'Imported Plan';
+			const name = plan._attributes?.name || 'Imported Plan';
 
-            const modules: ModuleConfig[] = [];
+			const modules: ModuleConfig[] = [];
 
-            for (const item of entries) {
-                const [ module ] = this.moduleService.getModulesByMacro(item._attributes.macro);
-                if (module) {
-                    const existing = modules.find(x => x.moduleId === module.id);
-                    if (!existing) {
-                        modules.push({ moduleId: module.id, count: 1 });
-                    } else {
-                        existing.count++;
-                    }
-                }
-            }
+			for (const item of entries) {
+				const [module] = this.moduleService.getModulesByMacro(item._attributes.macro);
+				if (module) {
+					const existing = modules.find((x) => x.moduleId === module.id);
+					if (!existing) {
+						modules.push({ moduleId: module.id, count: 1 });
+					} else {
+						existing.count++;
+					}
+				}
+			}
 
-            const layout: Layout = {
-                name: name,
-                config: modules
-            };
+			const layout: Layout = {
+				name: name,
+				config: modules,
+			};
 
-            this.layoutService.saveLayout(layout);
+			this.layoutService.saveLayout(layout);
 
-            layouts.push(name);
-        }
+			layouts.push(name);
+		}
 
-        return layouts;
-    }
+		return layouts;
+	}
 
-    get canImport() {
-        return this.xml;
-    }
+	get canImport() {
+		return this.xml;
+	}
 }
