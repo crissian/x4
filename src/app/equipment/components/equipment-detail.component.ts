@@ -1,8 +1,8 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
+import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { Router, RouterLink } from '@angular/router';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
-import { EntityImageComponent } from '../../shared/components/entity-image.component';
 import { ProductionCardComponent } from '../../shared/components/production-card.component';
 import { SellersComponent } from '../../shared/components/sellers.component';
 import { EquipmentService } from '../../shared/services/equipment.service';
@@ -20,7 +20,7 @@ interface ShipRow {
 }
 
 @Component({
-	imports: [DecimalPipe, RouterLink, DataGridComponent, ProductionCardComponent, SellersComponent, EntityImageComponent],
+	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, DataGridComponent, ProductionCardComponent, SellersComponent],
 	templateUrl: './equipment-detail.component.html',
 })
 export class EquipmentDetailComponent {

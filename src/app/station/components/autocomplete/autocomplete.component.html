@@ -19,13 +19,15 @@
 			@for (group of filteredGroups(); track group.name) {
 				<div class="px-2.5 pt-1.5 font-bold text-fg">{{ group.name }}</div>
 				@for (module of group.modules; track module.id) {
-					<div
-						class="cursor-pointer py-0.5 pr-2.5 pl-5 whitespace-nowrap hover:bg-hover"
+					<button
+						type="button"
+						tabindex="-1"
+						class="block w-full cursor-pointer py-0.5 pr-2.5 pl-5 text-left whitespace-nowrap hover:bg-hover"
 						(mousedown)="$event.preventDefault()"
 						(click)="onClick(module)"
 					>
 						{{ module.name }}
-					</div>
+					</button>
 				}
 			} @empty {
 				<div class="px-2.5 py-1 text-fg-muted">No modules found</div>

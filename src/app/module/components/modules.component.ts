@@ -12,7 +12,7 @@ function maxEfficiency(item: StationModule) {
 	if (item.product != null) {
 		const effect = item.product
 			.map((x) => x.production?.map((p) => p.effects?.find((y) => y.type === Effects.work)))
-			.map((x) => x[0])
+			.map((x) => x?.[0])
 			.filter((x) => x != null)
 			.map((x) => x.product);
 

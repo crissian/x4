@@ -3,7 +3,8 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"cli": {
-		"packageManager": "npm"
+		"packageManager": "npm",
+		"schematicCollections": ["angular-eslint"]
 	},
 	"projects": {
 		"x4-new": {
@@ -60,9 +61,7 @@
 							}
 						],
 						"allowedCommonJsDependencies": ["urlon", "xml-js"],
-						"styles": [
-							"src/styles.css"
-						]
+						"styles": ["src/styles.css"]
 					},
 					"configurations": {
 						"production": {
@@ -118,6 +117,12 @@
 						"tsConfig": "tsconfig.spec.json",
 						"runner": "vitest",
 						"buildTarget": "::development"
+					}
+				},
+				"lint": {
+					"builder": "@angular-eslint/builder:lint",
+					"options": {
+						"lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
 					}
 				}
 			}

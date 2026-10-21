@@ -1,8 +1,6 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { Component, computed, effect, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, computed, effect, inject, input, linkedSignal, signal } from '@angular/core';
 import { FormField, applyEach, disabled, form, max, min } from '@angular/forms/signals';
-import { ActivatedRoute } from '@angular/router';
 import { LucideFilePlus, LucideSave, LucideSaveAll, LucideFolderOpen, LucideShare2, LucideImport } from '@lucide/angular';
 import * as urlon from 'urlon';
 import { MessagesComponent } from '../../shared/components/messages.component';
@@ -30,6 +28,20 @@ import { StationSummaryComponent } from './station-summary/station-summary.compo
 
 const EMPTY_ROW: ModuleRow = { moduleId: '', count: 1 };
 
+/** Reads the rows of a shared layout link (`?l=...`, urlon with `=` and `&` swapped for URL-safe characters). */
+export function parseSharedLayout(value: string | undefined): ModuleRow[] | undefined {
+	if (!value) {
+		return undefined;
+	}
+	try {
+		const layoutData = urlon.parse(value.replace(/-/g, '=').replace(/,/g, '&')) as { module: string; count: number }[];
+		return layoutData.map((x) => ({ moduleId: x.module, count: x.count }));
+	} catch (err) {
+		console.log(err);
+		return undefined;
+	}
+}
+
 @Component({
 	selector: 'app-station-calculator',
 	imports: [
@@ -54,12 +66,15 @@ export default class StationCalculatorComponent {
 	private readonly wareService = inject(WareService);
 	private readonly moduleService = inject(ModuleService);
 
+	/** Shared layout from the `l` query parameter. */
+	readonly l = input<string>();
+
 	readonly layout = signal<Layout | null>(null);
 	readonly messages = signal<Message[]>([]);
 	readonly importResult = signal<ImportResult | null>(null);
 
 	/** Station layout rows */
-	readonly rows = signal<ModuleRow[]>([{ ...EMPTY_ROW }]);
+	readonly rows = linkedSignal<ModuleRow[]>(() => parseSharedLayout(this.l()) ?? [{ ...EMPTY_ROW }]);
 	readonly rowsForm = form(this.rows, (row) => {
 		applyEach(row, (item) => {
 			min(item.count, 0);
@@ -107,21 +122,6 @@ export default class StationCalculatorComponent {
 				field.value.set(partialWorkforce);
 			}
 		});
-
-		inject(ActivatedRoute)
-			.queryParamMap.pipe(takeUntilDestroyed())
-			.subscribe((params) => {
-				const value = params.get('l');
-				if (value) {
-					try {
-						const layout = value.replace(/-/g, '=').replace(/,/g, '&');
-						const layoutData: { module: string; count: number }[] = urlon.parse(layout);
-						this.rows.set(layoutData.map((x) => ({ moduleId: x.module, count: x.count })));
-					} catch (err) {
-						console.log(err);
-					}
-				}
-			});
 	}
 
 	shareLayout() {
@@ -151,7 +151,7 @@ export default class StationCalculatorComponent {
 	}
 
 	newLayout() {
-		this.loadLayoutInternal({ name: null, config: [{ ...EMPTY_ROW }] });
+		this.loadLayoutInternal({ name: '', config: [{ ...EMPTY_ROW }] });
 	}
 
 	loadLayout() {
@@ -171,6 +171,9 @@ export default class StationCalculatorComponent {
 				this.rows.update((rows) => {
 					const result = rows.map((x) => ({ ...x }));
 					for (const item of layout.config) {
+						if (!item.moduleId) {
+							continue;
+						}
 						const existing = result.find((x) => x.moduleId == item.moduleId);
 						if (existing == null) {
 							result.push({ moduleId: item.moduleId, count: item.count });

@@ -1,0 +1,54 @@
+@let form = settings();
+@let expanded = expand.state();
+
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col" i18n="@@stationCosts">Station Costs</th>
+			<th scope="col" class="text-right" i18n="@@amount">Amount</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (cost of moduleCosts(); track cost.key) {
+			<tr
+				class="cursor-pointer hover:bg-hover"
+				[attr.aria-expanded]="!!expanded[cost.key]"
+				(click)="expand.toggle(cost.key)"
+			>
+				<td>
+					@if (expanded[cost.key]) {<svg lucideChevronsUp class="mr-1" />} @else {<svg lucideChevronsDown class="mr-1" />}
+					{{ cost.count }} x {{ cost.name }}
+				</td>
+				<td class="text-right">{{ cost.price | number: '1.0-0' }}</td>
+			</tr>
+			@if (expanded[cost.key]) {
+				@for (item of cost.items; track item.ware.id) {
+					<tr>
+						<td class="pl-10">{{ cost.count * item.amount }} x {{ item.ware.name }}</td>
+						<td class="text-right">{{ cost.count * item.price | number: '1.0-0' }}</td>
+					</tr>
+				}
+			}
+		}
+		<tr>
+			<th class="text-right" i18n="@@total">Total:</th>
+			<th class="text-right">{{ totalModuleCost() | number: '1.0-0' }}</th>
+		</tr>
+		@for (item of totalModuleResourceCosts(); track item.ware.id) {
+			<tr>
+				<td class="text-right">{{ item.ware.name }}</td>
+				<td class="text-right">{{ item.value | number: '1.0-0' }}</td>
+			</tr>
+		}
+		<tr>
+			<td colspan="2">
+				<label for="modules-resources-price" class="mb-1 block">
+					<span i18n="@@resourcesPrice">Resources Price:</span>&nbsp;<strong>{{
+						priceLabel(form.modulesResourcesPrice().value())
+					}}</strong>
+				</label>
+				<input type="range" id="modules-resources-price" step="5" [formField]="form.modulesResourcesPrice" />
+			</td>
+		</tr>
+	</tbody>
+</table>

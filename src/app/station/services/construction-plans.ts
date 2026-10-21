@@ -28,7 +28,7 @@ interface ConstructionPlan {
 }
 
 export interface ImportResult {
-	error: string;
+	error: string | null;
 	layouts: string[];
 }
 
@@ -75,8 +75,8 @@ export function importConstructionPlans(
 	moduleService: Pick<ModuleService, 'getModulesByMacro'>,
 	saveLayout: (layout: Layout) => void
 ): ImportResult {
-	let layouts: string[];
-	let error: string = null;
+	let layouts: string[] = [];
+	let error: string | null = null;
 
 	try {
 		const result = convert.xml2js(xml, { compact: true }) as ConstructionPlan;
@@ -84,7 +84,7 @@ export function importConstructionPlans(
 			saveLayout(layout);
 			return layout.name;
 		});
-	} catch (e) {
+	} catch {
 		error = 'Failed to import layouts';
 	}
 

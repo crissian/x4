@@ -1,7 +1,7 @@
 import { EnvironmentProviders, Injectable, InjectionToken, inject, makeEnvironmentProviders } from '@angular/core';
 import { AnalyticsConfig } from './analytics.config';
 
-declare var gtag: any;
+declare const gtag: (...args: unknown[]) => void;
 
 export interface PageInfo {
 	title?: string;

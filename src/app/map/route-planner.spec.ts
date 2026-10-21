@@ -18,7 +18,7 @@ describe('route planner', () => {
 		const times = travelTimes([a, b, c], 'a', { speed: 1000, charge: 0 });
 		// 10 km + gate + 50 km + 50 km + gate + 10 km at 1 km/s
 		expect(times.time.get('c')).toBeCloseTo(120 + 2 * GATE_TIME);
-		const route = times.route('c');
+		const route = times.route('c')!;
 		expect(route.steps.map((x) => x.sector.id)).toEqual(['a', 'b', 'c']);
 		expect(route.jumps).toBe(2);
 		expect(route.distance).toBeCloseTo(120);
@@ -27,7 +27,7 @@ describe('route planner', () => {
 	it('takes a superhighway when faster', () => {
 		const ah = sector('a', a.gates, [{ sector: 'c', x: 0, z: 1 }]);
 		const ch = sector('c', c.gates, [{ sector: 'a', x: 0, z: 1 }]);
-		const route = travelTimes([ah, b, ch], 'a', { speed: 1000, charge: 0 }).route('c');
+		const route = travelTimes([ah, b, ch], 'a', { speed: 1000, charge: 0 }).route('c')!;
 		expect(route.steps.map((x) => x.type)).toEqual(['start', 'highway']);
 		expect(route.time).toBeCloseTo(2 + HIGHWAY_TIME);
 	});

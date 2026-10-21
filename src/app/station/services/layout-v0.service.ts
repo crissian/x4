@@ -3,7 +3,7 @@ import { Layout } from '../../shared/services/module-config';
 import { Modules } from '../../shared/services/data/modules-data';
 
 export class LayoutV0Service implements LayoutVersionService {
-  static map = {
+  static map: Record<string, { moduleId: string }> = {
     1: {moduleId: Modules.module_gen_prod_energycells_01.id },
     2: {moduleId: Modules.module_gen_prod_water_01.id },
     3: {moduleId: Modules.module_arg_prod_meat_01.id },
@@ -29,7 +29,7 @@ export class LayoutV0Service implements LayoutVersionService {
     23: {moduleId: Modules.module_gen_prod_superfluidcoolant_01.id },
     24: {moduleId: Modules.module_gen_prod_microchips_01.id },
     25: {moduleId: Modules.module_gen_prod_scanningarrays_01.id },
-    26: {moduleId: Modules.module_gen_prod_hullparts_01},
+    26: {moduleId: Modules.module_gen_prod_hullparts_01.id },
     27: {moduleId: Modules.module_gen_prod_advancedcomposites_01.id },
     28: {moduleId: Modules.module_gen_prod_engineparts_01.id },
     29: {moduleId: Modules.module_gen_prod_plasmaconductors_01.id },
@@ -46,14 +46,14 @@ export class LayoutV0Service implements LayoutVersionService {
     40: {moduleId: Modules.module_gen_prod_fieldcoils_01.id }
   };
 
-  getLayouts(data: any): Layout[] {
-    const layouts: Layout[] = data;
+  getLayouts(data: unknown): Layout[] {
+    const layouts = data as Layout[];
     return layouts
       .map<Layout>(x => {
         return {
           name: x.name,
           config: x.config.map(y => {
-            const value = LayoutV0Service.map[y.moduleId];
+            const value = LayoutV0Service.map[y.moduleId!];
             return {
               moduleId: value.moduleId,
               count: y.count
@@ -63,7 +63,7 @@ export class LayoutV0Service implements LayoutVersionService {
       });
   }
 
-  getSaveData(layouts: Layout[]) {
+  getSaveData() {
     return null;
   }
 }

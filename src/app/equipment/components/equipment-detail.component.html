@@ -1,142 +1,122 @@
 @if (entity(); as entity) {
-	<div class="card">
-		<div class="card-header"><a routerLink="/equipment">Equipment</a> - {{ entity.name }}</div>
-		<div class="card-body flow-root">
-			<app-entity-image kind="equipment" [id]="entity.id" [alt]="entity.name" />
-			@if (entity.description && entity.description != 'No information available') {
-				<p class="mb-3">{{ entity.description }}</p>
-			}
-			<div class="grid gap-x-6 gap-y-3 md:grid-cols-3">
-				<dl class="details">
-					<dt>Type</dt>
-					<dd>{{ entity.type || '-' }}</dd>
-					<dt>Class</dt>
-					<dd>{{ entity.equipmentClass || '-' }}</dd>
-					<dt>Size</dt>
-					<dd>{{ entity.size || '-' }}</dd>
-					<dt>Race</dt>
-					<dd>
-						@if (entity.race) {
-							<a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
-						} @else {
-							-
-						}
-					</dd>
-					@if (entity.hull) {
-						<dt>Hull</dt>
-						<dd>{{ entity.hull | number }}</dd>
+	<app-detail-page
+		section="Equipment"
+		sectionLink="/equipment"
+		[title]="entity.name"
+		[id]="entity.id"
+		image="equipment"
+		[description]="entity.description"
+	>
+		<div class="grid gap-x-6 gap-y-3 md:grid-cols-3">
+			<dl class="details">
+				<div appDetail="Type">{{ entity.type || '-' }}</div>
+				<div appDetail="Class">{{ entity.equipmentClass || '-' }}</div>
+				<div appDetail="Size">{{ entity.size || '-' }}</div>
+				<div appDetail="Race">
+					@if (entity.race) {
+						<a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
+					} @else {
+						-
 					}
-					@if (entity.price) {
-						<dt>Price</dt>
-						<dd>{{ entity.price.min | number }} - {{ entity.price.max | number }}</dd>
-					}
-				</dl>
+				</div>
+				@if (entity.hull) {
+					<div appDetail="Hull">{{ entity.hull | number }}</div>
+				}
+				@if (entity.price) {
+					<div appDetail="Price">{{ entity.price.min | number }} - {{ entity.price.max | number }}</div>
+				}
+			</dl>
 
-				<dl class="details">
-					@if (entity.thrust) {
-						<dt>Forward Thrust</dt>
-						<dd>{{ entity.thrust.forward | number: '1.0-0' }}</dd>
-						<dt>Reverse Thrust</dt>
-						<dd>{{ entity.thrust.reverse | number: '1.0-0' }}</dd>
-					}
-					@if (entity.boost) {
-						<dt>Boost</dt>
-						<dd>×{{ entity.boost.thrust | number: '1.0-2' }} for {{ entity.boost.duration | number: '1.0-1' }} s</dd>
-						<dt>Boost Recharge</dt>
-						<dd>{{ entity.boost.recharge | number: '1.0-1' }} s</dd>
-					}
-					@if (entity.travel) {
-						<dt>Travel</dt>
-						<dd>×{{ entity.travel.thrust | number: '1.0-2' }}</dd>
-						<dt>Travel Charge</dt>
-						<dd>{{ entity.travel.charge | number: '1.0-1' }} s</dd>
-					}
-					@if (entity.recharge) {
-						<dt>Shield</dt>
-						<dd>{{ entity.recharge.max | number }}</dd>
-						<dt>Recharge</dt>
-						<dd>{{ entity.recharge.rate | number: '1.0-1' }}/s</dd>
-						<dt>Recharge Delay</dt>
-						<dd>{{ entity.recharge.delay | number: '1.0-2' }} s</dd>
-					}
-					@if (entity.weapon; as w) {
-						@if (weapon(); as s) {
-							<dt>{{ w.repair ? 'Repair/s' : 'DPS' }}</dt>
-							<dd>
-								{{ s.sustainedDps | number: '1.0-0' }}
-								@if (s.burstDps - s.sustainedDps > 1) {
-									<span class="text-fg-muted">({{ s.burstDps | number: '1.0-0' }} burst)</span>
-								}
-							</dd>
-							@if (w.shield || w.hull) {
-								<dt>Shield / Hull DPS</dt>
-								<dd>{{ s.shieldDps | number: '1.0-0' }} / {{ s.hullDps | number: '1.0-0' }}</dd>
+			<dl class="details">
+				@if (entity.thrust) {
+					<div appDetail="Forward Thrust">{{ entity.thrust.forward | number: '1.0-0' }}</div>
+					<div appDetail="Reverse Thrust">{{ entity.thrust.reverse | number: '1.0-0' }}</div>
+				}
+				@if (entity.boost) {
+					<div appDetail="Boost">
+						×{{ entity.boost.thrust | number: '1.0-2' }} for {{ entity.boost.duration | number: '1.0-1' }} s
+					</div>
+					<div appDetail="Boost Recharge">{{ entity.boost.recharge | number: '1.0-1' }} s</div>
+				}
+				@if (entity.travel) {
+					<div appDetail="Travel">×{{ entity.travel.thrust | number: '1.0-2' }}</div>
+					<div appDetail="Travel Charge">{{ entity.travel.charge | number: '1.0-1' }} s</div>
+				}
+				@if (entity.recharge) {
+					<div appDetail="Shield">{{ entity.recharge.max | number }}</div>
+					<div appDetail="Recharge">{{ entity.recharge.rate | number: '1.0-1' }}/s</div>
+					<div appDetail="Recharge Delay">{{ entity.recharge.delay | number: '1.0-2' }} s</div>
+				}
+				@if (entity.weapon; as w) {
+					@if (weapon(); as s) {
+						<dt>{{ w.repair ? 'Repair/s' : 'DPS' }}</dt>
+						<dd>
+							{{ s.sustainedDps | number: '1.0-0' }}
+							@if (s.burstDps - s.sustainedDps > 1) {
+								<span class="text-fg-muted">({{ s.burstDps | number: '1.0-0' }} burst)</span>
 							}
-							<dt>{{ w.beam ? 'Damage/s (beam)' : 'Damage' }}</dt>
-							<dd>{{ w.damage | number: '1.0-1' }}{{ w.amount > 1 ? ' ×' + w.amount : '' }}</dd>
-							<dt>Fire Rate</dt>
-							<dd>{{ s.fireRate | number: '1.0-2' }}/s</dd>
-							<dt>Range</dt>
-							<dd>{{ s.range / 1000 | number: '1.0-2' }} km</dd>
-							@if (s.projectileSpeed) {
-								<dt>Projectile Speed</dt>
-								<dd>{{ s.projectileSpeed | number: '1.0-0' }} m/s</dd>
-							}
-							@if (w.magazine) {
-								<dt>Magazine</dt>
-								<dd>{{ w.magazine.size }} shots, {{ w.magazine.reload | number: '1.0-1' }} s reload</dd>
-							}
-							@if (s.timeToOverheat) {
-								<dt>Overheats After</dt>
-								<dd>{{ s.timeToOverheat | number: '1.0-1' }} s</dd>
-							}
+						</dd>
+						@if (w.shield || w.hull) {
+							<div appDetail="Shield / Hull DPS">
+								{{ s.shieldDps | number: '1.0-0' }} / {{ s.hullDps | number: '1.0-0' }}
+							</div>
+						}
+						<dt>{{ w.beam ? 'Damage/s (beam)' : 'Damage' }}</dt>
+						<dd>{{ w.damage | number: '1.0-1' }}{{ w.amount > 1 ? ' ×' + w.amount : '' }}</dd>
+						<div appDetail="Fire Rate">{{ s.fireRate | number: '1.0-2' }}/s</div>
+						<div appDetail="Range">{{ s.range / 1000 | number: '1.0-2' }} km</div>
+						@if (s.projectileSpeed) {
+							<div appDetail="Projectile Speed">{{ s.projectileSpeed | number: '1.0-0' }} m/s</div>
+						}
+						@if (w.magazine) {
+							<div appDetail="Magazine">
+								{{ w.magazine.size }} shots, {{ w.magazine.reload | number: '1.0-1' }} s reload
+							</div>
+						}
+						@if (s.timeToOverheat) {
+							<div appDetail="Overheats After">{{ s.timeToOverheat | number: '1.0-1' }} s</div>
 						}
 					}
-					@if (entity.missile; as m) {
-						<dt>Damage</dt>
-						<dd>{{ m.damage | number }}</dd>
-						<dt>DPS</dt>
-						<dd>{{ missileDps() | number: '1.0-0' }}</dd>
-						<dt>Range</dt>
-						<dd>{{ m.range / 1000 | number: '1.0-1' }} km</dd>
-						@if (m.speed) {
-							<dt>Speed</dt>
-							<dd>{{ m.speed | number: '1.0-0' }} m/s</dd>
-						}
-						<dt>Guided</dt>
-						<dd>{{ m.guided ? 'Yes' : 'No' }}</dd>
+				}
+				@if (entity.missile; as m) {
+					<div appDetail="Damage">{{ m.damage | number }}</div>
+					<div appDetail="DPS">{{ missileDps() | number: '1.0-0' }}</div>
+					<div appDetail="Range">{{ m.range / 1000 | number: '1.0-1' }} km</div>
+					@if (m.speed) {
+						<div appDetail="Speed">{{ m.speed | number: '1.0-0' }} m/s</div>
 					}
-				</dl>
+					<div appDetail="Guided">{{ m.guided ? 'Yes' : 'No' }}</div>
+				}
+			</dl>
 
-				<div>
-					<h6>Sold by</h6>
-					<app-sellers [owners]="entity.owners" [license]="entity.license" />
+			<div>
+				<h6>Sold by</h6>
+				<app-sellers [owners]="entity.owners" [license]="entity.license" />
+			</div>
+		</div>
+
+		@if (ships().length) {
+			<div class="mt-4 card">
+				<div class="card-header">Compatible ships ({{ ships().length }})</div>
+				<div class="card-body overflow-x-auto">
+					<app-data-grid
+						[data]="ships()"
+						[columns]="shipColumns"
+						[clickable]="true"
+						[trackBy]="trackShip"
+						(rowClick)="openShip($event)"
+					/>
 				</div>
 			</div>
+		}
 
-			@if (ships().length) {
-				<div class="mt-4 card">
-					<div class="card-header">Compatible ships ({{ ships().length }})</div>
-					<div class="card-body overflow-x-auto">
-						<app-data-grid
-							[data]="ships()"
-							[columns]="shipColumns"
-							[clickable]="true"
-							[trackBy]="trackShip"
-							(rowClick)="openShip($event)"
-						/>
-					</div>
-				</div>
-			}
-
-			@if (production().length) {
-				<h6 class="mt-4">Production</h6>
-				<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-					@for (item of production(); track $index) {
-						<app-production-card [production]="item" />
-					}
-				</div>
-			}
-		</div>
-	</div>
+		@if (production().length) {
+			<h6 class="mt-4">Production</h6>
+			<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+				@for (item of production(); track $index) {
+					<app-production-card [production]="item" />
+				}
+			</div>
+		}
+	</app-detail-page>
 }

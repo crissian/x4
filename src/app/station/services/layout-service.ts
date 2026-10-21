@@ -4,7 +4,6 @@ import { Layout } from '../../shared/services/module-config';
 import { LayoutV0Service } from './layout-v0.service';
 import { LayoutV1Service } from './layout-v1.service';
 import { LayoutV2Service } from './layout-v2.service';
-import { ModuleService } from '../../shared/services/module.service';
 import { LayoutVersionService } from './layout-version.service';
 import { AnalyticsService } from '../../google-analytics/services/analytics.service';
 
@@ -23,11 +22,11 @@ export class LayoutService {
 	private readonly analytics = inject(AnalyticsService);
 
 	constructor() {
-		this.services = [new LayoutV0Service(), new LayoutV1Service(inject(ModuleService)), new LayoutV2Service()];
+		this.services = [new LayoutV0Service(), new LayoutV1Service(), new LayoutV2Service()];
 	}
 
 	getLayouts(): Layout[] {
-		const data = this.storageService.get<any>(LayoutService.storageKey) || { version: LayoutService.version };
+		const data = this.storageService.get<{ version?: number }>(LayoutService.storageKey) || { version: LayoutService.version };
 
 		const layoutVersion = data.version || 0;
 
@@ -35,7 +34,7 @@ export class LayoutService {
 		return layouts || [];
 	}
 
-	getLayout(name: string): Layout {
+	getLayout(name: string): Layout | undefined {
 		this.analytics.event({ label: name, category: 'Layouts', action: 'Load Layout' });
 		return this.getLayouts().find((x) => x.name === name);
 	}

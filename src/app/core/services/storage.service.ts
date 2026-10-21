@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
+import { readStorage, writeStorage } from './local-storage';
 
 @Injectable({ providedIn: 'root' })
 export class StorageService {
 	add(key: string, value: unknown) {
-		localStorage.setItem(key, JSON.stringify(value));
+		writeStorage(key, value);
 	}
 
 	get<T>(key: string): T | null {
-		const json = localStorage.getItem(key);
-		if (json) {
-			return JSON.parse(json);
-		}
-		return null;
+		return readStorage<T | null>(key, null);
 	}
 
 	delete(key: string) {
-		localStorage.removeItem(key);
+		writeStorage(key, undefined);
 	}
 
 	clear() {
-		localStorage.clear();
+		try {
+			localStorage.clear();
+		} catch {
+			// storage unavailable
+		}
 	}
 }

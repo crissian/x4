@@ -1,0 +1,99 @@
+@let form = settings();
+@let expanded = expand.state();
+
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col" i18n="@@productionPerHour">Production Per Hour</th>
+			<th scope="col" class="text-right" i18n="@@amount">Amount</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr
+			class="text-danger cursor-pointer hover:bg-hover"
+			[attr.aria-expanded]="!!expanded['totalExpenses']"
+			(click)="expand.toggle('totalExpenses')"
+		>
+			<td>
+				@if (expanded['totalExpenses']) {<svg lucideChevronsUp class="mr-1" />} @else {<svg lucideChevronsDown class="mr-1" />}
+				<span i18n="@@expenses">Expenses</span>
+			</td>
+			<td class="text-right">{{ totalExpenses() | number: '1.0-0' }}</td>
+		</tr>
+		@if (expanded['totalExpenses']) {
+			@for (item of resourcesNeeded(); track item.name) {
+				<tr [class.text-danger]="item.price > 0" [class.text-warning]="item.price === 0">
+					<td class="pl-10">{{ item.amount | number: '1.0-0' }} x {{ item.name }}</td>
+					<td class="text-right">{{ item.amount * item.price | number: '1.0-0' }}</td>
+				</tr>
+			}
+		}
+
+		<tr
+			class="text-primary cursor-pointer hover:bg-hover"
+			[attr.aria-expanded]="!!expanded['totalProfits']"
+			(click)="expand.toggle('totalProfits')"
+		>
+			<td>
+				@if (expanded['totalProfits']) {<svg lucideChevronsUp class="mr-1" />} @else {<svg lucideChevronsDown class="mr-1" />}
+				<span i18n="@@production">Production</span>
+			</td>
+			<td class="text-right">{{ totalProfits() | number: '1.0-0' }}</td>
+		</tr>
+		@if (expanded['totalProfits']) {
+			@for (item of resourcesProduced(); track item.name) {
+				<tr class="text-primary">
+					<td class="pl-10">{{ item.amount | number: '1.0-0' }} x {{ item.name }}</td>
+					<td class="text-right">+{{ item.amount * item.price | number: '1.0-0' }}</td>
+				</tr>
+			}
+		}
+		<tr class="text-success">
+			<td>
+				<svg lucideTrendingUp class="mr-1" />
+				<strong i18n="@@profit">Profit</strong>
+			</td>
+			<td class="text-right">
+				<strong>{{ totalProfits() + totalExpenses() | number: '1.0-0' }}</strong>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<label class="flex items-center gap-2">
+					<input type="checkbox" [formField]="form.provideBasicResources" />
+					<span i18n="@@minersProvideBasicResources">Miners provide basic resources</span>
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<label class="flex items-center gap-2">
+					<input type="checkbox" [formField]="form.provideAllResources" />
+					<span i18n="@@rovideAllResources">Resources are provided by other stations</span>
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div class="grid grid-cols-2 gap-4">
+					<div>
+						<label for="resources-price" class="mb-1 block">
+							<span i18n="@@resourcePrice">Resources Price:</span>&nbsp;<strong>{{
+								priceLabel(form.resourcesPrice().value())
+							}}</strong>
+						</label>
+						<input type="range" id="resources-price" step="5" [formField]="form.resourcesPrice" />
+					</div>
+					<div>
+						<label for="products-price" class="mb-1 block">
+							<span>Products Price:</span>&nbsp;<strong>{{
+								priceLabel(form.productsPrice().value())
+							}}</strong>
+						</label>
+						<input type="range" id="products-price" step="5" [formField]="form.productsPrice" />
+					</div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>

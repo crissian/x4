@@ -1,10 +1,11 @@
-import { AllWares, Wares } from './data/wares-data';
 import { Injectable } from '@angular/core';
+import { AllWares } from './data/wares-data';
+import { EntityStore, usesWare } from './entity.service';
 import { Ware, WareGroup } from './model/model';
 
 @Injectable({ providedIn: 'root' })
-export class WareService {
-	private static order = {
+export class WareService extends EntityStore<Ware> {
+	private static order: Record<string, number> = {
 		gases: 0,
 		ice: 10,
 		minerals: 20,
@@ -18,27 +19,12 @@ export class WareService {
 		shiptech: 100,
 	};
 
-	getEntities(): Ware[] {
-		return AllWares;
-	}
-
-	getEntity(id: string): Ware {
-		return Wares[id];
+	constructor() {
+		super(AllWares);
 	}
 
 	getWaresUsingWare(id: string): Ware[] {
-		return AllWares.filter((x) => this.isUsing(x, id));
-	}
-
-	private isUsing(ware: Ware, wareId: string) {
-		for (let i = 0; i < ware.production.length; i++) {
-			const production = ware.production[i];
-			if (production.wares.find((y) => y.ware == wareId) != null) {
-				return true;
-			}
-		}
-
-		return false;
+		return this.getEntities().filter((x) => usesWare(x, id));
 	}
 
 	compareGroups(a: WareGroup, b: WareGroup) {
@@ -53,8 +39,8 @@ export class WareService {
 	}
 
 	compareWares(a: Ware, b: Ware) {
-		const aidx = WareService.order[a.group.id];
-		const bidx = WareService.order[b.group.id];
+		const aidx = WareService.order[a.group?.id ?? ''];
+		const bidx = WareService.order[b.group?.id ?? ''];
 
 		if (aidx == bidx) {
 			return this.compareProp(a, b, 'name');
@@ -63,7 +49,7 @@ export class WareService {
 		return aidx - bidx;
 	}
 
-	private compareProp(a: any, b: any, prop: string) {
+	private compareProp<T>(a: T, b: T, prop: keyof T) {
 		if (a[prop] < b[prop]) {
 			return -1;
 		} else if (a[prop] > b[prop]) {

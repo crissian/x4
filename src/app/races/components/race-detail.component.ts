@@ -1,9 +1,9 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { DetailPageComponent } from '../../shared/components/detail-page.component';
 import { RaceService } from '../../shared/services/race.service';
 
 @Component({
-	imports: [RouterLink],
+	imports: [DetailPageComponent],
 	templateUrl: './race-detail.component.html',
 })
 export class RaceDetailComponent {

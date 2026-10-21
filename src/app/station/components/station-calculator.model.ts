@@ -16,7 +16,7 @@ export interface StationResourceItemModel {
 	efficiency: number;
 	name: string;
 	total: number;
-	type: String;
+	type: string;
 }
 
 export interface StationResourceModel {
@@ -38,7 +38,7 @@ export interface WareProductionData {
 	efficiency: number;
 	name: string;
 	total: number;
-	type: String;
+	type: string;
 }
 
 export interface StationProduction {
@@ -80,64 +80,62 @@ export const DEFAULT_STATION_SETTINGS: StationSettings = {
 
 /** Production and needs of a module row, calculated once from its module id and count. */
 export class StationModuleModel {
-	readonly module: StationModule = null;
+	readonly module?: StationModule;
 	readonly needs: { amount: number; ware: Ware }[] = [];
-	readonly production: StationProduction[] = null;
+	readonly production?: StationProduction[];
 
 	constructor(
 		private wareService: WareService,
 		private moduleService: ModuleService,
-		readonly moduleId: string = '',
-		readonly count: number = 1
+		readonly moduleId = '',
+		readonly count = 1
 	) {
-		if (!moduleId) {
+		const module = moduleId ? this.moduleService.getEntity(moduleId) : undefined;
+		if (!module) {
 			return;
 		}
-
-		this.module = this.moduleService.getEntity(moduleId);
-		if (this.module == null) {
-			return;
-		}
-
+		this.module = module;
 		this.production = [];
 
-		if (this.module.type == ModuleTypes.production) {
-			const wares = this.module.product;
-
-			for (let ware of wares) {
-				let currentProd: Production = null;
-
-				if (RECYCLING_MODULES.includes(this.module.id)) {
-					currentProd = ware.production.find((x) => x.method == ProductionMethods.recycling);
-				}
-
-				if (currentProd == null) {
-					if (this.module.makerRace == null) {
-						currentProd = ware.production.find((x) => x.method == ProductionMethods.default);
-					} else {
-						currentProd =
-							ware.production.find((x) => x.method == this.module.makerRace.id) ||
-							ware.production.find((x) => x.method == ProductionMethods.default);
-					}
+		if (module.type == ModuleTypes.production) {
+			for (const ware of module.product ?? []) {
+				const production = this.productionOf(module, ware);
+				if (!production) {
+					continue;
 				}
 
 				// cycles per hour
-				const cycles = 3600 / currentProd.time;
+				const cycles = 3600 / production.time;
 
-				this.production.push({ amount: currentProd.amount * cycles, ware: ware, value: currentProd });
-				currentProd.wares.forEach((x) => {
+				this.production.push({ amount: production.amount * cycles, ware, value: production });
+				for (const x of production.wares) {
 					const neededWare = this.wareService.getEntity(x.ware);
-					this.needs.push({ amount: x.amount * cycles, ware: neededWare });
-				});
+					if (neededWare) {
+						this.needs.push({ amount: x.amount * cycles, ware: neededWare });
+					}
+				}
 			}
-		} else if (this.module.type == ModuleTypes.habitation) {
-			const capacity = this.module.workForce.capacity;
-			const worker: ModuleWorker = Workers.get(this.module.workForce.race.id);
+		} else if (module.type == ModuleTypes.habitation && module.workForce?.race) {
+			const capacity = module.workForce.capacity ?? 0;
+			const worker: ModuleWorker = Workers.get(module.workForce.race.id);
 
 			worker.consumption.forEach((x) => {
 				this.needs.push({ amount: (x.amount * capacity) / worker.amount, ware: x.ware });
 			});
 		}
+	}
+
+	/** Recyclers use the recycling method, race specific modules their race method, the rest the default one. */
+	private productionOf(module: StationModule, ware: Ware): Production | undefined {
+		const productions = ware.production ?? [];
+		const byMethod = (method: string) => productions.find((x) => x.method == method);
+		if (RECYCLING_MODULES.includes(module.id)) {
+			const recycling = byMethod(ProductionMethods.recycling);
+			if (recycling) {
+				return recycling;
+			}
+		}
+		return (module.makerRace && byMethod(module.makerRace.id)) || byMethod(ProductionMethods.default);
 	}
 }
 
@@ -161,7 +159,7 @@ export class ResourceCalculator {
 	}
 
 	static calculate(modules: StationModuleModel[], sunlight: number, partialWorkforce: number) {
-		let work = this.calculateWorkforce(modules);
+		const work = this.calculateWorkforce(modules);
 
 		let multiplier = work.capacity == 0 || work.value == 0 ? 0 : partialWorkforce / work.value;
 
@@ -169,13 +167,17 @@ export class ResourceCalculator {
 			multiplier = 1;
 		}
 
-		let data = {};
+		let data: Record<string, WareProductionData[]> = {};
 		if (modules.length > 0) {
 			data = modules
 				.map<WareProductionData[]>((x) => {
+					const module = x.module;
+					if (!module) {
+						return [];
+					}
 					let modifier = 1;
-					if (x.module?.type === 'Habitation') {
-						let capacity = x.module.workForce.capacity * x.count;
+					if (module.type === 'Habitation') {
+						const capacity = (module.workForce?.capacity ?? 0) * x.count;
 						if (partialWorkforce >= capacity) {
 							partialWorkforce -= capacity;
 						} else {
@@ -189,13 +191,13 @@ export class ResourceCalculator {
 						count: x.count,
 						amount: -y.amount,
 						efficiency: modifier * 100,
-						name: x.module.name,
+						name: module.name,
 						total: x.count * -y.amount * modifier,
-						type: x.module.type,
+						type: module.type,
 					}));
 
 					if (x.production) {
-						for (let production of x.production) {
+						for (const production of x.production) {
 							const effect = production.value.effects
 								? production.value.effects.find((e) => e.type == Effects.work)
 								: null;
@@ -203,7 +205,7 @@ export class ResourceCalculator {
 
 							if (production.ware.id === Wares.energycells.id) {
 								// add sunlight for energy cells
-								let sun = parseInt(sunlight as any);
+								let sun = parseInt(String(sunlight));
 								if (isNaN(sun) || sun < 0) {
 									sun = 100;
 								}
@@ -216,9 +218,9 @@ export class ResourceCalculator {
 								count: x.count,
 								amount: production.amount,
 								efficiency: efficiency * 100,
-								name: x.module.name,
+								name: module.name,
 								total: x.count * production.amount * efficiency,
-								type: x.module.type,
+								type: module.type,
 							});
 						}
 					}
@@ -228,7 +230,7 @@ export class ResourceCalculator {
 				.reduce((a, b) => {
 					return a.concat(b);
 				})
-				.reduce(function (obj, item) {
+				.reduce<Record<string, WareProductionData[]>>(function (obj, item) {
 					obj[item.ware.id] = obj[item.ware.id] || [];
 					obj[item.ware.id].push(item);
 					return obj;
@@ -238,8 +240,8 @@ export class ResourceCalculator {
 		const resources: StationResourceModel[] = [];
 
 		for (const prop in data) {
-			if (data.hasOwnProperty(prop)) {
-				const values = <WareProductionData[]>data[prop];
+			if (Object.hasOwn(data, prop)) {
+				const values = data[prop];
 
 				let sum = 0;
 				values.forEach((x) => {

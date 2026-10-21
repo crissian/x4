@@ -1,8 +1,9 @@
 import { DecimalPipe, TitleCasePipe } from '@angular/common';
 import { Component, computed, effect, inject, input, linkedSignal, signal, untracked } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { LucideCheck, LucideGitCompareArrows, LucideLink } from '@lucide/angular';
-import { Loadout, SlotGroup, buildWares, loadoutStats, weaponStats } from '../../shared/services/loadout';
+import { Loadout, buildWares, loadoutStats, weaponStats } from '../../shared/services/loadout';
 import { Equipment } from '../../shared/services/model/model';
 import { LOADOUT_PRESETS, LoadoutPreset, ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
@@ -10,7 +11,7 @@ import { WareService } from '../../shared/services/ware.service';
 import { addToComparison } from './ship-compare.component';
 
 @Component({
-	imports: [DecimalPipe, TitleCasePipe, RouterLink, LucideLink, LucideCheck, LucideGitCompareArrows],
+	imports: [DecimalPipe, TitleCasePipe, FormField, RouterLink, LucideLink, LucideCheck, LucideGitCompareArrows],
 	templateUrl: './ship-loadout.component.html',
 })
 export class ShipLoadoutComponent {
@@ -25,19 +26,36 @@ export class ShipLoadoutComponent {
 
 	protected readonly presets = LOADOUT_PRESETS;
 	protected readonly entity = computed(() => this.ships.getEntity(this.id()));
-	protected readonly groups = computed(() => (this.entity() ? this.stats.groups(this.entity()) : []));
+	protected readonly groups = computed(() => {
+		const ship = this.entity();
+		return ship ? this.stats.groups(ship) : [];
+	});
 
-	protected readonly loadout = linkedSignal<Loadout>(() => {
+	/** Equipment id per slot group, '' for an empty group; edited through the slot selects. */
+	protected readonly slots = linkedSignal<Record<string, string>>(() => {
 		const ship = this.entity();
 		if (!ship) {
 			return {};
 		}
-		return this.stats.decode(ship, untracked(() => this.l())) ?? this.stats.preset(ship, 'combat');
+		return this.toSlots(
+			this.stats.decode(
+				ship,
+				untracked(() => this.l())
+			) ?? this.stats.preset(ship, 'combat')
+		);
 	});
+	protected readonly slotsForm = form(this.slots);
+
+	protected readonly loadout = computed<Loadout>(() =>
+		Object.fromEntries(Object.entries(this.slots()).filter(([, id]) => id))
+	);
 
 	/** Production method used for the ware totals. */
-	protected readonly method = signal('default');
-	protected readonly methods = computed(() => (this.entity()?.production ?? []).map((x) => ({ id: x.method, name: x.name })));
+	protected readonly options = signal({ method: 'default' });
+	protected readonly optionsForm = form(this.options);
+	protected readonly methods = computed(() =>
+		(this.entity()?.production ?? []).map((x) => ({ id: x.method, name: x.name }))
+	);
 
 	protected readonly result = computed(() => {
 		const ship = this.entity();
@@ -63,7 +81,7 @@ export class ShipLoadoutComponent {
 		if (!ship || !result) {
 			return [];
 		}
-		return [...buildWares(ship, result.counts, this.stats.getEquipment, this.method())]
+		return [...buildWares(ship, result.counts, this.stats.getEquipment, this.options().method)]
 			.map(([id, amount]) => {
 				const ware = this.wares.getEntity(id);
 				return { id, ware, amount, value: (ware?.price.avg ?? 0) * amount };
@@ -74,7 +92,10 @@ export class ShipLoadoutComponent {
 	protected readonly wareTotalValue = computed(() => this.wareTotals().reduce((a, x) => a + x.value, 0));
 
 	protected readonly equipmentList = computed(() =>
-		[...(this.result()?.counts ?? [])].map(([id, count]) => ({ equipment: this.stats.getEquipment(id), count }))
+		[...(this.result()?.counts ?? [])].flatMap(([id, count]) => {
+			const equipment = this.stats.getEquipment(id);
+			return equipment ? [{ equipment, count }] : [];
+		})
 	);
 
 	protected readonly copied = signal(false);
@@ -95,23 +116,15 @@ export class ShipLoadoutComponent {
 		});
 	}
 
-	protected select(group: SlotGroup, id: string) {
-		this.loadout.update((loadout) => {
-			const next = { ...loadout };
-			if (id) {
-				next[group.key] = id;
-			} else {
-				delete next[group.key];
-			}
-			return next;
-		});
-	}
-
 	protected applyPreset(preset: string) {
 		const ship = this.entity();
 		if (ship && preset) {
-			this.loadout.set(this.stats.preset(ship, preset as LoadoutPreset));
+			this.slots.set(this.toSlots(this.stats.preset(ship, preset as LoadoutPreset)));
 		}
+	}
+
+	private toSlots(loadout: Loadout): Record<string, string> {
+		return Object.fromEntries(this.groups().map((g) => [g.key, loadout[g.key] ?? '']));
 	}
 
 	protected optionLabel(equipment: Equipment): string {

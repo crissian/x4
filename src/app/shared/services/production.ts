@@ -18,17 +18,17 @@ export interface ProductionData {
 
 export type PriceKind = 'min' | 'avg' | 'max';
 
-export function toProductionData(productions: Production[], wareService: WareService): ProductionData[] {
+export function toProductionData(productions: Production[] | undefined, wareService: WareService): ProductionData[] {
 	return (productions ?? []).map((x) => ({
 		amount: x.amount,
 		method: x.method,
 		name: x.name,
 		time: x.time,
-		efficiency: x.effects?.find((y) => y.type == Effects.work) ?? null,
-		wares: x.wares.map((y) => ({
-			ware: wareService.getEntity(y.ware),
-			amount: y.amount,
-		})),
+		efficiency: x.effects?.find((y) => y.type == Effects.work),
+		wares: x.wares.flatMap((y) => {
+			const ware = wareService.getEntity(y.ware);
+			return ware ? [{ ware, amount: y.amount }] : [];
+		}),
 	}));
 }
 
@@ -54,7 +54,7 @@ export function formatProductionTime(amount: number) {
 	return result;
 }
 
-export function getSlots(value: (Slot | Dock)[]): SlotSummary[] {
+export function getSlots(value: readonly (Slot | Dock)[] | undefined): SlotSummary[] {
 	if (!value) {
 		return [];
 	}
@@ -67,7 +67,7 @@ export function getSlots(value: (Slot | Dock)[]): SlotSummary[] {
 	return Object.keys(capacities).map((size) => ({ size, capacity: capacities[size] }));
 }
 
-export function getSlotsStr(value: (Slot | Dock)[]) {
+export function getSlotsStr(value: readonly (Slot | Dock)[] | undefined) {
 	const slots = getSlots(value);
 	if (slots.length == 0) {
 		return '-';

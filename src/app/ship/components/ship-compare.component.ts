@@ -1,8 +1,10 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, effect, inject, input, linkedSignal, untracked } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { LucideWrench, LucideX } from '@lucide/angular';
 import { LoadoutStats, loadoutStats } from '../../shared/services/loadout';
+import { readStorage, writeStorage } from '../../core/services/local-storage';
 import { Ship } from '../../shared/services/model/model';
 import { LOADOUT_PRESETS, LoadoutPreset, ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
@@ -31,19 +33,11 @@ function format(entries: Entry[]): string {
 }
 
 function readStored(): Entry[] {
-	try {
-		return parse(localStorage.getItem(STORAGE_KEY));
-	} catch {
-		return [];
-	}
+	return parse(readStorage(STORAGE_KEY, '', (x) => (typeof x === 'string' ? x : undefined)));
 }
 
 function store(entries: Entry[]) {
-	try {
-		localStorage.setItem(STORAGE_KEY, format(entries));
-	} catch {
-		// storage unavailable: the URL still holds the comparison
-	}
+	writeStorage(STORAGE_KEY, format(entries));
 }
 
 /**
@@ -57,10 +51,17 @@ export function addToComparison(value: string): string {
 	return format(entries);
 }
 
-interface Column {
-	entry: Entry;
-	ship: Ship;
+/** A compared ship as edited on the page: a preset, or '' with the custom loadout code. */
+interface Selection {
+	id: string;
 	preset: string;
+	custom?: string;
+}
+
+interface Column {
+	entry: Selection;
+	ship: Ship;
+	code: string;
 	stats: LoadoutStats;
 	price: number;
 }
@@ -74,7 +75,7 @@ interface Row {
 }
 
 @Component({
-	imports: [DecimalPipe, RouterLink, LucideX, LucideWrench],
+	imports: [DecimalPipe, FormField, RouterLink, LucideX, LucideWrench],
 	templateUrl: './ship-compare.component.html',
 })
 export class ShipCompareComponent {
@@ -88,19 +89,29 @@ export class ShipCompareComponent {
 	protected readonly max = MAX_COMPARED;
 	protected readonly allShips = [...this.shipService.getEntities()].sort((a, b) => a.name.localeCompare(b.name));
 
-	protected readonly entries = linkedSignal<Entry[]>(() => {
+	protected readonly entries = linkedSignal<Selection[]>(() => {
 		const fromUrl = parse(this.ships());
-		return (fromUrl.length ? fromUrl : readStored()).filter((x) => this.shipService.getEntity(x.id)).slice(0, MAX_COMPARED);
+		return (fromUrl.length ? fromUrl : untracked(readStored))
+			.flatMap((x) => {
+				const ship = this.shipService.getEntity(x.id);
+				return ship ? [this.toSelection(ship, x.code)] : [];
+			})
+			.slice(0, MAX_COMPARED);
 	});
+	protected readonly entriesForm = form(this.entries);
 
 	protected readonly columns = computed<Column[]>(() =>
-		this.entries().map((entry) => {
+		this.entries().flatMap((entry) => {
 			const ship = this.shipService.getEntity(entry.id);
-			const decoded = this.stats.decode(ship, entry.code);
-			const loadout = decoded ?? this.stats.preset(ship, 'combat');
-			const stats = loadoutStats(ship, this.stats.groups(ship), loadout, this.stats.getEquipment);
-			const preset = decoded ? (this.presets.find((p) => this.stats.encode(ship, this.stats.preset(ship, p.id)) === entry.code)?.id ?? '') : 'combat';
-			return { entry, ship, preset, stats, price: ship.price.avg + stats.equipmentPrice.avg };
+			if (!ship) {
+				return [];
+			}
+			const loadout = entry.preset
+				? this.stats.preset(ship, entry.preset as LoadoutPreset)
+				: this.stats.decode(ship, entry.custom);
+			const stats = loadoutStats(ship, this.stats.groups(ship), loadout ?? {}, this.stats.getEquipment);
+			const code = this.stats.encode(ship, loadout ?? {});
+			return [{ entry, ship, code, stats, price: ship.price.avg + stats.equipmentPrice.avg }];
 		})
 	);
 
@@ -121,7 +132,12 @@ export class ShipCompareComponent {
 		{ caption: 'Turrets', value: (c) => c.ship.turrets?.length ?? 0, best: 'higher' },
 		{ caption: 'Weapon DPS', value: (c) => c.stats.weaponDps, best: 'higher' },
 		{ caption: 'Turret DPS', value: (c) => c.stats.turretDps, best: 'higher' },
-		{ caption: 'Max range (km)', value: (c) => (c.stats.maxRange ? c.stats.maxRange / 1000 : null), best: 'higher', format: '1.0-1' },
+		{
+			caption: 'Max range (km)',
+			value: (c) => (c.stats.maxRange ? c.stats.maxRange / 1000 : null),
+			best: 'higher',
+			format: '1.0-1',
+		},
 		{ caption: 'Missiles', value: (c) => c.ship.storage?.missile, best: 'higher' },
 		{ caption: 'Drones', value: (c) => c.ship.storage?.unit, best: 'higher' },
 		{ caption: 'Crew', value: (c) => c.ship.people, best: 'higher' },
@@ -148,8 +164,9 @@ export class ShipCompareComponent {
 
 	constructor() {
 		effect(() => {
-			const value = format(this.entries());
-			store(this.entries());
+			const entries = this.columns().map((c) => ({ id: c.ship.id, code: c.code }));
+			const value = format(entries);
+			store(entries);
 			untracked(() => {
 				if (value !== (this.ships() ?? '')) {
 					this.router.navigate([], { queryParams: { ships: value || null }, replaceUrl: true });
@@ -164,27 +181,20 @@ export class ShipCompareComponent {
 
 	protected add(id: string) {
 		if (id && !this.entries().some((x) => x.id === id)) {
-			this.entries.update((entries) => [...entries, { id }].slice(-MAX_COMPARED));
+			this.entries.update((entries) => [...entries, { id, preset: 'combat' }].slice(-MAX_COMPARED));
 		}
+	}
+
+	/** Shows a stored loadout code as its preset when it matches one. */
+	private toSelection(ship: Ship, code: string | undefined): Selection {
+		if (!code || !this.stats.decode(ship, code)) {
+			return { id: ship.id, preset: 'combat' };
+		}
+		const preset = this.presets.find((p) => this.stats.encode(ship, this.stats.preset(ship, p.id)) === code);
+		return preset ? { id: ship.id, preset: preset.id } : { id: ship.id, preset: '', custom: code };
 	}
 
 	protected remove(index: number) {
 		this.entries.update((entries) => entries.filter((_, i) => i !== index));
-	}
-
-	protected setPreset(index: number, preset: string) {
-		this.entries.update((entries) =>
-			entries.map((entry, i) => {
-				if (i !== index) {
-					return entry;
-				}
-				const ship = this.shipService.getEntity(entry.id);
-				return { id: entry.id, code: this.stats.encode(ship, this.stats.preset(ship, preset as LoadoutPreset)) };
-			})
-		);
-	}
-
-	protected loadoutCode(column: Column): string {
-		return column.entry.code ?? this.stats.encode(column.ship, this.stats.preset(column.ship, 'combat'));
 	}
 }

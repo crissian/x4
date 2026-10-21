@@ -73,10 +73,10 @@ export class LoadLayoutComponent {
 	private readLayouts() {
 		return this.layoutService.getLayouts().map<LayoutData>((x) => ({
 			name: x.name,
-			modules: x.config.map<LayoutModule>((y) => ({
-				count: y.count,
-				module: this.moduleService.getEntity(y.moduleId),
-			})),
+			modules: x.config.flatMap<LayoutModule>((y) => {
+				const module = y.moduleId ? this.moduleService.getEntity(y.moduleId) : undefined;
+				return module ? [{ count: y.count, module }] : [];
+			}),
 		}));
 	}
 }

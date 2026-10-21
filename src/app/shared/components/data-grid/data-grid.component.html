@@ -14,11 +14,7 @@
 			>
 				@for (column of columns(); track column.key) {
 					<label class="flex items-center gap-2 rounded px-1.5 py-1 hover:bg-hover">
-						<input
-							type="checkbox"
-							[checked]="shownKeys().includes(column.key)"
-							(change)="toggleColumn(column, $any($event.target).checked)"
-						/>
+						<input type="checkbox" [formField]="shownForm[column.key]" />
 						{{ column.caption }}
 					</label>
 				}
@@ -108,7 +104,9 @@
 		@if (features()) {
 			<tfoot>
 				<tr>
-					<td class="text-fg-muted" [attr.colspan]="visibleColumns().length">Count: {{ filtered().length }}</td>
+					<td class="text-fg-muted" [attr.colspan]="visibleColumns().length">
+						Count: {{ filtered().length }}
+					</td>
 				</tr>
 			</tfoot>
 		}
@@ -119,9 +117,9 @@
 	<div class="mt-2 flex flex-wrap items-center justify-between gap-2 text-fg-soft">
 		<label class="flex items-center gap-2">
 			<span>Page size</span>
-			<select class="input w-auto" (change)="setPageSize($any($event.target).value)">
+			<select class="input w-auto" [formField]="pagerForm.pageSize">
 				@for (size of pageSizes(); track size) {
-					<option [value]="size" [selected]="size === pageSize()">{{ size }}</option>
+					<option [value]="size">{{ size }}</option>
 				}
 			</select>
 		</label>

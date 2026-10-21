@@ -1,3 +1,4 @@
+import { ModuleWorker } from '../model/model';
 import { Races } from './race-data';
 import { Wares } from './wares-data';
 
@@ -52,7 +53,8 @@ export const Workers = {
             { ware: Wares.water, amount: 162 }
         ]
     },
-    get(method: string) {
-        return Workers[method] || Workers.argon;
+    get(method: string): ModuleWorker {
+        const worker = (Workers as Record<string, unknown>)[method];
+        return (worker as ModuleWorker | undefined) ?? Workers.argon;
     }
 };

@@ -1,9 +1,9 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
+import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { Router, RouterLink } from '@angular/router';
 import { LucideGitCompareArrows, LucideWrench } from '@lucide/angular';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
-import { EntityImageComponent } from '../../shared/components/entity-image.component';
 import { ProductionCardComponent } from '../../shared/components/production-card.component';
 import { SellersComponent } from '../../shared/components/sellers.component';
 import { flightSpeeds } from '../../shared/services/loadout';
@@ -23,7 +23,7 @@ interface EngineRow {
 }
 
 @Component({
-	imports: [DecimalPipe, RouterLink, ProductionCardComponent, SellersComponent, DataGridComponent, LucideWrench, LucideGitCompareArrows, EntityImageComponent],
+	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, ProductionCardComponent, SellersComponent, DataGridComponent, LucideWrench, LucideGitCompareArrows],
 	templateUrl: './ship-detail.component.html',
 })
 export class ShipDetailComponent {
@@ -38,7 +38,10 @@ export class ShipDetailComponent {
 	protected readonly production = computed(() => toProductionData(this.entity()?.production, this.wareService));
 	protected readonly mainShields = computed(() => this.entity()?.shields?.filter((x) => !x.group) ?? []);
 	protected readonly additionalShields = computed(() => this.entity()?.shields?.filter((x) => x.group) ?? []);
-	protected readonly maxStats = computed(() => (this.entity() ? this.stats.maxStats(this.entity()) : undefined));
+	protected readonly maxStats = computed(() => {
+		const ship = this.entity();
+		return ship ? this.stats.maxStats(ship) : undefined;
+	});
 
 	protected readonly engines = computed<EngineRow[]>(() => {
 		const ship = this.entity();

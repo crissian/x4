@@ -1,28 +1,27 @@
 @if (entity(); as entity) {
-	<div class="card">
-		<div class="card-header"><a routerLink="/factions">Factions</a> - {{ entity.name }}</div>
-		<div class="card-body">
-			@if (entity.description != 'No information available') {
-				<p class="mb-3">{{ entity.description }}</p>
-			}
-			<dl class="details mb-4 max-w-xl">
-				<dt>Race</dt>
-				<dd>
-					@if (entity.race) {
-						<a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
-					} @else {
-						-
-					}
-				</dd>
-			</dl>
-			@if (entity.licenses?.length) {
-				<div class="card">
-					<div class="card-header">Licenses</div>
-					<div class="card-body">
-						<app-data-grid [data]="entity.licenses" [columns]="licenseColumns" [features]="false" />
-					</div>
+	<app-detail-page
+		section="Factions"
+		sectionLink="/factions"
+		[title]="entity.name"
+		[id]="entity.id"
+		[description]="entity.description"
+	>
+		<dl class="details mb-4 max-w-xl">
+			<div appDetail="Race">
+				@if (entity.race) {
+					<a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
+				} @else {
+					-
+				}
+			</div>
+		</dl>
+		@if (entity.licenses?.length) {
+			<div class="card">
+				<div class="card-header">Licenses</div>
+				<div class="card-body">
+					<app-data-grid [data]="entity.licenses" [columns]="licenseColumns" [features]="false" />
 				</div>
-			}
-		</div>
-	</div>
+			</div>
+		}
+	</app-detail-page>
 }

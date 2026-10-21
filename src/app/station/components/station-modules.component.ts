@@ -70,7 +70,7 @@ export class StationModulesComponent {
 			.value()
 			.map((x) => ({ ...x }));
 		const habitat = toModels(rows).find((x) => x.module?.type === ModuleTypes.habitation);
-		const method = habitat ? habitat.module.makerRace.id : 'default';
+		const method = habitat?.module?.makerRace?.id ?? 'default';
 
 		let didChange = true;
 		while (didChange) {
@@ -91,10 +91,12 @@ export class StationModulesComponent {
 
 				didChange = true;
 
-				const product = module.product.find((x) => x.id == resource.ware.id);
+				const productions = module.product?.find((x) => x.id == resource.ware.id)?.production ?? [];
 				const productionWare =
-					product.production.find((p) => p.method == method) ||
-					product.production.find((p) => p.method == 'default');
+					productions.find((p) => p.method == method) || productions.find((p) => p.method == 'default');
+				if (!productionWare) {
+					continue;
+				}
 				const productionPerHour = productionWare.amount * (3600 / productionWare.time);
 				const moduleCount = Math.ceil(-resource.amount / productionPerHour);
 
@@ -123,9 +125,12 @@ export class StationModulesComponent {
 				continue;
 			}
 
-			for (const product of item.product) {
-				groups[product.group.id] ??= { name: product.group.name, group: product.group, modules: [] };
-				groups[product.group.id].modules.push(item);
+			for (const product of item.product ?? []) {
+				const group = product.group;
+				if (group) {
+					groups[group.id] ??= { name: group.name, group, modules: [] };
+					groups[group.id].modules.push(item);
+				}
 			}
 		}
 

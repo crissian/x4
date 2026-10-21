@@ -5,7 +5,8 @@ import { DataGridComponent, GridColumn } from '../../shared/components/data-grid
 import { injectRowNavigation } from '../../shared/components/list-page';
 import { FactionService } from '../../shared/services/faction.service';
 import { Sector } from '../../shared/services/model/model';
-import { ClusterService, GAME_VERSIONS, SectorService } from '../../shared/services/universe.service';
+import { GAME_VERSION_LOOKUP } from '../../shared/services/constants';
+import { ClusterService, SectorService } from '../../shared/services/universe.service';
 import { WareService } from '../../shared/services/ware.service';
 
 const percent: Intl.NumberFormatOptions = { style: 'percent', maximumFractionDigits: 0 };
@@ -42,6 +43,6 @@ export class SectorsComponent {
 			sortable: false,
 		},
 		{ key: 'gates', caption: 'Gates', type: 'number', value: (x) => x.gates.length },
-		{ key: 'version', caption: 'DLC', lookup: GAME_VERSIONS.map((label, value) => ({ value, label })) },
+		{ key: 'version', caption: 'DLC', lookup: GAME_VERSION_LOOKUP },
 	];
 }

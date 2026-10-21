@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
-import { AllModules, Modules } from './data/modules-data';
+import { AllModules } from './data/modules-data';
 import { StationModule } from './model/model';
-import { EntityService } from './entity.service';
+import { EntityStore, usesWare } from './entity.service';
 
 @Injectable({ providedIn: 'root' })
-export class ModuleService implements EntityService<StationModule> {
-	getModulesByType(moduleType: string): StationModule[] {
-		return this.getEntities().filter((x) => x.type == moduleType);
+export class ModuleService extends EntityStore<StationModule> {
+	constructor() {
+		super(AllModules);
 	}
 
-	getEntity(id: string): StationModule {
-		return Modules[id];
+	getModulesByType(moduleType: string): StationModule[] {
+		return this.getEntities().filter((x) => x.type == moduleType);
 	}
 
 	getModulesByMacro(macro: string) {
 		return this.getEntities().filter((x) => x.macro === macro);
 	}
 
-	getModuleByWare(wareId: string, productionMethod: string = 'default'): StationModule {
+	getModuleByWare(wareId: string, productionMethod = 'default'): StationModule | undefined {
 		if (productionMethod === 'default') {
 			let module = this.getEntities().find(
 				(x) => x.product != null && x.product.find((y) => y.id == wareId) != null && x.makerRace == null
@@ -40,22 +40,7 @@ export class ModuleService implements EntityService<StationModule> {
 		}
 	}
 
-	getEntities(): StationModule[] {
-		return AllModules;
-	}
-
-	getModulesUsingWare(wareId: any) {
-		return AllModules.filter((x) => this.isUsing(x, wareId));
-	}
-
-	private isUsing(module: StationModule, wareId: string) {
-		for (let i = 0; i < module.production.length; i++) {
-			const production = module.production[i];
-			if (production.wares.find((y) => y.ware == wareId) != null) {
-				return true;
-			}
-		}
-
-		return false;
+	getModulesUsingWare(wareId: string): StationModule[] {
+		return this.getEntities().filter((x) => usesWare(x, wareId));
 	}
 }

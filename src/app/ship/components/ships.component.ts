@@ -11,7 +11,7 @@ import { Ship } from '../../shared/services/model/model';
 import { RaceService } from '../../shared/services/race.service';
 import { ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
-import { GAME_VERSIONS } from '../../shared/services/universe.service';
+import { GAME_VERSION_LOOKUP } from '../../shared/services/constants';
 
 @Component({
 	imports: [DataGridComponent, RouterLink, LucideGitCompareArrows],
@@ -60,7 +60,7 @@ export class ShipsComponent {
 			key: 'version',
 			caption: 'DLC',
 			hidden: true,
-			lookup: GAME_VERSIONS.map((label, value) => ({ value, label })),
+			lookup: GAME_VERSION_LOOKUP,
 		},
 	];
 }

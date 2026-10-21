@@ -133,8 +133,8 @@ export interface GalaxyLayout {
 	bounds: { x: number; y: number; w: number; h: number };
 }
 
-export function layoutGalaxy(clusters: Cluster[], getSector: (id: string) => Sector): GalaxyLayout {
-	const shapes = clusters.flatMap((c) => placeSectors(c, c.sectors.map(getSector).filter((s) => s)));
+export function layoutGalaxy(clusters: Cluster[], getSector: (id: string) => Sector | undefined): GalaxyLayout {
+	const shapes = clusters.flatMap((c) => placeSectors(c, c.sectors.map(getSector).filter((s): s is Sector => !!s)));
 	const byId = new Map(shapes.map((s) => [s.sector.id, s]));
 
 	const links: MapLink[] = [];

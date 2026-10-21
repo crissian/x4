@@ -2,7 +2,7 @@
 	<div class="card-header flex flex-wrap items-center justify-between gap-3">
 		<span><a routerLink="/ships">Ships</a> - Compare</span>
 		@if (columns().length < max) {
-			<select #picker class="input w-auto" (change)="add(picker.value); picker.value = ''">
+			<select #picker class="input w-auto" aria-label="Add ship" (change)="add(picker.value); picker.value = ''">
 				<option value="">Add ship...</option>
 				@for (ship of allShips; track ship.id) {
 					<option [value]="ship.id">{{ ship.name }} ({{ ship.size }})</option>
@@ -21,24 +21,26 @@
 								<th class="min-w-48 align-top">
 									<div class="flex items-start justify-between gap-2">
 										<a [routerLink]="['/ships', column.ship.id]">{{ column.ship.name }}</a>
-										<button type="button" class="link-button" title="Remove" (click)="remove(i)"><svg lucideX /></button>
+										<button type="button" class="link-button" title="Remove" (click)="remove(i)">
+											<svg lucideX />
+										</button>
 									</div>
 									<select
 										class="input mt-1 w-full text-sm font-normal"
-										[value]="column.preset"
-										(change)="setPreset(i, $any($event.target).value)"
+										aria-label="Loadout"
+										[formField]="entriesForm[i].preset"
 									>
-										@if (!column.preset) {
-											<option value="" selected>Custom loadout</option>
+										@if (column.entry.custom) {
+											<option value="">Custom loadout</option>
 										}
 										@for (preset of presets; track preset.id) {
-											<option [value]="preset.id" [selected]="column.preset === preset.id">{{ preset.label }}</option>
+											<option [value]="preset.id">{{ preset.label }}</option>
 										}
 									</select>
 									<a
 										class="mt-1 inline-block text-sm font-normal"
 										[routerLink]="['/ships', column.ship.id, 'loadout']"
-										[queryParams]="{ l: loadoutCode(column) }"
+										[queryParams]="{ l: column.code }"
 										><svg lucideWrench class="mr-0.5" />Customize</a
 									>
 								</th>
@@ -51,7 +53,10 @@
 								<th class="whitespace-nowrap">{{ row.caption }}</th>
 								@for (column of columns(); track column.entry.id) {
 									@let value = row.value(column);
-									<td [class.font-bold]="bestValues()[r] != null && value === bestValues()[r]" [class.text-success]="bestValues()[r] != null && value === bestValues()[r]">
+									<td
+										[class.font-bold]="bestValues()[r] != null && value === bestValues()[r]"
+										[class.text-success]="bestValues()[r] != null && value === bestValues()[r]"
+									>
 										@if (isNumber(value)) {
 											{{ value | number: row.format ?? '1.0-0' }}
 										} @else {
@@ -65,7 +70,8 @@
 				</table>
 			</div>
 			<p class="mt-2 text-xs text-fg-muted">
-				Stats use the selected loadout; open "Customize" to pick equipment slot by slot. The best value of each row is highlighted.
+				Stats use the selected loadout; open "Customize" to pick equipment slot by slot. The best value of each
+				row is highlighted.
 			</p>
 		} @else {
 			<p class="text-fg-muted">Pick up to {{ max }} ships to compare them side by side.</p>

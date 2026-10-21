@@ -9,7 +9,7 @@ import { EquipmentService } from '../../shared/services/equipment.service';
 import { WeaponStats, missileDps, weaponStats } from '../../shared/services/loadout';
 import { Equipment } from '../../shared/services/model/model';
 import { RaceService } from '../../shared/services/race.service';
-import { GAME_VERSIONS } from '../../shared/services/universe.service';
+import { GAME_VERSION_LOOKUP } from '../../shared/services/constants';
 
 @Component({
 	imports: [DataGridComponent],
@@ -58,7 +58,10 @@ export class EquipmentsComponent {
 			caption: 'Range (km)',
 			type: 'number',
 			format: { maximumFractionDigits: 1 },
-			value: (x) => ((x.weapon?.range ?? x.missile?.range) ? (x.weapon?.range ?? x.missile.range) / 1000 : null),
+			value: (x) => {
+				const range = x.weapon?.range ?? x.missile?.range;
+				return range ? range / 1000 : null;
+			},
 		},
 		{ key: 'missile.damage', caption: 'Missile Damage', type: 'number', hidden: true },
 		{ key: 'recharge.max', caption: 'Shield', type: 'number' },
@@ -72,7 +75,7 @@ export class EquipmentsComponent {
 			key: 'version',
 			caption: 'DLC',
 			hidden: true,
-			lookup: GAME_VERSIONS.map((label, value) => ({ value, label })),
+			lookup: GAME_VERSION_LOOKUP,
 		},
 	];
 }

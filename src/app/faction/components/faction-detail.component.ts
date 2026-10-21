@@ -1,4 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
+import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { RouterLink } from '@angular/router';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
 import { FactionService } from '../../shared/services/faction.service';
@@ -6,7 +7,7 @@ import { relationToReputation } from '../../shared/services/loadout';
 import { License } from '../../shared/services/model/model';
 
 @Component({
-	imports: [RouterLink, DataGridComponent],
+	imports: [DetailPageComponent, DetailComponent, RouterLink, DataGridComponent],
 	templateUrl: './faction-detail.component.html',
 })
 export class FactionDetailComponent {

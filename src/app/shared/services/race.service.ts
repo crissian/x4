@@ -1,15 +1,11 @@
-import { Races } from './data/race-data';
 import { Injectable } from '@angular/core';
+import { Races } from './data/race-data';
+import { EntityStore } from './entity.service';
 import { Race } from './model/model';
-import { EntityService } from './entity.service';
 
 @Injectable({ providedIn: 'root' })
-export class RaceService implements EntityService<Race> {
-	getEntities(): Race[] {
-		return Races.all;
-	}
-
-	getEntity(id: any): Race {
-		return Races[id];
+export class RaceService extends EntityStore<Race> {
+	constructor() {
+		super(Races.all as Race[]);
 	}
 }

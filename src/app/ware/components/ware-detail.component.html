@@ -1,187 +1,182 @@
 @if (entity(); as entity) {
-	<div class="card">
-		<div class="card-header"><a routerLink="/wares">Wares</a> - {{ entity.name }}</div>
-		<div class="card-body flow-root">
-			<app-entity-image kind="wares" [id]="entity.id" [alt]="entity.name" />
-			<p class="mb-3">{{ entity.description }}</p>
-			<dl class="details mb-4 max-w-2xl grid-cols-[10rem_1fr]">
-				<dt>Price</dt>
-				<dd>
-					{{ entity.price.min | number }} - {{ entity.price.max | number }}
-					<span class="text-success">(difference: {{ entity.price.max - entity.price.min | number }})</span>
-				</dd>
-				<dt>Volume</dt>
-				<dd>{{ entity.volume }}</dd>
-				<dt>Transport</dt>
-				<dd>{{ entity.transport }}</dd>
-				<dt>Type</dt>
-				<dd>{{ entity.group.name }}</dd>
-				<dt>Illegal</dt>
-				<dd>
-					@for (item of entity.illegal; track item.id; let last = $last) {
-						<a [routerLink]="['/factions', item.id]">{{ item.name }}</a>
-						@if (!last) {
-							<span> | </span>
-						}
-					} @empty {
-						-
+	<app-detail-page
+		section="Wares"
+		sectionLink="/wares"
+		[title]="entity.name"
+		[id]="entity.id"
+		image="wares"
+		[description]="entity.description"
+	>
+		<dl class="details mb-4 max-w-2xl grid-cols-[10rem_1fr]">
+			<div appDetail="Price">
+				{{ entity.price.min | number }} - {{ entity.price.max | number }}
+				<span class="text-success">(difference: {{ entity.price.max - entity.price.min | number }})</span>
+			</div>
+			<div appDetail="Volume">{{ entity.volume }}</div>
+			<div appDetail="Transport">{{ entity.transport }}</div>
+			<div appDetail="Type">{{ entity.group?.name }}</div>
+			<div appDetail="Illegal">
+				@for (item of entity.illegal; track item.id; let last = $last) {
+					<a [routerLink]="['/factions', item.id]">{{ item.name }}</a>
+					@if (!last) {
+						<span> | </span>
 					}
-				</dd>
-			</dl>
-
-			<div class="flex border-b border-line-strong" role="tablist">
-				@for (tab of tabs; track tab.id) {
-					<button
-						type="button"
-						role="tab"
-						class="-mb-px cursor-pointer rounded-t-md border px-4 py-2"
-						[class]="
-							activeTab() === tab.id
-								? 'border-line-strong border-b-surface bg-surface text-fg-strong'
-								: 'border-transparent text-link hover:text-link-hover'
-						"
-						[attr.aria-selected]="activeTab() === tab.id"
-						(click)="activeTab.set(tab.id)"
-					>
-						{{ tab.label }}
-					</button>
+				} @empty {
+					-
 				}
 			</div>
+		</dl>
 
-			<div class="pt-4" role="tabpanel">
-				@switch (activeTab()) {
-					@case ('construction') {
-						<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-							@for (item of production(); track $index) {
-								<div class="card">
-									<div class="card-header">{{ item.name }}</div>
-									<div class="card-body">
-										@if (item.wares.length) {
-											<app-production-requirements [production]="item" />
-										}
-										@let perHour = (3600 / item.time) * item.amount;
-										@let efficiency = item.efficiency?.product;
-										<h6>Production</h6>
-										<table class="table">
-											<tbody>
+		<div class="flex border-b border-line-strong" role="tablist">
+			@for (tab of tabs; track tab.id) {
+				<button
+					type="button"
+					role="tab"
+					class="-mb-px cursor-pointer rounded-t-md border px-4 py-2"
+					[class]="
+						activeTab() === tab.id
+							? 'border-line-strong border-b-surface bg-surface text-fg-strong'
+							: 'border-transparent text-link hover:text-link-hover'
+					"
+					[attr.aria-selected]="activeTab() === tab.id"
+					(click)="activeTab.set(tab.id)"
+				>
+					{{ tab.label }}
+				</button>
+			}
+		</div>
+
+		<div class="pt-4" role="tabpanel">
+			@switch (activeTab()) {
+				@case ('construction') {
+					<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+						@for (item of production(); track $index) {
+							<div class="card">
+								<div class="card-header">{{ item.name }}</div>
+								<div class="card-body">
+									@if (item.wares.length) {
+										<app-production-requirements [production]="item" />
+									}
+									@let perHour = (3600 / item.time) * item.amount;
+									@let efficiency = item.efficiency?.product ?? 0;
+									<h6>Production</h6>
+									<table class="table">
+										<tbody>
+											<tr>
+												<td>Cycle Time</td>
+												<td class="text-right">{{ formatTime(item.time) }}</td>
+											</tr>
+											<tr>
+												<td>Batch Size</td>
+												<td class="text-right">{{ item.amount }}</td>
+											</tr>
+											<tr>
+												<td>Products per Hour</td>
+												<td class="text-right">{{ perHour | number: '1.0' }}</td>
+											</tr>
+											@if (item.efficiency) {
 												<tr>
-													<td>Cycle Time</td>
-													<td class="text-right">{{ formatTime(item.time) }}</td>
+													<td>Max Efficiency</td>
+													<td class="text-right">{{ efficiency * 100 + 100 }}%</td>
 												</tr>
+											}
+											<tr>
+												<td>Profit per Hour (100% Efficiency)</td>
+												<td class="text-right">
+													<span class="text-danger"
+														>Min:
+														<strong>{{
+															entity.price.min * perHour | number: '1.0-0'
+														}}</strong>
+														/
+													</span>
+													<span class="text-primary"
+														>Avg:
+														<strong>{{
+															entity.price.avg * perHour | number: '1.0-0'
+														}}</strong>
+														/
+													</span>
+													<span class="text-success"
+														>Max:
+														<strong>{{
+															entity.price.max * perHour | number: '1.0-0'
+														}}</strong></span
+													>
+												</td>
+											</tr>
+											@if (item.efficiency) {
 												<tr>
-													<td>Batch Size</td>
-													<td class="text-right">{{ item.amount }}</td>
-												</tr>
-												<tr>
-													<td>Products per Hour</td>
-													<td class="text-right">{{ perHour | number: '1.0' }}</td>
-												</tr>
-												@if (item.efficiency) {
-													<tr>
-														<td>Max Efficiency</td>
-														<td class="text-right">{{ efficiency * 100 + 100 }}%</td>
-													</tr>
-												}
-												<tr>
-													<td>Profit per Hour (100% Efficiency)</td>
+													<td>Profit per Hour ({{ efficiency * 100 + 100 }}% Efficiency)</td>
 													<td class="text-right">
 														<span class="text-danger"
 															>Min:
 															<strong>{{
-																entity.price.min * perHour | number: '1.0-0'
+																entity.price.min * perHour * (1 + efficiency)
+																	| number: '1.0-0'
 															}}</strong>
 															/
 														</span>
 														<span class="text-primary"
 															>Avg:
 															<strong>{{
-																entity.price.avg * perHour | number: '1.0-0'
+																entity.price.avg * perHour * (1 + efficiency)
+																	| number: '1.0-0'
 															}}</strong>
 															/
 														</span>
 														<span class="text-success"
 															>Max:
 															<strong>{{
-																entity.price.max * perHour | number: '1.0-0'
+																entity.price.max * perHour * (1 + efficiency)
+																	| number: '1.0-0'
 															}}</strong></span
 														>
 													</td>
 												</tr>
-												@if (item.efficiency) {
-													<tr>
-														<td>
-															Profit per Hour ({{ efficiency * 100 + 100 }}% Efficiency)
-														</td>
-														<td class="text-right">
-															<span class="text-danger"
-																>Min:
-																<strong>{{
-																	entity.price.min * perHour * (1 + efficiency)
-																		| number: '1.0-0'
-																}}</strong>
-																/
-															</span>
-															<span class="text-primary"
-																>Avg:
-																<strong>{{
-																	entity.price.avg * perHour * (1 + efficiency)
-																		| number: '1.0-0'
-																}}</strong>
-																/
-															</span>
-															<span class="text-success"
-																>Max:
-																<strong>{{
-																	entity.price.max * perHour * (1 + efficiency)
-																		| number: '1.0-0'
-																}}</strong></span
-															>
-														</td>
-													</tr>
-												}
-											</tbody>
-										</table>
-									</div>
-								</div>
-							}
-						</div>
-					}
-					@case ('requiredFor') {
-						<div class="grid gap-4 md:grid-cols-3">
-							<div class="card">
-								<div class="card-header">Wares</div>
-								<div class="card-body grid grid-cols-2 gap-1 lg:grid-cols-3">
-									@for (ware of waresUsedIn(); track ware.id) {
-										<a [routerLink]="['/wares', ware.id]">{{ ware.name }}</a>
-									} @empty {
-										<span class="text-info">No usage found.</span>
-									}
+											}
+										</tbody>
+									</table>
 								</div>
 							</div>
-							<div class="card">
-								<div class="card-header">Ships</div>
-								<div class="card-body grid gap-1 lg:grid-cols-2">
-									@for (ship of shipsUsedIn(); track ship.id) {
-										<a [routerLink]="['/ships', ship.id]">{{ ship.name }}</a>
-									} @empty {
-										<span class="text-info">No usage found.</span>
-									}
-								</div>
-							</div>
-							<div class="card">
-								<div class="card-header">Station Modules</div>
-								<div class="card-body grid gap-1 lg:grid-cols-2">
-									@for (module of modulesUsedIn(); track module.id) {
-										<a [routerLink]="['/modules', module.id]">{{ module.name }}</a>
-									} @empty {
-										<span class="text-info">No usage found.</span>
-									}
-								</div>
-							</div>
-						</div>
-					}
+						}
+					</div>
 				}
-			</div>
+				@case ('requiredFor') {
+					<div class="grid gap-4 md:grid-cols-3">
+						<div class="card">
+							<div class="card-header">Wares</div>
+							<div class="card-body grid grid-cols-2 gap-1 lg:grid-cols-3">
+								@for (ware of waresUsedIn(); track ware.id) {
+									<a [routerLink]="['/wares', ware.id]">{{ ware.name }}</a>
+								} @empty {
+									<span class="text-info">No usage found.</span>
+								}
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-header">Ships</div>
+							<div class="card-body grid gap-1 lg:grid-cols-2">
+								@for (ship of shipsUsedIn(); track ship.id) {
+									<a [routerLink]="['/ships', ship.id]">{{ ship.name }}</a>
+								} @empty {
+									<span class="text-info">No usage found.</span>
+								}
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-header">Station Modules</div>
+							<div class="card-body grid gap-1 lg:grid-cols-2">
+								@for (module of modulesUsedIn(); track module.id) {
+									<a [routerLink]="['/modules', module.id]">{{ module.name }}</a>
+								} @empty {
+									<span class="text-info">No usage found.</span>
+								}
+							</div>
+						</div>
+					</div>
+				}
+			}
 		</div>
-	</div>
+	</app-detail-page>
 }

@@ -1,80 +1,72 @@
 @if (entity(); as entity) {
-	<div class="card">
-		<div class="card-header"><a routerLink="/modules">Station Modules</a> - {{ entity.name }}</div>
-		<div class="card-body flow-root">
-			<app-entity-image kind="modules" [id]="entity.id" [alt]="entity.name" />
-			@if (entity.description != 'No information available') {
-				<p class="mb-3">{{ entity.description }}</p>
-			}
-			<div class="grid gap-x-6 gap-y-3 md:grid-cols-2">
-				<dl class="details">
-					<dt>Race</dt>
-					<dd>
-						@if (entity.makerRace) {
-							<a [routerLink]="['/races', entity.makerRace.id]">{{ entity.makerRace.name }}</a>
-						} @else {
-							-
-						}
-					</dd>
-					<dt>Type</dt>
-					<dd>{{ entity.type || '-' }}</dd>
-					<dt>Product</dt>
-					<dd>
-						@for (prod of entity.product; track prod.id) {
-							<div>
-								<a [routerLink]="['/wares', prod.id]">{{ prod.name }}</a>
-							</div>
-						} @empty {
-							-
-						}
-					</dd>
-					@if (entity.cargo) {
-						<dt>Storage Capacity ({{ entity.cargo.type?.name }})</dt>
-						<dd>{{ entity.cargo.max | number }}</dd>
-					}
-					<dt>Hull</dt>
-					<dd>{{ entity.hull | number }}</dd>
-					<dt>Explosion Damage</dt>
-					<dd>{{ entity.explosionDamage ? (entity.explosionDamage | number) : '-' }}</dd>
-					@if (entity.workForce?.max) {
-						<dt>Workforce Needed</dt>
-						<dd>{{ entity.workForce.max }}</dd>
-					}
-					@if (entity.workForce?.capacity) {
-						<dt>Workforce Capacity</dt>
-						<dd>{{ entity.workForce.capacity }}</dd>
-					}
-					<dt>Owners</dt>
-					<dd>
-						<ul>
-							@for (item of entity.owners; track item.id) {
-								<li>
-									<a [routerLink]="['/factions', item.id]">{{ item.name }}</a>
-								</li>
-							}
-						</ul>
-					</dd>
-				</dl>
-				<dl class="details self-start">
-					<dt>Turrets</dt>
-					<dd>{{ getSlotsStr(entity.turrets) }}</dd>
-					<dt>Shields</dt>
-					<dd>{{ getSlotsStr(entity.shields) }}</dd>
-					@if (entity.dimensions; as d) {
-						<dt>Size (approx.)</dt>
-						<dd>{{ d.x | number }} × {{ d.y | number }} × {{ d.z | number }} m</dd>
-					}
-					<dt>Blueprint sold by</dt>
-					<dd><app-sellers [owners]="entity.owners" [license]="entity.license" /></dd>
-				</dl>
-			</div>
-			@if (production().length) {
-				<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-					@for (item of production(); track $index) {
-						<app-production-card [production]="item" />
+	<app-detail-page
+		section="Station Modules"
+		sectionLink="/modules"
+		[title]="entity.name"
+		[id]="entity.id"
+		image="modules"
+		[description]="entity.description"
+	>
+		<div class="grid gap-x-6 gap-y-3 md:grid-cols-2">
+			<dl class="details">
+				<div appDetail="Race">
+					@if (entity.makerRace) {
+						<a [routerLink]="['/races', entity.makerRace.id]">{{ entity.makerRace.name }}</a>
+					} @else {
+						-
 					}
 				</div>
-			}
+				<div appDetail="Type">{{ entity.type || '-' }}</div>
+				<div appDetail="Product">
+					@for (prod of entity.product; track prod.id) {
+						<div>
+							<a [routerLink]="['/wares', prod.id]">{{ prod.name }}</a>
+						</div>
+					} @empty {
+						-
+					}
+				</div>
+				@if (entity.cargo) {
+					<dt>Storage Capacity ({{ entity.cargo.type.name }})</dt>
+					<dd>{{ entity.cargo.max | number }}</dd>
+				}
+				<div appDetail="Hull">{{ entity.hull | number }}</div>
+				<div appDetail="Explosion Damage">
+					{{ entity.explosionDamage ? (entity.explosionDamage | number) : '-' }}
+				</div>
+				@if (entity.workForce?.max) {
+					<div appDetail="Workforce Needed">{{ entity.workForce.max }}</div>
+				}
+				@if (entity.workForce?.capacity) {
+					<div appDetail="Workforce Capacity">{{ entity.workForce.capacity }}</div>
+				}
+				<div appDetail="Owners">
+					<ul>
+						@for (item of entity.owners; track item.id) {
+							<li>
+								<a [routerLink]="['/factions', item.id]">{{ item.name }}</a>
+							</li>
+						}
+					</ul>
+				</div>
+			</dl>
+			<dl class="details self-start">
+				<div appDetail="Turrets">{{ getSlotsStr(entity.turrets) }}</div>
+				<div appDetail="Shields">{{ getSlotsStr(entity.shields) }}</div>
+				@if (entity.dimensions; as d) {
+					<div appDetail="Size (approx.)">{{ d.x | number }} × {{ d.y | number }} × {{ d.z | number }} m</div>
+				}
+				<div appDetail="Blueprint sold by">
+					<app-sellers [owners]="entity.owners" [license]="entity.license" />
+				</div>
+			</dl>
 		</div>
-	</div>
+		@if (production().length) {
+			<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+				@for (item of production(); track $index) {
+					<app-production-card [production]="item" />
+				}
+			</div>
+		}
+	</app-detail-page>
 }

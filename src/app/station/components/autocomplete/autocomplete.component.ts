@@ -13,7 +13,7 @@ import { WareGroupModel } from '../station-calculator.model';
 })
 export class AutocompleteComponent {
 	/** selected module id */
-	readonly id = input<string>(null);
+	readonly id = input<string | null>(null);
 	readonly groups = input<WareGroupModel[]>([]);
 	readonly selectModule = output<string>();
 
@@ -46,7 +46,7 @@ export class AutocompleteComponent {
 			.filter((group) => group.modules.length > 0);
 	});
 
-	private timeout: ReturnType<typeof setTimeout>;
+	private timeout?: ReturnType<typeof setTimeout>;
 
 	onFocus() {
 		clearTimeout(this.timeout);

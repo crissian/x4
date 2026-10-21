@@ -15,20 +15,20 @@ describe('loadout', () => {
 	const equipment = new EquipmentService();
 	const ships = new ShipService();
 	const all = equipment.getEntities();
-	const get = (id: string) => equipment.getEntity(id);
+	const get = (id: string) => equipment.getEntity(id)!;
 
 	it('matches equipment to slots by connection tags', () => {
-		const fighter = ships.getEntity('ship_arg_s_fighter_01_a');
+		const fighter = ships.getEntity('ship_arg_s_fighter_01_a')!;
 		const laser = get('weapon_gen_s_laser_01_mk1');
 		const mLaser = get('weapon_gen_m_laser_01_mk1');
 
-		expect(fits(laser, fighter.weapons[0])).toBe(true);
-		expect(fits(mLaser, fighter.weapons[0])).toBe(false);
+		expect(fits(laser, fighter.weapons![0])).toBe(true);
+		expect(fits(mLaser, fighter.weapons![0])).toBe(false);
 	});
 
 	it('finds options for every slot group of common ships', () => {
 		for (const id of ['ship_arg_s_fighter_01_a', 'ship_arg_m_trans_container_01_a', 'ship_arg_l_destroyer_01_a']) {
-			const groups = slotGroups(ships.getEntity(id), all);
+			const groups = slotGroups(ships.getEntity(id)!, all);
 			expect(groups.some((g) => g.kind === 'engines')).toBe(true);
 			expect(groups.some((g) => g.kind === 'shields')).toBe(true);
 			expect(groups.every((g) => g.options.length > 0)).toBe(true);
@@ -36,14 +36,14 @@ describe('loadout', () => {
 	});
 
 	it('computes speed as thrust / drag', () => {
-		const ship = ships.getEntity('ship_arg_s_fighter_01_a');
+		const ship = ships.getEntity('ship_arg_s_fighter_01_a')!;
 		const engine = get('engine_arg_s_allround_01_mk1');
 		const speeds = flightSpeeds(ship, engine);
 
-		const expected = (engine.thrust.forward * ship.engines.length) / ship.drag.forward;
+		const expected = (engine.thrust!.forward * ship.engines.length) / ship.drag.forward;
 		expect(speeds.speed).toBeCloseTo(expected);
-		expect(speeds.boost).toBeCloseTo(expected * engine.boost.thrust);
-		expect(speeds.travel).toBeCloseTo(expected * engine.travel.thrust);
+		expect(speeds.boost).toBeCloseTo(expected * engine.boost!.thrust);
+		expect(speeds.travel).toBeCloseTo(expected * engine.travel!.thrust);
 		// sanity: a scout-class fighter flies a few hundred m/s
 		expect(speeds.speed).toBeGreaterThan(100);
 		expect(speeds.speed).toBeLessThan(1000);
@@ -86,7 +86,7 @@ describe('loadout', () => {
 	});
 
 	it('totals a loadout and the wares to build it', () => {
-		const ship = ships.getEntity('ship_arg_m_trans_container_01_a');
+		const ship = ships.getEntity('ship_arg_m_trans_container_01_a')!;
 		const groups = slotGroups(ship, all);
 		const loadout = bestLoadout(groups, (x) => x.price?.avg ?? 0);
 		const stats = loadoutStats(ship, groups, loadout, get);

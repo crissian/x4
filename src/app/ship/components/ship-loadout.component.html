@@ -2,7 +2,8 @@
 	<div class="card">
 		<div class="card-header flex flex-wrap items-center justify-between gap-3">
 			<span
-				><a routerLink="/ships">Ships</a> - <a [routerLink]="['/ships', entity.id]">{{ entity.name }}</a> - Loadout builder</span
+				><a routerLink="/ships">Ships</a> - <a [routerLink]="['/ships', entity.id]">{{ entity.name }}</a> -
+				Loadout builder</span
 			>
 			<span class="flex gap-2">
 				<button type="button" class="btn btn-secondary" (click)="copyLink()">
@@ -12,7 +13,9 @@
 						<svg lucideLink />Copy link
 					}
 				</button>
-				<button type="button" class="btn btn-primary" (click)="compare()"><svg lucideGitCompareArrows />Add to comparison</button>
+				<button type="button" class="btn btn-primary" (click)="compare()">
+					<svg lucideGitCompareArrows />Add to comparison
+				</button>
 			</span>
 		</div>
 		<div class="card-body">
@@ -21,7 +24,12 @@
 					<div class="mb-3 flex flex-wrap items-center gap-2">
 						<span class="text-fg-muted">Preset:</span>
 						@for (preset of presets; track preset.id) {
-							<button type="button" class="btn btn-secondary" [title]="preset.label" (click)="applyPreset(preset.id)">
+							<button
+								type="button"
+								class="btn btn-secondary"
+								[title]="preset.label"
+								(click)="applyPreset(preset.id)"
+							>
 								{{ preset.id | titlecase }}
 							</button>
 						}
@@ -29,10 +37,10 @@
 					@for (group of groups(); track group.key) {
 						<label class="mb-2 grid items-center gap-1 sm:grid-cols-[12rem_1fr]">
 							<span>{{ group.label }}</span>
-							<select class="input" [value]="loadout()[group.key] ?? ''" (change)="select(group, $any($event.target).value)">
+							<select class="input" [formField]="slotsForm[group.key]">
 								<option value="">- none -</option>
 								@for (option of group.options; track option.id) {
-									<option [value]="option.id" [selected]="loadout()[group.key] === option.id">{{ optionLabel(option) }}</option>
+									<option [value]="option.id">{{ optionLabel(option) }}</option>
 								}
 							</select>
 						</label>
@@ -68,7 +76,9 @@
 								<dt>Total Price</dt>
 								<dd>
 									<strong>{{ price.avg | number: '1.0-0' }}</strong>
-									<div class="text-xs text-fg-muted">{{ price.min | number: '1.0-0' }} - {{ price.max | number: '1.0-0' }}</div>
+									<div class="text-xs text-fg-muted">
+										{{ price.min | number: '1.0-0' }} - {{ price.max | number: '1.0-0' }}
+									</div>
 								</dd>
 							}
 						</dl>
@@ -80,7 +90,9 @@
 									@for (item of equipmentList(); track item.equipment.id) {
 										<tr>
 											<td>
-												<a [routerLink]="['/equipment', item.equipment.id]">{{ item.equipment.name }}</a>
+												<a [routerLink]="['/equipment', item.equipment.id]">{{
+													item.equipment.name
+												}}</a>
 											</td>
 											<td class="text-right">×{{ item.count }}</td>
 										</tr>
@@ -97,9 +109,13 @@
 					<div class="card-header flex flex-wrap items-center justify-between gap-3">
 						<span>Wares to build ship and equipment</span>
 						@if (methods().length > 1) {
-							<select class="input w-auto" [value]="method()" (change)="method.set($any($event.target).value)">
+							<select
+								class="input w-auto"
+								aria-label="Production method"
+								[formField]="optionsForm.method"
+							>
 								@for (m of methods(); track m.id) {
-									<option [value]="m.id" [selected]="method() === m.id">{{ m.name }}</option>
+									<option [value]="m.id">{{ m.name }}</option>
 								}
 							</select>
 						}
@@ -132,8 +148,8 @@
 							</tfoot>
 						</table>
 						<p class="mt-2 text-xs text-fg-muted">
-							Uses the selected production method where available, otherwise the universal one. Equipment without its own
-							production is not included.
+							Uses the selected production method where available, otherwise the universal one. Equipment
+							without its own production is not included.
 						</p>
 					</div>
 				</div>

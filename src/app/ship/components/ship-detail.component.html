@@ -1,120 +1,105 @@
 @if (entity(); as entity) {
-	<div class="card">
-		<div class="card-header flex flex-wrap items-center justify-between gap-3">
-			<span><a routerLink="/ships">Ships</a> - {{ entity.name }}</span>
-			<span class="flex gap-2">
-				<a class="btn btn-primary hover:text-white hover:no-underline" [routerLink]="['/ships', entity.id, 'loadout']"
-					><svg lucideWrench />Loadout builder</a
-				>
-				<button type="button" class="btn btn-secondary" (click)="compare()"><svg lucideGitCompareArrows />Compare</button>
-			</span>
-		</div>
-		<div class="card-body flow-root">
-			<app-entity-image kind="ships" [id]="entity.id" [alt]="entity.name" />
-			@if (entity.description != 'No information available') {
-				<p class="mb-3">{{ entity.description }}</p>
-			}
-			<div class="grid gap-x-6 gap-y-3 md:grid-cols-3">
-				<dl class="details">
-					<dt>Race</dt>
-					<dd>
-						@if (entity.race) {
-							<a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
-						} @else {
-							-
-						}
-					</dd>
-					<dt>Type</dt>
-					<dd>{{ entity.type || '-' }}</dd>
-					<dt>Size</dt>
-					<dd>{{ entity.size }}</dd>
-					<dt>Purpose</dt>
-					<dd>{{ entity.purpose }}</dd>
-					<dt>Hull</dt>
-					<dd>{{ entity.hull | number }}</dd>
-					<dt>Explosion Damage</dt>
-					<dd>{{ (entity.explosionDamage | number) || '-' }}</dd>
-					<dt>Price</dt>
-					<dd>{{ entity.price.min | number }} - {{ entity.price.max | number }}</dd>
-				</dl>
-				<dl class="details">
-					<dt>Cargo</dt>
-					<dd>
-						@for (item of entity.cargo; track $index) {
-							<div>{{ item.max | number }} {{ cargoTypes(item) }}</div>
-						} @empty {
-							-
-						}
-					</dd>
-					<dt>Missile Storage</dt>
-					<dd>{{ entity.storage?.missile ? (entity.storage.missile | number) : '-' }}</dd>
-					<dt>Drone Storage</dt>
-					<dd>{{ entity.storage?.unit ? (entity.storage.unit | number) : '-' }}</dd>
-					<dt>Crew</dt>
-					<dd>{{ (entity.people | number) || '-' }}</dd>
-					<dt>Docks</dt>
-					<dd>{{ getSlotsStr(entity.docks) }}</dd>
-					<dt>Mass</dt>
-					<dd>{{ entity.mass | number: '1.0-1' }} t</dd>
-				</dl>
-				<dl class="details">
-					<dt>Engines</dt>
-					<dd>{{ getSlotsStr(entity.engines) }}</dd>
-					<dt>Weapons</dt>
-					<dd>{{ getSlotsStr(entity.weapons) }}</dd>
-					<dt>Turrets</dt>
-					<dd>{{ getSlotsStr(entity.turrets) }}</dd>
-					<dt>Main Shields</dt>
-					<dd>{{ getSlotsStr(mainShields()) }}</dd>
-					<dt>Additional Shields</dt>
-					<dd>{{ getSlotsStr(additionalShields()) }}</dd>
-					@if (maxStats(); as max) {
-						<dt>Max Shield</dt>
-						<dd>{{ max.shield ? (max.shield | number: '1.0-0') : '-' }}</dd>
-					}
-				</dl>
-			</div>
-
-			<div class="mt-4 grid gap-4 lg:grid-cols-3">
-				<div class="card min-w-0 lg:col-span-2">
-					<div class="card-header">Speed by engine</div>
-					<div class="card-body">
-						@if (engines().length) {
-							<div class="overflow-x-auto">
-								<app-data-grid
-									[data]="engines()"
-									[columns]="engineColumns"
-									[features]="false"
-									[clickable]="true"
-									[trackBy]="trackEngine"
-									(rowClick)="openEngine($event)"
-								/>
-							</div>
-							<p class="mt-2 text-xs text-fg-muted">
-								Speed = engine thrust × {{ entity.engines.length }} engines / drag {{ entity.drag.forward | number: '1.0-2' }}. Equipment
-								mods and crew skill are not included.
-							</p>
-						} @else {
-							<p class="text-fg-muted">No compatible engines found.</p>
-						}
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header">Sold by</div>
-					<div class="card-body">
-						<app-sellers [owners]="entity.owners" [license]="entity.license" />
-					</div>
-				</div>
-			</div>
-
-			@if (production().length) {
-				<h6 class="mt-4">Production</h6>
-				<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-					@for (item of production(); track $index) {
-						<app-production-card [production]="item" />
+	<app-detail-page
+		section="Ships"
+		sectionLink="/ships"
+		[title]="entity.name"
+		[id]="entity.id"
+		image="ships"
+		[description]="entity.description"
+	>
+		<span actions class="flex gap-2">
+			<a
+				class="btn btn-primary hover:text-white hover:no-underline"
+				[routerLink]="['/ships', entity.id, 'loadout']"
+				><svg lucideWrench />Loadout builder</a
+			>
+			<button type="button" class="btn btn-secondary" (click)="compare()">
+				<svg lucideGitCompareArrows />Compare
+			</button>
+		</span>
+		<div class="grid gap-x-6 gap-y-3 md:grid-cols-3">
+			<dl class="details">
+				<div appDetail="Race">
+					@if (entity.race) {
+						<a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
+					} @else {
+						-
 					}
 				</div>
-			}
+				<div appDetail="Type">{{ entity.type || '-' }}</div>
+				<div appDetail="Size">{{ entity.size }}</div>
+				<div appDetail="Purpose">{{ entity.purpose }}</div>
+				<div appDetail="Hull">{{ entity.hull | number }}</div>
+				<div appDetail="Explosion Damage">{{ (entity.explosionDamage | number) || '-' }}</div>
+				<div appDetail="Price">{{ entity.price.min | number }} - {{ entity.price.max | number }}</div>
+			</dl>
+			<dl class="details">
+				<div appDetail="Cargo">
+					@for (item of entity.cargo; track $index) {
+						<div>{{ item.max | number }} {{ cargoTypes(item) }}</div>
+					} @empty {
+						-
+					}
+				</div>
+				<div appDetail="Missile Storage">
+					{{ entity.storage?.missile ? (entity.storage.missile | number) : '-' }}
+				</div>
+				<div appDetail="Drone Storage">{{ entity.storage?.unit ? (entity.storage.unit | number) : '-' }}</div>
+				<div appDetail="Crew">{{ (entity.people | number) || '-' }}</div>
+				<div appDetail="Docks">{{ getSlotsStr(entity.docks) }}</div>
+				<div appDetail="Mass">{{ entity.mass | number: '1.0-1' }} t</div>
+			</dl>
+			<dl class="details">
+				<div appDetail="Engines">{{ getSlotsStr(entity.engines) }}</div>
+				<div appDetail="Weapons">{{ getSlotsStr(entity.weapons) }}</div>
+				<div appDetail="Turrets">{{ getSlotsStr(entity.turrets) }}</div>
+				<div appDetail="Main Shields">{{ getSlotsStr(mainShields()) }}</div>
+				<div appDetail="Additional Shields">{{ getSlotsStr(additionalShields()) }}</div>
+				@if (maxStats(); as max) {
+					<div appDetail="Max Shield">{{ max.shield ? (max.shield | number: '1.0-0') : '-' }}</div>
+				}
+			</dl>
 		</div>
-	</div>
+
+		<div class="mt-4 grid gap-4 lg:grid-cols-3">
+			<div class="card min-w-0 lg:col-span-2">
+				<div class="card-header">Speed by engine</div>
+				<div class="card-body">
+					@if (engines().length) {
+						<div class="overflow-x-auto">
+							<app-data-grid
+								[data]="engines()"
+								[columns]="engineColumns"
+								[features]="false"
+								[clickable]="true"
+								[trackBy]="trackEngine"
+								(rowClick)="openEngine($event)"
+							/>
+						</div>
+						<p class="mt-2 text-xs text-fg-muted">
+							Speed = engine thrust × {{ entity.engines.length }} engines / drag
+							{{ entity.drag.forward | number: '1.0-2' }}. Equipment mods and crew skill are not included.
+						</p>
+					} @else {
+						<p class="text-fg-muted">No compatible engines found.</p>
+					}
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header">Sold by</div>
+				<div class="card-body">
+					<app-sellers [owners]="entity.owners" [license]="entity.license" />
+				</div>
+			</div>
+		</div>
+
+		@if (production().length) {
+			<h6 class="mt-4">Production</h6>
+			<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+				@for (item of production(); track $index) {
+					<app-production-card [production]="item" />
+				}
+			</div>
+		}
+	</app-detail-page>
 }

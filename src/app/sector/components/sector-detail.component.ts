@@ -1,18 +1,19 @@
 import { DecimalPipe, PercentPipe } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
+import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { RouterLink } from '@angular/router';
 import { LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute } from '@lucide/angular';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
-import { EntityImageComponent } from '../../shared/components/entity-image.component';
 import { FactionService } from '../../shared/services/faction.service';
 import { Planet, SectorResource } from '../../shared/services/model/model';
-import { ClusterService, GAME_VERSIONS, SectorService } from '../../shared/services/universe.service';
+import { GAME_VERSIONS } from '../../shared/services/constants';
+import { ClusterService, SectorService } from '../../shared/services/universe.service';
 import { WareService } from '../../shared/services/ware.service';
 
 type PlanetRow = Planet & { moon?: boolean };
 
 @Component({
-	imports: [RouterLink, DataGridComponent, DecimalPipe, PercentPipe, LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute, EntityImageComponent],
+	imports: [DetailPageComponent, DetailComponent, RouterLink, DataGridComponent, DecimalPipe, PercentPipe, LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute],
 	templateUrl: './sector-detail.component.html',
 })
 export class SectorDetailComponent {
@@ -27,19 +28,20 @@ export class SectorDetailComponent {
 	protected readonly trackRow = (row: unknown) => row;
 
 	protected readonly entity = computed(() => this.sectors.getEntity(this.id()));
-	protected readonly cluster = computed(() => this.clusters.getEntity(this.entity()?.cluster));
-	protected readonly owner = computed(() => this.factions.getEntity(this.entity()?.owner));
+	protected readonly cluster = computed(() => this.clusters.getEntity(this.entity()?.cluster ?? ''));
+	protected readonly owner = computed(() => this.factions.getEntity(this.entity()?.owner ?? ''));
 
 	protected readonly gates = computed(() =>
-		(this.entity()?.gates ?? [])
-			.map((x) => ({ type: x.type, sector: this.sectors.getEntity(x.sector) }))
-			.filter((x) => x.sector)
+		(this.entity()?.gates ?? []).flatMap((x) => {
+			const sector = this.sectors.getEntity(x.sector);
+			return sector ? [{ type: x.type, sector }] : [];
+		})
 	);
 	protected readonly highways = computed(() =>
-		(this.entity()?.highways ?? []).map((x) => this.sectors.getEntity(x)).filter((x) => x)
+		(this.entity()?.highways ?? []).flatMap((x) => this.sectors.getEntity(x) ?? [])
 	);
 	protected readonly neighbours = computed(() =>
-		(this.cluster()?.sectors ?? []).filter((x) => x !== this.id()).map((x) => this.sectors.getEntity(x))
+		(this.cluster()?.sectors ?? []).filter((x) => x !== this.id()).flatMap((x) => this.sectors.getEntity(x) ?? [])
 	);
 
 	/** Planets followed by their moons. */

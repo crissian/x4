@@ -15,7 +15,7 @@ export function fits(equipment: Equipment, slot: Slot): boolean {
 	if (!equipment.tags?.length || !slot.tags?.length) {
 		return false;
 	}
-	return equipment.tags.every((tag) => slot.tags.includes(tag));
+	return equipment.tags.every((tag) => slot.tags!.includes(tag));
 }
 
 const KIND_TYPES: Record<SlotKind, string[]> = {
@@ -26,7 +26,7 @@ const KIND_TYPES: Record<SlotKind, string[]> = {
 };
 
 export function compatibleEquipment(slot: Slot, kind: SlotKind, equipment: readonly Equipment[]): Equipment[] {
-	return equipment.filter((x) => KIND_TYPES[kind].includes(x.type) && fits(x, slot));
+	return equipment.filter((x) => x.type != null && KIND_TYPES[kind].includes(x.type) && fits(x, slot));
 }
 
 export interface FlightSpeeds {
@@ -39,10 +39,10 @@ export interface FlightSpeeds {
 }
 
 /** Speeds of a ship with `count` copies of the given engine (defaults to every engine slot). */
-export function flightSpeeds(ship: Ship, engine: Equipment, count = ship.engines?.length ?? 0): FlightSpeeds {
+export function flightSpeeds(ship: Ship, engine: Equipment | undefined, count = ship.engines?.length ?? 0): FlightSpeeds {
 	const drag = ship.drag?.forward;
 	const thrust = (engine?.thrust?.forward ?? 0) * count;
-	if (!drag || !thrust) {
+	if (!engine || !drag || !thrust) {
 		return { speed: 0, boost: 0, travel: 0, travelCharge: 0 };
 	}
 	const speed = thrust / drag;
@@ -85,7 +85,7 @@ export function weaponStats(weapon: WeaponData): WeaponStats {
 		const interval = (weapon.rate ? 1 / weapon.rate : (weapon.reload ?? 0)) + (weapon.chargeTime ?? 0);
 		fireRate = interval > 0 ? 1 / interval : 0;
 		burstDps = weapon.damage * weapon.amount * fireRate;
-		if (weapon.magazine?.size > 0 && fireRate > 0) {
+		if (weapon.magazine && weapon.magazine.size > 0 && fireRate > 0) {
 			const firing = weapon.magazine.size / fireRate;
 			sustainedFactor = firing / (firing + weapon.magazine.reload);
 		}
@@ -214,7 +214,7 @@ export interface LoadoutStats {
 	equipmentPrice: { min: number; avg: number; max: number };
 }
 
-export function loadoutStats(ship: Ship, groups: SlotGroup[], loadout: Loadout, getEquipment: (id: string) => Equipment): LoadoutStats {
+export function loadoutStats(ship: Ship, groups: SlotGroup[], loadout: Loadout, getEquipment: (id: string) => Equipment | undefined): LoadoutStats {
 	const counts = new Map<string, number>();
 	let shield = 0;
 	let shieldRecharge = 0;
@@ -292,7 +292,7 @@ export function defaultProduction(productions: Production[] | undefined, method?
 export function buildWares(
 	ship: Ship,
 	counts: Map<string, number>,
-	getEquipment: (id: string) => Equipment,
+	getEquipment: (id: string) => Equipment | undefined,
 	method?: string
 ): Map<string, number> {
 	const totals = new Map<string, number>();

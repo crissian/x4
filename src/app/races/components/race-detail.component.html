@@ -1,10 +1,10 @@
 @if (entity(); as entity) {
-	<div class="card">
-		<div class="card-header"><a routerLink="/races">Races</a> - {{ entity.name }}</div>
-		<div class="card-body">
-			@if (entity.description != 'No information available') {
-				<p>{{ entity.description }}</p>
-			}
-		</div>
-	</div>
+	<app-detail-page
+		section="Races"
+		sectionLink="/races"
+		[title]="entity.name"
+		[id]="entity.id"
+		[description]="entity.description"
+	>
+	</app-detail-page>
 }
