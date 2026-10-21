@@ -1,8 +1,41 @@
+@if (features() && choosable()) {
+	<div class="relative mb-2 flex justify-end">
+		<button
+			type="button"
+			class="btn btn-secondary"
+			[attr.aria-expanded]="chooserOpen()"
+			(click)="chooserOpen.set(!chooserOpen())"
+		>
+			<svg lucideColumns3 />Columns
+		</button>
+		@if (chooserOpen()) {
+			<div
+				class="absolute top-full right-0 z-20 mt-1 max-h-96 w-64 overflow-y-auto rounded-md border border-line-strong bg-raised p-2 shadow-lg"
+			>
+				@for (column of columns(); track column.key) {
+					<label class="flex items-center gap-2 rounded px-1.5 py-1 hover:bg-hover">
+						<input
+							type="checkbox"
+							[checked]="shownKeys().includes(column.key)"
+							(change)="toggleColumn(column, $any($event.target).checked)"
+						/>
+						{{ column.caption }}
+					</label>
+				}
+				<div class="mt-1 flex justify-between border-t border-line pt-2">
+					<button type="button" class="link-button text-link" (click)="resetColumns()">Reset</button>
+					<button type="button" class="link-button text-link" (click)="chooserOpen.set(false)">Close</button>
+				</div>
+			</div>
+		}
+	</div>
+}
+
 <div class="overflow-x-auto rounded-md border border-line">
 	<table class="table table-hover">
 		<thead class="bg-surface-2">
 			<tr>
-				@for (column of columns(); track column.key) {
+				@for (column of visibleColumns(); track column.key) {
 					@let sort = sortOf(column);
 					<th
 						scope="col"
@@ -29,7 +62,7 @@
 			</tr>
 			@if (features()) {
 				<tr>
-					@for (column of columns(); track column.key) {
+					@for (column of visibleColumns(); track column.key) {
 						<th class="py-1 font-normal">
 							@if (column.filterable !== false) {
 								@if (column.lookup) {
@@ -62,20 +95,20 @@
 		<tbody>
 			@for (item of visibleRows(); track trackBy()(item.row)) {
 				<tr [class.cursor-pointer]="clickable()" (click)="rowClick.emit(item.row)">
-					@for (column of columns(); track column.key) {
+					@for (column of visibleColumns(); track column.key) {
 						<td [class.text-right]="column.type === 'number'">{{ item.texts[column.key] }}</td>
 					}
 				</tr>
 			} @empty {
 				<tr>
-					<td class="py-6 text-center text-fg-muted" [attr.colspan]="columns().length">No data</td>
+					<td class="py-6 text-center text-fg-muted" [attr.colspan]="visibleColumns().length">No data</td>
 				</tr>
 			}
 		</tbody>
 		@if (features()) {
 			<tfoot>
 				<tr>
-					<td class="text-fg-muted" [attr.colspan]="columns().length">Count: {{ filtered().length }}</td>
+					<td class="text-fg-muted" [attr.colspan]="visibleColumns().length">Count: {{ filtered().length }}</td>
 				</tr>
 			</tfoot>
 		}

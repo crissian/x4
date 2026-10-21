@@ -1,6 +1,10 @@
 <div class="card">
 	<div class="card-header" i18n="@@equipment">Equipment</div>
 	<div class="card-body">
-		<app-data-grid [data]="entities" [columns]="columns" [clickable]="true" (rowClick)="open($event)" />
+		<p class="mb-2 text-fg-muted">
+			DPS is the sustained damage per second including reloads and overheating. Thrust × engine count / ship drag gives the ship speed;
+			boost and travel speed are multiples of it.
+		</p>
+		<app-data-grid [data]="entities" [columns]="columns" [clickable]="true" storageKey="equipment" (rowClick)="open($event)" />
 	</div>
 </div>

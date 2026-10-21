@@ -1,6 +1,14 @@
 @if (entity(); as entity) {
 	<div class="card">
-		<div class="card-header"><a routerLink="/ships">Ships</a> - {{ entity.name }}</div>
+		<div class="card-header flex flex-wrap items-center justify-between gap-3">
+			<span><a routerLink="/ships">Ships</a> - {{ entity.name }}</span>
+			<span class="flex gap-2">
+				<a class="btn btn-primary hover:text-white hover:no-underline" [routerLink]="['/ships', entity.id, 'loadout']"
+					><svg lucideWrench />Loadout builder</a
+				>
+				<button type="button" class="btn btn-secondary" (click)="compare()"><svg lucideGitCompareArrows />Compare</button>
+			</span>
+		</div>
 		<div class="card-body flow-root">
 			<app-entity-image kind="ships" [id]="entity.id" [alt]="entity.name" />
 			@if (entity.description != 'No information available') {
@@ -20,36 +28,38 @@
 					<dd>{{ entity.type || '-' }}</dd>
 					<dt>Size</dt>
 					<dd>{{ entity.size }}</dd>
+					<dt>Purpose</dt>
+					<dd>{{ entity.purpose }}</dd>
 					<dt>Hull</dt>
 					<dd>{{ entity.hull | number }}</dd>
 					<dt>Explosion Damage</dt>
 					<dd>{{ (entity.explosionDamage | number) || '-' }}</dd>
-					<dt>Owners</dt>
-					<dd>
-						<ul>
-							@for (item of entity.owners; track item.id) {
-								<li>
-									<a [routerLink]="['/factions', item.id]">{{ item.name }}</a>
-								</li>
-							}
-						</ul>
-					</dd>
+					<dt>Price</dt>
+					<dd>{{ entity.price.min | number }} - {{ entity.price.max | number }}</dd>
 				</dl>
 				<dl class="details">
+					<dt>Cargo</dt>
+					<dd>
+						@for (item of entity.cargo; track $index) {
+							<div>{{ item.max | number }} {{ cargoTypes(item) }}</div>
+						} @empty {
+							-
+						}
+					</dd>
 					<dt>Missile Storage</dt>
 					<dd>{{ entity.storage?.missile ? (entity.storage.missile | number) : '-' }}</dd>
 					<dt>Drone Storage</dt>
 					<dd>{{ entity.storage?.unit ? (entity.storage.unit | number) : '-' }}</dd>
-					<dt>People</dt>
+					<dt>Crew</dt>
 					<dd>{{ (entity.people | number) || '-' }}</dd>
-					<dt>Purpose</dt>
-					<dd>{{ entity.purpose }}</dd>
+					<dt>Docks</dt>
+					<dd>{{ getSlotsStr(entity.docks) }}</dd>
+					<dt>Mass</dt>
+					<dd>{{ entity.mass | number: '1.0-1' }} t</dd>
 				</dl>
 				<dl class="details">
 					<dt>Engines</dt>
 					<dd>{{ getSlotsStr(entity.engines) }}</dd>
-					<dt>Docks</dt>
-					<dd>{{ getSlotsStr(entity.docks) }}</dd>
 					<dt>Weapons</dt>
 					<dd>{{ getSlotsStr(entity.weapons) }}</dd>
 					<dt>Turrets</dt>
@@ -58,10 +68,48 @@
 					<dd>{{ getSlotsStr(mainShields()) }}</dd>
 					<dt>Additional Shields</dt>
 					<dd>{{ getSlotsStr(additionalShields()) }}</dd>
+					@if (maxStats(); as max) {
+						<dt>Max Shield</dt>
+						<dd>{{ max.shield ? (max.shield | number: '1.0-0') : '-' }}</dd>
+					}
 				</dl>
 			</div>
+
+			<div class="mt-4 grid gap-4 lg:grid-cols-3">
+				<div class="card min-w-0 lg:col-span-2">
+					<div class="card-header">Speed by engine</div>
+					<div class="card-body">
+						@if (engines().length) {
+							<div class="overflow-x-auto">
+								<app-data-grid
+									[data]="engines()"
+									[columns]="engineColumns"
+									[features]="false"
+									[clickable]="true"
+									[trackBy]="trackEngine"
+									(rowClick)="openEngine($event)"
+								/>
+							</div>
+							<p class="mt-2 text-xs text-fg-muted">
+								Speed = engine thrust × {{ entity.engines.length }} engines / drag {{ entity.drag.forward | number: '1.0-2' }}. Equipment
+								mods and crew skill are not included.
+							</p>
+						} @else {
+							<p class="text-fg-muted">No compatible engines found.</p>
+						}
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header">Sold by</div>
+					<div class="card-body">
+						<app-sellers [owners]="entity.owners" [license]="entity.license" />
+					</div>
+				</div>
+			</div>
+
 			@if (production().length) {
-				<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+				<h6 class="mt-4">Production</h6>
+				<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 					@for (item of production(); track $index) {
 						<app-production-card [production]="item" />
 					}

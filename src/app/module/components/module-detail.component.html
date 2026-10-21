@@ -60,6 +60,12 @@
 					<dd>{{ getSlotsStr(entity.turrets) }}</dd>
 					<dt>Shields</dt>
 					<dd>{{ getSlotsStr(entity.shields) }}</dd>
+					@if (entity.dimensions; as d) {
+						<dt>Size (approx.)</dt>
+						<dd>{{ d.x | number }} × {{ d.y | number }} × {{ d.z | number }} m</dd>
+					}
+					<dt>Blueprint sold by</dt>
+					<dd><app-sellers [owners]="entity.owners" [license]="entity.license" /></dd>
 				</dl>
 			</div>
 			@if (production().length) {

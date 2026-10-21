@@ -1,0 +1,74 @@
+<div class="card">
+	<div class="card-header flex flex-wrap items-center justify-between gap-3">
+		<span><a routerLink="/ships">Ships</a> - Compare</span>
+		@if (columns().length < max) {
+			<select #picker class="input w-auto" (change)="add(picker.value); picker.value = ''">
+				<option value="">Add ship...</option>
+				@for (ship of allShips; track ship.id) {
+					<option [value]="ship.id">{{ ship.name }} ({{ ship.size }})</option>
+				}
+			</select>
+		}
+	</div>
+	<div class="card-body">
+		@if (columns().length) {
+			<div class="overflow-x-auto">
+				<table class="table">
+					<thead>
+						<tr>
+							<th></th>
+							@for (column of columns(); track column.entry.id; let i = $index) {
+								<th class="min-w-48 align-top">
+									<div class="flex items-start justify-between gap-2">
+										<a [routerLink]="['/ships', column.ship.id]">{{ column.ship.name }}</a>
+										<button type="button" class="link-button" title="Remove" (click)="remove(i)"><svg lucideX /></button>
+									</div>
+									<select
+										class="input mt-1 w-full text-sm font-normal"
+										[value]="column.preset"
+										(change)="setPreset(i, $any($event.target).value)"
+									>
+										@if (!column.preset) {
+											<option value="" selected>Custom loadout</option>
+										}
+										@for (preset of presets; track preset.id) {
+											<option [value]="preset.id" [selected]="column.preset === preset.id">{{ preset.label }}</option>
+										}
+									</select>
+									<a
+										class="mt-1 inline-block text-sm font-normal"
+										[routerLink]="['/ships', column.ship.id, 'loadout']"
+										[queryParams]="{ l: loadoutCode(column) }"
+										><svg lucideWrench class="mr-0.5" />Customize</a
+									>
+								</th>
+							}
+						</tr>
+					</thead>
+					<tbody>
+						@for (row of rows; track row.caption; let r = $index) {
+							<tr>
+								<th class="whitespace-nowrap">{{ row.caption }}</th>
+								@for (column of columns(); track column.entry.id) {
+									@let value = row.value(column);
+									<td [class.font-bold]="bestValues()[r] != null && value === bestValues()[r]" [class.text-success]="bestValues()[r] != null && value === bestValues()[r]">
+										@if (isNumber(value)) {
+											{{ value | number: row.format ?? '1.0-0' }}
+										} @else {
+											{{ value || '-' }}
+										}
+									</td>
+								}
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-2 text-xs text-fg-muted">
+				Stats use the selected loadout; open "Customize" to pick equipment slot by slot. The best value of each row is highlighted.
+			</p>
+		} @else {
+			<p class="text-fg-muted">Pick up to {{ max }} ships to compare them side by side.</p>
+		}
+	</div>
+</div>

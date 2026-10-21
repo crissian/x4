@@ -1,6 +1,6 @@
-import { Component, computed, input, linkedSignal, output, signal } from '@angular/core';
+import { Component, computed, effect, input, linkedSignal, output, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { LucideArrowUpNarrowWide, LucideArrowDownWideNarrow, LucideChevronsLeft, LucideChevronLeft, LucideChevronRight, LucideChevronsRight } from '@lucide/angular';
+import { LucideArrowUpNarrowWide, LucideArrowDownWideNarrow, LucideChevronsLeft, LucideChevronLeft, LucideChevronRight, LucideChevronsRight, LucideColumns3 } from '@lucide/angular';
 
 export interface GridLookupItem {
 	value: unknown;
@@ -22,6 +22,8 @@ export interface GridColumn<T> {
 	lookup?: readonly GridLookupItem[];
 	sortable?: boolean;
 	filterable?: boolean;
+	/** Hidden until the user turns the column on in the column chooser. */
+	hidden?: boolean;
 }
 
 interface SortState {
@@ -88,7 +90,7 @@ function matchesNumber(value: unknown, filter: string): boolean {
 
 @Component({
 	selector: 'app-data-grid',
-	imports: [FormField, LucideArrowUpNarrowWide, LucideArrowDownWideNarrow, LucideChevronsLeft, LucideChevronLeft, LucideChevronRight, LucideChevronsRight],
+	imports: [FormField, LucideArrowUpNarrowWide, LucideArrowDownWideNarrow, LucideChevronsLeft, LucideChevronLeft, LucideChevronRight, LucideChevronsRight, LucideColumns3],
 	templateUrl: './data-grid.component.html',
 })
 export class DataGridComponent<T> {
@@ -99,8 +101,36 @@ export class DataGridComponent<T> {
 	readonly features = input(true);
 	readonly pageSizes = input<readonly number[]>([10, 20, 50, 100]);
 	readonly clickable = input(false);
+	/** Remembers the columns chosen by the user in local storage under this key. */
+	readonly storageKey = input<string>();
 
 	readonly rowClick = output<T>();
+
+	/** Keys of the columns shown, starting with the columns that are not `hidden`. */
+	readonly shownKeys = linkedSignal<string[]>(() => {
+		const defaults = this.columns()
+			.filter((c) => !c.hidden)
+			.map((c) => c.key);
+		const key = this.storageKey();
+		if (!key) {
+			return defaults;
+		}
+		try {
+			const saved = JSON.parse(localStorage.getItem(`grid-columns:${key}`) ?? 'null');
+			return Array.isArray(saved) ? saved.filter((x) => this.columns().some((c) => c.key === x)) : defaults;
+		} catch {
+			return defaults;
+		}
+	});
+
+	readonly visibleColumns = computed(() => {
+		const shown = this.shownKeys();
+		return this.columns().filter((c) => shown.includes(c.key));
+	});
+
+	/** The column chooser is offered when some columns start hidden. */
+	readonly choosable = computed(() => this.columns().some((c) => c.hidden));
+	readonly chooserOpen = signal(false);
 
 	/** Filter values per column key, edited through a signal form. */
 	readonly filterModel = linkedSignal<Record<string, string>>(() =>
@@ -139,7 +169,7 @@ export class DataGridComponent<T> {
 
 	readonly filtered = computed(() => {
 		const filters = this.filterModel();
-		const active = this.columns().filter((c) => c.filterable !== false && filters[c.key]?.trim());
+		const active = this.visibleColumns().filter((c) => c.filterable !== false && filters[c.key]?.trim());
 
 		let rows = this.prepared();
 		if (active.length) {
@@ -177,6 +207,35 @@ export class DataGridComponent<T> {
 		const start = Math.min(this.page(), this.pageCount() - 1) * this.pageSize();
 		return this.filtered().slice(start, start + this.pageSize());
 	});
+
+	constructor() {
+		effect(() => {
+			const key = this.storageKey();
+			const shown = this.shownKeys();
+			if (key) {
+				try {
+					localStorage.setItem(`grid-columns:${key}`, JSON.stringify(shown));
+				} catch {
+					// storage unavailable, the choice is kept for this page only
+				}
+			}
+		});
+	}
+
+	toggleColumn(column: GridColumn<T>, shown: boolean) {
+		const order = this.columns().map((c) => c.key);
+		this.shownKeys.update((keys) => {
+			const next = shown ? [...keys, column.key] : keys.filter((x) => x !== column.key);
+			return order.filter((x) => next.includes(x));
+		});
+		if (!shown) {
+			this.sorts.update((sorts) => sorts.filter((x) => x.key !== column.key));
+		}
+	}
+
+	resetColumns() {
+		this.shownKeys.set(this.columns().filter((c) => !c.hidden).map((c) => c.key));
+	}
 
 	toggleSort(column: GridColumn<T>, event: MouseEvent) {
 		if (column.sortable === false) {

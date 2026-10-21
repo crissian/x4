@@ -3,12 +3,13 @@ import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { EntityImageComponent } from '../../shared/components/entity-image.component';
 import { ProductionCardComponent } from '../../shared/components/production-card.component';
+import { SellersComponent } from '../../shared/components/sellers.component';
 import { ModuleService } from '../../shared/services/module.service';
 import { getSlotsStr, toProductionData } from '../../shared/services/production';
 import { WareService } from '../../shared/services/ware.service';
 
 @Component({
-	imports: [DecimalPipe, RouterLink, ProductionCardComponent, EntityImageComponent],
+	imports: [DecimalPipe, RouterLink, ProductionCardComponent, EntityImageComponent, SellersComponent],
 	templateUrl: './module-detail.component.html',
 })
 export class ModuleDetailComponent {

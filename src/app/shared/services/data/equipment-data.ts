@@ -72,6 +72,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 3900, reverse: 3705 },
 		travel: { thrust: 30.53, attack: 91, charge: 18, release: 0 },
+		boost: { thrust: 6.89, duration: 27, recharge: 92, acceleration: 4.68 },
+		tags: [ 'engine', 'large', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -111,6 +114,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 3159, reverse: 3001.05 },
 		travel: { thrust: 42.4, attack: 82, charge: 16, release: 0 },
+		boost: { thrust: 5.74, duration: 24.3, recharge: 92, acceleration: 3.9 },
+		tags: [ 'engine', 'large', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -149,6 +155,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 960, reverse: 960 },
 		travel: { thrust: 10.51, attack: 41.8, charge: 8, release: 0 },
+		boost: { thrust: 7.38, duration: 12.5, recharge: 92, acceleration: 6.27 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -186,6 +195,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 1152, reverse: 1152 },
 		travel: { thrust: 10.51, attack: 41.8, charge: 8, release: 0 },
+		boost: { thrust: 7.38, duration: 12.5, recharge: 92, acceleration: 6.27 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -224,6 +236,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 1296, reverse: 1296 },
 		travel: { thrust: 10.51, attack: 41.8, charge: 8, release: 0 },
+		boost: { thrust: 7.38, duration: 12.5, recharge: 92, acceleration: 6.27 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -262,6 +277,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 1084.8, reverse: 1084.8 },
 		travel: { thrust: 8.04, attack: 44.3, charge: 8, release: 0 },
+		boost: { thrust: 7.9, duration: 15, recharge: 82.8, acceleration: 7.79 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -299,6 +317,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.yaki, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 1301.76, reverse: 1301.76 },
 		travel: { thrust: 8.04, attack: 44.3, charge: 8, release: 0 },
+		boost: { thrust: 7.9, duration: 15, recharge: 82.8, acceleration: 7.79 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -337,6 +358,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.yaki, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 1464.48, reverse: 1464.48 },
 		travel: { thrust: 8.04, attack: 44.3, charge: 8, release: 0 },
+		boost: { thrust: 7.9, duration: 15, recharge: 82.8, acceleration: 7.79 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -375,6 +399,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 864, reverse: 864 },
 		travel: { thrust: 14.39, attack: 37.6, charge: 7, release: 0 },
+		boost: { thrust: 6.15, duration: 11.25, recharge: 92, acceleration: 5.23 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -412,6 +439,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 1036.8, reverse: 1036.8 },
 		travel: { thrust: 14.39, attack: 37.6, charge: 7, release: 0 },
+		boost: { thrust: 6.15, duration: 11.25, recharge: 92, acceleration: 5.23 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -450,6 +480,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 1166.4, reverse: 1166.4 },
 		travel: { thrust: 14.39, attack: 37.6, charge: 7, release: 0 },
+		boost: { thrust: 6.15, duration: 11.25, recharge: 92, acceleration: 5.23 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -488,6 +521,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 384, reverse: 384 },
 		travel: { thrust: 14.2, attack: 38, charge: 6, release: 0 },
+		boost: { thrust: 8.2, duration: 10, recharge: 92, acceleration: 6.97 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -524,6 +560,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 460.8, reverse: 460.8 },
 		travel: { thrust: 14.2, attack: 38, charge: 6, release: 0 },
+		boost: { thrust: 8.2, duration: 10, recharge: 92, acceleration: 6.97 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -562,6 +601,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 518.4, reverse: 518.4 },
 		travel: { thrust: 14.2, attack: 38, charge: 6, release: 0 },
+		boost: { thrust: 8.2, duration: 10, recharge: 92, acceleration: 6.97 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -600,6 +642,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.yaki, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 433.92, reverse: 433.92 },
 		travel: { thrust: 10.87, attack: 40.28, charge: 6, release: 0 },
+		boost: { thrust: 8.78, duration: 12, recharge: 82.8, acceleration: 8.65 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -636,6 +681,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 520.7, reverse: 520.7 },
 		travel: { thrust: 10.87, attack: 40.28, charge: 6, release: 0 },
+		boost: { thrust: 8.78, duration: 12, recharge: 82.8, acceleration: 8.65 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -674,6 +722,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 585.79, reverse: 585.79 },
 		travel: { thrust: 10.87, attack: 40.28, charge: 6, release: 0 },
+		boost: { thrust: 8.78, duration: 12, recharge: 82.8, acceleration: 8.65 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -712,6 +763,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 345.6, reverse: 345.6 },
 		travel: { thrust: 19.72, attack: 34.2, charge: 4, release: 0 },
+		boost: { thrust: 6.83, duration: 9, recharge: 92, acceleration: 5.8 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -748,6 +802,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 414.72, reverse: 414.72 },
 		travel: { thrust: 19.72, attack: 34.2, charge: 4, release: 0 },
+		boost: { thrust: 6.83, duration: 9, recharge: 92, acceleration: 5.8 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -786,6 +843,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 466.56, reverse: 466.56 },
 		travel: { thrust: 19.72, attack: 34.2, charge: 4, release: 0 },
+		boost: { thrust: 6.83, duration: 9, recharge: 92, acceleration: 5.8 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -825,6 +885,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 10550, reverse: 10022.5 },
 		travel: { thrust: 27.48, attack: 91, charge: 18, release: 0 },
+		boost: { thrust: 6.89, duration: 27, recharge: 92, acceleration: 4.21 },
+		tags: [ 'engine', 'extralarge', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 30,
@@ -864,6 +927,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
 		thrust: { forward: 8545.5, reverse: 8118.23 },
 		travel: { thrust: 38.16, attack: 82, charge: 16, release: 0 },
+		boost: { thrust: 5.74, duration: 24.3, recharge: 92, acceleration: 3.5 },
+		tags: [ 'engine', 'extralarge', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 30,
@@ -902,6 +968,8 @@ export const Equipments = [
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
 		thrust: { forward: 5058, reverse: 5564 },
+		tags: [ 'engine', 'khaak', 'large', 'ship_kha_l_destroyer_01' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -918,6 +986,9 @@ export const Equipments = [
 		owners: [ Factions.khaak ],
 		thrust: { forward: 1400, reverse: 1600 },
 		travel: { thrust: 7, attack: 15, charge: 3, release: 0 },
+		boost: { thrust: 4, duration: 6, recharge: 50, acceleration: 5 },
+		tags: [ 'engine', 'medium', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -934,6 +1005,9 @@ export const Equipments = [
 		owners: [ Factions.khaak ],
 		thrust: { forward: 1400, reverse: 1662 },
 		travel: { thrust: 7, attack: 15, charge: 3, release: 0 },
+		boost: { thrust: 5, duration: 6, recharge: 50, acceleration: 5 },
+		tags: [ 'engine', 'medium', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -950,6 +1024,9 @@ export const Equipments = [
 		owners: [ Factions.khaak ],
 		thrust: { forward: 500, reverse: 770 },
 		travel: { thrust: 7, attack: 15, charge: 2, release: 0 },
+		boost: { thrust: 4, duration: 4, recharge: 40, acceleration: 5 },
+		tags: [ 'engine', 'small', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -966,6 +1043,8 @@ export const Equipments = [
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
 		thrust: { forward: 36000, reverse: 39000 },
+		tags: [ 'engine', 'extralarge', 'khaak', 'ship_kha_xl_battleship_01' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -983,6 +1062,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 4420, reverse: 3978 },
 		travel: { thrust: 30.6, attack: 72, charge: 14, release: 0 },
+		boost: { thrust: 4.2, duration: 33.6, recharge: 136, acceleration: 2.1 },
+		tags: [ 'engine', 'large', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -1011,6 +1093,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 3500, reverse: 3151 },
 		travel: { thrust: 45.2, attack: 67, charge: 12, release: 0 },
+		boost: { thrust: 3.63, duration: 27.89, recharge: 136, acceleration: 2.1 },
+		tags: [ 'engine', 'large', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -1038,6 +1123,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 1045, reverse: 1045 },
 		travel: { thrust: 10.5, attack: 36.8, charge: 6, release: 0 },
+		boost: { thrust: 4.86, duration: 15, recharge: 136, acceleration: 3.35 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1065,6 +1153,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 1251, reverse: 1251 },
 		travel: { thrust: 10.5, attack: 36.8, charge: 6, release: 0 },
+		boost: { thrust: 4.86, duration: 15, recharge: 136, acceleration: 3.35 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1092,6 +1183,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 1410.75, reverse: 1410.75 },
 		travel: { thrust: 10.5, attack: 36.8, charge: 6, release: 0 },
+		boost: { thrust: 4.86, duration: 15, recharge: 136, acceleration: 3.35 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1119,6 +1213,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki, Factions.kaori ],
 		thrust: { forward: 1201.75, reverse: 1201.75 },
 		travel: { thrust: 7.67, attack: 39.7, charge: 6, release: 0 },
+		boost: { thrust: 5.71, duration: 18, recharge: 122.4, acceleration: 4.78 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1146,6 +1243,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 1442.1, reverse: 1442.1 },
 		travel: { thrust: 7.67, attack: 39.7, charge: 6, release: 0 },
+		boost: { thrust: 5.71, duration: 18, recharge: 122.4, acceleration: 4.78 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1173,6 +1273,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 1622.36, reverse: 1622.36 },
 		travel: { thrust: 7.67, attack: 39.7, charge: 6, release: 0 },
+		boost: { thrust: 5.71, duration: 18, recharge: 122.4, acceleration: 4.78 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1200,6 +1303,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 919.6, reverse: 919.6 },
 		travel: { thrust: 15.51, attack: 34.2, charge: 4, release: 0 },
+		boost: { thrust: 4.2, duration: 12.45, recharge: 136, acceleration: 3.51 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1227,6 +1333,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 1103.52, reverse: 1103.52 },
 		travel: { thrust: 15.51, attack: 34.2, charge: 4, release: 0 },
+		boost: { thrust: 4.2, duration: 12.45, recharge: 136, acceleration: 3.51 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1254,6 +1363,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 1241.46, reverse: 1241.46 },
 		travel: { thrust: 15.51, attack: 34.2, charge: 4, release: 0 },
+		boost: { thrust: 4.2, duration: 12.45, recharge: 136, acceleration: 3.51 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1281,6 +1393,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 412, reverse: 412 },
 		travel: { thrust: 15, attack: 32, charge: 4, release: 0 },
+		boost: { thrust: 5.4, duration: 12, recharge: 136, acceleration: 3.38 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -1307,6 +1422,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 494.4, reverse: 494.4 },
 		travel: { thrust: 15, attack: 32, charge: 4, release: 0 },
+		boost: { thrust: 5.4, duration: 12, recharge: 136, acceleration: 3.38 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -1334,6 +1452,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 556.2, reverse: 556.2 },
 		travel: { thrust: 15, attack: 32, charge: 4, release: 0 },
+		boost: { thrust: 5.4, duration: 12, recharge: 136, acceleration: 3.38 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -1361,6 +1482,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 473.8, reverse: 473.8 },
 		travel: { thrust: 10.96, attack: 34.56, charge: 4, release: 0 },
+		boost: { thrust: 6.34, duration: 14.4, recharge: 122.4, acceleration: 4.83 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -1387,6 +1511,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki, Factions.kaori ],
 		thrust: { forward: 568.56, reverse: 568.56 },
 		travel: { thrust: 10.96, attack: 34.56, charge: 4, release: 0 },
+		boost: { thrust: 6.34, duration: 14.4, recharge: 122.4, acceleration: 4.83 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -1414,6 +1541,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki, Factions.kaori ],
 		thrust: { forward: 639.63, reverse: 639.63 },
 		travel: { thrust: 10.96, attack: 34.56, charge: 4, release: 0 },
+		boost: { thrust: 6.34, duration: 14.4, recharge: 122.4, acceleration: 4.83 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -1441,6 +1571,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 362.56, reverse: 362.56 },
 		travel: { thrust: 22.16, attack: 29.76, charge: 2, release: 0 },
+		boost: { thrust: 4.66, duration: 9.96, recharge: 136, acceleration: 3.55 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -1467,6 +1600,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 435.07, reverse: 435.07 },
 		travel: { thrust: 22.16, attack: 29.76, charge: 2, release: 0 },
+		boost: { thrust: 4.66, duration: 9.96, recharge: 136, acceleration: 3.55 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -1494,6 +1630,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 489.46, reverse: 489.46 },
 		travel: { thrust: 22.16, attack: 29.76, charge: 2, release: 0 },
+		boost: { thrust: 4.66, duration: 9.96, recharge: 136, acceleration: 3.55 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -1522,6 +1661,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 11600, reverse: 10440 },
 		travel: { thrust: 27.54, attack: 72, charge: 14, release: 0 },
+		boost: { thrust: 4.2, duration: 33.6, recharge: 136, acceleration: 1.84 },
+		tags: [ 'engine', 'extralarge', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 30,
@@ -1550,6 +1692,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.kaori ],
 		thrust: { forward: 9187, reverse: 8268 },
 		travel: { thrust: 40.68, attack: 67, charge: 12, release: 0 },
+		boost: { thrust: 3.63, duration: 27.89, recharge: 136, acceleration: 1.93 },
+		tags: [ 'engine', 'extralarge', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 30,
@@ -1578,6 +1723,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
 		thrust: { forward: 4000, reverse: 4400 },
 		travel: { thrust: 28.6, attack: 57, charge: 9, release: 0 },
+		boost: { thrust: 3.75, duration: 46, recharge: 120, acceleration: 2.11 },
+		tags: [ 'engine', 'large', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -1606,6 +1754,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
 		thrust: { forward: 3384, reverse: 3722 },
 		travel: { thrust: 37.5, attack: 49, charge: 8, release: 0 },
+		boost: { thrust: 2.66, duration: 36, recharge: 120, acceleration: 1.35 },
+		tags: [ 'engine', 'large', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -1633,6 +1784,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
 		thrust: { forward: 940, reverse: 1034 },
 		travel: { thrust: 8.65, attack: 25, charge: 6, release: 0 },
+		boost: { thrust: 4.5, duration: 26.4, recharge: 120, acceleration: 3.04 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1660,6 +1814,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
 		thrust: { forward: 1128, reverse: 1240.8 },
 		travel: { thrust: 8.65, attack: 25, charge: 6, release: 0 },
+		boost: { thrust: 4.5, duration: 26.4, recharge: 120, acceleration: 3.04 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1698,6 +1855,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
 		thrust: { forward: 1269, reverse: 1395.9 },
 		travel: { thrust: 8.65, attack: 25, charge: 6, release: 0 },
+		boost: { thrust: 4.5, duration: 26.4, recharge: 120, acceleration: 3.04 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1725,6 +1885,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
 		thrust: { forward: 1099.8, reverse: 1209.78 },
 		travel: { thrust: 6.28, attack: 25, charge: 6, release: 0 },
+		boost: { thrust: 5.19, duration: 31.68, recharge: 114, acceleration: 4.04 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1762,6 +1925,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
 		thrust: { forward: 1319.76, reverse: 1451.74 },
 		travel: { thrust: 6.28, attack: 25, charge: 6, release: 0 },
+		boost: { thrust: 5.19, duration: 31.68, recharge: 114, acceleration: 4.04 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1789,6 +1955,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
 		thrust: { forward: 1484.73, reverse: 1633.203 },
 		travel: { thrust: 6.28, attack: 25, charge: 6, release: 0 },
+		boost: { thrust: 5.19, duration: 31.68, recharge: 114, acceleration: 4.04 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1816,6 +1985,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
 		thrust: { forward: 902.4, reverse: 992.64 },
 		travel: { thrust: 11.53, attack: 20.5, charge: 6, release: 0 },
+		boost: { thrust: 3.19, duration: 23.76, recharge: 120, acceleration: 1.86 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1843,6 +2015,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
 		thrust: { forward: 1082.88, reverse: 1191.17 },
 		travel: { thrust: 11.53, attack: 20.5, charge: 6, release: 0 },
+		boost: { thrust: 3.19, duration: 23.76, recharge: 120, acceleration: 1.86 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1870,6 +2045,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
 		thrust: { forward: 1218.24, reverse: 1340.06 },
 		travel: { thrust: 11.53, attack: 20.5, charge: 6, release: 0 },
+		boost: { thrust: 3.19, duration: 23.76, recharge: 120, acceleration: 1.86 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -1908,6 +2086,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
 		thrust: { forward: 370, reverse: 407 },
 		travel: { thrust: 13.3, attack: 18, charge: 4, release: 0 },
+		boost: { thrust: 5, duration: 22, recharge: 120, acceleration: 3.75 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -1934,6 +2115,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
 		thrust: { forward: 444, reverse: 488.4 },
 		travel: { thrust: 13.3, attack: 18, charge: 4, release: 0 },
+		boost: { thrust: 5, duration: 22, recharge: 120, acceleration: 3.75 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -1961,6 +2145,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
 		thrust: { forward: 499.5, reverse: 549.45 },
 		travel: { thrust: 13.3, attack: 18, charge: 4, release: 0 },
+		boost: { thrust: 5, duration: 22, recharge: 120, acceleration: 3.75 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -1988,6 +2175,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
 		thrust: { forward: 432.9, reverse: 476.19 },
 		travel: { thrust: 9.66, attack: 18, charge: 4, release: 0 },
+		boost: { thrust: 5.77, duration: 26.4, recharge: 114, acceleration: 5 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -2014,6 +2204,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
 		thrust: { forward: 519.48, reverse: 571.43 },
 		travel: { thrust: 9.66, attack: 18, charge: 4, release: 0 },
+		boost: { thrust: 5.77, duration: 26.4, recharge: 114, acceleration: 5 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -2041,6 +2234,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
 		thrust: { forward: 584.42, reverse: 642.86 },
 		travel: { thrust: 9.66, attack: 18, charge: 4, release: 0 },
+		boost: { thrust: 5.77, duration: 26.4, recharge: 114, acceleration: 5 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -2068,6 +2264,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
 		thrust: { forward: 355.2, reverse: 390.72 },
 		travel: { thrust: 17.73, attack: 14.76, charge: 4, release: 0 },
+		boost: { thrust: 3.54, duration: 19.8, recharge: 120, acceleration: 2 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -2094,6 +2293,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
 		thrust: { forward: 426.24, reverse: 468.86 },
 		travel: { thrust: 17.73, attack: 14.76, charge: 4, release: 0 },
+		boost: { thrust: 3.54, duration: 19.8, recharge: 120, acceleration: 2 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -2121,6 +2323,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
 		thrust: { forward: 479.52, reverse: 527.47 },
 		travel: { thrust: 17, attack: 14.76, charge: 4, release: 0 },
+		boost: { thrust: 3.54, duration: 19.8, recharge: 120, acceleration: 2 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -2149,6 +2354,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
 		thrust: { forward: 10400, reverse: 11440 },
 		travel: { thrust: 25.74, attack: 57, charge: 9, release: 0 },
+		boost: { thrust: 3.75, duration: 46, recharge: 120, acceleration: 2.11 },
+		tags: [ 'engine', 'extralarge', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 30,
@@ -2177,6 +2385,9 @@ export const Equipments = [
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
 		thrust: { forward: 8898, reverse: 9678 },
 		travel: { thrust: 33.75, attack: 49, charge: 8, release: 0 },
+		boost: { thrust: 2.66, duration: 36, recharge: 120, acceleration: 1.35 },
+		tags: [ 'engine', 'extralarge', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 30,
@@ -2205,6 +2416,9 @@ export const Equipments = [
 		owners: [ Factions.xenon ],
 		thrust: { forward: 4206, reverse: 4627 },
 		travel: { thrust: 25, attack: 55, charge: 16, release: 0 },
+		boost: { thrust: 3.5, duration: 30, recharge: 150, acceleration: 1.5 },
+		tags: [ 'engine', 'large', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 8,
@@ -2233,6 +2447,9 @@ export const Equipments = [
 		owners: [ Factions.xenon ],
 		thrust: { forward: 4206, reverse: 4627 },
 		travel: { thrust: 25, attack: 55, charge: 16, release: 0 },
+		boost: { thrust: 3.5, duration: 30, recharge: 150, acceleration: 1.5 },
+		tags: [ 'engine', 'large', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 8,
@@ -2271,6 +2488,9 @@ export const Equipments = [
 		owners: [ Factions.xenon ],
 		thrust: { forward: 1286, reverse: 1486 },
 		travel: { thrust: 8, attack: 15, charge: 3, release: 0 },
+		boost: { thrust: 6, duration: 18, recharge: 150, acceleration: 7 },
+		tags: [ 'engine', 'medium', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 4,
@@ -2298,6 +2518,9 @@ export const Equipments = [
 		owners: [ Factions.xenon ],
 		thrust: { forward: 1224, reverse: 1102 },
 		travel: { thrust: 12, attack: 20, charge: 3, release: 0 },
+		boost: { thrust: 6, duration: 12, recharge: 150, acceleration: 6 },
+		tags: [ 'engine', 'medium', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -2325,6 +2548,9 @@ export const Equipments = [
 		owners: [ Factions.xenon ],
 		thrust: { forward: 1286, reverse: 1486 },
 		travel: { thrust: 8, attack: 20, charge: 1, release: 0 },
+		boost: { thrust: 6, duration: 18, recharge: 150, acceleration: 7 },
+		tags: [ 'engine', 'medium', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 4,
@@ -2363,6 +2589,9 @@ export const Equipments = [
 		owners: [ Factions.xenon ],
 		thrust: { forward: 503, reverse: 768 },
 		travel: { thrust: 18, attack: 22, charge: 1, release: 0 },
+		boost: { thrust: 6, duration: 16, recharge: 150, acceleration: 6 },
+		tags: [ 'engine', 'small', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 2,
@@ -2390,6 +2619,9 @@ export const Equipments = [
 		owners: [ Factions.xenon ],
 		thrust: { forward: 503, reverse: 768 },
 		travel: { thrust: 18, attack: 22, charge: 0, release: 0 },
+		boost: { thrust: 6, duration: 16, recharge: 150, acceleration: 8 },
+		tags: [ 'engine', 'small', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 2,
@@ -2429,6 +2661,9 @@ export const Equipments = [
 		owners: [ Factions.xenon ],
 		thrust: { forward: 11076, reverse: 12184 },
 		travel: { thrust: 25, attack: 55, charge: 20, release: 0 },
+		boost: { thrust: 2.5, duration: 30, recharge: 150, acceleration: 1.5 },
+		tags: [ 'engine', 'extralarge', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 16,
@@ -2453,6 +2688,7 @@ export const Equipments = [
 		explosionDamage: 1000,
 		hull: 50,
 		price: { min: 1936, max: 2620, avg: 2278 },
+		missile: { damage: 1000, range: 6500, lifetime: 12, guided: false, reload: 1.2, speed: 681 },
 		production: [
 		{
 			time: 3,
@@ -2507,6 +2743,7 @@ export const Equipments = [
 		explosionDamage: 8400,
 		hull: 90,
 		price: { min: 2930, max: 3964, avg: 3447 },
+		missile: { damage: 8400, range: 12000, lifetime: 88, guided: true, reload: 1, speed: 181 },
 		production: [
 		{
 			time: 3,
@@ -2562,6 +2799,7 @@ export const Equipments = [
 		explosionDamage: 780,
 		hull: 1,
 		price: { min: 881, max: 1191, avg: 1036 },
+		missile: { damage: 780, range: 5500, lifetime: 10, guided: false, reload: 0.46, speed: 681 },
 		production: [
 		{
 			time: 3,
@@ -2615,6 +2853,7 @@ export const Equipments = [
 		explosionDamage: 500,
 		hull: 1,
 		price: { min: 1058, max: 1432, avg: 1245 },
+		missile: { damage: 500, range: 5500, lifetime: 10, guided: false, reload: 0.46, speed: 681 },
 		production: [
 		{
 			time: 3,
@@ -2668,6 +2907,7 @@ export const Equipments = [
 		explosionDamage: 1200,
 		hull: 1,
 		price: { min: 1671, max: 2261, avg: 1966 },
+		missile: { damage: 1200, range: 12000, lifetime: 17.5, guided: true, reload: 17, speed: 891 },
 		production: [
 		{
 			time: 3,
@@ -2723,6 +2963,7 @@ export const Equipments = [
 		explosionDamage: 980,
 		hull: 1,
 		price: { min: 2105, max: 2849, avg: 2477 },
+		missile: { damage: 980, range: 9000, lifetime: 20, guided: true, reload: 18, speed: 804 },
 		production: [
 		{
 			time: 3,
@@ -2778,6 +3019,7 @@ export const Equipments = [
 		explosionDamage: 600,
 		hull: 1,
 		price: { min: 493, max: 667, avg: 580 },
+		missile: { damage: 600, range: 2800, lifetime: 4, guided: false, reload: 0.25, speed: 827 },
 		production: [
 		{
 			time: 3,
@@ -2831,6 +3073,7 @@ export const Equipments = [
 		explosionDamage: 374,
 		hull: 1,
 		price: { min: 597, max: 807, avg: 702 },
+		missile: { damage: 374, range: 2800, lifetime: 4, guided: false, reload: 0.25, speed: 827 },
 		production: [
 		{
 			time: 3,
@@ -2884,6 +3127,7 @@ export const Equipments = [
 		explosionDamage: 10,
 		hull: 1,
 		price: { min: 1016, max: 1375, avg: 1196 },
+		missile: { damage: 10, range: 22000, lifetime: 10, guided: true, reload: 12, speed: 57887 },
 		production: [
 		{
 			time: 3,
@@ -2938,6 +3182,7 @@ export const Equipments = [
 		explosionDamage: 1200,
 		hull: 1,
 		price: { min: 858, max: 1160, avg: 1009 },
+		missile: { damage: 1200, range: 12000, lifetime: 12.5, guided: true, reload: 10, speed: 1206 },
 		production: [
 		{
 			time: 3,
@@ -2992,6 +3237,7 @@ export const Equipments = [
 		explosionDamage: 940,
 		hull: 1,
 		price: { min: 729, max: 986, avg: 857 },
+		missile: { damage: 940, range: 7000, lifetime: 8, guided: true, reload: 1, speed: 1447 },
 		production: [
 		{
 			time: 3,
@@ -3046,6 +3292,7 @@ export const Equipments = [
 		explosionDamage: 980,
 		hull: 1,
 		price: { min: 965, max: 1305, avg: 1135 },
+		missile: { damage: 980, range: 8000, lifetime: 16, guided: true, reload: 8, speed: 904 },
 		production: [
 		{
 			time: 3,
@@ -3100,6 +3347,7 @@ export const Equipments = [
 		explosionDamage: 210,
 		hull: 1,
 		price: { min: 859, max: 1162, avg: 1010 },
+		missile: { damage: 210, range: 7000, lifetime: 15, guided: true, reload: 8, speed: 706 },
 		production: [
 		{
 			time: 3,
@@ -3154,6 +3402,7 @@ export const Equipments = [
 		explosionDamage: 3660,
 		hull: 60,
 		price: { min: 1975, max: 2672, avg: 2324 },
+		missile: { damage: 3660, range: 5000, lifetime: 40, guided: true, reload: 14, speed: 181 },
 		production: [
 		{
 			time: 3,
@@ -3212,6 +3461,8 @@ export const Equipments = [
 		recharge: { max: 55200, rate: 270, delay: 15 },
 		price: { min: 42166, max: 51536, avg: 46851 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.yaki, Factions.loanshark, Factions.scavenger ],
+		tags: [ 'large', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -3250,6 +3501,8 @@ export const Equipments = [
 		recharge: { max: 65688, rate: 405, delay: 15 },
 		price: { min: 205644, max: 251343, avg: 228494 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
+		tags: [ 'large', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -3288,6 +3541,8 @@ export const Equipments = [
 		recharge: { max: 5750, rate: 100, delay: 12.5 },
 		price: { min: 15405, max: 18828, avg: 17117 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger, Factions.boron ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -3325,6 +3580,8 @@ export const Equipments = [
 		recharge: { max: 7475, rate: 140, delay: 12.5 },
 		price: { min: 74538, max: 91102, avg: 82820 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger, Factions.boron ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -3363,6 +3620,8 @@ export const Equipments = [
 		recharge: { max: 5750, rate: 100, delay: 12.5 },
 		price: { min: 15405, max: 18828, avg: 17117 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger, Factions.boron ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -3400,6 +3659,8 @@ export const Equipments = [
 		recharge: { max: 7475, rate: 140, delay: 12.5 },
 		price: { min: 73916, max: 90342, avg: 82129 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger, Factions.boron ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -3437,6 +3698,8 @@ export const Equipments = [
 		recharge: { max: 1196, rate: 50, delay: 15 },
 		price: { min: 1219, max: 1489, avg: 1354 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.yaki, Factions.loanshark, Factions.scavenger ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -3471,6 +3734,8 @@ export const Equipments = [
 		recharge: { max: 1380, rate: 78, delay: 15 },
 		price: { min: 10186, max: 12449, avg: 11318 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -3507,6 +3772,8 @@ export const Equipments = [
 		recharge: { max: 1955, rate: 120, delay: 15 },
 		price: { min: 49892, max: 60979, avg: 55436 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -3545,6 +3812,8 @@ export const Equipments = [
 		recharge: { max: 148900, rate: 590, delay: 15 },
 		price: { min: 225671, max: 275820, avg: 250745 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger ],
+		tags: [ 'extralarge', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -3583,6 +3852,8 @@ export const Equipments = [
 		recharge: { max: 135000, rate: 240, delay: 8 },
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
+		tags: [ 'khaak', 'large', 'shield' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -3598,6 +3869,8 @@ export const Equipments = [
 		recharge: { max: 4800, rate: 52, delay: 4 },
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -3613,6 +3886,8 @@ export const Equipments = [
 		recharge: { max: 4800, rate: 52, delay: 4 },
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -3629,6 +3904,8 @@ export const Equipments = [
 		recharge: { max: 4800, rate: 52, delay: 4 },
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
+		tags: [ 'khaak', 'medium', 'shield' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -3644,6 +3921,8 @@ export const Equipments = [
 		recharge: { max: 745, rate: 40, delay: 4 },
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
+		tags: [ 'shield', 'small', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -3660,6 +3939,8 @@ export const Equipments = [
 		recharge: { max: 150000, rate: 400, delay: 8 },
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
+		tags: [ 'extralarge', 'khaak', 'shield' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -3676,6 +3957,8 @@ export const Equipments = [
 		recharge: { max: 40320, rate: 365, delay: 8 },
 		price: { min: 47226, max: 57720, avg: 52473 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		tags: [ 'large', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -3703,6 +3986,8 @@ export const Equipments = [
 		recharge: { max: 48000, rate: 530, delay: 8 },
 		price: { min: 230322, max: 281505, avg: 255913 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		tags: [ 'large', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -3730,6 +4015,8 @@ export const Equipments = [
 		recharge: { max: 4000, rate: 130, delay: 7.6 },
 		price: { min: 16946, max: 20711, avg: 18828 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -3757,6 +4044,8 @@ export const Equipments = [
 		recharge: { max: 5400, rate: 203, delay: 7.6 },
 		price: { min: 81992, max: 100213, avg: 91102 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -3784,6 +4073,8 @@ export const Equipments = [
 		recharge: { max: 4000, rate: 130, delay: 7.6 },
 		price: { min: 15860, max: 19384, avg: 17622 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -3811,6 +4102,8 @@ export const Equipments = [
 		recharge: { max: 5200, rate: 203, delay: 7.6 },
 		price: { min: 34397, max: 42041, avg: 38219 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -3837,6 +4130,8 @@ export const Equipments = [
 		recharge: { max: 760, rate: 65, delay: 10 },
 		price: { min: 1365, max: 1668, avg: 1516 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -3862,6 +4157,8 @@ export const Equipments = [
 		recharge: { max: 960, rate: 104, delay: 10 },
 		price: { min: 11409, max: 13944, avg: 12676 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -3888,6 +4185,8 @@ export const Equipments = [
 		recharge: { max: 1360, rate: 170, delay: 10 },
 		price: { min: 55879, max: 68297, avg: 62088 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -3915,6 +4214,8 @@ export const Equipments = [
 		recharge: { max: 103585, rate: 775, delay: 8.5 },
 		price: { min: 252751, max: 308918, avg: 280834 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		tags: [ 'extralarge', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -3942,6 +4243,8 @@ export const Equipments = [
 		recharge: { max: 66082, rate: 216, delay: 18 },
 		price: { min: 42166, max: 51536, avg: 46851 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi, Factions.kaori ],
+		tags: [ 'large', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -3969,6 +4272,8 @@ export const Equipments = [
 		recharge: { max: 78000, rate: 305, delay: 18 },
 		price: { min: 205644, max: 251343, avg: 228494 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi, Factions.kaori ],
+		tags: [ 'large', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -3996,6 +4301,8 @@ export const Equipments = [
 		recharge: { max: 6500, rate: 83, delay: 13.9 },
 		price: { min: 15405, max: 18828, avg: 17117 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi, Factions.kaori ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4033,6 +4340,8 @@ export const Equipments = [
 		recharge: { max: 8840, rate: 104, delay: 13.9 },
 		price: { min: 74538, max: 91102, avg: 82820 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi, Factions.yaki, Factions.kaori ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4071,6 +4380,8 @@ export const Equipments = [
 		recharge: { max: 6500, rate: 83, delay: 13.9 },
 		price: { min: 14418, max: 17622, avg: 16020 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi, Factions.kaori ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4108,6 +4419,8 @@ export const Equipments = [
 		recharge: { max: 8840, rate: 104, delay: 13.9 },
 		price: { min: 31270, max: 38219, avg: 34745 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi, Factions.kaori ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4145,6 +4458,8 @@ export const Equipments = [
 		recharge: { max: 1300, rate: 40, delay: 16.5 },
 		price: { min: 1219, max: 1489, avg: 1354 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi, Factions.kaori ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4170,6 +4485,8 @@ export const Equipments = [
 		recharge: { max: 1625, rate: 54, delay: 16.5 },
 		price: { min: 10186, max: 12450, avg: 11318 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi, Factions.kaori ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4196,6 +4513,8 @@ export const Equipments = [
 		recharge: { max: 2366, rate: 84, delay: 16.5 },
 		price: { min: 49892, max: 60980, avg: 55436 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi, Factions.yaki, Factions.kaori ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4223,6 +4542,8 @@ export const Equipments = [
 		recharge: { max: 181791, rate: 472, delay: 18 },
 		price: { min: 225671, max: 275820, avg: 250745 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi, Factions.kaori ],
+		tags: [ 'extralarge', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -4250,6 +4571,8 @@ export const Equipments = [
 		recharge: { max: 45600, rate: 356, delay: 17.25 },
 		price: { min: 41386, max: 50582, avg: 45984 },
 		owners: [ Factions.xenon ],
+		tags: [ 'large', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -4288,6 +4611,8 @@ export const Equipments = [
 		recharge: { max: 54355, rate: 552, delay: 17.25 },
 		price: { min: 110765, max: 135379, avg: 123072 },
 		owners: [ Factions.xenon ],
+		tags: [ 'large', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -4326,6 +4651,8 @@ export const Equipments = [
 		recharge: { max: 48000, rate: 356, delay: 17.25 },
 		price: { min: 41386, max: 50582, avg: 45984 },
 		owners: [ Factions.xenon ],
+		tags: [ 'large', 'shield', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -4364,6 +4691,8 @@ export const Equipments = [
 		recharge: { max: 54720, rate: 552, delay: 17.25 },
 		price: { min: 110765, max: 135379, avg: 123072 },
 		owners: [ Factions.xenon ],
+		tags: [ 'large', 'shield', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -4402,6 +4731,8 @@ export const Equipments = [
 		recharge: { max: 4750, rate: 132, delay: 15 },
 		price: { min: 16174, max: 19768, avg: 17971 },
 		owners: [ Factions.xenon ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4429,6 +4760,8 @@ export const Equipments = [
 		recharge: { max: 5662, rate: 198, delay: 15 },
 		price: { min: 33385, max: 40804, avg: 37094 },
 		owners: [ Factions.xenon ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4453,6 +4786,8 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 16174, max: 19768, avg: 17971 },
 		owners: [ Factions.xenon ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4480,6 +4815,8 @@ export const Equipments = [
 		recharge: { max: 5662, rate: 198, delay: 15 },
 		price: { min: 33385, max: 40804, avg: 37094 },
 		owners: [ Factions.xenon ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4507,6 +4844,8 @@ export const Equipments = [
 		recharge: { max: 4750, rate: 132, delay: 15 },
 		price: { min: 16174, max: 19768, avg: 17971 },
 		owners: [ Factions.xenon ],
+		tags: [ 'medium', 'shield', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4544,6 +4883,8 @@ export const Equipments = [
 		recharge: { max: 5662, rate: 178, delay: 16 },
 		price: { min: 16174, max: 19768, avg: 17971 },
 		owners: [ Factions.xenon ],
+		tags: [ 'medium', 'shield', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4581,6 +4922,8 @@ export const Equipments = [
 		recharge: { max: 950, rate: 66, delay: 17.5 },
 		price: { min: 1901, max: 2323, avg: 2112 },
 		owners: [ Factions.xenon ],
+		tags: [ 'small', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4607,6 +4950,8 @@ export const Equipments = [
 		recharge: { max: 1188, rate: 99, delay: 17.5 },
 		price: { min: 4579, max: 5597, avg: 5088 },
 		owners: [ Factions.xenon ],
+		tags: [ 'small', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4633,6 +4978,8 @@ export const Equipments = [
 		recharge: { max: 1188, rate: 99, delay: 17.5 },
 		price: { min: 1901, max: 2323, avg: 2112 },
 		owners: [ Factions.xenon ],
+		tags: [ 'shield', 'small', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -4670,6 +5017,8 @@ export const Equipments = [
 		recharge: { max: 135000, rate: 802, delay: 15.25 },
 		price: { min: 221493, max: 270714, avg: 246104 },
 		owners: [ Factions.xenon ],
+		tags: [ 'extralarge', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -4695,6 +5044,7 @@ export const Equipments = [
 		hull: 281,
 		price: { min: 9707, max: 13133, avg: 11420 },
 		owners: [ Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger, Factions.boron ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 60,
@@ -5059,6 +5409,7 @@ export const Equipments = [
 		hull: 281,
 		price: { min: 9707, max: 13133, avg: 11420 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 60,
@@ -5084,6 +5435,7 @@ export const Equipments = [
 		hull: 281,
 		price: { min: 9707, max: 13133, avg: 11420 },
 		owners: [ Factions.ministry, Factions.teladi ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 60,
@@ -5109,6 +5461,7 @@ export const Equipments = [
 		hull: 281,
 		price: { min: 9707, max: 13133, avg: 11420 },
 		owners: [ Factions.ministry, Factions.teladi ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 60,
@@ -5134,6 +5487,7 @@ export const Equipments = [
 		hull: 281,
 		price: { min: 9707, max: 13133, avg: 11420 },
 		owners: [ Factions.ministry, Factions.teladi ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 60,
@@ -5213,6 +5567,7 @@ export const Equipments = [
 		type: EquipmentType.software,
 		equipmentClass: EquipmentClass.scanner,
 		price: { min: 29274, max: 35779, avg: 32526 },
+		tags: [ 'scanner', 'mining', 'longrange' ],
 		production: [
 		{
 			time: 10,
@@ -5232,6 +5587,7 @@ export const Equipments = [
 		type: EquipmentType.software,
 		equipmentClass: EquipmentClass.scanner,
 		price: { min: 58547, max: 71558, avg: 65052 },
+		tags: [ 'scanner', 'mining', 'longrange' ],
 		production: [
 		{
 			time: 10,
@@ -5251,6 +5607,7 @@ export const Equipments = [
 		type: EquipmentType.software,
 		equipmentClass: EquipmentClass.scanner,
 		price: { min: 10907, max: 13331, avg: 12119 },
+		tags: [ 'scanner', 'mining', 'longrange' ],
 		production: [
 		{
 			time: 10,
@@ -5270,6 +5627,7 @@ export const Equipments = [
 		type: EquipmentType.software,
 		equipmentClass: EquipmentClass.scanner,
 		price: { min: 36733, max: 44896, avg: 40815 },
+		tags: [ 'scanner', 'mining', 'longrange' ],
 		production: [
 		{
 			time: 10,
@@ -5329,6 +5687,7 @@ export const Equipments = [
 		size: Size.large,
 		price: { min: 253435, max: 309754, avg: 281595 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'large' ],
 		production: [
 		{
 			time: 20,
@@ -5387,6 +5746,7 @@ export const Equipments = [
 		size: Size.large,
 		price: { min: 1266139, max: 1547503, avg: 1406821 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'large' ],
 		production: [
 		{
 			time: 20,
@@ -5445,6 +5805,7 @@ export const Equipments = [
 		size: Size.large,
 		price: { min: 6328619, max: 7734979, avg: 7031799 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'large' ],
 		production: [
 		{
 			time: 20,
@@ -5503,6 +5864,7 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 11717, max: 14321, avg: 13019 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'medium' ],
 		production: [
 		{
 			time: 10,
@@ -5559,6 +5921,7 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 58067, max: 70971, avg: 64519 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'medium' ],
 		production: [
 		{
 			time: 10,
@@ -5617,6 +5980,7 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 289300, max: 353589, avg: 321445 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'medium' ],
 		production: [
 		{
 			time: 10,
@@ -5675,6 +6039,7 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 14899, max: 18210, avg: 16555 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'medium' ],
 		production: [
 		{
 			time: 10,
@@ -5731,6 +6096,7 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 73978, max: 90418, avg: 82198 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'medium' ],
 		production: [
 		{
 			time: 10,
@@ -5789,6 +6155,7 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 368854, max: 450821, avg: 409838 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'medium' ],
 		production: [
 		{
 			time: 10,
@@ -5847,6 +6214,7 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 5353, max: 6542, avg: 5948 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'small' ],
 		production: [
 		{
 			time: 5,
@@ -5903,6 +6271,7 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 39752, max: 48586, avg: 44169 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'small' ],
 		production: [
 		{
 			time: 5,
@@ -5961,6 +6330,7 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 157946, max: 193045, avg: 175495 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'small' ],
 		production: [
 		{
 			time: 5,
@@ -6019,6 +6389,7 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 6241, max: 7628, avg: 6934 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'small' ],
 		production: [
 		{
 			time: 5,
@@ -6075,6 +6446,7 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 83968, max: 102628, avg: 93298 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'small' ],
 		production: [
 		{
 			time: 5,
@@ -6133,6 +6505,7 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 199757, max: 244147, avg: 221952 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'small' ],
 		production: [
 		{
 			time: 5,
@@ -6191,6 +6564,7 @@ export const Equipments = [
 		size: Size.extralarge,
 		price: { min: 538346, max: 657978, avg: 598162 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'extralarge' ],
 		production: [
 		{
 			time: 30,
@@ -6249,6 +6623,7 @@ export const Equipments = [
 		size: Size.extralarge,
 		price: { min: 2690693, max: 3288625, avg: 2989659 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'extralarge' ],
 		production: [
 		{
 			time: 30,
@@ -6307,6 +6682,7 @@ export const Equipments = [
 		size: Size.extralarge,
 		price: { min: 13451392, max: 16440590, avg: 14945991 },
 		thrust: { forward: 0, reverse: 0 },
+		tags: [ 'thruster', 'extralarge' ],
 		production: [
 		{
 			time: 30,
@@ -6367,6 +6743,9 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 58262, max: 71209, avg: 64735 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 375, shield: 125, amount: 1, speed: 299792500, lifetime: 4, range: 8600, beam: true, reload: 11 },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -6404,6 +6783,8 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 44955, max: 54945, avg: 49950 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		tags: [ 'turret', 'large', 'missile', 'standard' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -6441,6 +6822,8 @@ export const Equipments = [
 		hull: 3500,
 		price: { min: 62937, max: 76923, avg: 69930 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		tags: [ 'turret', 'large', 'missile', 'standard' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -6478,6 +6861,9 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 43277, max: 52894, avg: 48085 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.yaki, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 380, amount: 1, speed: 5000, lifetime: 1, range: 5000, reload: 1.4, magazine: { size: 8, reload: 7 } },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -6515,6 +6901,9 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 14985, max: 18315, avg: 16650 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 50, hull: 1, amount: 1, speed: 7000, lifetime: 4, range: 7000, reload: 4 },
+		tags: [ 'turret', 'large', 'mining', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -6552,6 +6941,9 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 103217, max: 126154, avg: 114685 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 2130, amount: 1, speed: 600, lifetime: 12, range: 7200, reload: 3.8, magazine: { size: 3, reload: 11 } },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -6588,6 +6980,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 29131, max: 35604, avg: 32368 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 126, shield: 42, amount: 1, speed: 299792500, lifetime: 3, range: 5000, beam: true, reload: 7 },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -6625,6 +7020,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 29131, max: 35604, avg: 32368 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 126, shield: 42, amount: 1, speed: 299792500, lifetime: 3, range: 5000, beam: true, reload: 7 },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -6662,6 +7060,8 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 22478, max: 27473, avg: 24975 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		tags: [ 'turret', 'medium', 'missile', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -6698,6 +7098,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 59101, max: 72234, avg: 65668 },
 		owners: [ Factions.alliance, Factions.argon, Factions.buccaneers ],
+		weapon: { damage: 0, amount: 1, speed: 3000, lifetime: 1.1, range: 3300, rate: 2.4, magazine: { size: 6, reload: 8.5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -6735,6 +7138,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 59101, max: 72234, avg: 65668 },
 		owners: [ Factions.alliance, Factions.argon, Factions.buccaneers ],
+		weapon: { damage: 0, amount: 1, speed: 3000, lifetime: 1.1, range: 3300, rate: 2.4, magazine: { size: 6, reload: 8.5 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -6771,6 +7177,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 36623, max: 44762, avg: 40693 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 26, amount: 1, speed: 2100, lifetime: 1.476, range: 3100, rate: 16, magazine: { size: 30, reload: 6.5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -6808,6 +7217,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 36623, max: 44762, avg: 40693 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		weapon: { damage: 26, amount: 1, speed: 2100, lifetime: 1.476, range: 3100, rate: 16, magazine: { size: 30, reload: 6.5 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -6845,6 +7257,8 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 31469, max: 38462, avg: 34965 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		tags: [ 'turret', 'medium', 'missile', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -6881,6 +7295,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 21638, max: 26447, avg: 24043 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.yaki, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 18, amount: 1, speed: 5000, lifetime: 0.7, range: 3500, rate: 3.8, magazine: { size: 8, reload: 2.4 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -6918,6 +7335,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 21638, max: 26447, avg: 24043 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.yaki, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		weapon: { damage: 18, amount: 1, speed: 5000, lifetime: 0.7, range: 3500, rate: 3.8, magazine: { size: 8, reload: 2.4 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -6954,6 +7374,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 7493, max: 9158, avg: 8325 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 10, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'advanced', 'medium', 'mining', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -6990,6 +7413,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 7493, max: 9158, avg: 8325 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		weapon: { damage: 10, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'turret', 'medium', 'mining', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -7025,6 +7451,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 58442, max: 71429, avg: 64935 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 750, amount: 1, speed: 1000, lifetime: 5.5, range: 5500, reload: 3, magazine: { size: 2, reload: 7 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7062,6 +7491,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 58442, max: 71429, avg: 64935 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 750, amount: 1, speed: 1000, lifetime: 5.5, range: 5500, reload: 3, magazine: { size: 2, reload: 7 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7098,6 +7530,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 44116, max: 53919, avg: 49018 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 60, amount: 6, speed: 1900, lifetime: 1.2, range: 2280, rate: 0.9, magazine: { size: 9, reload: 7.5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7135,6 +7570,9 @@ export const Equipments = [
 		hull: 1600,
 		price: { min: 44116, max: 53919, avg: 49018 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		weapon: { damage: 60, amount: 6, speed: 1900, lifetime: 1.2, range: 2280, rate: 0.9, magazine: { size: 9, reload: 7.5 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7171,6 +7609,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 14146, max: 17289, avg: 15718 },
 		owners: [ Factions.alliance, Factions.hatikvah, Factions.scaleplate, Factions.teladi, Factions.freesplit, Factions.pioneers, Factions.scavenger, Factions.boron ],
+		weapon: { damage: 0, amount: 1, speed: 299792500, lifetime: 4, range: 4364, beam: true, reload: 4 },
+		tags: [ 'turret', 'medium', 'mandatory', 'ship_gen_m_tugboat_01' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -7219,6 +7660,9 @@ export const Equipments = [
 		hull: 3000,
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
+		weapon: { damage: 2000, amount: 1, speed: 16000, lifetime: 1.5, range: 8400, reload: 8 },
+		tags: [ 'combat', 'khaak', 'large', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -7234,6 +7678,9 @@ export const Equipments = [
 		hull: 1500,
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
+		weapon: { damage: 450, amount: 1, speed: 299792500, lifetime: 0.5, range: 4822, beam: true, reload: 3 },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -7249,6 +7696,9 @@ export const Equipments = [
 		hull: 3000,
 		price: { min: 148172, max: 181099, avg: 164635 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 2550, amount: 1, speed: 10000, lifetime: 1.4, range: 14000, reload: 15 },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -7275,6 +7725,8 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 44955, max: 54945, avg: 49950 },
 		owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		tags: [ 'turret', 'large', 'missile', 'standard' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -7301,6 +7753,8 @@ export const Equipments = [
 		hull: 3500,
 		price: { min: 62937, max: 76923, avg: 69930 },
 		owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		tags: [ 'turret', 'large', 'missile', 'standard' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -7327,6 +7781,9 @@ export const Equipments = [
 		hull: 3600,
 		price: { min: 43277, max: 52894, avg: 48085 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 204, amount: 1, speed: 5000, lifetime: 0.95, range: 4750, reload: 0.6, magazine: { size: 12, reload: 8.5 } },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -7353,6 +7810,9 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 14985, max: 18315, avg: 16650 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 50, hull: 1, amount: 1, speed: 7000, lifetime: 4, range: 7000, reload: 4 },
+		tags: [ 'turret', 'large', 'mining', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -7379,6 +7839,9 @@ export const Equipments = [
 		hull: 3600,
 		price: { min: 103217, max: 126154, avg: 114685 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 2440, amount: 1, speed: 600, lifetime: 13.2, range: 7920, reload: 4, magazine: { size: 2, reload: 11.5 } },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -7404,6 +7867,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 74086, max: 90549, avg: 82318 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 1100, amount: 1, speed: 10000, lifetime: 1.2, range: 12000, reload: 16 },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7430,6 +7896,9 @@ export const Equipments = [
 		hull: 900,
 		price: { min: 74086, max: 90549, avg: 82318 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 1100, amount: 1, speed: 10000, lifetime: 1.2, range: 12000, reload: 16 },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7456,6 +7925,8 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 22478, max: 27473, avg: 24975 },
 		owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		tags: [ 'turret', 'medium', 'missile', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7481,6 +7952,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 36623, max: 44762, avg: 40693 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
+		weapon: { damage: 26, amount: 1, speed: 2100, lifetime: 1.476, range: 3100, rate: 16, magazine: { size: 30, reload: 6.5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7507,6 +7981,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 36623, max: 44762, avg: 40693 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity, Factions.yaki ],
+		weapon: { damage: 26, amount: 1, speed: 2100, lifetime: 1.476, range: 3100, rate: 16, magazine: { size: 30, reload: 6.5 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7533,6 +8010,8 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 31469, max: 38462, avg: 34965 },
 		owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		tags: [ 'turret', 'medium', 'missile', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7558,6 +8037,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 14146, max: 17289, avg: 15718 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 18, amount: 1, speed: 5000, lifetime: 0.7, range: 3500, rate: 3.8, magazine: { size: 8, reload: 2.4 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -7584,6 +8066,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 14146, max: 17289, avg: 15718 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 18, amount: 1, speed: 5000, lifetime: 0.7, range: 3500, rate: 3.8, magazine: { size: 8, reload: 2.4 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -7608,6 +8093,9 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.turret,
 		price: { min: 7493, max: 9158, avg: 8325 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 10, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'advanced', 'mining', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -7634,6 +8122,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 7493, max: 9158, avg: 8325 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 10, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'turret', 'medium', 'mining', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -7659,6 +8150,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 51608, max: 63077, avg: 57343 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 750, amount: 1, speed: 1000, lifetime: 5.5, range: 5500, reload: 3, magazine: { size: 2, reload: 7 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7685,6 +8179,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 51608, max: 63077, avg: 57343 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 750, amount: 1, speed: 1000, lifetime: 5.5, range: 5500, reload: 3, magazine: { size: 2, reload: 7 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7710,6 +8207,8 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 66593, max: 81392, avg: 73993 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7747,6 +8246,8 @@ export const Equipments = [
 		hull: 900,
 		price: { min: 66593, max: 81392, avg: 73993 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7784,6 +8285,9 @@ export const Equipments = [
 		hull: 4400,
 		price: { min: 58262, max: 71209, avg: 64735 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		weapon: { damage: 375, shield: 125, amount: 1, speed: 299792500, lifetime: 4, range: 8600, beam: true, reload: 11 },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -7810,6 +8314,8 @@ export const Equipments = [
 		hull: 5000,
 		price: { min: 44955, max: 54945, avg: 49950 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		tags: [ 'turret', 'large', 'missile', 'standard' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -7836,6 +8342,8 @@ export const Equipments = [
 		hull: 5000,
 		price: { min: 62937, max: 76923, avg: 69930 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		tags: [ 'turret', 'large', 'missile', 'standard' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -7862,6 +8370,9 @@ export const Equipments = [
 		hull: 4400,
 		price: { min: 28292, max: 34579, avg: 31435 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
+		weapon: { damage: 264, amount: 1, speed: 5000, lifetime: 1, range: 5000, reload: 1.1, magazine: { size: 4, reload: 3 } },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -7888,6 +8399,9 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 14985, max: 18315, avg: 16650 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		weapon: { damage: 50, hull: 1, amount: 1, speed: 7000, lifetime: 4, range: 7000, reload: 4 },
+		tags: [ 'turret', 'large', 'mining', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -7914,6 +8428,9 @@ export const Equipments = [
 		hull: 4400,
 		price: { min: 88232, max: 107839, avg: 98035 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		weapon: { damage: 760, amount: 3, speed: 900, lifetime: 7.4, range: 6660, reload: 4, magazine: { size: 3, reload: 8 } },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -7939,6 +8456,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 29131, max: 35604, avg: 32368 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		weapon: { damage: 126, shield: 42, amount: 1, speed: 299792500, lifetime: 3, range: 5000, beam: true, reload: 7 },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7965,6 +8485,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 29131, max: 35604, avg: 32368 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		weapon: { damage: 126, shield: 42, amount: 1, speed: 299792500, lifetime: 3, range: 5000, beam: true, reload: 7 },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -7991,6 +8514,8 @@ export const Equipments = [
 		hull: 1500,
 		price: { min: 22478, max: 27473, avg: 24975 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		tags: [ 'turret', 'medium', 'missile', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8016,6 +8541,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 36623, max: 44762, avg: 40693 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		weapon: { damage: 26, amount: 1, speed: 2100, lifetime: 1.476, range: 3100, rate: 16, magazine: { size: 30, reload: 6.5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8053,6 +8581,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 36623, max: 44762, avg: 40693 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		weapon: { damage: 26, amount: 1, speed: 2100, lifetime: 1.476, range: 3100, rate: 16, magazine: { size: 30, reload: 6.5 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8090,6 +8621,8 @@ export const Equipments = [
 		hull: 1250,
 		price: { min: 31469, max: 38462, avg: 34965 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		tags: [ 'turret', 'medium', 'missile', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8115,6 +8648,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 14146, max: 17289, avg: 15718 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
+		weapon: { damage: 18, amount: 1, speed: 5000, lifetime: 0.7, range: 3500, rate: 3.8, magazine: { size: 8, reload: 2.4 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -8152,6 +8688,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 14146, max: 17289, avg: 15718 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.scaleplate, Factions.teladi ],
+		weapon: { damage: 18, amount: 1, speed: 5000, lifetime: 0.7, range: 3500, rate: 3.8, magazine: { size: 8, reload: 2.4 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -8188,6 +8727,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 7493, max: 9158, avg: 8325 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		weapon: { damage: 10, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'advanced', 'medium', 'mining', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -8214,6 +8756,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 7493, max: 9158, avg: 8325 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		weapon: { damage: 10, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'turret', 'medium', 'mining', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -8239,6 +8784,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 51608, max: 63077, avg: 57343 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		weapon: { damage: 750, amount: 1, speed: 1000, lifetime: 5.5, range: 5500, reload: 3, magazine: { size: 2, reload: 7 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8265,6 +8813,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 51608, max: 63077, avg: 57343 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		weapon: { damage: 750, amount: 1, speed: 1000, lifetime: 5.5, range: 5500, reload: 3, magazine: { size: 2, reload: 7 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8290,6 +8841,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 44116, max: 53919, avg: 49018 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi, Factions.yaki ],
+		weapon: { damage: 114, shield: 76, amount: 1, speed: 2300, lifetime: 1.75, range: 4025, rate: 1.8, magazine: { size: 6, reload: 4 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8327,6 +8881,9 @@ export const Equipments = [
 		hull: 1500,
 		price: { min: 44116, max: 53919, avg: 49018 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi, Factions.yaki ],
+		weapon: { damage: 114, shield: 76, amount: 1, speed: 2300, lifetime: 1.75, range: 4025, rate: 1.8, magazine: { size: 6, reload: 4 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8364,6 +8921,9 @@ export const Equipments = [
 		hull: 9000,
 		price: { min: 61175, max: 74769, avg: 67972 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 2640, amount: 1, speed: 1400, lifetime: 5.5, range: 7700, reload: 2.5, magazine: { size: 4, reload: 5 } },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -8390,6 +8950,9 @@ export const Equipments = [
 		hull: 7200,
 		price: { min: 92643, max: 113231, avg: 102937 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 1000, amount: 1, speed: 850, lifetime: 6.8, range: 5780, rate: 0.24 },
+		tags: [ 'combat', 'large', 'turret', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -8427,6 +8990,9 @@ export const Equipments = [
 		hull: 1500,
 		price: { min: 22028, max: 26923, avg: 24476 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 64, shield: 22, amount: 1, speed: 299792500, lifetime: 1, range: 2900, beam: true, reload: 3.4 },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -8452,6 +9018,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 14853, max: 18154, avg: 16503 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 50, amount: 1, speed: 2270, lifetime: 1.5, range: 3405, rate: 5, magazine: { size: 23, reload: 5 } },
+		tags: [ 'combat', 'medium', 'turret', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -8489,6 +9058,9 @@ export const Equipments = [
 		hull: 1500,
 		price: { min: 14853, max: 18154, avg: 16503 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 50, amount: 1, speed: 2270, lifetime: 1.5, range: 3405, rate: 5, magazine: { size: 23, reload: 5 } },
+		tags: [ 'combat', 'medium', 'turret', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -8525,6 +9097,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 22720, max: 27769, avg: 25245 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 18, amount: 1, speed: 2500, lifetime: 1.52, range: 3800, rate: 4, magazine: { size: 8, reload: 1 } },
+		tags: [ 'combat', 'medium', 'turret', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -8551,6 +9126,9 @@ export const Equipments = [
 		hull: 1500,
 		price: { min: 22720, max: 27769, avg: 25245 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 18, amount: 1, speed: 2500, lifetime: 1.52, range: 3800, rate: 4, magazine: { size: 8, reload: 1 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -8577,6 +9155,9 @@ export const Equipments = [
 		hull: 10000,
 		price: { min: 1254814, max: 1533662, avg: 1394238 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.scaleplate ],
+		weapon: { damage: 1900, amount: 1, speed: 1100, lifetime: 8.2, range: 9020, rate: 0.65, magazine: { size: 6, reload: 4.5 }, heat: { shot: 384, overheat: 10000, coolRate: 1160, coolDelay: 2.7, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'arg_destroyer_01', 'large', 'weapon' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -8603,6 +9184,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 33296, max: 40696, avg: 36996 },
 		owners: [ Factions.alliance, Factions.argon, Factions.buccaneers, Factions.yaki ],
+		weapon: { damage: 125, shield: 500, amount: 1, speed: 2800, lifetime: 1.75, range: 4900, rate: 0.8, magazine: { size: 5, reload: 6 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8629,6 +9213,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 253067, max: 309304, avg: 281185 },
 		owners: [ Factions.alliance, Factions.argon, Factions.buccaneers, Factions.yaki ],
+		weapon: { damage: 151, shield: 605, amount: 1, speed: 2800, lifetime: 1.75, range: 4900, rate: 1, magazine: { size: 5, reload: 6 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8655,6 +9242,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 22198, max: 27130, avg: 24664 },
 		owners: [ Factions.alliance, Factions.argon, Factions.buccaneers, Factions.yaki ],
+		weapon: { damage: 68, shield: 268, amount: 1, speed: 2800, lifetime: 1.45, range: 4060, rate: 0.8, magazine: { size: 5, reload: 5 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8681,6 +9271,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 168711, max: 206203, avg: 187457 },
 		owners: [ Factions.alliance, Factions.argon, Factions.buccaneers, Factions.yaki ],
+		weapon: { damage: 84, shield: 336, amount: 1, speed: 2800, lifetime: 1.45, range: 4060, rate: 1, magazine: { size: 5, reload: 5 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8872,6 +9465,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 33296, max: 40696, avg: 36996 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 135, shield: 45, amount: 1, speed: 299792500, lifetime: 1, range: 5200, beam: true, reload: 1, heat: { shot: 1200, overheat: 10000, coolRate: 1700, coolDelay: 1, overheatCoolDelay: 2, reenable: 7000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8920,6 +9516,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 253067, max: 309304, avg: 281185 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 188, shield: 62, amount: 1, speed: 299792500, lifetime: 1, range: 5600, beam: true, reload: 1, heat: { shot: 1200, overheat: 10000, coolRate: 1700, coolDelay: 1, overheatCoolDelay: 2, reenable: 7000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -8967,6 +9566,8 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 28097, max: 34341, avg: 31219 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		tags: [ 'advanced', 'medium', 'missile', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 5,
@@ -9015,6 +9616,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 48281, max: 59011, avg: 53646 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.yaki, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 32, amount: 1, speed: 2100, lifetime: 1.7, range: 3570, rate: 11.5, magazine: { size: 65, reload: 3.8 }, heat: { shot: 69, overheat: 10000, coolRate: 1100, coolDelay: 2, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9063,6 +9667,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 313007, max: 382564, avg: 347785 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 42, amount: 1, speed: 2100, lifetime: 1.7, range: 3570, rate: 11.8, magazine: { size: 72, reload: 3.4 }, heat: { shot: 69, overheat: 10000, coolRate: 1100, coolDelay: 2, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9110,6 +9717,8 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 42483, max: 51923, avg: 47203 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		tags: [ 'advanced', 'medium', 'missile', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 5,
@@ -9158,6 +9767,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 18311, max: 22381, avg: 20346 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.yaki, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 55, amount: 1, speed: 5000, lifetime: 0.8, range: 4000, rate: 8, magazine: { size: 3, reload: 0.7 }, heat: { shot: 196, overheat: 10000, coolRate: 2000, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -9206,6 +9818,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 120479, max: 147253, avg: 133866 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.yaki, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 64, amount: 1, speed: 5000, lifetime: 0.8, range: 4000, rate: 8, magazine: { size: 4, reload: 0.7 }, heat: { shot: 196, overheat: 10000, coolRate: 2000, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -9254,6 +9869,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 11659, max: 14249, avg: 12954 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 25, amount: 1, speed: 7000, lifetime: 4, range: 4000, reload: 4 },
+		tags: [ 'advanced', 'medium', 'mining', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -9300,6 +9918,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 26644, max: 32564, avg: 29604 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 50, amount: 1, speed: 7000, lifetime: 4, range: 4000, reload: 4 },
+		tags: [ 'advanced', 'medium', 'mining', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -9348,6 +9969,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 78251, max: 95641, avg: 86946 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 1200, amount: 1, speed: 1200, lifetime: 5, range: 6000, reload: 2.5, heat: { shot: 2500, overheat: 10000, coolRate: 1000, coolDelay: 1.8, overheatCoolDelay: 2, reenable: 7000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9396,6 +10020,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 432887, max: 529084, avg: 480985 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 1680, amount: 1, speed: 1200, lifetime: 5, range: 6000, reload: 2.5, heat: { shot: 2500, overheat: 10000, coolRate: 1000, coolDelay: 1.8, overheatCoolDelay: 2, reenable: 7000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9444,6 +10071,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 63266, max: 77326, avg: 70296 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.yaki, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 85, amount: 6, speed: 1900, lifetime: 1.474, range: 2801, rate: 0.8, magazine: { size: 6, reload: 5.5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9492,6 +10122,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 372947, max: 455824, avg: 414385 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.yaki, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 114, amount: 6, speed: 1900, lifetime: 1.6, range: 3040, rate: 0.8, magazine: { size: 6, reload: 5.5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9539,6 +10172,8 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 60690, max: 74176, avg: 67433 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		tags: [ 'advanced', 'medium', 'missile', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 5,
@@ -9587,6 +10222,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 22198, max: 27130, avg: 24664 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 82, shield: 28, amount: 1, speed: 299792500, lifetime: 1, range: 4600, beam: true, reload: 1, heat: { shot: 1200, overheat: 10000, coolRate: 1700, coolDelay: 1, overheatCoolDelay: 2, reenable: 7000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9635,6 +10273,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 168711, max: 206203, avg: 187457 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 120, shield: 40, amount: 1, speed: 299792500, lifetime: 1, range: 5000, beam: true, reload: 1, heat: { shot: 1200, overheat: 10000, coolRate: 1700, coolDelay: 1, overheatCoolDelay: 2, reenable: 7000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9683,6 +10324,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 62158, max: 75970, avg: 69064 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 24, hull: 76, amount: 1, speed: 6000, lifetime: 0, range: 2000, rate: 1, heat: { shot: 800, overheat: 10000, coolRate: 1300, coolDelay: 1, overheatCoolDelay: 2, reenable: 7000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9719,6 +10363,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 288591, max: 352723, avg: 320657 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 30, hull: 96, amount: 1, speed: 6000, lifetime: 0, range: 2300, rate: 1, heat: { shot: 800, overheat: 10000, coolRate: 1300, coolDelay: 1, overheatCoolDelay: 2, reenable: 7000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9754,6 +10401,9 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 62158, max: 75970, avg: 69064 },
 		owners: [ Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.trinity, Factions.kaori ],
+		weapon: { damage: 0, amount: 1, speed: 3000, lifetime: 1.25, range: 3750, reload: 0.9, magazine: { size: 8, reload: 12 }, heat: { shot: 490, overheat: 10000, coolRate: 580, coolDelay: 4, overheatCoolDelay: 2, reenable: 7000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9789,6 +10439,9 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 328551, max: 401563, avg: 365057 },
 		owners: [ Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.trinity, Factions.kaori ],
+		weapon: { damage: 0, amount: 1, speed: 3000, lifetime: 1.25, range: 3750, reload: 0.9, magazine: { size: 10, reload: 12 }, heat: { shot: 490, overheat: 10000, coolRate: 580, coolDelay: 4, overheatCoolDelay: 2, reenable: 7000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9824,6 +10477,8 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 17982, max: 21978, avg: 19980 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		tags: [ 'advanced', 'missile', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 5,
@@ -9871,6 +10526,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 32188, max: 39340, avg: 35764 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.yaki, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 18, amount: 1, speed: 2100, lifetime: 1.3, range: 2730, rate: 14, magazine: { size: 66, reload: 3.4 }, heat: { shot: 69, overheat: 10000, coolRate: 1100, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9919,6 +10577,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 208671, max: 255043, avg: 231857 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 26, amount: 1, speed: 2100, lifetime: 1.3, range: 2730, rate: 14, magazine: { size: 72, reload: 3.4 }, heat: { shot: 69, overheat: 10000, coolRate: 1100, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -9966,6 +10627,8 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 26853, max: 32821, avg: 29837 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		tags: [ 'advanced', 'missile', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 5,
@@ -10014,6 +10677,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 12208, max: 14920, avg: 13564 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.yaki, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 36, amount: 1, speed: 5000, lifetime: 0.7, range: 3500, rate: 6, magazine: { size: 3, reload: 0.7 }, heat: { shot: 165, overheat: 10000, coolRate: 2500, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -10061,6 +10727,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 80320, max: 98168, avg: 89244 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.yaki, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 46, amount: 1, speed: 5000, lifetime: 0.7, range: 3500, rate: 6, magazine: { size: 4, reload: 0.7 }, heat: { shot: 180, overheat: 10000, coolRate: 2500, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -10109,6 +10778,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 7772, max: 9500, avg: 8636 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 15, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'advanced', 'mining', 'small', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -10155,6 +10827,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 17762, max: 21710, avg: 19736 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 30, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'advanced', 'mining', 'small', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -10203,6 +10878,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 52168, max: 63760, avg: 57964 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 720, amount: 1, speed: 1200, lifetime: 3.8, range: 4560, reload: 2.6, heat: { shot: 2600, overheat: 10000, coolRate: 1000, coolDelay: 1.8, overheatCoolDelay: 2, reenable: 7000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -10251,6 +10929,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 288591, max: 352723, avg: 320657 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 1000, amount: 1, speed: 1200, lifetime: 4.2, range: 5040, reload: 2.4, heat: { shot: 2500, overheat: 10000, coolRate: 1000, coolDelay: 1.8, overheatCoolDelay: 2, reenable: 7000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -10299,6 +10980,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 42178, max: 51550, avg: 46864 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.yaki, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 48, amount: 6, speed: 1800, lifetime: 1.28, range: 2304, rate: 0.9, magazine: { size: 8, reload: 5 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -10347,6 +11031,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 248631, max: 303883, avg: 276257 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.yaki, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		weapon: { damage: 70, amount: 6, speed: 1900, lifetime: 1.28, range: 2432, rate: 0.9, magazine: { size: 8, reload: 5 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -10394,6 +11081,8 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 38362, max: 46886, avg: 42624 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		tags: [ 'advanced', 'missile', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 5,
@@ -10441,6 +11130,9 @@ export const Equipments = [
 		size: Size.large,
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
+		weapon: { damage: 66000, amount: 1, speed: 30000, lifetime: 4, range: 14000, chargeTime: 5.5, reload: 14, heat: { shot: 2490, overheat: 10000, coolRate: 1000, coolDelay: 2, overheatCoolDelay: 2, reenable: 1 } },
+		tags: [ 'combat', 'large', 'mandatory', 'ship_kha_l_destroyer_01', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -10456,6 +11148,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
+		weapon: { damage: 411, amount: 1, speed: 299792500, lifetime: 0.7, range: 4500, beam: true, reload: 2.6, magazine: { size: 6, reload: 6 } },
+		tags: [ 'weapon', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -10471,6 +11166,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
+		weapon: { damage: 292, amount: 1, speed: 299792500, lifetime: 0.3, range: 3602, beam: true, reload: 0.9, magazine: { size: 4, reload: 4.2 } },
+		tags: [ 'weapon', 'small', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -10484,6 +11182,9 @@ export const Equipments = [
 		size: Size.extralarge,
 		price: { min: 0, max: 0, avg: 0 },
 		owners: [ Factions.khaak ],
+		weapon: { damage: 1000000, amount: 1, speed: 100000, lifetime: 6, range: 20000, chargeTime: 10, reload: 10.1, heat: { shot: 1666, overheat: 10000, coolRate: 1000, coolDelay: 0, overheatCoolDelay: 0, reenable: 1 } },
+		tags: [ 'combat', 'extralarge', 'mandatory', 'ship_kha_xl_battleship_01', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		]
 	},
@@ -10499,6 +11200,9 @@ export const Equipments = [
 		hull: 8000,
 		price: { min: 1104694, max: 1350182, avg: 1227438 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 5480, amount: 1, speed: 2000, lifetime: 6, range: 12000, reload: 3.6, heat: { shot: 2500, overheat: 10000, coolRate: 950, coolDelay: 2.5, overheatCoolDelay: 2, reenable: 6000 } },
+		tags: [ 'weapon', 'large', 'par_destroyer_01' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -10525,6 +11229,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 108221, max: 132271, avg: 120246 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity, Factions.yaki ],
+		weapon: { damage: 1122, amount: 1, speed: 10000, lifetime: 1.4, range: 14000, chargeTime: 0.5, reload: 3.8 },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -10551,6 +11258,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 552767, max: 675604, avg: 614185 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 1392, amount: 1, speed: 10000, lifetime: 1.4, range: 14000, chargeTime: 0.5, reload: 3.4 },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -10577,6 +11287,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 114286, max: 139682, avg: 126984 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity, Factions.yaki ],
+		weapon: { damage: 820, amount: 1, speed: 10000, lifetime: 1.2, range: 12000, chargeTime: 0.5, reload: 3.8 },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -10603,6 +11316,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 368511, max: 450403, avg: 409457 },
 		owners: [ Factions.alliance, Factions.buccaneers, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 992, amount: 1, speed: 10000, lifetime: 1.2, range: 12000, chargeTime: 0.5, reload: 3.4 },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -10629,6 +11345,9 @@ export const Equipments = [
 		hull: 12000,
 		price: { min: 954844, max: 1167032, avg: 1060938 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		weapon: { damage: 1890, shield: 810, amount: 1, speed: 1740, lifetime: 5, range: 8700, rate: 2, magazine: { size: 3, reload: 3.2 }, heat: { shot: 625, overheat: 10000, coolRate: 800, coolDelay: 3, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'weapon', 'large', 'tel_destroyer_01' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -10655,6 +11374,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 63266, max: 77326, avg: 70296 },
 		owners: [ Factions.alliance, Factions.teladi ],
+		weapon: { damage: 524, shield: 246, amount: 1, speed: 2200, lifetime: 2.25, range: 4950, reload: 1.4, heat: { shot: 2000, overheat: 10000, coolRate: 900, coolDelay: 1, overheatCoolDelay: 2, reenable: 400 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -10692,6 +11414,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 372947, max: 455824, avg: 414385 },
 		owners: [ Factions.alliance, Factions.teladi ],
+		weapon: { damage: 748, shield: 352, amount: 1, speed: 2200, lifetime: 2.4, range: 5280, reload: 1.4, heat: { shot: 2000, overheat: 10000, coolRate: 900, coolDelay: 1, overheatCoolDelay: 2, reenable: 4000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -10729,6 +11454,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 42178, max: 51550, avg: 46864 },
 		owners: [ Factions.alliance, Factions.teladi ],
+		weapon: { damage: 285, shield: 190, amount: 1, speed: 2200, lifetime: 1.85, range: 4070, reload: 1.3, heat: { shot: 2000, overheat: 10000, coolRate: 900, coolDelay: 1, overheatCoolDelay: 2, reenable: 4000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -10766,6 +11494,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 248631, max: 303883, avg: 276257 },
 		owners: [ Factions.alliance, Factions.teladi ],
+		weapon: { damage: 408, shield: 272, amount: 1, speed: 2200, lifetime: 2, range: 4400, reload: 1.3, heat: { shot: 2000, overheat: 10000, coolRate: 900, coolDelay: 1, overheatCoolDelay: 2, reenable: 4000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -10803,6 +11534,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 34961, max: 42731, avg: 38846 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 620, amount: 1, speed: 13000, lifetime: 4, range: 2700, reload: 6, heat: { shot: 2520, overheat: 10000, coolRate: 1780, coolDelay: 2.5, overheatCoolDelay: 2, reenable: 6000 } },
+		tags: [ 'combat', 'medium', 'weapon', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -10840,6 +11574,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 50696, max: 61962, avg: 56329 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 50, amount: 1, speed: 2300, lifetime: 1.8, range: 4140, rate: 12, magazine: { size: 6, reload: 0.7 }, heat: { shot: 170, overheat: 10000, coolRate: 1600, coolDelay: 1, overheatCoolDelay: 2, reenable: 6000 } },
+		tags: [ 'weapon', 'medium', 'standard', 'combat' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -10866,6 +11603,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 50696, max: 61962, avg: 56329 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 50, amount: 1, speed: 2300, lifetime: 1.8, range: 4140, rate: 12, magazine: { size: 6, reload: 0.7 }, heat: { shot: 170, overheat: 10000, coolRate: 1600, coolDelay: 1, overheatCoolDelay: 2, reenable: 6000 } },
+		tags: [ 'combat', 'medium', 'weapon', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -10902,6 +11642,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 12241, max: 14961, avg: 13601 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 15, amount: 1, speed: 7000, lifetime: 4, range: 3600, reload: 4 },
+		tags: [ 'weapon', 'medium', 'mining', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -10927,6 +11670,8 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 12241, max: 14961, avg: 13601 },
 		owners: [ Factions.xenon ],
+		tags: [ 'medium', 'mining', 'weapon', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -10964,6 +11709,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 33797, max: 41307, avg: 37552 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 38, amount: 1, speed: 2400, lifetime: 1.4, range: 3360, rate: 10, magazine: { size: 26, reload: 2.8 }, heat: { shot: 132, overheat: 10000, coolRate: 1150, coolDelay: 0.5, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'combat', 'small', 'weapon', 'xenon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -11000,6 +11748,9 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 23307, max: 28487, avg: 25897 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 23, amount: 1, speed: 2300, lifetime: 1.5, range: 3450, rate: 12, magazine: { size: 5, reload: 0.6 }, heat: { shot: 160, overheat: 10000, coolRate: 1600, coolDelay: 1, overheatCoolDelay: 2, reenable: 6000 } },
+		tags: [ 'weapon', 'small', 'standard', 'combat' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 4,
@@ -11028,6 +11779,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 5200, reverse: 5200 },
 		travel: { thrust: 16.77, attack: 72.8, charge: 15, release: 0 },
+		boost: { thrust: 5.04, duration: 33.6, recharge: 128, acceleration: 2.44 },
+		tags: [ 'engine', 'large', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -11056,6 +11810,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 4212, reverse: 4212 },
 		travel: { thrust: 23.29, attack: 69.2, charge: 15, release: 0 },
+		boost: { thrust: 3.92, duration: 28.56, recharge: 128, acceleration: 2.11 },
+		tags: [ 'engine', 'large', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -11083,6 +11840,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 1300, reverse: 1300 },
 		travel: { thrust: 5.772, attack: 33.6, charge: 7, release: 0 },
+		boost: { thrust: 5.04, duration: 17.5, recharge: 128, acceleration: 3.33 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -11109,6 +11869,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 1560, reverse: 1560 },
 		travel: { thrust: 5.772, attack: 33.6, charge: 7, release: 0 },
+		boost: { thrust: 5.04, duration: 17.5, recharge: 128, acceleration: 3.33 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -11136,6 +11899,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 1755, reverse: 1755 },
 		travel: { thrust: 5.772, attack: 33.6, charge: 7, release: 0 },
+		boost: { thrust: 5.04, duration: 17.5, recharge: 128, acceleration: 3.33 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 15,
@@ -11163,6 +11929,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 1482, reverse: 1482 },
 		travel: { thrust: 4.56, attack: 38.6, charge: 5, release: 0 },
+		boost: { thrust: 5.35, duration: 21.86, recharge: 128, acceleration: 3.72 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 15,
@@ -11189,6 +11958,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 1778.4, reverse: 1778.4 },
 		travel: { thrust: 4.56, attack: 38.6, charge: 5, release: 0 },
+		boost: { thrust: 5.35, duration: 21.86, recharge: 128, acceleration: 3.72 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 15,
@@ -11216,6 +11988,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 2000.7, reverse: 2000.7 },
 		travel: { thrust: 4.56, attack: 38.6, charge: 5, release: 0 },
+		boost: { thrust: 5.35, duration: 21.86, recharge: 128, acceleration: 3.72 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 15,
@@ -11243,6 +12018,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.split ],
 		thrust: { forward: 2104, reverse: 2104 },
 		travel: { thrust: 4.56, attack: 38.6, charge: 5, release: 0 },
+		boost: { thrust: 5.35, duration: 21.86, recharge: 128, acceleration: 3.72 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 15,
@@ -11270,6 +12048,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 1170, reverse: 1170 },
 		travel: { thrust: 8.02, attack: 31.9, charge: 7, release: 0 },
+		boost: { thrust: 3.92, duration: 14.86, recharge: 128, acceleration: 2.87 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -11296,6 +12077,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 1404, reverse: 1404 },
 		travel: { thrust: 8.02, attack: 31.9, charge: 7, release: 0 },
+		boost: { thrust: 3.92, duration: 14.86, recharge: 128, acceleration: 2.87 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -11323,6 +12107,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 1579.5, reverse: 1579.5 },
 		travel: { thrust: 8.02, attack: 31.9, charge: 7, release: 0 },
+		boost: { thrust: 3.92, duration: 14.86, recharge: 128, acceleration: 2.87 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -11350,6 +12137,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 510, reverse: 510 },
 		travel: { thrust: 7.8, attack: 28, charge: 5, release: 0 },
+		boost: { thrust: 5.6, duration: 14, recharge: 128, acceleration: 3.08 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -11376,6 +12166,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 612, reverse: 612 },
 		travel: { thrust: 7.8, attack: 28, charge: 5, release: 0 },
+		boost: { thrust: 5.6, duration: 14, recharge: 128, acceleration: 3.08 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -11403,6 +12196,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 688.5, reverse: 688.5 },
 		travel: { thrust: 7.8, attack: 28, charge: 5, release: 0 },
+		boost: { thrust: 5.6, duration: 14, recharge: 128, acceleration: 3.08 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -11430,6 +12226,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 581.4, reverse: 581.4 },
 		travel: { thrust: 6.16, attack: 32.2, charge: 3, release: 0 },
+		boost: { thrust: 5.94, duration: 17.5, recharge: 128, acceleration: 3.44 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -11456,6 +12255,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 697.68, reverse: 697.68 },
 		travel: { thrust: 6.16, attack: 32.2, charge: 3, release: 0 },
+		boost: { thrust: 5.94, duration: 17.5, recharge: 128, acceleration: 3.44 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -11483,6 +12285,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 784.89, reverse: 784.89 },
 		travel: { thrust: 6.16, attack: 32.2, charge: 3, release: 0 },
+		boost: { thrust: 5.94, duration: 17.5, recharge: 128, acceleration: 3.44 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -11510,6 +12315,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.split ],
 		thrust: { forward: 826, reverse: 826 },
 		travel: { thrust: 6.16, attack: 32.2, charge: 3, release: 0 },
+		boost: { thrust: 5.94, duration: 17.5, recharge: 128, acceleration: 3.44 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -11537,6 +12345,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 459, reverse: 459 },
 		travel: { thrust: 10.83, attack: 26.6, charge: 5, release: 0 },
+		boost: { thrust: 4.36, duration: 11.9, recharge: 128, acceleration: 2.66 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -11563,6 +12374,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 550.8, reverse: 550.8 },
 		travel: { thrust: 10.83, attack: 26.6, charge: 5, release: 0 },
+		boost: { thrust: 4.36, duration: 11.9, recharge: 128, acceleration: 2.66 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -11590,6 +12404,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 619.65, reverse: 619.65 },
 		travel: { thrust: 10.83, attack: 26.6, charge: 5, release: 0 },
+		boost: { thrust: 4.36, duration: 11.9, recharge: 128, acceleration: 2.66 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -11618,6 +12435,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 13715, reverse: 13715 },
 		travel: { thrust: 15.44, attack: 72.8, charge: 15, release: 0 },
+		boost: { thrust: 5.04, duration: 33.6, recharge: 128, acceleration: 2.44 },
+		tags: [ 'engine', 'extralarge', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 30,
@@ -11646,6 +12466,9 @@ export const Equipments = [
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
 		thrust: { forward: 11109.15, reverse: 11109.15 },
 		travel: { thrust: 21.45, attack: 69.2, charge: 15, release: 0 },
+		boost: { thrust: 3.92, duration: 28.56, recharge: 128, acceleration: 2.11 },
+		tags: [ 'engine', 'extralarge', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 30,
@@ -11671,6 +12494,8 @@ export const Equipments = [
 		hull: 1,
 		price: { min: 866, max: 1171, avg: 1018 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		missile: { damage: 900, range: 8000, lifetime: 15, guided: true, reload: 10, speed: 965 },
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 3,
@@ -11705,6 +12530,8 @@ export const Equipments = [
 		hull: 1,
 		price: { min: 1877, max: 2540, avg: 2209 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		missile: { damage: 100, range: 39000, lifetime: 30, guided: true, reload: 6, speed: 4631 },
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 3,
@@ -11742,6 +12569,8 @@ export const Equipments = [
 		recharge: { max: 38845, rate: 220, delay: 3 },
 		price: { min: 41287, max: 50461, avg: 45874 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		tags: [ 'large', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -11769,6 +12598,8 @@ export const Equipments = [
 		recharge: { max: 46886, rate: 302, delay: 3 },
 		price: { min: 203477, max: 248694, avg: 226085 },
 		owners: [ Factions.court, Factions.split ],
+		tags: [ 'large', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -11796,6 +12627,8 @@ export const Equipments = [
 		recharge: { max: 3848, rate: 74, delay: 2 },
 		price: { min: 15365, max: 18780, avg: 17072 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -11823,6 +12656,8 @@ export const Equipments = [
 		recharge: { max: 4932, rate: 112, delay: 2 },
 		price: { min: 70942, max: 86707, avg: 78824 },
 		owners: [ Factions.court, Factions.split ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -11850,6 +12685,8 @@ export const Equipments = [
 		recharge: { max: 3848, rate: 74, delay: 2 },
 		price: { min: 1536515365, max: 18780, avg: 17072 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -11877,6 +12714,8 @@ export const Equipments = [
 		recharge: { max: 4932, rate: 112, delay: 2 },
 		price: { min: 70942, max: 86707, avg: 78824 },
 		owners: [ Factions.court, Factions.split ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -11903,6 +12742,8 @@ export const Equipments = [
 		recharge: { max: 740, rate: 35, delay: 3.5 },
 		price: { min: 1375, max: 1681, avg: 1528 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -11928,6 +12769,8 @@ export const Equipments = [
 		recharge: { max: 888, rate: 54, delay: 3.5 },
 		price: { min: 9932, max: 12139, avg: 11035 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -11954,6 +12797,8 @@ export const Equipments = [
 		recharge: { max: 1258, rate: 88, delay: 3.5 },
 		price: { min: 46949, max: 57383, avg: 52166 },
 		owners: [ Factions.court, Factions.split ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -11981,6 +12826,8 @@ export const Equipments = [
 		recharge: { max: 100800, rate: 454, delay: 3 },
 		price: { min: 214598, max: 262286, avg: 238442 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		tags: [ 'extralarge', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -12006,6 +12853,7 @@ export const Equipments = [
 		hull: 281,
 		price: { min: 7999, max: 10822, avg: 9410 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 60,
@@ -12032,6 +12880,9 @@ export const Equipments = [
 		hull: 3200,
 		price: { min: 139846, max: 170923, avg: 155384 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 1940, amount: 1, speed: 14000, lifetime: 0.64, range: 8960, reload: 2.8, magazine: { size: 2, reload: 15.6 } },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -12058,6 +12909,8 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 47203, max: 57692, avg: 52448 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		tags: [ 'turret', 'large', 'missile', 'standard' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -12084,6 +12937,8 @@ export const Equipments = [
 		hull: 3500,
 		price: { min: 66084, max: 80769, avg: 73427 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		tags: [ 'turret', 'large', 'missile', 'standard' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -12110,6 +12965,9 @@ export const Equipments = [
 		hull: 3600,
 		price: { min: 29706, max: 36308, avg: 33007 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 272, amount: 1, speed: 5000, lifetime: 1, range: 5000, reload: 0.8, magazine: { size: 8, reload: 5 } },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -12136,6 +12994,9 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 15734, max: 19231, avg: 17483 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 50, hull: 1, amount: 1, speed: 7000, lifetime: 4, range: 7000, reload: 4 },
+		tags: [ 'turret', 'large', 'mining', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -12162,6 +13023,9 @@ export const Equipments = [
 		hull: 3600,
 		price: { min: 108378, max: 132461, avg: 120419 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 1900, amount: 1, speed: 840, lifetime: 8.333, range: 7000, reload: 3, magazine: { size: 5, reload: 19 } },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -12187,6 +13051,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 69923, max: 85461, avg: 77692 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 800, amount: 1, speed: 14000, lifetime: 0.57, range: 7980, reload: 2.7, magazine: { size: 2, reload: 15 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -12213,6 +13080,9 @@ export const Equipments = [
 		hull: 800,
 		price: { min: 69923, max: 85461, avg: 77692 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 800, amount: 1, speed: 14000, lifetime: 0.57, range: 7980, reload: 2.7, magazine: { size: 2, reload: 15 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -12239,6 +13109,8 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 23601, max: 28846, avg: 26224 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		tags: [ 'turret', 'medium', 'missile', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -12264,6 +13136,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 41023, max: 89587, avg: 65305 },
 		owners: [ Factions.court, Factions.freesplit ],
+		weapon: { damage: 0, amount: 1, speed: 2600, lifetime: 1.4, range: 3640, rate: 0.8, magazine: { size: 8, reload: 10 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -12290,6 +13165,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 41023, max: 89587, avg: 65305 },
 		owners: [ Factions.court, Factions.freesplit ],
+		weapon: { damage: 0, amount: 1, speed: 2600, lifetime: 1.4, range: 3640, rate: 0.8, magazine: { size: 8, reload: 10 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -12315,6 +13193,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 46322, max: 56615, avg: 51468 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 18, amount: 1, speed: 2500, lifetime: 1.4, range: 3500, rate: 18, magazine: { size: 80, reload: 8 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -12341,6 +13222,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 46322, max: 56615, avg: 51468 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 18, amount: 1, speed: 2500, lifetime: 1.4, range: 3500, rate: 18, magazine: { size: 80, reload: 8 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -12367,6 +13251,8 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 33042, max: 40385, avg: 36713 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		tags: [ 'turret', 'medium', 'missile', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -12392,6 +13278,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 14853, max: 18154, avg: 16503 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 18, amount: 1, speed: 5000, lifetime: 0.7, range: 3500, rate: 3.8, magazine: { size: 8, reload: 2.4 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -12418,6 +13307,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 14853, max: 18154, avg: 16503 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 18, amount: 1, speed: 5000, lifetime: 0.7, range: 3500, rate: 3.8, magazine: { size: 8, reload: 2.4 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -12443,6 +13335,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 7867, max: 9615, avg: 8741 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 10, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'advanced', 'medium', 'mining', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -12469,6 +13364,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 7867, max: 9615, avg: 8741 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 10, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'turret', 'medium', 'mining', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -12494,6 +13392,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 54189, max: 66231, avg: 60210 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 750, amount: 1, speed: 1000, lifetime: 5.5, range: 5500, reload: 3, magazine: { size: 2, reload: 7 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -12520,6 +13421,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 54189, max: 66231, avg: 60210 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 750, amount: 1, speed: 1000, lifetime: 5.5, range: 5500, reload: 3, magazine: { size: 2, reload: 7 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -12545,6 +13449,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 38455, max: 47000, avg: 42727 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 42, amount: 4, speed: 2000, lifetime: 1.235, range: 2470, rate: 3, magazine: { size: 8, reload: 5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -12571,6 +13478,9 @@ export const Equipments = [
 		hull: 1600,
 		price: { min: 38455, max: 47000, avg: 42727 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 42, amount: 4, speed: 2000, lifetime: 1.235, range: 2470, rate: 3, magazine: { size: 8, reload: 5 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -12597,6 +13507,9 @@ export const Equipments = [
 		hull: 8000,
 		price: { min: 1335524, max: 1632307, avg: 1483915 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		weapon: { damage: 1400, amount: 1, speed: 1360, lifetime: 5, range: 6800, rate: 2.3, magazine: { size: 12, reload: 6 }, heat: { shot: 278, overheat: 10000, coolRate: 1100, coolDelay: 3, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'large', 'spl_destroyer_01', 'weapon' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -12624,6 +13537,8 @@ export const Equipments = [
 		recharge: { max: 57600, rate: 292, delay: 19 },
 		price: { min: 101271, max: 123775, avg: 112523 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'large', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -12652,6 +13567,8 @@ export const Equipments = [
 		recharge: { max: 71424, rate: 444, delay: 19 },
 		price: { min: 394916, max: 482675, avg: 438795 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'large', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -12680,6 +13597,8 @@ export const Equipments = [
 		recharge: { max: 86400, rate: 616, delay: 19 },
 		price: { min: 1014959, max: 1240505, avg: 1127732 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'large', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -12708,6 +13627,8 @@ export const Equipments = [
 		recharge: { max: 6000, rate: 115, delay: 15.4 },
 		price: { min: 37023, max: 45251, avg: 41137 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -12736,6 +13657,8 @@ export const Equipments = [
 		recharge: { max: 7800, rate: 158, delay: 15.4 },
 		price: { min: 166466, max: 203458, avg: 184962 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -12764,6 +13687,8 @@ export const Equipments = [
 		recharge: { max: 9720, rate: 193, delay: 15.4 },
 		price: { min: 727294, max: 888914, avg: 808104 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -12792,6 +13717,8 @@ export const Equipments = [
 		recharge: { max: 6000, rate: 115, delay: 15.4 },
 		price: { min: 37023, max: 45251, avg: 41137 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -12820,6 +13747,8 @@ export const Equipments = [
 		recharge: { max: 7800, rate: 158, delay: 15.4 },
 		price: { min: 165048, max: 201726, avg: 183387 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -12848,6 +13777,8 @@ export const Equipments = [
 		recharge: { max: 9720, rate: 193, delay: 15.4 },
 		price: { min: 727294, max: 888914, avg: 808104 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'medium', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -12875,6 +13806,8 @@ export const Equipments = [
 		recharge: { max: 1200, rate: 63, delay: 18 },
 		price: { min: 3014, max: 3684, avg: 3349 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -12900,6 +13833,8 @@ export const Equipments = [
 		recharge: { max: 1440, rate: 93, delay: 18 },
 		price: { min: 24519, max: 29967, avg: 27243 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -12926,6 +13861,8 @@ export const Equipments = [
 		recharge: { max: 2100, rate: 144, delay: 18 },
 		price: { min: 119812, max: 146436, avg: 133124 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -12954,6 +13891,8 @@ export const Equipments = [
 		recharge: { max: 155377, rate: 680, delay: 19 },
 		price: { min: 460454, max: 562777, avg: 511615 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'extralarge', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -12982,6 +13921,8 @@ export const Equipments = [
 		recharge: { max: 195775, rate: 998, delay: 19 },
 		price: { min: 2657264, max: 3247767, avg: 2952515 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'extralarge', 'shield', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -13008,6 +13949,7 @@ export const Equipments = [
 		hull: 300,
 		price: { min: 24676, max: 30160, avg: 27418 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 60,
@@ -13034,6 +13976,9 @@ export const Equipments = [
 		hull: 3000,
 		price: { min: 326313, max: 398827, avg: 362570 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 1210, amount: 1, speed: 299792500, lifetime: 1.6, range: 11400, beam: true, reload: 18.2 },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -13061,6 +14006,8 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 89910, max: 109890, avg: 99900 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'turret', 'large', 'missile', 'standard' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -13088,6 +14035,9 @@ export const Equipments = [
 		hull: 3600,
 		price: { min: 176463, max: 215677, avg: 196070 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 206, amount: 1, speed: 2300, lifetime: 2.52, range: 5796, rate: 4.5, magazine: { size: 32, reload: 6.2 } },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -13115,6 +14065,8 @@ export const Equipments = [
 		hull: 3500,
 		price: { min: 125874, max: 153846, avg: 139860 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'turret', 'large', 'missile', 'standard' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -13142,6 +14094,9 @@ export const Equipments = [
 		hull: 3600,
 		price: { min: 86553, max: 105787, avg: 96170 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 372, amount: 1, speed: 6500, lifetime: 1, range: 6500, reload: 2.6 },
+		tags: [ 'turret', 'large', 'standard', 'combat' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -13169,6 +14124,9 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 29970, max: 36630, avg: 33300 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 50, hull: 1, amount: 1, speed: 7000, lifetime: 4, range: 7000, reload: 4 },
+		tags: [ 'turret', 'large', 'mining', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -13195,6 +14153,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 163157, max: 199414, avg: 181285 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 940, amount: 1, speed: 299792500, lifetime: 1.5, range: 8800, beam: true, reload: 17.5 },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13222,6 +14183,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 163157, max: 199414, avg: 181285 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 940, amount: 1, speed: 299792500, lifetime: 1.5, range: 8800, beam: true, reload: 17.5 },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13249,6 +14213,8 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 44955, max: 54945, avg: 49950 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'turret', 'medium', 'missile', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13275,6 +14241,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 88232, max: 107839, avg: 98035 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 78, amount: 1, speed: 2400, lifetime: 1.25, range: 3000, rate: 5, magazine: { size: 24, reload: 5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13302,6 +14271,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 88232, max: 107839, avg: 98035 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 78, amount: 1, speed: 2400, lifetime: 1.25, range: 3000, rate: 5, magazine: { size: 24, reload: 5 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13329,6 +14301,8 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 62937, max: 76923, avg: 69930 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		tags: [ 'turret', 'medium', 'missile', 'standard' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13355,6 +14329,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 43277, max: 52894, avg: 48085 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 46, amount: 1, speed: 6500, lifetime: 0.538, range: 3497, rate: 3, magazine: { size: 16, reload: 5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -13382,6 +14359,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 43277, max: 52894, avg: 48085 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 46, amount: 1, speed: 6500, lifetime: 0.538, range: 3497, rate: 3, magazine: { size: 16, reload: 5 } },
+		tags: [ 'turret', 'medium', 'standard', 'combat' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -13408,6 +14388,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 14985, max: 18315, avg: 16650 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 10, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'advanced', 'medium', 'mining', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -13434,6 +14417,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 14985, max: 18315, avg: 16650 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 10, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'turret', 'medium', 'mining', 'standard' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -13460,6 +14446,9 @@ export const Equipments = [
 		hull: 10000,
 		price: { min: 8323268, max: 10172884, avg: 9248076 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 194000, amount: 1, speed: 299792500, lifetime: 7, range: 14000, beam: true, reload: 7.3, heat: { shot: 2772, overheat: 10000, coolRate: 178, coolDelay: 0.5, overheatCoolDelay: 2, reenable: 2000 } },
+		tags: [ 'extralarge', 'mandatory', 'weapon' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -13486,6 +14475,7 @@ export const Equipments = [
 		hull: 100,
 		price: { min: 5812, max: 7862, avg: 6838 },
 		owners: [ Factions.yaki ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13511,6 +14501,9 @@ export const Equipments = [
 		hull: 8000,
 		price: { min: 1699448, max: 2077104, avg: 1888276 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 530, amount: 1, speed: 1500, lifetime: 5.467, range: 8200, rate: 4.3, heat: { shot: 130, overheat: 10000, coolRate: 1760, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'large', 'ter_destroyer_01', 'weapon' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -13538,6 +14531,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 372827, max: 455677, avg: 414252 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 1060, amount: 1, speed: 299792500, lifetime: 5, range: 10000, beam: true, reload: 5, heat: { shot: 3500, overheat: 10000, coolRate: 1000, coolDelay: 2, overheatCoolDelay: 3, reenable: 2000 } },
+		tags: [ 'highpower', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13565,6 +14561,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 1731067, max: 2115749, avg: 1923408 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 1480, amount: 1, speed: 299792500, lifetime: 5, range: 10000, beam: true, reload: 5, heat: { shot: 3500, overheat: 10000, coolRate: 1000, coolDelay: 2, overheatCoolDelay: 3, reenable: 2000 } },
+		tags: [ 'highpower', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13592,6 +14591,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 94900, max: 115988, avg: 105444 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 66, amount: 1, speed: 2400, lifetime: 1.4, range: 3360, rate: 4.6, heat: { shot: 153, overheat: 10000, coolRate: 800, coolDelay: 0.5, overheatCoolDelay: 2, reenable: 9000 } },
+		tags: [ 'highpower', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13619,6 +14621,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 626013, max: 765127, avg: 695570 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 84, amount: 1, speed: 2400, lifetime: 1.4, range: 3360, rate: 5, heat: { shot: 153, overheat: 10000, coolRate: 800, coolDelay: 0.5, overheatCoolDelay: 2, reenable: 9000 } },
+		tags: [ 'highpower', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13646,6 +14651,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 96564, max: 118022, avg: 107293 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 108, amount: 1, speed: 6500, lifetime: 0.585, range: 3802, rate: 2.9, magazine: { size: 4, reload: 1.2 }, heat: { shot: 280, overheat: 10000, coolRate: 2000, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -13673,6 +14681,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 506133, max: 618607, avg: 562370 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 140, amount: 1, speed: 6500, lifetime: 0.585, range: 3802, rate: 3, magazine: { size: 4, reload: 1.1 }, heat: { shot: 280, overheat: 10000, coolRate: 2000, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -13700,6 +14711,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 248551, max: 303785, avg: 276168 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 640, amount: 1, speed: 299792500, lifetime: 5, range: 8500, beam: true, reload: 5, heat: { shot: 3500, overheat: 10000, coolRate: 1000, coolDelay: 1.5, overheatCoolDelay: 3, reenable: 2000 } },
+		tags: [ 'highpower', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13727,6 +14741,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 816943, max: 998485, avg: 907714 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 950, amount: 1, speed: 299792500, lifetime: 5, range: 8500, beam: true, reload: 5, heat: { shot: 3500, overheat: 10000, coolRate: 1000, coolDelay: 1.5, overheatCoolDelay: 3, reenable: 2000 } },
+		tags: [ 'highpower', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13754,6 +14771,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 84355, max: 103101, avg: 93728 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 36, amount: 1, speed: 2400, lifetime: 1, range: 2400, rate: 6, heat: { shot: 128, overheat: 10000, coolRate: 800, coolDelay: 0.5, overheatCoolDelay: 2, reenable: 9000 } },
+		tags: [ 'highpower', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13781,6 +14801,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 417343, max: 510085, avg: 463714 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 47, amount: 1, speed: 2400, lifetime: 1, range: 2400, rate: 6.5, heat: { shot: 128, overheat: 10000, coolRate: 800, coolDelay: 0.5, overheatCoolDelay: 2, reenable: 9000 } },
+		tags: [ 'highpower', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -13808,6 +14831,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 38625, max: 47209, avg: 42917 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 60, amount: 1, speed: 6500, lifetime: 0.5, range: 3250, rate: 3.3, magazine: { size: 4, reload: 1 }, heat: { shot: 190, overheat: 10000, coolRate: 2200, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -13835,6 +14861,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 337423, max: 412405, avg: 374914 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		weapon: { damage: 80, amount: 1, speed: 6500, lifetime: 0.5, range: 3250, rate: 3.3, magazine: { size: 4, reload: 0.9 }, heat: { shot: 190, overheat: 10000, coolRate: 2200, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -13863,6 +14892,9 @@ export const Equipments = [
 		owners: [ Factions.loanshark ],
 		thrust: { forward: 2415, reverse: 3250 },
 		travel: { thrust: 12, attack: 33, charge: 4, release: 0 },
+		boost: { thrust: 7, duration: 14, recharge: 150, acceleration: 6.4 },
+		tags: [ 'engine', 'mandatory', 'medium', 'ship_gen_m_yacht_01' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -13902,6 +14934,9 @@ export const Equipments = [
 		owners: [ Factions.ownerless ],
 		thrust: { forward: 18504, reverse: 18504 },
 		travel: { thrust: 26, attack: 75, charge: 26, release: 0 },
+		boost: { thrust: 2.5, duration: 24, recharge: 130, acceleration: 1.45 },
+		tags: [ 'engine', 'extralarge', 'pir_battleship_01' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 140,
@@ -13928,6 +14963,8 @@ export const Equipments = [
 		recharge: { max: 38600, rate: 340, delay: 11.2 },
 		price: { min: 67288, max: 82241, avg: 74765 },
 		owners: [ Factions.loanshark ],
+		tags: [ 'mandatory', 'medium', 'shield', 'ship_gen_m_yacht_01' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -13966,6 +15003,8 @@ export const Equipments = [
 		recharge: { max: 158600, rate: 680, delay: 18 },
 		price: { min: 108086, max: 132106, avg: 120096 },
 		owners: [ Factions.ownerless ],
+		tags: [ 'extralarge', 'shield', 'pir_battleship_01' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 20,
@@ -13991,6 +15030,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 29131, max: 35604, avg: 32368 },
 		owners: [ Factions.loanshark ],
+		weapon: { damage: 160, amount: 1, speed: 299792500, lifetime: 2.5, range: 4800, beam: true, reload: 5 },
+		tags: [ 'turret', 'medium', 'mandatory', 'ship_gen_m_yacht_01' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -14028,6 +15070,9 @@ export const Equipments = [
 		hull: 4140,
 		price: { min: 103217, max: 126154, avg: 114685 },
 		owners: [ Factions.ownerless ],
+		weapon: { damage: 2150, amount: 1, speed: 1800, lifetime: 5, range: 9000, reload: 1.2, magazine: { size: 2, reload: 5 } },
+		tags: [ 'turret', 'large', 'pir_battleship_01' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -14054,6 +15099,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 51608, max: 63077, avg: 57343 },
 		owners: [ Factions.ownerless ],
+		weapon: { damage: 30, amount: 1, speed: 3200, lifetime: 2.25, range: 7200, rate: 10, magazine: { size: 26, reload: 6 } },
+		tags: [ 'turret', 'medium', 'pir_battleship_01' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -14079,6 +15127,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 48281, max: 59011, avg: 53646 },
 		owners: [ Factions.loanshark ],
+		weapon: { damage: 82, amount: 1, speed: 4000, lifetime: 1.1, range: 4400, rate: 8, magazine: { size: 8, reload: 2 }, heat: { shot: 170, overheat: 10000, coolRate: 1250, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'mandatory', 'medium', 'ship_gen_m_yacht_01', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14116,6 +15167,9 @@ export const Equipments = [
 		hull: 15000,
 		price: { min: 1044754, max: 1276922, avg: 1160838 },
 		owners: [ Factions.ownerless ],
+		weapon: { damage: 16500, amount: 1, speed: 3400, lifetime: 3, range: 10200, chargeTime: 1.4, reload: 2.6, heat: { shot: 700, overheat: 10000, coolRate: 900, coolDelay: 2.6, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'extralarge', 'pir_battleship_01', 'weapon' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -14144,6 +15198,9 @@ export const Equipments = [
 		owners: [ Factions.boron ],
 		thrust: { forward: 3000, reverse: 3300 },
 		travel: { thrust: 41.8, attack: 95.5, charge: 0, release: 0 },
+		boost: { thrust: 5.04, duration: 46, recharge: 200, acceleration: 2.02 },
+		tags: [ 'advanced', 'engine', 'large' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -14171,6 +15228,9 @@ export const Equipments = [
 		owners: [ Factions.boron ],
 		thrust: { forward: 750, reverse: 825 },
 		travel: { thrust: 13.3, attack: 55, charge: 0, release: 0 },
+		boost: { thrust: 8, duration: 28.6, recharge: 200, acceleration: 2.88 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -14197,6 +15257,9 @@ export const Equipments = [
 		owners: [ Factions.boron ],
 		thrust: { forward: 930, reverse: 1023 },
 		travel: { thrust: 13.3, attack: 55, charge: 0, release: 0 },
+		boost: { thrust: 8, duration: 28.6, recharge: 200, acceleration: 2.88 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -14224,6 +15287,9 @@ export const Equipments = [
 		owners: [ Factions.boron ],
 		thrust: { forward: 1035, reverse: 1138.5 },
 		travel: { thrust: 13.3, attack: 55, charge: 0, release: 0 },
+		boost: { thrust: 8, duration: 28.6, recharge: 200, acceleration: 2.88 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -14251,6 +15317,9 @@ export const Equipments = [
 		owners: [ Factions.boron ],
 		thrust: { forward: 300, reverse: 330 },
 		travel: { thrust: 19, attack: 44, charge: 0, release: 0 },
+		boost: { thrust: 8, duration: 22, recharge: 200, acceleration: 3.2 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14277,6 +15346,9 @@ export const Equipments = [
 		owners: [ Factions.boron ],
 		thrust: { forward: 372, reverse: 409.2 },
 		travel: { thrust: 19, attack: 44, charge: 0, release: 0 },
+		boost: { thrust: 8, duration: 22, recharge: 200, acceleration: 3.2 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14304,6 +15376,9 @@ export const Equipments = [
 		owners: [ Factions.boron ],
 		thrust: { forward: 415, reverse: 455.4 },
 		travel: { thrust: 19, attack: 44, charge: 0, release: 0 },
+		boost: { thrust: 8, duration: 22, recharge: 200, acceleration: 3.2 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14332,6 +15407,9 @@ export const Equipments = [
 		owners: [ Factions.boron ],
 		thrust: { forward: 7912.5, reverse: 8703.75 },
 		travel: { thrust: 37.62, attack: 95.5, charge: 0, release: 0 },
+		boost: { thrust: 5.04, duration: 46, recharge: 200, acceleration: 2.02 },
+		tags: [ 'advanced', 'engine', 'extralarge' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 30,
@@ -14359,6 +15437,8 @@ export const Equipments = [
 		recharge: { max: 50400, rate: 300, delay: 10.5 },
 		price: { min: 41484, max: 51739, avg: 46612 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'large', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -14386,6 +15466,8 @@ export const Equipments = [
 		recharge: { max: 61690, rate: 365, delay: 10.5 },
 		price: { min: 209116, max: 255586, avg: 232351 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'large', 'shield' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 20,
@@ -14413,6 +15495,8 @@ export const Equipments = [
 		recharge: { max: 82656, rate: 594, delay: 10.5 },
 		price: { min: 1294936, max: 1438818, avg: 1438818 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'large', 'shield' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 20,
@@ -14439,6 +15523,8 @@ export const Equipments = [
 		recharge: { max: 5250, rate: 95, delay: 8.8 },
 		price: { min: 18190, max: 22233, avg: 20212 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14465,6 +15551,8 @@ export const Equipments = [
 		recharge: { max: 6825, rate: 131, delay: 8.8 },
 		price: { min: 81076, max: 99092, avg: 90084 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14491,6 +15579,8 @@ export const Equipments = [
 		recharge: { max: 8400, rate: 178, delay: 8.8 },
 		price: { min: 357737, max: 437234, avg: 397486 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14518,6 +15608,8 @@ export const Equipments = [
 		recharge: { max: 5250, rate: 95, delay: 8.8 },
 		price: { min: 18190, max: 22233, avg: 20212 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14545,6 +15637,8 @@ export const Equipments = [
 		recharge: { max: 6825, rate: 131, delay: 8.8 },
 		price: { min: 81076, max: 99092, avg: 90084 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14572,6 +15666,8 @@ export const Equipments = [
 		recharge: { max: 8400, rate: 178, delay: 8.8 },
 		price: { min: 357737, max: 437234, avg: 397486 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14598,6 +15694,8 @@ export const Equipments = [
 		recharge: { max: 1050, rate: 50, delay: 10.5 },
 		price: { min: 2261, max: 2763, avg: 2512 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14623,6 +15721,8 @@ export const Equipments = [
 		recharge: { max: 1260, rate: 75, delay: 10.5 },
 		price: { min: 15883, max: 19413, avg: 17648 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14649,6 +15749,8 @@ export const Equipments = [
 		recharge: { max: 1738, rate: 115, delay: 10.5 },
 		price: { min: 75245, max: 91967, avg: 83606 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14676,6 +15778,8 @@ export const Equipments = [
 		recharge: { max: 135955, rate: 572, delay: 10.5 },
 		price: { min: 355439, max: 434425, avg: 394932 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'extralarge', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 20,
@@ -14703,6 +15807,8 @@ export const Equipments = [
 		recharge: { max: 160427, rate: 767, delay: 10.5 },
 		price: { min: 2190623, max: 2677429, avg: 2434026 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'extralarge', 'shield' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 20,
@@ -14729,6 +15835,9 @@ export const Equipments = [
 		hull: 3450,
 		price: { min: 130022, max: 158916, avg: 144469 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 0, amount: 1, speed: 5000, lifetime: 1.96, range: 9800, rate: 1, magazine: { size: 3, reload: 12 } },
+		tags: [ 'advanced', 'combat', 'large', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14755,6 +15864,9 @@ export const Equipments = [
 		hull: 3450,
 		price: { min: 127253, max: 155531, avg: 141392 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 0, amount: 1, speed: 3800, lifetime: 1.4211, range: 5400, rate: 0.33, magazine: { size: 3, reload: 6 } },
+		tags: [ 'advanced', 'combat', 'large', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14781,6 +15893,9 @@ export const Equipments = [
 		hull: 3450,
 		price: { min: 80571, max: 98476, avg: 89524 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 290, amount: 1, speed: 2500, lifetime: 2.4, range: 6000, rate: 1, magazine: { size: 10, reload: 5 } },
+		tags: [ 'advanced', 'combat', 'large', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14807,6 +15922,9 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 16484, max: 20147, avg: 18315 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 50, hull: 1, amount: 1, speed: 7000, lifetime: 4, range: 7000, reload: 4 },
+		tags: [ 'advanced', 'large', 'mining', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14832,6 +15950,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 32044, max: 39165, avg: 35604 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 282, amount: 1, speed: 2600, lifetime: 1, range: 2600, rate: 0.55, magazine: { size: 5, reload: 10 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -14858,6 +15979,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 32044, max: 39165, avg: 35604 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 282, amount: 1, speed: 2600, lifetime: 1, range: 2600, rate: 0.55, magazine: { size: 5, reload: 10 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -14884,6 +16008,8 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 24725, max: 30220, avg: 27473 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'medium', 'missile', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -14910,6 +16036,8 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 34615, max: 42308, avg: 38462 },
 		owners: [ Factions.boron ],
+		tags: [ 'advanced', 'medium', 'missile', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -14935,6 +16063,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 23802, max: 29092, avg: 26447 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 94, amount: 1, speed: 2400, lifetime: 1.6, range: 3840, rate: 1, magazine: { size: 10, reload: 4 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14961,6 +16092,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 23802, max: 29092, avg: 26447 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 94, amount: 1, speed: 2400, lifetime: 1.6, range: 3840, rate: 1, magazine: { size: 10, reload: 4 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -14986,6 +16120,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 8242, max: 10073, avg: 9158 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 10, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'advanced', 'medium', 'mining', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15012,6 +16149,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 8242, max: 10073, avg: 9158 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 10, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'advanced', 'medium', 'mining', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15037,6 +16177,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 48527, max: 59311, avg: 53919 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 306, shield: 204, amount: 1, speed: 9000, lifetime: 0.9, range: 8100, rate: 1.2, magazine: { size: 6, reload: 15.5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -15063,6 +16206,9 @@ export const Equipments = [
 		hull: 900,
 		price: { min: 48527, max: 59311, avg: 53919 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 306, shield: 204, amount: 1, speed: 9000, lifetime: 0.9, range: 8100, rate: 1.2, magazine: { size: 6, reload: 15.5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -15089,6 +16235,9 @@ export const Equipments = [
 		hull: 10000,
 		price: { min: 844022, max: 1031582, avg: 937802 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 5200, shield: 3200, amount: 1, speed: 60000, lifetime: 4, range: 11000, chargeTime: 4, reload: 6, heat: { shot: 2550, overheat: 10000, coolRate: 1660, coolDelay: 2, overheatCoolDelay: 2, reenable: 1 } },
+		tags: [ 'advanced', 'large', 'weapon' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -15115,6 +16264,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 152308, max: 186154, avg: 169231 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 0, amount: 1, speed: 2000, lifetime: 2.7, range: 5400, rate: 0.75, magazine: { size: 6, reload: 4.5 }, heat: { shot: 450, overheat: 10000, coolRate: 2000, coolDelay: 3, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -15141,6 +16293,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 132527, max: 161978, avg: 147253 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 210, amount: 1, speed: 2400, lifetime: 1.7, range: 4080, rate: 1, magazine: { size: 10, reload: 2.5 }, heat: { shot: 300, overheat: 10000, coolRate: 2000, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15167,6 +16322,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 12824, max: 15674, avg: 14249 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 40, amount: 1, speed: 7000, lifetime: 4, range: 4300, reload: 4 },
+		tags: [ 'advanced', 'medium', 'mining', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15193,6 +16351,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 188572, max: 230476, avg: 209524 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 372, shield: 248, amount: 1, speed: 9000, lifetime: 1.2, range: 10800, rate: 2.7, heat: { shot: 2000, overheat: 10000, coolRate: 940, coolDelay: 1, overheatCoolDelay: 2, reenable: 6000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -15219,6 +16380,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 101538, max: 124102, avg: 112820 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 282, amount: 1, speed: 2600, lifetime: 1.1, range: 2860, rate: 0.57, heat: { shot: 1667, overheat: 10000, coolRate: 1300, coolDelay: 1, overheatCoolDelay: 2, reenable: 4000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -15245,6 +16409,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 114725, max: 140220, avg: 127472 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 26, shield: 38, amount: 1, speed: 2600, lifetime: 1.31, range: 3406, rate: 8.4, magazine: { size: 38, reload: 4.6 }, heat: { shot: 85, overheat: 10000, coolRate: 1320, coolDelay: 4, overheatCoolDelay: 2, reenable: 800 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'militaryequipment',
 		production: [
 		{
 			time: 10,
@@ -15271,6 +16438,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 88352, max: 107985, avg: 98168 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 102, amount: 1, speed: 2308, lifetime: 1.3, range: 3000, rate: 1.3, magazine: { size: 10, reload: 2 }, heat: { shot: 240, overheat: 10000, coolRate: 2000, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15297,6 +16467,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 8549, max: 10449, avg: 9499 },
 		owners: [ Factions.boron ],
+		weapon: { damage: 20, amount: 1, speed: 7000, lifetime: 4, range: 3000, reload: 4 },
+		tags: [ 'advanced', 'mining', 'small', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15324,6 +16497,9 @@ export const Equipments = [
 		owners: [ Factions.ownerless ],
 		thrust: { forward: 563, reverse: 710 },
 		travel: { thrust: 1, attack: 1, charge: 0, release: 0 },
+		boost: { thrust: 4.4, duration: 2, recharge: 10, acceleration: 5 },
+		tags: [ 'engine', 'small', 'small_racer' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15350,6 +16526,9 @@ export const Equipments = [
 		owners: [ Factions.ownerless ],
 		thrust: { forward: 710, reverse: 710 },
 		travel: { thrust: 1, attack: 1, charge: 0, release: 0 },
+		boost: { thrust: 4.6, duration: 7, recharge: 36, acceleration: 4 },
+		tags: [ 'engine', 'small', 'small_racer' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15376,6 +16555,9 @@ export const Equipments = [
 		owners: [ Factions.ownerless ],
 		thrust: { forward: 710, reverse: 710 },
 		travel: { thrust: 9.5, attack: 38, charge: 0, release: 0 },
+		boost: { thrust: 4.6, duration: 7, recharge: 36, acceleration: 4.6 },
+		tags: [ 'engine', 'small', 'small_racer' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15403,6 +16585,9 @@ export const Equipments = [
 		owners: [ Factions.ownerless ],
 		thrust: { forward: 500, reverse: 720 },
 		travel: { thrust: 1, attack: 1, charge: 0, release: 0 },
+		boost: { thrust: 2.5, duration: 5, recharge: 18, acceleration: 3 },
+		tags: [ 'engine', 'small', 'small_racer' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15430,6 +16615,9 @@ export const Equipments = [
 		owners: [ Factions.ownerless ],
 		thrust: { forward: 488, reverse: 555 },
 		travel: { thrust: 1, attack: 1, charge: 0, release: 0 },
+		boost: { thrust: 3, duration: 9, recharge: 20, acceleration: 2 },
+		tags: [ 'engine', 'small', 'small_racer' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15458,6 +16646,9 @@ export const Equipments = [
 		owners: [ Factions.terran ],
 		thrust: { forward: 3864, reverse: 4444 },
 		travel: { thrust: 32, attack: 66, charge: 8, release: 0 },
+		boost: { thrust: 4.8, duration: 36, recharge: 90, acceleration: 2.2 },
+		tags: [ 'advanced', 'engine', 'large' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 20,
@@ -15497,6 +16688,9 @@ export const Equipments = [
 		owners: [ Factions.terran ],
 		thrust: { forward: 1170, reverse: 2004 },
 		travel: { thrust: 8, attack: 18.5, charge: 0, release: 0 },
+		boost: { thrust: 6.8, duration: 16, recharge: 100, acceleration: 4.8 },
+		tags: [ 'advanced', 'engine', 'medium' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 15,
@@ -15536,6 +16730,9 @@ export const Equipments = [
 		owners: [ Factions.terran ],
 		thrust: { forward: 462, reverse: 554.4 },
 		travel: { thrust: 13, attack: 16, charge: 1, release: 0 },
+		boost: { thrust: 6.89, duration: 18, recharge: 130, acceleration: 4.7 },
+		tags: [ 'advanced', 'engine', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15575,6 +16772,8 @@ export const Equipments = [
 		price: { min: 498332, max: 702468, avg: 600400 },
 		owners: [ Factions.xenon ],
 		thrust: { forward: 35312, reverse: 38844 },
+		tags: [ 'engine', 'extralarge', 'ship_xen_xl_mothership_01' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 1,
@@ -15600,6 +16799,8 @@ export const Equipments = [
 		hull: 10,
 		price: { min: 1564, max: 2116, avg: 1840 },
 		owners: [ Factions.ownerless ],
+		missile: { damage: 1250, range: 10000, lifetime: 30, guided: true, reload: 0.25, speed: 591 },
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 3,
@@ -15645,6 +16846,8 @@ export const Equipments = [
 		hull: 1,
 		price: { min: 1324, max: 1791, avg: 1558 },
 		owners: [ Factions.ownerless ],
+		missile: { damage: 500, range: 9000, lifetime: 16, guided: true, reload: 0.25, speed: 1072 },
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 3,
@@ -15690,6 +16893,8 @@ export const Equipments = [
 		recharge: { max: 1196, rate: 50, delay: 15 },
 		price: { min: 12223, max: 14939, avg: 13582 },
 		owners: [ Factions.ownerless ],
+		tags: [ 'shield', 'small', 'small_racer' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15715,6 +16920,8 @@ export const Equipments = [
 		recharge: { max: 1196, rate: 50, delay: 15 },
 		price: { min: 13242, max: 16184, avg: 14713 },
 		owners: [ Factions.ownerless ],
+		tags: [ 'shield', 'small', 'small_racer' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15741,6 +16948,8 @@ export const Equipments = [
 		recharge: { max: 1289, rate: 135, delay: 10.2 },
 		price: { min: 13691, max: 16733, avg: 15212 },
 		owners: [ Factions.ownerless ],
+		tags: [ 'shield', 'small', 'small_racer' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15767,6 +16976,8 @@ export const Equipments = [
 		recharge: { max: 450, rate: 150, delay: 2 },
 		price: { min: 12224, max: 13582, avg: 13582 },
 		owners: [ Factions.ownerless ],
+		tags: [ 'shield', 'small', 'small_racer' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15794,6 +17005,8 @@ export const Equipments = [
 		recharge: { max: 57600, rate: 162, delay: 6.2 },
 		price: { min: 104540, max: 127772, avg: 116156 },
 		owners: [ Factions.terran ],
+		tags: [ 'advanced', 'large', 'shield' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 20,
@@ -15833,6 +17046,8 @@ export const Equipments = [
 		recharge: { max: 71424, rate: 227, delay: 6.2 },
 		price: { min: 394916, max: 482675, avg: 438795 },
 		owners: [ Factions.terran ],
+		tags: [ 'advanced', 'large', 'shield' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 20,
@@ -15872,6 +17087,8 @@ export const Equipments = [
 		recharge: { max: 86400, rate: 324, delay: 6.2 },
 		price: { min: 1014959, max: 1240505, avg: 1127732 },
 		owners: [ Factions.terran ],
+		tags: [ 'advanced', 'large', 'shield' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 20,
@@ -15911,6 +17128,8 @@ export const Equipments = [
 		recharge: { max: 6000, rate: 70, delay: 4 },
 		price: { min: 93789, max: 114631, avg: 104210 },
 		owners: [ Factions.terran ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15950,6 +17169,8 @@ export const Equipments = [
 		recharge: { max: 7800, rate: 89, delay: 4 },
 		price: { min: 174653, max: 213465, avg: 194059 },
 		owners: [ Factions.terran ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -15989,6 +17210,8 @@ export const Equipments = [
 		recharge: { max: 9720, rate: 113, delay: 4 },
 		price: { min: 764335, max: 934188, avg: 849262 },
 		owners: [ Factions.terran ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -16027,6 +17250,8 @@ export const Equipments = [
 		recharge: { max: 6000, rate: 70, delay: 4 },
 		price: { min: 93789, max: 114631, avg: 104210 },
 		owners: [ Factions.terran ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -16065,6 +17290,8 @@ export const Equipments = [
 		recharge: { max: 7800, rate: 89, delay: 4 },
 		price: { min: 174653, max: 213465, avg: 194059 },
 		owners: [ Factions.terran ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -16103,6 +17330,8 @@ export const Equipments = [
 		recharge: { max: 9720, rate: 113, delay: 4 },
 		price: { min: 764335, max: 934188, avg: 849262 },
 		owners: [ Factions.terran ],
+		tags: [ 'advanced', 'medium', 'shield' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -16141,6 +17370,8 @@ export const Equipments = [
 		recharge: { max: 1440, rate: 48, delay: 6 },
 		price: { min: 22586, max: 27605, avg: 25095 },
 		owners: [ Factions.terran ],
+		tags: [ 'advanced', 'shield', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -16178,6 +17409,8 @@ export const Equipments = [
 		recharge: { max: 4800, rate: 400, delay: 9 },
 		price: { min: 412740, max: 504460, avg: 458600 },
 		owners: [ Factions.terran ],
+		tags: [ 'shield', 'ship_ter_s_xperimental_01', 'small' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -16217,6 +17450,8 @@ export const Equipments = [
 		recharge: { max: 86060, rate: 240, delay: 17.55 },
 		price: { min: 320048, max: 451152, avg: 385600 },
 		owners: [ Factions.xenon ],
+		tags: [ 'extralarge', 'shield', 'ship_xen_xl_mothership_01' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 1,
@@ -16243,6 +17478,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 133187, max: 162784, avg: 147985 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 102, hull: 68, amount: 1, speed: 2800, lifetime: 1, range: 2800, rate: 1.2, magazine: { size: 10, reload: 6.5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -16281,6 +17519,9 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 133187, max: 162784, avg: 147985 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 102, hull: 68, amount: 1, speed: 2800, lifetime: 1, range: 2800, rate: 1.2, magazine: { size: 10, reload: 6.5 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -16319,6 +17560,9 @@ export const Equipments = [
 		hull: 15600,
 		price: { min: 40670, max: 57330, avg: 49000 },
 		owners: [ Factions.xenon ],
+		weapon: { damage: 40000, amount: 1, speed: 50000, lifetime: 4, range: 30000, chargeTime: 5, reload: 15 },
+		tags: [ 'extralarge', 'ship_xen_xl_mothership_01', 'turret' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -16345,6 +17589,8 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 1798200, max: 2197800, avg: 1998000 },
 		owners: [ Factions.ownerless ],
+		tags: [ 'large', 'mandatory', 'ship_ter_l_flagship_01', 'weapon' ],
+		license: 'capitalequipment',
 		production: [
 		{
 			time: 10,
@@ -16383,6 +17629,9 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 246414, max: 301172, avg: 273793 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 240, hull: 160, amount: 1, speed: 2700, lifetime: 1.15, range: 3105, rate: 1, heat: { shot: 770, overheat: 10000, coolRate: 940, coolDelay: 2, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'medium', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -16421,6 +17670,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 164275, max: 200781, avg: 182528 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 110, hull: 70, amount: 1, speed: 2800, lifetime: 1, range: 2800, rate: 1.4, heat: { shot: 350, overheat: 10000, coolRate: 2000, coolDelay: 1, overheatCoolDelay: 1, reenable: 8000 } },
+		tags: [ 'advanced', 'combat', 'small', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -16459,6 +17711,9 @@ export const Equipments = [
 		hull: 500,
 		price: { min: 168711, max: 206202, avg: 187457 },
 		owners: [ Factions.terran ],
+		weapon: { damage: 40, amount: 1, speed: 2300, lifetime: 1.7, range: 3910, rate: 9, heat: { shot: 172, overheat: 10000, coolRate: 2600, coolDelay: 0.5, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'combat', 'ship_ter_s_xperimental_01', 'small', 'weapon' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -16497,6 +17752,9 @@ export const Equipments = [
 		hull: 8000,
 		price: { min: 954754, max: 1166922, avg: 1060838 },
 		owners: [ Factions.holyorder, Factions.paranid, Factions.trinity ],
+		weapon: { damage: 740, amount: 1, speed: 2800, lifetime: 2.5, range: 7000, rate: 0.6, heat: { shot: 1250, overheat: 10000, coolRate: 3330, coolDelay: 1.5, overheatCoolDelay: 2, reenable: 8000 } },
+		tags: [ 'large', 'ship_par_l_expeditionary_01', 'weapon' ],
+		license: 'hyperion_access',
 		production: [
 		{
 			time: 10,
@@ -16524,6 +17782,9 @@ export const Equipments = [
 		owners: [ Factions.argon ],
 		thrust: { forward: 1484.1, reverse: 1336 },
 		travel: { thrust: 12.5, attack: 38, charge: 7, release: 0 },
+		boost: { thrust: 7.2, duration: 16, recharge: 92, acceleration: 6 },
+		tags: [ 'engine', 'medium', 'ship_gen_m_corvette_01' ],
+		license: 'envoy_access',
 		production: [
 		{
 			time: 15,
@@ -16562,6 +17823,9 @@ export const Equipments = [
 		owners: [ Factions.argon ],
 		thrust: { forward: 1706, reverse: 1535 },
 		travel: { thrust: 12, attack: 38, charge: 7, release: 0 },
+		boost: { thrust: 7.2, duration: 16, recharge: 92, acceleration: 6 },
+		tags: [ 'engine', 'medium', 'ship_gen_m_corvette_01' ],
+		license: 'envoy_access',
 		production: [
 		{
 			time: 15,
@@ -16600,6 +17864,9 @@ export const Equipments = [
 		owners: [ Factions.ministry, Factions.scaleplate ],
 		thrust: { forward: 1342, reverse: 1208 },
 		travel: { thrust: 14.3, attack: 23, charge: 3, release: 0 },
+		boost: { thrust: 5.4, duration: 26.4, recharge: 120, acceleration: 4 },
+		tags: [ 'engine', 'medium', 'ship_gen_m_corvette_01' ],
+		license: 'envoy_access',
 		production: [
 		{
 			time: 15,
@@ -16638,6 +17905,9 @@ export const Equipments = [
 		owners: [ Factions.ministry ],
 		thrust: { forward: 1543, reverse: 1389 },
 		travel: { thrust: 13.8, attack: 23, charge: 3, release: 0 },
+		boost: { thrust: 5.4, duration: 26.4, recharge: 120, acceleration: 4 },
+		tags: [ 'engine', 'medium', 'ship_gen_m_corvette_01' ],
+		license: 'envoy_access',
 		production: [
 		{
 			time: 15,
@@ -16675,6 +17945,8 @@ export const Equipments = [
 		recharge: { max: 8600, rate: 110, delay: 10 },
 		price: { min: 79218, max: 96822, avg: 88020 },
 		owners: [ Factions.argon, Factions.ministry, Factions.scaleplate ],
+		tags: [ 'medium', 'shield', 'ship_gen_m_corvette_01' ],
+		license: 'envoy_access',
 		production: [
 		{
 			time: 20,
@@ -16711,6 +17983,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 51608, max: 63077, avg: 57343 },
 		owners: [ Factions.ministry ],
+		weapon: { damage: 30, amount: 1, speed: 10000, lifetime: 0.31, range: 3100, reload: 3.4 },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'envoy_access',
 		production: [
 		{
 			time: 10,
@@ -16746,6 +18021,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 44116, max: 53919, avg: 49018 },
 		owners: [ Factions.scaleplate ],
+		weapon: { damage: 140, amount: 1, speed: 2300, lifetime: 1.46, range: 3358, rate: 3.6, magazine: { size: 6, reload: 3.2 } },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'generaluseequipment',
 		production: [
 		{
 			time: 10,
@@ -16782,6 +18060,9 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 136516, max: 166853, avg: 151685 },
 		owners: [ Factions.argon ],
+		weapon: { damage: 50, hull: 150, amount: 1, speed: 299792500, lifetime: 4.4, range: 2300, beam: true, reload: 6.7 },
+		tags: [ 'advanced', 'combat', 'medium', 'turret' ],
+		license: 'envoy_access',
 		production: [
 		{
 			time: 10,
@@ -16819,6 +18100,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 372827, max: 455677, avg: 414252 },
 		owners: [ Factions.ministry, Factions.scaleplate ],
+		weapon: { damage: 50, amount: 1, speed: 12000, lifetime: 2, range: 24000, rate: 3, magazine: { size: 3, reload: 4 }, heat: { shot: 1000, overheat: 10000, coolRate: 500, coolDelay: 1, overheatCoolDelay: 2, reenable: 2000 } },
+		tags: [ 'mandatory', 'medium', 'ship_gen_m_corvette_01', 'weapon' ],
+		license: 'envoy_access',
 		production: [
 		{
 			time: 20,
@@ -16856,6 +18140,9 @@ export const Equipments = [
 		hull: 1001,
 		price: { min: 276384, max: 337802, avg: 307093 },
 		owners: [ Factions.argon ],
+		weapon: { damage: 130, hull: 390, amount: 1, speed: 299792500, lifetime: 4, range: 4200, beam: true, reload: 5, heat: { shot: 1333, overheat: 10000, coolRate: 850, coolDelay: 1, overheatCoolDelay: 2, reenable: 5000 } },
+		tags: [ 'mandatory', 'medium', 'ship_gen_m_corvette_01', 'weapon' ],
+		license: 'envoy_access',
 		production: [
 		{
 			time: 20,

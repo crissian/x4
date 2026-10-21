@@ -7,6 +7,7 @@
 			<select class="input w-auto" [value]="mode()" (change)="setMode($any($event.target).value)">
 				<option value="owner">Owner</option>
 				<option value="sunlight">Sunlight</option>
+				<option value="security">Security</option>
 				<option value="resource">Resource</option>
 			</select>
 		</label>
@@ -23,6 +24,28 @@
 				}
 			</select>
 		}
+
+		<div class="relative text-sm font-normal">
+			<button type="button" class="btn btn-secondary" (click)="versionsOpen.set(!versionsOpen())">
+				DLC ({{ versions().size }}/{{ gameVersions.length }})
+			</button>
+			@if (versionsOpen()) {
+				<div class="absolute right-0 z-20 mt-1 w-56 rounded-md border border-line bg-raised p-2 shadow-lg">
+					@for (version of gameVersions; track version.id) {
+						<label class="flex items-center gap-2 py-0.5">
+							<input type="checkbox" [checked]="versions().has(version.id)" (change)="toggleVersion(version.id)" />
+							{{ version.name }}
+						</label>
+					}
+					<button type="button" class="link-button mt-1" (click)="versionsOpen.set(false)">Close</button>
+				</div>
+			}
+		</div>
+
+		<label class="flex items-center gap-1.5 text-sm font-normal">
+			<input type="checkbox" [checked]="showAbandoned()" (change)="showAbandoned.set(!showAbandoned())" />
+			Abandoned ships
+		</label>
 
 		<div class="flex items-center gap-1 text-sm font-normal">
 			<input
@@ -70,7 +93,7 @@
 				fill="url(#map-glow)"
 			/>
 
-			@for (shape of layout.shapes; track shape.sector.id) {
+			@for (shape of visibleShapes(); track shape.sector.id) {
 				@let fill = fills().get(shape.sector.id);
 				<polygon
 					class="cursor-pointer"
@@ -86,7 +109,7 @@
 				/>
 			}
 
-			@for (link of layout.links; track $index) {
+			@for (link of visibleLinks(); track $index) {
 				<line
 					class="pointer-events-none"
 					[attr.x1]="link.x1"
@@ -105,9 +128,42 @@
 				}
 			}
 
+			@if (routePoints()) {
+				<polyline
+					class="pointer-events-none"
+					[attr.points]="routePoints()"
+					fill="none"
+					stroke="#fde047"
+					stroke-width="5"
+					stroke-opacity="0.85"
+					stroke-linejoin="round"
+					stroke-linecap="round"
+					vector-effect="non-scaling-stroke"
+				/>
+			}
+
+			@if (showAbandoned()) {
+				@for (marker of abandoned(); track $index) {
+					<g class="cursor-pointer" [attr.data-sector]="marker.item.sector">
+						<title>Abandoned {{ marker.ship?.name ?? marker.item.ship }}{{ marker.item.condition ? ' (' + marker.item.condition + ')' : '' }}</title>
+						<rect
+							[attr.x]="marker.x - fontSize() * 0.45"
+							[attr.y]="marker.y - fontSize() * 0.45"
+							[attr.width]="fontSize() * 0.9"
+							[attr.height]="fontSize() * 0.9"
+							[attr.transform]="'rotate(45 ' + marker.x + ' ' + marker.y + ')'"
+							[attr.fill]="marker.item.condition ? '#c084fc' : '#f472b6'"
+							stroke="#05080f"
+							stroke-width="1"
+							vector-effect="non-scaling-stroke"
+						/>
+					</g>
+				}
+			}
+
 			@if (showLabels()) {
 				<g class="pointer-events-none" text-anchor="middle" [attr.font-size]="fontSize()" fill="#f1f5f9">
-					@for (shape of layout.shapes; track shape.sector.id) {
+					@for (shape of visibleShapes(); track shape.sector.id) {
 						@let lines = labelLines(shape.sector, shape);
 						@for (line of lines; track $index) {
 							<text
@@ -179,6 +235,11 @@
 					></div>
 					<div class="flex w-48 justify-between text-slate-400"><span>0%</span><span>100%</span><span>200%+</span></div>
 				}
+				@case ('security') {
+					<div class="mb-1 font-semibold text-white">Security level</div>
+					<div class="h-2.5 w-48 rounded-sm" style="background: linear-gradient(to right, hsl(0 75% 45%), hsl(60 75% 45%), hsl(120 75% 45%))"></div>
+					<div class="flex w-48 justify-between text-slate-400"><span>0%</span><span>50%</span><span>100%</span></div>
+				}
 				@case ('resource') {
 					<div class="mb-1 font-semibold text-white">{{ wareName(resource()) }} available</div>
 					<div class="h-2.5 w-48 rounded-sm" style="background: linear-gradient(to right, rgb(20 184 166 / 0.2), rgb(20 184 166 / 0.95))"></div>
@@ -189,6 +250,12 @@
 				<span><span class="mr-1 inline-block h-0.5 w-4 bg-slate-200 align-middle"></span>Jump gate</span>
 				<span><span class="mr-1 inline-block w-4 border-t-2 border-dashed border-amber-400 align-middle"></span>Accelerator</span>
 				<span><span class="mr-1 inline-block w-4 border-t-2 border-dotted border-sky-400 align-middle"></span>Superhighway</span>
+				@if (showAbandoned()) {
+					<span><span class="mr-1 inline-block size-2 rotate-45 bg-pink-400 align-middle"></span>Abandoned ship</span>
+				}
+				@if (route()) {
+					<span><span class="mr-1 inline-block h-1 w-4 bg-yellow-300 align-middle"></span>Route</span>
+				}
 			</div>
 		</div>
 
@@ -229,5 +296,132 @@
 				<div class="mt-1.5 text-slate-500">Click for details</div>
 			</div>
 		}
+	</div>
+</div>
+
+<div class="mt-4 grid gap-4 lg:grid-cols-3">
+	<div class="card">
+		<div class="card-header">Route planner</div>
+		<div class="card-body">
+			<div class="grid gap-2">
+				<input class="input" list="map-sectors" placeholder="From sector..." aria-label="From sector" [value]="sectorName(routeFrom())" (change)="setRouteFrom($any($event.target).value)" />
+				<input class="input" list="map-sectors" placeholder="To sector..." aria-label="To sector" [value]="sectorName(routeTo())" (change)="setRouteTo($any($event.target).value)" />
+				<select class="input" aria-label="Ship" [value]="routeShip()" (change)="setRouteShip($any($event.target).value)">
+					<option value="">Custom travel speed</option>
+					@for (ship of routeShips; track ship.id) {
+						<option [value]="ship.id">{{ ship.name }} ({{ ship.size }})</option>
+					}
+				</select>
+				<div class="grid grid-cols-2 gap-2">
+					<label class="text-sm">
+						Travel speed (m/s)
+						<input class="input" type="number" min="100" [value]="travelSpeed()" (change)="travelSpeed.set(+$any($event.target).value || 3000); routeShip.set('')" />
+					</label>
+					<label class="text-sm">
+						Drive charge (s)
+						<input class="input" type="number" min="0" [value]="travelCharge()" (change)="travelCharge.set(+$any($event.target).value || 0)" />
+					</label>
+				</div>
+			</div>
+			@if (route(); as r) {
+				<div class="mt-3">
+					<strong>{{ formatDuration(r.time) }}</strong>, {{ r.jumps }} jumps, {{ r.distance | number: '1.0-0' }} km in sectors
+				</div>
+				<ol class="mt-2 list-decimal pl-6 text-sm">
+					@for (step of r.steps; track $index) {
+						<li>
+							<a [routerLink]="['/sectors', step.sector.id]">{{ step.sector.name }}</a>
+							@if (step.type !== 'start') {
+								<span class="text-fg-muted"> - {{ step.type }}, {{ formatDuration(step.time) }}</span>
+							}
+						</li>
+					}
+				</ol>
+			} @else if (routeFrom() && routeTo()) {
+				<p class="mt-3 text-fg-muted">No route between these sectors with the selected DLCs.</p>
+			}
+			<p class="mt-2 text-xs text-fg-muted">
+				Center to center with the travel drive between gates; gates and accelerators count 10 s, superhighways 40 s. Estimates only.
+			</p>
+		</div>
+	</div>
+
+	<div class="card">
+		<div class="card-header">Mining: {{ wareName(resource()) }}</div>
+		<div class="card-body">
+			<select class="input mb-2" aria-label="Resource" [value]="resource()" (change)="resource.set($any($event.target).value)">
+				@for (ware of resourceWares; track ware.id) {
+					<option [value]="ware.id" [selected]="ware.id === resource()">{{ ware.name }}</option>
+				}
+			</select>
+			<p class="mb-2 text-xs text-fg-muted">
+				@if (routeFrom()) {
+					Closest sectors to {{ sectorName(routeFrom()) }} (route planner start).
+				} @else {
+					Richest sectors. Set a route start to rank them by travel time.
+				}
+			</p>
+			<table class="table text-sm">
+				<thead>
+					<tr>
+						<th>Sector</th>
+						<th class="text-right">Amount</th>
+						@if (routeFrom()) {
+							<th class="text-right">Time</th>
+							<th class="text-right">Jumps</th>
+						}
+					</tr>
+				</thead>
+				<tbody>
+					@for (item of miningSectors(); track item.sector.id) {
+						<tr>
+							<td><a [routerLink]="['/sectors', item.sector.id]">{{ item.sector.name }}</a></td>
+							<td class="text-right">{{ item.amount | number }}</td>
+							@if (routeFrom()) {
+								<td class="text-right">{{ formatDuration(item.time) }}</td>
+								<td class="text-right">{{ item.jumps }}</td>
+							}
+						</tr>
+					} @empty {
+						<tr>
+							<td colspan="4" class="text-fg-muted">None</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="card">
+		<div class="card-header">Abandoned ships</div>
+		<div class="card-body">
+			<table class="table text-sm">
+				<tbody>
+					@for (marker of abandoned(); track $index) {
+						<tr>
+							<td>
+								@if (marker.ship) {
+									<a [routerLink]="['/ships', marker.ship.id]">{{ marker.ship.name }}</a>
+								} @else {
+									{{ marker.item.ship }}
+								}
+								@if (marker.item.condition) {
+									<div class="text-xs text-fg-muted">{{ marker.item.condition }}</div>
+								}
+							</td>
+							<td>
+								<a [routerLink]="['/map']" [queryParams]="{ sector: marker.item.sector }">{{ marker.shape.sector.name }}</a>
+								<div class="text-xs text-fg-muted">{{ marker.item.x | number: '1.0-0' }}, {{ marker.item.y | number: '1.0-0' }}, {{ marker.item.z | number: '1.0-0' }} km</div>
+							</td>
+						</tr>
+					} @empty {
+						<tr>
+							<td class="text-fg-muted">None for the selected DLCs</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			<p class="mt-2 text-xs text-fg-muted">Ownerless ships placed at game start; claim them by boarding with a spacesuit.</p>
+		</div>
 	</div>
 </div>

@@ -17,6 +17,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 290000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 779, y: 180, z: 1394 },
    price: { min: 101601, max: 137461, avg: 119531 },
    owners: [
     Factions.antigone,
@@ -45,6 +47,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 150000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 278, y: 150, z: 400 },
    price: { min: 92363, max: 124961, avg: 108662 },
    owners: [
     Factions.antigone,
@@ -73,6 +77,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 237000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 288, y: 180, z: 731 },
    price: { min: 75585, max: 102263, avg: 88924 },
    owners: [
     Factions.antigone,
@@ -101,6 +107,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 280000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 321, y: 701, z: 1535 },
    price: { min: 98841, max: 133727, avg: 116284 },
    owners: [
     Factions.antigone,
@@ -129,6 +137,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 120000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 315, y: 736, z: 713 },
    price: { min: 65300, max: 88348, avg: 76824 },
    owners: [
     Factions.antigone,
@@ -157,6 +167,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 110000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 400, y: 272, z: 400 },
    price: { min: 63911, max: 86467, avg: 75189 },
    owners: [
     Factions.antigone,
@@ -185,6 +197,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 100000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 400, y: 145, z: 400 },
    price: { min: 59572, max: 80597, avg: 70084 },
    owners: [
     Factions.antigone,
@@ -213,6 +227,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 90000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 400, y: 150, z: 339 },
    price: { min: 55263, max: 74768, avg: 65016 },
    owners: [
     Factions.antigone,
@@ -241,6 +257,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 80000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 339, y: 150, z: 339 },
    price: { min: 50924, max: 68898, avg: 59911 },
    owners: [
     Factions.antigone,
@@ -269,6 +287,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 79000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 135, y: 349, z: 209 },
    price: { min: 54125, max: 73227, avg: 63676 },
    owners: [
     Factions.antigone,
@@ -297,6 +317,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 143000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 135, y: 749, z: 209 },
    price: { min: 70888, max: 95908, avg: 83398 },
    owners: [
     Factions.antigone,
@@ -326,6 +348,8 @@ export const Modules = {
    explosionDamage: 2000,
    hull: 512000,
    makerRace: Races.argon,
+   license: 'station_gen_advanced',
+   dimensions: { x: 2000, y: 1835, z: 2000 },
    price: { min: 744928, max: 1007844, avg: 876386 },
    owners: [
     Factions.antigone,
@@ -355,6 +379,8 @@ export const Modules = {
    explosionDamage: 1200,
    hull: 197400,
    makerRace: Races.argon,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 400, y: 154, z: 400 },
    price: { min: 533140, max: 721308, avg: 627224 },
    owners: [
     Factions.antigone,
@@ -431,6 +457,8 @@ export const Modules = {
    explosionDamage: 1200,
    hull: 148800,
    makerRace: Races.argon,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 270, y: 122, z: 339 },
    price: { min: 462691, max: 625993, avg: 544342 },
    owners: [
     Factions.antigone,
@@ -496,6 +524,8 @@ export const Modules = {
    type: ModuleTypes.dockarea,
    explosionDamage: 1000,
    hull: 240000,
+   license: 'station_gen_basic',
+   dimensions: { x: 1440, y: 1434, z: 1326 },
    price: { min: 293852, max: 397564, avg: 345708 },
    owners: [
     Factions.antigone,
@@ -535,6 +565,8 @@ export const Modules = {
    type: ModuleTypes.dockarea,
    explosionDamage: 1000,
    hull: 275000,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 1440, y: 1434, z: 1326 },
    price: { min: 315326, max: 426618, avg: 370972 },
    owners: [
     Factions.antigone,
@@ -574,6 +606,8 @@ export const Modules = {
    type: ModuleTypes.dockarea,
    explosionDamage: 1000,
    hull: 210000,
+   license: 'station_gen_basic',
+   dimensions: { x: 1440, y: 1434, z: 1326 },
    price: { min: 276636, max: 374272, avg: 325454 },
    owners: [
     Factions.antigone,
@@ -613,6 +647,8 @@ export const Modules = {
    type: ModuleTypes.dockarea,
    explosionDamage: 1000,
    hull: 495000,
+   license: 'station_gen_basic',
+   dimensions: { x: 1440, y: 1434, z: 1326 },
    price: { min: 423562, max: 573054, avg: 498308 },
    owners: [
     Factions.antigone,
@@ -652,6 +688,8 @@ export const Modules = {
    type: ModuleTypes.dockarea,
    explosionDamage: 1000,
    hull: 530000,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 1440, y: 1434, z: 1326 },
    price: { min: 435642, max: 589398, avg: 512520 },
    owners: [
     Factions.antigone,
@@ -691,6 +729,8 @@ export const Modules = {
    type: ModuleTypes.dockarea,
    explosionDamage: 10000,
    hull: 460000,
+   license: 'station_gen_basic',
+   dimensions: { x: 1440, y: 1434, z: 1326 },
    price: { min: 407689, max: 551579, avg: 479634 },
    owners: [
     Factions.antigone,
@@ -730,6 +770,8 @@ export const Modules = {
    type: ModuleTypes.dockarea,
    explosionDamage: 10000,
    hull: 1100000,
+   license: 'station_gen_advanced',
+   dimensions: { x: 1194, y: 264, z: 795 },
    price: { min: 630652, max: 853236, avg: 741944 },
    owners: [
     Factions.antigone,
@@ -767,6 +809,8 @@ export const Modules = {
     capacity: 1000,
     race: Races.argon
    },
+   license: 'station_gen_advanced',
+   dimensions: { x: 415, y: 1600, z: 569 },
    price: { min: 16627714, max: 22496318, avg: 19562016 },
    owners: [
     Factions.antigone,
@@ -800,6 +844,8 @@ export const Modules = {
     capacity: 500,
     race: Races.argon
    },
+   license: 'station_gen_intermediate',
+   dimensions: { x: 662, y: 930, z: 713 },
    price: { min: 11754290, max: 15902862, avg: 13828576 },
    owners: [
     Factions.antigone,
@@ -833,6 +879,8 @@ export const Modules = {
     capacity: 250,
     race: Races.argon
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 251, y: 930, z: 713 },
    price: { min: 8172621, max: 11057075, avg: 9614848 },
    owners: [
     Factions.antigone,
@@ -862,6 +910,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 750000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 4400, y: 2000, z: 7600 },
    price: { min: 2946171, max: 3985997, avg: 3466084 },
    owners: [
     Factions.argon,
@@ -890,6 +940,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 250000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 6000, y: 2000, z: 2000 },
    price: { min: 1701192, max: 2301612, avg: 2001402 },
    owners: [
     Factions.antigone,
@@ -919,6 +971,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 1000000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 3000, y: 2000, z: 8000 },
    price: { min: 3399016, max: 4598668, avg: 3998842 },
    owners: [
     Factions.antigone,
@@ -947,6 +1001,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 180000,
    makerRace: Races.argon,
+   license: 'station_gen_basic',
+   dimensions: { x: 4000, y: 2000, z: 2000 },
    price: { min: 1224857, max: 1657160, avg: 1441009 },
    owners: [
     Factions.antigone,
@@ -980,6 +1036,8 @@ export const Modules = {
    workForce: {
     max: 90
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 774, y: 770, z: 327 },
    price: { min: 1425885, max: 1929139, avg: 1677512 },
    owners: [
     Factions.antigone,
@@ -1035,6 +1093,8 @@ export const Modules = {
    workForce: {
     max: 75
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 1514, y: 354, z: 713 },
    price: { min: 1349848, max: 1826264, avg: 1588056 },
    owners: [
     Factions.antigone,
@@ -1090,6 +1150,8 @@ export const Modules = {
    workForce: {
     max: 90
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 954, y: 1386, z: 588 },
    price: { min: 1223505, max: 1655331, avg: 1439418 },
    owners: [
     Factions.argon,
@@ -1141,6 +1203,8 @@ export const Modules = {
    workForce: {
     max: 225
    },
+   license: 'station_illegal',
+   dimensions: { x: 769, y: 758, z: 786 },
    price: { min: 1735171, max: 2347585, avg: 2041378 },
    owners: [
     Factions.scaleplate,
@@ -1195,6 +1259,8 @@ export const Modules = {
    workForce: {
     max: 75
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 1370, y: 391, z: 2261 },
    price: { min: 1610158, max: 2178450, avg: 1894304 },
    owners: [
     Factions.antigone,
@@ -1245,6 +1311,8 @@ export const Modules = {
    type: ModuleTypes.radar,
    explosionDamage: 1000,
    hull: 110000,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 1790, y: 1357, z: 707 },
    price: { min: 897249, max: 1213926, avg: 1055588 },
    owners: [
     Factions.alliance,
@@ -1303,6 +1371,8 @@ export const Modules = {
    hull: 565000,
    makerRace: Races.argon,
    cargo: { max: 1000000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 800, y: 479, z: 1600 },
    price: { min: 625503, max: 846269, avg: 735886 },
    owners: [
     Factions.antigone,
@@ -1361,6 +1431,8 @@ export const Modules = {
    hull: 285000,
    makerRace: Races.argon,
    cargo: { max: 250000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 569, y: 480, z: 800 },
    price: { min: 445475, max: 602701, avg: 524088 },
    owners: [
     Factions.antigone,
@@ -1407,6 +1479,8 @@ export const Modules = {
    hull: 114000,
    makerRace: Races.argon,
    cargo: { max: 50000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 660, y: 303, z: 722 },
    price: { min: 282224, max: 381832, avg: 332028 },
    owners: [
     Factions.antigone,
@@ -1450,6 +1524,8 @@ export const Modules = {
    hull: 565000,
    makerRace: Races.argon,
    cargo: { max: 1000000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 800, y: 459, z: 1600 },
    price: { min: 625503, max: 846269, avg: 735886 },
    owners: [
     Factions.antigone,
@@ -1508,6 +1584,8 @@ export const Modules = {
    hull: 285000,
    makerRace: Races.argon,
    cargo: { max: 500000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 569, y: 434, z: 800 },
    price: { min: 445475, max: 602701, avg: 524088 },
    owners: [
     Factions.antigone,
@@ -1554,6 +1632,8 @@ export const Modules = {
    hull: 114000,
    makerRace: Races.argon,
    cargo: { max: 100000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 660, y: 303, z: 722 },
    price: { min: 282224, max: 381832, avg: 332028 },
    owners: [
     Factions.antigone,
@@ -1594,6 +1674,8 @@ export const Modules = {
    hull: 565000,
    makerRace: Races.argon,
    cargo: { max: 1000000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 772, y: 398, z: 1512 },
    price: { min: 625503, max: 846269, avg: 735886 },
    owners: [
     Factions.antigone,
@@ -1652,6 +1734,8 @@ export const Modules = {
    hull: 285000,
    makerRace: Races.argon,
    cargo: { max: 500000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 569, y: 488, z: 800 },
    price: { min: 445475, max: 602701, avg: 524088 },
    owners: [
     Factions.antigone,
@@ -1698,6 +1782,8 @@ export const Modules = {
    hull: 114000,
    makerRace: Races.argon,
    cargo: { max: 100000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 305, y: 162, z: 800 },
    price: { min: 282224, max: 381832, avg: 332028 },
    owners: [
     Factions.antigone,
@@ -1742,6 +1828,8 @@ export const Modules = {
    workForce: {
     max: 800
    },
+   license: 'station_equip_sm',
+   dimensions: { x: 1196, y: 517, z: 796 },
    price: { min: 86008820, max: 116364875, avg: 101186848 },
    owners: [
     Factions.antigone,
@@ -1796,6 +1884,8 @@ export const Modules = {
    workForce: {
     max: 700
    },
+   license: 'station_equip_lxl',
+   dimensions: { x: 1404, y: 1102, z: 2436 },
    price: { min: 180147181, max: 243728539, avg: 211937860 },
    owners: [
     Factions.antigone,
@@ -1833,6 +1923,8 @@ export const Modules = {
    workForce: {
     max: 700
    },
+   license: 'station_equip_lxl',
+   dimensions: { x: 3496, y: 2442, z: 2255 },
    price: { min: 183235129, max: 247906351, avg: 215570740 },
    owners: [
     Factions.antigone,
@@ -1866,6 +1958,8 @@ export const Modules = {
    description: 'No information available',
    type: ModuleTypes.connectionmodule,
    hull: 170000,
+   license: 'station_gen_basic',
+   dimensions: { x: 224, y: 139, z: 188 },
    price: { min: 190696, max: 258000, avg: 224348 },
    owners: [
     Factions.alliance,
@@ -1912,6 +2006,8 @@ export const Modules = {
    description: 'No information available',
    type: ModuleTypes.connectionmodule,
    hull: 170000,
+   license: 'station_gen_basic',
+   dimensions: { x: 133, y: 223, z: 185 },
    price: { min: 200150, max: 270792, avg: 235471 },
    owners: [
     Factions.alliance,
@@ -1958,6 +2054,8 @@ export const Modules = {
    description: 'No information available',
    type: ModuleTypes.connectionmodule,
    hull: 170000,
+   license: 'station_gen_basic',
+   dimensions: { x: 133, y: 185, z: 223 },
    price: { min: 216484, max: 292890, avg: 254687 },
    owners: [
     Factions.alliance,
@@ -2005,6 +2103,8 @@ export const Modules = {
    type: ModuleTypes.dockarea,
    explosionDamage: 1000,
    hull: 260000,
+   license: 'station_gen_basic',
+   dimensions: { x: 1125, y: 1099, z: 1125 },
    price: { min: 394158, max: 533272, avg: 463715 },
    owners: [
     Factions.antigone,
@@ -2066,6 +2166,8 @@ export const Modules = {
    type: ModuleTypes.dockarea,
    explosionDamage: 1000,
    hull: 260000,
+   license: 'station_gen_basic',
+   dimensions: { x: 1125, y: 1099, z: 1125 },
    price: { min: 346859, max: 469280, avg: 408069 },
    owners: [
     Factions.antigone,
@@ -2127,6 +2229,8 @@ export const Modules = {
    type: ModuleTypes.dockarea,
    explosionDamage: 1000,
    hull: 260000,
+   license: 'station_gen_basic',
+   dimensions: { x: 1125, y: 1099, z: 1125 },
    price: { min: 362625, max: 490610, avg: 426618 },
    owners: [
     Factions.antigone,
@@ -2191,6 +2295,8 @@ export const Modules = {
    workForce: {
     max: 400
    },
+   license: 'station_equip_sm',
+   dimensions: { x: 1196, y: 517, z: 796 },
    price: { min: 26053880, max: 35249367, avg: 30651624 },
    owners: [
     Factions.antigone,
@@ -2233,6 +2339,8 @@ export const Modules = {
    workForce: {
     max: 500
    },
+   license: 'station_equip_lxl',
+   dimensions: { x: 1108, y: 1634, z: 1452 },
    price: { min: 47705459, max: 64542680, avg: 56124070 },
    owners: [
     Factions.antigone,
@@ -2270,6 +2378,8 @@ export const Modules = {
    workForce: {
     max: 500
    },
+   license: 'station_equip_lxl',
+   dimensions: { x: 1456, y: 2610, z: 2255 },
    price: { min: 49280566, max: 66673706, avg: 57977136 },
    owners: [
     Factions.antigone,
@@ -2304,6 +2414,8 @@ export const Modules = {
    type: ModuleTypes.processingmodule,
    explosionDamage: 1000,
    hull: 150000,
+   license: 'station_gen_basic',
+   dimensions: { x: 791, y: 1442, z: 3191 },
    price: { min: 992413, max: 1342677, avg: 1167545 },
    owners: [
     Factions.alliance,
@@ -2365,6 +2477,8 @@ export const Modules = {
    type: ModuleTypes.processingmodule,
    explosionDamage: 1000,
    hull: 150000,
+   license: 'station_gen_basic',
+   dimensions: { x: 791, y: 1442, z: 3191 },
    price: { min: 1190896, max: 1611212, avg: 1401054 },
    owners: [
     Factions.hatikvah,
@@ -2430,6 +2544,8 @@ export const Modules = {
    workForce: {
     max: 315
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 987, y: 916, z: 663 },
    price: { min: 3524906, max: 4768990, avg: 4146948 },
    owners: [
     Factions.antigone,
@@ -2491,6 +2607,8 @@ export const Modules = {
    workForce: {
     max: 540
    },
+   license: 'station_gen_advanced',
+   dimensions: { x: 1292, y: 625, z: 1994 },
    price: { min: 2622767, max: 3548449, avg: 3085608 },
    owners: [
     Factions.antigone,
@@ -2552,6 +2670,8 @@ export const Modules = {
    workForce: {
     max: 180
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 1324, y: 833, z: 1676 },
    price: { min: 375477, max: 507999, avg: 441738 },
    owners: [
     Factions.antigone,
@@ -2613,6 +2733,8 @@ export const Modules = {
    workForce: {
     max: 1080
    },
+   license: 'station_gen_intermediate',
+   dimensions: { x: 1086, y: 1399, z: 1087 },
    price: { min: 9681548, max: 13098564, avg: 11390056 },
    owners: [
     Factions.antigone,
@@ -2674,6 +2796,8 @@ export const Modules = {
    workForce: {
     max: 1215
    },
+   license: 'station_gen_intermediate',
+   dimensions: { x: 748, y: 522, z: 680 },
    price: { min: 15347532, max: 20764308, avg: 18055920 },
    owners: [
     Factions.antigone,
@@ -2734,6 +2858,8 @@ export const Modules = {
    workForce: {
     max: 675
    },
+   license: 'station_gen_intermediate',
+   dimensions: { x: 813, y: 529, z: 840 },
    price: { min: 6662268, max: 9013656, avg: 7837962 },
    owners: [
     Factions.argon,
@@ -2793,6 +2919,8 @@ export const Modules = {
    workForce: {
     max: 90
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 2400, y: 1361, z: 708 },
    price: { min: 1413819, max: 1912813, avg: 1663316 },
    owners: [
     Factions.antigone,
@@ -2842,6 +2970,8 @@ export const Modules = {
    workForce: {
     max: 225
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 514, y: 495, z: 757 },
    price: { min: 2116689, max: 2863755, avg: 2490222 },
    owners: [
     Factions.antigone,
@@ -2902,6 +3032,8 @@ export const Modules = {
    workForce: {
     max: 810
    },
+   license: 'station_gen_intermediate',
+   dimensions: { x: 758, y: 271, z: 755 },
    price: { min: 9436671, max: 12767261, avg: 11101966 },
    owners: [
     Factions.antigone,
@@ -2956,6 +3088,8 @@ export const Modules = {
    workForce: {
     max: 180
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 794, y: 445, z: 1444 },
    price: { min: 152966, max: 206954, avg: 179960 },
    owners: [
     Factions.antigone,
@@ -3017,6 +3151,8 @@ export const Modules = {
    workForce: {
     max: 270
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 334, y: 288, z: 1159 },
    price: { min: 3340194, max: 4519086, avg: 3929640 },
    owners: [
     Factions.antigone,
@@ -3078,6 +3214,8 @@ export const Modules = {
    workForce: {
     max: 450
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 845, y: 363, z: 1599 },
    price: { min: 4122469, max: 5577459, avg: 4849964 },
    owners: [
     Factions.antigone,
@@ -3139,6 +3277,8 @@ export const Modules = {
    workForce: {
     max: 22
    },
+   license: 'station_gen_advanced',
+   dimensions: { x: 668, y: 367, z: 1141 },
    price: { min: 191643, max: 259281, avg: 225462 },
    owners: [
     Factions.argon,
@@ -3199,6 +3339,8 @@ export const Modules = {
    workForce: {
     max: 225
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 727, y: 779, z: 1154 },
    price: { min: 2572901, max: 3480983, avg: 3026942 },
    owners: [
     Factions.antigone,
@@ -3260,6 +3402,8 @@ export const Modules = {
    workForce: {
     max: 225
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 364, y: 1177, z: 380 },
    price: { min: 2068152, max: 2798088, avg: 2433120 },
    owners: [
     Factions.antigone,
@@ -3315,6 +3459,8 @@ export const Modules = {
    workForce: {
     max: 225
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 690, y: 656, z: 1554 },
    price: { min: 197231, max: 266841, avg: 232036 },
    owners: [
     Factions.antigone,
@@ -3376,6 +3522,8 @@ export const Modules = {
    workForce: {
     max: 315
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 794, y: 371, z: 1165 },
    price: { min: 3422258, max: 4630114, avg: 4026186 },
    owners: [
     Factions.antigone,
@@ -3437,6 +3585,8 @@ export const Modules = {
    workForce: {
     max: 1250
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 795, y: 3596, z: 1195 },
    price: { min: 1628494, max: 2203256, avg: 1915875 },
    owners: [
     Factions.alliance,
@@ -3496,6 +3646,8 @@ export const Modules = {
    workForce: {
     max: 1250
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 795, y: 3596, z: 1195 },
    price: { min: 1954193, max: 2643908, avg: 2299050 },
    owners: [
     Factions.hatikvah,
@@ -3567,6 +3719,8 @@ export const Modules = {
    workForce: {
     max: 225
    },
+   license: 'station_gen_intermediate',
+   dimensions: { x: 488, y: 371, z: 1544 },
    price: { min: 2350389, max: 3179939, avg: 2765164 },
    owners: [
     Factions.antigone,
@@ -3628,6 +3782,8 @@ export const Modules = {
    workForce: {
     max: 225
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 339, y: 277, z: 2532 },
    price: { min: 403430, max: 545818, avg: 474624 },
    owners: [
     Factions.antigone,
@@ -3685,6 +3841,8 @@ export const Modules = {
    workForce: {
     max: 60
    },
+   license: 'station_gen_advanced',
+   dimensions: { x: 525, y: 1112, z: 304 },
    price: { min: 686545, max: 928855, avg: 807700 },
    owners: [
     Factions.antigone,
@@ -3738,6 +3896,8 @@ export const Modules = {
    workForce: {
     max: 60
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 733, y: 370, z: 1081 },
    price: { min: 756543, max: 1023558, avg: 890050 },
    owners: [
     Factions.antigone,
@@ -3795,6 +3955,8 @@ export const Modules = {
    workForce: {
     max: 180
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 678, y: 1155, z: 763 },
    price: { min: 137080, max: 185461, avg: 161270 },
    owners: [
     Factions.antigone,
@@ -3853,6 +4015,8 @@ export const Modules = {
    workForce: {
     max: 225
    },
+   license: 'station_gen_advanced',
+   dimensions: { x: 759, y: 793, z: 754 },
    price: { min: 2584529, max: 3496715, avg: 3040622 },
    owners: [
     Factions.argon,
@@ -3909,6 +4073,8 @@ export const Modules = {
    workForce: {
     max: 180
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 2445, y: 1883, z: 1289 },
    price: { min: 195901, max: 265043, avg: 230472 },
    owners: [
     Factions.antigone,
@@ -3970,6 +4136,8 @@ export const Modules = {
    workForce: {
     max: 225
    },
+   license: 'station_gen_advanced',
+   dimensions: { x: 357, y: 1177, z: 1156 },
    price: { min: 2154927, max: 2915489, avg: 2535208 },
    owners: [
     Factions.argon,
@@ -4025,6 +4193,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 110000,
    makerRace: Races.paranid,
+   license: 'station_gen_basic',
+   dimensions: { x: 144, y: 294, z: 400 },
    price: { min: 64410, max: 87142, avg: 75776 },
    owners: [
     Factions.holyorder,
@@ -4054,6 +4224,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 230000,
    makerRace: Races.paranid,
+   license: 'station_gen_basic',
+   dimensions: { x: 188, y: 925, z: 759 },
    price: { min: 91924, max: 124368, avg: 108146 },
    owners: [
     Factions.holyorder,
@@ -4083,6 +4255,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 370000,
    makerRace: Races.paranid,
+   license: 'station_gen_basic',
+   dimensions: { x: 189, y: 925, z: 1549 },
    price: { min: 114728, max: 155220, avg: 134974 },
    owners: [
     Factions.holyorder,
@@ -4112,6 +4286,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 90000,
    makerRace: Races.paranid,
+   license: 'station_gen_basic',
+   dimensions: { x: 223, y: 905, z: 713 },
    price: { min: 55015, max: 74433, avg: 64724 },
    owners: [
     Factions.holyorder,
@@ -4141,6 +4317,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 370000,
    makerRace: Races.paranid,
+   license: 'station_gen_basic',
+   dimensions: { x: 677, y: 900, z: 718 },
    price: { min: 114728, max: 155220, avg: 134974 },
    owners: [
     Factions.holyorder,
@@ -4170,6 +4348,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 230000,
    makerRace: Races.paranid,
+   license: 'station_gen_basic',
+   dimensions: { x: 617, y: 940, z: 713 },
    price: { min: 91924, max: 124368, avg: 108146 },
    owners: [
     Factions.holyorder,
@@ -4199,6 +4379,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 79000,
    makerRace: Races.paranid,
+   license: 'station_gen_basic',
+   dimensions: { x: 255, y: 701, z: 713 },
    price: { min: 54125, max: 73227, avg: 63676 },
    owners: [
     Factions.holyorder,
@@ -4228,6 +4410,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 143000,
    makerRace: Races.paranid,
+   license: 'station_gen_basic',
+   dimensions: { x: 255, y: 1065, z: 713 },
    price: { min: 70888, max: 95908, avg: 83398 },
    owners: [
     Factions.holyorder,
@@ -4258,6 +4442,8 @@ export const Modules = {
    explosionDamage: 2000,
    hull: 532000,
    makerRace: Races.paranid,
+   license: 'station_gen_advanced',
+   dimensions: { x: 1200, y: 1969, z: 1200 },
    price: { min: 760801, max: 1029319, avg: 895060 },
    owners: [
     Factions.holyorder,
@@ -4288,6 +4474,8 @@ export const Modules = {
    explosionDamage: 1200,
    hull: 197400,
    makerRace: Races.paranid,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 400, y: 383, z: 400 },
    price: { min: 533140, max: 721308, avg: 627224 },
    owners: [
     Factions.holyorder,
@@ -4350,6 +4538,8 @@ export const Modules = {
    explosionDamage: 1200,
    hull: 148800,
    makerRace: Races.paranid,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 118, y: 353, z: 334 },
    price: { min: 462691, max: 625993, avg: 544342 },
    owners: [
     Factions.holyorder,
@@ -4410,6 +4600,8 @@ export const Modules = {
     capacity: 999,
     race: Races.paranid
    },
+   license: 'station_gen_advanced',
+   dimensions: { x: 690, y: 1516, z: 828 },
    price: { min: 18262842, max: 24708550, avg: 21485696 },
    owners: [
     Factions.holyorder,
@@ -4444,6 +4636,8 @@ export const Modules = {
     capacity: 666,
     race: Races.paranid
    },
+   license: 'station_gen_intermediate',
+   dimensions: { x: 490, y: 1105, z: 713 },
    price: { min: 11754290, max: 15902862, avg: 13828576 },
    owners: [
     Factions.holyorder,
@@ -4478,6 +4672,8 @@ export const Modules = {
     capacity: 333,
     race: Races.paranid
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 199, y: 1132, z: 713 },
    price: { min: 8172621, max: 11057075, avg: 9614848 },
    owners: [
     Factions.holyorder,
@@ -4508,6 +4704,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 810000,
    makerRace: Races.paranid,
+   license: 'station_gen_basic',
+   dimensions: { x: 4400, y: 2000, z: 7600 },
    price: { min: 3060886, max: 4141198, avg: 3601042 },
    owners: [
     Factions.paranid,
@@ -4537,6 +4735,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 270000,
    makerRace: Races.paranid,
+   license: 'station_gen_basic',
+   dimensions: { x: 6000, y: 2000, z: 2000 },
    price: { min: 1766944, max: 2390572, avg: 2078758 },
    owners: [
     Factions.holyorder,
@@ -4567,6 +4767,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 1080000,
    makerRace: Races.paranid,
+   license: 'station_gen_basic',
+   dimensions: { x: 3000, y: 2000, z: 8000 },
    price: { min: 3534314, max: 4781718, avg: 4158016 },
    owners: [
     Factions.holyorder,
@@ -4600,6 +4802,8 @@ export const Modules = {
    workForce: {
     max: 123
    },
+   license: 'station_illegal',
+   dimensions: { x: 1200, y: 1066, z: 478 },
    price: { min: 2029023, max: 2745149, avg: 2387086 },
    owners: [
     Factions.hatikvah,
@@ -4649,6 +4853,8 @@ export const Modules = {
    workForce: {
     max: 175
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 828, y: 1761, z: 828 },
    price: { min: 1349848, max: 1826264, avg: 1588056 },
    owners: [
     Factions.holyorder,
@@ -4699,6 +4905,8 @@ export const Modules = {
    workForce: {
     max: 90
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 954, y: 1386, z: 588 },
    price: { min: 1229080, max: 1662872, avg: 1445976 },
    owners: [
     Factions.holyorder,
@@ -4752,6 +4960,8 @@ export const Modules = {
    workForce: {
     max: 175
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 955, y: 1724, z: 1068 },
    price: { min: 1610158, max: 2178450, avg: 1894304 },
    owners: [
     Factions.holyorder,
@@ -4808,6 +5018,8 @@ export const Modules = {
    workForce: {
     max: 99
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 598, y: 1089, z: 613 },
    price: { min: 1719737, max: 2326703, avg: 2023220 },
    owners: [
     Factions.holyorder,
@@ -4858,6 +5070,8 @@ export const Modules = {
    hull: 653000,
    makerRace: Races.paranid,
    cargo: { max: 1000000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 715, y: 1568, z: 758 },
    price: { min: 674026, max: 911918, avg: 792972 },
    owners: [
     Factions.holyorder,
@@ -4905,6 +5119,8 @@ export const Modules = {
    hull: 304000,
    makerRace: Races.paranid,
    cargo: { max: 250000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 700, y: 787, z: 765 },
    price: { min: 457555, max: 619045, avg: 538300 },
    owners: [
     Factions.holyorder,
@@ -4952,6 +5168,8 @@ export const Modules = {
    hull: 133000,
    makerRace: Races.paranid,
    cargo: { max: 50000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 390, y: 730, z: 713 },
    price: { min: 304150, max: 411498, avg: 357824 },
    owners: [
     Factions.holyorder,
@@ -4999,6 +5217,8 @@ export const Modules = {
    hull: 653000,
    makerRace: Races.paranid,
    cargo: { max: 1000000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 715, y: 1568, z: 758 },
    price: { min: 674026, max: 911918, avg: 792972 },
    owners: [
     Factions.holyorder,
@@ -5046,6 +5266,8 @@ export const Modules = {
    hull: 304000,
    makerRace: Races.paranid,
    cargo: { max: 500000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 700, y: 787, z: 765 },
    price: { min: 457555, max: 619045, avg: 538300 },
    owners: [
     Factions.holyorder,
@@ -5093,6 +5315,8 @@ export const Modules = {
    hull: 133000,
    makerRace: Races.paranid,
    cargo: { max: 100000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 390, y: 730, z: 713 },
    price: { min: 304150, max: 411498, avg: 357824 },
    owners: [
     Factions.holyorder,
@@ -5140,6 +5364,8 @@ export const Modules = {
    hull: 653000,
    makerRace: Races.paranid,
    cargo: { max: 1000000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 715, y: 1568, z: 758 },
    price: { min: 674026, max: 911918, avg: 792972 },
    owners: [
     Factions.holyorder,
@@ -5187,6 +5413,8 @@ export const Modules = {
    hull: 304000,
    makerRace: Races.paranid,
    cargo: { max: 500000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 700, y: 787, z: 765 },
    price: { min: 457555, max: 619045, avg: 538300 },
    owners: [
     Factions.holyorder,
@@ -5234,6 +5462,8 @@ export const Modules = {
    hull: 133000,
    makerRace: Races.paranid,
    cargo: { max: 100000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 390, y: 730, z: 713 },
    price: { min: 304150, max: 411498, avg: 357824 },
    owners: [
     Factions.holyorder,
@@ -5279,6 +5509,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 150000,
    makerRace: Races.teladi,
+   license: 'station_gen_basic',
+   dimensions: { x: 259, y: 325, z: 387 },
    price: { min: 92363, max: 124961, avg: 108662 },
    owners: [
     Factions.teladi,
@@ -5306,6 +5538,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 238000,
    makerRace: Races.teladi,
+   license: 'station_gen_basic',
+   dimensions: { x: 306, y: 704, z: 754 },
    price: { min: 75585, max: 102263, avg: 88924 },
    owners: [
     Factions.teladi,
@@ -5333,6 +5567,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 280000,
    makerRace: Races.teladi,
+   license: 'station_gen_basic',
+   dimensions: { x: 306, y: 704, z: 1548 },
    price: { min: 98841, max: 133727, avg: 116284 },
    owners: [
     Factions.teladi,
@@ -5360,6 +5596,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 120000,
    makerRace: Races.teladi,
+   license: 'station_gen_basic',
+   dimensions: { x: 348, y: 722, z: 713 },
    price: { min: 65300, max: 88348, avg: 76824 },
    owners: [
     Factions.teladi,
@@ -5387,6 +5625,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 79000,
    makerRace: Races.teladi,
+   license: 'station_gen_basic',
+   dimensions: { x: 342, y: 739, z: 713 },
    price: { min: 54125, max: 73227, avg: 63676 },
    owners: [
     Factions.teladi,
@@ -5414,6 +5654,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 143000,
    makerRace: Races.teladi,
+   license: 'station_gen_basic',
+   dimensions: { x: 342, y: 939, z: 713 },
    price: { min: 70888, max: 95908, avg: 83398 },
    owners: [
     Factions.teladi,
@@ -5442,6 +5684,8 @@ export const Modules = {
    explosionDamage: 2000,
    hull: 516000,
    makerRace: Races.teladi,
+   license: 'station_gen_advanced',
+   dimensions: { x: 1227, y: 1789, z: 1227 },
    price: { min: 749625, max: 1014199, avg: 881912 },
    owners: [
     Factions.ministry,
@@ -5471,6 +5715,8 @@ export const Modules = {
    explosionDamage: 1200,
    hull: 197400,
    makerRace: Races.teladi,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 400, y: 198, z: 400 },
    price: { min: 533140, max: 721308, avg: 627224 },
    owners: [
     Factions.ministry,
@@ -5530,6 +5776,8 @@ export const Modules = {
    explosionDamage: 1200,
    hull: 148800,
    makerRace: Races.teladi,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 256, y: 213, z: 363 },
    price: { min: 462691, max: 625993, avg: 544342 },
    owners: [
     Factions.ministry,
@@ -5589,6 +5837,8 @@ export const Modules = {
     capacity: 1000,
     race: Races.teladi
    },
+   license: 'station_gen_advanced',
+   dimensions: { x: 1430, y: 1557, z: 1430 },
    price: { min: 15822621, max: 21407075, avg: 18614848 },
    owners: [
     Factions.teladi,
@@ -5621,6 +5871,8 @@ export const Modules = {
     capacity: 500,
     race: Races.teladi
    },
+   license: 'station_gen_intermediate',
+   dimensions: { x: 1132, y: 930, z: 1132 },
    price: { min: 10530453, max: 14247083, avg: 12388768 },
    owners: [
     Factions.teladi,
@@ -5653,6 +5905,8 @@ export const Modules = {
     capacity: 250,
     race: Races.teladi
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 784, y: 795, z: 772 },
    price: { min: 7471187, max: 10108077, avg: 8789632 },
    owners: [
     Factions.teladi,
@@ -5681,6 +5935,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 750000,
    makerRace: Races.teladi,
+   license: 'station_gen_basic',
+   dimensions: { x: 4400, y: 2000, z: 7600 },
    price: { min: 2946171, max: 3985997, avg: 3466084 },
    owners: [
     Factions.ministry,
@@ -5710,6 +5966,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 250000,
    makerRace: Races.teladi,
+   license: 'station_gen_basic',
+   dimensions: { x: 6000, y: 2000, z: 2000 },
    price: { min: 1701192, max: 2301612, avg: 2001402 },
    owners: [
     Factions.ministry,
@@ -5739,6 +5997,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 1000000,
    makerRace: Races.teladi,
+   license: 'station_gen_basic',
+   dimensions: { x: 3000, y: 2000, z: 8000 },
    price: { min: 3399016, max: 4598668, avg: 3998842 },
    owners: [
     Factions.ministry,
@@ -5772,6 +6032,8 @@ export const Modules = {
    workForce: {
     max: 315
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 987, y: 916, z: 663 },
    price: { min: 3416014, max: 4621666, avg: 4018840 },
    owners: [
     Factions.teladi,
@@ -5826,6 +6088,8 @@ export const Modules = {
    workForce: {
     max: 225
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 514, y: 495, z: 757 },
    price: { min: 2143163, max: 2899573, avg: 2521368 },
    owners: [
     Factions.teladi,
@@ -5880,6 +6144,8 @@ export const Modules = {
    workForce: {
     max: 270
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 334, y: 288, z: 1159 },
    price: { min: 3339976, max: 4518792, avg: 3929384 },
    owners: [
     Factions.teladi,
@@ -5934,6 +6200,8 @@ export const Modules = {
    workForce: {
     max: 90
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 954, y: 1386, z: 588 },
    price: { min: 1219233, max: 1649551, avg: 1434392 },
    owners: [
     Factions.ministry,
@@ -5985,6 +6253,8 @@ export const Modules = {
    workForce: {
     max: 120
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 697, y: 381, z: 441 },
    price: { min: 1574127, max: 2129701, avg: 1851914 },
    owners: [
     Factions.teladi,
@@ -6039,6 +6309,8 @@ export const Modules = {
    workForce: {
     max: 315
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 794, y: 371, z: 1165 },
    price: { min: 3464989, max: 4687927, avg: 4076458 },
    owners: [
     Factions.teladi,
@@ -6093,6 +6365,8 @@ export const Modules = {
    workForce: {
     max: 90
    },
+   license: 'station_illegal',
+   dimensions: { x: 751, y: 763, z: 949 },
    price: { min: 3475040, max: 4701524, avg: 4088282 },
    owners: [
     Factions.hatikvah,
@@ -6143,6 +6417,8 @@ export const Modules = {
    workForce: {
     max: 50
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 1383, y: 656, z: 1410 },
    price: { min: 1611474, max: 2180230, avg: 1895852 },
    owners: [
     Factions.teladi,
@@ -6191,6 +6467,8 @@ export const Modules = {
    workForce: {
     max: 50
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 1966, y: 355, z: 1200 },
    price: { min: 3475040, max: 4701524, avg: 4088282 },
    owners: [
     Factions.teladi,
@@ -6245,6 +6523,8 @@ export const Modules = {
    workForce: {
     max: 225
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 743, y: 770, z: 1523 },
    price: { min: 272830, max: 369122, avg: 320976 },
    owners: [
     Factions.teladi,
@@ -6293,6 +6573,8 @@ export const Modules = {
    hull: 531000,
    makerRace: Races.teladi,
    cargo: { max: 1000000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 800, y: 1200, z: 800 },
    price: { min: 608287, max: 822977, avg: 715632 },
    owners: [
     Factions.teladi,
@@ -6350,6 +6632,8 @@ export const Modules = {
    hull: 259000,
    makerRace: Races.teladi,
    cargo: { max: 250000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 381, y: 1071, z: 713 },
    price: { min: 424014, max: 573666, avg: 498840 },
    owners: [
     Factions.teladi,
@@ -6401,6 +6685,8 @@ export const Modules = {
    hull: 111000,
    makerRace: Races.teladi,
    cargo: { max: 50000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 381, y: 871, z: 713 },
    price: { min: 277527, max: 375477, avg: 326502 },
    owners: [
     Factions.teladi,
@@ -6449,6 +6735,8 @@ export const Modules = {
    hull: 531000,
    makerRace: Races.teladi,
    cargo: { max: 1000000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 800, y: 1200, z: 800 },
    price: { min: 608287, max: 822977, avg: 715632 },
    owners: [
     Factions.teladi,
@@ -6506,6 +6794,8 @@ export const Modules = {
    hull: 259000,
    makerRace: Races.teladi,
    cargo: { max: 500000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 352, y: 1071, z: 713 },
    price: { min: 424014, max: 573666, avg: 498840 },
    owners: [
     Factions.teladi,
@@ -6557,6 +6847,8 @@ export const Modules = {
    hull: 111000,
    makerRace: Races.teladi,
    cargo: { max: 100000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 356, y: 871, z: 713 },
    price: { min: 277527, max: 375477, avg: 326502 },
    owners: [
     Factions.teladi,
@@ -6605,6 +6897,8 @@ export const Modules = {
    hull: 531000,
    makerRace: Races.teladi,
    cargo: { max: 1000000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 800, y: 1200, z: 800 },
    price: { min: 608287, max: 822977, avg: 715632 },
    owners: [
     Factions.teladi,
@@ -6662,6 +6956,8 @@ export const Modules = {
    hull: 259000,
    makerRace: Races.teladi,
    cargo: { max: 500000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 353, y: 1071, z: 713 },
    price: { min: 424014, max: 573666, avg: 498840 },
    owners: [
     Factions.teladi,
@@ -6713,6 +7009,8 @@ export const Modules = {
    hull: 111000,
    makerRace: Races.teladi,
    cargo: { max: 100000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 353, y: 871, z: 713 },
    price: { min: 277527, max: 375477, avg: 326502 },
    owners: [
     Factions.teladi,
@@ -6759,6 +7057,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 150000,
    makerRace: Races.split,
+   license: 'station_gen_basic',
+   dimensions: { x: 184, y: 420, z: 383 },
    price: { min: 92363, max: 124961, avg: 108662 },
    owners: [
     Factions.freesplit,
@@ -6787,6 +7087,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 237000,
    makerRace: Races.split,
+   license: 'station_gen_basic',
+   dimensions: { x: 184, y: 420, z: 792 },
    price: { min: 75585, max: 102263, avg: 88924 },
    owners: [
     Factions.freesplit,
@@ -6815,6 +7117,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 280000,
    makerRace: Races.split,
+   license: 'station_gen_basic',
+   dimensions: { x: 266, y: 400, z: 1600 },
    price: { min: 98841, max: 133727, avg: 116284 },
    owners: [
     Factions.freesplit,
@@ -6843,6 +7147,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 120000,
    makerRace: Races.split,
+   license: 'station_gen_basic',
+   dimensions: { x: 489, y: 400, z: 471 },
    price: { min: 65300, max: 88348, avg: 76824 },
    owners: [
     Factions.freesplit,
@@ -6871,6 +7177,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 79000,
    makerRace: Races.split,
+   license: 'station_gen_basic',
+   dimensions: { x: 212, y: 400, z: 386 },
    price: { min: 54125, max: 73227, avg: 63676 },
    owners: [
     Factions.freesplit,
@@ -6899,6 +7207,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 143000,
    makerRace: Races.split,
+   license: 'station_gen_basic',
+   dimensions: { x: 220, y: 800, z: 381 },
    price: { min: 70888, max: 95908, avg: 83398 },
    owners: [
     Factions.freesplit,
@@ -6928,6 +7238,8 @@ export const Modules = {
    explosionDamage: 2000,
    hull: 520000,
    makerRace: Races.split,
+   license: 'station_gen_advanced',
+   dimensions: { x: 1242, y: 1973, z: 1434 },
    price: { min: 750516, max: 1015404, avg: 882960 },
    owners: [
     Factions.freesplit,
@@ -6957,6 +7269,8 @@ export const Modules = {
    explosionDamage: 1200,
    hull: 197400,
    makerRace: Races.split,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 581, y: 400, z: 504 },
    price: { min: 570940, max: 772448, avg: 671694 },
    owners: [
     Factions.freesplit,
@@ -7026,6 +7340,8 @@ export const Modules = {
    explosionDamage: 1200,
    hull: 148800,
    makerRace: Races.split,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 151, y: 377, z: 400 },
    price: { min: 570940, max: 772448, avg: 671694 },
    owners: [
     Factions.freesplit,
@@ -7087,6 +7403,8 @@ export const Modules = {
     capacity: 1000,
     race: Races.split
    },
+   license: 'station_gen_advanced',
+   dimensions: { x: 521, y: 1592, z: 520 },
    price: { min: 16627714, max: 22496318, avg: 19562016 },
    owners: [
     Factions.freesplit,
@@ -7120,6 +7438,8 @@ export const Modules = {
     capacity: 500,
     race: Races.split
    },
+   license: 'station_gen_intermediate',
+   dimensions: { x: 545, y: 758, z: 1610 },
    price: { min: 11754290, max: 15902862, avg: 13828576 },
    owners: [
     Factions.freesplit,
@@ -7153,6 +7473,8 @@ export const Modules = {
     capacity: 250,
     race: Races.split
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 403, y: 766, z: 1389 },
    price: { min: 8172621, max: 11057075, avg: 9614848 },
    owners: [
     Factions.freesplit,
@@ -7182,6 +7504,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 750000,
    makerRace: Races.split,
+   license: 'station_gen_basic',
+   dimensions: { x: 6000, y: 2000, z: 8000 },
    price: { min: 2946171, max: 3985997, avg: 3466084 },
    owners: [
     Factions.freesplit,
@@ -7211,6 +7535,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 250000,
    makerRace: Races.split,
+   license: 'station_gen_basic',
+   dimensions: { x: 6200, y: 2000, z: 2400 },
    price: { min: 1701192, max: 2301612, avg: 2001402 },
    owners: [
     Factions.freesplit,
@@ -7240,6 +7566,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 1000000,
    makerRace: Races.split,
+   license: 'station_gen_basic',
+   dimensions: { x: 3000, y: 2000, z: 8000 },
    price: { min: 3399016, max: 4598668, avg: 3998842 },
    owners: [
     Factions.freesplit,
@@ -7273,6 +7601,8 @@ export const Modules = {
    workForce: {
     max: 90
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 806, y: 1303, z: 566 },
    price: { min: 698188, max: 944608, avg: 821398 },
    owners: [
     Factions.freesplit,
@@ -7328,6 +7658,8 @@ export const Modules = {
    workForce: {
     max: 90
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 954, y: 1386, z: 588 },
    price: { min: 1223505, max: 1655331, avg: 1439418 },
    owners: [
     Factions.split,
@@ -7379,6 +7711,8 @@ export const Modules = {
    workForce: {
     max: 90
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 1107, y: 365, z: 1993 },
    price: { min: 829662, max: 1122484, avg: 976073 },
    owners: [
     Factions.freesplit,
@@ -7431,6 +7765,8 @@ export const Modules = {
    hull: 778000,
    makerRace: Races.split,
    cargo: { max: 1000000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 1610, y: 1560, z: 638 },
    price: { min: 734191, max: 993317, avg: 863754 },
    owners: [
     Factions.freesplit,
@@ -7489,6 +7825,8 @@ export const Modules = {
    hull: 345000,
    makerRace: Races.split,
    cargo: { max: 250000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 541, y: 793, z: 1544 },
    price: { min: 489314, max: 662014, avg: 575664 },
    owners: [
     Factions.freesplit,
@@ -7535,6 +7873,8 @@ export const Modules = {
    hull: 157000,
    makerRace: Races.split,
    cargo: { max: 50000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 332, y: 756, z: 392 },
    price: { min: 331199, max: 448093, avg: 389646 },
    owners: [
     Factions.freesplit,
@@ -7578,6 +7918,8 @@ export const Modules = {
    hull: 778000,
    makerRace: Races.split,
    cargo: { max: 1000000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 619, y: 1538, z: 617 },
    price: { min: 734191, max: 993317, avg: 863754 },
    owners: [
     Factions.freesplit,
@@ -7636,6 +7978,8 @@ export const Modules = {
    hull: 345000,
    makerRace: Races.split,
    cargo: { max: 500000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 541, y: 793, z: 1548 },
    price: { min: 489314, max: 662014, avg: 575664 },
    owners: [
     Factions.freesplit,
@@ -7682,6 +8026,8 @@ export const Modules = {
    hull: 157000,
    makerRace: Races.split,
    cargo: { max: 100000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 332, y: 756, z: 1503 },
    price: { min: 331199, max: 448093, avg: 389646 },
    owners: [
     Factions.freesplit,
@@ -7725,6 +8071,8 @@ export const Modules = {
    hull: 778000,
    makerRace: Races.split,
    cargo: { max: 1000000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 1610, y: 1560, z: 638 },
    price: { min: 734191, max: 993317, avg: 863754 },
    owners: [
     Factions.freesplit,
@@ -7783,6 +8131,8 @@ export const Modules = {
    hull: 345000,
    makerRace: Races.split,
    cargo: { max: 500000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 541, y: 793, z: 1544 },
    price: { min: 489314, max: 662014, avg: 575664 },
    owners: [
     Factions.freesplit,
@@ -7829,6 +8179,8 @@ export const Modules = {
    hull: 157000,
    makerRace: Races.split,
    cargo: { max: 100000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 332, y: 756, z: 392 },
    price: { min: 331199, max: 448093, avg: 389646 },
    owners: [
     Factions.freesplit,
@@ -7874,6 +8226,8 @@ export const Modules = {
    workForce: {
     max: 800
    },
+   license: 'station_equip_sm',
+   dimensions: { x: 1196, y: 517, z: 796 },
    price: { min: 92680858, max: 125391749, avg: 109036303 },
    owners: [
     Factions.pioneers,
@@ -7911,6 +8265,8 @@ export const Modules = {
    workForce: {
     max: 500
    },
+   license: 'station_equip_lxl',
+   dimensions: { x: 1404, y: 1102, z: 2436 },
    price: { min: 223501475, max: 302384349, avg: 262942912 },
    owners: [
     Factions.pioneers,
@@ -7943,6 +8299,8 @@ export const Modules = {
    workForce: {
     max: 700
    },
+   license: 'station_equip_lxl',
+   dimensions: { x: 3496, y: 2442, z: 2255 },
    price: { min: 227108570, max: 307264536, avg: 267186553 },
    owners: [
     Factions.pioneers,
@@ -7971,6 +8329,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 75000,
    makerRace: Races.terran,
+   license: 'station_gen_basic',
+   dimensions: { x: 274, y: 110, z: 328 },
    price: { min: 61609, max: 83354, avg: 72482 },
    owners: [
     Factions.pioneers,
@@ -7999,6 +8359,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 150000,
    makerRace: Races.terran,
+   license: 'station_gen_basic',
+   dimensions: { x: 274, y: 110, z: 728 },
    price: { min: 85802, max: 116086, avg: 100944 },
    owners: [
     Factions.pioneers,
@@ -8027,6 +8389,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 300000,
    makerRace: Races.terran,
+   license: 'station_gen_basic',
+   dimensions: { x: 359, y: 100, z: 2113 },
    price: { min: 110087, max: 148942, avg: 129515 },
    owners: [
     Factions.pioneers,
@@ -8055,6 +8419,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 300000,
    makerRace: Races.terran,
+   license: 'station_gen_basic',
+   dimensions: { x: 800, y: 400, z: 800 },
    price: { min: 110087, max: 148942, avg: 129515 },
    owners: [
     Factions.pioneers,
@@ -8083,6 +8449,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 75000,
    makerRace: Races.terran,
+   license: 'station_gen_basic',
+   dimensions: { x: 277, y: 324, z: 277 },
    price: { min: 61609, max: 83354, avg: 72482 },
    owners: [
     Factions.pioneers,
@@ -8111,6 +8479,8 @@ export const Modules = {
    type: ModuleTypes.connectionmodule,
    hull: 150000,
    makerRace: Races.terran,
+   license: 'station_gen_basic',
+   dimensions: { x: 277, y: 724, z: 277 },
    price: { min: 85802, max: 116086, avg: 100944 },
    owners: [
     Factions.pioneers,
@@ -8140,6 +8510,8 @@ export const Modules = {
    explosionDamage: 2000,
    hull: 600000,
    makerRace: Races.terran,
+   license: 'station_gen_advanced',
+   dimensions: { x: 373, y: 1889, z: 800 },
    price: { min: 1731191, max: 2342200, avg: 2036696 },
    owners: [
     Factions.pioneers,
@@ -8169,6 +8541,8 @@ export const Modules = {
    explosionDamage: 1200,
    hull: 300000,
    makerRace: Races.terran,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 800, y: 400, z: 800 },
    price: { min: 1231845, max: 1666614, avg: 1449230 },
    owners: [
     Factions.pioneers,
@@ -8238,6 +8612,8 @@ export const Modules = {
    explosionDamage: 1200,
    hull: 150000,
    makerRace: Races.terran,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 251, y: 160, z: 728 },
    price: { min: 866932, max: 1172909, avg: 1019921 },
    owners: [
     Factions.pioneers,
@@ -8307,6 +8683,8 @@ export const Modules = {
    explosionDamage: 2000,
    hull: 455000,
    makerRace: Races.terran,
+   license: 'station_gen_basic',
+   dimensions: { x: 1200, y: 400, z: 1200 },
    price: { min: 238867, max: 323174, avg: 281021 },
    owners: [
     Factions.pioneers,
@@ -8344,6 +8722,8 @@ export const Modules = {
    workForce: {
     max: 400
    },
+   license: 'station_equip_sm',
+   dimensions: { x: 1196, y: 517, z: 796 },
    price: { min: 32174490, max: 43530192, avg: 37852341 },
    owners: [
     Factions.pioneers,
@@ -8381,6 +8761,8 @@ export const Modules = {
    workForce: {
     max: 500
    },
+   license: 'station_equip_lxl',
+   dimensions: { x: 1108, y: 1634, z: 1452 },
    price: { min: 57725113, max: 78098683, avg: 67911898 },
    owners: [
     Factions.pioneers,
@@ -8413,6 +8795,8 @@ export const Modules = {
    workForce: {
     max: 700
    },
+   license: 'station_equip_lxl',
+   dimensions: { x: 1456, y: 2610, z: 2255 },
    price: { min: 59755291, max: 80845393, avg: 70300342 },
    owners: [
     Factions.pioneers,
@@ -8446,6 +8830,8 @@ export const Modules = {
     capacity: 500,
     race: Races.terran
    },
+   license: 'station_gen_advanced',
+   dimensions: { x: 1556, y: 260, z: 1573 },
    price: { min: 12310693, max: 16655643, avg: 14483168 },
    owners: [
     Factions.pioneers,
@@ -8479,6 +8865,8 @@ export const Modules = {
     capacity: 250,
     race: Races.terran
    },
+   license: 'station_gen_intermediate',
+   dimensions: { x: 1123, y: 260, z: 1141 },
    price: { min: 8759787, max: 11851477, avg: 10305632 },
    owners: [
     Factions.pioneers,
@@ -8512,6 +8900,8 @@ export const Modules = {
     capacity: 100,
     race: Races.terran
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 800, y: 221, z: 800 },
    price: { min: 6164853, max: 8340683, avg: 7252768 },
    owners: [
     Factions.pioneers,
@@ -8541,6 +8931,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 750000,
    makerRace: Races.terran,
+   license: 'station_gen_basic',
+   dimensions: { x: 4400, y: 2000, z: 7600 },
    price: { min: 3159110, max: 4274089, avg: 3716600 },
    owners: [
     Factions.pioneers,
@@ -8570,6 +8962,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 250000,
    makerRace: Races.terran,
+   license: 'station_gen_basic',
+   dimensions: { x: 6200, y: 2000, z: 2400 },
    price: { min: 1835686, max: 2483576, avg: 2159631 },
    owners: [
     Factions.pioneers,
@@ -8599,6 +8993,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 1000000,
    makerRace: Races.terran,
+   license: 'station_gen_basic',
+   dimensions: { x: 3000, y: 2000, z: 8000 },
    price: { min: 3655537, max: 4945727, avg: 4300632 },
    owners: [
     Factions.pioneers,
@@ -8628,6 +9024,8 @@ export const Modules = {
    explosionDamage: 500,
    hull: 250000,
    makerRace: Races.terran,
+   license: 'station_gen_basic',
+   dimensions: { x: 8000, y: 3999, z: 8000 },
    price: { min: 1835686, max: 2483576, avg: 2159631 },
    owners: [
     Factions.pioneers,
@@ -8657,6 +9055,8 @@ export const Modules = {
    explosionDamage: 1500,
    hull: 2000000,
    makerRace: Races.terran,
+   license: 'station_gen_basic',
+   dimensions: { x: 8000, y: 2000, z: 10000 },
    price: { min: 2297462, max: 3108330, avg: 2702896 },
    owners: [
     Factions.pioneers,
@@ -8690,6 +9090,8 @@ export const Modules = {
    workForce: {
     max: 1500
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 1200, y: 1219, z: 660 },
    price: { min: 4220074, max: 5709512, avg: 4964793 },
    owners: [
     Factions.pioneers,
@@ -8739,6 +9141,8 @@ export const Modules = {
    workForce: {
     max: 45
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 394, y: 50, z: 1000 },
    price: { min: 409886, max: 542074, avg: 471369 },
    owners: [
     Factions.pioneers,
@@ -8772,6 +9176,8 @@ export const Modules = {
    workForce: {
     max: 90
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 800, y: 1344, z: 442 },
    price: { min: 301266, max: 407596, avg: 354431 },
    owners: [
     Factions.pioneers,
@@ -8821,6 +9227,8 @@ export const Modules = {
    workForce: {
     max: 120
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 795, y: 1407, z: 804 },
    price: { min: 106659, max: 144303, avg: 125481 },
    owners: [
     Factions.pioneers,
@@ -8870,6 +9278,8 @@ export const Modules = {
    workForce: {
     max: 180
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 1200, y: 399, z: 1200 },
    price: { min: 1292921, max: 1749247, avg: 1521084 },
    owners: [
     Factions.pioneers,
@@ -8919,6 +9329,8 @@ export const Modules = {
    workForce: {
     max: 1250
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 795, y: 3596, z: 1195 },
    price: { min: 1719675, max: 2112168, avg: 1915898 },
    owners: [
     Factions.pioneers,
@@ -8976,6 +9388,8 @@ export const Modules = {
    workForce: {
     max: 750
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 796, y: 1458, z: 660 },
    price: { min: 709162, max: 959454, avg: 834308 },
    owners: [
     Factions.pioneers,
@@ -9025,6 +9439,8 @@ export const Modules = {
    workForce: {
     max: 300
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 1200, y: 1396, z: 660 },
    price: { min: 2484701, max: 3361653, avg: 2923177 },
    owners: [
     Factions.pioneers,
@@ -9074,6 +9490,8 @@ export const Modules = {
    workForce: {
     max: 135
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 559, y: 1769, z: 342 },
    price: { min: 533265, max: 721477, avg: 627371 },
    owners: [
     Factions.pioneers,
@@ -9120,6 +9538,8 @@ export const Modules = {
    hull: 1000000,
    makerRace: Races.terran,
    cargo: { max: 1000000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 800, y: 1600, z: 800 },
    price: { min: 778303, max: 1052999, avg: 915651 },
    owners: [
     Factions.pioneers,
@@ -9178,6 +9598,8 @@ export const Modules = {
    hull: 450000,
    makerRace: Races.terran,
    cargo: { max: 500000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 784, y: 1200, z: 801 },
    price: { min: 520713, max: 704493, avg: 612603 },
    owners: [
     Factions.pioneers,
@@ -9224,6 +9646,8 @@ export const Modules = {
    hull: 150000,
    makerRace: Races.terran,
    cargo: { max: 100000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 399, y: 800, z: 399 },
    price: { min: 303273, max: 410310, avg: 356792 },
    owners: [
     Factions.pioneers,
@@ -9270,6 +9694,8 @@ export const Modules = {
    hull: 1000000,
    makerRace: Races.terran,
    cargo: { max: 1000000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 800, y: 1600, z: 800 },
    price: { min: 778303, max: 1052999, avg: 915651 },
    owners: [
     Factions.pioneers,
@@ -9316,6 +9742,8 @@ export const Modules = {
    hull: 450000,
    makerRace: Races.terran,
    cargo: { max: 500000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 784, y: 1200, z: 800 },
    price: { min: 520713, max: 704493, avg: 612603 },
    owners: [
     Factions.pioneers,
@@ -9362,6 +9790,8 @@ export const Modules = {
    hull: 150000,
    makerRace: Races.terran,
    cargo: { max: 100000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 399, y: 800, z: 399 },
    price: { min: 303273, max: 410310, avg: 356792 },
    owners: [
     Factions.pioneers,
@@ -9408,6 +9838,8 @@ export const Modules = {
    hull: 1000000,
    makerRace: Races.terran,
    cargo: { max: 1000000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 800, y: 1600, z: 800 },
    price: { min: 778303, max: 1052999, avg: 915651 },
    owners: [
     Factions.pioneers,
@@ -9466,6 +9898,8 @@ export const Modules = {
    hull: 450000,
    makerRace: Races.terran,
    cargo: { max: 500000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 784, y: 1200, z: 801 },
    price: { min: 520713, max: 704493, avg: 612603 },
    owners: [
     Factions.pioneers,
@@ -9512,6 +9946,8 @@ export const Modules = {
    hull: 150000,
    makerRace: Races.terran,
    cargo: { max: 100000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 399, y: 800, z: 399 },
    price: { min: 303273, max: 410310, avg: 356792 },
    owners: [
     Factions.pioneers,
@@ -9561,6 +9997,8 @@ export const Modules = {
     capacity: 1000,
     race: Races.argon
    },
+   license: 'station_gen_advanced',
+   dimensions: { x: 713, y: 1589, z: 660 },
    price: { min: 17721792, max: 26352612, avg: 22037202 },
    owners: [
     Factions.loanshark,
@@ -9594,6 +10032,8 @@ export const Modules = {
     capacity: 500,
     race: Races.argon
    },
+   license: 'station_gen_intermediate',
+   dimensions: { x: 395, y: 1166, z: 792 },
    price: { min: 12530160, max: 18631944, avg: 15581052 },
    owners: [
     Factions.loanshark,
@@ -9627,6 +10067,8 @@ export const Modules = {
     capacity: 250,
     race: Races.argon
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 713, y: 908, z: 393 },
    price: { min: 8689428, max: 12920328, avg: 10804878 },
    owners: [
     Factions.loanshark,
@@ -9656,6 +10098,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 1000000,
    cargo: { max: 50, type: CargoTypes.condensate },
+   license: 'station_gen_advanced',
+   dimensions: { x: 11366, y: 11370, z: 11363 },
    price: { min: 1433988, max: 2146384, avg: 1790186 },
    owners: [
     Factions.scavenger,
@@ -9709,6 +10153,8 @@ export const Modules = {
    workForce: {
     max: 800
    },
+   license: 'station_equip_sm',
+   dimensions: { x: 2194, y: 1713, z: 1900 },
    price: { min: 94609703, max: 128001363, avg: 111305533 },
    owners: [
     Factions.boron,
@@ -9745,6 +10191,8 @@ export const Modules = {
    workForce: {
     max: 700
    },
+   license: 'station_equip_lxl',
+   dimensions: { x: 1369, y: 770, z: 2271 },
    price: { min: 198161899, max: 268101393, avg: 233131646 },
    owners: [
     Factions.boron,
@@ -9777,6 +10225,8 @@ export const Modules = {
    workForce: {
     max: 500
    },
+   license: 'station_equip_lxl',
+   dimensions: { x: 1103, y: 2165, z: 2061 },
    price: { min: 201558642, max: 272696986, avg: 237127814 },
    owners: [
     Factions.boron,
@@ -9806,6 +10256,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 74000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 315, y: 256, z: 400 },
    price: { min: 83144, max: 112490, avg: 97817 },
    owners: [
     Factions.boron,
@@ -9835,6 +10287,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 140000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 319, y: 331, z: 800 },
    price: { min: 10600, max: 137458, avg: 119529 },
    owners: [
     Factions.boron,
@@ -9864,6 +10318,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 213000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 319, y: 331, z: 1600 },
    price: { min: 108726, max: 147100, avg: 127913 },
    owners: [
     Factions.boron,
@@ -9893,6 +10349,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 225000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 560, y: 331, z: 1600 },
    price: { min: 114908, max: 155464, avg: 135186 },
    owners: [
     Factions.boron,
@@ -9922,6 +10380,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 260000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 319, y: 731, z: 1600 },
    price: { min: 126095, max: 170599, avg: 148347 },
    owners: [
     Factions.boron,
@@ -9951,6 +10411,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 110000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 791, y: 400, z: 810 },
    price: { min: 71831, max: 97183, avg: 84507 },
    owners: [
     Factions.boron,
@@ -9980,6 +10442,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 165000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 1452, y: 324, z: 1599 },
    price: { min: 89522, max: 121118, avg: 105320 },
    owners: [
     Factions.boron,
@@ -10009,6 +10473,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 68000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 319, y: 398, z: 319 },
    price: { min: 59537, max: 80551, avg: 70044 },
    owners: [
     Factions.boron,
@@ -10038,6 +10504,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 132000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 312, y: 800, z: 312 },
    price: { min: 77977, max: 105499, avg: 91738 },
    owners: [
     Factions.boron,
@@ -10067,6 +10535,8 @@ export const Modules = {
    explosionDamage: 2000,
    hull: 435000,
    makerRace: Races.boron,
+   license: 'station_gen_advanced',
+   dimensions: { x: 818, y: 2113, z: 819 },
    price: { min: 819421, max: 1108629, avg: 964025 },
    owners: [
     Factions.boron,
@@ -10096,6 +10566,8 @@ export const Modules = {
    explosionDamage: 1200,
    hull: 387000,
    makerRace: Races.boron,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 791, y: 400, z: 740 },
    price: { min: 586455, max: 793439, avg: 689947 },
    owners: [
     Factions.boron,
@@ -10177,6 +10649,8 @@ export const Modules = {
    explosionDamage: 1200,
    hull: 295000,
    makerRace: Races.boron,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 328, y: 368, z: 800 },
    price: { min: 508960, max: 688594, avg: 598777 },
    owners: [
     Factions.boron,
@@ -10266,6 +10740,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 580000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 3044, y: 2470, z: 4270 },
    price: { min: 497906, max: 673638, avg: 585772 },
    owners: [
     Factions.boron,
@@ -10303,6 +10779,8 @@ export const Modules = {
    workForce: {
     max: 400
    },
+   license: 'station_equip_sm',
+   dimensions: { x: 2194, y: 1713, z: 1900 },
    price: { min: 28659268, max: 38774304, avg: 33716786 },
    owners: [
     Factions.boron,
@@ -10340,6 +10818,8 @@ export const Modules = {
    workForce: {
     max: 500
    },
+   license: 'station_equip_lxl',
+   dimensions: { x: 1369, y: 770, z: 2271 },
    price: { min: 52476005, max: 70996949, avg: 61736477 },
    owners: [
     Factions.boron,
@@ -10372,6 +10852,8 @@ export const Modules = {
    workForce: {
     max: 500
    },
+   license: 'station_equip_lxl',
+   dimensions: { x: 1103, y: 2165, z: 2061 },
    price: { min: 54208622, max: 73341077, avg: 63774850 },
    owners: [
     Factions.boron,
@@ -10405,6 +10887,8 @@ export const Modules = {
     capacity: 1000,
     race: Races.boron
    },
+   license: 'station_gen_advanced',
+   dimensions: { x: 889, y: 1509, z: 1591 },
    price: { min: 18290485, max: 24745951, avg: 21518218 },
    owners: [
     Factions.boron,
@@ -10438,6 +10922,8 @@ export const Modules = {
     capacity: 500,
     race: Races.boron
    },
+   license: 'station_gen_intermediate',
+   dimensions: { x: 790, y: 942, z: 1200 },
    price: { min: 12929719, max: 17493149, avg: 15211434 },
    owners: [
     Factions.boron,
@@ -10471,6 +10957,8 @@ export const Modules = {
     capacity: 250,
     race: Races.boron
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 761, y: 743, z: 809 },
    price: { min: 8989883, max: 12162783, avg: 10576333 },
    owners: [
     Factions.boron,
@@ -10500,6 +10988,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 850000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 4600, y: 2000, z: 8000 },
    price: { min: 3240789, max: 4384597, avg: 3812693 },
    owners: [
     Factions.boron,
@@ -10529,6 +11019,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 325000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 6200, y: 2000, z: 2000 },
    price: { min: 1871312, max: 2531774, avg: 2201543 },
    owners: [
     Factions.boron,
@@ -10558,6 +11050,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 1250000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 5200, y: 2000, z: 8000 },
    price: { min: 3738918, max: 5058536, avg: 4398727 },
    owners: [
     Factions.boron,
@@ -10587,6 +11081,8 @@ export const Modules = {
    explosionDamage: 1000,
    hull: 575000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 8000, y: 4000, z: 8000 },
    price: { min: 2633918, max: 3563536, avg: 3098727 },
    owners: [
     Factions.boron,
@@ -10616,6 +11112,8 @@ export const Modules = {
    explosionDamage: 1500,
    hull: 2000000,
    makerRace: Races.boron,
+   license: 'station_gen_basic',
+   dimensions: { x: 6534, y: 1290, z: 6537 },
    price: { min: 4225512, max: 5210498, avg: 4730030 },
    owners: [
     Factions.boron,
@@ -10649,6 +11147,8 @@ export const Modules = {
    workForce: {
     max: 125
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 1992, y: 1263, z: 613 },
    price: { min: 1568474, max: 2122053, avg: 1845263 },
    owners: [
     Factions.boron,
@@ -10698,6 +11198,8 @@ export const Modules = {
    workForce: {
     max: 100
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 592, y: 385, z: 2013 },
    price: { min: 1484832, max: 2008891, avg: 1746862 },
    owners: [
     Factions.boron,
@@ -10747,6 +11249,8 @@ export const Modules = {
    workForce: {
     max: 90
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 439, y: 1623, z: 1798 },
    price: { min: 1345856, max: 1820864, avg: 1583360 },
    owners: [
     Factions.boron,
@@ -10796,6 +11300,8 @@ export const Modules = {
    workForce: {
     max: 40
    },
+   license: 'station_gen_basic',
+   dimensions: { x: 1937, y: 1720, z: 788 },
    price: { min: 921174, max: 1246295, avg: 1083734 },
    owners: [
     Factions.boron,
@@ -10844,6 +11350,8 @@ export const Modules = {
    hull: 775000,
    makerRace: Races.boron,
    cargo: { max: 1000000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 809, y: 1588, z: 809 },
    price: { min: 688054, max: 930896, avg: 809475 },
    owners: [
     Factions.boron,
@@ -10890,6 +11398,8 @@ export const Modules = {
    hull: 315000,
    makerRace: Races.boron,
    cargo: { max: 250000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 514, y: 1200, z: 800 },
    price: { min: 490022, max: 662972, avg: 576497 },
    owners: [
     Factions.boron,
@@ -10936,6 +11446,8 @@ export const Modules = {
    hull: 135000,
    makerRace: Races.boron,
    cargo: { max: 50000, type: CargoTypes.container },
+   license: 'station_gen_basic',
+   dimensions: { x: 356, y: 797, z: 488 },
    price: { min: 310446, max: 420016, avg: 365231 },
    owners: [
     Factions.boron,
@@ -10976,6 +11488,8 @@ export const Modules = {
    hull: 765000,
    makerRace: Races.boron,
    cargo: { max: 1000000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 809, y: 1588, z: 809 },
    price: { min: 688054, max: 930896, avg: 809475 },
    owners: [
     Factions.boron,
@@ -11022,6 +11536,8 @@ export const Modules = {
    hull: 307000,
    makerRace: Races.boron,
    cargo: { max: 500000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 514, y: 1200, z: 800 },
    price: { min: 490022, max: 662972, avg: 576497 },
    owners: [
     Factions.boron,
@@ -11068,6 +11584,8 @@ export const Modules = {
    hull: 126000,
    makerRace: Races.boron,
    cargo: { max: 100000, type: CargoTypes.liquid },
+   license: 'station_gen_basic',
+   dimensions: { x: 356, y: 797, z: 488 },
    price: { min: 310446, max: 420016, avg: 365231 },
    owners: [
     Factions.boron,
@@ -11108,6 +11626,8 @@ export const Modules = {
    hull: 769000,
    makerRace: Races.boron,
    cargo: { max: 1000000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 809, y: 1588, z: 809 },
    price: { min: 688054, max: 930896, avg: 809475 },
    owners: [
     Factions.boron,
@@ -11154,6 +11674,8 @@ export const Modules = {
    hull: 311000,
    makerRace: Races.boron,
    cargo: { max: 500000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 514, y: 1200, z: 800 },
    price: { min: 490022, max: 662972, avg: 576497 },
    owners: [
     Factions.boron,
@@ -11200,6 +11722,8 @@ export const Modules = {
    hull: 132000,
    makerRace: Races.boron,
    cargo: { max: 100000, type: CargoTypes.solid },
+   license: 'station_gen_basic',
+   dimensions: { x: 356, y: 797, z: 488 },
    price: { min: 310446, max: 420016, avg: 365231 },
    owners: [
     Factions.boron,

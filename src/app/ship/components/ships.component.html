@@ -1,6 +1,18 @@
 <div class="card">
-	<div class="card-header" i18n="@@ships">Ships</div>
+	<div class="card-header flex items-center justify-between gap-3">
+		<span i18n="@@ships">Ships</span>
+		<a routerLink="compare" class="text-sm font-normal"><svg lucideGitCompareArrows class="mr-0.5" /> Compare ships</a>
+	</div>
 	<div class="card-body">
-		<app-data-grid [data]="entities" [columns]="columns" [clickable]="true" (rowClick)="open($event)" />
+		<p class="mb-2 text-fg-muted">
+			Max values use the best compatible equipment for each ship (speed: fastest engine, shield: strongest shield in every slot).
+		</p>
+		<app-data-grid
+			[data]="entities"
+			[columns]="columns"
+			[clickable]="true"
+			storageKey="ships"
+			(rowClick)="open($event)"
+		/>
 	</div>
 </div>

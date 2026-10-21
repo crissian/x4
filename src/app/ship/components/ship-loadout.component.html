@@ -1,0 +1,143 @@
+@if (entity(); as entity) {
+	<div class="card">
+		<div class="card-header flex flex-wrap items-center justify-between gap-3">
+			<span
+				><a routerLink="/ships">Ships</a> - <a [routerLink]="['/ships', entity.id]">{{ entity.name }}</a> - Loadout builder</span
+			>
+			<span class="flex gap-2">
+				<button type="button" class="btn btn-secondary" (click)="copyLink()">
+					@if (copied()) {
+						<svg lucideCheck />Copied
+					} @else {
+						<svg lucideLink />Copy link
+					}
+				</button>
+				<button type="button" class="btn btn-primary" (click)="compare()"><svg lucideGitCompareArrows />Add to comparison</button>
+			</span>
+		</div>
+		<div class="card-body">
+			<div class="grid gap-4 lg:grid-cols-5">
+				<div class="min-w-0 lg:col-span-3">
+					<div class="mb-3 flex flex-wrap items-center gap-2">
+						<span class="text-fg-muted">Preset:</span>
+						@for (preset of presets; track preset.id) {
+							<button type="button" class="btn btn-secondary" [title]="preset.label" (click)="applyPreset(preset.id)">
+								{{ preset.id | titlecase }}
+							</button>
+						}
+					</div>
+					@for (group of groups(); track group.key) {
+						<label class="mb-2 grid items-center gap-1 sm:grid-cols-[12rem_1fr]">
+							<span>{{ group.label }}</span>
+							<select class="input" [value]="loadout()[group.key] ?? ''" (change)="select(group, $any($event.target).value)">
+								<option value="">- none -</option>
+								@for (option of group.options; track option.id) {
+									<option [value]="option.id" [selected]="loadout()[group.key] === option.id">{{ optionLabel(option) }}</option>
+								}
+							</select>
+						</label>
+					} @empty {
+						<p class="text-fg-muted">This ship has no configurable slots.</p>
+					}
+				</div>
+
+				@if (result(); as r) {
+					<div class="lg:col-span-2">
+						<dl class="details">
+							<dt>Speed</dt>
+							<dd>{{ r.speeds.speed | number: '1.0-0' }} m/s</dd>
+							<dt>Boost</dt>
+							<dd>{{ r.speeds.boost | number: '1.0-0' }} m/s</dd>
+							<dt>Travel</dt>
+							<dd>{{ r.speeds.travel | number: '1.0-0' }} m/s</dd>
+							<dt>Hull</dt>
+							<dd>{{ r.hull | number }}</dd>
+							<dt>Shield</dt>
+							<dd>{{ r.shield | number: '1.0-0' }} ({{ r.shieldRecharge | number: '1.0-0' }}/s)</dd>
+							<dt>Weapon DPS</dt>
+							<dd>{{ r.weaponDps | number: '1.0-0' }}</dd>
+							<dt>Turret DPS</dt>
+							<dd>{{ r.turretDps | number: '1.0-0' }}</dd>
+							<dt>Max Range</dt>
+							<dd>{{ r.maxRange ? (r.maxRange / 1000 | number: '1.0-1') + ' km' : '-' }}</dd>
+							<dt>Ship Price</dt>
+							<dd>{{ entity.price.avg | number }}</dd>
+							<dt>Equipment Price</dt>
+							<dd>{{ r.equipmentPrice.avg | number: '1.0-0' }}</dd>
+							@if (price(); as price) {
+								<dt>Total Price</dt>
+								<dd>
+									<strong>{{ price.avg | number: '1.0-0' }}</strong>
+									<div class="text-xs text-fg-muted">{{ price.min | number: '1.0-0' }} - {{ price.max | number: '1.0-0' }}</div>
+								</dd>
+							}
+						</dl>
+
+						@if (equipmentList().length) {
+							<h6 class="mt-4">Equipment</h6>
+							<table class="table">
+								<tbody>
+									@for (item of equipmentList(); track item.equipment.id) {
+										<tr>
+											<td>
+												<a [routerLink]="['/equipment', item.equipment.id]">{{ item.equipment.name }}</a>
+											</td>
+											<td class="text-right">×{{ item.count }}</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						}
+					</div>
+				}
+			</div>
+
+			@if (wareTotals().length) {
+				<div class="mt-4 card">
+					<div class="card-header flex flex-wrap items-center justify-between gap-3">
+						<span>Wares to build ship and equipment</span>
+						@if (methods().length > 1) {
+							<select class="input w-auto" [value]="method()" (change)="method.set($any($event.target).value)">
+								@for (m of methods(); track m.id) {
+									<option [value]="m.id" [selected]="method() === m.id">{{ m.name }}</option>
+								}
+							</select>
+						}
+					</div>
+					<div class="card-body overflow-x-auto">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Ware</th>
+									<th class="text-right">Amount</th>
+									<th class="text-right">Value (avg)</th>
+								</tr>
+							</thead>
+							<tbody>
+								@for (item of wareTotals(); track item.id) {
+									<tr>
+										<td>
+											<a [routerLink]="['/wares', item.id]">{{ item.ware?.name ?? item.id }}</a>
+										</td>
+										<td class="text-right">{{ item.amount | number }}</td>
+										<td class="text-right">{{ item.value | number: '1.0-0' }}</td>
+									</tr>
+								}
+							</tbody>
+							<tfoot>
+								<tr>
+									<th colspan="2">Total</th>
+									<th class="text-right">{{ wareTotalValue() | number: '1.0-0' }}</th>
+								</tr>
+							</tfoot>
+						</table>
+						<p class="mt-2 text-xs text-fg-muted">
+							Uses the selected production method where available, otherwise the universal one. Equipment without its own
+							production is not included.
+						</p>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+}

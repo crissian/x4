@@ -57,6 +57,8 @@ export interface License {
   name: string;
   icon?: string;
   price: number;
+  /** Relation needed to buy the license, -1 .. 1 (see `relationToReputation`). */
+  minRelation?: number;
 }
 
 export interface Faction {
@@ -101,6 +103,10 @@ export interface StationModule {
   docks?: Dock[];
   shields?: Slot[];
   turrets?: TurretSlot[];
+  /** License the buyer needs, matches `License.type` of the selling faction. */
+  license?: string;
+  /** Bounding box of the module in meters. */
+  dimensions?: { x: number; y: number; z: number };
 }
 
 export interface ModuleWorker {
@@ -151,6 +157,14 @@ export interface Ship {
   shields?: Slot[];
   weapons?: TurretSlot[];
   turrets?: TurretSlot[];
+  cargo?: ShipCargo[];
+  /** License the buyer needs, matches `License.type` of the selling faction. */
+  license?: string;
+}
+
+export interface ShipCargo {
+  max: number;
+  types: CargoType[];
 }
 
 export interface Dock {
@@ -162,6 +176,8 @@ export interface Slot {
   group?: string;
   size: string;
   hittable: boolean;
+  /** Connection tags; equipment fits when all of its own tags are present. */
+  tags?: string[];
 }
 
 export interface TurretSlot extends Slot {
@@ -191,6 +207,88 @@ export interface Equipment {
    thrust?: Thrust;
    owners?: Faction[];
    production?: Production[];
+   explosionDamage?: number;
+   /** Shield generators. */
+   recharge?: ShieldRecharge;
+   /** Engines. */
+   travel?: TravelDrive;
+   boost?: Boost;
+   /** Weapons and turrets. */
+   weapon?: WeaponData;
+   missile?: MissileData;
+   /** Connection tags, see `Slot.tags`. */
+   tags?: string[];
+   license?: string;
+}
+
+export interface ShieldRecharge {
+   /** Shield capacity. */
+   max: number;
+   /** Shield points per second. */
+   rate: number;
+   /** Seconds without damage before recharging starts. */
+   delay: number;
+}
+
+export interface TravelDrive {
+   /** Travel speed as a multiple of the forward thrust. */
+   thrust: number;
+   attack: number;
+   /** Seconds to engage. */
+   charge: number;
+   release: number;
+}
+
+export interface Boost {
+   /** Boost speed as a multiple of the forward thrust. */
+   thrust: number;
+   duration: number;
+   recharge: number;
+   acceleration: number;
+}
+
+export interface WeaponData {
+   /** Damage per projectile, or per second while firing for beams. */
+   damage: number;
+   /** Extra damage against shields only. */
+   shield?: number;
+   /** Extra damage against hull only. */
+   hull?: number;
+   repair?: boolean;
+   /** Projectiles per shot. */
+   amount: number;
+   speed: number;
+   lifetime: number;
+   /** Meters. */
+   range: number;
+   beam?: boolean;
+   chargeTime?: number;
+   /** Shots per second. */
+   rate?: number;
+   /** Seconds between shots (used when there is no rate). */
+   reload?: number;
+   magazine?: { size: number; reload: number };
+   heat?: WeaponHeat;
+}
+
+export interface WeaponHeat {
+   /** Heat added per shot (per second for beams). */
+   shot: number;
+   overheat: number;
+   coolRate: number;
+   coolDelay: number;
+   overheatCoolDelay: number;
+   /** The weapon fires again once cooled below this value. */
+   reenable: number;
+}
+
+export interface MissileData {
+   damage: number;
+   range: number;
+   lifetime: number;
+   guided: boolean;
+   reload?: number;
+   speed?: number;
 }
 
 export interface Planet {
@@ -236,6 +334,29 @@ export interface SectorResource {
 export interface SectorLink {
   sector: string;
   type: 'gate' | 'accelerator';
+  /** Position of the gate inside the sector, in km. */
+  x: number;
+  z: number;
+}
+
+/** Superhighway entry point inside a sector, in km. */
+export interface HighwayLink {
+  sector: string;
+  x: number;
+  z: number;
+}
+
+/** A claimable ship placed in the universe at game start. */
+export interface AbandonedShip {
+  ship: string;
+  sector: string;
+  version: number;
+  /** Position inside the sector, in km. */
+  x: number;
+  y: number;
+  z: number;
+  /** Set when the ship only appears after a condition is met. */
+  condition?: string;
 }
 
 export interface Sector {
@@ -256,4 +377,5 @@ export interface Sector {
   resources: SectorResource[];
   gates: SectorLink[];
   highways: string[];
+  highwayLinks?: HighwayLink[];
 }
