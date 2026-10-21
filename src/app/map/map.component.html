@@ -40,7 +40,7 @@
 			</datalist>
 			@if (selected()) {
 				<button type="button" class="btn btn-secondary" title="Clear selection" (click)="clearSelection()">
-					<i class="fa-solid fa-xmark"></i>
+					<svg lucideX />
 				</button>
 			}
 		</div>
@@ -144,13 +144,13 @@
 
 		<div class="absolute top-3 right-3 flex flex-col gap-1">
 			<button type="button" class="btn btn-dark" title="Zoom in" (pointerdown)="$event.stopPropagation()" (click)="zoom(0.7)">
-				<i class="fa-solid fa-plus"></i>
+				<svg lucideZoomIn />
 			</button>
 			<button type="button" class="btn btn-dark" title="Zoom out" (pointerdown)="$event.stopPropagation()" (click)="zoom(1.4)">
-				<i class="fa-solid fa-minus"></i>
+				<svg lucideZoomOut />
 			</button>
 			<button type="button" class="btn btn-dark" title="Show the whole galaxy" (pointerdown)="$event.stopPropagation()" (click)="reset()">
-				<i class="fa-solid fa-expand"></i>
+				<svg lucideExpand />
 			</button>
 		</div>
 

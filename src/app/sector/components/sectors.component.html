@@ -1,7 +1,7 @@
 <div class="card">
 	<div class="card-header flex items-center justify-between gap-3">
 		<span>Sectors</span>
-		<a routerLink="/map" class="text-sm font-normal"><i class="fa-solid fa-map"></i> Galaxy map</a>
+		<a routerLink="/map" class="text-sm font-normal"><svg lucideMap class="mr-0.5" /> Galaxy map</a>
 	</div>
 	<div class="card-body">
 		<app-data-grid [data]="entities" [columns]="columns" [clickable]="true" (rowClick)="open($event)" />

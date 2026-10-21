@@ -2,11 +2,11 @@
 	<h4 class="text-lg font-medium text-fg-strong">{{ title() }}</h4>
 	<button
 		type="button"
-		class="cursor-pointer text-2xl leading-none text-fg-muted hover:text-fg-strong"
+		class="cursor-pointer text-xl leading-none text-fg-muted hover:text-fg-strong"
 		aria-label="Close"
 		(click)="dialogRef.close()"
 	>
-		&times;
+		<svg lucideX />
 	</button>
 </div>
 <div class="p-4"><ng-content /></div>

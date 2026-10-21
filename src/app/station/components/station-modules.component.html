@@ -30,7 +30,7 @@
 					/>
 				</td>
 				<td>
-					<i class="fa-solid fa-ellipsis-vertical cursor-move px-1 text-fg-muted" cdkDragHandle></i>
+					<svg lucideGripVertical class="cursor-move text-fg-muted" cdkDragHandle />
 				</td>
 				<td>
 					<button
@@ -39,7 +39,7 @@
 						aria-label="Remove module"
 						(click)="removeModule(i)"
 					>
-						<i class="fa-solid fa-trash"></i>
+						<svg lucideTrash />
 					</button>
 				</td>
 			</tr>
@@ -50,10 +50,10 @@
 			<th colspan="4" class="pt-3">
 				<div class="flex flex-wrap gap-2">
 					<button (click)="addModule()" class="btn btn-secondary" type="button">
-						<i class="fa-solid fa-square-plus"></i><span>Add Module</span>
+						<svg lucideSquarePlus /><span>Add Module</span>
 					</button>
 					<button (click)="autofillModules()" class="btn btn-info" type="button">
-						<i class="fa-solid fa-list"></i><span>Autofill Modules</span>
+						<svg lucideWandSparkles /><span>Autofill Modules</span>
 					</button>
 				</div>
 			</th>

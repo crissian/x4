@@ -8,9 +8,8 @@
 			class="btn btn-success"
 			(click)="saveLayout()"
 			[disabled]="saveForm().invalid()"
-			i18n="@@save"
 		>
-			Save
+			<svg lucideSave /><span i18n="@@save">Save</span>
 		</button>
 		<button type="button" class="btn btn-secondary" (click)="dialogRef.close()" i18n="@@cancel">Cancel</button>
 	</ng-container>

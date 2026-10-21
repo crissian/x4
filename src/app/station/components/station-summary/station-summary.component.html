@@ -15,11 +15,7 @@
 			(click)="toggleExpanded('totalWorkforce')"
 		>
 			<td>
-				<i
-					class="fa-solid w-4"
-					[class.fa-angles-down]="!expanded['totalWorkforce']"
-					[class.fa-angles-up]="expanded['totalWorkforce']"
-				></i>
+				@if (expanded['totalWorkforce']) {<svg lucideChevronsUp class="mr-1" />} @else {<svg lucideChevronsDown class="mr-1" />}
 				<span
 					[class.text-danger]="totalWorkforce() > totalWorkforceCapacity()"
 					[class.text-success]="totalWorkforce() <= totalWorkforceCapacity()"
@@ -50,11 +46,7 @@
 			(click)="toggleExpanded('totalWorkforceCapacity')"
 		>
 			<td>
-				<i
-					class="fa-solid w-4"
-					[class.fa-angles-down]="!expanded['totalWorkforceCapacity']"
-					[class.fa-angles-up]="expanded['totalWorkforceCapacity']"
-				></i>
+				@if (expanded['totalWorkforceCapacity']) {<svg lucideChevronsUp class="mr-1" />} @else {<svg lucideChevronsDown class="mr-1" />}
 				<span
 					[class.text-danger]="totalWorkforce() > totalWorkforceCapacity()"
 					[class.text-success]="totalWorkforce() <= totalWorkforceCapacity()"
@@ -121,11 +113,7 @@
 			(click)="toggleExpanded('totalExpenses')"
 		>
 			<td>
-				<i
-					class="fa-solid w-4"
-					[class.fa-angles-down]="!expanded['totalExpenses']"
-					[class.fa-angles-up]="expanded['totalExpenses']"
-				></i>
+				@if (expanded['totalExpenses']) {<svg lucideChevronsUp class="mr-1" />} @else {<svg lucideChevronsDown class="mr-1" />}
 				<span i18n="@@expenses">Expenses</span>
 			</td>
 			<td class="text-right">{{ totalExpenses() | number: '1.0-0' }}</td>
@@ -145,11 +133,7 @@
 			(click)="toggleExpanded('totalProfits')"
 		>
 			<td>
-				<i
-					class="fa-solid w-4"
-					[class.fa-angles-down]="!expanded['totalProfits']"
-					[class.fa-angles-up]="expanded['totalProfits']"
-				></i>
+				@if (expanded['totalProfits']) {<svg lucideChevronsUp class="mr-1" />} @else {<svg lucideChevronsDown class="mr-1" />}
 				<span i18n="@@production">Production</span>
 			</td>
 			<td class="text-right">{{ totalProfits() | number: '1.0-0' }}</td>
@@ -164,7 +148,7 @@
 		}
 		<tr class="text-success">
 			<td>
-				<i class="fa-solid fa-chart-line w-4"></i>
+				<svg lucideTrendingUp class="mr-1" />
 				<strong i18n="@@profit">Profit</strong>
 			</td>
 			<td class="text-right">
@@ -227,11 +211,7 @@
 				(click)="toggleExpanded(cost.key)"
 			>
 				<td>
-					<i
-						class="fa-solid w-4"
-						[class.fa-angles-down]="!expanded[cost.key]"
-						[class.fa-angles-up]="expanded[cost.key]"
-					></i>
+					@if (expanded[cost.key]) {<svg lucideChevronsUp class="mr-1" />} @else {<svg lucideChevronsDown class="mr-1" />}
 					{{ cost.count }} x {{ cost.name }}
 				</td>
 				<td class="text-right">{{ cost.price | number: '1.0-0' }}</td>

@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { LucideMap } from '@lucide/angular';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
 import { injectRowNavigation } from '../../shared/components/list-page';
 import { FactionService } from '../../shared/services/faction.service';
@@ -10,7 +11,7 @@ import { WareService } from '../../shared/services/ware.service';
 const percent: Intl.NumberFormatOptions = { style: 'percent', maximumFractionDigits: 0 };
 
 @Component({
-	imports: [DataGridComponent, RouterLink],
+	imports: [DataGridComponent, RouterLink, LucideMap],
 	templateUrl: './sectors.component.html',
 })
 export class SectorsComponent {

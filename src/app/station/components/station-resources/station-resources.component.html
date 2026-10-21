@@ -16,7 +16,7 @@
 				(click)="toggleExpanded(item)"
 			>
 				<td>
-					<i class="fa-solid w-4" [class.fa-angles-down]="!isExpanded" [class.fa-angles-up]="isExpanded"></i>
+					@if (isExpanded) {<svg lucideChevronsUp class="mr-1" />} @else {<svg lucideChevronsDown class="mr-1" />}
 					{{ item.ware.name }}
 				</td>
 				<td class="text-right">{{ item.amount | number: '1.0-0' }}</td>

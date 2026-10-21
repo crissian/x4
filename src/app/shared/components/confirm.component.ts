@@ -1,5 +1,6 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, inject } from '@angular/core';
+import { LucideCheck, LucideX } from '@lucide/angular';
 import { ModalComponent } from './modal/modal.component';
 
 export interface ConfirmData {
@@ -9,7 +10,7 @@ export interface ConfirmData {
 }
 
 @Component({
-	imports: [ModalComponent],
+	imports: [ModalComponent, LucideCheck, LucideX],
 	templateUrl: './confirm.component.html',
 })
 export class ConfirmComponent {

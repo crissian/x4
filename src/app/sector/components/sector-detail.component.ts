@@ -1,6 +1,7 @@
 import { DecimalPipe, PercentPipe } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute } from '@lucide/angular';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
 import { FactionService } from '../../shared/services/faction.service';
 import { Planet, SectorResource } from '../../shared/services/model/model';
@@ -10,7 +11,7 @@ import { WareService } from '../../shared/services/ware.service';
 type PlanetRow = Planet & { moon?: boolean };
 
 @Component({
-	imports: [RouterLink, DataGridComponent, DecimalPipe, PercentPipe],
+	imports: [RouterLink, DataGridComponent, DecimalPipe, PercentPipe, LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute],
 	templateUrl: './sector-detail.component.html',
 })
 export class SectorDetailComponent {

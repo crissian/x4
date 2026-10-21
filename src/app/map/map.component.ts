@@ -12,6 +12,7 @@ import {
 	viewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { LucideX, LucideZoomIn, LucideZoomOut, LucideExpand } from '@lucide/angular';
 import { FactionService } from '../shared/services/faction.service';
 import { Faction, Sector } from '../shared/services/model/model';
 import { ClusterService, SectorService } from '../shared/services/universe.service';
@@ -56,7 +57,7 @@ function wrap(name: string): string[] {
 }
 
 @Component({
-	imports: [PercentPipe, DecimalPipe],
+	imports: [PercentPipe, DecimalPipe, LucideX, LucideZoomIn, LucideZoomOut, LucideExpand],
 	templateUrl: './map.component.html',
 	host: { class: 'block' },
 })

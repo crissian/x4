@@ -1,6 +1,7 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject, input, signal } from '@angular/core';
 import { FieldTree, FormField } from '@angular/forms/signals';
+import { LucideChevronsDown, LucideChevronsUp, LucideTrendingUp } from '@lucide/angular';
 import { WareGroups } from '../../../shared/services/data/ware-groups-data';
 import { Ware } from '../../../shared/services/model/model';
 import { WareService } from '../../../shared/services/ware.service';
@@ -45,7 +46,7 @@ function priceAt(ware: Ware, percentage: number) {
  */
 @Component({
 	selector: 'app-station-summary',
-	imports: [DecimalPipe, FormField],
+	imports: [DecimalPipe, FormField, LucideChevronsDown, LucideChevronsUp, LucideTrendingUp],
 	templateUrl: './station-summary.component.html',
 })
 export class StationSummaryComponent {

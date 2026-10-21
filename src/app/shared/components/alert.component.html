@@ -1,9 +1,23 @@
+@switch (type()) {
+	@case ('success') {
+		<svg lucideCircleCheck class="mt-0.5 shrink-0 text-base" />
+	}
+	@case ('danger') {
+		<svg lucideCircleAlert class="mt-0.5 shrink-0 text-base" />
+	}
+	@case ('warning') {
+		<svg lucideTriangleAlert class="mt-0.5 shrink-0 text-base" />
+	}
+	@default {
+		<svg lucideInfo class="mt-0.5 shrink-0 text-base" />
+	}
+}
 <div class="min-w-0 flex-1"><ng-content /></div>
 <button
 	type="button"
-	class="cursor-pointer text-xl leading-none opacity-70 hover:opacity-100"
+	class="cursor-pointer text-base leading-none opacity-70 hover:opacity-100"
 	aria-label="Close"
 	(click)="closed.emit()"
 >
-	&times;
+	<svg lucideX />
 </button>

@@ -3,6 +3,7 @@ import { Component, computed, effect, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormField, applyEach, disabled, form, max, min } from '@angular/forms/signals';
 import { ActivatedRoute } from '@angular/router';
+import { LucideFilePlus, LucideSave, LucideSaveAll, LucideFolderOpen, LucideShare2, LucideImport } from '@lucide/angular';
 import * as urlon from 'urlon';
 import { MessagesComponent } from '../../shared/components/messages.component';
 import { openDialog } from '../../shared/components/modal/dialog';
@@ -32,6 +33,12 @@ const EMPTY_ROW: ModuleRow = { moduleId: '', count: 1 };
 @Component({
 	selector: 'app-station-calculator',
 	imports: [
+		LucideFilePlus,
+		LucideSave,
+		LucideSaveAll,
+		LucideFolderOpen,
+		LucideShare2,
+		LucideImport,
 		FormField,
 		MessagesComponent,
 		ImportPlanResultComponent,

@@ -1,5 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject, input, signal } from '@angular/core';
+import { LucideChevronsDown, LucideChevronsUp } from '@lucide/angular';
 import { WareService } from '../../../shared/services/ware.service';
 import { StationResourceModel } from '../station-calculator.model';
 
@@ -8,7 +9,7 @@ import { StationResourceModel } from '../station-calculator.model';
  */
 @Component({
 	selector: 'app-station-resources',
-	imports: [DecimalPipe],
+	imports: [DecimalPipe, LucideChevronsDown, LucideChevronsUp],
 	templateUrl: './station-resources.component.html',
 })
 export class StationResourcesComponent {

@@ -1,6 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component, inject, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
+import { LucideImport } from '@lucide/angular';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { ModuleService } from '../../shared/services/module.service';
 import { ImportResult, importConstructionPlans } from '../services/construction-plans';
@@ -10,7 +11,7 @@ export type { ImportResult } from '../services/construction-plans';
 
 @Component({
 	selector: 'app-import-plans',
-	imports: [ModalComponent, FormField],
+	imports: [ModalComponent, FormField, LucideImport],
 	templateUrl: './import-plans.component.html',
 })
 export class ImportPlansComponent {

@@ -15,11 +15,11 @@
 					>
 						{{ column.caption }}
 						@if (sort) {
-							<i
-								class="fa-solid text-xs text-link"
-								[class.fa-arrow-up-short-wide]="sort.direction === 1"
-								[class.fa-arrow-down-wide-short]="sort.direction === -1"
-							></i>
+							@if (sort.direction === 1) {
+								<svg lucideArrowUpNarrowWide class="text-link" />
+							} @else {
+								<svg lucideArrowDownWideNarrow class="text-link" />
+							}
 							@if (sort.order) {
 								<sup class="text-link">{{ sort.order }}</sup>
 							}
@@ -101,7 +101,7 @@
 				(click)="goTo(0)"
 				aria-label="First page"
 			>
-				<i class="fa-solid fa-angles-left"></i>
+				<svg lucideChevronsLeft />
 			</button>
 			<button
 				type="button"
@@ -110,7 +110,7 @@
 				(click)="goTo(page() - 1)"
 				aria-label="Previous page"
 			>
-				<i class="fa-solid fa-angle-left"></i>
+				<svg lucideChevronLeft />
 			</button>
 			<span class="px-2">Page {{ page() + 1 }} of {{ pageCount() }}</span>
 			<button
@@ -120,7 +120,7 @@
 				(click)="goTo(page() + 1)"
 				aria-label="Next page"
 			>
-				<i class="fa-solid fa-angle-right"></i>
+				<svg lucideChevronRight />
 			</button>
 			<button
 				type="button"
@@ -129,7 +129,7 @@
 				(click)="goTo(pageCount() - 1)"
 				aria-label="Last page"
 			>
-				<i class="fa-solid fa-angles-right"></i>
+				<svg lucideChevronsRight />
 			</button>
 		</div>
 	</div>

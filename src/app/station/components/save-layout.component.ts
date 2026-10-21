@@ -1,13 +1,14 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Component, inject, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
+import { LucideSave } from '@lucide/angular';
 import { ConfirmComponent, ConfirmData } from '../../shared/components/confirm.component';
 import { openDialog } from '../../shared/components/modal/dialog';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { LayoutService } from '../services/layout-service';
 
 @Component({
-	imports: [ModalComponent, FormField],
+	imports: [ModalComponent, FormField, LucideSave],
 	templateUrl: './save-layout.component.html',
 })
 export class SaveLayoutComponent {

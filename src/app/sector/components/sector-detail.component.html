@@ -3,7 +3,7 @@
 		<div class="card-header flex items-center justify-between gap-3">
 			<span><a routerLink="/sectors">Sectors</a> - {{ entity.name }}</span>
 			<a routerLink="/map" [queryParams]="{ sector: entity.id }" class="text-sm font-normal"
-				><i class="fa-solid fa-map-location-dot"></i> Show on map</a
+				><svg lucideMapPinned class="mr-0.5" /> Show on map</a
 			>
 		</div>
 		<div class="card-body">
@@ -50,18 +50,18 @@
 						<ul class="space-y-1">
 							@for (item of gates(); track item.sector.id) {
 								<li>
-									<i
-										class="fa-solid mr-1 w-5 text-fg-muted"
-										[class.fa-circle-notch]="item.type === 'gate'"
-										[class.fa-angles-right]="item.type === 'accelerator'"
-									></i>
+									@if (item.type === 'gate') {
+										<svg lucideCircleDot class="mr-1 text-fg-muted" />
+									} @else {
+										<svg lucideChevronsRight class="mr-1 text-fg-muted" />
+									}
 									<a [routerLink]="['/sectors', item.sector.id]">{{ item.sector.name }}</a>
 									<span class="ml-1 text-sm text-fg-muted">{{ item.type === 'gate' ? 'jump gate' : 'accelerator' }}</span>
 								</li>
 							}
 							@for (item of highways(); track item.id) {
 								<li>
-									<i class="fa-solid fa-road mr-1 w-5 text-fg-muted"></i>
+									<svg lucideRoute class="mr-1 text-fg-muted" />
 									<a [routerLink]="['/sectors', item.id]">{{ item.name }}</a>
 									<span class="ml-1 text-sm text-fg-muted">superhighway</span>
 								</li>

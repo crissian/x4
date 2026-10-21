@@ -12,7 +12,7 @@
 	></textarea>
 	<ng-container footer>
 		<button type="button" class="btn btn-success" (click)="importPlans()" [disabled]="importForm().invalid()">
-			Import
+			<svg lucideImport /><span>Import</span>
 		</button>
 		<button type="button" class="btn btn-secondary" (click)="dialogRef.close()" i18n="@@cancel">Cancel</button>
 	</ng-container>

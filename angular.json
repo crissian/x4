@@ -61,8 +61,6 @@
 						],
 						"allowedCommonJsDependencies": ["urlon", "xml-js"],
 						"styles": [
-							"node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css",
-							"node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
 							"src/styles.css"
 						]
 					},

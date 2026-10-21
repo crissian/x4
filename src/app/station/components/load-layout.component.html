@@ -10,32 +10,29 @@
 			>
 				<div class="flex flex-wrap items-center justify-between gap-2">
 					<strong>{{ entity.name }}</strong>
-					<div class="text-xs">
+					<div class="flex items-center gap-1 text-xs">
 						<button
 							type="button"
-							class="link-button text-link"
-							i18n="@@loadLayoutLink"
+							class="link-button inline-flex items-center gap-1 text-link"
 							(click)="close(entity, LoadLayoutType.load, $event)"
 						>
-							Load Layout
+							<svg lucideFolderOpen /><span i18n="@@loadLayoutLink">Load Layout</span>
 						</button>
 						|
 						<button
 							type="button"
-							class="link-button text-fg-soft"
-							i18n="@@addModules"
+							class="link-button inline-flex items-center gap-1 text-fg-soft"
 							(click)="close(entity, LoadLayoutType.add, $event)"
 						>
-							Add Modules
+							<svg lucideListPlus /><span i18n="@@addModules">Add Modules</span>
 						</button>
 						|
 						<button
 							type="button"
-							class="link-button text-danger"
-							i18n="@@delete"
+							class="link-button inline-flex items-center gap-1 text-danger"
 							(click)="deleteLayout(entity, $event)"
 						>
-							Delete Layout
+							<svg lucideTrash /><span i18n="@@delete">Delete Layout</span>
 						</button>
 					</div>
 				</div>

@@ -1,4 +1,5 @@
 import { Component, computed, input, output } from '@angular/core';
+import { LucideCircleCheck, LucideCircleAlert, LucideTriangleAlert, LucideInfo, LucideX } from '@lucide/angular';
 
 const TYPES: Record<string, string> = {
 	primary: 'border-sky-300 bg-sky-50 text-sky-900 dark:border-sky-700 dark:bg-sky-950/60 dark:text-sky-200',
@@ -14,6 +15,7 @@ const TYPES: Record<string, string> = {
 
 @Component({
 	selector: 'app-alert',
+	imports: [LucideCircleCheck, LucideCircleAlert, LucideTriangleAlert, LucideInfo, LucideX],
 	host: {
 		role: 'alert',
 		'[class]': 'classes()',

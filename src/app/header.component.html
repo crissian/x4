@@ -4,8 +4,8 @@
 			<a
 				[routerLink]="link.path"
 				routerLinkActive="!text-fg-strong bg-nav-active"
-				class="px-3 py-3 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
-				>{{ link.label }}</a
+				class="inline-flex items-center gap-1.5 px-3 py-3 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
+				><svg [lucideIcon]="link.icon" class="opacity-80" />{{ link.label }}</a
 			>
 		}
 	</nav>
@@ -22,7 +22,11 @@
 		<span
 			class="absolute top-0.5 left-0.5 flex size-5.5 items-center justify-center rounded-full bg-white text-xs text-amber-500 shadow transition-transform dark:translate-x-6 dark:bg-neutral-900 dark:text-sky-300"
 		>
-			<i class="fa-solid" [class.fa-sun]="!theme.isDark()" [class.fa-moon]="theme.isDark()"></i>
+			@if (theme.isDark()) {
+				<svg lucideMoon />
+			} @else {
+				<svg lucideSun />
+			}
 		</span>
 	</button>
 
@@ -33,9 +37,9 @@
 		href="https://www.buymeacoffee.com/crissian"
 		title="Enjoying the planner? Buy me a coffee"
 		aria-label="Buy me a coffee"
-		><i
-			class="fa-solid fa-mug-hot text-amber-500 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110"
-		></i
-		><span class="hidden sm:inline">Buy me a coffee</span></a
+		><svg
+			lucideCoffee
+			class="text-amber-500 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110"
+		/><span class="hidden sm:inline">Buy me a coffee</span></a
 	>
 </header>

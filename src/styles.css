@@ -104,6 +104,11 @@
 		@apply w-full accent-sky-600 disabled:opacity-50 dark:accent-sky-500;
 	}
 
+	/* Lucide icons size with the surrounding text (see provideLucideConfig) */
+	svg.lucide {
+		@apply inline-block shrink-0 align-[-0.125em];
+	}
+
 	input[type='checkbox'] {
 		@apply size-4 rounded accent-sky-600 dark:accent-sky-500;
 	}

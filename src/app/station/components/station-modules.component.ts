@@ -8,6 +8,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Component, inject, input } from '@angular/core';
 import { FieldTree, FormField } from '@angular/forms/signals';
+import { LucideGripVertical, LucideTrash, LucideSquarePlus, LucideWandSparkles } from '@lucide/angular';
 import { AllModuleTypes, ModuleTypes } from '../../shared/services/data/module-types-data';
 import { StationModule, WareGroup } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
@@ -23,7 +24,7 @@ import {
 
 @Component({
 	selector: 'app-station-modules',
-	imports: [FormField, CdkDropList, CdkDrag, CdkDragHandle, CdkDragPreview, AutocompleteComponent],
+	imports: [FormField, CdkDropList, CdkDrag, CdkDragHandle, CdkDragPreview, AutocompleteComponent, LucideGripVertical, LucideTrash, LucideSquarePlus, LucideWandSparkles],
 	templateUrl: './station-modules.component.html',
 	styleUrl: './station-modules.component.css',
 })

@@ -2,7 +2,11 @@
 	<div class="flex">
 		<input class="input rounded-r-none" [value]="url" readonly aria-label="Layout URL" #urlInput />
 		<button class="btn btn-secondary shrink-0 rounded-l-none" type="button" (click)="copy(urlInput)">
-			{{ copied() ? 'Copied' : 'Copy' }}
+			@if (copied()) {
+				<svg lucideCheck /><span>Copied</span>
+			} @else {
+				<svg lucideCopy /><span>Copy</span>
+			}
 		</button>
 	</div>
 	<ng-container footer>

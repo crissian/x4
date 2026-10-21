@@ -1,5 +1,6 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Component, inject, signal } from '@angular/core';
+import { LucideFolderOpen, LucideListPlus, LucideTrash } from '@lucide/angular';
 import { ConfirmComponent, ConfirmData } from '../../shared/components/confirm.component';
 import { openDialog } from '../../shared/components/modal/dialog';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
@@ -28,7 +29,7 @@ export interface LoadLayoutResult {
 }
 
 @Component({
-	imports: [ModalComponent],
+	imports: [ModalComponent, LucideFolderOpen, LucideListPlus, LucideTrash],
 	templateUrl: './load-layout.component.html',
 })
 export class LoadLayoutComponent {

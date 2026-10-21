@@ -1,7 +1,11 @@
 <app-modal [title]="data.title">
 	<p [innerHTML]="data.message"></p>
 	<ng-container footer>
-		<button type="button" class="btn btn-primary" (click)="dialogRef.close(true)" i18n="@@yes">Yes</button>
-		<button type="button" class="btn btn-secondary" (click)="dialogRef.close(false)" i18n="@@no">No</button>
+		<button type="button" class="btn btn-primary" (click)="dialogRef.close(true)">
+			<svg lucideCheck /><span i18n="@@yes">Yes</span>
+		</button>
+		<button type="button" class="btn btn-secondary" (click)="dialogRef.close(false)">
+			<svg lucideX /><span i18n="@@no">No</span>
+		</button>
 	</ng-container>
 </app-modal>

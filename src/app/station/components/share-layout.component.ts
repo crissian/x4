@@ -1,10 +1,11 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, inject, signal } from '@angular/core';
+import { LucideCheck, LucideCopy } from '@lucide/angular';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 
 @Component({
 	selector: 'app-share-layout',
-	imports: [ModalComponent],
+	imports: [ModalComponent, LucideCheck, LucideCopy],
 	templateUrl: './share-layout.component.html',
 })
 export class ShareLayoutComponent {

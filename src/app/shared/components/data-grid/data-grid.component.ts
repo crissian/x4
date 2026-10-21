@@ -1,5 +1,6 @@
 import { Component, computed, input, linkedSignal, output, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
+import { LucideArrowUpNarrowWide, LucideArrowDownWideNarrow, LucideChevronsLeft, LucideChevronLeft, LucideChevronRight, LucideChevronsRight } from '@lucide/angular';
 
 export interface GridLookupItem {
 	value: unknown;
@@ -87,7 +88,7 @@ function matchesNumber(value: unknown, filter: string): boolean {
 
 @Component({
 	selector: 'app-data-grid',
-	imports: [FormField],
+	imports: [FormField, LucideArrowUpNarrowWide, LucideArrowDownWideNarrow, LucideChevronsLeft, LucideChevronLeft, LucideChevronRight, LucideChevronsRight],
 	templateUrl: './data-grid.component.html',
 })
 export class DataGridComponent<T> {
