@@ -1,0 +1,134 @@
+@if (entity(); as entity) {
+	<div class="card">
+		<div class="card-header flex items-center justify-between gap-3">
+			<span><a routerLink="/sectors">Sectors</a> - {{ entity.name }}</span>
+			<a routerLink="/map" [queryParams]="{ sector: entity.id }" class="text-sm font-normal"
+				><i class="fa-solid fa-map-location-dot"></i> Show on map</a
+			>
+		</div>
+		<div class="card-body">
+			@if (entity.description) {
+				<p class="mb-4 max-w-4xl whitespace-pre-line">{{ entity.description }}</p>
+			}
+
+			<div class="mb-4 grid gap-x-6 gap-y-3 md:grid-cols-3">
+				<dl class="details">
+					<dt>System</dt>
+					<dd>{{ cluster()?.name }}</dd>
+					<dt>Owner</dt>
+					<dd>
+						@if (owner(); as owner) {
+							<span class="mr-1 inline-block size-2.5 rounded-full" [style.background]="owner.color"></span>
+							<a [routerLink]="['/factions', owner.id]">{{ owner.name }}</a>
+						} @else {
+							None
+						}
+					</dd>
+					<dt>DLC</dt>
+					<dd>{{ versions[entity.version] }}</dd>
+				</dl>
+				<dl class="details">
+					<dt>Sunlight</dt>
+					<dd>{{ entity.sunlight != null ? (entity.sunlight | percent) : '-' }}</dd>
+					<dt>Security</dt>
+					<dd>{{ entity.security != null ? (entity.security | percent) : '-' }}</dd>
+					<dt>Economy</dt>
+					<dd>{{ entity.economy != null ? (entity.economy | percent) : '-' }}</dd>
+				</dl>
+				<dl class="details">
+					<dt>Sun</dt>
+					<dd>{{ cluster()?.suns?.join(', ') || '-' }}</dd>
+					<dt>Environment</dt>
+					<dd>{{ cluster()?.environment ?? '-' }}</dd>
+				</dl>
+			</div>
+
+			<div class="grid gap-4 lg:grid-cols-3">
+				<div class="card">
+					<div class="card-header">Connections</div>
+					<div class="card-body">
+						<ul class="space-y-1">
+							@for (item of gates(); track item.sector.id) {
+								<li>
+									<i
+										class="fa-solid mr-1 w-5 text-fg-muted"
+										[class.fa-circle-notch]="item.type === 'gate'"
+										[class.fa-angles-right]="item.type === 'accelerator'"
+									></i>
+									<a [routerLink]="['/sectors', item.sector.id]">{{ item.sector.name }}</a>
+									<span class="ml-1 text-sm text-fg-muted">{{ item.type === 'gate' ? 'jump gate' : 'accelerator' }}</span>
+								</li>
+							}
+							@for (item of highways(); track item.id) {
+								<li>
+									<i class="fa-solid fa-road mr-1 w-5 text-fg-muted"></i>
+									<a [routerLink]="['/sectors', item.id]">{{ item.name }}</a>
+									<span class="ml-1 text-sm text-fg-muted">superhighway</span>
+								</li>
+							}
+							@if (!gates().length && !highways().length) {
+								<li class="text-fg-muted">No connections</li>
+							}
+						</ul>
+						@if (neighbours().length) {
+							<div class="mt-3 border-t border-line pt-3 text-sm">
+								Other sectors in {{ cluster()?.name }}:
+								@for (item of neighbours(); track item.id; let last = $last) {
+									<a [routerLink]="['/sectors', item.id]">{{ item.name }}</a>{{ last ? '' : ', ' }}
+								}
+							</div>
+						}
+					</div>
+				</div>
+
+				<div class="card min-w-0 lg:col-span-2">
+					<div class="card-header">Resources</div>
+					<div class="card-body">
+						@if (entity.resources.length) {
+							<div class="mb-3 flex flex-wrap gap-2">
+								@for (item of totals(); track item.id) {
+									<span class="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 text-sm">
+										@if (item.ware) {
+											<a [routerLink]="['/wares', item.id]">{{ item.ware.name }}</a>
+										} @else {
+											{{ item.id }}
+										}
+										<span class="ml-1 text-fg-muted">{{ item.amount | number }}</span>
+									</span>
+								}
+							</div>
+							<div class="overflow-x-auto">
+								<app-data-grid
+									[data]="entity.resources"
+									[columns]="resourceColumns"
+									[features]="false"
+									[trackBy]="trackRow"
+								/>
+							</div>
+						} @else {
+							<p class="text-fg-muted">No mineable resources.</p>
+						}
+					</div>
+				</div>
+			</div>
+
+			@if (cluster(); as cluster) {
+				<div class="card mt-4">
+					<div class="card-header">System - {{ cluster.name }}</div>
+					<div class="card-body">
+						@if (cluster.description && cluster.description !== entity.description) {
+							<p class="mb-3 max-w-4xl whitespace-pre-line">{{ cluster.description }}</p>
+						}
+						@if (planets().length) {
+							<div class="overflow-x-auto">
+								<app-data-grid [data]="planets()" [columns]="planetColumns" [features]="false" [trackBy]="trackRow" />
+							</div>
+						} @else {
+							<p class="text-fg-muted">No planets recorded.</p>
+						}
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+}

@@ -18,6 +18,8 @@ export class HeaderComponent {
 		{ path: '/equipment', label: 'Equipment' },
 		{ path: '/races', label: 'Races' },
 		{ path: '/factions', label: 'Factions' },
+		{ path: '/sectors', label: 'Sectors' },
+		{ path: '/map', label: 'Map' },
 		{ path: '/about', label: 'About' },
 	];
 }

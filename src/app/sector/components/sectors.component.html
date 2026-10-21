@@ -1,0 +1,13 @@
+<div class="card">
+	<div class="card-header flex items-center justify-between gap-3">
+		<span>Sectors</span>
+		<a routerLink="/map" class="text-sm font-normal"><i class="fa-solid fa-map"></i> Galaxy map</a>
+	</div>
+	<div class="card-body">
+		<app-data-grid [data]="entities" [columns]="columns" [clickable]="true" (rowClick)="open($event)" />
+		<p class="mt-3 text-sm text-fg-muted">
+			Owner is the faction holding the sector at the start of a new game, estimated from the stations placed there.
+			Sunlight is the solar power multiplier for solar panels.
+		</p>
+	</div>
+</div>

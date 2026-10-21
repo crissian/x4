@@ -65,6 +65,7 @@ export interface Faction {
   description: string;
   race: Race;
   icon: string;
+  color?: string;
   licenses?: License[];
 }
 
@@ -190,4 +191,69 @@ export interface Equipment {
    thrust?: Thrust;
    owners?: Faction[];
    production?: Production[];
+}
+
+export interface Planet {
+  name?: string;
+  class?: string;
+  geology?: string;
+  atmosphere?: string;
+  population?: string;
+  maxPopulation?: number;
+  settlements?: string;
+  moons?: Planet[];
+}
+
+/** A star system (cluster) holding one or more sectors. Coordinates are in km. */
+export interface Cluster {
+  id: string;
+  version: number;
+  name: string;
+  description?: string;
+  x: number;
+  z: number;
+  environment?: string;
+  suns: string[];
+  planets: Planet[];
+  sectors: string[];
+}
+
+export interface SectorResource {
+  ware: string;
+  size: string;
+  yield: string;
+  speed: string;
+  /** Number of resource areas of this kind. */
+  count: number;
+  /** Amount held by one area. */
+  yieldAmount: number;
+  /** Minutes until a depleted area recovers. */
+  respawnDelay: number;
+  /** Area radius in meters. */
+  radius: number;
+}
+
+export interface SectorLink {
+  sector: string;
+  type: 'gate' | 'accelerator';
+}
+
+export interface Sector {
+  id: string;
+  version: number;
+  cluster: string;
+  name: string;
+  description?: string;
+  /** Offset inside the cluster, in km. */
+  x: number;
+  z: number;
+  /** Solar output multiplier, 1 = 100%. */
+  sunlight?: number;
+  economy?: number;
+  security?: number;
+  /** Faction owning the sector at game start (estimated from the stations placed there). */
+  owner?: string;
+  resources: SectorResource[];
+  gates: SectorLink[];
+  highways: string[];
 }

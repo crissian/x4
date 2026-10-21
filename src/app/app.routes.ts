@@ -38,6 +38,15 @@ export const appRoutes: Routes = [
 		loadChildren: () => import('./ware/ware.routes'),
 	},
 	{
+		path: 'sectors',
+		loadChildren: () => import('./sector/sector.routes'),
+	},
+	{
+		path: 'map',
+		loadComponent: () => import('./map/map.component'),
+		title: `${BASE_TITLE} - Galaxy Map`,
+	},
+	{
 		path: 'station-calculator',
 		loadComponent: () => import('./station/components/station-calculator.component'),
 		title: `${BASE_TITLE} - Station Calculator`,

@@ -1,0 +1,81 @@
+import { DecimalPipe, PercentPipe } from '@angular/common';
+import { Component, computed, inject, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
+import { FactionService } from '../../shared/services/faction.service';
+import { Planet, SectorResource } from '../../shared/services/model/model';
+import { ClusterService, GAME_VERSIONS, SectorService } from '../../shared/services/universe.service';
+import { WareService } from '../../shared/services/ware.service';
+
+type PlanetRow = Planet & { moon?: boolean };
+
+@Component({
+	imports: [RouterLink, DataGridComponent, DecimalPipe, PercentPipe],
+	templateUrl: './sector-detail.component.html',
+})
+export class SectorDetailComponent {
+	private readonly sectors = inject(SectorService);
+	private readonly clusters = inject(ClusterService);
+	private readonly factions = inject(FactionService);
+	private readonly wares = inject(WareService);
+
+	readonly id = input.required<string>();
+
+	protected readonly versions = GAME_VERSIONS;
+	protected readonly trackRow = (row: unknown) => row;
+
+	protected readonly entity = computed(() => this.sectors.getEntity(this.id()));
+	protected readonly cluster = computed(() => this.clusters.getEntity(this.entity()?.cluster));
+	protected readonly owner = computed(() => this.factions.getEntity(this.entity()?.owner));
+
+	protected readonly gates = computed(() =>
+		(this.entity()?.gates ?? [])
+			.map((x) => ({ type: x.type, sector: this.sectors.getEntity(x.sector) }))
+			.filter((x) => x.sector)
+	);
+	protected readonly highways = computed(() =>
+		(this.entity()?.highways ?? []).map((x) => this.sectors.getEntity(x)).filter((x) => x)
+	);
+	protected readonly neighbours = computed(() =>
+		(this.cluster()?.sectors ?? []).filter((x) => x !== this.id()).map((x) => this.sectors.getEntity(x))
+	);
+
+	/** Planets followed by their moons. */
+	protected readonly planets = computed(() => {
+		const result: PlanetRow[] = [];
+		for (const planet of this.cluster()?.planets ?? []) {
+			result.push(planet);
+			result.push(...(planet.moons ?? []).map((x) => ({ ...x, moon: true })));
+		}
+		return result;
+	});
+
+	/** Total amount the sector holds per ware. */
+	protected readonly totals = computed(() => {
+		const totals = new Map<string, number>();
+		for (const r of this.entity()?.resources ?? []) {
+			totals.set(r.ware, (totals.get(r.ware) ?? 0) + r.count * r.yieldAmount);
+		}
+		return [...totals].map(([id, amount]) => ({ id, ware: this.wares.getEntity(id), amount }));
+	});
+
+	protected readonly resourceColumns: GridColumn<SectorResource>[] = [
+		{ key: 'ware', caption: 'Ware', value: (x) => this.wares.getEntity(x.ware)?.name ?? x.ware },
+		{ key: 'count', caption: 'Areas', type: 'number' },
+		{ key: 'size', caption: 'Size' },
+		{ key: 'radius', caption: 'Radius (km)', type: 'number', value: (x) => x.radius / 1000 },
+		{ key: 'yield', caption: 'Yield' },
+		{ key: 'yieldAmount', caption: 'Amount per area', type: 'number' },
+		{ key: 'speed', caption: 'Gather speed' },
+		{ key: 'respawnDelay', caption: 'Respawn (min)', type: 'number' },
+	];
+
+	protected readonly planetColumns: GridColumn<PlanetRow>[] = [
+		{ key: 'name', caption: 'Name', display: (x) => (x.moon ? '↳ ' : '') + (x.name ?? '-') },
+		{ key: 'class', caption: 'Class' },
+		{ key: 'geology', caption: 'Geology' },
+		{ key: 'atmosphere', caption: 'Atmosphere' },
+		{ key: 'population', caption: 'Population' },
+		{ key: 'settlements', caption: 'Settlements' },
+	];
+}
