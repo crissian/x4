@@ -1,6 +1,12 @@
 @if (entity(); as entity) {
 	<div class="card">
 		<div class="card-header"><a routerLink="/equipment">Equipment</a> - {{ entity.name }}</div>
-		<div class="card-body">Coming soon</div>
+		<div class="card-body flow-root">
+			<app-entity-image kind="equipment" [id]="entity.id" [alt]="entity.name" />
+			@if (entity.description && entity.description != 'No information available') {
+				<p class="mb-3">{{ entity.description }}</p>
+			}
+			<p class="text-fg-muted">More details coming soon.</p>
+		</div>
 	</div>
 }

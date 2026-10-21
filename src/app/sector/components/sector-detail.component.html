@@ -6,7 +6,8 @@
 				><svg lucideMapPinned class="mr-0.5" /> Show on map</a
 			>
 		</div>
-		<div class="card-body">
+		<div class="card-body flow-root">
+			<app-entity-image kind="sectors" [id]="entity.id" [alt]="entity.name" />
 			@if (entity.description) {
 				<p class="mb-4 max-w-4xl whitespace-pre-line">{{ entity.description }}</p>
 			}

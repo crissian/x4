@@ -3,6 +3,7 @@ import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute } from '@lucide/angular';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
+import { EntityImageComponent } from '../../shared/components/entity-image.component';
 import { FactionService } from '../../shared/services/faction.service';
 import { Planet, SectorResource } from '../../shared/services/model/model';
 import { ClusterService, GAME_VERSIONS, SectorService } from '../../shared/services/universe.service';
@@ -11,7 +12,7 @@ import { WareService } from '../../shared/services/ware.service';
 type PlanetRow = Planet & { moon?: boolean };
 
 @Component({
-	imports: [RouterLink, DataGridComponent, DecimalPipe, PercentPipe, LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute],
+	imports: [RouterLink, DataGridComponent, DecimalPipe, PercentPipe, LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute, EntityImageComponent],
 	templateUrl: './sector-detail.component.html',
 })
 export class SectorDetailComponent {

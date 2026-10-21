@@ -1,7 +1,8 @@
 @if (entity(); as entity) {
 	<div class="card">
 		<div class="card-header"><a routerLink="/wares">Wares</a> - {{ entity.name }}</div>
-		<div class="card-body">
+		<div class="card-body flow-root">
+			<app-entity-image kind="wares" [id]="entity.id" [alt]="entity.name" />
 			<p class="mb-3">{{ entity.description }}</p>
 			<dl class="details mb-4 max-w-2xl grid-cols-[10rem_1fr]">
 				<dt>Price</dt>

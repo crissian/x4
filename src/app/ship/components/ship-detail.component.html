@@ -1,7 +1,8 @@
 @if (entity(); as entity) {
 	<div class="card">
 		<div class="card-header"><a routerLink="/ships">Ships</a> - {{ entity.name }}</div>
-		<div class="card-body">
+		<div class="card-body flow-root">
+			<app-entity-image kind="ships" [id]="entity.id" [alt]="entity.name" />
 			@if (entity.description != 'No information available') {
 				<p class="mb-3">{{ entity.description }}</p>
 			}

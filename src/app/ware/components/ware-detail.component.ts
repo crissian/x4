@@ -1,6 +1,7 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { EntityImageComponent } from '../../shared/components/entity-image.component';
 import { ProductionRequirementsComponent } from '../../shared/components/production-requirements.component';
 import { ModuleService } from '../../shared/services/module.service';
 import { formatProductionTime, toProductionData } from '../../shared/services/production';
@@ -10,7 +11,7 @@ import { WareService } from '../../shared/services/ware.service';
 type WareTab = 'construction' | 'requiredFor';
 
 @Component({
-	imports: [DecimalPipe, RouterLink, ProductionRequirementsComponent],
+	imports: [DecimalPipe, RouterLink, ProductionRequirementsComponent, EntityImageComponent],
 	templateUrl: './ware-detail.component.html',
 })
 export class WareDetailComponent {
