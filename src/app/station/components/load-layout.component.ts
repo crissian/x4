@@ -27,7 +27,8 @@ export interface LoadLayoutResult {
 }
 
 @Component({
-   templateUrl: './load-layout.component.html'
+    templateUrl: './load-layout.component.html',
+    standalone: false
 })
 export class LoadLayoutComponent extends ComponentBase implements OnInit {
    entities: LayoutData[];

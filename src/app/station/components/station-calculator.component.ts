@@ -24,7 +24,8 @@ interface Updatable {
 
 @Component({
     selector: 'app-station-calculator',
-    templateUrl: './station-calculator.component.html'
+    templateUrl: './station-calculator.component.html',
+    standalone: false
 })
 export class StationCalculatorComponent extends ComponentBase implements OnInit {
     layout: Layout;

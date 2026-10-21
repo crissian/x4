@@ -4,7 +4,8 @@ import { LayoutService } from '../services/layout-service';
 import { ConfirmComponent } from '../../shared/components/confirm.component';
 
 @Component({
-  templateUrl: './save-layout.component.html'
+    templateUrl: './save-layout.component.html',
+    standalone: false
 })
 export class SaveLayoutComponent {
   name: string;

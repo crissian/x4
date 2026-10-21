@@ -11,7 +11,8 @@ import { Effects } from '../../shared/services/data/effects-data';
 import {BASE_TITLE} from '../../shared/services/constants';
 
 @Component({
-   templateUrl: './modules.component.html'
+    templateUrl: './modules.component.html',
+    standalone: false
 })
 export class ModulesComponent extends EntityListComponent<StationModule> implements OnInit {
    moduleTypes: string[];

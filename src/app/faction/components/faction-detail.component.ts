@@ -8,7 +8,8 @@ import {FactionService} from '../../shared/services/faction.service';
 import {BASE_TITLE} from '../../shared/services/constants';
 
 @Component({
-   templateUrl: './faction-detail.component.html'
+    templateUrl: './faction-detail.component.html',
+    standalone: false
 })
 export class FactionDetailComponent extends EntityDetailsComponent<Faction> implements OnInit {
    constructor(service: FactionService, private moduleService: ModuleService,

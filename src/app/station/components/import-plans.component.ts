@@ -38,7 +38,8 @@ export interface ImportResult {
 
 @Component({
     selector: 'app-import-plans',
-    templateUrl: './import-plans.component.html'
+    templateUrl: './import-plans.component.html',
+    standalone: false
 })
 export class ImportPlansComponent extends ComponentBase implements OnInit {
     xml: string;

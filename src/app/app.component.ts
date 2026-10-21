@@ -3,8 +3,9 @@ import { NavigationEnd, Router } from '@angular/router';
 import { AnalyticsService } from './google-analytics/services/analytics.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html'
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    standalone: false
 })
 export class AppComponent {
   theme = 'dark';

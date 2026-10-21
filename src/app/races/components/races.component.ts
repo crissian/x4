@@ -7,7 +7,8 @@ import { EntityListComponent } from '../../shared/components/entity-list.compone
 import {BASE_TITLE} from '../../shared/services/constants';
 
 @Component({
-  templateUrl: './races.component.html'
+    templateUrl: './races.component.html',
+    standalone: false
 })
 export class RacesComponent extends EntityListComponent<Race> implements OnInit {
   constructor(private raceService: RaceService,

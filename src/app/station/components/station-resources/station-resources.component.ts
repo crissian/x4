@@ -10,6 +10,7 @@ import { StationSummaryService } from '../station-summary/services/station-summa
 @Component({
     selector: 'app-station-resources',
     templateUrl: './station-resources.component.html',
+    standalone: false
 })
 export class StationResourcesComponent implements OnChanges, OnDestroy {
     private expandState: { [resourceId: number]: boolean } = {};

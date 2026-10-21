@@ -2,8 +2,9 @@ import { Component, Input } from '@angular/core';
 import { Message } from '../services/message';
 
 @Component({
-  selector: 'app-messages',
-  templateUrl: './messages.component.html'
+    selector: 'app-messages',
+    templateUrl: './messages.component.html',
+    standalone: false
 })
 export class MessagesComponent {
   @Input()

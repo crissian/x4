@@ -2,8 +2,9 @@ import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-share-layout',
-  templateUrl: './share-layout.component.html'
+    selector: 'app-share-layout',
+    templateUrl: './share-layout.component.html',
+    standalone: false
 })
 export class ShareLayoutComponent {
   @Input()

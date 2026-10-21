@@ -10,7 +10,8 @@ import { StationSummaryService } from './station-summary/services/station-summar
 @Component({
     selector: 'app-station-modules',
     templateUrl: './station-modules.component.html',
-    styleUrls: [ './station-modules.component.scss' ],
+    styleUrls: ['./station-modules.component.scss'],
+    standalone: false
 })
 export class StationModulesComponent implements OnInit {
     wareGroups: WareGroupModel[];

@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  templateUrl: './confirm.component.html'
+    templateUrl: './confirm.component.html',
+    standalone: false
 })
 export class ConfirmComponent {
   constructor(public activeModal: NgbActiveModal) {

@@ -2,8 +2,9 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { ImportResult } from './import-plans.component';
 
 @Component({
-   selector: 'app-import-result',
-   templateUrl: './import-plan-result.component.html'
+    selector: 'app-import-result',
+    templateUrl: './import-plan-result.component.html',
+    standalone: false
 })
 export class ImportPlanResultComponent {
    private _result: ImportResult;

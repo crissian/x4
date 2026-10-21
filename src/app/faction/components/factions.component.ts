@@ -7,7 +7,8 @@ import {FactionService} from '../../shared/services/faction.service';
 import {BASE_TITLE} from '../../shared/services/constants';
 
 @Component({
-   templateUrl: './factions.component.html'
+    templateUrl: './factions.component.html',
+    standalone: false
 })
 export class FactionsComponent extends EntityListComponent<Faction> implements OnInit {
    constructor(factionService: FactionService,

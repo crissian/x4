@@ -2,8 +2,9 @@
 import {environment} from '../environments/environment';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html'
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    standalone: false
 })
 export class HeaderComponent {
 }

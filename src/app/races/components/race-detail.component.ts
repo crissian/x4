@@ -8,7 +8,8 @@ import {environment} from '../../../environments/environment';
 import {BASE_TITLE} from '../../shared/services/constants';
 
 @Component({
-  templateUrl: 'race-detail.component.html'
+    templateUrl: 'race-detail.component.html',
+    standalone: false
 })
 export class RaceDetailComponent extends EntityDetailsComponent<Race> implements OnInit {
   constructor(raceService: RaceService, route: ActivatedRoute, private titleService: Title) {

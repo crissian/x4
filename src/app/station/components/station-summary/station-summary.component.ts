@@ -13,8 +13,9 @@ import { StationSummaryService } from './services/station-summary.service';
  * The Station Summary component
  */
 @Component({
-   selector: 'app-station-summary',
-   templateUrl: './station-summary.component.html',
+    selector: 'app-station-summary',
+    templateUrl: './station-summary.component.html',
+    standalone: false
 })
 export class StationSummaryComponent implements OnChanges {
    static basicResources = [ WareGroups.gases, WareGroups.minerals, WareGroups.ice ];

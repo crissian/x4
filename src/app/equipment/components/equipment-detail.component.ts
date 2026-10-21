@@ -21,7 +21,8 @@ interface ProductionData {
 }
 
 @Component({
-   templateUrl: './equipment-detail.component.html'
+    templateUrl: './equipment-detail.component.html',
+    standalone: false
 })
 export class EquipmentDetailComponent extends EntityDetailsComponent<Equipment> implements OnInit {
    entityProduction: ProductionData[];

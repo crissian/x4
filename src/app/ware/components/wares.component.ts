@@ -9,7 +9,8 @@ import { EnumFn } from '../../core/services/enum-fn';
 import {BASE_TITLE} from '../../shared/services/constants';
 
 @Component({
-   templateUrl: './wares.component.html'
+    templateUrl: './wares.component.html',
+    standalone: false
 })
 export class WaresComponent extends EntityListComponent<Ware> implements OnInit {
    transportTypes: string[];

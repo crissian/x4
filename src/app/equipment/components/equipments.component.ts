@@ -12,7 +12,8 @@ import { EnumFn } from '../../core/services/enum-fn';
 import {BASE_TITLE} from '../../shared/services/constants';
 
 @Component({
-   templateUrl: './equipments.component.html'
+    templateUrl: './equipments.component.html',
+    standalone: false
 })
 export class EquipmentsComponent extends EntityListComponent<Equipment> implements OnInit {
    sizes: string[];
