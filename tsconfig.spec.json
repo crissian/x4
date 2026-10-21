@@ -1,16 +1,9 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
 {
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
 		"outDir": "./out-tsc/spec",
-		"types": ["jasmine"]
+		"types": ["vitest/globals", "@angular/localize"]
 	},
-	"include": ["src/**/*.spec.ts", "src/**/*.d.ts"],
-	"angularCompilerOptions": {
-		"extendedDiagnostics": {
-			"checks": {
-				"nullishCoalescingNotNullable": "suppress",
-				"optionalChainNotNullable": "suppress"
-			}
-		}
-	}
+	"include": ["src/**/*.ts"]
 }

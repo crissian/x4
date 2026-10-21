@@ -1,61 +1,42 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { Race, Ship } from '../../shared/services/model/model';
-import { EntityListComponent } from '../../shared/components/entity-list.component';
-import { ShipService } from '../../shared/services/ship.service';
-import { RaceService } from '../../shared/services/race.service';
-import { Size } from '../../shared/services/data/size-data';
-import { ShipType } from '../../shared/services/data/ship-type-data';
-import { ShipPurpose } from '../../shared/services/data/ship-purpose-data';
+import { Component, inject } from '@angular/core';
 import { EnumFn } from '../../core/services/enum-fn';
-import { BASE_TITLE } from '../../shared/services/constants';
+import { DataGridComponent, GridColumn, lookupOf } from '../../shared/components/data-grid/data-grid.component';
+import { injectRowNavigation } from '../../shared/components/list-page';
+import { ShipPurpose } from '../../shared/services/data/ship-purpose-data';
+import { ShipType } from '../../shared/services/data/ship-type-data';
+import { Size } from '../../shared/services/data/size-data';
+import { Ship } from '../../shared/services/model/model';
+import { RaceService } from '../../shared/services/race.service';
+import { ShipService } from '../../shared/services/ship.service';
 
 @Component({
+	imports: [DataGridComponent],
 	templateUrl: './ships.component.html',
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
 })
-export class ShipsComponent extends EntityListComponent<Ship> implements OnInit {
-	sizes: string[];
-	races: Race[];
-	shipTypes: string[];
-	purposes: string[];
+export class ShipsComponent {
+	protected readonly entities = inject(ShipService).getEntities();
+	protected readonly open = injectRowNavigation<Ship>();
 
-	constructor(
-		entityService: ShipService,
-		private raceService: RaceService,
-		router: Router,
-		route: ActivatedRoute,
-		private titleService: Title
-	) {
-		super(entityService, router, route);
-	}
-
-	override ngOnInit(): void {
-		this.titleService.setTitle(`${BASE_TITLE} - Ships`);
-
-		this.sizes = EnumFn.values(Size);
-		this.shipTypes = EnumFn.values(ShipType);
-		this.purposes = EnumFn.values(ShipPurpose);
-		this.races = this.raceService.getEntities();
-
-		super.ngOnInit();
-	}
-
-	calculateWeapons(entity: Ship) {
-		return entity.weapons ? entity.weapons.length : 0;
-	}
-
-	calculateTurrets(entity: Ship) {
-		return entity.turrets ? entity.turrets.length : 0;
-	}
-
-	calculateShields(entity: Ship) {
-		if (!entity.shields) {
-			return 0;
-		}
-
-		return entity.shields.filter((x) => !x.group).length;
-	}
+	protected readonly columns: GridColumn<Ship>[] = [
+		{ key: 'name', caption: 'Name' },
+		{
+			key: 'race.id',
+			caption: 'Race',
+			lookup: inject(RaceService)
+				.getEntities()
+				.map((x) => ({ value: x.id, label: x.name })),
+		},
+		{ key: 'type', caption: 'Type', lookup: lookupOf(EnumFn.values(ShipType)) },
+		{ key: 'size', caption: 'Size', lookup: lookupOf(EnumFn.values(Size)) },
+		{ key: 'purpose', caption: 'Purpose', lookup: lookupOf(EnumFn.values(ShipPurpose)) },
+		{ key: 'weapons', caption: 'Weapons', type: 'number', value: (ship) => ship.weapons?.length ?? 0 },
+		{ key: 'turrets', caption: 'Turrets', type: 'number', value: (ship) => ship.turrets?.length ?? 0 },
+		{
+			key: 'shields',
+			caption: 'Shields',
+			type: 'number',
+			value: (ship) => ship.shields?.filter((x) => !x.group).length ?? 0,
+		},
+		{ key: 'people', caption: 'People', type: 'number' },
+	];
 }

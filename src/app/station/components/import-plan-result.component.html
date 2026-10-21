@@ -1,55 +1,17 @@
-@if (result) {
-	<!-- No plan was imported -->
-	@if (result.error && (!result.layouts || result.layouts.length === 0)) {
-		<div class="alert alert-danger">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="result = null">
-				<span aria-hidden="true">&times;</span>
-			</button>
-			<div>Failed to import plans.</div>
-		</div>
-	}
-	<!-- Some plans were imported -->
-	@if (result.error && result.layouts && result.layouts.length > 0) {
-		<div class="alert alert-warning">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="result = null">
-				<span aria-hidden="true">&times;</span>
-			</button>
-			<div>
-				Imported plans, but errors occurred trying to import some of them.
-				<div class="small">
-					@for (item of result.layouts; track item; let last = $last) {
-						<a (click)="selectLayout(item)" class="cursor-pointer link text-primary">{{ item }}</a>
-						@if (!last) {
-							<span> | </span>
-						}
+@if (result(); as result) {
+	<app-alert [type]="status().type" (closed)="this.result.set(null)">
+		<div>{{ status().message }}</div>
+		@if (result.layouts?.length) {
+			<div class="text-xs">
+				@for (item of result.layouts; track $index; let last = $last) {
+					<button type="button" class="link-button text-sky-400 underline" (click)="selectPlan.emit(item)">
+						{{ item }}
+					</button>
+					@if (!last) {
+						<span> | </span>
 					}
-				</div>
+				}
 			</div>
-		</div>
-	}
-	<!-- All plans were imported -->
-	@if (!result.error && result.layouts && result.layouts.length > 0) {
-		<div class="alert alert-success">
-			<button
-				type="button"
-				class="close pull-right"
-				data-dismiss="alert"
-				aria-label="Close"
-				(click)="result = null"
-			>
-				<span aria-hidden="true">&times;</span>
-			</button>
-			<div>
-				Successfully imported plans
-				<div class="small">
-					@for (item of result.layouts; track item; let last = $last) {
-						<a (click)="selectLayout(item)" class="cursor-pointer link text-primary">{{ item }}</a>
-						@if (!last) {
-							<span> | </span>
-						}
-					}
-				</div>
-			</div>
-		</div>
-	}
+		}
+	</app-alert>
 }

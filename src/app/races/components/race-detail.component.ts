@@ -1,32 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { EntityDetailsComponent } from '../../shared/components/entity-details.component';
-import { Race } from '../../shared/services/model/model';
+import { Component, computed, inject, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { RaceService } from '../../shared/services/race.service';
-import { ActivatedRoute } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { environment } from '../../../environments/environment';
-import { BASE_TITLE } from '../../shared/services/constants';
 
 @Component({
-	templateUrl: 'race-detail.component.html',
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
+	imports: [RouterLink],
+	templateUrl: './race-detail.component.html',
 })
-export class RaceDetailComponent extends EntityDetailsComponent<Race> implements OnInit {
-	constructor(
-		raceService: RaceService,
-		route: ActivatedRoute,
-		private titleService: Title
-	) {
-		super(raceService, route);
-	}
+export class RaceDetailComponent {
+	private readonly service = inject(RaceService);
 
-	override ngOnInit(): void {
-		this.titleService.setTitle(`${BASE_TITLE} - Races`);
-		super.ngOnInit();
-	}
-
-	override onEntityLoaded(entity: Race) {
-		this.titleService.setTitle(`${BASE_TITLE} - Races - ${entity.name}`);
-	}
+	readonly id = input.required<string>();
+	protected readonly entity = computed(() => this.service.getEntity(this.id()));
 }

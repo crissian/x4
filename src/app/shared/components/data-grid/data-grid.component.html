@@ -1,0 +1,136 @@
+<div class="overflow-x-auto rounded-md border border-neutral-700">
+	<table class="table table-hover">
+		<thead class="bg-neutral-800">
+			<tr>
+				@for (column of columns(); track column.key) {
+					@let sort = sortOf(column);
+					<th
+						scope="col"
+						class="whitespace-nowrap select-none"
+						[class.cursor-pointer]="column.sortable !== false"
+						[class.text-right]="column.type === 'number'"
+						[attr.aria-sort]="sort ? (sort.direction === 1 ? 'ascending' : 'descending') : null"
+						(click)="toggleSort(column, $event)"
+						title="Click to sort, Shift+Click to sort by multiple columns"
+					>
+						{{ column.caption }}
+						@if (sort) {
+							<i
+								class="fa-solid text-xs text-sky-400"
+								[class.fa-arrow-up-short-wide]="sort.direction === 1"
+								[class.fa-arrow-down-wide-short]="sort.direction === -1"
+							></i>
+							@if (sort.order) {
+								<sup class="text-sky-400">{{ sort.order }}</sup>
+							}
+						}
+					</th>
+				}
+			</tr>
+			@if (features()) {
+				<tr>
+					@for (column of columns(); track column.key) {
+						<th class="py-1 font-normal">
+							@if (column.filterable !== false) {
+								@if (column.lookup) {
+									<select
+										class="input"
+										[formField]="filterForm[column.key]"
+										[attr.aria-label]="'Filter ' + column.caption"
+									>
+										<option value="">(All)</option>
+										@for (item of column.lookup; track item.value) {
+											<option [value]="item.value">{{ item.label }}</option>
+										}
+									</select>
+								} @else {
+									<input
+										type="search"
+										class="input"
+										[class.text-right]="column.type === 'number'"
+										[formField]="filterForm[column.key]"
+										[placeholder]="column.type === 'number' ? '=, <, >' : ''"
+										[attr.aria-label]="'Filter ' + column.caption"
+									/>
+								}
+							}
+						</th>
+					}
+				</tr>
+			}
+		</thead>
+		<tbody>
+			@for (item of visibleRows(); track trackBy()(item.row)) {
+				<tr [class.cursor-pointer]="clickable()" (click)="rowClick.emit(item.row)">
+					@for (column of columns(); track column.key) {
+						<td [class.text-right]="column.type === 'number'">{{ item.texts[column.key] }}</td>
+					}
+				</tr>
+			} @empty {
+				<tr>
+					<td class="py-6 text-center text-neutral-400" [attr.colspan]="columns().length">No data</td>
+				</tr>
+			}
+		</tbody>
+		@if (features()) {
+			<tfoot>
+				<tr>
+					<td class="text-neutral-400" [attr.colspan]="columns().length">Count: {{ filtered().length }}</td>
+				</tr>
+			</tfoot>
+		}
+	</table>
+</div>
+
+@if (features()) {
+	<div class="mt-2 flex flex-wrap items-center justify-between gap-2 text-neutral-300">
+		<label class="flex items-center gap-2">
+			<span>Page size</span>
+			<select class="input w-auto" [value]="pageSize()" (change)="setPageSize($any($event.target).value)">
+				@for (size of pageSizes(); track size) {
+					<option [value]="size">{{ size }}</option>
+				}
+			</select>
+		</label>
+
+		<div class="flex items-center gap-1">
+			<button
+				type="button"
+				class="btn btn-secondary"
+				[disabled]="page() === 0"
+				(click)="goTo(0)"
+				aria-label="First page"
+			>
+				<i class="fa-solid fa-angles-left"></i>
+			</button>
+			<button
+				type="button"
+				class="btn btn-secondary"
+				[disabled]="page() === 0"
+				(click)="goTo(page() - 1)"
+				aria-label="Previous page"
+			>
+				<i class="fa-solid fa-angle-left"></i>
+			</button>
+			<span class="px-2">Page {{ page() + 1 }} of {{ pageCount() }}</span>
+			<button
+				type="button"
+				class="btn btn-secondary"
+				[disabled]="page() >= pageCount() - 1"
+				(click)="goTo(page() + 1)"
+				aria-label="Next page"
+			>
+				<i class="fa-solid fa-angle-right"></i>
+			</button>
+			<button
+				type="button"
+				class="btn btn-secondary"
+				[disabled]="page() >= pageCount() - 1"
+				(click)="goTo(pageCount() - 1)"
+				aria-label="Last page"
+			>
+				<i class="fa-solid fa-angles-right"></i>
+			</button>
+		</div>
+	</div>
+}

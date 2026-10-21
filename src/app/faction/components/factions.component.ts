@@ -1,28 +1,19 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { Faction } from '../../shared/services/model/model';
-import { EntityListComponent } from '../../shared/components/entity-list.component';
+import { Component, inject } from '@angular/core';
+import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
+import { injectRowNavigation } from '../../shared/components/list-page';
 import { FactionService } from '../../shared/services/faction.service';
-import { BASE_TITLE } from '../../shared/services/constants';
+import { Faction } from '../../shared/services/model/model';
 
 @Component({
+	imports: [DataGridComponent],
 	templateUrl: './factions.component.html',
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
 })
-export class FactionsComponent extends EntityListComponent<Faction> implements OnInit {
-	constructor(
-		factionService: FactionService,
-		router: Router,
-		route: ActivatedRoute,
-		private titleService: Title
-	) {
-		super(factionService, router, route);
-	}
+export class FactionsComponent {
+	protected readonly entities = inject(FactionService).getEntities();
+	protected readonly open = injectRowNavigation<Faction>();
 
-	override ngOnInit(): void {
-		this.titleService.setTitle(`${BASE_TITLE} - Factions`);
-		super.ngOnInit();
-	}
+	protected readonly columns: GridColumn<Faction>[] = [
+		{ key: 'name', caption: 'Name' },
+		{ key: 'description', caption: 'Description' },
+	];
 }

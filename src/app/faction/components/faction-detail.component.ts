@@ -1,33 +1,21 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { Faction } from '../../shared/services/model/model';
-import { ModuleService } from '../../shared/services/module.service';
-import { EntityDetailsComponent } from '../../shared/components/entity-details.component';
+import { Component, computed, inject, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
 import { FactionService } from '../../shared/services/faction.service';
-import { BASE_TITLE } from '../../shared/services/constants';
+import { License } from '../../shared/services/model/model';
 
 @Component({
+	imports: [RouterLink, DataGridComponent],
 	templateUrl: './faction-detail.component.html',
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
 })
-export class FactionDetailComponent extends EntityDetailsComponent<Faction> implements OnInit {
-	constructor(
-		service: FactionService,
-		private moduleService: ModuleService,
-		route: ActivatedRoute,
-		private titleService: Title
-	) {
-		super(service, route);
-	}
+export class FactionDetailComponent {
+	private readonly service = inject(FactionService);
 
-	override ngOnInit(): void {
-		this.titleService.setTitle(`${BASE_TITLE} - Factions`);
-		super.ngOnInit();
-	}
+	readonly id = input.required<string>();
+	protected readonly entity = computed(() => this.service.getEntity(this.id()));
 
-	override onEntityLoaded(entity: Faction) {
-		this.titleService.setTitle(`${BASE_TITLE} - ${this.entity.name}`);
-	}
+	protected readonly licenseColumns: GridColumn<License>[] = [
+		{ key: 'name', caption: 'Name' },
+		{ key: 'price', caption: 'Price', type: 'number' },
+	];
 }

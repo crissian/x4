@@ -1,0 +1,17 @@
+<div class="card-header">
+	Production: <em>{{ production().name }}</em>
+</div>
+<div class="card-body">
+	@if (production().wares.length) {
+		<app-production-requirements [production]="production()" />
+	}
+	<h6>Production</h6>
+	<table class="table">
+		<tbody>
+			<tr>
+				<td>Time</td>
+				<td class="text-right">{{ formatTime(production().time) }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

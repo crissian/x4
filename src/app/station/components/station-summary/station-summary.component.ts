@@ -1,247 +1,177 @@
-import { Component, EventEmitter, Input, OnChanges, Output, ChangeDetectionStrategy } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import { Component, computed, inject, input, signal } from '@angular/core';
+import { FieldTree, FormField } from '@angular/forms/signals';
 import { WareGroups } from '../../../shared/services/data/ware-groups-data';
+import { Ware } from '../../../shared/services/model/model';
 import { WareService } from '../../../shared/services/ware.service';
-import { ResourceCalculator, StationModuleModel } from '../station-calculator.model';
-import { ResourcePriceType } from './enums/resource-price-type.enum';
-import { ResourceAmount } from './interfaces/resource-amount';
-import { ModuleCost } from './models/module-cost';
-import { ModuleCostItem } from './models/module-cost-item';
-import { ResourceSummary } from './models/resource-summary';
-import { StationSummaryService } from './services/station-summary.service';
+import { StationModuleModel, StationResourceModel, StationSettings } from '../station-calculator.model';
+
+const BASIC_RESOURCES = [WareGroups.gases, WareGroups.minerals, WareGroups.ice];
+const HQ_WORKFORCE = 200;
+
+interface WorkforceItem {
+	amount: number;
+	name: string;
+	count: number;
+}
+
+interface ResourceSummary {
+	name: string;
+	amount: number;
+	price: number;
+}
+
+interface ModuleCostItem {
+	ware: Ware;
+	amount: number;
+	price: number;
+}
+
+interface ModuleCost {
+	key: string;
+	name: string;
+	count: number;
+	price: number;
+	items: ModuleCostItem[];
+}
+
+/** Ware price between min (0%) and max (100%) */
+function priceAt(ware: Ware, percentage: number) {
+	return ware.price.min + ((ware.price.max - ware.price.min) * percentage) / 100;
+}
 
 /**
  * The Station Summary component
  */
 @Component({
 	selector: 'app-station-summary',
+	imports: [DecimalPipe, FormField],
 	templateUrl: './station-summary.component.html',
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
 })
-export class StationSummaryComponent implements OnChanges {
-	static basicResources = [WareGroups.gases, WareGroups.minerals, WareGroups.ice];
+export class StationSummaryComponent {
+	private readonly wareService = inject(WareService);
 
-	expandState: { [key: string]: boolean } = {};
+	readonly modules = input.required<StationModuleModel[]>();
+	readonly resources = input.required<StationResourceModel[]>();
+	readonly workforce = input.required<{ value: number; capacity: number }>();
+	readonly settings = input.required<FieldTree<StationSettings>>();
 
-	provideBasicResources = false;
-	provideAllResources = false;
-	isHq = false;
-	resourcesPrice = 50;
-	productsPrice = 50;
-	modulesResourcesPrice = 50;
+	readonly expandState = signal<Record<string, boolean>>({});
 
-	private _totalWorkforce = 0;
-	totalWorkforceCapacity = 0;
-	partialWorkforce = 0;
-	autoWorkforce = true;
+	private readonly values = computed(() => this.settings()().value());
 
-	workforceNeeded: { amount: number; name: string; count: number }[] = [];
-	workforceCapacity: { amount: number; name: string; count: number }[] = [];
+	readonly hqWorkforce = HQ_WORKFORCE;
+	readonly totalWorkforce = computed(() => this.workforce().value + (this.values().isHq ? HQ_WORKFORCE : 0));
+	readonly totalWorkforceCapacity = computed(() => this.workforce().capacity);
 
-	resourcesNeeded: ResourceSummary[] = [];
-	resourcesProduced: ResourceSummary[] = [];
-	moduleCosts: ModuleCost[];
+	readonly workforceNeeded = computed<WorkforceItem[]>(() =>
+		this.modules()
+			.filter((x) => x.module?.workForce?.max != null)
+			.map((x) => ({ amount: x.module.workForce.max, name: x.module.name, count: x.count }))
+	);
 
-	totalModuleResourceCosts: ResourceAmount[] = [];
+	readonly workforceCapacity = computed<WorkforceItem[]>(() =>
+		this.modules()
+			.filter((x) => x.module?.workForce?.capacity != null)
+			.map((x) => ({ amount: x.module.workForce.capacity, name: x.module.name, count: x.count }))
+	);
 
-	@Output()
-	change = new EventEmitter();
+	readonly workforceStep = computed(() => {
+		const capacity = this.totalWorkforceCapacity();
+		return capacity === 0 ? 1 : capacity / 20;
+	});
 
-	@Input()
-	modules: StationModuleModel[];
+	readonly workforcePercent = computed(() => {
+		const capacity = this.totalWorkforceCapacity();
+		return capacity === 0 ? '0%' : Math.round((100 * this.values().partialWorkforce) / capacity) + '%';
+	});
 
-	@Input()
-	sunlight = 100;
+	private readonly sortedResources = computed(() =>
+		[...this.resources()].sort((a, b) => this.wareService.compareWares(a.ware, b.ware))
+	);
 
-	constructor(
-		private wareService: WareService,
-		private stationSummaryService: StationSummaryService
-	) {}
+	readonly resourcesNeeded = computed<ResourceSummary[]>(() => {
+		const settings = this.values();
+		return this.sortedResources()
+			.filter((x) => x.amount < 0)
+			.map((x) => {
+				const provided =
+					settings.provideAllResources ||
+					(settings.provideBasicResources && BASIC_RESOURCES.indexOf(x.ware.group) >= 0);
+				return {
+					name: x.ware.name,
+					amount: x.amount,
+					price: provided ? 0 : priceAt(x.ware, settings.resourcesPrice),
+				};
+			});
+	});
 
-	ngOnChanges() {
-		this.update();
-	}
+	readonly resourcesProduced = computed<ResourceSummary[]>(() => {
+		const percentage = this.values().productsPrice;
+		return this.sortedResources()
+			.filter((x) => x.amount > 0)
+			.map((x) => ({ name: x.ware.name, amount: x.amount, price: priceAt(x.ware, percentage) }));
+	});
 
-	get totalWorkforce() {
-		return this._totalWorkforce + (this.isHq ? 200 : 0);
-	}
+	readonly totalExpenses = computed(() => this.resourcesNeeded().reduce((sum, x) => sum + x.amount * x.price, 0));
+	readonly totalProfits = computed(() => this.resourcesProduced().reduce((sum, x) => sum + x.amount * x.price, 0));
 
-	onChange() {
-		this.update();
-		this.change.emit();
-	}
+	readonly moduleCosts = computed<ModuleCost[]>(() => {
+		const percentage = this.values().modulesResourcesPrice;
+		const result: ModuleCost[] = [];
 
-	update() {
-		this._totalWorkforce = 0;
-
-		this.workforceNeeded = [];
-		this.workforceCapacity = [];
-
-		this.resourcesNeeded = [];
-		this.resourcesProduced = [];
-		this.moduleCosts = [];
-
-		if (this.modules == null) {
-			return;
-		}
-
-		this.modules.forEach((item) => {
-			if (item.module != null && item.module.workForce != null) {
-				if (item.module.workForce.max != null) {
-					this._totalWorkforce += item.count * item.module.workForce.max;
-					this.workforceNeeded.push({
-						amount: item.module.workForce.max,
-						name: item.module.name,
-						count: item.count,
-					});
-				}
-				if (item.module.workForce.capacity != null) {
-					this.workforceCapacity.push({
-						amount: item.module.workForce.capacity,
-						name: item.module.name,
-						count: item.count,
-					});
-				}
+		this.modules().forEach((item, index) => {
+			const production = item.module?.production[0];
+			if (!production) {
+				return;
 			}
-			if (item.module != null) {
-				const cost = this.getModuleCost(item);
-				if (cost != null) {
-					this.moduleCosts.push(cost);
-				}
-			}
-		});
 
-		const workforceCapacity = this.modules.reduce((acc, item) => {
-			if (item.module && item.module.workForce && item.module.workForce.capacity) {
-				return acc + item.count * item.module.workForce.capacity;
-			}
-			return acc;
-		}, 0);
+			const items = production.wares.map((x) => {
+				const ware = this.wareService.getEntity(x.ware);
+				return { ware, amount: x.amount, price: x.amount * priceAt(ware, percentage) };
+			});
 
-		const workforceNeeded = this.modules.reduce((acc, item) => {
-			if (item.module && item.module.workForce && item.module.workForce.max) {
-				return acc + item.count * item.module.workForce.max;
-			}
-			return acc;
-		}, 0);
-
-		this.totalWorkforceCapacity = workforceCapacity;
-		if (this.autoWorkforce) {
-			this.partialWorkforce = workforceNeeded > workforceCapacity ? workforceCapacity : workforceNeeded;
-		} else if (this.partialWorkforce > workforceCapacity) {
-			this.partialWorkforce = workforceCapacity;
-		}
-
-		this.stationSummaryService.setPartialWorkforce(this.partialWorkforce);
-
-		const resources = ResourceCalculator.calculate(this.modules, this.sunlight, this.partialWorkforce);
-		resources.sort((a, b) => this.wareService.compareWares(a.ware, b.ware));
-
-		resources.forEach((x) => {
-			if (x.amount < 0) {
-				let warePrice: number = null;
-				if (this.provideAllResources) {
-					warePrice = 0;
-				} else if (
-					this.provideBasicResources &&
-					StationSummaryComponent.basicResources.indexOf(x.ware.group) >= 0
-				) {
-					warePrice = 0;
-				}
-				const model = new ResourceSummary(x, this, ResourcePriceType.expense, warePrice);
-				this.resourcesNeeded.push(model);
-			} else if (x.amount > 0) {
-				const model = new ResourceSummary(x, this, ResourcePriceType.product);
-				this.resourcesProduced.push(model);
-			}
-		});
-
-		this.totalModuleResourceCosts = [];
-
-		this.moduleCosts.forEach((cost) => {
-			cost.items.forEach((item) => {
-				let resourceCost = this.totalModuleResourceCosts.find((x) => x.ware.id == item.ware.id);
-				if (resourceCost == null) {
-					resourceCost = {
-						ware: item.ware,
-						value: cost.count * item.amount,
-					};
-					this.totalModuleResourceCosts.push(resourceCost);
-				} else {
-					resourceCost.value += cost.count * item.amount;
-				}
+			result.push({
+				key: `${index}:${item.module.id}`,
+				name: item.module.name,
+				count: item.count,
+				price: item.count * items.reduce((sum, x) => sum + x.price, 0),
+				items,
 			});
 		});
-	}
 
-	get workforceStep() {
-		if (this.totalWorkforceCapacity === 0) {
-			return 1;
+		return result;
+	});
+
+	readonly totalModuleCost = computed(() => this.moduleCosts().reduce((sum, x) => sum + x.price, 0));
+
+	readonly totalModuleResourceCosts = computed(() => {
+		const totals = new Map<string, { ware: Ware; value: number }>();
+		for (const cost of this.moduleCosts()) {
+			for (const item of cost.items) {
+				const total = totals.get(item.ware.id) ?? { ware: item.ware, value: 0 };
+				total.value += cost.count * item.amount;
+				totals.set(item.ware.id, total);
+			}
 		}
-
-		return this.totalWorkforceCapacity / 20;
-	}
-
-	get workforcePercent() {
-		if (this.totalWorkforceCapacity === 0) {
-			return '0%';
-		}
-
-		return Math.round((100 * this.partialWorkforce) / this.totalWorkforceCapacity) + '%';
-	}
-
-	get totalExpenses() {
-		let totalExpenses = 0;
-
-		this.resourcesNeeded.forEach((x) => {
-			totalExpenses += x.amount * x.price;
-		});
-
-		return totalExpenses;
-	}
-
-	get totalProfits() {
-		let totalProfits = 0;
-
-		this.resourcesProduced.forEach((x) => {
-			totalProfits += x.amount * x.price;
-		});
-
-		return totalProfits;
-	}
-
-	get totalModuleCost() {
-		let total = 0;
-
-		this.moduleCosts.forEach((x) => {
-			total += x.price;
-		});
-
-		return total;
-	}
-
-	private getModuleCost(item: StationModuleModel) {
-		const production = item.module.production[0];
-		if (!production) {
-			return null;
-		}
-
-		let totalMin = 0;
-		let totalMax = 0;
-
-		const items: ModuleCostItem[] = [];
-		production.wares.forEach((x) => {
-			const ware = this.wareService.getEntity(x.ware);
-			totalMin += ware.price.min * x.amount;
-			totalMax += ware.price.max * x.amount;
-
-			items.push(new ModuleCostItem(ware, x.amount, this));
-		});
-
-		return new ModuleCost(item, this, totalMin, totalMax, items);
-	}
+		return [...totals.values()];
+	});
 
 	toggleExpanded(key: string) {
-		this.expandState[key] = !this.expandState[key];
+		this.expandState.update((state) => ({ ...state, [key]: !state[key] }));
+	}
+
+	/** label of a price slider value */
+	priceLabel(value: number) {
+		switch (value) {
+			case 0:
+				return $localize`:@@min:Min`;
+			case 50:
+				return $localize`:@@average:Average`;
+			case 100:
+				return $localize`:@@max:Max`;
+			default:
+				return `${value}%`;
+		}
 	}
 }

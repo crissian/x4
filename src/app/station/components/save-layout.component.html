@@ -1,15 +1,17 @@
-<div class="modal-header">
-  <h4 class="modal-title" i18n="@@saveLayout">Save Layout</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <div class="form-group">
-    <input class="form-control" [(ngModel)]="name" />
-  </div>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-success" (click)="saveLayout()" [disabled]="!canSave()" i18n="@@save">Save</button>
-  <button type="button" class="btn btn-secondary" (click)="activeModal.close()" i18n="@@cancel">Cancel</button>
-</div>
+<app-modal i18n-title="@@saveLayout" title="Save Layout">
+	<form (submit)="$event.preventDefault(); saveLayout()">
+		<input class="input" aria-label="Layout name" placeholder="Layout name" [formField]="saveForm.name" />
+	</form>
+	<ng-container footer>
+		<button
+			type="button"
+			class="btn btn-success"
+			(click)="saveLayout()"
+			[disabled]="saveForm().invalid()"
+			i18n="@@save"
+		>
+			Save
+		</button>
+		<button type="button" class="btn btn-secondary" (click)="dialogRef.close()" i18n="@@cancel">Cancel</button>
+	</ng-container>
+</app-modal>

@@ -1,39 +1,44 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { Component, inject, signal } from '@angular/core';
+import { FormField, form, required } from '@angular/forms/signals';
+import { ConfirmComponent, ConfirmData } from '../../shared/components/confirm.component';
+import { openDialog } from '../../shared/components/modal/dialog';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { LayoutService } from '../services/layout-service';
-import { ConfirmComponent } from '../../shared/components/confirm.component';
 
 @Component({
+	imports: [ModalComponent, FormField],
 	templateUrl: './save-layout.component.html',
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
 })
 export class SaveLayoutComponent {
-	name: string;
+	protected readonly dialogRef = inject<DialogRef<string>>(DialogRef);
+	private readonly dialog = inject(Dialog);
+	private readonly layoutService = inject(LayoutService);
 
-	constructor(
-		public activeModal: NgbActiveModal,
-		private modal: NgbModal,
-		private layoutService: LayoutService
-	) {}
-
-	canSave() {
-		return this.name;
-	}
+	readonly model = signal({ name: '' });
+	readonly saveForm = form(this.model, (layout) => {
+		required(layout.name);
+	});
 
 	saveLayout() {
-		const layout = this.layoutService.getLayout(this.name);
-		if (layout) {
-			const modalRef = this.modal.open(ConfirmComponent);
-			modalRef.componentInstance.title = 'Confirm Save';
-			modalRef.componentInstance.message = `<strong>${this.name}</strong> already exists. Confirm overwrite?`;
-			modalRef.result.then((res) => {
+		if (this.saveForm().invalid()) {
+			return;
+		}
+
+		const name = this.model().name.trim();
+		if (this.layoutService.getLayout(name)) {
+			openDialog<boolean, ConfirmData>(this.dialog, ConfirmComponent, {
+				data: {
+					title: 'Confirm Save',
+					message: `<strong>${name}</strong> already exists. Confirm overwrite?`,
+				},
+			}).closed.subscribe((res) => {
 				if (res) {
-					this.activeModal.close(this.name);
+					this.dialogRef.close(name);
 				}
 			});
 		} else {
-			this.activeModal.close(this.name);
+			this.dialogRef.close(name);
 		}
 	}
 }

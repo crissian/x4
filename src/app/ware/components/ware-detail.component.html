@@ -1,358 +1,186 @@
-<div class="row content-row">
-	<div class="col-md-12">
-		@if (entity) {
-			<div class="card shadow">
-				<div class="card-header shadow-sm"><a routerLink="/wares">Wares</a> - {{ entity.name }}</div>
-				@if (entity) {
-					<div class="card-body">
-						<div class="form-group row">
-							<label class="col col-form-label col-form-label-sm">{{ entity.description }}</label>
-						</div>
-						<dl class="row">
-							<dt class="col-sm-2">Price</dt>
-							<dd class="col-sm-10">
-								{{ entity.price.min | number }} - {{ entity.price.max | number }}
-								<span class="text-success"
-									>(difference: {{ entity.price.max - entity.price.min | number }} )</span
-								>
-							</dd>
-							<dt class="col-sm-2">Volume</dt>
-							<dd class="col-sm-10">{{ entity.volume }}</dd>
-							<dt class="col-sm-2">Transport</dt>
-							<dd class="col-sm-10">{{ entity.transport }}</dd>
-							<dt class="col-sm-2">Type</dt>
-							<dd class="col-sm-10">{{ entity.group.name }}</dd>
-							<dt class="col-sm-2">Illegal</dt>
-							<dd class="col-sm-10">
-								@if (entity.illegal && entity.illegal.length > 0) {
-									@for (item of entity.illegal; track item; let last = $last) {
-										<span>
-											<a [routerLink]="['/factions', item.id]">{{ item.name }}</a>
-											@if (!last) {
-												<span> | </span>
-											}
-										</span>
-									}
-								} @else {
-									-
-								}
-							</dd>
-						</dl>
-						<ul #nav="ngbNav" ngbNav class="nav-tabs">
-							<li ngbNavItem>
-								<a ngbNavLink>Construction</a>
-								<ng-template ngbNavContent>
-									@if (entityProduction && entityProduction.length) {
-										<div class="row mt-2 mb-2">
-											@for (production of entityProduction; track production) {
-												<div class="col-md-6 col-sm-6 col-lg-4">
-													<div class="card shadow-sm">
-														<div class="card-header small">
-															{{ production.name }}
-														</div>
-														<div class="card-body small">
-															@if (production.wares.length) {
-																<div class="row">
-																	<div class="col">
-																		<h6>Requirements</h6>
-																		<table class="table table-sm">
-																			<thead>
-																				<tr>
-																					<th>Resource</th>
-																					<th class="text-right">Min</th>
-																					<th class="text-right">Max</th>
-																					<th class="text-right">Avg</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				@for (
-																					item of production.wares;
-																					track item
-																				) {
-																					<tr>
-																						<td>
-																							{{ item.amount }} x
-																							<a
-																								[routerLink]="[
-																									'/wares/',
-																									item.ware.id,
-																								]"
-																								>{{ item.ware.name }}</a
-																							>
-																						</td>
-																						<td class="text-right">
-																							{{
-																								item.amount *
-																									item.ware.price.min
-																									| number
-																							}}
-																						</td>
-																						<td class="text-right">
-																							{{
-																								item.amount *
-																									item.ware.price.max
-																									| number
-																							}}
-																						</td>
-																						<td class="text-right">
-																							{{
-																								item.amount *
-																									item.ware.price.avg
-																									| number
-																							}}
-																						</td>
-																					</tr>
-																				}
-																			</tbody>
-																			<tfoot>
-																				<tr>
-																					<th class="text-right">Total</th>
-																					<th class="text-right">
-																						{{
-																							getTotalMin(production)
-																								| number
-																						}}
-																					</th>
-																					<th class="text-right">
-																						{{
-																							getTotalMax(production)
-																								| number
-																						}}
-																					</th>
-																					<th class="text-right">
-																						{{
-																							getTotalAvg(production)
-																								| number
-																						}}
-																					</th>
-																				</tr>
-																			</tfoot>
-																		</table>
-																	</div>
-																</div>
-															}
-															<div class="row">
-																<div class="col">
-																	<h6>Production</h6>
-																	<table class="table table-sm">
-																		<tbody>
-																			<tr>
-																				<td>Cycle Time</td>
-																				<td class="text-right">
-																					{{
-																						getProductionTime(
-																							production.time
-																						)
-																					}}
-																				</td>
-																			</tr>
-																			<tr>
-																				<td>Batch Size</td>
-																				<td class="text-right">
-																					{{ production.amount }}
-																				</td>
-																			</tr>
-																			<tr>
-																				<td>Products per Hour</td>
-																				<td class="text-right">
-																					{{
-																						(3600 / production.time) *
-																							production.amount
-																							| number: '1.0'
-																					}}
-																				</td>
-																			</tr>
-																			@if (production.efficiency) {
-																				<tr>
-																					<td>Max Efficiency</td>
-																					<td class="text-right">
-																						{{
-																							production.efficiency
-																								.product *
-																								100 +
-																								100
-																						}}%
-																					</td>
-																				</tr>
-																			}
-																			<tr>
-																				<td>
-																					Profit per Hour (100% Efficiency)
-																				</td>
-																				<td class="text-right">
-																					<span class="text-danger">
-																						Min:
-																						<strong>{{
-																							entity.price.min *
-																								(3600 /
-																									production.time) *
-																								production.amount
-																								| number: '1.0-0'
-																						}}</strong>
-																						/
-																					</span>
-																					<span class="text-primary">
-																						Avg:
-																						<strong>{{
-																							entity.price.avg *
-																								(3600 /
-																									production.time) *
-																								production.amount
-																								| number: '1.0-0'
-																						}}</strong>
-																						/
-																					</span>
-																					<span class="text-success">
-																						Max:
-																						<strong>{{
-																							entity.price.max *
-																								(3600 /
-																									production.time) *
-																								production.amount
-																								| number: '1.0-0'
-																						}}</strong>
-																					</span>
-																				</td>
-																			</tr>
-																			@if (production.efficiency) {
-																				<tr>
-																					<td>
-																						Profit per Hour ({{
-																							production.efficiency
-																								.product *
-																								100 +
-																								100
-																						}}% Efficiency)
-																					</td>
-																					<td class="text-right">
-																						<span class="text-danger">
-																							Min:
-																							<strong>{{
-																								entity.price.min *
-																									(3600 /
-																										production.time) *
-																									production.amount *
-																									(1 +
-																										production
-																											.efficiency
-																											.product)
-																									| number: '1.0-0'
-																							}}</strong>
-																							/
-																						</span>
-																						<span class="text-primary">
-																							Avg:
-																							<strong>{{
-																								entity.price.avg *
-																									(3600 /
-																										production.time) *
-																									production.amount *
-																									(1 +
-																										production
-																											.efficiency
-																											.product)
-																									| number: '1.0-0'
-																							}}</strong>
-																							/
-																						</span>
-																						<span class="text-success">
-																							Max:
-																							<strong>{{
-																								entity.price.max *
-																									(3600 /
-																										production.time) *
-																									production.amount *
-																									(1 +
-																										production
-																											.efficiency
-																											.product)
-																									| number: '1.0-0'
-																							}}</strong>
-																						</span>
-																					</td>
-																				</tr>
-																			}
-																		</tbody>
-																	</table>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											}
-										</div>
-									}
-								</ng-template>
-							</li>
-							<li ngbNavItem title="Required For">
-								<a ngbNavLink>Required For</a>
-								<ng-template ngbNavContent>
-									<div class="row mt-2 mb-2">
-										<div class="col-md-4 col-sm-12">
-											<div class="card small">
-												<div class="card-header">Wares</div>
-												<div class="card-body">
-													<div class="row">
-														@if (!waresUsedIn.length) {
-															<div class="col text-info">No usage found.</div>
-														}
-														@for (ware of waresUsedIn; track ware) {
-															<div class="col-md-4 col-sm-6">
-																<a [routerLink]="['/wares/', ware.id]">{{
-																	ware.name
-																}}</a>
-															</div>
-														}
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4 col-sm-12">
-											<div class="card small">
-												<div class="card-header">Ships</div>
-												<div class="card-body">
-													<div class="row">
-														@if (!shipsUsedIn.length) {
-															<div class="col text-info">No usage found.</div>
-														}
-														@for (ship of shipsUsedIn; track ship) {
-															<div class="col-md-6 col-sm-12">
-																<a [routerLink]="['/ships/', ship.id]">{{
-																	ship.name
-																}}</a>
-															</div>
-														}
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4 col-sm-12">
-											<div class="card small">
-												<div class="card-header">Station Modules</div>
-												<div class="card-body">
-													<div class="row">
-														@if (!modulesUsedIn.length) {
-															<div class="col text-info">No usage found.</div>
-														}
-														@for (module of modulesUsedIn; track module) {
-															<div class="col-md-6 col-sm-12">
-																<a [routerLink]="['/modules/', module.id]">{{
-																	module.name
-																}}</a>
-															</div>
-														}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</ng-template>
-							</li>
-						</ul>
-						<div [ngbNavOutlet]="nav"></div>
-					</div>
+@if (entity(); as entity) {
+	<div class="card">
+		<div class="card-header"><a routerLink="/wares">Wares</a> - {{ entity.name }}</div>
+		<div class="card-body">
+			<p class="mb-3">{{ entity.description }}</p>
+			<dl class="details mb-4 max-w-2xl grid-cols-[10rem_1fr]">
+				<dt>Price</dt>
+				<dd>
+					{{ entity.price.min | number }} - {{ entity.price.max | number }}
+					<span class="text-success">(difference: {{ entity.price.max - entity.price.min | number }})</span>
+				</dd>
+				<dt>Volume</dt>
+				<dd>{{ entity.volume }}</dd>
+				<dt>Transport</dt>
+				<dd>{{ entity.transport }}</dd>
+				<dt>Type</dt>
+				<dd>{{ entity.group.name }}</dd>
+				<dt>Illegal</dt>
+				<dd>
+					@for (item of entity.illegal; track item.id; let last = $last) {
+						<a [routerLink]="['/factions', item.id]">{{ item.name }}</a>
+						@if (!last) {
+							<span> | </span>
+						}
+					} @empty {
+						-
+					}
+				</dd>
+			</dl>
+
+			<div class="flex border-b border-neutral-600" role="tablist">
+				@for (tab of tabs; track tab.id) {
+					<button
+						type="button"
+						role="tab"
+						class="-mb-px cursor-pointer rounded-t-md border px-4 py-2"
+						[class]="
+							activeTab() === tab.id
+								? 'border-neutral-600 border-b-neutral-800 bg-neutral-800 text-white'
+								: 'border-transparent text-sky-400 hover:text-sky-300'
+						"
+						[attr.aria-selected]="activeTab() === tab.id"
+						(click)="activeTab.set(tab.id)"
+					>
+						{{ tab.label }}
+					</button>
 				}
 			</div>
-		}
+
+			<div class="pt-4" role="tabpanel">
+				@switch (activeTab()) {
+					@case ('construction') {
+						<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+							@for (item of production(); track $index) {
+								<div class="card">
+									<div class="card-header">{{ item.name }}</div>
+									<div class="card-body">
+										@if (item.wares.length) {
+											<app-production-requirements [production]="item" />
+										}
+										@let perHour = (3600 / item.time) * item.amount;
+										@let efficiency = item.efficiency?.product;
+										<h6>Production</h6>
+										<table class="table">
+											<tbody>
+												<tr>
+													<td>Cycle Time</td>
+													<td class="text-right">{{ formatTime(item.time) }}</td>
+												</tr>
+												<tr>
+													<td>Batch Size</td>
+													<td class="text-right">{{ item.amount }}</td>
+												</tr>
+												<tr>
+													<td>Products per Hour</td>
+													<td class="text-right">{{ perHour | number: '1.0' }}</td>
+												</tr>
+												@if (item.efficiency) {
+													<tr>
+														<td>Max Efficiency</td>
+														<td class="text-right">{{ efficiency * 100 + 100 }}%</td>
+													</tr>
+												}
+												<tr>
+													<td>Profit per Hour (100% Efficiency)</td>
+													<td class="text-right">
+														<span class="text-danger"
+															>Min:
+															<strong>{{
+																entity.price.min * perHour | number: '1.0-0'
+															}}</strong>
+															/
+														</span>
+														<span class="text-primary"
+															>Avg:
+															<strong>{{
+																entity.price.avg * perHour | number: '1.0-0'
+															}}</strong>
+															/
+														</span>
+														<span class="text-success"
+															>Max:
+															<strong>{{
+																entity.price.max * perHour | number: '1.0-0'
+															}}</strong></span
+														>
+													</td>
+												</tr>
+												@if (item.efficiency) {
+													<tr>
+														<td>
+															Profit per Hour ({{ efficiency * 100 + 100 }}% Efficiency)
+														</td>
+														<td class="text-right">
+															<span class="text-danger"
+																>Min:
+																<strong>{{
+																	entity.price.min * perHour * (1 + efficiency)
+																		| number: '1.0-0'
+																}}</strong>
+																/
+															</span>
+															<span class="text-primary"
+																>Avg:
+																<strong>{{
+																	entity.price.avg * perHour * (1 + efficiency)
+																		| number: '1.0-0'
+																}}</strong>
+																/
+															</span>
+															<span class="text-success"
+																>Max:
+																<strong>{{
+																	entity.price.max * perHour * (1 + efficiency)
+																		| number: '1.0-0'
+																}}</strong></span
+															>
+														</td>
+													</tr>
+												}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							}
+						</div>
+					}
+					@case ('requiredFor') {
+						<div class="grid gap-4 md:grid-cols-3">
+							<div class="card">
+								<div class="card-header">Wares</div>
+								<div class="card-body grid grid-cols-2 gap-1 lg:grid-cols-3">
+									@for (ware of waresUsedIn(); track ware.id) {
+										<a [routerLink]="['/wares', ware.id]">{{ ware.name }}</a>
+									} @empty {
+										<span class="text-info">No usage found.</span>
+									}
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header">Ships</div>
+								<div class="card-body grid gap-1 lg:grid-cols-2">
+									@for (ship of shipsUsedIn(); track ship.id) {
+										<a [routerLink]="['/ships', ship.id]">{{ ship.name }}</a>
+									} @empty {
+										<span class="text-info">No usage found.</span>
+									}
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header">Station Modules</div>
+								<div class="card-body grid gap-1 lg:grid-cols-2">
+									@for (module of modulesUsedIn(); track module.id) {
+										<a [routerLink]="['/modules', module.id]">{{ module.name }}</a>
+									} @empty {
+										<span class="text-info">No usage found.</span>
+									}
+								</div>
+							</div>
+						</div>
+					}
+				}
+			</div>
+		</div>
 	</div>
-</div>
+}

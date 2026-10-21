@@ -1,17 +1,11 @@
-<div class="modal-header">
-  <h4 class="modal-title" i18n="@@shareLayout">Share Layout</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <div class="input-group">
-    <input class="form-control" [value]="url" readonly #urlInput />
-    <div class="input-group-append">
-      <button class="btn btn-sm btn-outline-secondary" type="button" (click)="copy(urlInput)" i18n="@@copy">Copy</button>
-    </div>
-  </div>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-success" (click)="activeModal.close()" i18n="@@ok">Ok</button>
-</div>
+<app-modal i18n-title="@@shareLayout" title="Share Layout">
+	<div class="flex">
+		<input class="input rounded-r-none" [value]="url" readonly aria-label="Layout URL" #urlInput />
+		<button class="btn btn-secondary shrink-0 rounded-l-none" type="button" (click)="copy(urlInput)">
+			{{ copied() ? 'Copied' : 'Copy' }}
+		</button>
+	</div>
+	<ng-container footer>
+		<button type="button" class="btn btn-success" (click)="dialogRef.close()" i18n="@@ok">Ok</button>
+	</ng-container>
+</app-modal>

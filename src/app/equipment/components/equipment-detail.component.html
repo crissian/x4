@@ -1,10 +1,6 @@
-<div class="row content-row">
-	<div class="col-md-12">
-		@if (entity) {
-			<div class="card shadow">
-				<div class="card-header shadow-sm"><a routerLink="/races">Equipment</a> - {{ entity.name }}</div>
-				<div class="card-body small">Coming soon</div>
-			</div>
-		}
+@if (entity(); as entity) {
+	<div class="card">
+		<div class="card-header"><a routerLink="/equipment">Equipment</a> - {{ entity.name }}</div>
+		<div class="card-body">Coming soon</div>
 	</div>
-</div>
+}

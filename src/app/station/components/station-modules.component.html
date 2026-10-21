@@ -1,58 +1,61 @@
-<table class="table table-sm table-hover small">
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th i18n="@@module" scope="col">Module</th>
-			<th i18n="@@count" scope="col">Count</th>
-			<th scope="col"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></th>
-			<th scope="col"><i class="fa fa-trash" aria-hidden="true"></i></th>
+			<th i18n="@@count" scope="col" class="w-28">Count</th>
+			<th scope="col" class="w-6"><span class="sr-only">Move</span></th>
+			<th scope="col" class="w-6"><span class="sr-only">Remove</span></th>
 		</tr>
 	</thead>
 	<tbody cdkDropList (cdkDropListDropped)="drop($event)">
-		@for (item of modules; track item) {
-			<tr cdkDrag cdkDragBoundary=".table">
+		@for (row of rows(); track row; let i = $index) {
+			<tr cdkDrag cdkDragLockAxis="y">
 				<td>
-					<div *cdkDragPreview>
-						{{ item.module.name }}
+					<div *cdkDragPreview class="rounded-md bg-neutral-700 px-5 py-4 text-neutral-100 shadow-2xl">
+						{{ modules()[i]?.module?.name || '( Select )' }}
 					</div>
-					<div class="form-group">
-						<!--suppress HtmlFormInputWithoutLabel -->
-						<app-autocomplete
-							[id]="item.moduleId"
-							[groups]="wareGroups"
-							(selectModule)="onSelectModule($event, item)"
-						></app-autocomplete>
-					</div>
+					<app-autocomplete
+						[id]="row.moduleId().value()"
+						[groups]="wareGroups"
+						(selectModule)="onSelectModule($event, i)"
+					/>
 				</td>
 				<td>
-					<div class="form-group">
-						<input
-							type="number"
-							class="form-control form-control-sm"
-							placeholder="Module Count"
-							[(ngModel)]="item.count"
-							min="0"
-							(ngModelChange)="onChange()"
-						/>
-					</div>
+					<input
+						type="number"
+						class="input"
+						placeholder="Module Count"
+						aria-label="Module Count"
+						[formField]="row.count"
+					/>
 				</td>
 				<td>
-					<i class="fa fa-ellipsis-v move" cdkDragHandle></i>
+					<i class="fa-solid fa-ellipsis-vertical cursor-move px-1 text-neutral-400" cdkDragHandle></i>
 				</td>
 				<td>
-					<i class="fa fa-trash hover" aria-hidden="true" (click)="removeModule(item)"></i>
+					<button
+						type="button"
+						class="cursor-pointer text-neutral-400 hover:text-red-400"
+						aria-label="Remove module"
+						(click)="removeModule(i)"
+					>
+						<i class="fa-solid fa-trash"></i>
+					</button>
 				</td>
 			</tr>
 		}
 	</tbody>
 	<tfoot>
 		<tr>
-			<th>
-				<button (click)="addModule()" class="btn btn-secondary btn-sm" type="button">
-					<i class="fa fa-plus-square"></i>&nbsp;Add Module</button
-				>&nbsp;
-				<button (click)="autofillModules()" class="btn btn-sm btn-info" type="button">
-					<i class="fa fa-list"></i>&nbsp;<span>Autofill Modules</span>
-				</button>
+			<th colspan="4" class="pt-3">
+				<div class="flex flex-wrap gap-2">
+					<button (click)="addModule()" class="btn btn-secondary" type="button">
+						<i class="fa-solid fa-square-plus"></i><span>Add Module</span>
+					</button>
+					<button (click)="autofillModules()" class="btn btn-info" type="button">
+						<i class="fa-solid fa-list"></i><span>Autofill Modules</span>
+					</button>
+				</div>
 			</th>
 		</tr>
 	</tfoot>

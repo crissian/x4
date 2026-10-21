@@ -3,13 +3,13 @@ import { Factions } from './data/factions-data';
 import { EntityService } from './entity.service';
 import { Faction } from './model/model';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FactionService implements EntityService<Faction> {
-  getEntities() {
-    return Factions.all as any[];
-  }
+	getEntities() {
+		return Factions.all as any[];
+	}
 
-  getEntity(id: any): Faction {
-    return Factions[id];
-  }
+	getEntity(id: any): Faction {
+		return Factions[id];
+	}
 }

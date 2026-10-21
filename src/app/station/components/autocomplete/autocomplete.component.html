@@ -1,29 +1,34 @@
-<div class="autocomplete-container">
+<div class="relative">
 	<input
 		type="search"
-		class="form-control form-control-sm"
+		class="input"
 		i18n-placeholder="@@select"
 		placeholder="( Select )"
-		[(ngModel)]="inputString"
-		(ngModelChange)="changed($event)"
+		aria-label="Module"
+		[formField]="queryField"
 		(focus)="onFocus()"
 		(blur)="onBlur()"
 	/>
-	@if (visible) {
-		<div tabindex="0" class="autocomplete" (focus)="onFocus()" (blur)="onBlur()">
-			@for (group of filteredGroups; track group) {
-				@if (group.modules.length > 0) {
-					<div class="autocomplete__group-container">
-						<label class="autocomplete__group-title"
-							><b>{{ group.name }}</b></label
-						>
-						@for (module of group.modules; track module) {
-							<div class="autocomplete__group-item" (click)="onClick(module)">
-								<label>{{ module.name }}</label>
-							</div>
-						}
+	@if (visible()) {
+		<div
+			tabindex="0"
+			class="absolute z-10 mt-1 max-h-[40vh] min-w-full overflow-y-auto rounded-md border border-neutral-600 bg-neutral-700 py-1 shadow-xl"
+			(focus)="onFocus()"
+			(blur)="onBlur()"
+		>
+			@for (group of filteredGroups(); track group.name) {
+				<div class="px-2.5 pt-1.5 font-bold text-neutral-200">{{ group.name }}</div>
+				@for (module of group.modules; track module.id) {
+					<div
+						class="cursor-pointer py-0.5 pr-2.5 pl-5 whitespace-nowrap hover:bg-black/20"
+						(mousedown)="$event.preventDefault()"
+						(click)="onClick(module)"
+					>
+						{{ module.name }}
 					</div>
 				}
+			} @empty {
+				<div class="px-2.5 py-1 text-neutral-400">No modules found</div>
 			}
 		</div>
 	}

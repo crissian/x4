@@ -1,34 +1,51 @@
-<div class="modal-header">
-	<h4 class="modal-title" i18n="@@loadLayout">Load Layout</h4>
-	<button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
-		<span aria-hidden="true">&times;</span>
-	</button>
-</div>
-<div class="modal-body">
-	<div class="list-group">
-		@for (entity of entities; track entity) {
-			<a class="list-group-item list-group-item-action" (click)="loadLayout($event, entity)">
-				<div>
+<app-modal i18n-title="@@loadLayout" title="Load Layout">
+	<div class="divide-y divide-neutral-700 overflow-hidden rounded-md border border-neutral-700">
+		@for (entity of entities(); track entity.name) {
+			<div
+				class="cursor-pointer px-4 py-2.5 hover:bg-white/5"
+				role="button"
+				tabindex="0"
+				(click)="close(entity, LoadLayoutType.load)"
+				(keydown.enter)="close(entity, LoadLayoutType.load)"
+			>
+				<div class="flex flex-wrap items-center justify-between gap-2">
 					<strong>{{ entity.name }}</strong>
-					<div class="float-right small">
-						<a class="hover text-primary" i18n="@@load" (click)="loadLayout($event, entity)">Load Layout</a>
-						|
-						<a class="hover text-secondary" i18n="@@load" (click)="addLayout($event, entity)"
-							>Add Modules</a
+					<div class="text-xs">
+						<button
+							type="button"
+							class="link-button text-sky-400"
+							i18n="@@loadLayoutLink"
+							(click)="close(entity, LoadLayoutType.load, $event)"
 						>
+							Load Layout
+						</button>
 						|
-						<a class="hover text-danger" (click)="deleteLayout($event, entity)" i18n="@@delete"
-							>Delete Layout</a
+						<button
+							type="button"
+							class="link-button text-neutral-300"
+							i18n="@@addModules"
+							(click)="close(entity, LoadLayoutType.add, $event)"
 						>
+							Add Modules
+						</button>
+						|
+						<button
+							type="button"
+							class="link-button text-red-400"
+							i18n="@@delete"
+							(click)="deleteLayout(entity, $event)"
+						>
+							Delete Layout
+						</button>
 					</div>
 				</div>
-				<div class="small">
-					{{ getModules(entity) }}
-				</div>
-			</a>
+				<div class="text-xs text-neutral-400">{{ getModules(entity) }}</div>
+			</div>
+		} @empty {
+			<div class="px-4 py-3 text-neutral-400">No saved layouts.</div>
 		}
 	</div>
-</div>
-<div class="modal-footer">
-	<button type="button" class="btn btn-secondary" (click)="activeModal.close()" i18n="@@cancel">Cancel</button>
-</div>
+	<ng-container footer>
+		<button type="button" class="btn btn-secondary" (click)="dialogRef.close()" i18n="@@cancel">Cancel</button>
+	</ng-container>
+</app-modal>

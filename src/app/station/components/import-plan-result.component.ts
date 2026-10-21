@@ -1,28 +1,25 @@
-import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
-import { ImportResult } from './import-plans.component';
+import { Component, computed, model, output } from '@angular/core';
+import { AlertComponent } from '../../shared/components/alert.component';
+import { ImportResult } from '../services/construction-plans';
 
 @Component({
 	selector: 'app-import-result',
+	imports: [AlertComponent],
 	templateUrl: './import-plan-result.component.html',
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
 })
 export class ImportPlanResultComponent {
-	private _result: ImportResult;
+	readonly result = model<ImportResult | null>(null);
+	readonly selectPlan = output<string>();
 
-	@Input()
-	set result(value: ImportResult) {
-		this._result = value;
-	}
-
-	get result() {
-		return this._result;
-	}
-
-	@Output()
-	selectPlan = new EventEmitter<string>();
-
-	selectLayout(item: string) {
-		this.selectPlan.emit(item);
-	}
+	protected readonly status = computed(() => {
+		const result = this.result();
+		const hasLayouts = !!result?.layouts?.length;
+		if (result?.error && !hasLayouts) {
+			return { type: 'danger', message: 'Failed to import plans.' };
+		}
+		if (result?.error) {
+			return { type: 'warning', message: 'Imported plans, but errors occurred trying to import some of them.' };
+		}
+		return { type: 'success', message: 'Successfully imported plans' };
+	});
 }

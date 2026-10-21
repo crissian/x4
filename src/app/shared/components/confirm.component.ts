@@ -1,17 +1,18 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { Component, inject } from '@angular/core';
+import { ModalComponent } from './modal/modal.component';
+
+export interface ConfirmData {
+	title: string;
+	/** HTML message */
+	message: string;
+}
 
 @Component({
+	imports: [ModalComponent],
 	templateUrl: './confirm.component.html',
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
 })
 export class ConfirmComponent {
-	constructor(public activeModal: NgbActiveModal) {}
-
-	@Input()
-	title: string;
-
-	@Input()
-	message: string;
+	protected readonly dialogRef = inject<DialogRef<boolean>>(DialogRef);
+	protected readonly data = inject<ConfirmData>(DIALOG_DATA);
 }

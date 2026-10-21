@@ -1,131 +1,68 @@
-import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
-import { WareGroupModel } from 'src/app/station/components/station-calculator.model';
+import { Component, computed, input, linkedSignal, output, signal } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import { StationModule } from '../../../shared/services/model/model';
+import { WareGroupModel } from '../station-calculator.model';
 
 /**
- * The Autocomplete component
+ * Module picker: a search box filtering the modules grouped by ware group.
  */
 @Component({
 	selector: 'app-autocomplete',
+	imports: [FormField],
 	templateUrl: './autocomplete.component.html',
-	styleUrls: ['./autocomplete.component.scss'],
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
 })
-export class AutocompleteComponent implements OnInit {
-	/**
-	 * id
-	 */
-	@Input() id: string = null;
-	/**
-	 * groups
-	 */
-	@Input() groups: WareGroupModel[] = [];
-	/**
-	 * filtered groups
-	 */
-	filteredGroups: WareGroupModel[] = [];
-	/**
-	 * output event change
-	 */
-	@Output() selectModule: EventEmitter<string> = new EventEmitter<string>();
+export class AutocompleteComponent {
+	/** selected module id */
+	readonly id = input<string>(null);
+	readonly groups = input<WareGroupModel[]>([]);
+	readonly selectModule = output<string>();
 
-	/**
-	 * input string
-	 */
-	inputString = '';
-	/**
-	 * visible
-	 */
-	visible = false;
-	/**
-	 * Timeout function reference
-	 */
-	private timeout: any;
-
-	/**
-	 * The constructor
-	 */
-	constructor() {}
-
-	/**
-	 * onInit
-	 */
-	ngOnInit() {
-		this.filteredGroups = this.groups.map((x) => Object.assign({}, x));
-		this.setName();
-	}
-
-	/**
-	 * filter modules
-	 *
-	 * @param filterString filter string
-	 */
-	filterModules(filterString: string) {
-		for (let i = 0; i < this.groups.length; i++) {
-			this.filteredGroups[i].modules = [
-				...this.groups[i].modules.filter((module) =>
-					module.name.trim().toLowerCase().includes(filterString.trim().toLowerCase())
-				),
-			];
+	private readonly selectedName = computed(() => {
+		const id = this.id();
+		for (const group of this.groups()) {
+			const module = group.modules.find((m) => m.id === id);
+			if (module) {
+				return module.name;
+			}
 		}
-	}
+		return '';
+	});
 
-	/**
-	 * input change
-	 *
-	 * @param text new string
-	 */
-	changed(text: string) {
-		if (text) {
-			this.filterModules(text);
-		} else {
-			this.filteredGroups = this.groups.map((x) => Object.assign({}, x));
-		}
-	}
+	/** search text, reset to the selected module name when the selection changes */
+	readonly query = linkedSignal(() => this.selectedName());
+	readonly queryField = form(this.query);
 
-	/**
-	 * on focus
-	 */
+	readonly visible = signal(false);
+
+	readonly filteredGroups = computed(() => {
+		const filter = this.query().trim().toLowerCase();
+		return this.groups()
+			.map((group) => ({
+				...group,
+				modules: filter
+					? group.modules.filter((m) => m.name.trim().toLowerCase().includes(filter))
+					: group.modules,
+			}))
+			.filter((group) => group.modules.length > 0);
+	});
+
+	private timeout: ReturnType<typeof setTimeout>;
+
 	onFocus() {
 		clearTimeout(this.timeout);
-		this.filterModules(this.inputString);
-		this.visible = true;
+		this.visible.set(true);
 	}
 
-	/**
-	 * on blur
-	 */
 	onBlur() {
 		this.timeout = setTimeout(() => {
-			this.setName();
-			this.visible = false;
+			this.query.set(this.selectedName());
+			this.visible.set(false);
 		}, 100);
 	}
 
-	/**
-	 * on module click
-	 *
-	 * @param module The station module
-	 */
 	onClick(module: StationModule) {
-		this.inputString = module.name;
-		this.filterModules(this.inputString);
+		this.query.set(module.name);
 		this.selectModule.emit(module.id);
-		this.visible = false;
-	}
-
-	/**
-	 * set name from id
-	 */
-	setName() {
-		if (this.id) {
-			this.groups.forEach((group) => {
-				const module = group.modules.filter((m) => m.id === this.id)[0];
-				if (module) {
-					this.inputString = module.name;
-				}
-			});
-		}
+		this.visible.set(false);
 	}
 }

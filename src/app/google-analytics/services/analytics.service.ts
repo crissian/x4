@@ -1,52 +1,57 @@
-import { Inject, Injectable } from '@angular/core';
+import { EnvironmentProviders, Injectable, InjectionToken, inject, makeEnvironmentProviders } from '@angular/core';
 import { AnalyticsConfig } from './analytics.config';
 
 declare var gtag: any;
 
 export interface PageInfo {
-  title?: string;
-  location?: string;
-  path: string;
+	title?: string;
+	location?: string;
+	path: string;
 }
 
 export interface EventInfo {
-  action: string;
-  category?: string;
-  label?: string;
+	action: string;
+	category?: string;
+	label?: string;
 }
 
-@Injectable()
+export const ANALYTICS_CONFIG = new InjectionToken<AnalyticsConfig>('analyticsConfig', {
+	factory: () => ({ trackingId: '' }),
+});
+
+export function provideAnalytics(config: AnalyticsConfig): EnvironmentProviders {
+	return makeEnvironmentProviders([{ provide: ANALYTICS_CONFIG, useValue: config }]);
+}
+
+@Injectable({ providedIn: 'root' })
 export class AnalyticsService {
-  constructor(@Inject('analyticsConfig') private config: AnalyticsConfig) {
-  }
+	private readonly config = inject(ANALYTICS_CONFIG);
 
-  pageView(page: PageInfo) {
-    if (!this.config.trackingId) {
-      return;
-    }
+	pageView(page: PageInfo) {
+		if (!this.config.trackingId) {
+			return;
+		}
 
-    if (!page.path.startsWith('/')) {
-      page.path = `/${page.path}`;
-    }
-    const args = {
-      page_path: page.path
-    };
+		if (!page.path.startsWith('/')) {
+			page.path = `/${page.path}`;
+		}
+		const args: Record<string, string> = {
+			page_path: page.path,
+		};
 
-    if (page.location) {
-      // @ts-ignore
-      args['page_location'] = page.path;
-    }
-    if (page.title) {
-      // @ts-ignore
-      args['page_title'] = page.title;
-    }
-    gtag('config', this.config.trackingId, args);
-  }
+		if (page.location) {
+			args['page_location'] = page.path;
+		}
+		if (page.title) {
+			args['page_title'] = page.title;
+		}
+		gtag('config', this.config.trackingId, args);
+	}
 
-  event(evt: EventInfo) {
-    if (!this.config.trackingId) {
-      return;
-    }
-    gtag('event', evt.action, { event_category: evt.category, event_label: evt.label });
-  }
+	event(evt: EventInfo) {
+		if (!this.config.trackingId) {
+			return;
+		}
+		gtag('event', evt.action, { event_category: evt.category, event_label: evt.label });
+	}
 }

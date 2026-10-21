@@ -1,0 +1,15 @@
+<div class="flex items-center justify-between border-b border-neutral-700 px-4 py-3">
+	<h4 class="text-lg font-medium text-neutral-100">{{ title() }}</h4>
+	<button
+		type="button"
+		class="cursor-pointer text-2xl leading-none text-neutral-400 hover:text-white"
+		aria-label="Close"
+		(click)="dialogRef.close()"
+	>
+		&times;
+	</button>
+</div>
+<div class="p-4"><ng-content /></div>
+<div class="flex justify-end gap-2 border-t border-neutral-700 px-4 py-3 empty:hidden">
+	<ng-content select="[footer]" />
+</div>

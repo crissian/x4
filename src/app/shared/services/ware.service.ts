@@ -2,74 +2,73 @@ import { AllWares, Wares } from './data/wares-data';
 import { Injectable } from '@angular/core';
 import { Ware, WareGroup } from './model/model';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class WareService {
-  private static order = {
-    gases: 0,
-    ice: 10,
-    minerals: 20,
-    energy: 30,
-    water: 40,
-    refined: 50,
-    agricultural: 60,
-    food: 70,
-    pharmaceutical: 80,
-    hightech: 90,
-    shiptech: 100
-  };
+	private static order = {
+		gases: 0,
+		ice: 10,
+		minerals: 20,
+		energy: 30,
+		water: 40,
+		refined: 50,
+		agricultural: 60,
+		food: 70,
+		pharmaceutical: 80,
+		hightech: 90,
+		shiptech: 100,
+	};
 
-  getEntities(): Ware[] {
-    return AllWares;
-  }
+	getEntities(): Ware[] {
+		return AllWares;
+	}
 
-  getEntity(id: string): Ware {
-    return Wares[id];
-  }
+	getEntity(id: string): Ware {
+		return Wares[id];
+	}
 
-  getWaresUsingWare(id: string): Ware[] {
-    return AllWares
-      .filter(x => this.isUsing(x, id));
-  }
+	getWaresUsingWare(id: string): Ware[] {
+		return AllWares.filter((x) => this.isUsing(x, id));
+	}
 
-  private isUsing(ware: Ware, wareId: string) {
-    for (let i = 0; i < ware.production.length; i ++) {
-      const production = ware.production[i];
-      if (production.wares.find(y => y.ware == wareId) != null) {
-        return true;
-      }
-    }
+	private isUsing(ware: Ware, wareId: string) {
+		for (let i = 0; i < ware.production.length; i++) {
+			const production = ware.production[i];
+			if (production.wares.find((y) => y.ware == wareId) != null) {
+				return true;
+			}
+		}
 
-    return false;
-  }
+		return false;
+	}
 
-  compareGroups(a: WareGroup, b: WareGroup) {
-    const aidx = WareService.order[a.id];
-    const bidx = WareService.order[b.id];
+	compareGroups(a: WareGroup, b: WareGroup) {
+		const aidx = WareService.order[a.id];
+		const bidx = WareService.order[b.id];
 
-    if (aidx == bidx) {
-      return this.compareProp(a, b, 'name');
-    }
+		if (aidx == bidx) {
+			return this.compareProp(a, b, 'name');
+		}
 
-    return aidx - bidx;
-  }
+		return aidx - bidx;
+	}
 
-  compareWares(a: Ware, b: Ware) {
-    const aidx = WareService.order[a.group.id];
-    const bidx = WareService.order[b.group.id];
+	compareWares(a: Ware, b: Ware) {
+		const aidx = WareService.order[a.group.id];
+		const bidx = WareService.order[b.group.id];
 
-    if (aidx == bidx) {
-      return this.compareProp(a, b, 'name');
-    }
+		if (aidx == bidx) {
+			return this.compareProp(a, b, 'name');
+		}
 
-    return aidx - bidx;
-  }
+		return aidx - bidx;
+	}
 
-  private compareProp(a: any, b: any, prop: string) {
-    if (a[prop] < b[prop]) {
-      return -1;
-    } else if (a[prop] > b[prop]) {
-      return 1;
-    }
-    return 0;
-  }
+	private compareProp(a: any, b: any, prop: string) {
+		if (a[prop] < b[prop]) {
+			return -1;
+		} else if (a[prop] > b[prop]) {
+			return 1;
+		}
+		return 0;
+	}
 }

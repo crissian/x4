@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { Race } from './model/model';
 import { EntityService } from './entity.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class RaceService implements EntityService<Race> {
-  getEntities(): Race[] {
-    return Races.all;
-  }
+	getEntities(): Race[] {
+		return Races.all;
+	}
 
-  getEntity(id: any): Race {
-    return Races[id];
-  }
+	getEntity(id: any): Race {
+		return Races[id];
+	}
 }

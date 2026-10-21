@@ -1,48 +1,6 @@
-<div class="row content-row">
-   <div class="col-md-12">
-      <div class="card shadow">
-         <div class="card-header shadow-sm" i18n="@@wares">
-            Wares
-         </div>
-         <div class="card-body">
-            <dx-data-grid [dataSource]="entities"
-                          [allowColumnReordering]="true"
-                          [allowColumnResizing]="true"
-                          [showBorders]="true"
-                          [hoverStateEnabled]="true"
-                          (onCellClick)="onRowSelect($event)"
-                          keyExpr="id">
-               <dxo-pager [showPageSizeSelector]="true" [showNavigationButtons]="true"></dxo-pager>
-               <dxo-sorting mode="multiple"></dxo-sorting>
-               <dxo-filter-row [applyFilter]="currentFilter" [visible]="true"></dxo-filter-row>
-               <dxo-filter-panel [visible]="true"></dxo-filter-panel>
-
-               <dxi-column dataField="name" caption="Name"></dxi-column>
-               <dxi-column dataField="transport" caption="Transport">
-                  <dxo-lookup [dataSource]="transportTypes"></dxo-lookup>
-               </dxi-column>
-               <dxi-column dataField="price.min" caption="Min Price" dataType="number" format="fixedPoint"></dxi-column>
-               <dxi-column dataField="price.avg" caption="Avg Price" dataType="number" format="fixedPoint"></dxi-column>
-               <dxi-column dataField="price.max" caption="Max Price" dataType="number" format="fixedPoint"></dxi-column>
-               <dxi-column dataField="volume" caption="Volume" dataType="number" format="fixedPoint"></dxi-column>
-               <dxi-column caption="Price Diff / Volume"
-                           dataType="number"
-                           name="priceDiffPerVolume"
-                           [allowSorting]="true"
-                           [allowFiltering]="true"
-                           [calculateCellValue]="calculatePriceDiffPerVolume">
-                  <dxo-format type="fixedPoint" [precision]="2"></dxo-format>
-               </dxi-column>
-
-               <dxo-summary>
-                  <dxi-total-item
-                     column="name"
-                     summaryType="count">
-                  </dxi-total-item>
-               </dxo-summary>
-            </dx-data-grid>
-         </div>
-      </div>
-   </div>
-
+<div class="card">
+	<div class="card-header" i18n="@@wares">Wares</div>
+	<div class="card-body">
+		<app-data-grid [data]="entities" [columns]="columns" [clickable]="true" (rowClick)="open($event)" />
+	</div>
 </div>

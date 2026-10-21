@@ -1,135 +1,23 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Dock, Slot, SlotSummary, StationModule, Ware } from '../../shared/services/model/model';
-import { WareService } from '../../shared/services/ware.service';
+import { DecimalPipe } from '@angular/common';
+import { Component, computed, inject, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ProductionCardComponent } from '../../shared/components/production-card.component';
 import { ModuleService } from '../../shared/services/module.service';
-import { ActivatedRoute } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { EntityDetailsComponent } from '../../shared/components/entity-details.component';
-import { BASE_TITLE } from '../../shared/services/constants';
-
-interface ProductionWareData {
-	ware: Ware;
-	amount: number;
-}
-
-interface ProductionData {
-	time: number;
-	amount: number;
-	method: string;
-	name: string;
-	wares: ProductionWareData[];
-}
+import { getSlotsStr, toProductionData } from '../../shared/services/production';
+import { WareService } from '../../shared/services/ware.service';
 
 @Component({
+	imports: [DecimalPipe, RouterLink, ProductionCardComponent],
 	templateUrl: './module-detail.component.html',
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
 })
-export class ModuleDetailComponent extends EntityDetailsComponent<StationModule> implements OnInit {
-	public entityProduction: ProductionData[];
+export class ModuleDetailComponent {
+	private readonly service = inject(ModuleService);
+	private readonly wareService = inject(WareService);
 
-	constructor(
-		private wareService: WareService,
-		moduleService: ModuleService,
-		route: ActivatedRoute,
-		private titleService: Title
-	) {
-		super(moduleService, route);
-	}
+	readonly id = input.required<string>();
 
-	override ngOnInit(): void {
-		this.titleService.setTitle(`${BASE_TITLE} - Modules`);
-		super.ngOnInit();
-	}
+	protected readonly entity = computed(() => this.service.getEntity(this.id()));
+	protected readonly production = computed(() => toProductionData(this.entity()?.production, this.wareService));
 
-	override onEntityLoaded(entity: StationModule) {
-		this.titleService.setTitle(`${BASE_TITLE} - Modules - ${this.entity.name}`);
-
-		this.entityProduction = this.entity.production.map<ProductionData>((x) => {
-			return {
-				amount: x.amount,
-				effects: x.effects,
-				method: x.method,
-				name: x.name,
-				time: x.time,
-				wares: x.wares.map((y) => {
-					return {
-						ware: this.wareService.getEntity(y.ware),
-						amount: y.amount,
-					};
-				}),
-			};
-		});
-	}
-
-	getTotalMin(production: ProductionData) {
-		let total = 0;
-		production.wares.forEach((x) => {
-			total += x.amount * x.ware.price.min;
-		});
-		return total;
-	}
-
-	getTotalMax(production: ProductionData) {
-		let total = 0;
-		production.wares.forEach((x) => {
-			total += x.amount * x.ware.price.max;
-		});
-		return total;
-	}
-
-	getTotalAvg(production: ProductionData) {
-		let total = 0;
-		production.wares.forEach((x) => {
-			total += x.amount * x.ware.price.avg;
-		});
-		return total;
-	}
-
-	// noinspection JSMethodCanBeStatic
-	getProductionTime(amount: number) {
-		const minutes = Math.trunc(amount / 60);
-		const seconds = amount - minutes * 60;
-
-		let result = '';
-		if (minutes > 0) {
-			result += minutes + (minutes === 1 ? ' minute' : ' minutes');
-		}
-		if (seconds > 0) {
-			if (minutes > 0) {
-				result += ' ';
-			}
-			result += seconds + (seconds === 1 ? ' second' : ' seconds');
-		}
-
-		return result;
-	}
-
-	getSlotsStr(value: (Slot | Dock)[]) {
-		const slots = this.getSlots(value);
-		if (slots.length == 0) {
-			return '-';
-		}
-
-		return slots.map((x) => `${x.capacity} x ${x.size}`).join(', ');
-	}
-
-	getSlots(value: (Slot | Dock)[]) {
-		if (!value) {
-			return [];
-		}
-
-		const valueObj = value.reduce((obj, slot) => {
-			obj[slot.size] = obj[slot.size] || 0;
-			obj[slot.size] += (<Dock>slot).capacity || 1;
-			return obj;
-		}, {});
-
-		const slots: SlotSummary[] = [];
-		Object.keys(valueObj).forEach((key) => {
-			slots.push({ size: key, capacity: valueObj[key] });
-		});
-
-		return slots;
-	}
+	protected readonly getSlotsStr = getSlotsStr;
 }

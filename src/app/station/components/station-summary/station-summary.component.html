@@ -1,4 +1,7 @@
-<table class="table table-sm small table-hover">
+@let form = settings();
+@let expanded = expandState();
+
+<table class="table mb-4">
 	<thead>
 		<tr>
 			<th i18n="@@workforce" scope="col">Workforce</th>
@@ -6,69 +9,65 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr class="hover" (click)="toggleExpanded('totalWorkforce')">
+		<tr
+			class="cursor-pointer hover:bg-white/5"
+			[attr.aria-expanded]="!!expanded['totalWorkforce']"
+			(click)="toggleExpanded('totalWorkforce')"
+		>
 			<td>
-				@if (!expandState['totalWorkforce']) {
-					<i class="fa fa-angle-double-down"></i>
-				}
-				@if (expandState['totalWorkforce']) {
-					<i class="fa fa-angle-double-up"></i>
-				}
+				<i
+					class="fa-solid w-4"
+					[class.fa-angles-down]="!expanded['totalWorkforce']"
+					[class.fa-angles-up]="expanded['totalWorkforce']"
+				></i>
 				<span
-					[ngClass]="{
-						'text-danger': totalWorkforce > totalWorkforceCapacity,
-						'text-success': totalWorkforce <= totalWorkforceCapacity,
-					}"
+					[class.text-danger]="totalWorkforce() > totalWorkforceCapacity()"
+					[class.text-success]="totalWorkforce() <= totalWorkforceCapacity()"
 					i18n="@@neededWorkforce"
+					>Needed Workforce</span
 				>
-					Needed Workforce
-				</span>
 			</td>
-			<td class="text-right">{{ totalWorkforce | number: '1.0-0' }}</td>
+			<td class="text-right">{{ totalWorkforce() | number: '1.0-0' }}</td>
 		</tr>
-
-		@if (expandState['totalWorkforce']) {
-			@for (item of workforceNeeded; track item) {
+		@if (expanded['totalWorkforce']) {
+			@for (item of workforceNeeded(); track $index) {
 				<tr class="text-danger">
-					<td class="pl-4">{{ item.count }} x {{ item.name }}</td>
+					<td class="pl-8">{{ item.count }} x {{ item.name }}</td>
 					<td class="text-right">-{{ item.amount * item.count | number: '1.0-0' }}</td>
 				</tr>
 			}
-			@if (isHq) {
+			@if (form.isHq().value()) {
 				<tr class="text-danger">
-					<td class="pl-4">1 x Unknown Module</td>
-					<td class="text-right">-200</td>
+					<td class="pl-8">1 x Unknown Module</td>
+					<td class="text-right">-{{ hqWorkforce }}</td>
 				</tr>
 			}
 		}
 
-		<tr class="hover" (click)="toggleExpanded('totalWorkforceCapacity')">
+		<tr
+			class="cursor-pointer hover:bg-white/5"
+			[attr.aria-expanded]="!!expanded['totalWorkforceCapacity']"
+			(click)="toggleExpanded('totalWorkforceCapacity')"
+		>
 			<td>
-				@if (!expandState['totalWorkforceCapacity']) {
-					<i class="fa fa-angle-double-down"></i>
-				}
-				@if (expandState['totalWorkforceCapacity']) {
-					<i class="fa fa-angle-double-up"></i>
-				}
+				<i
+					class="fa-solid w-4"
+					[class.fa-angles-down]="!expanded['totalWorkforceCapacity']"
+					[class.fa-angles-up]="expanded['totalWorkforceCapacity']"
+				></i>
 				<span
-					[ngClass]="{
-						'text-danger': totalWorkforce > totalWorkforceCapacity,
-						'text-success': totalWorkforce <= totalWorkforceCapacity,
-					}"
+					[class.text-danger]="totalWorkforce() > totalWorkforceCapacity()"
+					[class.text-success]="totalWorkforce() <= totalWorkforceCapacity()"
 					i18n="@@workforceCapacity"
+					>Workforce Capacity</span
 				>
-					Workforce Capacity
-				</span>
 			</td>
-			<td class="text-right">
-				{{ totalWorkforceCapacity | number: '1.0-0' }}
-			</td>
+			<td class="text-right">{{ totalWorkforceCapacity() | number: '1.0-0' }}</td>
 		</tr>
-
-		@if (expandState['totalWorkforceCapacity']) {
-			@for (item of workforceCapacity; track item) {
+		@if (expanded['totalWorkforceCapacity']) {
+			@for (item of workforceCapacity(); track $index) {
 				<tr class="text-success">
-					<td class="pl-4">{{ item.count }} x {{ item.name }}</td>
+					<td class="pl-8">{{ item.count }} x {{ item.name }}</td>
 					<td class="text-right">+{{ item.amount * item.count | number: '1.0-0' }}</td>
 				</tr>
 			}
@@ -76,69 +75,39 @@
 
 		<tr>
 			<td colspan="2">
-				<div class="form-check">
-					<input
-						type="checkbox"
-						id="is-hq"
-						class="form-check-input"
-						[(ngModel)]="isHq"
-						(ngModelChange)="onChange()"
-					/>
-					<label class="form-check-label" for="is-hq" i18n="@@isHeadquarters"
-						>Headquarters (The HQ needs 200 workers for some reason)</label
-					>
-				</div>
+				<label class="flex items-center gap-2">
+					<input type="checkbox" [formField]="form.isHq" />
+					<span i18n="@@isHeadquarters">Headquarters (The HQ needs 200 workers for some reason)</span>
+				</label>
 			</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">
-				<div class="row">
-					<div class="form-group col">
-						<label for="workforce-slider">
-							<span>Actual Workforce:</span>&nbsp;<strong>{{
-								partialWorkforce | number: '1.0-0'
-							}}</strong>
-						</label>
-
-						<div class="d-flex flex-row">
-							<div class="flex-grow-1">
-								<input
-									type="range"
-									class="form-control-range small"
-									id="workforce-slider"
-									min="0"
-									[disabled]="autoWorkforce"
-									[max]="totalWorkforceCapacity"
-									[attr.step]="workforceStep"
-									[(ngModel)]="partialWorkforce"
-									(ngModelChange)="onChange()"
-								/>
-							</div>
-							<div class="ml-1">
-								{{ workforcePercent }}
-							</div>
-						</div>
-						<div class="form-check">
-							<input
-								type="checkbox"
-								id="auto-workforce-check-box"
-								class="form-check-input"
-								[(ngModel)]="autoWorkforce"
-								(ngModelChange)="onChange()"
-							/>
-							<label class="form-check-label" for="auto-workforce-check-box" i18n="@@isAutoWorkforce"
-								>Auto</label
-							>
-						</div>
-					</div>
+				<label for="workforce-slider" class="mb-1 block">
+					<span>Actual Workforce:</span>&nbsp;<strong>{{
+						form.partialWorkforce().value() | number: '1.0-0'
+					}}</strong>
+				</label>
+				<div class="flex items-center gap-2">
+					<input
+						type="range"
+						id="workforce-slider"
+						[attr.step]="workforceStep()"
+						[formField]="form.partialWorkforce"
+					/>
+					<span class="w-12 text-right">{{ workforcePercent() }}</span>
 				</div>
+				<label class="mt-1 flex items-center gap-2">
+					<input type="checkbox" [formField]="form.autoWorkforce" />
+					<span i18n="@@isAutoWorkforce">Auto</span>
+				</label>
 			</td>
 		</tr>
 	</tbody>
 </table>
 
-<table class="table table-sm small table-hover">
+<table class="table mb-4">
 	<thead>
 		<tr>
 			<th scope="col" i18n="@@productionPerHour">Production Per Hour</th>
@@ -146,157 +115,96 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr class="hover text-danger" (click)="toggleExpanded('totalExpenses')">
+		<tr
+			class="text-danger cursor-pointer hover:bg-white/5"
+			[attr.aria-expanded]="!!expanded['totalExpenses']"
+			(click)="toggleExpanded('totalExpenses')"
+		>
 			<td>
-				@if (!expandState['totalExpenses']) {
-					<i class="fa fa-angle-double-down"></i>
-				}
-				@if (expandState['totalExpenses']) {
-					<i class="fa fa-angle-double-up"></i>
-				}
-				<span i18n="@@expenses"> Expenses</span>
+				<i
+					class="fa-solid w-4"
+					[class.fa-angles-down]="!expanded['totalExpenses']"
+					[class.fa-angles-up]="expanded['totalExpenses']"
+				></i>
+				<span i18n="@@expenses">Expenses</span>
 			</td>
-			<td class="text-right">{{ totalExpenses | number: '1.0-0' }}</td>
+			<td class="text-right">{{ totalExpenses() | number: '1.0-0' }}</td>
 		</tr>
-		@if (expandState['totalExpenses']) {
-			@for (item of resourcesNeeded; track item) {
-				<tr
-					[ngClass]="{
-						'text-danger': item.price > 0,
-						'text-warning': item.price == 0,
-					}"
-				>
-					<td class="pl-5">{{ item.amount | number: '1.0-0' }} x {{ item.name }}</td>
-					<td class="text-right">
-						{{ item.amount * item.price | number: '1.0-0' }}
-					</td>
+		@if (expanded['totalExpenses']) {
+			@for (item of resourcesNeeded(); track item.name) {
+				<tr [class.text-danger]="item.price > 0" [class.text-warning]="item.price == 0">
+					<td class="pl-10">{{ item.amount | number: '1.0-0' }} x {{ item.name }}</td>
+					<td class="text-right">{{ item.amount * item.price | number: '1.0-0' }}</td>
 				</tr>
 			}
 		}
 
-		<tr class="hover text-primary" (click)="toggleExpanded('totalProfits')">
+		<tr
+			class="text-primary cursor-pointer hover:bg-white/5"
+			[attr.aria-expanded]="!!expanded['totalProfits']"
+			(click)="toggleExpanded('totalProfits')"
+		>
 			<td>
-				@if (!expandState['totalProfits']) {
-					<i class="fa fa-angle-double-down"></i>
-				}
-				@if (expandState['totalProfits']) {
-					<i class="fa fa-angle-double-up"></i>
-				}
-				<span i18n="@@production"> Production</span>
+				<i
+					class="fa-solid w-4"
+					[class.fa-angles-down]="!expanded['totalProfits']"
+					[class.fa-angles-up]="expanded['totalProfits']"
+				></i>
+				<span i18n="@@production">Production</span>
 			</td>
-			<td class="text-right">{{ totalProfits | number: '1.0-0' }}</td>
+			<td class="text-right">{{ totalProfits() | number: '1.0-0' }}</td>
 		</tr>
-		@if (expandState['totalProfits']) {
-			@for (item of resourcesProduced; track item) {
+		@if (expanded['totalProfits']) {
+			@for (item of resourcesProduced(); track item.name) {
 				<tr class="text-primary">
-					<td class="pl-5">{{ item.amount | number: '1.0-0' }} x {{ item.name }}</td>
+					<td class="pl-10">{{ item.amount | number: '1.0-0' }} x {{ item.name }}</td>
 					<td class="text-right">+{{ item.amount * item.price | number: '1.0-0' }}</td>
 				</tr>
 			}
 		}
 		<tr class="text-success">
-			<td><i class="fa fa-line-chart"></i><strong i18n="@@profit"> Profit</strong></td>
+			<td>
+				<i class="fa-solid fa-chart-line w-4"></i>
+				<strong i18n="@@profit">Profit</strong>
+			</td>
 			<td class="text-right">
-				<strong>{{ totalProfits + totalExpenses | number: '1.0-0' }}</strong>
+				<strong>{{ totalProfits() + totalExpenses() | number: '1.0-0' }}</strong>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<div class="form-check">
-					<input
-						type="checkbox"
-						id="basic-resources"
-						class="form-check-input"
-						[(ngModel)]="provideBasicResources"
-						(ngModelChange)="onChange()"
-					/>
-					<label class="form-check-label" for="basic-resources" i18n="@@minersProvideBasicResources"
-						>Miners provide basic resources</label
-					>
-				</div>
+				<label class="flex items-center gap-2">
+					<input type="checkbox" [formField]="form.provideBasicResources" />
+					<span i18n="@@minersProvideBasicResources">Miners provide basic resources</span>
+				</label>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<div class="form-check">
-					<input
-						type="checkbox"
-						id="all-resources"
-						class="form-check-input"
-						[(ngModel)]="provideAllResources"
-						(ngModelChange)="onChange()"
-					/>
-					<label class="form-check-label" for="all-resources" i18n="@@rovideAllResources"
-						>Resources are provided by other stations</label
-					>
-				</div>
+				<label class="flex items-center gap-2">
+					<input type="checkbox" [formField]="form.provideAllResources" />
+					<span i18n="@@rovideAllResources">Resources are provided by other stations</span>
+				</label>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<div class="row">
-					<div class="form-group col">
-						<label for="resources-price"
-							><span i18n="@@resourcePrice">Resources Price:</span>&nbsp;
-							<strong>
-								@switch (resourcesPrice) {
-									@case (0) {
-										<span i18n="@@min">Min</span>
-									}
-									@case (50) {
-										<span i18n="@@average">Average</span>
-									}
-									@case (100) {
-										<span i18n="@@max">Max</span>
-									}
-									@default {
-										{{ resourcesPrice }}%
-									}
-								}
-							</strong> </label
-						><br />
-						<input
-							type="range"
-							class="form-control-range small"
-							id="resources-price"
-							min="0"
-							max="100"
-							step="5"
-							[(ngModel)]="resourcesPrice"
-							(ngModelChange)="onChange()"
-						/>
+				<div class="grid grid-cols-2 gap-4">
+					<div>
+						<label for="resources-price" class="mb-1 block">
+							<span i18n="@@resourcePrice">Resources Price:</span>&nbsp;<strong>{{
+								priceLabel(form.resourcesPrice().value())
+							}}</strong>
+						</label>
+						<input type="range" id="resources-price" step="5" [formField]="form.resourcesPrice" />
 					</div>
-
-					<div class="form-group col">
-						<label for="products-price">
-							<span>Products Price:</span>&nbsp;
-							<strong>
-								@switch (productsPrice) {
-									@case (0) {
-										<span i18n="@@min">Min</span>
-									}
-									@case (50) {
-										<span i18n="@@average">Average</span>
-									}
-									@case (100) {
-										<span i18n="@@max">Max</span>
-									}
-									@default {
-										{{ productsPrice }}%
-									}
-								}
-							</strong> </label
-						><br />
-						<input
-							type="range"
-							class="form-control-range small"
-							id="products-price"
-							min="0"
-							max="100"
-							step="5"
-							[(ngModel)]="productsPrice"
-							(ngModelChange)="onChange()"
-						/>
+					<div>
+						<label for="products-price" class="mb-1 block">
+							<span>Products Price:</span>&nbsp;<strong>{{
+								priceLabel(form.productsPrice().value())
+							}}</strong>
+						</label>
+						<input type="range" id="products-price" step="5" [formField]="form.productsPrice" />
 					</div>
 				</div>
 			</td>
@@ -304,7 +212,7 @@
 	</tbody>
 </table>
 
-<table class="table table-sm small table-hover">
+<table class="table">
 	<thead>
 		<tr>
 			<th scope="col" i18n="@@stationCosts">Station Costs</th>
@@ -312,78 +220,49 @@
 		</tr>
 	</thead>
 	<tbody>
-		@for (cost of moduleCosts; track cost) {
-			<tr class="hover" (click)="toggleExpanded(cost.module.id)">
+		@for (cost of moduleCosts(); track cost.key) {
+			<tr
+				class="cursor-pointer hover:bg-white/5"
+				[attr.aria-expanded]="!!expanded[cost.key]"
+				(click)="toggleExpanded(cost.key)"
+			>
 				<td>
-					@if (!expandState[cost.module.id]) {
-						<i class="fa fa-angle-double-down"></i>
-					}
-					@if (expandState[cost.module.id]) {
-						<i class="fa fa-angle-double-up"></i>
-					}
-					{{ cost.count }} x {{ cost.module.name }}
+					<i
+						class="fa-solid w-4"
+						[class.fa-angles-down]="!expanded[cost.key]"
+						[class.fa-angles-up]="expanded[cost.key]"
+					></i>
+					{{ cost.count }} x {{ cost.name }}
 				</td>
-				<td class="text-right">
-					{{ cost.price | number: '1.0-0' }}
-				</td>
+				<td class="text-right">{{ cost.price | number: '1.0-0' }}</td>
 			</tr>
-			@if (expandState[cost.module.id]) {
-				@for (item of cost.items; track item) {
+			@if (expanded[cost.key]) {
+				@for (item of cost.items; track item.ware.id) {
 					<tr>
-						<td class="pl-5">{{ cost.count * item.amount }} x {{ item.ware.name }}</td>
-						<td class="text-right">
-							{{ cost.count * item.price | number: '1.0-0' }}
-						</td>
+						<td class="pl-10">{{ cost.count * item.amount }} x {{ item.ware.name }}</td>
+						<td class="text-right">{{ cost.count * item.price | number: '1.0-0' }}</td>
 					</tr>
 				}
 			}
 		}
 		<tr>
 			<th class="text-right" i18n="@@total">Total:</th>
-			<th class="text-right">{{ totalModuleCost | number: '1.0-0' }}</th>
+			<th class="text-right">{{ totalModuleCost() | number: '1.0-0' }}</th>
 		</tr>
-		@for (item of totalModuleResourceCosts; track item) {
+		@for (item of totalModuleResourceCosts(); track item.ware.id) {
 			<tr>
 				<td class="text-right">{{ item.ware.name }}</td>
 				<td class="text-right">{{ item.value | number: '1.0-0' }}</td>
 			</tr>
 		}
-
 		<tr>
 			<td colspan="2">
-				<div class="row">
-					<div class="form-group col">
-						<label for="modules-resources-price"
-							><span i18n="@@resourcesPrice">Resources Price:</span>&nbsp;
-							<strong>
-								@switch (modulesResourcesPrice) {
-									@case (0) {
-										<span i18n="@@min">Min</span>
-									}
-									@case (50) {
-										<span i18n="@@average">Average</span>
-									}
-									@case (100) {
-										<span i18n="@@max">Max</span>
-									}
-									@default {
-										{{ modulesResourcesPrice }}%
-									}
-								}
-							</strong> </label
-						><br />
-						<input
-							type="range"
-							class="form-control-range small"
-							id="modules-resources-price"
-							min="0"
-							max="100"
-							step="5"
-							[(ngModel)]="modulesResourcesPrice"
-							(ngModelChange)="onChange()"
-						/>
-					</div>
-				</div>
+				<label for="modules-resources-price" class="mb-1 block">
+					<span i18n="@@resourcesPrice">Resources Price:</span>&nbsp;<strong>{{
+						priceLabel(form.modulesResourcesPrice().value())
+					}}</strong>
+				</label>
+				<input type="range" id="modules-resources-price" step="5" [formField]="form.modulesResourcesPrice" />
 			</td>
 		</tr>
 	</tbody>

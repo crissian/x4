@@ -1,4 +1,4 @@
-<table class="table table-sm small">
+<table class="table">
 	<thead>
 		<tr>
 			<th i18n="@@resources" scope="col">Resource</th>
@@ -6,27 +6,25 @@
 		</tr>
 	</thead>
 	<tbody>
-		@for (item of resources; track item) {
-			<tr class="hover" (click)="toggleExpanded(item)">
+		@for (item of sortedResources(); track item.ware.id) {
+			@let isExpanded = expanded()[item.ware.id];
+			<tr
+				class="cursor-pointer hover:bg-white/5"
+				[class.text-danger]="item.amount < 0"
+				[class.text-success]="item.amount > 0"
+				[attr.aria-expanded]="!!isExpanded"
+				(click)="toggleExpanded(item)"
+			>
 				<td>
-					@if (!item.expanded) {
-						<i class="fa fa-angle-double-down"></i>
-					}
-					@if (item.expanded) {
-						<i class="fa fa-angle-double-up"></i>
-					}
-					<span [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">
-						{{ item.ware.name }}</span
-					>
+					<i class="fa-solid w-4" [class.fa-angles-down]="!isExpanded" [class.fa-angles-up]="isExpanded"></i>
+					{{ item.ware.name }}
 				</td>
-				<td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">
-					{{ item.amount | number: '1.0-0' }}
-				</td>
+				<td class="text-right">{{ item.amount | number: '1.0-0' }}</td>
 			</tr>
-			@if (item.expanded) {
-				@for (moduleRes of item.items; track moduleRes) {
-					<tr [ngClass]="{ 'text-danger': moduleRes.total < 0, 'text-success': moduleRes.total > 0 }">
-						<td class="pl-4">
+			@if (isExpanded) {
+				@for (moduleRes of item.items; track $index) {
+					<tr [class.text-danger]="moduleRes.total < 0" [class.text-success]="moduleRes.total > 0">
+						<td class="pl-8">
 							<strong>{{ moduleRes.count }}</strong> x <strong>{{ moduleRes.name }}</strong>
 							@if (moduleRes.total > 0) {
 								<span i18n="@@at"> at</span>&nbsp;<strong

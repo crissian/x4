@@ -1,13 +1,7 @@
-<div class="modal-header">
-  <h4 class="modal-title">{{ title }}</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
- <p [innerHTML]="message">
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-primary" (click)="activeModal.close(true)" i18n="@@yes">Yes</button>
-  <button type="button" class="btn btn-primary" (click)="activeModal.close(false)" i18n="@@no">No</button>
-</div>
+<app-modal [title]="data.title">
+	<p [innerHTML]="data.message"></p>
+	<ng-container footer>
+		<button type="button" class="btn btn-primary" (click)="dialogRef.close(true)" i18n="@@yes">Yes</button>
+		<button type="button" class="btn btn-secondary" (click)="dialogRef.close(false)" i18n="@@no">No</button>
+	</ng-container>
+</app-modal>

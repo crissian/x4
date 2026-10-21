@@ -1,0 +1,129 @@
+@import 'tailwindcss';
+@import '@angular/cdk/overlay-prebuilt.css';
+
+@theme {
+	--font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+@layer base {
+	html {
+		color-scheme: dark;
+	}
+
+	body {
+		@apply min-h-screen bg-neutral-800 text-sm text-neutral-200 antialiased;
+	}
+
+	a {
+		@apply text-sky-400 hover:text-sky-300 hover:underline;
+	}
+
+	h6 {
+		@apply mb-2 font-semibold text-neutral-100;
+	}
+
+	input[type='range'] {
+		@apply w-full accent-sky-500 disabled:opacity-50;
+	}
+
+	input[type='checkbox'] {
+		@apply size-4 rounded accent-sky-500;
+	}
+}
+
+@layer components {
+	.card {
+		@apply rounded-lg border border-neutral-700 bg-neutral-900/40 shadow-lg;
+	}
+
+	.card-header {
+		@apply rounded-t-lg border-b border-neutral-700 bg-neutral-700/40 px-4 py-2.5 font-medium text-neutral-100;
+	}
+
+	.card-body {
+		@apply p-4;
+	}
+
+	.btn {
+		@apply inline-flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium text-white shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 disabled:cursor-not-allowed disabled:opacity-50;
+	}
+
+	.btn-primary {
+		@apply bg-blue-600 hover:bg-blue-500;
+	}
+
+	.btn-info {
+		@apply bg-cyan-700 hover:bg-cyan-600;
+	}
+
+	.btn-secondary {
+		@apply bg-neutral-600 hover:bg-neutral-500;
+	}
+
+	.btn-dark {
+		@apply bg-neutral-950 hover:bg-neutral-900;
+	}
+
+	.btn-success {
+		@apply bg-emerald-600 hover:bg-emerald-500;
+	}
+
+	.link-button {
+		@apply cursor-pointer hover:underline;
+	}
+
+	.input {
+		@apply block w-full rounded-md border border-neutral-600 bg-neutral-900 px-2 py-1 text-sm text-neutral-100 placeholder:text-neutral-500 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:outline-none disabled:opacity-50;
+	}
+
+	.table {
+		@apply w-full border-collapse text-left text-sm;
+
+		& th,
+		& td {
+			@apply border-b border-neutral-700 px-2 py-1.5 align-middle;
+		}
+
+		& thead th {
+			@apply border-b-2 font-semibold text-neutral-100;
+		}
+
+		& tfoot th {
+			@apply border-b-0;
+		}
+	}
+
+	.table-hover tbody tr {
+		@apply hover:bg-white/5;
+	}
+
+	.details {
+		@apply grid grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-x-4 gap-y-1;
+
+		& dt {
+			@apply font-semibold text-neutral-100;
+		}
+	}
+}
+
+@layer utilities {
+	.text-danger {
+		@apply text-red-400;
+	}
+
+	.text-success {
+		@apply text-emerald-400;
+	}
+
+	.text-primary {
+		@apply text-sky-400;
+	}
+
+	.text-warning {
+		@apply text-amber-400;
+	}
+
+	.text-info {
+		@apply text-cyan-400;
+	}
+}

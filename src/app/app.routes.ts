@@ -1,42 +1,45 @@
 import { Routes } from '@angular/router';
 import { AboutComponent } from './about.component';
+import { BASE_TITLE } from './shared/services/constants';
 
 export const appRoutes: Routes = [
-   {
-      path: '',
-      redirectTo: 'station-calculator',
-      pathMatch: 'full'
-   },
-   {
-      path: 'about',
-      component: AboutComponent
-   },
-   {
-      path: 'ships',
-      loadChildren: () => import('./ship/ships.module').then(m => m.ShipsModule)
-   },
-   {
-      path: 'equipment',
-      loadChildren: () => import('./equipment/equipment.module').then(m => m.EquipmentModule)
-   },
-   {
-      path: 'factions',
-      loadChildren: () => import('./faction/faction.module').then(m => m.FactionModule)
-   },
-   {
-      path: 'races',
-      loadChildren: () => import('./races/race.module').then(m => m.RaceModule)
-   },
-   {
-      path: 'modules',
-      loadChildren: () => import('./module/module.module').then(m => m.ModuleModule)
-   },
-   {
-      path: 'station-calculator',
-      loadChildren: () => import('./station/station.module').then(m => m.StationModule)
-   },
-   {
-      path: 'wares',
-      loadChildren: () => import('./ware/ware.module').then(m => m.WareModule)
-   }
+	{
+		path: '',
+		redirectTo: 'station-calculator',
+		pathMatch: 'full',
+	},
+	{
+		path: 'about',
+		component: AboutComponent,
+		title: `${BASE_TITLE} - About`,
+	},
+	{
+		path: 'ships',
+		loadChildren: () => import('./ship/ship.routes'),
+	},
+	{
+		path: 'equipment',
+		loadChildren: () => import('./equipment/equipment.routes'),
+	},
+	{
+		path: 'factions',
+		loadChildren: () => import('./faction/faction.routes'),
+	},
+	{
+		path: 'races',
+		loadChildren: () => import('./races/race.routes'),
+	},
+	{
+		path: 'modules',
+		loadChildren: () => import('./module/module.routes'),
+	},
+	{
+		path: 'wares',
+		loadChildren: () => import('./ware/ware.routes'),
+	},
+	{
+		path: 'station-calculator',
+		loadComponent: () => import('./station/components/station-calculator.component'),
+		title: `${BASE_TITLE} - Station Calculator`,
+	},
 ];

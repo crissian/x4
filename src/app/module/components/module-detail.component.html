@@ -1,201 +1,73 @@
-<div class="row content-row">
-	<div class="col-md-12">
-		@if (entity) {
-			<div class="card shadow">
-				<div class="card-header shadow-sm">
-					<a routerLink="/modules">Station Modules</a> - {{ entity.name }}
-				</div>
-				@if (entity) {
-					<div class="card-body small">
-						@if (entity.description != 'No information available') {
-							<div class="form-group row">
-								<label class="col col-form-label col-form-label-sm">{{ entity.description }}</label>
-							</div>
+@if (entity(); as entity) {
+	<div class="card">
+		<div class="card-header"><a routerLink="/modules">Station Modules</a> - {{ entity.name }}</div>
+		<div class="card-body">
+			@if (entity.description != 'No information available') {
+				<p class="mb-3">{{ entity.description }}</p>
+			}
+			<div class="grid gap-x-6 gap-y-3 md:grid-cols-2">
+				<dl class="details">
+					<dt>Race</dt>
+					<dd>
+						@if (entity.makerRace) {
+							<a [routerLink]="['/races', entity.makerRace.id]">{{ entity.makerRace.name }}</a>
+						} @else {
+							-
 						}
-						<div class="row">
-							<div class="col-md-6 col-sm-12">
-								<dl class="row">
-									<dt class="col-5">Race</dt>
-									<dd class="col-7">
-										@if (entity.makerRace) {
-											<span>
-												<a [routerLink]="['/races', entity.makerRace.id]">{{
-													entity.makerRace.name
-												}}</a>
-											</span>
-										}
-										@if (!entity.makerRace) {
-											<span> - </span>
-										}
-									</dd>
-									<dt class="col-5">Type</dt>
-									<dd class="col-7">
-										@if (entity.type) {
-											<span>{{ entity.type }}</span>
-										}
-										@if (!entity.type) {
-											<span> - </span>
-										}
-									</dd>
-									<dt class="col-5">Product</dt>
-									<dd class="col-7">
-										@if (entity.product && entity.product.length) {
-											<div>
-												@for (prod of entity.product; track prod) {
-													<div>
-														<a [routerLink]="['/wares/', prod.id]">{{ prod.name }}</a>
-													</div>
-												}
-											</div>
-										}
-										@if (!entity.product) {
-											<span> - </span>
-										}
-									</dd>
-									@if (entity.cargo) {
-										<dt class="col-5">Storage Capacity ({{ entity.cargo.type?.name }})</dt>
-										<dd class="col-7">{{ entity.cargo.max | number }}</dd>
-									}
-									<dt class="col-5">Hull</dt>
-									<dd class="col-7">{{ entity.hull | number }}</dd>
-									<dt class="col-5">Explosion Damage</dt>
-									<dd class="col-7">
-										@if (entity.explosionDamage) {
-											<span>{{ entity.explosionDamage | number }}</span>
-										}
-										@if (!entity.explosionDamage) {
-											<span> - </span>
-										}
-									</dd>
-									@if (entity.workForce?.max) {
-										<dt class="col-5">Workforce Needed</dt>
-										<dd class="col-7">{{ entity.workForce.max }}</dd>
-									}
-									@if (entity.workForce?.capacity) {
-										<dt class="col-5">Workforce Capacity</dt>
-										<dd class="col-7">{{ entity.workForce.capacity }}</dd>
-									}
-									<dt class="col-5">Owners</dt>
-									<dd class="col-7">
-										<ul class="list-unstyled">
-											@for (item of entity.owners; track item) {
-												<li>
-													<a [routerLink]="['/factions/', item.id]">{{ item.name }}</a>
-												</li>
-											}
-										</ul>
-									</dd>
-								</dl>
+					</dd>
+					<dt>Type</dt>
+					<dd>{{ entity.type || '-' }}</dd>
+					<dt>Product</dt>
+					<dd>
+						@for (prod of entity.product; track prod.id) {
+							<div>
+								<a [routerLink]="['/wares', prod.id]">{{ prod.name }}</a>
 							</div>
-							<div class="col-md-6 col-sm-12">
-								<div class="col-md-4 col-sm-12">
-									<dl class="row">
-										<dt class="col-5">Turrets</dt>
-										<dd class="col-7">{{ getSlotsStr(entity.turrets) }}</dd>
-										<dt class="col-5">Shields</dt>
-										<dd class="col-7">{{ getSlotsStr(entity.shields) }}</dd>
-									</dl>
-								</div>
-							</div>
-						</div>
-						@if (entityProduction && entityProduction.length) {
-							<div class="row mt-2 mb-2">
-								@for (production of entityProduction; track production) {
-									<div class="col-md-6 col-sm-6 col-lg-4">
-										<div class="card shadow-sm">
-											<div class="card-header">
-												Production: <em>{{ production.name }}</em>
-											</div>
-											<div class="card-body">
-												@if (production.wares.length) {
-													<div class="row">
-														<div class="col">
-															<h6>Requirements</h6>
-															<table class="table table-sm">
-																<thead>
-																	<tr>
-																		<th>Resource</th>
-																		<th class="text-right">Min</th>
-																		<th class="text-right">Max</th>
-																		<th class="text-right">Avg</th>
-																	</tr>
-																</thead>
-																<tbody>
-																	@for (item of production.wares; track item) {
-																		<tr>
-																			<td>
-																				{{ item.amount }} x
-																				<a
-																					[routerLink]="[
-																						'/wares/',
-																						item.ware.id,
-																					]"
-																					>{{ item.ware.name }}</a
-																				>
-																			</td>
-																			<td class="text-right">
-																				{{
-																					item.amount * item.ware.price.min
-																						| number
-																				}}
-																			</td>
-																			<td class="text-right">
-																				{{
-																					item.amount * item.ware.price.max
-																						| number
-																				}}
-																			</td>
-																			<td class="text-right">
-																				{{
-																					item.amount * item.ware.price.avg
-																						| number
-																				}}
-																			</td>
-																		</tr>
-																	}
-																</tbody>
-																<tfoot>
-																	<tr>
-																		<th class="text-right">Total</th>
-																		<th class="text-right">
-																			{{ getTotalMin(production) | number }}
-																		</th>
-																		<th class="text-right">
-																			{{ getTotalMax(production) | number }}
-																		</th>
-																		<th class="text-right">
-																			{{ getTotalAvg(production) | number }}
-																		</th>
-																	</tr>
-																</tfoot>
-															</table>
-														</div>
-													</div>
-												}
-												<div class="row">
-													<div class="col">
-														<h6>Production</h6>
-														<table class="table table-sm">
-															<tbody>
-																<tr>
-																	<td>Time</td>
-																	<td class="text-right">
-																		{{ getProductionTime(production.time) }}
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								}
-							</div>
+						} @empty {
+							-
 						}
-					</div>
-				}
+					</dd>
+					@if (entity.cargo) {
+						<dt>Storage Capacity ({{ entity.cargo.type?.name }})</dt>
+						<dd>{{ entity.cargo.max | number }}</dd>
+					}
+					<dt>Hull</dt>
+					<dd>{{ entity.hull | number }}</dd>
+					<dt>Explosion Damage</dt>
+					<dd>{{ entity.explosionDamage ? (entity.explosionDamage | number) : '-' }}</dd>
+					@if (entity.workForce?.max) {
+						<dt>Workforce Needed</dt>
+						<dd>{{ entity.workForce.max }}</dd>
+					}
+					@if (entity.workForce?.capacity) {
+						<dt>Workforce Capacity</dt>
+						<dd>{{ entity.workForce.capacity }}</dd>
+					}
+					<dt>Owners</dt>
+					<dd>
+						<ul>
+							@for (item of entity.owners; track item.id) {
+								<li>
+									<a [routerLink]="['/factions', item.id]">{{ item.name }}</a>
+								</li>
+							}
+						</ul>
+					</dd>
+				</dl>
+				<dl class="details self-start">
+					<dt>Turrets</dt>
+					<dd>{{ getSlotsStr(entity.turrets) }}</dd>
+					<dt>Shields</dt>
+					<dd>{{ getSlotsStr(entity.shields) }}</dd>
+				</dl>
 			</div>
-		}
+			@if (production().length) {
+				<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+					@for (item of production(); track $index) {
+						<app-production-card [production]="item" />
+					}
+				</div>
+			}
+		</div>
 	</div>
-</div>
+}

@@ -1,48 +1,6 @@
-<div class="row content-row">
-   <div class="col-md-12">
-      <div class="card shadow">
-         <div class="card-header shadow-sm" i18n="@@stationModules">
-            Station Modules
-         </div>
-         <div class="card-body">
-            <dx-data-grid [dataSource]="entities"
-                          [allowColumnReordering]="true"
-                          [allowColumnResizing]="true"
-                          [showBorders]="true"
-                          [hoverStateEnabled]="true"
-                          (onCellClick)="onRowSelect($event)"
-                          keyExpr="id">
-               <dxo-pager [showPageSizeSelector]="true" [showNavigationButtons]="true"></dxo-pager>
-               <dxo-sorting mode="multiple"></dxo-sorting>
-               <dxo-filter-row [applyFilter]="currentFilter" [visible]="true"></dxo-filter-row>
-               <dxo-filter-panel [visible]="true"></dxo-filter-panel>
-
-               <dxi-column dataField="name" caption="Name"></dxi-column>
-               <dxi-column dataField="type" caption="Type">
-                  <dxo-lookup [dataSource]="moduleTypes"></dxo-lookup>
-               </dxi-column>
-               <dxi-column dataField="makerRace.id" caption="Race">
-                  <dxo-lookup [dataSource]="races" valueExpr="id" displayExpr="name"></dxo-lookup>
-               </dxi-column>
-               <dxi-column [calculateDisplayValue]="calculateProduct"
-                           [allowSorting]="true"
-                           [allowFiltering]="true"
-                           caption="Product"
-                           name="productName"></dxi-column>
-               <dxi-column [calculateDisplayValue]="calculateMaxEfficiencyDisplay"
-                           [calculateSortValue]="calculateMaxEfficiency"
-                           [allowSorting]="true"
-                           [allowFiltering]="true"
-                           caption="Max Efficiency"
-                           name="maxEfficiency"></dxi-column>
-               <dxo-summary>
-                  <dxi-total-item
-                     column="name"
-                     summaryType="count">
-                  </dxi-total-item>
-               </dxo-summary>
-            </dx-data-grid>
-         </div>
-      </div>
-   </div>
+<div class="card">
+	<div class="card-header" i18n="@@stationModules">Station Modules</div>
+	<div class="card-body">
+		<app-data-grid [data]="entities" [columns]="columns" [clickable]="true" (rowClick)="open($event)" />
+	</div>
 </div>

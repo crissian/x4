@@ -1,109 +1,80 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
+import {
+	CdkDrag,
+	CdkDragDrop,
+	CdkDragHandle,
+	CdkDragPreview,
+	CdkDropList,
+	moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import { Component, inject, input } from '@angular/core';
+import { FieldTree, FormField } from '@angular/forms/signals';
 import { AllModuleTypes, ModuleTypes } from '../../shared/services/data/module-types-data';
-import { StationModule } from '../../shared/services/model/model';
+import { StationModule, WareGroup } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
 import { WareService } from '../../shared/services/ware.service';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import {
+	ModuleRow,
 	RECYCLING_MODULES,
 	ResourceCalculator,
 	StationModuleModel,
-	StationResourceModel,
 	WareGroupModel,
 } from './station-calculator.model';
-import { StationSummaryService } from './station-summary/services/station-summary.service';
 
 @Component({
 	selector: 'app-station-modules',
+	imports: [FormField, CdkDropList, CdkDrag, CdkDragHandle, CdkDragPreview, AutocompleteComponent],
 	templateUrl: './station-modules.component.html',
-	styleUrls: ['./station-modules.component.scss'],
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
+	styleUrl: './station-modules.component.css',
 })
-export class StationModulesComponent implements OnInit {
-	wareGroups: WareGroupModel[];
+export class StationModulesComponent {
+	private readonly moduleService = inject(ModuleService);
+	private readonly wareService = inject(WareService);
 
-	@Output()
-	change = new EventEmitter();
+	readonly rows = input.required<FieldTree<ModuleRow[]>>();
+	readonly modules = input.required<StationModuleModel[]>();
+	readonly sunlight = input(100);
+	readonly partialWorkforce = input(0);
 
-	@Input()
-	modules: StationModuleModel[];
+	readonly wareGroups: WareGroupModel[] = this.createWareGroups();
 
-	@Input()
-	sunlight = 100;
-
-	constructor(
-		private moduleService: ModuleService,
-		private wareService: WareService,
-		private stationSummaryService: StationSummaryService
-	) {}
-
-	ngOnInit(): void {
-		const groupsObj = this.moduleService
-			.getModulesByType(ModuleTypes.production)
-			.reduce((obj, item: StationModule) => {
-				if (RECYCLING_MODULES.includes(item.id)) {
-					obj[ModuleTypes.recycling] = obj[ModuleTypes.recycling] || {
-						name: ModuleTypes.recycling,
-						group: ModuleTypes.recycling,
-						modules: [],
-					};
-					obj[ModuleTypes.recycling].modules.push(item);
-					return obj;
-				}
-
-				for (let product of item.product) {
-					obj[product.group.id] = obj[product.group.id] || {
-						name: product.group.name,
-						group: product.group,
-						modules: [],
-					};
-					obj[product.group.id].modules.push(item);
-				}
-				return obj;
-			}, []);
-
-		this.wareGroups = Object.keys(groupsObj)
-			.map((x) => groupsObj[x])
-			.sort((a, b) => this.wareService.compareGroups(a.group, b.group));
-
-		for (const type of AllModuleTypes) {
-			this.wareGroups.push({ name: type, modules: this.moduleService.getModulesByType(type) });
-		}
-	}
-
-	removeModule(item: StationModuleModel) {
-		const index = this.modules.indexOf(item);
-		if (index >= 0) {
-			this.modules.splice(index, 1);
-			this.onChange();
-		}
+	removeModule(index: number) {
+		this.rows()().value.update((rows) => rows.filter((_, i) => i !== index));
 	}
 
 	addModule() {
-		this.modules.push(new StationModuleModel(this.wareService, this.moduleService));
+		this.rows()().value.update((rows) => [...rows, { moduleId: '', count: 1 }]);
 	}
 
-	onChange() {
-		this.change.emit();
+	onSelectModule(id: string, index: number) {
+		this.rows()[index].moduleId().value.set(id);
 	}
 
+	drop(event: CdkDragDrop<unknown>) {
+		this.rows()().value.update((rows) => {
+			const result = [...rows];
+			moveItemInArray(result, event.previousIndex, event.currentIndex);
+			return result;
+		});
+	}
+
+	/** Adds production modules until every needed resource is produced by the station. */
 	autofillModules() {
-		const habitat = this.modules.find((x) => x.module?.type === ModuleTypes.habitation);
-		let method = 'default';
-		if (habitat) {
-			method = habitat.module.makerRace.id;
-		}
-
-		while (true) {
-			const resources: StationResourceModel[] = ResourceCalculator.calculate(
-				this.modules,
-				this.sunlight,
-				this.stationSummaryService.$partialWorkforce
+		const toModels = (rows: ModuleRow[]) =>
+			rows.map(
+				(x) => new StationModuleModel(this.wareService, this.moduleService, x.moduleId, Number(x.count) || 0)
 			);
-			let didChange = false;
 
-			const modules = this.modules;
+		const rows = this.rows()()
+			.value()
+			.map((x) => ({ ...x }));
+		const habitat = toModels(rows).find((x) => x.module?.type === ModuleTypes.habitation);
+		const method = habitat ? habitat.module.makerRace.id : 'default';
+
+		let didChange = true;
+		while (didChange) {
+			didChange = false;
+			const resources = ResourceCalculator.calculate(toModels(rows), this.sunlight(), this.partialWorkforce());
 
 			for (const resource of resources) {
 				if (resource.amount >= 0) {
@@ -120,46 +91,50 @@ export class StationModulesComponent implements OnInit {
 				didChange = true;
 
 				const product = module.product.find((x) => x.id == resource.ware.id);
-
 				const productionWare =
 					product.production.find((p) => p.method == method) ||
 					product.production.find((p) => p.method == 'default');
 				const productionPerHour = productionWare.amount * (3600 / productionWare.time);
 				const moduleCount = Math.ceil(-resource.amount / productionPerHour);
 
-				const existingModule = modules.find((m) => m.module?.id == module.id);
-				if (existingModule == null) {
-					modules.push(new StationModuleModel(this.wareService, this.moduleService, module.id, moduleCount));
+				const existing = rows.find((m) => m.moduleId == module.id);
+				if (existing == null) {
+					rows.push({ moduleId: module.id, count: moduleCount });
 				} else {
-					existingModule.count += moduleCount;
+					existing.count += moduleCount;
 				}
-			}
-
-			if (!didChange) {
-				break;
 			}
 		}
 
-		this.onChange();
+		this.rows()().value.set(rows);
 	}
 
-	/**
-	 * on module selected
-	 *
-	 * @param id module id
-	 * @param item the station module item
-	 */
-	onSelectModule(id: string, item: StationModuleModel) {
-		this.modules[this.modules.indexOf(item)].moduleId = id;
-		this.onChange();
-	}
+	private createWareGroups() {
+		const groups: Record<string, WareGroupModel & { group: WareGroup | string }> = {};
+		for (const item of this.moduleService.getModulesByType(ModuleTypes.production)) {
+			if (RECYCLING_MODULES.includes(item.id)) {
+				groups[ModuleTypes.recycling] ??= {
+					name: ModuleTypes.recycling,
+					group: ModuleTypes.recycling,
+					modules: [],
+				};
+				groups[ModuleTypes.recycling].modules.push(item);
+				continue;
+			}
 
-	/**
-	 * move item in modules on drop
-	 *
-	 * @param event drop event
-	 */
-	drop(event: CdkDragDrop<StationModuleModel[]>) {
-		moveItemInArray(this.modules, event.previousIndex, event.currentIndex);
+			for (const product of item.product) {
+				groups[product.group.id] ??= { name: product.group.name, group: product.group, modules: [] };
+				groups[product.group.id].modules.push(item);
+			}
+		}
+
+		const result: WareGroupModel[] = Object.values(groups).sort((a, b) =>
+			this.wareService.compareGroups(a.group as WareGroup, b.group as WareGroup)
+		);
+
+		for (const type of AllModuleTypes) {
+			result.push({ name: type, modules: this.moduleService.getModulesByType(type) as StationModule[] });
+		}
+		return result;
 	}
 }

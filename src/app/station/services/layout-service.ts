@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { StorageService } from '../../core/services/storage.service';
 import { Layout } from '../../shared/services/module-config';
 import { LayoutV0Service } from './layout-v0.service';
@@ -8,69 +8,67 @@ import { ModuleService } from '../../shared/services/module.service';
 import { LayoutVersionService } from './layout-version.service';
 import { AnalyticsService } from '../../google-analytics/services/analytics.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LayoutService {
-   private static version = 2;
-   private static storageKey = 'layouts';
+	private static version = 2;
+	private static storageKey = 'layouts';
 
-   private readonly services: LayoutVersionService[];
+	private readonly services: LayoutVersionService[];
 
-   private getCurrentService() {
-      return this.services[LayoutService.version];
-   }
+	private getCurrentService() {
+		return this.services[LayoutService.version];
+	}
 
-   constructor(private storageService: StorageService, private moduleService: ModuleService, private analytics: AnalyticsService) {
-      this.services = [
-         new LayoutV0Service(),
-         new LayoutV1Service(moduleService),
-         new LayoutV2Service()
-      ];
-   }
+	private readonly storageService = inject(StorageService);
+	private readonly analytics = inject(AnalyticsService);
 
-   getLayouts(): Layout[] {
-      const data = this.storageService.get<any>(LayoutService.storageKey) || { version: LayoutService.version };
+	constructor() {
+		this.services = [new LayoutV0Service(), new LayoutV1Service(inject(ModuleService)), new LayoutV2Service()];
+	}
 
-      const layoutVersion = data.version || 0;
+	getLayouts(): Layout[] {
+		const data = this.storageService.get<any>(LayoutService.storageKey) || { version: LayoutService.version };
 
-      const layouts = this.services[layoutVersion].getLayouts(data);
-      return layouts || [];
-   }
+		const layoutVersion = data.version || 0;
 
-   getLayout(name: string): Layout {
-      this.analytics.event({ label: name, category: 'Layouts', action: 'Load Layout' });
-      return this.getLayouts()
-         .find(x => x.name === name);
-   }
+		const layouts = this.services[layoutVersion].getLayouts(data);
+		return layouts || [];
+	}
 
-   saveLayout(layout: Layout) {
-      const layouts = this.getLayouts();
+	getLayout(name: string): Layout {
+		this.analytics.event({ label: name, category: 'Layouts', action: 'Load Layout' });
+		return this.getLayouts().find((x) => x.name === name);
+	}
 
-      const index = layouts.findIndex(x => x.name.toLowerCase() === layout.name.toLowerCase());
+	saveLayout(layout: Layout) {
+		const layouts = this.getLayouts();
 
-      if (index >= 0) {
-         layouts[index] = layout;
-      } else {
-         layouts.push(layout);
-      }
+		const index = layouts.findIndex((x) => x.name.toLowerCase() === layout.name.toLowerCase());
 
-      this.analytics.event({ label: layout.name, category: 'Layouts', action: 'Save Layout' });
-      this.saveLayoutsInternal(layouts);
-   }
+		if (index >= 0) {
+			layouts[index] = layout;
+		} else {
+			layouts.push(layout);
+		}
 
-   deleteLayout(name: string) {
-      this.analytics.event({ label: name, category: 'Layouts', action: 'Delete Layout' });
-      const layouts = this.getLayouts();
+		this.analytics.event({ label: layout.name, category: 'Layouts', action: 'Save Layout' });
+		this.saveLayoutsInternal(layouts);
+	}
 
-      const index = layouts.findIndex(x => x.name.toLowerCase() === name.toLowerCase());
-      if (index >= 0) {
-         layouts.splice(index, 1);
-      }
+	deleteLayout(name: string) {
+		this.analytics.event({ label: name, category: 'Layouts', action: 'Delete Layout' });
+		const layouts = this.getLayouts();
 
-      this.saveLayoutsInternal(layouts);
-   }
+		const index = layouts.findIndex((x) => x.name.toLowerCase() === name.toLowerCase());
+		if (index >= 0) {
+			layouts.splice(index, 1);
+		}
 
-   saveLayoutsInternal(layouts: Layout[]) {
-      const data = this.getCurrentService().getSaveData(layouts);
-      this.storageService.add(LayoutService.storageKey, { ...data, version: LayoutService.version });
-   }
+		this.saveLayoutsInternal(layouts);
+	}
+
+	saveLayoutsInternal(layouts: Layout[]) {
+		const data = this.getCurrentService().getSaveData(layouts);
+		this.storageService.add(LayoutService.storageKey, { ...data, version: LayoutService.version });
+	}
 }

@@ -1,20 +1,16 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, model } from '@angular/core';
 import { Message } from '../services/message';
+import { AlertComponent } from './alert.component';
 
 @Component({
 	selector: 'app-messages',
+	imports: [AlertComponent],
 	templateUrl: './messages.component.html',
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
 })
 export class MessagesComponent {
-	@Input()
-	messages: Message[];
+	readonly messages = model.required<Message[]>();
 
 	close(message: Message) {
-		const index = this.messages.indexOf(message);
-		if (index >= 0) {
-			this.messages.splice(index, 1);
-		}
+		this.messages.update((messages) => messages.filter((x) => x !== message));
 	}
 }

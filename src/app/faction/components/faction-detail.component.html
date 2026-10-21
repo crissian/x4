@@ -1,55 +1,28 @@
-<div class="row content-row">
-	<div class="col-md-12">
-		@if (entity) {
-			<div class="card shadow">
-				<div class="card-header shadow-sm"><a routerLink="/factions">Factions</a> - {{ entity.name }}</div>
-				@if (entity) {
-					<div class="card-body small">
-						@if (entity.description != 'No information available') {
-							<div class="form-group row">
-								<label class="col col-form-label col-form-label-sm">{{ entity.description }}</label>
-							</div>
-						}
-						<dl class="row">
-							<dt class="col-sm-2">Race</dt>
-							<dd class="col-sm-10">
-								@if (entity.race) {
-									<span>
-										<a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
-									</span>
-								}
-								@if (!entity.race) {
-									<span> - </span>
-								}
-							</dd>
-						</dl>
-						@if (entity.licenses && entity.licenses.length > 0) {
-							<div class="row mt-2 mb-2">
-								<div class="col-12">
-									<div class="card shadow-sm">
-										<div class="card-header">Licenses</div>
-										<div class="card-body">
-											<dx-data-grid
-												[dataSource]="entity.licenses"
-												[showBorders]="true"
-												[hoverStateEnabled]="true"
-											>
-												<dxi-column dataField="name" caption="Name"></dxi-column>
-												<dxi-column
-													dataField="price"
-													caption="Price"
-													dataType="number"
-													format="fixedPoint"
-												></dxi-column>
-											</dx-data-grid>
-										</div>
-									</div>
-								</div>
-							</div>
-						}
+@if (entity(); as entity) {
+	<div class="card">
+		<div class="card-header"><a routerLink="/factions">Factions</a> - {{ entity.name }}</div>
+		<div class="card-body">
+			@if (entity.description != 'No information available') {
+				<p class="mb-3">{{ entity.description }}</p>
+			}
+			<dl class="details mb-4 max-w-xl">
+				<dt>Race</dt>
+				<dd>
+					@if (entity.race) {
+						<a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
+					} @else {
+						-
+					}
+				</dd>
+			</dl>
+			@if (entity.licenses?.length) {
+				<div class="card">
+					<div class="card-header">Licenses</div>
+					<div class="card-body">
+						<app-data-grid [data]="entity.licenses" [columns]="licenseColumns" [features]="false" />
 					</div>
-				}
-			</div>
-		}
+				</div>
+			}
+		</div>
 	</div>
-</div>
+}

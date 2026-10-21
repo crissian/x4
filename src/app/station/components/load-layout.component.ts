@@ -1,10 +1,11 @@
-import { ComponentBase } from '../../shared/components/component-base';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LayoutService } from '../services/layout-service';
-import { ConfirmComponent } from '../../shared/components/confirm.component';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { Component, inject, signal } from '@angular/core';
+import { ConfirmComponent, ConfirmData } from '../../shared/components/confirm.component';
+import { openDialog } from '../../shared/components/modal/dialog';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { StationModule } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
+import { LayoutService } from '../services/layout-service';
 
 interface LayoutModule {
 	count: number;
@@ -27,86 +28,54 @@ export interface LoadLayoutResult {
 }
 
 @Component({
+	imports: [ModalComponent],
 	templateUrl: './load-layout.component.html',
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
 })
-export class LoadLayoutComponent extends ComponentBase implements OnInit {
-	entities: LayoutData[];
+export class LoadLayoutComponent {
+	protected readonly dialogRef = inject<DialogRef<LoadLayoutResult>>(DialogRef);
+	private readonly dialog = inject(Dialog);
+	private readonly layoutService = inject(LayoutService);
+	private readonly moduleService = inject(ModuleService);
 
-	constructor(
-		public activeModal: NgbActiveModal,
-		private modal: NgbModal,
-		private layoutService: LayoutService,
-		private moduleService: ModuleService
-	) {
-		super();
-	}
+	protected readonly LoadLayoutType = LoadLayoutType;
+	readonly entities = signal<LayoutData[]>(this.readLayouts());
 
-	ngOnInit(): void {
-		this.entities = this.layoutService.getLayouts().map<LayoutData>((x) => {
-			return {
-				name: x.name,
-				modules: x.config.map<LayoutModule>((y) => {
-					return { count: y.count, module: this.moduleService.getEntity(y.moduleId) };
-				}),
-			};
-		});
-	}
-
-	// noinspection JSMethodCanBeStatic
 	getModules(item: LayoutData) {
-		let hasMore = false;
-
-		let modules = item.modules;
-		if (modules.length > 3) {
-			modules = modules.slice(0, 3);
-			hasMore = true;
-		}
-
+		const modules = item.modules.slice(0, 3);
 		return (
 			modules.map((x) => x.count + ' x ' + (x.module == null ? '' : x.module.name)).join(', ') +
-			(hasMore ? '...' : '')
+			(item.modules.length > 3 ? '...' : '')
 		);
 	}
 
-	loadLayout(event: any, item: LayoutData) {
-		event.preventDefault();
-		event.stopPropagation();
-
-		const result: LoadLayoutResult = {
-			layoutName: item.name,
-			type: LoadLayoutType.load,
-		};
-
-		this.activeModal.close(result);
+	close(item: LayoutData, type: LoadLayoutType, event?: Event) {
+		event?.stopPropagation();
+		this.dialogRef.close({ layoutName: item.name, type });
 	}
 
-	addLayout(event: any, item: LayoutData) {
-		event.preventDefault();
+	deleteLayout(item: LayoutData, event: Event) {
 		event.stopPropagation();
 
-		const result: LoadLayoutResult = {
-			layoutName: item.name,
-			type: LoadLayoutType.add,
-		};
-
-		this.activeModal.close(result);
-	}
-
-	deleteLayout(event: any, item: LayoutData) {
-		event.preventDefault();
-		event.stopPropagation();
-
-		const modalRef = this.modal.open(ConfirmComponent);
-		modalRef.componentInstance.title = 'Confirm Delete';
-		modalRef.componentInstance.message = `Are you sure you want to delete <strong>${item.name}</strong>?`;
-
-		modalRef.result.then((res) => {
+		openDialog<boolean, ConfirmData>(this.dialog, ConfirmComponent, {
+			data: {
+				title: 'Confirm Delete',
+				message: `Are you sure you want to delete <strong>${item.name}</strong>?`,
+			},
+		}).closed.subscribe((res) => {
 			if (res) {
 				this.layoutService.deleteLayout(item.name);
-				this.ngOnInit();
+				this.entities.set(this.readLayouts());
 			}
 		});
+	}
+
+	private readLayouts() {
+		return this.layoutService.getLayouts().map<LayoutData>((x) => ({
+			name: x.name,
+			modules: x.config.map<LayoutModule>((y) => ({
+				count: y.count,
+				module: this.moduleService.getEntity(y.moduleId),
+			})),
+		}));
 	}
 }

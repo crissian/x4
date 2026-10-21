@@ -1,28 +1,19 @@
+import { Component, inject } from '@angular/core';
+import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
+import { injectRowNavigation } from '../../shared/components/list-page';
 import { Race } from '../../shared/services/model/model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { RaceService } from '../../shared/services/race.service';
-import { EntityListComponent } from '../../shared/components/entity-list.component';
-import { BASE_TITLE } from '../../shared/services/constants';
 
 @Component({
+	imports: [DataGridComponent],
 	templateUrl: './races.component.html',
-	changeDetection: ChangeDetectionStrategy.Eager,
-	standalone: false,
 })
-export class RacesComponent extends EntityListComponent<Race> implements OnInit {
-	constructor(
-		private raceService: RaceService,
-		router: Router,
-		route: ActivatedRoute,
-		private titleService: Title
-	) {
-		super(raceService, router, route);
-	}
+export class RacesComponent {
+	protected readonly entities = inject(RaceService).getEntities();
+	protected readonly open = injectRowNavigation<Race>();
 
-	override ngOnInit(): void {
-		this.titleService.setTitle(`${BASE_TITLE} - Races`);
-		super.ngOnInit();
-	}
+	protected readonly columns: GridColumn<Race>[] = [
+		{ key: 'name', caption: 'Name' },
+		{ key: 'description', caption: 'Description' },
+	];
 }
