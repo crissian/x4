@@ -9,6 +9,7 @@ export enum EquipmentClass {
    scanner = 'Scanner',
    mine = 'Mine',
    missilelauncher = 'Missile Launcher',
+   component = 'Software',
 
    ship_s = 'Small Drone',
    ship_xs = 'Extra Small Drone',

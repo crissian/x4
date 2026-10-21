@@ -5,5 +5,6 @@ export enum ShipPurpose {
    fight = 'Fight',
    trade = 'Trade',
    salvage = 'Salvage',
-   dismantling = 'Dismantling'
+   dismantling = 'Dismantling',
+   racing = 'Racing'
 }
