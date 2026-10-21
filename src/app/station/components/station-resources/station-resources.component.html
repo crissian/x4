@@ -1,35 +1,48 @@
 <table class="table table-sm small">
-  <thead>
-  <tr>
-    <th i18n="@@resources" scope="col">Resource</th>
-    <th class="text-right" i18n="@@amount" scope="col">Amount</th>
-  </tr>
-  </thead>
-  <tbody>
-
-  <ng-container *ngFor="let item of resources">
-    <tr class="hover" (click)="toggleExpanded(item)">
-      <td>
-        <i *ngIf="!item.expanded" class="fa fa-angle-double-down"></i>
-        <i *ngIf="item.expanded" class="fa fa-angle-double-up"></i>
-        <span [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }"> {{ item.ware.name }}</span>
-      </td>
-      <td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">{{ item.amount | number:'1.0-0' }}</td>
-    </tr>
-    <ng-container *ngIf="item.expanded">
-      <tr *ngFor="let moduleRes of item.items" [ngClass]="{'text-danger': moduleRes.total < 0, 'text-success': moduleRes.total > 0 }">
-        <td class="pl-4">
-          <strong>{{ moduleRes.count }}</strong> x <strong>{{ moduleRes.name }}</strong>
-          <ng-container *ngIf="moduleRes.total > 0">
-            <span i18n="@@at"> at</span>&nbsp;<strong>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong>&nbsp;<span i18n="@@efficiency">efficiency</span>
-          </ng-container>
-          <ng-container *ngIf="moduleRes.type === 'Habitation'">
-              <span i18n="@@at"> at</span>&nbsp;<strong>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong>&nbsp;<span i18n="@@capacity">capacity</span>
-          </ng-container>
-        </td>
-        <td class="text-right">{{ (moduleRes.total) | number:'1.0-0' }}</td>
-      </tr>
-    </ng-container>
-  </ng-container>
-  </tbody>
+	<thead>
+		<tr>
+			<th i18n="@@resources" scope="col">Resource</th>
+			<th class="text-right" i18n="@@amount" scope="col">Amount</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (item of resources; track item) {
+			<tr class="hover" (click)="toggleExpanded(item)">
+				<td>
+					@if (!item.expanded) {
+						<i class="fa fa-angle-double-down"></i>
+					}
+					@if (item.expanded) {
+						<i class="fa fa-angle-double-up"></i>
+					}
+					<span [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">
+						{{ item.ware.name }}</span
+					>
+				</td>
+				<td class="text-right" [ngClass]="{ 'text-danger': item.amount < 0, 'text-success': item.amount > 0 }">
+					{{ item.amount | number: '1.0-0' }}
+				</td>
+			</tr>
+			@if (item.expanded) {
+				@for (moduleRes of item.items; track moduleRes) {
+					<tr [ngClass]="{ 'text-danger': moduleRes.total < 0, 'text-success': moduleRes.total > 0 }">
+						<td class="pl-4">
+							<strong>{{ moduleRes.count }}</strong> x <strong>{{ moduleRes.name }}</strong>
+							@if (moduleRes.total > 0) {
+								<span i18n="@@at"> at</span>&nbsp;<strong
+									>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong
+								>&nbsp;<span i18n="@@efficiency">efficiency</span>
+							}
+							@if (moduleRes.type === 'Habitation') {
+								<span i18n="@@at"> at</span>&nbsp;<strong
+									>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong
+								>&nbsp;<span i18n="@@capacity">capacity</span>
+							}
+						</td>
+						<td class="text-right">{{ moduleRes.total | number: '1.0-0' }}</td>
+					</tr>
+				}
+			}
+		}
+	</tbody>
 </table>

@@ -1,26 +1,34 @@
 <div class="modal-header">
-  <h4 class="modal-title" i18n="@@loadLayout">Load Layout</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
-    <span aria-hidden="true">&times;</span>
-  </button>
+	<h4 class="modal-title" i18n="@@loadLayout">Load Layout</h4>
+	<button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
+		<span aria-hidden="true">&times;</span>
+	</button>
 </div>
 <div class="modal-body">
-  <div class="list-group">
-    <a *ngFor="let entity of entities" class="list-group-item list-group-item-action" (click)="loadLayout($event, entity)">
-      <div>
-        <strong>{{ entity.name }}</strong>
-        <div class="float-right small">
-          <a class="hover text-primary" i18n="@@load" (click)="loadLayout($event, entity)">Load Layout</a> |
-          <a class="hover text-secondary" i18n="@@load" (click)="addLayout($event, entity)">Add Modules</a> |
-          <a class="hover text-danger" (click)="deleteLayout($event, entity)" i18n="@@delete">Delete Layout</a>
-        </div>
-      </div>
-      <div class="small">
-        {{ getModules(entity) }}
-      </div>
-    </a>
-  </div>
+	<div class="list-group">
+		@for (entity of entities; track entity) {
+			<a class="list-group-item list-group-item-action" (click)="loadLayout($event, entity)">
+				<div>
+					<strong>{{ entity.name }}</strong>
+					<div class="float-right small">
+						<a class="hover text-primary" i18n="@@load" (click)="loadLayout($event, entity)">Load Layout</a>
+						|
+						<a class="hover text-secondary" i18n="@@load" (click)="addLayout($event, entity)"
+							>Add Modules</a
+						>
+						|
+						<a class="hover text-danger" (click)="deleteLayout($event, entity)" i18n="@@delete"
+							>Delete Layout</a
+						>
+					</div>
+				</div>
+				<div class="small">
+					{{ getModules(entity) }}
+				</div>
+			</a>
+		}
+	</div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="activeModal.close()" i18n="@@cancel">Cancel</button>
+	<button type="button" class="btn btn-secondary" (click)="activeModal.close()" i18n="@@cancel">Cancel</button>
 </div>

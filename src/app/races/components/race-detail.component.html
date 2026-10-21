@@ -1,14 +1,18 @@
 <div class="row content-row">
-  <div class="col-md-12">
-    <div class="card shadow" *ngIf="entity">
-      <div class="card-header shadow-sm">
-        <a routerLink="/races">Races</a> - {{ entity.name }}
-      </div>
-      <div class="card-body small" *ngIf="entity">
-        <div class="form-group row" *ngIf="entity.description != 'No information available'">
-          <label class="col col-form-label col-form-label-sm">{{ entity.description }}</label>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="col-md-12">
+		@if (entity) {
+			<div class="card shadow">
+				<div class="card-header shadow-sm"><a routerLink="/races">Races</a> - {{ entity.name }}</div>
+				@if (entity) {
+					<div class="card-body small">
+						@if (entity.description != 'No information available') {
+							<div class="form-group row">
+								<label class="col col-form-label col-form-label-sm">{{ entity.description }}</label>
+							</div>
+						}
+					</div>
+				}
+			</div>
+		}
+	</div>
 </div>
