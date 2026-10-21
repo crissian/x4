@@ -2,9 +2,10 @@
 	<div class="card">
 		<div class="card-header flex items-center justify-between gap-3">
 			<span><a routerLink="/sectors">Sectors</a> - {{ entity.name }}</span>
-			<a routerLink="/map" [queryParams]="{ sector: entity.id }" class="text-sm font-normal"
-				><svg lucideMapPinned class="mr-0.5" /> Show on map</a
-			>
+			<span class="flex gap-4 text-sm font-normal">
+				<a routerLink="/map" [queryParams]="{ sector: entity.id }"><svg lucideMapPinned class="mr-0.5" /> Show on map</a>
+				<a routerLink="/map" [queryParams]="{ sector: entity.id, to: entity.id }"><svg lucideRoute class="mr-0.5" /> Plan route here</a>
+			</span>
 		</div>
 		<div class="card-body flow-root">
 			<app-entity-image kind="sectors" [id]="entity.id" [alt]="entity.name" />

@@ -7,6 +7,7 @@ import {
 	effect,
 	inject,
 	input,
+	linkedSignal,
 	signal,
 	untracked,
 	viewChild,
@@ -14,16 +15,30 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { LucideX, LucideZoomIn, LucideZoomOut, LucideExpand } from '@lucide/angular';
 import { AbandonedShips } from '../shared/services/data/abandoned-ships-data';
+import { GodStations } from '../shared/services/data/god-stations-data';
+import { Size } from '../shared/services/data/size-data';
+import { EquipmentService } from '../shared/services/equipment.service';
 import { FactionService } from '../shared/services/faction.service';
-import { AbandonedShip, Faction, Sector } from '../shared/services/model/model';
+import { AbandonedShip, Faction, GodStation, Sector } from '../shared/services/model/model';
 import { ShipStatsService } from '../shared/services/ship-stats.service';
 import { ShipService } from '../shared/services/ship.service';
 import { ClusterService, GAME_VERSIONS, SectorService } from '../shared/services/universe.service';
 import { WareService } from '../shared/services/ware.service';
 import { CLUSTER_RADIUS, SectorShape, layoutGalaxy } from './galaxy-layout';
+import { minerCapacity, minersFor, miningTrip } from './mining';
 import { formatDuration, travelTimes } from './route-planner';
 
 type ColorMode = 'owner' | 'sunlight' | 'security' | 'resource';
+type PanelTab = 'route' | 'mining' | 'stations' | 'abandoned';
+
+const STATION_TYPES = [
+	{ id: 'shipyard', label: 'Shipyard', letter: 'S', color: '#f59e0b' },
+	{ id: 'wharf', label: 'Wharf', letter: 'W', color: '#22d3ee' },
+	{ id: 'equipmentdock', label: 'Equipment dock', letter: 'E', color: '#a3e635' },
+	{ id: 'tradestation', label: 'Trading station', letter: 'T', color: '#e879f9' },
+	{ id: 'defence', label: 'Defence station', letter: 'D', color: '#f87171' },
+	{ id: 'piratebase', label: 'Pirate base', letter: 'P', color: '#fb923c' },
+];
 
 const VERSIONS_KEY = 'map-versions';
 
@@ -92,9 +107,13 @@ export default class MapComponent {
 	private readonly wares = inject(WareService);
 	private readonly ships = inject(ShipService);
 	private readonly shipStats = inject(ShipStatsService);
+	private readonly equipment = inject(EquipmentService);
 
 	/** Sector to highlight, from the `?sector=` query parameter. */
 	readonly sector = input<string>();
+	/** Route start and destination, from the `?from=` and `?to=` query parameters. */
+	readonly from = input<string>();
+	readonly to = input<string>();
 
 	private readonly container = viewChild.required<ElementRef<HTMLElement>>('container');
 
@@ -133,6 +152,18 @@ export default class MapComponent {
 	private readonly visibleSectors = computed(() => this.visibleShapes().map((x) => x.sector));
 	private readonly shapeById = new Map(this.layout.shapes.map((x) => [x.sector.id, x]));
 
+	// side panel
+	protected readonly tab = signal<PanelTab>('route');
+	protected readonly tabs: { id: PanelTab; label: string }[] = [
+		{ id: 'route', label: 'Route' },
+		{ id: 'mining', label: 'Mining' },
+		{ id: 'stations', label: 'Stations' },
+		{ id: 'abandoned', label: 'Abandoned' },
+	];
+	protected readonly legendOpen = signal(true);
+	/** Right-click menu on a sector. */
+	protected readonly menu = signal<{ sector: Sector; x: number; y: number } | undefined>(undefined);
+
 	// route planner
 	protected readonly routeShips = [...this.ships.getEntities()]
 		.filter((x) => this.shipStats.maxStats(x).travel > 0)
@@ -163,21 +194,103 @@ export default class MapComponent {
 			.join(' ')
 	);
 
-	/** Sectors holding the selected resource, closest to the route start first. */
+	// mining: home sector is the route start
+	protected readonly miningWare = computed(() => this.wares.getEntity(this.resource()));
+	protected readonly miners = computed(() => {
+		const ware = this.miningWare();
+		return ware ? minersFor(this.ships.getEntities(), ware) : [];
+	});
+	protected readonly minerId = linkedSignal(() => this.miners()[0]?.id ?? '');
+	protected readonly miner = computed(() => this.miners().find((x) => x.id === this.minerId()));
+	protected readonly minerSpeed = computed(() => (this.miner() ? this.shipStats.maxStats(this.miner()).travel : 0));
+	protected readonly miningUnits = computed(() => {
+		const ware = this.miningWare();
+		const miner = this.miner();
+		return ware?.volume && miner ? Math.floor(minerCapacity(miner, ware) / ware.volume) : 0;
+	});
+	protected readonly fillMinutes = signal(10);
+	protected readonly priceLevel = signal<'min' | 'avg' | 'max'>('avg');
+
+	private readonly minerTravel = computed(() => {
+		const from = this.routeFrom();
+		const miner = this.miner();
+		if (!from || !miner) {
+			return undefined;
+		}
+		return travelTimes(this.visibleSectors(), from, { speed: this.minerSpeed() || 1000, charge: this.travelCharge() });
+	});
+
+	/** Sectors holding the selected resource: credits per hour from the home sector, or the richest first. */
 	protected readonly miningSectors = computed(() => {
-		const travel = this.travel();
+		const travel = this.minerTravel();
 		const amounts = this.resourceAmounts();
+		const ware = this.miningWare();
+		const miner = this.miner();
+		const capacity = ware && miner ? minerCapacity(miner, ware) : 0;
+		const price = ware?.price[this.priceLevel()] ?? 0;
 		return this.visibleSectors()
 			.filter((x) => amounts.has(x.id))
-			.map((sector) => ({
-				sector,
-				amount: amounts.get(sector.id),
-				time: travel?.time.get(sector.id),
-				jumps: travel?.route(sector.id)?.jumps,
-			}))
+			.map((sector) => {
+				const time = travel?.time.get(sector.id);
+				return {
+					sector,
+					amount: amounts.get(sector.id),
+					time,
+					jumps: travel?.route(sector.id)?.jumps,
+					trip: time != null && ware ? miningTrip(time, capacity, ware, price, this.fillMinutes()) : undefined,
+				};
+			})
 			.filter((x) => !travel || x.time != null)
-			.sort((a, b) => (travel ? a.time - b.time : b.amount - a.amount))
-			.slice(0, 20);
+			.sort((a, b) => (travel ? b.trip.perHour - a.trip.perHour : b.amount - a.amount))
+			.slice(0, 25);
+	});
+
+	// game start stations
+	protected readonly stationTypes = STATION_TYPES;
+	protected readonly shownStationTypes = signal(new Set<string>(['shipyard', 'wharf', 'equipmentdock', 'tradestation']));
+	protected readonly stations = computed(() =>
+		(GodStations as GodStation[])
+			.filter((x) => this.versions().has(x.version) && this.shapeById.has(x.sector))
+			.map((station, i) => {
+				const shape = this.shapeById.get(station.sector);
+				// stations without a fixed spot are spread around the sector center
+				const angle = i * 2.4;
+				const pos = station.x != null ? this.markerPosition(shape, station.x, station.z) : { x: shape.x + Math.cos(angle) * shape.r * 0.35, y: shape.y + Math.sin(angle) * shape.r * 0.35 };
+				return { station, shape, type: STATION_TYPES.find((t) => t.id === station.type), faction: this.factions.getEntity(station.owner), ...pos };
+			})
+	);
+	protected readonly stationMarkers = computed(() => this.stations().filter((x) => this.shownStationTypes().has(x.station.type)));
+
+	/** Ship or equipment the player wants to buy. */
+	protected readonly buyItem = signal('');
+	protected readonly buyOptions = [
+		...this.ships.getEntities().map((x) => ({ id: `ship:${x.id}`, name: `${x.name} (ship, ${x.size})` })),
+		...this.equipment.getEntities().filter((x) => x.owners?.length).map((x) => ({ id: `equipment:${x.id}`, name: `${x.name} (${x.type ?? 'equipment'})` })),
+	].sort((a, b) => a.name.localeCompare(b.name));
+
+	/** Stations selling the chosen item, closest to the route start first. */
+	protected readonly sellers = computed(() => {
+		const [kind, id] = this.buyItem().split(':');
+		if (!id) {
+			return [];
+		}
+		let owners: string[];
+		let types: string[];
+		if (kind === 'ship') {
+			const ship = this.ships.getEntity(id);
+			owners = (ship?.owners ?? []).map((x) => x.id);
+			// wharfs build small and medium ships, shipyards large and extra large ones
+			types = [Size.small, Size.medium, Size.extrasmall].includes(ship?.size as Size) ? ['wharf'] : ['shipyard'];
+		} else {
+			owners = (this.equipment.getEntity(id)?.owners ?? []).map((x) => x.id);
+			types = ['equipmentdock', 'wharf', 'shipyard'];
+		}
+		const travel = this.travel();
+		return this.stations()
+			.filter((x) => types.includes(x.station.type) && owners.includes(x.station.owner))
+			.map((x) => ({ ...x, time: travel?.time.get(x.station.sector) }))
+			.filter((x) => !travel || x.time != null)
+			.sort((a, b) => (a.time ?? 0) - (b.time ?? 0) || a.shape.sector.name.localeCompare(b.shape.sector.name));
 	});
 
 	// abandoned ships
@@ -187,18 +300,16 @@ export default class MapComponent {
 			.filter((x) => this.versions().has(x.version) && this.shapeById.has(x.sector))
 			.map((item) => {
 				const shape = this.shapeById.get(item.sector);
-				// game positions are within roughly ±500 km of the sector center
-				const scale = (shape.r * 0.7) / 500;
-				const clamp = (v: number) => Math.max(-shape.r * 0.7, Math.min(shape.r * 0.7, v));
-				return {
-					item,
-					shape,
-					ship: this.ships.getEntity(item.ship),
-					x: shape.x + clamp(item.x * scale),
-					y: shape.y + clamp(-item.z * scale),
-				};
+				return { item, shape, ship: this.ships.getEntity(item.ship), ...this.markerPosition(shape, item.x, item.z) };
 			})
 	);
+
+	/** Map position of a point inside a sector (km); game positions are within roughly ±500 km of the center. */
+	private markerPosition(shape: SectorShape, x: number, z: number) {
+		const scale = (shape.r * 0.7) / 500;
+		const clamp = (v: number) => Math.max(-shape.r * 0.7, Math.min(shape.r * 0.7, v));
+		return { x: shape.x + clamp(x * scale), y: shape.y + clamp(-z * scale) };
+	}
 
 	protected readonly resourceWares = [...new Set(this.sectorList.flatMap((x) => x.resources.map((r) => r.ware)))]
 		.map((id) => ({ id, name: this.wares.getEntity(id)?.name ?? id }))
@@ -292,6 +403,92 @@ export default class MapComponent {
 			const id = this.sector();
 			untracked(() => (id ? this.focus(id) : this.selected.set(undefined)));
 		});
+
+		effect(() => {
+			const from = this.from();
+			const to = this.to();
+			untracked(() => {
+				if (from) {
+					this.routeFrom.set(from);
+				}
+				if (to) {
+					this.routeTo.set(to);
+				}
+				if (from || to) {
+					this.tab.set('route');
+				}
+			});
+		});
+	}
+
+	protected onContextMenu(event: MouseEvent) {
+		const id = (event.target as Element).closest('[data-sector]')?.getAttribute('data-sector');
+		const sector = id ? this.sectors.getEntity(id) : undefined;
+		if (!sector) {
+			this.menu.set(undefined);
+			return;
+		}
+		event.preventDefault();
+		const rect = this.container().nativeElement.getBoundingClientRect();
+		this.hovered.set(undefined);
+		this.menu.set({ sector, x: event.clientX - rect.left, y: event.clientY - rect.top });
+	}
+
+	protected menuAction(action: 'from' | 'to' | 'open') {
+		const sector = this.menu()?.sector;
+		this.menu.set(undefined);
+		if (!sector) {
+			return;
+		}
+		switch (action) {
+			case 'from':
+				this.routeFrom.set(sector.id);
+				if (this.tab() === 'abandoned') {
+					this.tab.set('route');
+				}
+				break;
+			case 'to':
+				this.routeTo.set(sector.id);
+				this.tab.set('route');
+				break;
+			case 'open':
+				this.router.navigate(['/sectors', sector.id]);
+				break;
+		}
+	}
+
+	protected toggleStationType(id: string) {
+		this.shownStationTypes.update((types) => {
+			const next = new Set(types);
+			if (next.has(id)) {
+				next.delete(id);
+			} else {
+				next.add(id);
+			}
+			return next;
+		});
+	}
+
+	protected selectTab(tab: PanelTab) {
+		this.tab.set(tab);
+		if (tab === 'mining') {
+			this.mode.set('resource');
+		}
+	}
+
+	protected setBuyItem(name: string) {
+		this.buyItem.set(this.buyOptions.find((x) => x.name.toLowerCase() === name.trim().toLowerCase())?.id ?? '');
+	}
+
+	/** Selects a sector and centers the map on it. */
+	protected focusSector(id: string) {
+		this.router.navigate([], { queryParams: { sector: id }, queryParamsHandling: 'merge', replaceUrl: true });
+	}
+
+	protected swapRoute() {
+		const from = this.routeFrom();
+		this.routeFrom.set(this.routeTo());
+		this.routeTo.set(from);
 	}
 
 	protected labelLines(sector: Sector, shape: SectorShape): string[] {
@@ -430,6 +627,7 @@ export default class MapComponent {
 		if (event.button !== 0) {
 			return;
 		}
+		this.menu.set(undefined);
 		this.drag = { x: event.clientX, y: event.clientY, view: this.view(), moved: false };
 	}
 
@@ -459,7 +657,7 @@ export default class MapComponent {
 	protected onPointerUp(event: PointerEvent) {
 		const drag = this.drag;
 		this.drag = undefined;
-		if (drag?.moved) {
+		if (event.button !== 0 || !drag || drag.moved) {
 			return;
 		}
 		// a click without dragging: open the sector under the pointer

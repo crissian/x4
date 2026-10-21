@@ -379,3 +379,15 @@ export interface Sector {
   highways: string[];
   highwayLinks?: HighwayLink[];
 }
+
+/** Fixed station created at game start (shipyard, wharf, equipment dock, ...). */
+export interface GodStation {
+  id: string;
+  type: 'shipyard' | 'wharf' | 'equipmentdock' | 'tradestation' | 'defence' | 'piratebase';
+  owner?: string;
+  sector: string;
+  version: number;
+  /** Position inside the sector in km, missing when the game picks a random spot. */
+  x?: number;
+  z?: number;
+}
