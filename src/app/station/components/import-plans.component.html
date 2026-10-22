@@ -1,9 +1,27 @@
 <app-modal title="Import Plans">
 	<p>
-		Paste the <span class="text-info italic">constructionplans.xml</span> content below. The plans will be added to
-		your saved layout list.
+		Choose an X4 construction plans file, or paste its content below. The plans will be added to your saved layout
+		list.
 	</p>
-	<p class="text-xs text-fg-muted">File can be found in Documents\Egosoft\X4\[12345678]\constructionplans.xml</p>
+	<ul class="mt-1 list-inside list-disc text-xs text-fg-muted">
+		<li>
+			All plans saved in game:
+			<span class="text-info italic">Documents\Egosoft\X4\[12345678]\constructionplans.xml</span>
+		</li>
+		<li>
+			A single exported plan:
+			<span class="text-info italic">Documents\Egosoft\X4\[12345678]\constructionplan\[name].xml</span>
+		</li>
+	</ul>
+	<div class="mt-3 flex flex-wrap items-center gap-2">
+		<input #file type="file" accept=".xml,text/xml,application/xml" class="hidden" (change)="loadFile($event)" />
+		<button type="button" class="btn btn-info" (click)="file.click()">
+			<svg lucideUpload /><span>Choose file</span>
+		</button>
+		@if (fileName(); as name) {
+			<span class="text-xs text-fg-muted">{{ name }}</span>
+		}
+	</div>
 	<textarea
 		class="input mt-2 font-mono text-xs"
 		rows="10"

@@ -1,6 +1,7 @@
 import { Layout } from '../../shared/services/module-config';
 import { ModuleService } from '../../shared/services/module.service';
-import { importConstructionPlans } from './construction-plans';
+import { PLAYER_HQ_MACRO, importConstructionPlans } from './construction-plans';
+import { AGREFITS_PLAN } from './testdata/agrefits-plan';
 
 describe('importConstructionPlans', () => {
 	let saved: Layout[];
@@ -60,6 +61,35 @@ describe('importConstructionPlans', () => {
 		expect(result.error).toBeNull();
 		expect(saved[0].config.length).toBe(1); // unknown macro skipped
 		expect(saved[0].config[0].count).toBe(2); // duplicate aggregated
+	});
+
+	it('imports an exported 8.00 plan including the Antigone landmark modules', () => {
+		const result = importXml(AGREFITS_PLAN);
+
+		expect(result.error).toBeNull();
+		expect(result.layouts).toEqual(['Agrefits']);
+		const count = saved[0].config.reduce((sum, x) => sum + x.count, 0);
+		expect(count).toBe(100); // every entry matched a module
+		expect(saved[0].isHeadquarters).toBeUndefined();
+	});
+
+	it('turns the player HQ landmark into the Headquarters setting', () => {
+		importXml(`<plans><plan name="hq">${entry(PLAYER_HQ_MACRO)}${entry(macroA)}</plan></plans>`);
+
+		expect(saved[0].isHeadquarters).toBe(true);
+		expect(saved[0].config.length).toBe(1);
+	});
+
+	it('returns the imported layout names sorted case-insensitively', () => {
+		const result = importXml(
+			`<plans>` +
+				`<plan name="beta">${entry(macroA)}</plan>` +
+				`<plan name="Alpha">${entry(macroA)}</plan>` +
+				`<plan name="gamma">${entry(macroA)}</plan>` +
+				`</plans>`
+		);
+
+		expect(result.layouts).toEqual(['Alpha', 'beta', 'gamma']);
 	});
 
 	it('reports an error on malformed XML', () => {

@@ -4218,6 +4218,33 @@ export const Modules = {
      },
     ]
   },
+  module_gen_welfare_gamblinghall_01: {
+   id: 'module_gen_welfare_gamblinghall_01',
+	  version: 0,
+   name: 'Gambling Den',
+   macro: 'welfare_gen_gamblinghall_01_macro',
+   description: 'A station offering a wide range of recreational activities can help set it apart from its competition, and will improve conditions for its workforce. Gambling establishments increase the rate at which a station\'s workforce grows.\n\nThe Gambling Den is a modest, but cosy, space where workers can gather to gamble away their savings after a long shift. The establishment offers tables with a wide variety of games, and a bar for people to take occasional breaks and have some refreshments.',
+   type: ModuleTypes.welfaremodule,
+   explosionDamage: 1000,
+   hull: 100000,
+   dimensions: { x: 361, y: 1760, z: 669 },
+   price: { min: 2095385, max: 2834932, avg: 2465159 },
+   owners: [
+   ],
+    production: [
+     {
+       time: 730,
+       amount: 1,
+       method: 'default',
+       name: 'Universal',
+       wares: [
+         { ware: 'claytronics', amount: 376 },
+         { ware: 'energycells', amount: 342 },
+         { ware: 'hullparts', amount: 1546 },
+       ],
+     },
+    ]
+  },
   module_par_conn_base_01: {
    id: 'module_par_conn_base_01',
 	  version: 0,
@@ -10044,6 +10071,33 @@ export const Modules = {
      },
     ]
   },
+  module_gen_welfare_casino_01: {
+   id: 'module_gen_welfare_casino_01',
+	  version: 3,
+   name: 'Casino',
+   macro: 'welfare_gen_casino_01_macro',
+   description: 'A station offering a wide range of recreational activities can help set it apart from its competition, and will improve conditions for its workforce. Gambling establishments increase the rate at which a station\'s workforce grows.\n\nThe Casino is a monument to excess, which will draw visitors from all parts of the Jump Gate network. With its luxurious interior, well stocked bar, and wide range of games, it is guaranteed to keep its patrons enthralled and entertained for hours on end.',
+   type: ModuleTypes.welfaremodule,
+   explosionDamage: 1000,
+   hull: 250000,
+   dimensions: { x: 1029, y: 5562, z: 1506 },
+   price: { min: 3311343, max: 4480052, avg: 3895697 },
+   owners: [
+   ],
+    production: [
+     {
+       time: 1155,
+       amount: 1,
+       method: 'default',
+       name: 'Universal',
+       wares: [
+         { ware: 'claytronics', amount: 594 },
+         { ware: 'energycells', amount: 541 },
+         { ware: 'hullparts', amount: 2445 },
+       ],
+     },
+    ]
+  },
   module_pir_hab_l_01: {
    id: 'module_pir_hab_l_01',
 	  version: 3,
@@ -11818,6 +11872,192 @@ export const Modules = {
      },
     ]
   },
+  welfare_bor_artacademy_01: {
+   id: 'welfare_bor_artacademy_01',
+	  version: 4,
+   name: 'Pheromone Art Gallery',
+   macro: 'welfare_bor_artacademy_01_macro',
+   description: 'A station offering a wide range of recreational activities can help set it apart from its competition, and will improve conditions for its workforce. Gambling establishments increase the rate at which a station\'s workforce grows.\n\nThe Pheromone Art Gallery exhibits the most fragrant and fin-tingling pieces of art created in the Royal Academy. This is sure to attract many a Boron, but even olfactorily underequipped friends will find this well worth a visit as audiovisual supplements are provided for every piece.',
+   type: ModuleTypes.welfaremodule,
+   explosionDamage: 1000,
+   hull: 305000,
+   dimensions: { x: 1451, y: 1721, z: 1368 },
+   price: { min: 4967013, max: 6720077, avg: 5843545 },
+   owners: [
+   ],
+    production: [
+     {
+       time: 1155,
+       amount: 1,
+       method: 'default',
+       name: 'Boron',
+       wares: [
+         { ware: 'claytronics', amount: 516 },
+         { ware: 'energycells', amount: 16435 },
+         { ware: 'hullparts', amount: 3775 },
+         { ware: 'water', amount: 9923 },
+       ],
+     },
+    ]
+  },
+  module_conn_arg_antigonearc_01: {
+   id: 'module_conn_arg_antigonearc_01',
+	  version: 5,
+   name: 'Argon Arc Connection Structure 02',
+   macro: 'landmarks_arg_antigonearc_01_macro',
+   description: 'No information available',
+   type: ModuleTypes.connectionmodule,
+   explosionDamage: 1000,
+   hull: 178500,
+   makerRace: Races.argon,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 426, y: 207, z: 1481 },
+   price: { min: 160148, max: 216671, avg: 188410 },
+   owners: [
+    Factions.kaori,
+   ],
+    production: [
+     {
+       time: 220,
+       amount: 1,
+       method: 'default',
+       name: 'Universal',
+       wares: [
+         { ware: 'claytronics', amount: 19 },
+         { ware: 'energycells', amount: 1060 },
+         { ware: 'hullparts', amount: 142 },
+       ],
+     },
+    ]
+  },
+  module_conn_arg_antigonescaffolding_01: {
+   id: 'module_conn_arg_antigonescaffolding_01',
+	  version: 5,
+   name: 'Argon Span Connection Structure 02',
+   macro: 'landmarks_arg_antigonescaffolding_01_macro',
+   description: 'No information available',
+   type: ModuleTypes.connectionmodule,
+   explosionDamage: 1000,
+   hull: 245500,
+   makerRace: Races.argon,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 200, y: 116, z: 2348 },
+   price: { min: 179063, max: 242262, avg: 210663 },
+   owners: [
+    Factions.kaori,
+   ],
+    production: [
+     {
+       time: 302,
+       amount: 1,
+       method: 'default',
+       name: 'Universal',
+       wares: [
+         { ware: 'claytronics', amount: 21 },
+         { ware: 'energycells', amount: 1185 },
+         { ware: 'hullparts', amount: 159 },
+       ],
+     },
+    ]
+  },
+  module_conn_arg_antigonestraight_01: {
+   id: 'module_conn_arg_antigonestraight_01',
+	  version: 5,
+   name: 'Argon Span Connection Structure 01',
+   macro: 'landmarks_arg_antigonestraight_01_macro',
+   description: 'No information available',
+   type: ModuleTypes.connectionmodule,
+   explosionDamage: 1000,
+   hull: 223000,
+   makerRace: Races.argon,
+   license: 'station_gen_intermediate',
+   dimensions: { x: 297, y: 173, z: 1748 },
+   price: { min: 126101, max: 170607, avg: 148354 },
+   owners: [
+    Factions.kaori,
+   ],
+    production: [
+     {
+       time: 275,
+       amount: 1,
+       method: 'default',
+       name: 'Universal',
+       wares: [
+         { ware: 'claytronics', amount: 15 },
+         { ware: 'energycells', amount: 835 },
+         { ware: 'hullparts', amount: 112 },
+       ],
+     },
+    ]
+  },
+  module_hab_arg_antigonepillar_01: {
+   id: 'module_hab_arg_antigonepillar_01',
+	  version: 5,
+   name: 'Argon L Housing Spire',
+   macro: 'landmarks_arg_antigonepillar_01_macro',
+   description: 'No information available',
+   type: ModuleTypes.habitation,
+   explosionDamage: 1000,
+   hull: 430000,
+   makerRace: Races.argon,
+   workForce: {
+    capacity: 1000,
+    race: Races.argon
+   },
+   license: 'station_gen_advanced',
+   dimensions: { x: 353, y: 3174, z: 274 },
+   price: { min: 16691091, max: 22582065, avg: 19636578 },
+   owners: [
+    Factions.kaori,
+   ],
+    production: [
+     {
+       time: 530,
+       amount: 1,
+       method: 'default',
+       name: 'Universal',
+       wares: [
+         { ware: 'claytronics', amount: 117 },
+         { ware: 'energycells', amount: 6627 },
+         { ware: 'hullparts', amount: 888 },
+       ],
+     },
+    ]
+  },
+  module_hab_arg_antigonespire_01: {
+   id: 'module_hab_arg_antigonespire_01',
+	  version: 5,
+   name: 'Argon XL Housing Spire',
+   macro: 'landmarks_arg_antigonespire_01_macro',
+   description: 'No information available',
+   type: ModuleTypes.habitation,
+   explosionDamage: 1000,
+   hull: 680000,
+   makerRace: Races.argon,
+   workForce: {
+    capacity: 2000,
+    race: Races.argon
+   },
+   license: 'station_gen_advanced',
+   dimensions: { x: 800, y: 4507, z: 800 },
+   price: { min: 23611353, max: 31944772, avg: 27778063 },
+   owners: [
+    Factions.kaori,
+   ],
+    production: [
+     {
+       time: 848,
+       amount: 1,
+       method: 'default',
+       name: 'Universal',
+       wares: [
+         { ware: 'claytronics', amount: 165 },
+         { ware: 'energycells', amount: 9375 },
+         { ware: 'hullparts', amount: 1256 },
+       ],
+     },
+    ]
+  },
 };
 
 export const AllModules = [
@@ -11905,6 +12145,7 @@ export const AllModules = [
  Modules.module_gen_prod_turretcomponents_01,
  Modules.module_gen_prod_water_01,
  Modules.module_gen_prod_weaponcomponents_01,
+ Modules.module_gen_welfare_gamblinghall_01,
  Modules.module_par_conn_base_01,
  Modules.module_par_conn_base_02,
  Modules.module_par_conn_base_03,
@@ -12039,6 +12280,7 @@ export const AllModules = [
  Modules.module_ter_stor_solid_l_01,
  Modules.module_ter_stor_solid_m_01,
  Modules.module_ter_stor_solid_s_01,
+ Modules.module_gen_welfare_casino_01,
  Modules.module_pir_hab_l_01,
  Modules.module_pir_hab_m_01,
  Modules.module_pir_hab_s_01,
@@ -12083,4 +12325,10 @@ export const AllModules = [
  Modules.module_bor_stor_solid_l_01,
  Modules.module_bor_stor_solid_m_01,
  Modules.module_bor_stor_solid_s_01,
+ Modules.welfare_bor_artacademy_01,
+ Modules.module_conn_arg_antigonearc_01,
+ Modules.module_conn_arg_antigonescaffolding_01,
+ Modules.module_conn_arg_antigonestraight_01,
+ Modules.module_hab_arg_antigonepillar_01,
+ Modules.module_hab_arg_antigonespire_01,
 ];

@@ -6,6 +6,7 @@ import { openDialog } from '../../shared/components/modal/dialog';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { StationModule } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
+import { compareNames } from '../services/construction-plans';
 import { LayoutService } from '../services/layout-service';
 
 interface LayoutModule {
@@ -101,12 +102,15 @@ export class LoadLayoutComponent {
 	}
 
 	private readLayouts() {
-		return this.layoutService.getLayouts().map<LayoutData>((x) => ({
-			name: x.name,
-			modules: x.config.flatMap<LayoutModule>((y) => {
-				const module = y.moduleId ? this.moduleService.getEntity(y.moduleId) : undefined;
-				return module ? [{ count: y.count, module }] : [];
-			}),
-		}));
+		return this.layoutService
+			.getLayouts()
+			.map<LayoutData>((x) => ({
+				name: x.name,
+				modules: x.config.flatMap<LayoutModule>((y) => {
+					const module = y.moduleId ? this.moduleService.getEntity(y.moduleId) : undefined;
+					return module ? [{ count: y.count, module }] : [];
+				}),
+			}))
+			.sort((a, b) => compareNames(a.name, b.name));
 	}
 }
