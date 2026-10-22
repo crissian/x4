@@ -47,6 +47,11 @@ export const appRoutes: Routes = [
 		title: `${BASE_TITLE} - ${$localize`Galaxy Map`}`,
 	},
 	{
+		path: 'saves',
+		loadComponent: () => import('./savegame/components/savegames-page.component'),
+		title: `${BASE_TITLE} - ${$localize`Savegames`}`,
+	},
+	{
 		path: 'station-calculator',
 		loadComponent: () => import('./station/components/station-calculator.component'),
 		title: `${BASE_TITLE} - ${$localize`Station Calculator`}`,

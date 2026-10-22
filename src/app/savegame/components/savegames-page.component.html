@@ -1,0 +1,57 @@
+<div class="card">
+	<div class="card-header" i18n>Savegames</div>
+	<div class="card-body space-y-4">
+		<app-file-drop accept=".gz,.xml" [disabled]="store.loading() !== null" (files)="load($event)">
+			<span class="font-medium text-fg-strong" i18n>Drop a savegame here or click to choose one</span>
+			<span class="text-sm text-fg-muted" i18n>.xml.gz or .xml files</span>
+			<span class="text-sm text-fg-muted" i18n>
+				Find them in <code>Documents\Egosoft\X4\&lt;id&gt;\save\</code>, on many Windows setups under
+				<code>OneDrive\Documents\...</code>
+			</span>
+		</app-file-drop>
+
+		@if (store.loading(); as loading) {
+			<div class="space-y-2">
+				<div class="flex items-center gap-3">
+					<span class="mr-auto min-w-0 truncate">{{ loading.fileName }}</span>
+					<span class="text-sm text-fg-muted">{{ percent() }}%</span>
+					<button type="button" class="btn btn-secondary" (click)="store.cancel()"><svg lucideX /><span i18n>Cancel</span></button>
+				</div>
+				<app-progress-bar [value]="loading.read" [max]="loading.total" label="Loading savegame" i18n-label />
+			</div>
+		}
+
+		@if (notice(); as current) {
+			<app-alert [type]="current.type" (closed)="notice.set(null)">{{ current.text }}</app-alert>
+		}
+
+		@if (store.persistent() === false) {
+			<app-alert type="warning" i18n>
+				Saves can't be stored in this browser (private window or blocked site data); they are lost when you reload or close the page.
+			</app-alert>
+		}
+
+		<p class="flex flex-wrap gap-x-1 text-sm text-fg-muted">
+			<ng-container i18n>Your saves stay in this browser; nothing is uploaded.</ng-container>
+			@if (store.storage(); as storage) {
+				<ng-container i18n>Storage used: {{ storage.usage / 1048576 | number: '1.0-0' }} MB of {{ storage.quota / 1048576 | number: '1.0-0' }} MB.</ng-container>
+			}
+		</p>
+	</div>
+</div>
+
+@if (store.saves().length > 0) {
+	<div class="mt-4 grid gap-4 lg:grid-cols-2">
+		@for (save of store.saves(); track save.id) {
+			<app-savegame-card
+				[save]="save"
+				[active]="save.id === store.activeId()"
+				[status]="store.status(save.id)"
+				(activate)="store.select(save.id)"
+				(remove)="remove(save)"
+			/>
+		}
+	</div>
+} @else {
+	<p class="mt-4 text-fg-muted" i18n>No saves loaded yet.</p>
+}

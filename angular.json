@@ -66,7 +66,8 @@
 							}
 						],
 						"allowedCommonJsDependencies": ["urlon", "xml-js"],
-						"styles": ["src/styles.css"]
+						"styles": ["src/styles.css"],
+						"webWorkerTsConfig": "tsconfig.worker.json"
 					},
 					"configurations": {
 						"production": {

@@ -14,16 +14,18 @@ import {
 	LucideMoon,
 	LucidePackage,
 	LucideRocket,
+	LucideSave,
 	LucideSun,
 	LucideUsers,
 	LucideWrench,
 } from '@lucide/angular';
 import { GAME_LANGUAGES, getGameLanguage, setGameLanguage } from './core/game-text';
+import { SavegameSelectorComponent } from './savegame/components/savegame-selector.component';
 import { ThemeService } from './core/services/theme.service';
 
 @Component({
 	selector: 'app-header',
-	imports: [RouterLink, RouterLinkActive, FormField, LucideDynamicIcon, LucideSun, LucideMoon, LucideCoffee, LucideLanguages],
+	imports: [RouterLink, RouterLinkActive, FormField, LucideDynamicIcon, LucideSun, LucideMoon, LucideCoffee, LucideLanguages, SavegameSelectorComponent],
 	templateUrl: './header.component.html',
 })
 export class HeaderComponent {
@@ -56,6 +58,7 @@ export class HeaderComponent {
 		{ path: '/factions', label: $localize`Factions`, icon: LucideFlag },
 		{ path: '/sectors', label: $localize`Sectors`, icon: LucideHexagon },
 		{ path: '/map', label: $localize`Map`, icon: LucideMap },
+		{ path: '/saves', label: $localize`Savegames`, icon: LucideSave },
 		{ path: '/about', label: $localize`About`, icon: LucideInfo },
 	];
 }

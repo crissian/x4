@@ -1,0 +1,35 @@
+import { WorkerTask, runWorkerTask } from '../core/workers/worker-task';
+import { ReadSavegameResult } from './read-savegame';
+import { SavegameError, SavegameInfo } from './savegame-model';
+import { SavegameWorkerMessage } from './savegame-worker-protocol';
+
+export interface ParseCallbacks {
+	onProgress?(read: number, total: number): void;
+	onInfo?(info: SavegameInfo): void;
+}
+
+export type SavegameParser = (file: Blob, callbacks: ParseCallbacks) => WorkerTask<ReadSavegameResult>;
+
+/** Parses the savegame in a dedicated worker so the page stays responsive. */
+export const parseSavegame: SavegameParser = (file, callbacks) =>
+	runWorkerTask<ReadSavegameResult>(
+		() => new Worker(new URL('./savegame.worker', import.meta.url), { type: 'module' }),
+		file,
+		(data) => {
+			const message = data as SavegameWorkerMessage;
+			switch (message.type) {
+				case 'progress':
+					callbacks.onProgress?.(message.read, message.total);
+					return undefined;
+				case 'info':
+					callbacks.onInfo?.(message.info);
+					return undefined;
+				case 'done':
+					return { done: message.result };
+				case 'error':
+					return { fail: new SavegameError(message.code, message.message) };
+				default:
+					return { fail: new Error('Unknown message from the savegame worker.') };
+			}
+		},
+	);
