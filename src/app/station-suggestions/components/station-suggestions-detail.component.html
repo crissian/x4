@@ -1,0 +1,85 @@
+@if (store.selected(); as row) {
+	<section class="mt-4 min-w-0 text-sm" aria-live="polite" data-detail>
+		<h6 class="mb-2 text-base">
+			<a [routerLink]="['/wares', row.ware]">{{ row.name }}</a>
+			·
+			<a [routerLink]="['/sectors', row.sector]">{{ row.sectorName }}</a>
+		</h6>
+		@if (row.loop === 'closed') {
+			<p i18n>
+				{{ row.crPerHour | number: '1.0-0' }} Cr/h with
+				{row.modules, plural, =1 {1 module} other {{{ row.modules }} modules}} of
+				{{ row.moduleOutput | number: '1.0-0' }}/h each, sold at the average price of
+				{{ row.margin | number: '1.0-2' }} Cr; the reach absorbs {{ row.absorbable | number: '1.0-0' }}/h.
+			</p>
+			<app-station-suggestions-chain />
+		} @else {
+			<p i18n>
+				{{ row.crPerHour | number: '1.0-0' }} Cr/h with
+				{row.modules, plural, =1 {1 module} other {{{ row.modules }} modules}} of
+				{{ row.moduleOutput | number: '1.0-0' }}/h each; the reach absorbs
+				{{ row.absorbable | number: '1.0-0' }}/h at a margin of {{ row.margin | number: '1.0-2' }} Cr per unit.
+			</p>
+		}
+
+		<h6 class="mt-3 text-sm" i18n>Demand and supply within reach (weighted per hour)</h6>
+		@if (targets().length) {
+			<table class="table mt-1 w-full" data-targets>
+				<thead>
+					<tr>
+						<th scope="col" i18n>Sector</th>
+						<th scope="col" class="text-right" i18n>Weight</th>
+						<th scope="col" class="text-right" i18n>Own net/h</th>
+						<th scope="col" class="text-right" title="Own net × weight" i18n-title i18n>Counts here /h</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for (target of targets(); track target.sector) {
+						<tr>
+							<td>
+								<a [routerLink]="['/sectors', target.sector]">{{ store.sectorName(target.sector) }}</a>
+								<span class="ml-1 text-fg-muted" i18n>{target.jumps, plural,
+									=0 {here}
+									=1 {1 jump}
+									other {{{ target.jumps }} jumps}
+								}</span>
+							</td>
+							<td class="text-right">{{ target.weight | percent }}</td>
+							<td class="text-right">{{ target.net | number: '1.0-0' }}</td>
+							<td class="text-right" [class]="target.pull > 0 ? 'text-success' : 'text-danger'">
+								{{ target.pull | number: '1.0-0' }}
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		}
+
+		@if (row.inputs.length) {
+			<h6 class="mt-3 text-sm" i18n>Inputs within reach (weighted net per hour)</h6>
+			<ul data-inputs>
+				@for (input of row.inputs; track input.ware) {
+					<li class="flex justify-between gap-2">
+						<a [routerLink]="['/wares', input.ware]">{{ store.wareName(input.ware) }}</a>
+						<span [class]="input.covered ? 'text-success' : 'text-danger'">
+							@if (input.mined) {
+								@if (input.covered) {
+									<ng-container i18n>mined in reach</ng-container>
+								} @else {
+									<ng-container i18n>no resource in reach</ng-container>
+								}
+							} @else {
+								{{ input.balance | number: '1.0-0' }}
+							}
+						</span>
+					</li>
+				}
+			</ul>
+		}
+		@if (row.building) {
+			<p class="mt-3 text-fg-muted" i18n>
+				A building material: the demand of ship and station building comes on top.
+			</p>
+		}
+	</section>
+}

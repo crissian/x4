@@ -1,0 +1,34 @@
+@if (values(); as values) {
+	<div class="min-w-0">
+		<h6 class="mb-2" i18n>{{ wareName() }}: where a factory earns most</h6>
+		<p class="mb-2 text-sm text-fg-muted" data-caption>
+			@if (store.here()) {
+				<ng-container i18n
+					>Colour: the Cr/h of each sector for this ware on its own; ★ the top 5. Outlined: the sectors within
+					{store.jumps(), plural, =1 {1 jump} other {{{ store.jumps() }} jumps}}.</ng-container
+				>
+			} @else {
+				<ng-container i18n
+					>Colour: the Cr/h of each sector for this ware on its own; ★ the top 5 spots of the
+					list.</ng-container
+				>
+			}
+		</p>
+		<app-marked-heat-map
+			[values]="values"
+			[centre]="centre()"
+			[format]="format"
+			[idle]="idle()"
+			[outline]="outline()"
+			[markers]="markers()"
+			lowLabel="None"
+			i18n-lowLabel="map legend"
+			highLabel="Best"
+			i18n-highLabel="map legend"
+			mapLabel="Station suggestions map"
+			i18n-mapLabel
+			(sectorClick)="pick($event)"
+		/>
+		<p class="mt-1 text-sm text-fg-muted" i18n>Click a sector to see what to build there.</p>
+	</div>
+}

@@ -86,6 +86,7 @@ export class HeaderComponent {
 			links: [
 				{ path: '/trade-routes', label: $localize`Trade Routes`, icon: LucideArrowLeftRight },
 				{ path: '/supply-demand', label: $localize`Supply & Demand`, icon: LucideScale },
+				{ path: '/station-suggestions', label: $localize`Station Suggestions`, icon: LucideFactory },
 			],
 		},
 	];
