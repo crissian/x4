@@ -1,0 +1,5 @@
+/* about 4:3, as the galaxy is wider than it is tall */
+.box {
+	aspect-ratio: 4 / 3;
+	width: 100%;
+}

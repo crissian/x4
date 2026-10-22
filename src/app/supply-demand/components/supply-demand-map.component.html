@@ -1,0 +1,46 @@
+@if (values(); as values) {
+	<div class="min-w-0">
+		<h6 class="mb-2" i18n>{{ store.selected()?.name }}: net value in Cr per hour</h6>
+		<fieldset class="mb-2 flex flex-wrap items-center gap-x-4 text-sm">
+			<legend class="sr-only" i18n>Map colour</legend>
+			<label class="inline-flex items-center gap-1">
+				<input id="supply-map-local" type="radio" value="local" [formField]="store.form.map" />
+				<ng-container i18n="map colour mode">Local</ng-container>
+			</label>
+			<label class="inline-flex items-center gap-1">
+				<input id="supply-map-reach" type="radio" value="reach" [formField]="store.form.map" />
+				<ng-container i18n="map colour mode">Reach</ng-container>
+			</label>
+		</fieldset>
+		<p class="mb-2 text-sm text-fg-muted" data-caption>
+			@if (reach()) {
+				<ng-container i18n
+					>Colour: what a station built here could sell or buy within
+					{store.jumps(), plural, =1 {1 jump} other {{{ store.jumps() }} jumps}}.</ng-container
+				>
+			} @else {
+				<ng-container i18n>Colour: this sector's own stations.</ng-container>
+			}
+		</p>
+		<app-heat-map
+			[values]="values"
+			[centre]="store.centre()"
+			[format]="format"
+			[idle]="idle()"
+			[outline]="area()"
+			lowLabel="Short"
+			i18n-lowLabel
+			highLabel="Surplus"
+			i18n-highLabel
+			mapLabel="Shortage map"
+			i18n-mapLabel
+			(sectorClick)="pick($event)"
+		/>
+		@if (mined()) {
+			<p class="mt-1 text-sm text-fg-muted" i18n>
+				Mining is not counted, so the map shows how much is used around each sector.
+			</p>
+		}
+		<p class="mt-1 text-sm text-fg-muted" i18n>Click a sector to look at the stations around it.</p>
+	</div>
+}

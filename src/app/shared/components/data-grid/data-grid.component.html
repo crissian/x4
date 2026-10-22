@@ -12,10 +12,16 @@
 			<div
 				class="absolute top-full right-0 z-20 mt-1 max-h-96 w-64 overflow-y-auto rounded-md border border-line-strong bg-raised p-2 shadow-lg"
 			>
-				@for (column of columns(); track column.key) {
+				@for (item of chooserColumns(); track item.column.key) {
+					@if (item.separated) {
+						<div class="my-1 border-t border-line"></div>
+					}
+					@if (item.heading) {
+						<div class="px-1.5 pt-1 text-xs font-semibold text-fg-muted">{{ item.heading }}</div>
+					}
 					<label class="flex items-center gap-2 rounded px-1.5 py-1 hover:bg-hover">
-						<input type="checkbox" [formField]="shownForm[column.key]" />
-						{{ column.caption }}
+						<input type="checkbox" [formField]="shownForm[item.column.key]" />
+						{{ item.column.caption }}
 					</label>
 				}
 				<div class="mt-1 flex justify-between border-t border-line pt-2">
@@ -28,8 +34,29 @@
 }
 
 <div class="overflow-x-auto rounded-md border border-line">
-	<table class="table table-hover">
+	<table class="table table-hover" [class.compact]="compact()">
 		<thead class="bg-surface-2">
+			@if (groupHeaders().length) {
+				<tr class="grid-groups">
+					@for (header of groupHeaders(); track $index) {
+						<th scope="colgroup" [attr.colspan]="header.span" [attr.data-tone]="header.tone ?? null">
+							{{ header.label }}
+							@if (header.hint) {
+								<button
+									type="button"
+									class="grid-hint"
+									[attr.title]="header.hint"
+									[attr.aria-describedby]="header.hintId"
+									[attr.aria-label]="header.label"
+								>
+									<svg lucideInfo />
+								</button>
+								<span hidden [id]="header.hintId">{{ header.hint }}</span>
+							}
+						</th>
+					}
+				</tr>
+			}
 			<tr>
 				@for (column of visibleColumns(); track column.key) {
 					@let sort = sortOf(column);
@@ -104,8 +131,10 @@
 				>
 					@for (column of visibleColumns(); track column.key) {
 						@let link = column.link?.(item.row);
+						@let dot = column.dot?.(item.row);
+						@let bar = column.bar?.(item.row);
 						<!-- no whitespace around the text: the cell text is its content -->
-						<td [class.text-right]="column.type === 'number'" [attr.title]="column.title?.(item.row) ?? null">@if (link) {<a [routerLink]="link" [queryParams]="column.queryParams?.(item.row)" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" (keydown.space)="$event.stopPropagation()">{{ item.texts[column.key] }}</a>} @else {<ng-container>{{ item.texts[column.key] }}</ng-container>}</td>
+						<td [class.text-right]="column.type === 'number'" [attr.title]="column.title?.(item.row) ?? null" [attr.data-tone]="toneOf(column)">@if (dot) {<app-tone-dot [tone]="dot.tone" [level]="dot.level" />}@if (bar !== undefined) {<span class="grid-bar" [attr.data-negative]="bar < 0"><span [style.width.%]="barWidth(bar)"></span></span>}@if (link) {<a [routerLink]="link" [queryParams]="column.queryParams?.(item.row)" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" (keydown.space)="$event.stopPropagation()">{{ item.texts[column.key] }}</a>} @else {<ng-container>{{ item.texts[column.key] }}</ng-container>}</td>
 					}
 				</tr>
 			} @empty {

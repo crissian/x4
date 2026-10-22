@@ -48,7 +48,16 @@
 	>
 		@for (section of sections(); track section.label) {
 			@if (section.label) {
-				<div class="px-4 py-1 text-sm font-semibold text-fg-muted">{{ section.label }}</div>
+				<div class="flex items-center gap-2 px-4 py-1 text-sm font-semibold text-fg-muted">
+					{{ section.label }}
+					@if (section.experimental) {
+						<span
+							class="rounded-full border border-amber-400 px-1.5 text-xs text-amber-800 dark:text-amber-200"
+							i18n="@@navExperimental"
+							>Experimental</span
+						>
+					}
+				</div>
 			}
 			@for (link of section.links; track link.path) {
 				<a

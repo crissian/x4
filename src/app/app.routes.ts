@@ -52,6 +52,11 @@ export const appRoutes: Routes = [
 		title: `${BASE_TITLE} - ${$localize`Trade Routes`}`,
 	},
 	{
+		path: 'supply-demand',
+		loadComponent: () => import('./supply-demand/components/supply-demand-page.component'),
+		title: `${BASE_TITLE} - ${$localize`Supply & Demand`}`,
+	},
+	{
 		path: 'saves',
 		loadComponent: () => import('./savegame/components/savegames-page.component'),
 		title: `${BASE_TITLE} - ${$localize`Savegames`}`,

@@ -4,6 +4,8 @@ import type { GridColumn } from './data-grid.component';
 export interface PreparedRow<T> {
 	row: T;
 	values: Record<string, unknown>;
+	/** the values the columns sort by */
+	sortValues: Record<string, unknown>;
 	texts: Record<string, string>;
 }
 
@@ -36,6 +38,11 @@ export class GridValues {
 			return GridValues.matchesNumber(row.values[column.key], filter);
 		}
 		return row.texts[column.key].toLowerCase().includes(filter.trim().toLowerCase());
+	}
+
+	/** Width in % of the bar of a value between -1 and 1: the bar grows from the middle, so at most half. */
+	static barWidth(value: number): number {
+		return Math.min(1, Math.abs(value)) * 50;
 	}
 
 	static getPath(row: unknown, path: string): unknown {

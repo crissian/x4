@@ -37,7 +37,10 @@ export class HeaderNavComponent {
 	/** The menu lists the plain links first, then each group under its label. */
 	protected readonly sections = computed(() => {
 		const items = this.items();
-		return [{ label: '', links: items.filter(NavItems.isLink) }, ...items.filter(NavItems.isGroup)];
+		return [
+			{ label: '', links: items.filter(NavItems.isLink), experimental: false },
+			...items.filter(NavItems.isGroup),
+		];
 	});
 
 	protected readonly url = signal(inject(Router).url);

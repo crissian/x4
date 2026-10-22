@@ -1,0 +1,57 @@
+<div class="rounded-md border border-line bg-surface-2 p-3 text-sm">
+	<button
+		type="button"
+		class="flex items-center gap-1 font-semibold"
+		aria-controls="supply-demand-help"
+		[attr.aria-expanded]="open()"
+		(click)="open.set(!open())"
+	>
+		@if (open()) {
+			<svg lucideChevronDown />
+		} @else {
+			<svg lucideChevronRight />
+		}
+		<ng-container i18n>How to read this</ng-container>
+	</button>
+	@if (open()) {
+		<div id="supply-demand-help" class="mt-2">
+			<p i18n>
+				<strong>Built capacity</strong> is what the stations are built to make and use per hour, with full
+				inputs, their real workforce and sunlight. It is stable and decides what is worth building.
+				<strong>Market now</strong> is what is on offer at save time. It changes within minutes and shows
+				whether the capacity actually reaches the market.
+			</p>
+			<p class="mt-2" i18n>The diagnosis puts the two together:</p>
+			<div class="mt-1 overflow-x-auto">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col"></th>
+							<th scope="col" i18n>Market tight (price index 105% or more)</th>
+							<th scope="col" i18n>Market calm or cheap</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row" i18n>Built short (net below -2% of the larger flow)</th>
+							<td>{{ kinds.short }}</td>
+							<td>{{ kinds.covered }}</td>
+						</tr>
+						<tr>
+							<th scope="row" i18n>Built surplus (net above +2%)</th>
+							<td>{{ kinds.starved }}</td>
+							<td>{{ kinds.surplus }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-2 text-fg-muted" i18n>
+				When the capacity is balanced, the market decides: {{ kinds.tight }}, {{ kinds.balanced }} or
+				{{ kinds.glut }}. Slight, moderate and severe tell how big the balance or the price gap is. Mined
+				resources and wares used only for building are judged from the market only. Wares that building also
+				uses, such as hull parts, keep their capacity diagnosis and are marked *, because their real demand is
+				higher.
+			</p>
+		</div>
+	}
+</div>

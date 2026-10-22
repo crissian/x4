@@ -1,0 +1,43 @@
+/* the colours are app tokens, so they follow the light and dark themes */
+:host {
+	display: inline-block;
+	width: 0.75rem;
+	height: 0.75rem;
+	margin-right: 0.4rem;
+	vertical-align: -0.1em;
+	border: 1.5px solid var(--tone);
+	border-radius: 9999px;
+	background: color-mix(in oklab, var(--tone) var(--fill, 100%), transparent);
+}
+
+:host([data-tone='red']) {
+	--tone: var(--app-danger);
+}
+
+:host([data-tone='orange']) {
+	--tone: color-mix(in oklab, var(--app-danger) 45%, var(--app-warning));
+}
+
+:host([data-tone='amber']) {
+	--tone: var(--app-warning);
+}
+
+:host([data-tone='green']) {
+	--tone: var(--app-success);
+}
+
+:host([data-tone='teal']) {
+	--tone: var(--app-info);
+}
+
+:host([data-tone='grey']) {
+	--tone: var(--app-fg-muted);
+}
+
+:host([data-level='1']) {
+	--fill: 20%;
+}
+
+:host([data-level='2']) {
+	--fill: 60%;
+}
