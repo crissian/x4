@@ -7,6 +7,7 @@ import { FactionService } from '../shared/services/faction.service';
 import { AbandonedShip, Faction, Sector, Ship } from '../shared/services/model/model';
 import { ShipStatsService } from '../shared/services/ship-stats.service';
 import { ShipService } from '../shared/services/ship.service';
+import { TravelDrives } from '../shared/services/travel-drives';
 import { SectorService } from '../shared/services/universe.service';
 import { WareService } from '../shared/services/ware.service';
 import { CLUSTER_RADIUS, GalaxyLayout, SectorShape } from './galaxy-layout';
@@ -289,7 +290,7 @@ export class MapStore {
 			const ship = this.ships.getEntity(this.routeShip());
 			if (ship) {
 				untracked(() => {
-					const charge = MapStore.fastestTravelEngine(this.shipStats, ship)?.travel?.charge;
+					const charge = TravelDrives.fastest(this.shipStats, ship)?.travel?.charge;
 					this.routeModel.update((route) => ({
 						...route,
 						speed: Math.round(this.shipStats.maxStats(ship).travel),
@@ -390,16 +391,5 @@ export class MapStore {
 		}
 		const t = Math.max(0, Math.min(1, value));
 		return `hsl(${(120 * t).toFixed(0)} 75% 45%)`;
-	}
-
-	/** Engine with the best travel thrust, used for the travel drive charge time. */
-	private static fastestTravelEngine(stats: ShipStatsService, ship: Ship) {
-		const score = (x: { thrust?: { forward: number }; travel?: { thrust: number } }) =>
-			(x.thrust?.forward ?? 0) * (x.travel?.thrust ?? 0);
-		const engines = stats.engines(ship);
-		return engines.reduce<(typeof engines)[number] | undefined>(
-			(best, x) => (!best || score(x) > score(best) ? x : best),
-			undefined
-		);
 	}
 }

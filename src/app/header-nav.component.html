@@ -15,16 +15,25 @@
 	</button>
 }
 
-<div #space class="min-w-0 flex-1 overflow-hidden">
+<div #space class="min-w-0 flex-1" [class.overflow-hidden]="!openGroup()">
 	@if (!collapsed()) {
 		<nav #row class="-mb-px flex w-max" i18n-aria-label aria-label="Main">
-			@for (link of links(); track link.path) {
-				<a
-					[routerLink]="link.path"
-					routerLinkActive="!text-fg-strong bg-nav-active"
-					class="inline-flex items-center gap-1.5 px-3 py-3 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
-					><svg [lucideIcon]="link.icon" class="opacity-80" />{{ link.label }}</a
-				>
+			@for (item of items(); track item.label) {
+				@if (NavItems.isGroup(item)) {
+					<app-nav-dropdown
+						[group]="item"
+						[url]="url()"
+						[open]="openGroup() === item.label"
+						(openChange)="setGroupOpen(item.label, $event)"
+					/>
+				} @else {
+					<a
+						[routerLink]="item.path"
+						routerLinkActive="!text-fg-strong bg-nav-active"
+						class="inline-flex items-center gap-1.5 px-3 py-3 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
+						><svg [lucideIcon]="item.icon" class="opacity-80" />{{ item.label }}</a
+					>
+				}
 			}
 		</nav>
 	}
@@ -37,14 +46,19 @@
 		i18n-aria-label
 		aria-label="Main"
 	>
-		@for (link of links(); track link.path) {
-			<a
-				[routerLink]="link.path"
-				routerLinkActive="!text-fg-strong bg-nav-active"
-				class="inline-flex items-center gap-2 px-4 py-2.5 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
-				(click)="closeMenu()"
-				><svg [lucideIcon]="link.icon" class="opacity-80" />{{ link.label }}</a
-			>
+		@for (section of sections(); track section.label) {
+			@if (section.label) {
+				<div class="px-4 py-1 text-sm font-semibold text-fg-muted">{{ section.label }}</div>
+			}
+			@for (link of section.links; track link.path) {
+				<a
+					[routerLink]="link.path"
+					routerLinkActive="!text-fg-strong bg-nav-active"
+					class="inline-flex items-center gap-2 px-4 py-2.5 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
+					(click)="closeMenu()"
+					><svg [lucideIcon]="link.icon" class="opacity-80" />{{ link.label }}</a
+				>
+			}
 		}
 	</nav>
 }

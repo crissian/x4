@@ -1,8 +1,12 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
+	LucideArrowLeftRight,
 	LucideCalculator,
 	LucideCoffee,
+	LucideCoins,
+	LucideDatabase,
 	LucideFactory,
 	LucideFlag,
 	LucideHexagon,
@@ -12,19 +16,30 @@ import {
 	LucideMoon,
 	LucidePackage,
 	LucideRocket,
-	LucideSave,
 	LucideSun,
 	LucideUsers,
 	LucideWrench,
 } from '@lucide/angular';
 import { GAME_LANGUAGES, GameText } from './core/game-text';
-import { HeaderNavComponent, NavLink } from './header-nav.component';
+import { HeaderNavComponent } from './header-nav.component';
+import type { NavItem } from './nav-item';
 import { SavegameSelectorComponent } from './savegame/components/savegame-selector.component';
 import { ThemeService } from './core/services/theme.service';
 
 @Component({
 	selector: 'app-header',
-	imports: [HeaderNavComponent, FormField, LucideSun, LucideMoon, LucideCoffee, LucideLanguages, SavegameSelectorComponent],
+	imports: [
+		HeaderNavComponent,
+		RouterLink,
+		RouterLinkActive,
+		LucideInfo,
+		FormField,
+		LucideSun,
+		LucideMoon,
+		LucideCoffee,
+		LucideLanguages,
+		SavegameSelectorComponent,
+	],
 	templateUrl: './header.component.html',
 })
 export class HeaderComponent {
@@ -47,17 +62,26 @@ export class HeaderComponent {
 		});
 	}
 
-	readonly links: NavLink[] = [
+	readonly items: NavItem[] = [
 		{ path: '/station-calculator', label: $localize`Station Calculator`, icon: LucideCalculator },
-		{ path: '/wares', label: $localize`Wares`, icon: LucidePackage },
-		{ path: '/modules', label: $localize`Station Modules`, icon: LucideFactory },
-		{ path: '/ships', label: $localize`Ships`, icon: LucideRocket },
-		{ path: '/equipment', label: $localize`Equipment`, icon: LucideWrench },
-		{ path: '/races', label: $localize`Races`, icon: LucideUsers },
-		{ path: '/factions', label: $localize`Factions`, icon: LucideFlag },
-		{ path: '/sectors', label: $localize`Sectors`, icon: LucideHexagon },
 		{ path: '/map', label: $localize`Map`, icon: LucideMap },
-		{ path: '/saves', label: $localize`Savegames`, icon: LucideSave },
-		{ path: '/about', label: $localize`About`, icon: LucideInfo },
+		{
+			label: $localize`Database`,
+			icon: LucideDatabase,
+			links: [
+				{ path: '/wares', label: $localize`Wares`, icon: LucidePackage },
+				{ path: '/modules', label: $localize`Station Modules`, icon: LucideFactory },
+				{ path: '/ships', label: $localize`Ships`, icon: LucideRocket },
+				{ path: '/equipment', label: $localize`Equipment`, icon: LucideWrench },
+				{ path: '/races', label: $localize`Races`, icon: LucideUsers },
+				{ path: '/factions', label: $localize`Factions`, icon: LucideFlag },
+				{ path: '/sectors', label: $localize`Sectors`, icon: LucideHexagon },
+			],
+		},
+		{
+			label: $localize`:Header menu group@@navEconomy:Economy`,
+			icon: LucideCoins,
+			links: [{ path: '/trade-routes', label: $localize`Trade Routes`, icon: LucideArrowLeftRight }],
+		},
 	];
 }

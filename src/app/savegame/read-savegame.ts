@@ -3,6 +3,7 @@ import { XmlExtractor, XmlExtractorRunner } from '../core/xml/xml-extractor';
 import { XmlScanError } from '../core/xml/xml-stream-scanner';
 import { InfoExtractor } from './extractors/info-extractor';
 import { MapExtractor } from './extractors/map-extractor';
+import { RelationsExtractor } from './extractors/relations-extractor';
 import { SavegameError, SavegameInfo } from './savegame-model';
 
 export interface ReadSavegameOptions {
@@ -44,7 +45,7 @@ export class SavegameReader {
 	/** Reads the whole file; info is extracted first, `data` holds the results of the other extractors. */
 	static async read(bytes: ReadableStream<Uint8Array>, options: ReadSavegameOptions): Promise<ReadSavegameResult> {
 		const guard = new RootGuard();
-		const extractors: XmlExtractor[] = [guard, new InfoExtractor(), new MapExtractor()];
+		const extractors: XmlExtractor[] = [guard, new InfoExtractor(), new MapExtractor(), new RelationsExtractor()];
 		try {
 			const opened = await TextStream.open(bytes, { size: options.size, onProgress: options.onProgress, keepGzip: true });
 			const results = await XmlExtractorRunner.run(opened.text, extractors, (key, result) => {

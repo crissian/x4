@@ -47,6 +47,11 @@ export const appRoutes: Routes = [
 		title: `${BASE_TITLE} - ${$localize`Galaxy Map`}`,
 	},
 	{
+		path: 'trade-routes',
+		loadComponent: () => import('./trade/components/trade-routes-page.component'),
+		title: `${BASE_TITLE} - ${$localize`Trade Routes`}`,
+	},
+	{
 		path: 'saves',
 		loadComponent: () => import('./savegame/components/savegames-page.component'),
 		title: `${BASE_TITLE} - ${$localize`Savegames`}`,

@@ -52,3 +52,6 @@ export interface SaveMap {
 	stations: SaveStation[];
 	playerShips: ShipCounts;
 }
+
+/** Player relation per faction id, -1..1 (relation plus booster, clamped); a missing faction means 0. */
+export type SaveRelations = Record<string, number>;

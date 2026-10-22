@@ -1,22 +1,29 @@
-import { Component, DestroyRef, ElementRef, afterNextRender, effect, inject, input, signal, viewChild } from '@angular/core';
+import {
+	Component,
+	DestroyRef,
+	ElementRef,
+	afterNextRender,
+	computed,
+	effect,
+	inject,
+	input,
+	signal,
+	viewChild,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { LucideDynamicIcon, LucideMenu, type LucideIconInput } from '@lucide/angular';
+import { LucideDynamicIcon, LucideMenu } from '@lucide/angular';
 import { filter } from 'rxjs/operators';
-
-export interface NavLink {
-	path: string;
-	label: string;
-	icon: LucideIconInput;
-}
+import { NavDropdownComponent } from './nav-dropdown.component';
+import { NavItems, type NavItem } from './nav-item';
 
 /**
- * The main links: in a row while they fit next to the header controls, else behind a menu button. The row width
+ * The main links and link groups: in a row while they fit next to the header controls, else behind a menu button. The row width
  * depends on the language, so it is measured rather than tied to a breakpoint.
  */
 @Component({
 	selector: 'app-header-nav',
-	imports: [RouterLink, RouterLinkActive, LucideDynamicIcon, LucideMenu],
+	imports: [RouterLink, RouterLinkActive, LucideDynamicIcon, LucideMenu, NavDropdownComponent],
 	templateUrl: './header-nav.component.html',
 	host: {
 		'(document:keydown.escape)': 'closeMenu(true)',
@@ -24,7 +31,18 @@ export interface NavLink {
 	},
 })
 export class HeaderNavComponent {
-	readonly links = input.required<NavLink[]>();
+	readonly items = input.required<NavItem[]>();
+	protected readonly NavItems = NavItems;
+
+	/** The menu lists the plain links first, then each group under its label. */
+	protected readonly sections = computed(() => {
+		const items = this.items();
+		return [{ label: '', links: items.filter(NavItems.isLink) }, ...items.filter(NavItems.isGroup)];
+	});
+
+	protected readonly url = signal(inject(Router).url);
+	/** Label of the open dropdown; only one is open at a time. */
+	protected readonly openGroup = signal<string | null>(null);
 
 	/** The links do not fit in a row, so a menu button shows them. */
 	protected readonly collapsed = signal(false);
@@ -40,12 +58,17 @@ export class HeaderNavComponent {
 
 	constructor() {
 		const destroyRef = inject(DestroyRef);
-		inject(Router)
-			.events.pipe(
+		const router = inject(Router);
+		router.events
+			.pipe(
 				filter((event) => event instanceof NavigationEnd),
 				takeUntilDestroyed()
 			)
-			.subscribe(() => this.menuOpen.set(false));
+			.subscribe(() => {
+				this.menuOpen.set(false);
+				this.openGroup.set(null);
+				this.url.set(router.url);
+			});
 		afterNextRender(() => {
 			const observer = new ResizeObserver(() => this.fit());
 			observer.observe(this.space().nativeElement);
@@ -61,6 +84,14 @@ export class HeaderNavComponent {
 				onCleanup(() => observer.unobserve(row));
 			}
 		});
+	}
+
+	protected setGroupOpen(label: string, open: boolean) {
+		if (open) {
+			this.openGroup.set(label);
+		} else if (this.openGroup() === label) {
+			this.openGroup.set(null);
+		}
 	}
 
 	protected toggleMenu() {
@@ -88,7 +119,8 @@ export class HeaderNavComponent {
 	private fit() {
 		const row = this.row()?.nativeElement;
 		if (row) {
-			this.rowWidth = row.scrollWidth;
+			// the row's own width: an open dropdown panel inside it would inflate scrollWidth
+			this.rowWidth = row.offsetWidth;
 		}
 		const available = this.space().nativeElement.clientWidth;
 		if (this.collapsed()) {
@@ -98,6 +130,7 @@ export class HeaderNavComponent {
 			}
 		} else if (this.rowWidth > available) {
 			this.collapsed.set(true);
+			this.openGroup.set(null);
 		}
 	}
 }
