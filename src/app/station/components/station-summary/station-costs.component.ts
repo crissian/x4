@@ -5,7 +5,7 @@ import { LucideChevronsDown, LucideChevronsUp } from '@lucide/angular';
 import { Ware } from '../../../shared/services/model/model';
 import { WareService } from '../../../shared/services/ware.service';
 import { StationModuleModel, StationSettings } from '../station-calculator.model';
-import { ExpandState, priceAt, priceLabel } from './station-summary.shared';
+import { ExpandState, StationSummaryPrices } from './station-summary.shared';
 
 interface ModuleCostItem {
 	ware: Ware;
@@ -34,7 +34,7 @@ export class StationCostsComponent {
 	readonly settings = input.required<FieldTree<StationSettings>>();
 
 	protected readonly expand = new ExpandState();
-	protected readonly priceLabel = priceLabel;
+	protected readonly priceLabel = StationSummaryPrices.priceLabel;
 
 	readonly moduleCosts = computed<ModuleCost[]>(() => {
 		const percentage = this.settings()().value().modulesResourcesPrice;
@@ -49,7 +49,7 @@ export class StationCostsComponent {
 
 			const items = production.wares.flatMap((x) => {
 				const ware = this.wareService.getEntity(x.ware);
-				return ware ? [{ ware, amount: x.amount, price: x.amount * priceAt(ware, percentage) }] : [];
+				return ware ? [{ ware, amount: x.amount, price: x.amount * StationSummaryPrices.priceAt(ware, percentage) }] : [];
 			});
 
 			result.push({

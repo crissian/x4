@@ -4,104 +4,15 @@ import { FormField } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
 import { EnumLabelPipe } from '../../core/enum-labels';
 import { MapStore } from '../map-store';
-import { formatDuration } from '../route-planner';
+import { RoutePlanner } from '../route-planner';
 
 @Component({
 	selector: 'app-map-mining-panel',
 	imports: [DecimalPipe, EnumLabelPipe, FormField, RouterLink],
-	template: `
-		<div class="grid gap-2">
-			<select class="input" aria-label="Resource" i18n-aria-label [formField]="store.settingsForm.resource">
-				@for (ware of store.resourceWares; track ware.id) {
-					<option [value]="ware.id">{{ ware.name }}</option>
-				}
-			</select>
-			<input
-				class="input"
-				list="map-sectors"
-				placeholder="Home sector (where you sell)..."
-				i18n-placeholder
-				aria-label="Home sector"
-				i18n-aria-label
-				[formField]="store.routeForm.from"
-			/>
-			<select class="input" aria-label="Miner" i18n-aria-label [formField]="form.miner">
-				@for (ship of store.miners(); track ship.id) {
-					<option [value]="ship.id">{{ ship.name }} ({{ ship.size | enumLabel }})</option>
-				} @empty {
-					<option value="" i18n>No miner carries this ware</option>
-				}
-			</select>
-			<div class="grid grid-cols-2 gap-2">
-				<label class="text-sm">
-					<ng-container i18n>Minutes to fill hold</ng-container>
-					<input class="input" type="number" [formField]="form.fillMinutes" />
-				</label>
-				<label class="text-sm">
-					<ng-container i18n>Sell price</ng-container>
-					<select class="input" [formField]="form.price">
-						<option value="min" i18n>Min ({{ store.miningWare()?.price.min | number }})</option>
-						<option value="avg" i18n>Avg ({{ store.miningWare()?.price.avg | number }})</option>
-						<option value="max" i18n>Max ({{ store.miningWare()?.price.max | number }})</option>
-					</select>
-				</label>
-			</div>
-		</div>
-		<p class="my-2 text-xs text-fg-muted">
-			@if (store.routeFrom()) {
-				<ng-container i18n>Credits per hour for one miner: fly there at full travel speed, fill the hold, fly back and sell.</ng-container>
-			} @else {
-				<ng-container i18n>Richest sectors. Set a home sector to rank them by credits per hour.</ng-container>
-			}
-		</p>
-		<table class="table text-sm">
-			<thead>
-				<tr>
-					<th i18n>Sector</th>
-					@if (store.routeFrom()) {
-						<th class="text-right" i18n>Trip</th>
-						<th class="text-right">Cr/h</th>
-					} @else {
-						<th class="text-right" i18n>Amount</th>
-					}
-				</tr>
-			</thead>
-			<tbody>
-				@for (item of store.miningSectors(); track item.sector.id) {
-					<tr>
-						<td>
-							<a [routerLink]="['/sectors', item.sector.id]">{{ item.sector.name }}</a>
-							@if (store.routeFrom()) {
-								<div class="text-xs text-fg-muted" i18n>
-									{{ item.jumps }} jumps, {{ item.amount | number }} units
-								</div>
-							}
-						</td>
-						@if (item.trip; as trip) {
-							<td class="text-right whitespace-nowrap">{{ formatDuration(trip.tripTime) }}</td>
-							<td class="text-right font-semibold">{{ trip.perHour | number: '1.0-0' }}</td>
-						} @else {
-							<td class="text-right">{{ item.amount | number }}</td>
-						}
-					</tr>
-				} @empty {
-					<tr>
-						<td colspan="3" class="text-fg-muted" i18n>None</td>
-					</tr>
-				}
-			</tbody>
-		</table>
-		@if (store.miner(); as miner) {
-			<p class="mt-2 text-xs text-fg-muted" i18n>
-				{{ miner.name }}: {{ store.miningUnits() | number }} units per trip, travel
-				{{ store.minerSpeed() | number: '1.0-0' }} m/s with its fastest engine. Mining speed depends on the
-				asteroid, equipment and crew, so set the fill time from experience.
-			</p>
-		}
-	`,
+	templateUrl: './map-mining-panel.component.html',
 })
 export class MapMiningPanelComponent {
 	protected readonly store = inject(MapStore);
 	protected readonly form = this.store.miningForm;
-	protected readonly formatDuration = formatDuration;
+	protected readonly routes = RoutePlanner;
 }

@@ -1,12 +1,129 @@
+import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
+import { SavegameStore } from '../savegame/savegame-store';
+import { GodStations } from '../shared/services/data/god-stations-data';
+import { FactionService } from '../shared/services/faction.service';
+import { MAP_PROVIDERS } from './map-providers';
+import { MapSaveTesting } from './map-save-testing';
+import { MapStations } from './map-stations';
 import { MapStore } from './map-store';
+import { MapSaveLayer } from './save/map-save-layer';
 
 describe('MapStore', () => {
 	function setup() {
-		TestBed.configureTestingModule({ providers: [MapStore] });
+		TestBed.configureTestingModule({
+			providers: [
+				...MAP_PROVIDERS,
+				{ provide: SavegameStore, useValue: { active: signal(null), activeId: signal(null) } },
+			],
+		});
 		return TestBed.inject(MapStore);
 	}
+
+	describe('with a save', () => {
+		const { A, B } = MapSaveTesting;
+
+		async function load(map: Parameters<MapSaveTesting['load']>[0]) {
+			const testing = new MapSaveTesting();
+			await testing.load(map);
+			return TestBed.inject(MapStore);
+		}
+
+		it('limits sectors to the save', async () => {
+			const store = await load({ sectors: [{ id: A, owner: 'argon', contested: false, known: true }] });
+			expect(store.visibleShapes().map((x) => x.sector.id)).toEqual([A]);
+			expect(store.visibleLinks()).toEqual([]);
+			expect(store.saveActive()).toBe(true);
+			// the version choice does not apply
+			store.versions.set(store.versions().map(() => false));
+			expect(store.visibleShapes().length).toBe(1);
+		});
+
+		it('uses save owners for fills and legend', async () => {
+			const store = await load({
+				sectors: [
+					{ id: A, owner: 'xenon', contested: false, known: true },
+					{ id: B, owner: 'player', contested: false, known: true },
+				],
+			});
+			const xenon = TestBed.inject(FactionService).getEntity('xenon')!;
+			expect(store.fills().get(A)?.fill).toBe(xenon.color);
+			expect(store.ownerLegend().map((x) => [x.id, x.count])).toEqual(
+				expect.arrayContaining([
+					['xenon', 1],
+					['player', 1],
+				])
+			);
+			expect(store.ownerLegend().reduce((a, x) => a + x.count, 0)).toBe(2);
+		});
+
+		it('labels ownerless sectors Unclaimed like the map without a save', async () => {
+			const store = await load({
+				sectors: [
+					{ id: A, owner: 'ownerless', contested: false, known: true },
+					{ id: B, owner: '', contested: false, known: true },
+				],
+			});
+			const legend = store.ownerLegend();
+			expect(legend.length).toBe(1);
+			expect(legend[0]).toMatchObject({ id: '', count: 2, name: 'Unclaimed' });
+		});
+
+		it('discovered only hides unknown sectors, links and stations', async () => {
+			const testing = new MapSaveTesting();
+			const store = TestBed.inject(MapStore);
+			const link = store.layout.links[0];
+			const [from, to] = [link.from.sector.id, link.to.sector.id];
+			const sectors = (known: boolean) => [
+				{ id: from, owner: 'argon', contested: false, known: true },
+				{ id: to, owner: 'argon', contested: false, known },
+			];
+			await testing.load({ sectors: sectors(true) });
+			TestBed.inject(MapSaveLayer).discoveredOnly.set(true);
+			expect(link).toBeDefined();
+			expect(store.visibleShapes().length).toBe(2);
+			expect(store.visibleLinks()).toContain(link);
+
+			await testing.load({ sectors: sectors(false) });
+			expect(store.visibleShapes().map((x) => x.sector.id)).toEqual([from]);
+			expect(store.visibleLinks()).not.toContain(link);
+
+			TestBed.inject(MapSaveLayer).discoveredOnly.set(false);
+			expect(store.visibleShapes().length).toBe(2);
+			expect(store.visibleLinks()).toContain(link);
+		});
+
+		it('hides abandoned ships outside the save and in unknown sectors', async () => {
+			const known = 'cluster_01_sector001';
+			const unknown = 'cluster_27_sector001';
+			const outside = 'cluster_25_sector002';
+			const store = await load({
+				sectors: [
+					{ id: known, owner: 'argon', contested: false, known: true },
+					{ id: unknown, owner: 'argon', contested: false, known: false },
+				],
+			});
+			const sectorsOf = () => new Set(store.abandoned().map((x) => x.item.sector));
+			expect(sectorsOf()).toEqual(new Set([known, unknown]));
+			expect(sectorsOf().has(outside)).toBe(false);
+
+			TestBed.inject(MapSaveLayer).discoveredOnly.set(true);
+			expect(sectorsOf()).toEqual(new Set([known]));
+		});
+	});
+
+	it('without a save equals the game-start map', () => {
+		const store = setup();
+		const stations = TestBed.inject(MapStations);
+		expect(store.saveActive()).toBe(false);
+		expect(store.visibleShapes().length).toBe(store.layout.shapes.length);
+		expect(store.visibleLinks().length).toBe(store.layout.links.length);
+		expect(store.hidesUnknown()).toBe(false);
+		const first = store.layout.shapes[0].sector;
+		expect(store.sectorOwner(first)).toBe(first.owner);
+		expect(stations.stations().length).toBe(GodStations.length);
+	});
 
 	it('plans a route between sectors picked by name', () => {
 		const store = setup();

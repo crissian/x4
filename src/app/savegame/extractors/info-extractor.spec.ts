@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { runExtractors } from '../../core/xml/xml-extractor';
+import { XmlExtractorRunner } from '../../core/xml/xml-extractor';
 import { INFO_9_00 } from '../testdata/info-9.00';
-import { createInfoExtractor } from './info-extractor';
+import { InfoExtractor } from './info-extractor';
 
 function textStream(...chunks: string[]): ReadableStream<string> {
 	return new ReadableStream<string>({
@@ -12,10 +12,10 @@ function textStream(...chunks: string[]): ReadableStream<string> {
 	});
 }
 
-describe('createInfoExtractor', () => {
+describe('InfoExtractor', () => {
 	it('reads the save header', async () => {
-		const results = await runExtractors(textStream(INFO_9_00), [createInfoExtractor()]);
-		const info = results['info'] as ReturnType<ReturnType<typeof createInfoExtractor>['result']>;
+		const results = await XmlExtractorRunner.run(textStream(INFO_9_00), [new InfoExtractor()]);
+		const info = results['info'] as ReturnType<InfoExtractor['result']>;
 		expect(info).toMatchObject({
 			saveName: "Hatikvah's Choice I",
 			savedAt: 1792661326000,
@@ -34,7 +34,7 @@ describe('createInfoExtractor', () => {
 	});
 
 	it('is done after </info>', () => {
-		const extractor = createInfoExtractor();
+		const extractor = new InfoExtractor();
 		expect(extractor.done()).toBe(false);
 		extractor.open('savegame', ['savegame'], () => ({}));
 		extractor.open('info', ['savegame', 'info'], () => ({}));

@@ -5,7 +5,7 @@ import { LucideChevronsDown, LucideChevronsUp, LucideTrendingUp } from '@lucide/
 import { WareGroups } from '../../../shared/services/data/ware-groups-data';
 import { WareService } from '../../../shared/services/ware.service';
 import { StationResourceModel, StationSettings } from '../station-calculator.model';
-import { ExpandState, priceAt, priceLabel } from './station-summary.shared';
+import { ExpandState, StationSummaryPrices } from './station-summary.shared';
 
 const BASIC_RESOURCES = [WareGroups.gases, WareGroups.minerals, WareGroups.ice];
 
@@ -28,7 +28,7 @@ export class StationProfitComponent {
 	readonly settings = input.required<FieldTree<StationSettings>>();
 
 	protected readonly expand = new ExpandState();
-	protected readonly priceLabel = priceLabel;
+	protected readonly priceLabel = StationSummaryPrices.priceLabel;
 	private readonly values = computed(() => this.settings()().value());
 
 	private readonly sortedResources = computed(() =>
@@ -46,7 +46,7 @@ export class StationProfitComponent {
 				return {
 					name: x.ware.name,
 					amount: x.amount,
-					price: provided ? 0 : priceAt(x.ware, settings.resourcesPrice),
+					price: provided ? 0 : StationSummaryPrices.priceAt(x.ware, settings.resourcesPrice),
 				};
 			});
 	});
@@ -55,7 +55,7 @@ export class StationProfitComponent {
 		const percentage = this.values().productsPrice;
 		return this.sortedResources()
 			.filter((x) => x.amount > 0)
-			.map((x) => ({ name: x.ware.name, amount: x.amount, price: priceAt(x.ware, percentage) }));
+			.map((x) => ({ name: x.ware.name, amount: x.amount, price: StationSummaryPrices.priceAt(x.ware, percentage) }));
 	});
 
 	readonly totalExpenses = computed(() => this.resourcesNeeded().reduce((sum, x) => sum + x.amount * x.price, 0));

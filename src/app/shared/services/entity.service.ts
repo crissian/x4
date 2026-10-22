@@ -11,6 +11,14 @@ export abstract class EntityStore<T extends { id: string }> implements EntitySer
 		this.byId = new Map(entities.map((x) => [x.id, x]));
 	}
 
+	/** True when a production method of the item takes the ware as input. */
+	static usesWare(
+		item: { production?: readonly { wares: readonly { ware: string }[] }[] },
+		wareId: string
+	): boolean {
+		return item.production?.some((p) => p.wares.some((w) => w.ware === wareId)) ?? false;
+	}
+
 	getEntities(): T[] {
 		return this.entities as T[];
 	}
@@ -18,12 +26,4 @@ export abstract class EntityStore<T extends { id: string }> implements EntitySer
 	getEntity(id: string): T | undefined {
 		return this.byId.get(id);
 	}
-}
-
-/** True when a production method of the item takes the ware as input. */
-export function usesWare(
-	item: { production?: readonly { wares: readonly { ware: string }[] }[] },
-	wareId: string
-): boolean {
-	return item.production?.some((p) => p.wares.some((w) => w.ware === wareId)) ?? false;
 }

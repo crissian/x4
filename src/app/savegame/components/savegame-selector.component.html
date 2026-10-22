@@ -1,7 +1,12 @@
 @if (saves().length > 0) {
-	<label class="inline-flex min-w-0 shrink-0 items-center gap-1 text-nav-fg" i18n-title title="Active savegame">
-		<svg lucideSave class="opacity-80" />
-		<select class="input h-8 w-8 py-0 text-sm sm:w-auto sm:max-w-56" i18n-aria-label aria-label="Active savegame" [formField]="selectorForm.active">
+	<label class="inline-flex shrink-0 items-center gap-1 text-nav-fg" i18n-title title="Active savegame">
+		<svg lucideSave class="hidden opacity-80 sm:inline-block" />
+		<select
+			class="input h-8 w-18 py-0 text-sm sm:w-auto sm:max-w-56"
+			i18n-aria-label
+			aria-label="Active savegame"
+			[formField]="selectorForm.active"
+		>
 			<option value="" i18n>No save</option>
 			@for (save of saves(); track save.id) {
 				<option [value]="save.id">{{ label(save) }}</option>

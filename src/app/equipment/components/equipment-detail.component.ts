@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { EnumLabelPipe, enumLabel } from '../../core/enum-labels';
+import { EnumLabelPipe, EnumLabels } from '../../core/enum-labels';
 import { Component, computed, inject, input } from '@angular/core';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { Router, RouterLink } from '@angular/router';
@@ -7,9 +7,9 @@ import { DataGridComponent, GridColumn } from '../../shared/components/data-grid
 import { ProductionCardComponent } from '../../shared/components/production-card.component';
 import { SellersComponent } from '../../shared/components/sellers.component';
 import { EquipmentService } from '../../shared/services/equipment.service';
-import { missileDps, weaponStats } from '../../shared/services/loadout';
+import { ShipPerformance } from '../../shared/services/ship-performance';
 import { Ship } from '../../shared/services/model/model';
-import { toProductionData } from '../../shared/services/production';
+import { Production } from '../../shared/services/production';
 import { ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
 import { WareService } from '../../shared/services/ware.service';
@@ -33,14 +33,14 @@ export class EquipmentDetailComponent {
 
 	readonly id = input.required<string>();
 	protected readonly entity = computed(() => this.service.getEntity(this.id()));
-	protected readonly production = computed(() => toProductionData(this.entity()?.production, this.wareService));
+	protected readonly production = computed(() => Production.toProductionData(this.entity()?.production, this.wareService));
 	protected readonly weapon = computed(() => {
 		const weapon = this.entity()?.weapon;
-		return weapon ? weaponStats(weapon) : undefined;
+		return weapon ? ShipPerformance.weaponStats(weapon) : undefined;
 	});
 	protected readonly missileDps = computed(() => {
 		const missile = this.entity()?.missile;
-		return missile ? missileDps(missile) : undefined;
+		return missile ? ShipPerformance.missileDps(missile) : undefined;
 	});
 
 	/** Ships with at least one slot this equipment fits. */
@@ -61,8 +61,8 @@ export class EquipmentDetailComponent {
 
 	protected readonly shipColumns: GridColumn<ShipRow>[] = [
 		{ key: 'ship.name', caption: $localize`Ship` },
-		{ key: 'ship.size', caption: $localize`Size`, value: (x) => enumLabel(x.ship.size) },
-		{ key: 'ship.type', caption: $localize`Type`, value: (x) => enumLabel(x.ship.type) },
+		{ key: 'ship.size', caption: $localize`Size`, value: (x) => EnumLabels.label(x.ship.size) },
+		{ key: 'ship.type', caption: $localize`Type`, value: (x) => EnumLabels.label(x.ship.type) },
 		{ key: 'slots', caption: $localize`Slots`, type: 'number' },
 	];
 	protected readonly trackShip = (row: ShipRow) => row.ship.id;

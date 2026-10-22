@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { enumLabel } from '../../core/enum-labels';
+import { EnumLabels } from '../../core/enum-labels';
 import { EquipmentService } from './equipment.service';
 import { FactionService } from './faction.service';
-import { Loadout, SlotGroup, bestLoadout, flightSpeeds, slotGroups, weaponStats } from './loadout';
+import { SlotGroup, Loadouts, Loadout } from './loadout';
+import { ShipPerformance } from './ship-performance';
 import { Equipment, Faction, License, Ship } from './model/model';
 
 export type LoadoutPreset = 'combat' | 'travel' | 'cheapest' | 'empty';
@@ -41,7 +42,7 @@ export class ShipStatsService {
 	groups(ship: Ship): SlotGroup[] {
 		let groups = this.groupsCache.get(ship.id);
 		if (!groups) {
-			groups = slotGroups(ship, this.equipmentService.getEntities());
+			groups = Loadouts.slotGroups(ship, this.equipmentService.getEntities());
 			this.groupsCache.set(ship.id, groups);
 		}
 		return groups;
@@ -54,7 +55,7 @@ export class ShipStatsService {
 	maxStats(ship: Ship): ShipMaxStats {
 		let stats = this.maxCache.get(ship.id);
 		if (!stats) {
-			const engines = this.engines(ship).map((x) => flightSpeeds(ship, x));
+			const engines = this.engines(ship).map((x) => ShipPerformance.flightSpeeds(ship, x));
 			const shield = this.groups(ship)
 				.filter((x) => x.kind === 'shields')
 				.reduce((total, group) => total + Math.max(0, ...group.options.map((x) => x.recharge?.max ?? 0)) * group.slots.length, 0);
@@ -64,7 +65,7 @@ export class ShipStatsService {
 				travel: Math.max(0, ...engines.map((x) => x.travel)),
 				shield,
 				cargo: (ship.cargo ?? []).reduce((total, x) => total + x.max, 0),
-				cargoTypes: [...new Set((ship.cargo ?? []).flatMap((x) => x.types.map((t) => enumLabel(t.name))))].join(', '),
+				cargoTypes: [...new Set((ship.cargo ?? []).flatMap((x) => x.types.map((t) => EnumLabels.label(t.name))))].join(', '),
 			};
 			this.maxCache.set(ship.id, stats);
 		}
@@ -77,10 +78,10 @@ export class ShipStatsService {
 			case 'empty':
 				return {};
 			case 'cheapest':
-				return bestLoadout(groups, (x) => -(x.price?.avg ?? 0));
+				return Loadouts.bestLoadout(groups, (x) => -(x.price?.avg ?? 0));
 			case 'travel':
 			case 'combat':
-				return bestLoadout(groups, (x, group) => {
+				return Loadouts.bestLoadout(groups, (x, group) => {
 					switch (group.kind) {
 						case 'engines':
 							return preset === 'travel'
@@ -89,7 +90,7 @@ export class ShipStatsService {
 						case 'shields':
 							return x.recharge?.max ?? 0;
 						default:
-							return x.weapon && !x.weapon.repair ? weaponStats(x.weapon).sustainedDps : null;
+							return x.weapon && !x.weapon.repair ? ShipPerformance.weaponStats(x.weapon).sustainedDps : null;
 					}
 				});
 		}

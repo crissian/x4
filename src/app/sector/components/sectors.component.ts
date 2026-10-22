@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideMap } from '@lucide/angular';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
-import { injectRowNavigation } from '../../shared/components/list-page';
+import { RowNavigation } from '../../shared/components/list-page';
 import { FactionService } from '../../shared/services/faction.service';
 import { Sector } from '../../shared/services/model/model';
 import { GAME_VERSION_LOOKUP } from '../../shared/services/constants';
@@ -20,7 +20,7 @@ export class SectorsComponent {
 	private readonly wares = inject(WareService);
 
 	protected readonly entities = inject(SectorService).getEntities();
-	protected readonly open = injectRowNavigation<Sector>();
+	protected readonly open = RowNavigation.inject<Sector>();
 
 	protected readonly columns: GridColumn<Sector>[] = [
 		{ key: 'name', caption: $localize`Name` },

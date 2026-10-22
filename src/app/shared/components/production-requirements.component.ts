@@ -1,7 +1,7 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ProductionData, getProductionTotal } from '../services/production';
+import { ProductionData, Production } from '../services/production';
 
 /** Table of wares needed by a production, with min / max / avg prices. */
 @Component({
@@ -13,8 +13,8 @@ export class ProductionRequirementsComponent {
 	readonly production = input.required<ProductionData>();
 
 	protected readonly totals = computed(() => ({
-		min: getProductionTotal(this.production(), 'min'),
-		max: getProductionTotal(this.production(), 'max'),
-		avg: getProductionTotal(this.production(), 'avg'),
+		min: Production.getProductionTotal(this.production(), 'min'),
+		max: Production.getProductionTotal(this.production(), 'max'),
+		avg: Production.getProductionTotal(this.production(), 'avg'),
 	}));
 }

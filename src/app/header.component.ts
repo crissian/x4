@@ -1,10 +1,8 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
 	LucideCalculator,
 	LucideCoffee,
-	LucideDynamicIcon,
 	LucideFactory,
 	LucideFlag,
 	LucideHexagon,
@@ -19,13 +17,14 @@ import {
 	LucideUsers,
 	LucideWrench,
 } from '@lucide/angular';
-import { GAME_LANGUAGES, getGameLanguage, setGameLanguage } from './core/game-text';
+import { GAME_LANGUAGES, GameText } from './core/game-text';
+import { HeaderNavComponent, NavLink } from './header-nav.component';
 import { SavegameSelectorComponent } from './savegame/components/savegame-selector.component';
 import { ThemeService } from './core/services/theme.service';
 
 @Component({
 	selector: 'app-header',
-	imports: [RouterLink, RouterLinkActive, FormField, LucideDynamicIcon, LucideSun, LucideMoon, LucideCoffee, LucideLanguages, SavegameSelectorComponent],
+	imports: [HeaderNavComponent, FormField, LucideSun, LucideMoon, LucideCoffee, LucideLanguages, SavegameSelectorComponent],
 	templateUrl: './header.component.html',
 })
 export class HeaderComponent {
@@ -35,7 +34,7 @@ export class HeaderComponent {
 	protected readonly switchToDark = $localize`Switch to dark theme`;
 
 	protected readonly languages = GAME_LANGUAGES;
-	private readonly language = getGameLanguage();
+	private readonly language = GameText.language();
 	protected readonly languageForm = form(signal({ language: this.language }));
 
 	constructor() {
@@ -43,12 +42,12 @@ export class HeaderComponent {
 		effect(() => {
 			const language = this.languageForm.language().value();
 			if (language !== this.language) {
-				setGameLanguage(language);
+				GameText.setLanguage(language);
 			}
 		});
 	}
 
-	readonly links = [
+	readonly links: NavLink[] = [
 		{ path: '/station-calculator', label: $localize`Station Calculator`, icon: LucideCalculator },
 		{ path: '/wares', label: $localize`Wares`, icon: LucidePackage },
 		{ path: '/modules', label: $localize`Station Modules`, icon: LucideFactory },

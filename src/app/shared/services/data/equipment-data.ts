@@ -1,4 +1,4 @@
-import { translateGameText } from '../../../core/game-text';
+import { GameText } from '../../../core/game-text';
 /* tslint:disable:max-line-length */
 import { EquipmentType } from './equipment-type-data';
 import { EquipmentClass } from './equipment-class-data';
@@ -18171,4 +18171,4 @@ export const Equipments = [
 	},
 ];
 
-translateGameText(Equipments);
+GameText.translate(Equipments);

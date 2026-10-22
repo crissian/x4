@@ -1,7 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { KeyValueStore, MemoryKeyValueStore } from '../core/storage/key-value-store';
-import { SavegameInfo, SavegameSummary } from './savegame-model';
-import { createSavegameRepository } from './savegame-repository';
+import { SavegameInfo, SavegameListItem, SavegameSummary } from './savegame-model';
+import { SavegameRepository } from './savegame-repository';
 
 function info(guid: string, savedAt: number): SavegameInfo {
 	return {
@@ -25,7 +25,7 @@ function summary(id: string, savedAt: number): Omit<SavegameSummary, 'fileKept'>
 }
 
 function repo(files: KeyValueStore<Blob> = new MemoryKeyValueStore<Blob>()) {
-	return createSavegameRepository(new MemoryKeyValueStore<SavegameSummary>(), files, true);
+	return new SavegameRepository(new MemoryKeyValueStore<SavegameListItem>(), new MemoryKeyValueStore<Record<string, unknown>>(), files, true);
 }
 
 describe('SavegameRepository', () => {
@@ -90,10 +90,78 @@ describe('SavegameRepository', () => {
 
 	it('drops the new file when the summary cannot be stored', async () => {
 		const files = new MemoryKeyValueStore<Blob>();
-		const saves = new MemoryKeyValueStore<SavegameSummary>();
+		const data = new MemoryKeyValueStore<Record<string, unknown>>();
+		const saves = new MemoryKeyValueStore<SavegameListItem>();
 		saves.put = () => Promise.reject(new Error('boom'));
-		const r = createSavegameRepository(saves, files, true);
+		const r = new SavegameRepository(saves, data, files, true);
 		await expect(r.save(summary('a', 1), new Blob(['x']))).rejects.toThrow('boom');
 		expect(await files.get('a')).toBeUndefined();
+		expect(await data.get('a')).toBeUndefined();
+	});
+
+	it('list does not read data', async () => {
+		const data = new MemoryKeyValueStore<Record<string, unknown>>();
+		const r = new SavegameRepository(new MemoryKeyValueStore<SavegameListItem>(), data, new MemoryKeyValueStore<Blob>(), true);
+		await r.save(summary('a', 1), undefined);
+		const get = vi.spyOn(data, 'get');
+		const getAll = vi.spyOn(data, 'getAll');
+		await r.list();
+		expect(get).not.toHaveBeenCalled();
+		expect(getAll).not.toHaveBeenCalled();
+	});
+
+	it('get joins summary and data', async () => {
+		const r = repo();
+		await r.save(summary('a', 1), undefined);
+		expect((await r.get('a'))?.data).toEqual({ a: 1 });
+	});
+
+	it('get returns empty data when the data record is missing', async () => {
+		const summaries = new MemoryKeyValueStore<SavegameListItem>();
+		const r = new SavegameRepository(summaries, new MemoryKeyValueStore<Record<string, unknown>>(), new MemoryKeyValueStore<Blob>(), true);
+		const item = SavegameRepository.moveSummaryData({ ...summary('b', 1), fileKept: false }).summary;
+		await summaries.put('b', item);
+		expect((await r.get('b'))?.data).toEqual({});
+		expect(await r.get('missing')).toBeUndefined();
+	});
+
+	it('remove deletes summary, data and file', async () => {
+		const data = new MemoryKeyValueStore<Record<string, unknown>>();
+		const files = new MemoryKeyValueStore<Blob>();
+		const summaries = new MemoryKeyValueStore<SavegameListItem>();
+		const r = new SavegameRepository(summaries, data, files, true);
+		await r.save(summary('a', 1), new Blob(['abc']));
+		await r.remove('a');
+		expect(await summaries.get('a')).toBeUndefined();
+		expect(await data.get('a')).toBeUndefined();
+		expect(await files.get('a')).toBeUndefined();
+	});
+
+	it('upgrades version 1 records and keeps them', () => {
+		const { summary: moved, data } = SavegameRepository.moveSummaryData({ ...summary('a', 1), fileKept: true });
+		expect(data).toEqual({ a: 1 });
+		expect('data' in moved).toBe(false);
+		expect(moved.id).toBe('a');
+		expect(moved.fileKept).toBe(true);
+		expect(SavegameRepository.moveSummaryData({ ...summary('b', 1), fileKept: false, data: undefined as never }).data).toEqual({});
+	});
+
+	it('keeps the previous data when re-saving fails', async () => {
+		const data = new MemoryKeyValueStore<Record<string, unknown>>();
+		const saves = new MemoryKeyValueStore<SavegameListItem>();
+		const r = new SavegameRepository(saves, data, new MemoryKeyValueStore<Blob>(), true);
+		await r.save(summary('a', 1), undefined);
+		saves.put = () => Promise.reject(new Error('boom'));
+		await expect(r.save({ ...summary('a', 2), data: { b: 2 } }, undefined)).rejects.toThrow('boom');
+		expect((await r.get('a'))?.data).toEqual({ a: 1 });
+	});
+
+	it('keeps the previous file when re-saving fails', async () => {
+		const saves = new MemoryKeyValueStore<SavegameListItem>();
+		const r = new SavegameRepository(saves, new MemoryKeyValueStore<Record<string, unknown>>(), new MemoryKeyValueStore<Blob>(), true);
+		await r.save(summary('a', 1), new Blob(['old']));
+		saves.put = () => Promise.reject(new Error('boom'));
+		await expect(r.save(summary('a', 2), new Blob(['new']))).rejects.toThrow('boom');
+		expect(await (await r.getFile('a'))?.text()).toBe('old');
 	});
 });

@@ -1,21 +1,19 @@
 import { Injectable, computed, effect, inject, linkedSignal, signal, untracked } from '@angular/core';
 import { disabled, form, min } from '@angular/forms/signals';
-import { enumLabel } from '../core/enum-labels';
-import { persistedSignal } from '../core/services/local-storage';
-import { GAME_VERSIONS, STATION_TYPES, StationTypeInfo } from '../shared/services/constants';
+import { LocalStorage } from '../core/services/local-storage';
+import { GAME_VERSIONS } from '../shared/services/constants';
 import { AbandonedShips } from '../shared/services/data/abandoned-ships-data';
-import { GodStations } from '../shared/services/data/god-stations-data';
-import { Size } from '../shared/services/data/size-data';
-import { EquipmentService } from '../shared/services/equipment.service';
 import { FactionService } from '../shared/services/faction.service';
-import { AbandonedShip, Faction, GodStation, Sector, Ship } from '../shared/services/model/model';
+import { AbandonedShip, Faction, Sector, Ship } from '../shared/services/model/model';
 import { ShipStatsService } from '../shared/services/ship-stats.service';
 import { ShipService } from '../shared/services/ship.service';
-import { ClusterService, SectorService } from '../shared/services/universe.service';
+import { SectorService } from '../shared/services/universe.service';
 import { WareService } from '../shared/services/ware.service';
-import { CLUSTER_RADIUS, SectorShape, layoutGalaxy } from './galaxy-layout';
-import { minerCapacity, minersFor, miningTrip } from './mining';
-import { travelTimes } from './route-planner';
+import { CLUSTER_RADIUS, GalaxyLayout, SectorShape } from './galaxy-layout';
+import { MapGeometry } from './map-geometry';
+import { Mining } from './mining';
+import { RoutePlanner } from './route-planner';
+import { MapSaveLayer } from './save/map-save-layer';
 
 export type ColorMode = 'owner' | 'sunlight' | 'security' | 'resource';
 export type PriceLevel = 'min' | 'avg' | 'max';
@@ -30,57 +28,6 @@ export interface ViewBox {
 export const NEUTRAL = '#6b7280';
 const LABEL_PX = 11;
 
-/** Sunlight 0% .. 200%+ from deep blue to bright yellow. */
-function sunlightColor(value: number | undefined): string {
-	if (value == null) {
-		return NEUTRAL;
-	}
-	const t = Math.max(0, Math.min(1, value / 2));
-	return `hsl(${(230 - 180 * t).toFixed(0)} 85% ${(22 + 43 * t).toFixed(0)}%)`;
-}
-
-/** Security 0 .. 1 from red to green. */
-function securityColor(value: number | undefined): string {
-	if (value == null) {
-		return NEUTRAL;
-	}
-	const t = Math.max(0, Math.min(1, value));
-	return `hsl(${(120 * t).toFixed(0)} 75% 45%)`;
-}
-
-/** Splits a long name over two lines. */
-export function wrap(name: string): string[] {
-	if (name.length <= 14) {
-		return [name];
-	}
-	const middle = name.length / 2;
-	let split = -1;
-	for (let i = 0; i < name.length; i++) {
-		if (name[i] === ' ' && (split < 0 || Math.abs(i - middle) < Math.abs(split - middle))) {
-			split = i;
-		}
-	}
-	return split < 0 ? [name] : [name.slice(0, split), name.slice(split + 1)];
-}
-
-/** Map position of a point inside a sector (km); game positions are within roughly ±500 km of the center. */
-function markerPosition(shape: SectorShape, x: number, z: number) {
-	const scale = (shape.r * 0.7) / 500;
-	const clamp = (v: number) => Math.max(-shape.r * 0.7, Math.min(shape.r * 0.7, v));
-	return { x: shape.x + clamp(x * scale), y: shape.y + clamp(-z * scale) };
-}
-
-/** Engine with the best travel thrust, used for the travel drive charge time. */
-function fastestTravelEngine(stats: ShipStatsService, ship: Ship) {
-	const score = (x: { thrust?: { forward: number }; travel?: { thrust: number } }) =>
-		(x.thrust?.forward ?? 0) * (x.travel?.thrust ?? 0);
-	const engines = stats.engines(ship);
-	return engines.reduce<(typeof engines)[number] | undefined>(
-		(best, x) => (!best || score(x) > score(best) ? x : best),
-		undefined
-	);
-}
-
 /**
  * State shared by the galaxy map, its layers and side panels. Editable state is held in signal
  * form models; everything else is derived. Provided by the map page, so it lives as long as the page.
@@ -92,11 +39,12 @@ export class MapStore {
 	private readonly wares = inject(WareService);
 	private readonly ships = inject(ShipService);
 	private readonly shipStats = inject(ShipStatsService);
-	private readonly equipment = inject(EquipmentService);
+	private readonly save = inject(MapSaveLayer);
+	private readonly geometry = inject(MapGeometry);
 
-	readonly layout = layoutGalaxy(inject(ClusterService).getEntities(), (id) => this.sectors.getEntity(id));
-	readonly sectorList = this.layout.shapes.map((x) => x.sector).sort((a, b) => a.name.localeCompare(b.name));
-	readonly shapeById = new Map(this.layout.shapes.map((x) => [x.sector.id, x]));
+	readonly layout = this.geometry.layout;
+	readonly sectorList = this.geometry.sectorList;
+	readonly shapeById = this.geometry.shapeById;
 	readonly resourceWares = [...new Set(this.sectorList.flatMap((x) => x.resources.map((r) => r.ware)))]
 		.map((id) => ({ id, name: this.wareName(id) }))
 		.sort((a, b) => a.name.localeCompare(b.name));
@@ -129,7 +77,7 @@ export class MapStore {
 	readonly resource = computed(() => this.settings().resource);
 
 	/** Content packs shown on the map, indexed by version; stored as the list of shown versions. */
-	readonly versions = persistedSignal<boolean[]>(
+	readonly versions = LocalStorage.persistedSignal<boolean[]>(
 		'map-versions',
 		GAME_VERSIONS.map(() => true),
 		{
@@ -139,11 +87,29 @@ export class MapStore {
 	);
 	readonly versionsForm = form(this.versions);
 	readonly shownVersionCount = computed(() => this.versions().filter((x) => x).length);
-	readonly visibleShapes = computed(() => this.layout.shapes.filter((x) => this.isShown(x.sector.version)));
-	readonly visibleLinks = computed(() =>
-		this.layout.links.filter((x) => this.isShown(x.from.sector.version) && this.isShown(x.to.sector.version))
-	);
-	private readonly visibleSectors = computed(() => this.visibleShapes().map((x) => x.sector));
+	/** A save is active with its map data: its sectors replace the version choice. */
+	readonly saveActive = this.save.active;
+	/** Only discovered sectors are drawn (canvas only; panels keep using every sector of the set). */
+	readonly hidesUnknown = computed(() => this.save.active() && this.save.discoveredOnly());
+	/** The sectors of the save, or those of the shown versions. */
+	private readonly setShapes = computed(() => {
+		const ids = this.save.sectorIds();
+		return this.layout.shapes.filter((x) => (ids ? ids.has(x.sector.id) : this.isShown(x.sector.version)));
+	});
+	private readonly visibleSectors = computed(() => this.setShapes().map((x) => x.sector));
+	readonly drawnIds = computed(() => {
+		const hide = this.hidesUnknown();
+		const sectors = this.save.sectors();
+		return new Set(this.setShapes().flatMap((x) => (hide && !sectors.get(x.sector.id)?.known ? [] : x.sector.id)));
+	});
+	readonly visibleShapes = computed(() => {
+		const ids = this.drawnIds();
+		return this.setShapes().filter((x) => ids.has(x.sector.id));
+	});
+	readonly visibleLinks = computed(() => {
+		const ids = this.drawnIds();
+		return this.layout.links.filter((x) => ids.has(x.from.sector.id) && ids.has(x.to.sector.id));
+	});
 
 	// route planner: sectors are picked by name from a datalist
 	readonly routeShips = [...this.ships.getEntities()]
@@ -165,7 +131,7 @@ export class MapStore {
 	readonly travel = computed(() => {
 		const from = this.routeFrom();
 		const speed = Math.max(100, this.routeModel().speed || 3000);
-		return from ? travelTimes(this.visibleSectors(), from, { speed, charge: this.travelCharge() }) : undefined;
+		return from ? RoutePlanner.travelTimes(this.visibleSectors(), from, { speed, charge: this.travelCharge() }) : undefined;
 	});
 	readonly route = computed(() => {
 		const to = this.routeTo();
@@ -182,7 +148,7 @@ export class MapStore {
 	readonly miningWare = computed(() => this.wares.getEntity(this.resource()));
 	readonly miners = computed(() => {
 		const ware = this.miningWare();
-		return ware ? minersFor(this.ships.getEntities(), ware) : [];
+		return ware ? Mining.minersFor(this.ships.getEntities(), ware) : [];
 	});
 	/** Mining settings; the miner resets to the first one able to carry the resource. */
 	readonly miningModel = linkedSignal<Ship[], { miner: string; fillMinutes: number; price: PriceLevel }>({
@@ -205,12 +171,12 @@ export class MapStore {
 	readonly miningUnits = computed(() => {
 		const ware = this.miningWare();
 		const miner = this.miner();
-		return ware?.volume && miner ? Math.floor(minerCapacity(miner, ware) / ware.volume) : 0;
+		return ware?.volume && miner ? Math.floor(Mining.minerCapacity(miner, ware) / ware.volume) : 0;
 	});
 	private readonly minerTravel = computed(() => {
 		const from = this.routeFrom();
 		return from && this.miner()
-			? travelTimes(this.visibleSectors(), from, {
+			? RoutePlanner.travelTimes(this.visibleSectors(), from, {
 					speed: this.minerSpeed() || 1000,
 					charge: this.travelCharge(),
 				})
@@ -224,7 +190,7 @@ export class MapStore {
 		const ware = this.miningWare();
 		const miner = this.miner();
 		const { fillMinutes, price } = this.miningModel();
-		const capacity = ware && miner ? minerCapacity(miner, ware) : 0;
+		const capacity = ware && miner ? Mining.minerCapacity(miner, ware) : 0;
 		return this.visibleSectors()
 			.filter((x) => amounts.has(x.id))
 			.map((sector) => {
@@ -236,7 +202,7 @@ export class MapStore {
 					jumps: travel?.route(sector.id)?.jumps,
 					trip:
 						time != null && ware
-							? miningTrip(time, capacity, ware, ware.price[price], Math.max(1, fillMinutes || 10))
+							? Mining.miningTrip(time, capacity, ware, ware.price[price], Math.max(1, fillMinutes || 10))
 							: undefined,
 				};
 			})
@@ -245,89 +211,20 @@ export class MapStore {
 			.slice(0, 25);
 	});
 
-	// game start stations
-	readonly stationsModel = signal({
-		types: Object.fromEntries(
-			STATION_TYPES.map((x) => [x.id, x.id !== 'defence' && x.id !== 'piratebase'])
-		) as Record<string, boolean>,
-		/** Name of the ship or equipment to buy, picked from a datalist. */
-		buy: '',
-	});
-	readonly stationsForm = form(this.stationsModel);
-	readonly stations = computed(() =>
-		(GodStations as GodStation[])
-			.filter((x) => this.isShown(x.version))
-			.flatMap((station, i) => {
-				const shape = this.shapeById.get(station.sector);
-				if (!shape) {
-					return [];
-				}
-				// stations without a fixed spot are spread around the sector center
-				const angle = i * 2.4;
-				const position =
-					station.x != null
-						? markerPosition(shape, station.x, station.z ?? 0)
-						: {
-								x: shape.x + Math.cos(angle) * shape.r * 0.35,
-								y: shape.y + Math.sin(angle) * shape.r * 0.35,
-							};
-				const type: StationTypeInfo = STATION_TYPES.find((t) => t.id === station.type)!;
-				return [{ station, shape, type, faction: this.faction(station.owner), ...position }];
-			})
-	);
-	readonly stationMarkers = computed(() => {
-		const types = this.stationsModel().types;
-		return this.stations().filter((x) => types[x.station.type]);
-	});
-
-	readonly buyOptions = [
-		...this.ships.getEntities().map((x) => ({ id: `ship:${x.id}`, name: $localize`${x.name}:name: (ship, ${enumLabel(x.size)}:size:)` })),
-		...this.equipment
-			.getEntities()
-			.filter((x) => x.owners?.length)
-			.map((x) => ({ id: `equipment:${x.id}`, name: `${x.name} (${x.type ? enumLabel(x.type) : $localize`equipment`})` })),
-	].sort((a, b) => a.name.localeCompare(b.name));
-	readonly buyItem = computed(() => {
-		const name = this.stationsModel().buy.trim().toLowerCase();
-		return name ? this.buyOptions.find((x) => x.name.toLowerCase() === name)?.id : undefined;
-	});
-
-	/** Stations selling the chosen item, closest to the route start first. */
-	readonly sellers = computed(() => {
-		const [kind, id] = this.buyItem()?.split(':') ?? [];
-		if (!id) {
-			return [];
-		}
-		let owners: string[];
-		let types: string[];
-		if (kind === 'ship') {
-			const ship = this.ships.getEntity(id);
-			owners = (ship?.owners ?? []).map((x) => x.id);
-			// wharfs build small and medium ships, shipyards large and extra large ones
-			types = [Size.small, Size.medium, Size.extrasmall].includes(ship?.size as Size) ? ['wharf'] : ['shipyard'];
-		} else {
-			owners = (this.equipment.getEntity(id)?.owners ?? []).map((x) => x.id);
-			types = ['equipmentdock', 'wharf', 'shipyard'];
-		}
-		const travel = this.travel();
-		return this.stations()
-			.filter((x) => types.includes(x.station.type) && owners.includes(x.station.owner ?? ''))
-			.map((x) => ({ ...x, time: travel?.time.get(x.station.sector) }))
-			.filter((x) => !travel || x.time != null)
-			.sort((a, b) => (a.time ?? 0) - (b.time ?? 0) || a.shape.sector.name.localeCompare(b.shape.sector.name));
-	});
-
 	// abandoned ships
 	readonly abandonedModel = signal({ show: true });
 	readonly abandonedForm = form(this.abandonedModel);
-	readonly abandoned = computed(() =>
-		(AbandonedShips as AbandonedShip[])
-			.filter((x) => this.isShown(x.version))
+	/** Abandoned ships in the drawn sectors; the version choice only applies without a save. */
+	readonly abandoned = computed(() => {
+		const drawn = this.drawnIds();
+		const saveActive = this.save.active();
+		return (AbandonedShips as AbandonedShip[])
+			.filter((x) => saveActive || this.isShown(x.version))
 			.flatMap((item) => {
-				const shape = this.shapeById.get(item.sector);
-				return shape ? [{ item, shape, ship: this.ships.getEntity(item.ship), ...markerPosition(shape, item.x, item.z) }] : [];
-			})
-	);
+				const shape = drawn.has(item.sector) ? this.shapeById.get(item.sector) : undefined;
+				return shape ? [{ item, shape, ship: this.ships.getEntity(item.ship), ...GalaxyLayout.markerPosition(shape, item.x, item.z) }] : [];
+			});
+	});
 
 	// sector colors
 	/** Total amount of the selected resource per sector. */
@@ -348,8 +245,9 @@ export class MapStore {
 
 	readonly ownerLegend = computed(() => {
 		const counts = new Map<string, number>();
-		for (const sector of this.sectorList) {
-			counts.set(sector.owner ?? '', (counts.get(sector.owner ?? '') ?? 0) + 1);
+		for (const sector of this.save.active() ? this.visibleSectors() : this.sectorList) {
+			const owner = this.sectorOwner(sector) ?? '';
+			counts.set(owner, (counts.get(owner) ?? 0) + 1);
 		}
 		return [...counts]
 			.map(([id, count]) => {
@@ -365,15 +263,15 @@ export class MapStore {
 		for (const { sector } of this.layout.shapes) {
 			switch (mode) {
 				case 'owner': {
-					const color = this.factions.getEntity(sector.owner ?? '')?.color;
+					const color = this.factions.getEntity(this.sectorOwner(sector) ?? '')?.color;
 					result.set(sector.id, { fill: color ?? NEUTRAL, opacity: color ? 0.5 : 0.2 });
 					break;
 				}
 				case 'sunlight':
-					result.set(sector.id, { fill: sunlightColor(sector.sunlight), opacity: 0.85 });
+					result.set(sector.id, { fill: MapStore.sunlightColor(sector.sunlight), opacity: 0.85 });
 					break;
 				case 'security':
-					result.set(sector.id, { fill: securityColor(sector.security), opacity: 0.7 });
+					result.set(sector.id, { fill: MapStore.securityColor(sector.security), opacity: 0.7 });
 					break;
 				case 'resource': {
 					const amount = this.resourceAmounts().get(sector.id);
@@ -395,7 +293,7 @@ export class MapStore {
 			const ship = this.ships.getEntity(this.routeShip());
 			if (ship) {
 				untracked(() => {
-					const charge = fastestTravelEngine(this.shipStats, ship)?.travel?.charge;
+					const charge = MapStore.fastestTravelEngine(this.shipStats, ship)?.travel?.charge;
 					this.routeModel.update((route) => ({
 						...route,
 						speed: Math.round(this.shipStats.maxStats(ship).travel),
@@ -467,8 +365,13 @@ export class MapStore {
 		return this.resourceAmounts().get(sector.id) ?? 0;
 	}
 
+	/** The sector owner at game start, or in the active save. */
+	sectorOwner(sector: Sector | undefined): string | undefined {
+		return (this.save.active() ? this.save.sectors().get(sector?.id ?? '')?.owner : sector?.owner)?.replace(/^ownerless$/, '') || undefined;
+	}
+
 	/** Content packs added after the stored choice are shown. */
-	private isShown(version: number) {
+	isShown(version: number) {
 		return this.versions()[version] ?? true;
 	}
 
@@ -479,5 +382,34 @@ export class MapStore {
 		const fitW = Math.max(w, (h * size.width) / size.height);
 		const fitH = (fitW * size.height) / size.width;
 		return { x: x - (fitW - w) / 2, y: y - (fitH - h) / 2, w: fitW };
+	}
+
+	/** Sunlight 0% .. 200%+ from deep blue to bright yellow. */
+	private static sunlightColor(value: number | undefined): string {
+		if (value == null) {
+			return NEUTRAL;
+		}
+		const t = Math.max(0, Math.min(1, value / 2));
+		return `hsl(${(230 - 180 * t).toFixed(0)} 85% ${(22 + 43 * t).toFixed(0)}%)`;
+	}
+
+	/** Security 0 .. 1 from red to green. */
+	private static securityColor(value: number | undefined): string {
+		if (value == null) {
+			return NEUTRAL;
+		}
+		const t = Math.max(0, Math.min(1, value));
+		return `hsl(${(120 * t).toFixed(0)} 75% 45%)`;
+	}
+
+	/** Engine with the best travel thrust, used for the travel drive charge time. */
+	private static fastestTravelEngine(stats: ShipStatsService, ship: Ship) {
+		const score = (x: { thrust?: { forward: number }; travel?: { thrust: number } }) =>
+			(x.thrust?.forward ?? 0) * (x.travel?.thrust ?? 0);
+		const engines = stats.engines(ship);
+		return engines.reduce<(typeof engines)[number] | undefined>(
+			(best, x) => (!best || score(x) > score(best) ? x : best),
+			undefined
+		);
 	}
 }

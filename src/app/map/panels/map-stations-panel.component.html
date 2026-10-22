@@ -1,0 +1,88 @@
+<div class="mb-3 flex flex-wrap gap-x-3 gap-y-1 text-sm">
+	@for (type of stations.typeList(); track type.id) {
+		<label class="flex items-center gap-1.5">
+			<input type="checkbox" [formField]="form.types[type.id]" />
+			<span class="inline-block size-2.5 rounded-full" [style.background]="type.color"></span>
+			{{ type.label }}
+		</label>
+	}
+</div>
+
+<h6 i18n>Where to buy</h6>
+<input
+	class="input"
+	list="map-buy-items"
+	placeholder="Ship or equipment..."
+	i18n-placeholder
+	aria-label="Ship or equipment"
+	i18n-aria-label
+	[formField]="form.buy"
+/>
+<datalist id="map-buy-items">
+	@for (item of stations.buyOptions; track item.id) {
+		<option [value]="item.name"></option>
+	}
+</datalist>
+@if (stations.buyItem()) {
+	<p class="my-2 text-xs text-fg-muted">
+		@if (store.routeFrom(); as from) {
+			<ng-container i18n>Closest to {{ store.sectorName(from) }}.</ng-container>
+		} @else {
+			<ng-container i18n>Set a route start to sort by travel time.</ng-container>
+		}
+		<ng-container i18n>Licence and reputation still apply.</ng-container>
+	</p>
+	<table class="table text-sm">
+		<tbody>
+			@for (item of stations.sellers(); track item.id) {
+				<tr>
+					<td>
+						<span
+							class="mr-1 inline-block size-2.5 rounded-full"
+							[style.background]="item.type.color"
+						></span>
+						{{ item.type.label }}
+						<div class="text-xs text-fg-muted">{{ item.faction?.name ?? item.owner }}</div>
+					</td>
+					<td>
+						<app-map-focus-link [sector]="item.shape.sector" />
+						@if (!item.known) {
+							<div class="text-xs text-fg-muted" i18n>Undiscovered</div>
+						}
+					</td>
+					@if (item.time != null) {
+						<td class="text-right whitespace-nowrap">{{ routes.formatDuration(item.time) }}</td>
+					}
+				</tr>
+			} @empty {
+				<tr>
+					@if (store.saveActive()) {
+						<td class="text-fg-muted" i18n>No station sells it in this save.</td>
+					} @else {
+						<td class="text-fg-muted" i18n>No station sells it at game start.</td>
+					}
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+<h6 class="mt-4" i18n>All stations ({{ stations.stationList().length }})</h6>
+<table class="table text-sm">
+	<tbody>
+		@for (item of stations.stationList(); track item.id) {
+			<tr>
+				<td>
+					<span class="mr-1 inline-block size-2.5 rounded-full" [style.background]="item.type.color"></span>
+					{{ item.type.label }}
+					<div class="text-xs text-fg-muted">{{ item.faction?.name ?? item.owner }}</div>
+				</td>
+				<td><app-map-focus-link [sector]="item.shape.sector" /></td>
+			</tr>
+		}
+	</tbody>
+</table>
+@if (!store.saveActive()) {
+	<!-- prettier-ignore -->
+	<p class="mt-2 text-xs text-fg-muted" i18n> Stations the game creates at the start; factions build and lose stations as the game goes on. </p>
+}

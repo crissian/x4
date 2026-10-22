@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideGitCompareArrows } from '@lucide/angular';
 import { EnumFn } from '../../core/services/enum-fn';
-import { DataGridComponent, GridColumn, lookupOf } from '../../shared/components/data-grid/data-grid.component';
-import { injectRowNavigation } from '../../shared/components/list-page';
+import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
+import { RowNavigation } from '../../shared/components/list-page';
 import { ShipPurpose } from '../../shared/services/data/ship-purpose-data';
 import { ShipType } from '../../shared/services/data/ship-type-data';
 import { Size } from '../../shared/services/data/size-data';
@@ -21,7 +21,7 @@ export class ShipsComponent {
 	private readonly stats = inject(ShipStatsService);
 
 	protected readonly entities = inject(ShipService).getEntities();
-	protected readonly open = injectRowNavigation<Ship>();
+	protected readonly open = RowNavigation.inject<Ship>();
 
 	protected readonly columns: GridColumn<Ship>[] = [
 		{ key: 'name', caption: $localize`Name` },
@@ -32,9 +32,9 @@ export class ShipsComponent {
 				.getEntities()
 				.map((x) => ({ value: x.id, label: x.name })),
 		},
-		{ key: 'type', caption: $localize`Type`, lookup: lookupOf(EnumFn.values(ShipType)) },
-		{ key: 'size', caption: $localize`Size`, lookup: lookupOf(EnumFn.values(Size)) },
-		{ key: 'purpose', caption: $localize`Purpose`, lookup: lookupOf(EnumFn.values(ShipPurpose)) },
+		{ key: 'type', caption: $localize`Type`, lookup: DataGridComponent.lookupOf(EnumFn.values(ShipType)) },
+		{ key: 'size', caption: $localize`Size`, lookup: DataGridComponent.lookupOf(EnumFn.values(Size)) },
+		{ key: 'purpose', caption: $localize`Purpose`, lookup: DataGridComponent.lookupOf(EnumFn.values(ShipPurpose)) },
 		{ key: 'hull', caption: $localize`Hull`, type: 'number' },
 		{ key: 'shield', caption: $localize`Max Shield`, type: 'number', value: (ship) => this.stats.maxStats(ship).shield || null },
 		{ key: 'speed', caption: $localize`Max Speed`, type: 'number', value: (ship) => this.stats.maxStats(ship).speed || null },

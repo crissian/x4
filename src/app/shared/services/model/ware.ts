@@ -5,6 +5,7 @@ export interface WareGroup {
   name: string;
   factoryName: string;
   icon: string;
+  priority: number;
   tier?: number;
 }
 

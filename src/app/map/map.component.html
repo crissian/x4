@@ -26,22 +26,35 @@
 				</select>
 			}
 
-			<div class="relative text-sm font-normal">
-				<button type="button" class="btn btn-secondary" (click)="versionsOpen.set(!versionsOpen())" i18n>
-					DLC ({{ store.shownVersionCount() }}/{{ gameVersions.length }})
-				</button>
-				@if (versionsOpen()) {
-					<div class="absolute right-0 z-20 mt-1 w-56 rounded-md border border-line bg-raised p-2 shadow-lg">
-						@for (name of gameVersions; track $index) {
-							<label class="flex items-center gap-2 py-0.5">
-								<input type="checkbox" [formField]="store.versionsForm[$index]" />
-								{{ name }}
-							</label>
-						}
-						<button type="button" class="link-button mt-1" (click)="versionsOpen.set(false)" i18n>Close</button>
-					</div>
-				}
-			</div>
+			@if (save.pending()) {
+				<span class="text-sm font-normal text-fg-muted" role="status" i18n>Loading save…</span>
+			} @else if (save.reloadNeeded()) {
+				<a class="text-sm font-normal" routerLink="/saves" i18n>Reload this save to show it on the map</a>
+			}
+
+			@if (store.saveActive()) {
+				<label class="flex items-center gap-2 text-sm font-normal">
+					<input type="checkbox" [formField]="save.discoveredOnlyForm" />
+					<ng-container i18n>Discovered only</ng-container>
+				</label>
+			} @else {
+				<div class="relative text-sm font-normal">
+					<button type="button" class="btn btn-secondary" (click)="versionsOpen.set(!versionsOpen())" i18n>
+						DLC ({{ store.shownVersionCount() }}/{{ gameVersions.length }})
+					</button>
+					@if (versionsOpen()) {
+						<div class="absolute right-0 z-20 mt-1 w-56 rounded-md border border-line bg-raised p-2 shadow-lg">
+							@for (name of gameVersions; track $index) {
+								<label class="flex items-center gap-2 py-0.5">
+									<input type="checkbox" [formField]="store.versionsForm[$index]" />
+									{{ name }}
+								</label>
+							}
+							<button type="button" class="link-button mt-1" (click)="versionsOpen.set(false)" i18n>Close</button>
+						</div>
+					}
+				</div>
+			}
 
 			<div class="flex items-center gap-1 text-sm font-normal">
 				<input
@@ -59,7 +72,13 @@
 					}
 				</datalist>
 				@if (store.selected()) {
-					<button type="button" class="btn btn-secondary" title="Clear selection" i18n-title (click)="clearSelection()">
+					<button
+						type="button"
+						class="btn btn-secondary"
+						title="Clear selection"
+						i18n-title
+						(click)="clearSelection()"
+					>
 						<svg lucideX />
 					</button>
 				}

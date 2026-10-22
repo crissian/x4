@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { readStorage, writeStorage } from './local-storage';
+import { LocalStorage } from './local-storage';
 
 @Injectable({ providedIn: 'root' })
 export class StorageService {
 	add(key: string, value: unknown) {
-		writeStorage(key, value);
+		LocalStorage.write(key, value);
 	}
 
 	get<T>(key: string): T | null {
-		return readStorage<T | null>(key, null);
+		return LocalStorage.read<T | null>(key, null);
 	}
 
 	delete(key: string) {
-		writeStorage(key, undefined);
+		LocalStorage.write(key, undefined);
 	}
 
 	clear() {

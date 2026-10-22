@@ -1,4 +1,4 @@
-import { translateGameText } from '../../../core/game-text';
+import { GameText } from '../../../core/game-text';
 /* tslint:disable:max-line-length */
 import { ShipPurpose } from './ship-purpose-data';
 import { Size } from './size-data';
@@ -16140,4 +16140,4 @@ export const Ships = [
   },
 ];
 
-translateGameText(Ships);
+GameText.translate(Ships);

@@ -15,7 +15,9 @@
 				<div class="flex items-center gap-3">
 					<span class="mr-auto min-w-0 truncate">{{ loading.fileName }}</span>
 					<span class="text-sm text-fg-muted">{{ percent() }}%</span>
-					<button type="button" class="btn btn-secondary" (click)="store.cancel()"><svg lucideX /><span i18n>Cancel</span></button>
+					<button type="button" class="btn btn-secondary" (click)="store.cancel()">
+						<svg lucideX /><span i18n>Cancel</span>
+					</button>
 				</div>
 				<app-progress-bar [value]="loading.read" [max]="loading.total" label="Loading savegame" i18n-label />
 			</div>
@@ -27,14 +29,18 @@
 
 		@if (store.persistent() === false) {
 			<app-alert type="warning" i18n>
-				Saves can't be stored in this browser (private window or blocked site data); they are lost when you reload or close the page.
+				Saves can't be stored in this browser (private window or blocked site data); they are lost when you
+				reload or close the page.
 			</app-alert>
 		}
 
 		<p class="flex flex-wrap gap-x-1 text-sm text-fg-muted">
 			<ng-container i18n>Your saves stay in this browser; nothing is uploaded.</ng-container>
 			@if (store.storage(); as storage) {
-				<ng-container i18n>Storage used: {{ storage.usage / 1048576 | number: '1.0-0' }} MB of {{ storage.quota / 1048576 | number: '1.0-0' }} MB.</ng-container>
+				<ng-container i18n
+					>Storage used: {{ storage.usage / 1048576 | number: '1.0-0' }} MB of
+					{{ storage.quota / 1048576 | number: '1.0-0' }} MB.</ng-container
+				>
 			}
 		</p>
 	</div>
@@ -55,3 +61,16 @@
 } @else {
 	<p class="mt-4 text-fg-muted" i18n>No saves loaded yet.</p>
 }
+
+<ng-template #deleteMessage let-save>
+	<ng-container i18n
+		>Are you sure you want to delete
+		<strong>{{
+			save.info.saveName // i18n(ph="name")
+		}}</strong>
+		of
+		{{
+			save.info.playerName  // i18n(ph="player")
+		}}?</ng-container
+	>
+</ng-template>

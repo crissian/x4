@@ -1,14 +1,6 @@
 import { EquipmentService } from './equipment.service';
-import {
-	bestLoadout,
-	buildWares,
-	fits,
-	flightSpeeds,
-	loadoutStats,
-	relationToReputation,
-	slotGroups,
-	weaponStats,
-} from './loadout';
+import { Loadouts } from './loadout';
+import { ShipPerformance } from './ship-performance';
 import { ShipService } from './ship.service';
 
 describe('loadout', () => {
@@ -22,13 +14,13 @@ describe('loadout', () => {
 		const laser = get('weapon_gen_s_laser_01_mk1');
 		const mLaser = get('weapon_gen_m_laser_01_mk1');
 
-		expect(fits(laser, fighter.weapons![0])).toBe(true);
-		expect(fits(mLaser, fighter.weapons![0])).toBe(false);
+		expect(Loadouts.fits(laser, fighter.weapons![0])).toBe(true);
+		expect(Loadouts.fits(mLaser, fighter.weapons![0])).toBe(false);
 	});
 
 	it('finds options for every slot group of common ships', () => {
 		for (const id of ['ship_arg_s_fighter_01_a', 'ship_arg_m_trans_container_01_a', 'ship_arg_l_destroyer_01_a']) {
-			const groups = slotGroups(ships.getEntity(id)!, all);
+			const groups = Loadouts.slotGroups(ships.getEntity(id)!, all);
 			expect(groups.some((g) => g.kind === 'engines')).toBe(true);
 			expect(groups.some((g) => g.kind === 'shields')).toBe(true);
 			expect(groups.every((g) => g.options.length > 0)).toBe(true);
@@ -38,7 +30,7 @@ describe('loadout', () => {
 	it('computes speed as thrust / drag', () => {
 		const ship = ships.getEntity('ship_arg_s_fighter_01_a')!;
 		const engine = get('engine_arg_s_allround_01_mk1');
-		const speeds = flightSpeeds(ship, engine);
+		const speeds = ShipPerformance.flightSpeeds(ship, engine);
 
 		const expected = (engine.thrust!.forward * ship.engines.length) / ship.drag.forward;
 		expect(speeds.speed).toBeCloseTo(expected);
@@ -50,20 +42,20 @@ describe('loadout', () => {
 	});
 
 	it('computes projectile damage per second from the fire rate', () => {
-		const stats = weaponStats({ damage: 55, amount: 1, speed: 5000, lifetime: 0.8, range: 4000, rate: 8 });
+		const stats = ShipPerformance.weaponStats({ damage: 55, amount: 1, speed: 5000, lifetime: 0.8, range: 4000, rate: 8 });
 		expect(stats.burstDps).toBeCloseTo(440);
 		expect(stats.sustainedDps).toBeCloseTo(440);
 	});
 
 	it('accounts for magazine reloads', () => {
 		// 8 shots at 1 per 1.4 s = 11.2 s firing, then 7 s reload
-		const stats = weaponStats({ damage: 380, amount: 1, speed: 5000, lifetime: 1, range: 5000, reload: 1.4, magazine: { size: 8, reload: 7 } });
+		const stats = ShipPerformance.weaponStats({ damage: 380, amount: 1, speed: 5000, lifetime: 1, range: 5000, reload: 1.4, magazine: { size: 8, reload: 7 } });
 		expect(stats.burstDps).toBeCloseTo(380 / 1.4);
 		expect(stats.sustainedDps).toBeCloseTo((380 / 1.4) * (11.2 / 18.2));
 	});
 
 	it('treats beams as damage per second while firing', () => {
-		const stats = weaponStats({ damage: 147, amount: 1, speed: 3e8, lifetime: 3, range: 5000, beam: true, reload: 5 });
+		const stats = ShipPerformance.weaponStats({ damage: 147, amount: 1, speed: 3e8, lifetime: 3, range: 5000, beam: true, reload: 5 });
 		expect(stats.burstDps).toBeCloseTo(147);
 		expect(stats.sustainedDps).toBeCloseTo(147 * (3 / 5));
 	});
@@ -78,7 +70,7 @@ describe('loadout', () => {
 			rate: 10,
 			heat: { shot: 200, overheat: 10000, coolRate: 1000, coolDelay: 1, overheatCoolDelay: 2, reenable: 8000 },
 		};
-		const stats = weaponStats(weapon);
+		const stats = ShipPerformance.weaponStats(weapon);
 		// heats 2000 - 1000 = 1000 per second
 		expect(stats.timeToOverheat).toBeCloseTo(10);
 		// 2 s firing from 8000 to 10000, then 2 s delay + 2 s cooling
@@ -87,23 +79,23 @@ describe('loadout', () => {
 
 	it('totals a loadout and the wares to build it', () => {
 		const ship = ships.getEntity('ship_arg_m_trans_container_01_a')!;
-		const groups = slotGroups(ship, all);
-		const loadout = bestLoadout(groups, (x) => x.price?.avg ?? 0);
-		const stats = loadoutStats(ship, groups, loadout, get);
+		const groups = Loadouts.slotGroups(ship, all);
+		const loadout = Loadouts.bestLoadout(groups, (x) => x.price?.avg ?? 0);
+		const stats = Loadouts.loadoutStats(ship, groups, loadout, get);
 
 		expect(stats.speeds.speed).toBeGreaterThan(0);
 		expect(stats.shield).toBeGreaterThan(0);
 		expect(stats.equipmentPrice.avg).toBeGreaterThan(0);
 
-		const wares = buildWares(ship, stats.counts, get);
+		const wares = Loadouts.buildWares(ship, stats.counts, get);
 		expect(wares.get('hullparts')).toBeGreaterThan(0);
 		expect(wares.get('energycells')).toBeGreaterThan(0);
 	});
 
 	it('maps relations to the reputation shown in game', () => {
-		expect(relationToReputation(0.1)).toBe(20);
-		expect(relationToReputation(0.01)).toBe(10);
-		expect(relationToReputation(-0.01)).toBe(-10);
-		expect(relationToReputation(1)).toBe(30);
+		expect(Loadouts.relationToReputation(0.1)).toBe(20);
+		expect(Loadouts.relationToReputation(0.01)).toBe(10);
+		expect(Loadouts.relationToReputation(-0.01)).toBe(-10);
+		expect(Loadouts.relationToReputation(1)).toBe(30);
 	});
 });

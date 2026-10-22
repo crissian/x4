@@ -3,15 +3,15 @@ import { provideLucideConfig } from '@lucide/angular';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { environment } from '../environments/environment';
 import { appRoutes } from './app.routes';
-import { getLocale } from './core/language';
-import { provideAnalytics } from './google-analytics/services/analytics.service';
+import { Language } from './core/language';
+import { AnalyticsService } from './google-analytics/services/analytics.service';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
 		provideBrowserGlobalErrorListeners(),
-		{ provide: LOCALE_ID, useValue: getLocale() },
+		{ provide: LOCALE_ID, useValue: Language.locale() },
 		provideRouter(appRoutes, withComponentInputBinding()),
 		provideLucideConfig({ size: '1em' }),
-		provideAnalytics({ trackingId: environment.googleAnalytics }),
+		AnalyticsService.provide({ trackingId: environment.googleAnalytics }),
 	],
 };

@@ -4,13 +4,9 @@ import { SavegameInfo } from '../savegame-model';
 
 const INFO_PATH = 'savegame/info';
 
-function num(value: string | undefined): number {
-	const parsed = Number(value);
-	return Number.isFinite(parsed) ? parsed : 0;
-}
-
-export function createInfoExtractor(): XmlExtractor<SavegameInfo | null> {
-	const info: SavegameInfo = {
+export class InfoExtractor implements XmlExtractor<SavegameInfo | null> {
+	readonly key = 'info';
+	private readonly info: SavegameInfo = {
 		saveName: '',
 		savedAt: 0,
 		gameVersion: 0,
@@ -24,48 +20,58 @@ export function createInfoExtractor(): XmlExtractor<SavegameInfo | null> {
 		modified: false,
 		extensions: [],
 	};
-	let seen = false;
-	let finished = false;
-	const handlers: Record<string, (a: XmlAttributes) => void> = {
+	private seen = false;
+	private finished = false;
+	private readonly handlers: Record<string, (a: XmlAttributes) => void> = {
 		[`${INFO_PATH}/save`]: (a) => {
-			info.saveName = a['name'] ?? '';
-			info.savedAt = num(a['date']) * 1000;
+			this.info.saveName = a['name'] ?? '';
+			this.info.savedAt = InfoExtractor.num(a['date']) * 1000;
 		},
 		[`${INFO_PATH}/game`]: (a) => {
-			info.gameVersion = num(a['version']);
-			info.gameBuild = num(a['build']);
-			info.originalVersion = num(a['original']);
-			info.start = a['start'] ?? '';
-			info.gameTime = num(a['time']);
-			info.guid = a['guid'] ?? '';
-			info.modified = a['modified'] === '1';
+			this.info.gameVersion = InfoExtractor.num(a['version']);
+			this.info.gameBuild = InfoExtractor.num(a['build']);
+			this.info.originalVersion = InfoExtractor.num(a['original']);
+			this.info.start = a['start'] ?? '';
+			this.info.gameTime = InfoExtractor.num(a['time']);
+			this.info.guid = a['guid'] ?? '';
+			this.info.modified = a['modified'] === '1';
 		},
 		[`${INFO_PATH}/player`]: (a) => {
-			info.playerName = a['name'] ?? '';
-			info.money = num(a['money']);
+			this.info.playerName = a['name'] ?? '';
+			this.info.money = InfoExtractor.num(a['money']);
 		},
 		[`${INFO_PATH}/patches/patch`]: (a) => {
-			info.extensions.push({ id: a['extension'] ?? '', version: num(a['version']) });
+			this.info.extensions.push({ id: a['extension'] ?? '', version: InfoExtractor.num(a['version']) });
 		},
 	};
-	return {
-		key: 'info',
-		open(_name, path, attrs) {
-			if (path.length < 3 || path.length > 4 || path[1] !== 'info') {
-				return;
-			}
-			const handler = handlers[path.join('/')];
-			if (handler) {
-				seen = true;
-				handler(attrs());
-			}
-		},
-		close(name, path) {
-			if (name === 'info' && path.length === 2 && path[0] === 'savegame') {
-				finished = true;
-			}
-		},
-		done: () => finished,
-		result: () => (seen ? info : null),
-	};
+
+	open(_name: string, path: readonly string[], attrs: () => XmlAttributes): void {
+		if (path.length < 3 || path.length > 4 || path[1] !== 'info') {
+			return;
+		}
+		const handler = this.handlers[path.join('/')];
+		if (handler) {
+			this.seen = true;
+			handler(attrs());
+		}
+	}
+
+	close(name: string, path: readonly string[]): void {
+		if (name === 'info' && path.length === 2 && path[0] === 'savegame') {
+			this.finished = true;
+		}
+	}
+
+	done(): boolean {
+		return this.finished;
+	}
+
+	result(): SavegameInfo | null {
+		return this.seen ? this.info : null;
+	}
+
+	private static num(value: string | undefined): number {
+		const parsed = Number(value);
+		return Number.isFinite(parsed) ? parsed : 0;
+	}
 }

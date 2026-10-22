@@ -21,3 +21,12 @@
 		<button type="button" class="btn btn-secondary" (click)="dialogRef.close()" i18n="@@cancel">Cancel</button>
 	</ng-container>
 </app-modal>
+
+<ng-template #existsMessage let-name>
+	<ng-container i18n
+		><strong>{{
+			name // i18n(ph="name")
+		}}</strong>
+		already exists. Confirm overwrite?</ng-container
+	>
+</ng-template>

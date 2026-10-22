@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { gunzipBlob, gzipBytes, streamOf } from '../core/streams/test-streams';
-import { readSavegame } from './read-savegame';
+import { TestStreams } from '../core/streams/test-streams';
+import { SavegameReader } from './read-savegame';
 import { SavegameError } from './savegame-model';
 import { INFO_9_00 } from './testdata/info-9.00';
 
@@ -27,14 +27,14 @@ function bigSave(): string {
 
 function plain(text: string): { bytes: ReadableStream<Uint8Array>; size: number } {
 	const data = encoder.encode(text);
-	return { bytes: streamOf([data.slice(0, 50), data.slice(50)]), size: data.length };
+	return { bytes: TestStreams.streamOf([data.slice(0, 50), data.slice(50)]), size: data.length };
 }
 
-describe('readSavegame', () => {
+describe('SavegameReader', () => {
 	it('reads a gzipped save', async () => {
-		const packed = await gzipBytes(encoder.encode(INFO_9_00));
+		const packed = await TestStreams.gzipBytes(encoder.encode(INFO_9_00));
 		const onInfo = vi.fn();
-		const result = await readSavegame(streamOf([packed]), { size: packed.length, onInfo });
+		const result = await SavegameReader.read(TestStreams.streamOf([packed]), { size: packed.length, onInfo });
 		expect(result.info.guid).toBe('8A33B22E-2892-403F-B88C-DD0B320D825B');
 		expect(result.info.playerName).toBe('Müller');
 		expect(result.info.gameVersion).toBe(900);
@@ -44,13 +44,13 @@ describe('readSavegame', () => {
 
 	it('returns a gzip copy for an unpacked save', async () => {
 		const { bytes, size } = plain(INFO_9_00);
-		const result = await readSavegame(bytes, { size });
-		expect(await gunzipBlob(result.gzipCopy!)).toBe(INFO_9_00);
+		const result = await SavegameReader.read(bytes, { size });
+		expect(await TestStreams.gunzipBlob(result.gzipCopy!)).toBe(INFO_9_00);
 	});
 
 	it('rejects a file without <savegame>', async () => {
 		const { bytes, size } = plain('<foo/>');
-		const error = await rejection(readSavegame(bytes, { size }));
+		const error = await rejection(SavegameReader.read(bytes, { size }));
 		expect(error).toBeInstanceOf(SavegameError);
 		expect((error as SavegameError).code).toBe('not-a-savegame');
 	});
@@ -60,13 +60,13 @@ describe('readSavegame', () => {
 		['plain text', 'just some text, no markup'],
 	])('rejects %s as not a savegame', async (_label, text) => {
 		const { bytes, size } = plain(text);
-		const error = await rejection(readSavegame(bytes, { size }));
+		const error = await rejection(SavegameReader.read(bytes, { size }));
 		expect((error as SavegameError).code).toBe('not-a-savegame');
 	});
 
 	it('rejects gzipped non-XML as not a savegame', async () => {
-		const packed = await gzipBytes(encoder.encode('hello world, this is not xml'));
-		const error = await rejection(readSavegame(streamOf([packed]), { size: packed.length }));
+		const packed = await TestStreams.gzipBytes(encoder.encode('hello world, this is not xml'));
+		const error = await rejection(SavegameReader.read(TestStreams.streamOf([packed]), { size: packed.length }));
 		expect((error as SavegameError).code).toBe('not-a-savegame');
 	});
 
@@ -75,20 +75,20 @@ describe('readSavegame', () => {
 		['missing', INFO_9_00.replace(/guid="[^"]*"/, '')],
 	])('rejects a save with an %s guid', async (_label, text) => {
 		const { bytes, size } = plain(text);
-		const error = await rejection(readSavegame(bytes, { size }));
+		const error = await rejection(SavegameReader.read(bytes, { size }));
 		expect((error as SavegameError).code).toBe('not-a-savegame');
 	});
 
 	it('reports a truncated gzip', async () => {
-		const packed = await gzipBytes(encoder.encode(bigSave()));
+		const packed = await TestStreams.gzipBytes(encoder.encode(bigSave()));
 		const cut = packed.slice(0, packed.length - 100);
-		const error = await rejection(readSavegame(streamOf([cut]), { size: cut.length }));
+		const error = await rejection(SavegameReader.read(TestStreams.streamOf([cut]), { size: cut.length }));
 		expect((error as SavegameError).code).toBe('truncated');
 	});
 
 	it('reports a save cut off inside the XML', async () => {
 		const { bytes, size } = plain(INFO_9_00.replace('</savegame>', ''));
-		const error = await rejection(readSavegame(bytes, { size }));
+		const error = await rejection(SavegameReader.read(bytes, { size }));
 		expect((error as SavegameError).code).toBe('truncated');
 	});
 
@@ -98,13 +98,13 @@ describe('readSavegame', () => {
 		for (let i = 0; i < data.length; i += 65536) {
 			chunks.push(data.slice(i, i + 65536));
 		}
-		const error = await rejection(readSavegame(streamOf(chunks), { size: data.length }));
+		const error = await rejection(SavegameReader.read(TestStreams.streamOf(chunks), { size: data.length }));
 		expect((error as SavegameError).code).toBe('invalid-xml');
 	});
 
 	it('reports broken xml', async () => {
 		const { bytes, size } = plain('<savegame><a></b>');
-		const error = await rejection(readSavegame(bytes, { size }));
+		const error = await rejection(SavegameReader.read(bytes, { size }));
 		expect((error as SavegameError).code).toBe('invalid-xml');
 	});
 });

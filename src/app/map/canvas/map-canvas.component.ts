@@ -1,11 +1,13 @@
-import { Component, DestroyRef, ElementRef, afterNextRender, inject } from '@angular/core';
+import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { LucideExpand, LucideZoomIn, LucideZoomOut } from '@lucide/angular';
 import { CLUSTER_RADIUS, SectorShape } from '../galaxy-layout';
 import { MapStore, ViewBox } from '../map-store';
+import { MapSaveLayer } from '../save/map-save-layer';
 import { MapLegendComponent } from './map-legend.component';
 import { MapLabelsLayer, MapLinksLayer, MapMarkersLayer } from './map-layers';
-import { MapMenuComponent, MapTooltipComponent } from './map-popups';
+import { MapMenuComponent, MapStationTooltipComponent, MapTooltipComponent } from './map-popups';
+import { MapSaveMarkers } from './map-save-markers';
 
 /** The galaxy map: sectors, layers and overlays, with drag to pan and wheel to zoom. */
 @Component({
@@ -16,6 +18,8 @@ import { MapMenuComponent, MapTooltipComponent } from './map-popups';
 		LucideExpand,
 		MapLinksLayer,
 		MapMarkersLayer,
+		MapSaveMarkers,
+		MapStationTooltipComponent,
 		MapLabelsLayer,
 		MapLegendComponent,
 		MapTooltipComponent,
@@ -23,7 +27,6 @@ import { MapMenuComponent, MapTooltipComponent } from './map-popups';
 	],
 	templateUrl: './map-canvas.component.html',
 	host: {
-		class: 'relative block h-[calc(100vh-10rem)] min-h-[420px] touch-none overflow-hidden rounded-b-lg bg-[#05080f] select-none',
 		'(wheel)': 'onWheel($event)',
 		'(pointerdown)': 'onPointerDown($event)',
 		'(pointermove)': 'onPointerMove($event)',
@@ -33,9 +36,21 @@ import { MapMenuComponent, MapTooltipComponent } from './map-popups';
 	},
 })
 export class MapCanvasComponent {
+	/** Narrowest view in map units: one sector hex fills it, so its stations stand apart. */
+	static readonly MIN_VIEW_WIDTH = CLUSTER_RADIUS / 2;
+
 	protected readonly store = inject(MapStore);
+	protected readonly save = inject(MapSaveLayer);
 	private readonly router = inject(Router);
 	private readonly element: HTMLElement = inject(ElementRef).nativeElement;
+
+	/** Sectors the active save has not discovered or that are contested; empty without a save. */
+	protected readonly unknown = computed(
+		() => new Set([...this.save.sectors()].filter(([, x]) => !x.known).map(([id]) => id))
+	);
+	protected readonly contested = computed(
+		() => new Set([...this.save.sectors()].filter(([, x]) => x.contested).map(([id]) => id))
+	);
 
 	private drag: { x: number; y: number; view: ViewBox; moved: boolean } | undefined;
 
@@ -71,7 +86,7 @@ export class MapCanvasComponent {
 		const bounds = this.store.layout.bounds;
 		this.store.view.update((view) => {
 			const h = (view.w * rect.height) / rect.width;
-			const w = Math.min(Math.max(view.w * factor, CLUSTER_RADIUS * 4), bounds.w * 3);
+			const w = Math.min(Math.max(view.w * factor, MapCanvasComponent.MIN_VIEW_WIDTH), bounds.w * 3);
 			const nh = (w * rect.height) / rect.width;
 			return { x: view.x + (view.w - w) * px, y: view.y + (h - nh) * py, w };
 		});

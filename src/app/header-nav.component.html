@@ -1,0 +1,50 @@
+@if (collapsed()) {
+	<button
+		#menuButton
+		type="button"
+		class="inline-flex size-9 shrink-0 items-center justify-center rounded-md text-nav-fg hover:bg-hover hover:text-fg-strong focus-visible:outline-2 focus-visible:outline-sky-500"
+		aria-controls="app-nav-menu"
+		[attr.aria-expanded]="menuOpen()"
+		i18n-aria-label
+		aria-label="Main menu"
+		i18n-title
+		title="Main menu"
+		(click)="toggleMenu()"
+	>
+		<svg lucideMenu />
+	</button>
+}
+
+<div #space class="min-w-0 flex-1 overflow-hidden">
+	@if (!collapsed()) {
+		<nav #row class="-mb-px flex w-max" i18n-aria-label aria-label="Main">
+			@for (link of links(); track link.path) {
+				<a
+					[routerLink]="link.path"
+					routerLinkActive="!text-fg-strong bg-nav-active"
+					class="inline-flex items-center gap-1.5 px-3 py-3 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
+					><svg [lucideIcon]="link.icon" class="opacity-80" />{{ link.label }}</a
+				>
+			}
+		</nav>
+	}
+</div>
+
+@if (collapsed() && menuOpen()) {
+	<nav
+		id="app-nav-menu"
+		class="absolute inset-x-0 top-full z-30 flex flex-col border-t border-line bg-nav py-1 shadow-lg sm:right-auto sm:left-2 sm:w-64 sm:rounded-b-md dark:shadow-black/40"
+		i18n-aria-label
+		aria-label="Main"
+	>
+		@for (link of links(); track link.path) {
+			<a
+				[routerLink]="link.path"
+				routerLinkActive="!text-fg-strong bg-nav-active"
+				class="inline-flex items-center gap-2 px-4 py-2.5 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
+				(click)="closeMenu()"
+				><svg [lucideIcon]="link.icon" class="opacity-80" />{{ link.label }}</a
+			>
+		}
+	</nav>
+}

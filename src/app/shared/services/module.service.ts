@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AllModules } from './data/modules-data';
 import { StationModule } from './model/model';
-import { EntityStore, usesWare } from './entity.service';
+import { EntityStore } from './entity.service';
 
 @Injectable({ providedIn: 'root' })
 export class ModuleService extends EntityStore<StationModule> {
@@ -41,6 +41,6 @@ export class ModuleService extends EntityStore<StationModule> {
 	}
 
 	getModulesUsingWare(wareId: string): StationModule[] {
-		return this.getEntities().filter((x) => usesWare(x, wareId));
+		return this.getEntities().filter((x) => EntityStore.usesWare(x, wareId));
 	}
 }

@@ -9,11 +9,12 @@ import { Planet, SectorResource } from '../../shared/services/model/model';
 import { GAME_VERSIONS } from '../../shared/services/constants';
 import { ClusterService, SectorService } from '../../shared/services/universe.service';
 import { WareService } from '../../shared/services/ware.service';
+import { SectorStationsComponent } from './sector-stations.component';
 
 type PlanetRow = Planet & { moon?: boolean };
 
 @Component({
-	imports: [DetailPageComponent, DetailComponent, RouterLink, DataGridComponent, DecimalPipe, PercentPipe, LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute],
+	imports: [DetailPageComponent, DetailComponent, RouterLink, DataGridComponent, DecimalPipe, PercentPipe, LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute, SectorStationsComponent],
 	templateUrl: './sector-detail.component.html',
 })
 export class SectorDetailComponent {

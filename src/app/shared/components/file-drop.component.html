@@ -1,0 +1,13 @@
+<div
+	class="flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed px-4 py-8 text-center transition-colors in-focus-visible:outline-2 in-focus-visible:outline-offset-2 in-focus-visible:outline-sky-500"
+	[class]="
+		disabled()
+			? 'cursor-not-allowed border-line opacity-50'
+			: over()
+				? 'cursor-pointer border-sky-500 bg-sky-50 dark:bg-sky-950/40'
+				: 'cursor-pointer border-line-strong hover:border-sky-500 hover:bg-hover'
+	"
+>
+	<ng-content />
+</div>
+<input #picker type="file" class="hidden" tabindex="-1" [attr.accept]="accept() || null" [multiple]="multiple()" (change)="picked()" />

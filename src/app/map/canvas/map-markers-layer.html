@@ -1,0 +1,53 @@
+@if (store.abandonedModel().show) {
+	@for (marker of store.abandoned(); track $index) {
+		@let size = store.fontSize() * 0.9;
+		<svg:g class="cursor-pointer" [attr.data-sector]="marker.item.sector">
+			<svg:title i18n>
+				Abandoned {{ marker.ship?.name ?? marker.item.ship
+				}}{{ marker.item.condition ? ' (' + marker.item.condition + ')' : '' }}
+			</svg:title>
+			<svg:rect
+				[attr.x]="marker.x - size / 2"
+				[attr.y]="marker.y - size / 2"
+				[attr.width]="size"
+				[attr.height]="size"
+				[attr.transform]="'rotate(45 ' + marker.x + ' ' + marker.y + ')'"
+				[attr.fill]="marker.item.condition ? '#c084fc' : '#f472b6'"
+				stroke="#05080f"
+				stroke-width="1"
+				vector-effect="non-scaling-stroke"
+			/>
+		</svg:g>
+	}
+}
+
+@for (marker of save.active() ? [] : stations.stationMarkers(); track marker.id) {
+	<svg:g class="cursor-pointer" [attr.data-sector]="marker.sector">
+		<svg:title>
+			{{ marker.type.label }}{{ marker.faction ? ' - ' + marker.faction.name : '' }} ({{
+				marker.shape.sector.name
+			}})
+		</svg:title>
+		<svg:circle
+			[attr.cx]="marker.x"
+			[attr.cy]="marker.y"
+			[attr.r]="store.fontSize() * 0.6"
+			[attr.fill]="marker.type.color"
+			stroke="#05080f"
+			stroke-width="1"
+			vector-effect="non-scaling-stroke"
+		/>
+		<svg:text
+			class="pointer-events-none"
+			[attr.x]="marker.x"
+			[attr.y]="marker.y"
+			[attr.font-size]="store.fontSize() * 0.8"
+			text-anchor="middle"
+			dominant-baseline="central"
+			font-weight="700"
+			fill="#05080f"
+		>
+			{{ marker.type.letter }}
+		</svg:text>
+	</svg:g>
+}

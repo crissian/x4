@@ -4,17 +4,12 @@ import { Component, computed, input } from '@angular/core';
 	selector: 'app-progress-bar',
 	host: {
 		role: 'progressbar',
-		class: 'block',
 		'[attr.aria-valuemin]': '0',
 		'[attr.aria-valuemax]': 'max()',
 		'[attr.aria-valuenow]': 'value()',
 		'[attr.aria-label]': 'label() || null',
 	},
-	template: `
-		<div class="h-2 overflow-hidden rounded-full bg-surface-2">
-			<div class="h-full rounded-full bg-sky-600 transition-[width] dark:bg-sky-400" [style.width.%]="percent()"></div>
-		</div>
-	`,
+	templateUrl: './progress-bar.component.html',
 })
 export class ProgressBarComponent {
 	readonly value = input.required<number>();

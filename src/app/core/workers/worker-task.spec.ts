@@ -1,4 +1,4 @@
-import { WorkerCancelled, WorkerLike, runWorkerTask } from './worker-task';
+import { WorkerCancelled, WorkerLike, WorkerTask } from './worker-task';
 
 class FakeWorker implements WorkerLike {
 	onmessage: ((e: MessageEvent) => void) | null = null;
@@ -20,10 +20,10 @@ class FakeWorker implements WorkerLike {
 	}
 }
 
-describe('runWorkerTask', () => {
+describe('WorkerTask', () => {
 	it('settles with the done value and terminates', async () => {
 		const worker = new FakeWorker();
-		const task = runWorkerTask<number>(
+		const task = WorkerTask.run<number>(
 			() => worker,
 			'request',
 			(data) => (data === 'end' ? { done: 42 } : undefined),
@@ -37,7 +37,7 @@ describe('runWorkerTask', () => {
 	it('forwards intermediate messages without settling', async () => {
 		const worker = new FakeWorker();
 		const seen: unknown[] = [];
-		const task = runWorkerTask<string>(
+		const task = WorkerTask.run<string>(
 			() => worker,
 			null,
 			(data) => {
@@ -55,7 +55,7 @@ describe('runWorkerTask', () => {
 
 	it('rejects with the failure from onMessage', async () => {
 		const worker = new FakeWorker();
-		const task = runWorkerTask<number>(
+		const task = WorkerTask.run<number>(
 			() => worker,
 			null,
 			() => ({ fail: new Error('boom') }),
@@ -67,7 +67,7 @@ describe('runWorkerTask', () => {
 
 	it('rejects with WorkerCancelled on cancel and terminates', async () => {
 		const worker = new FakeWorker();
-		const task = runWorkerTask<number>(
+		const task = WorkerTask.run<number>(
 			() => worker,
 			null,
 			() => undefined,
@@ -81,7 +81,7 @@ describe('runWorkerTask', () => {
 
 	it('rejects when the worker errors', async () => {
 		const worker = new FakeWorker();
-		const task = runWorkerTask<number>(
+		const task = WorkerTask.run<number>(
 			() => worker,
 			null,
 			() => undefined,
@@ -93,7 +93,7 @@ describe('runWorkerTask', () => {
 
 	it('settles with a failure when onMessage throws', async () => {
 		const worker = new FakeWorker();
-		const task = runWorkerTask<number>(
+		const task = WorkerTask.run<number>(
 			() => worker,
 			null,
 			() => {
@@ -107,7 +107,7 @@ describe('runWorkerTask', () => {
 
 	it('settles with a failure on messageerror', async () => {
 		const worker = new FakeWorker();
-		const task = runWorkerTask<number>(
+		const task = WorkerTask.run<number>(
 			() => worker,
 			null,
 			() => undefined,
@@ -122,7 +122,7 @@ describe('runWorkerTask', () => {
 		worker.postMessage = () => {
 			throw new Error('cannot clone');
 		};
-		const task = runWorkerTask<number>(
+		const task = WorkerTask.run<number>(
 			() => worker,
 			null,
 			() => undefined,
@@ -132,7 +132,7 @@ describe('runWorkerTask', () => {
 	});
 
 	it('rejects instead of throwing when create throws', async () => {
-		const task = runWorkerTask<number>(
+		const task = WorkerTask.run<number>(
 			() => {
 				throw new Error('no worker');
 			},
@@ -145,7 +145,7 @@ describe('runWorkerTask', () => {
 	it('ignores messages after settle', async () => {
 		const worker = new FakeWorker();
 		let calls = 0;
-		const task = runWorkerTask<number>(
+		const task = WorkerTask.run<number>(
 			() => worker,
 			null,
 			() => {

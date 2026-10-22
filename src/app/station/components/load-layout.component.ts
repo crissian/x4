@@ -1,12 +1,12 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
-import { Component, inject, signal } from '@angular/core';
+import { Component, TemplateRef, inject, signal, viewChild } from '@angular/core';
 import { LucideDownload, LucideFolderOpen, LucideListPlus, LucideTrash, LucideUpload } from '@lucide/angular';
 import { ConfirmComponent, ConfirmData } from '../../shared/components/confirm.component';
-import { openDialog } from '../../shared/components/modal/dialog';
+import { AppDialog } from '../../shared/components/modal/dialog';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { StationModule } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
-import { compareNames } from '../services/construction-plans';
+import { ConstructionPlans } from '../services/construction-plans';
 import { LayoutService } from '../services/layout-service';
 
 interface LayoutModule {
@@ -38,6 +38,7 @@ export class LoadLayoutComponent {
 	private readonly dialog = inject(Dialog);
 	private readonly layoutService = inject(LayoutService);
 	private readonly moduleService = inject(ModuleService);
+	private readonly deleteMessage = viewChild.required<TemplateRef<{ $implicit: string }>>('deleteMessage');
 
 	protected readonly LoadLayoutType = LoadLayoutType;
 	readonly entities = signal<LayoutData[]>(this.readLayouts());
@@ -60,10 +61,11 @@ export class LoadLayoutComponent {
 	deleteLayout(item: LayoutData, event: Event) {
 		event.stopPropagation();
 
-		openDialog<boolean, ConfirmData>(this.dialog, ConfirmComponent, {
+		AppDialog.open<boolean, ConfirmData<{ $implicit: string }>>(this.dialog, ConfirmComponent, {
 			data: {
 				title: $localize`Confirm Delete`,
-				message: $localize`Are you sure you want to delete <strong>${item.name}:name:</strong>?`,
+				message: this.deleteMessage(),
+				context: { $implicit: item.name },
 			},
 		}).closed.subscribe((res) => {
 			if (res) {
@@ -111,6 +113,6 @@ export class LoadLayoutComponent {
 					return module ? [{ count: y.count, module }] : [];
 				}),
 			}))
-			.sort((a, b) => compareNames(a.name, b.name));
+			.sort((a, b) => ConstructionPlans.compareNames(a.name, b.name));
 	}
 }

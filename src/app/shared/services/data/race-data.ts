@@ -1,4 +1,4 @@
-import { translateGameText } from '../../../core/game-text';
+import { GameText } from '../../../core/game-text';
 /* tslint:disable:max-line-length */
 const entities = {
   argon: {
@@ -71,4 +71,4 @@ export const Races = {
   ]
 };
 
-translateGameText(Races);
+GameText.translate(Races);

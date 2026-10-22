@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
-import { injectRowNavigation } from '../../shared/components/list-page';
+import { RowNavigation } from '../../shared/components/list-page';
 import { FactionService } from '../../shared/services/faction.service';
 import { Faction } from '../../shared/services/model/model';
 
@@ -10,7 +10,7 @@ import { Faction } from '../../shared/services/model/model';
 })
 export class FactionsComponent {
 	protected readonly entities = inject(FactionService).getEntities();
-	protected readonly open = injectRowNavigation<Faction>();
+	protected readonly open = RowNavigation.inject<Faction>();
 
 	protected readonly columns: GridColumn<Faction>[] = [
 		{ key: 'name', caption: $localize`Name` },

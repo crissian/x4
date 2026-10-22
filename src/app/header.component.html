@@ -1,20 +1,11 @@
-<header class="flex items-center gap-3 bg-nav px-4 shadow-lg dark:shadow-black/40">
-	<nav class="-mb-px flex min-w-0 flex-1 overflow-x-auto">
-		@for (link of links; track link.path) {
-			<a
-				[routerLink]="link.path"
-				routerLinkActive="!text-fg-strong bg-nav-active"
-				class="inline-flex items-center gap-1.5 px-3 py-3 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
-				><svg [lucideIcon]="link.icon" class="opacity-80" />{{ link.label }}</a
-			>
-		}
-	</nav>
+<header class="relative flex items-center gap-2 bg-nav px-4 shadow-lg sm:gap-3 dark:shadow-black/40">
+	<app-header-nav class="flex min-h-11 min-w-9 flex-1 items-center" [links]="links" />
 
 	<app-savegame-selector />
 
 	<label class="inline-flex shrink-0 items-center gap-1 text-nav-fg" i18n-title title="Language of the game names and descriptions">
-		<svg lucideLanguages class="opacity-80" />
-		<select class="input h-8 w-auto py-0 text-sm" i18n-aria-label aria-label="Game text language" [formField]="languageForm.language">
+		<svg lucideLanguages class="hidden opacity-80 sm:inline-block" />
+		<select class="input h-8 w-20 py-0 text-sm sm:w-auto" i18n-aria-label aria-label="Game text language" [formField]="languageForm.language">
 			@for (language of languages; track language.code) {
 				<option [value]="language.code">{{ language.name }}</option>
 			}
@@ -54,6 +45,6 @@
 		><svg
 			lucideCoffee
 			class="text-amber-500 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110"
-		/><span class="hidden sm:inline" i18n>Buy me a coffee</span></a
+		/><span class="hidden lg:inline" i18n>Buy me a coffee</span></a
 	>
 </header>

@@ -3,7 +3,7 @@ import { DetailComponent, DetailPageComponent } from '../../shared/components/de
 import { RouterLink } from '@angular/router';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
 import { FactionService } from '../../shared/services/faction.service';
-import { relationToReputation } from '../../shared/services/loadout';
+import { Loadouts } from '../../shared/services/loadout';
 import { License } from '../../shared/services/model/model';
 
 @Component({
@@ -23,7 +23,7 @@ export class FactionDetailComponent {
 			key: 'minRelation',
 			caption: $localize`Reputation`,
 			type: 'number',
-			value: (x) => (x.minRelation != null ? relationToReputation(x.minRelation) : null),
+			value: (x) => (x.minRelation != null ? Loadouts.relationToReputation(x.minRelation) : null),
 		},
 	];
 }

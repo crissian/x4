@@ -51,4 +51,14 @@ describe('FileDropComponent', () => {
 		expect(event.defaultPrevented).toBe(true);
 		expect((event as DragEvent).dataTransfer!.dropEffect).toBe('none');
 	});
+	it('applies the state classes to the drop box', () => {
+		const { fixture, zone } = setup();
+		const box = zone.querySelector('div') as HTMLElement;
+		expect(box.classList).toContain('cursor-pointer');
+		expect(box.classList).toContain('border-dashed');
+		fixture.componentInstance.disabled.set(true);
+		fixture.detectChanges();
+		expect(box.classList).toContain('opacity-50');
+		expect(box.classList).not.toContain('cursor-pointer');
+	});
 });

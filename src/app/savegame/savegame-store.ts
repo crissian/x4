@@ -1,7 +1,7 @@
-import { InjectionToken, Injectable, Signal, computed, effect, inject, signal } from '@angular/core';
-import { persistedSignal } from '../core/services/local-storage';
+import { Injectable, Signal, computed, effect, inject, signal } from '@angular/core';
+import { LocalStorage } from '../core/services/local-storage';
 import { WorkerCancelled, WorkerTask } from '../core/workers/worker-task';
-import { SavegameParser, parseSavegame } from './parse-savegame';
+import { SavegameParser } from './parse-savegame';
 import { ReadSavegameResult } from './read-savegame';
 import {
 	SAVEGAME_SCHEMA_VERSION,
@@ -11,8 +11,6 @@ import {
 	SavegameSummary,
 } from './savegame-model';
 import { SAVEGAME_REPOSITORY, SavegameRepository } from './savegame-repository';
-
-export const SAVEGAME_PARSER = new InjectionToken<SavegameParser>('savegameParser', { factory: () => parseSavegame });
 
 export interface SavegameLoadState {
 	fileName: string;
@@ -32,10 +30,12 @@ export type SavegameStatus = 'ok' | 'updating' | 'reload-needed';
 
 @Injectable({ providedIn: 'root' })
 export class SavegameStore {
-	private readonly parser = inject(SAVEGAME_PARSER);
-	private readonly repositoryReady: Promise<SavegameRepository> = inject(SAVEGAME_REPOSITORY)();
+	private readonly parser = inject(SavegameParser);
+	private readonly openRepository = inject(SAVEGAME_REPOSITORY);
+	/** undefined until open() is called */
+	private repositoryReady: Promise<SavegameRepository> | undefined;
 	private readonly list = signal<SavegameListItem[] | null>(null);
-	private readonly storedActive = persistedSignal<string | null>('activeSavegame', null, {
+	private readonly storedActive = LocalStorage.persistedSignal<string | null>('activeSavegame', null, {
 		parse: (value) => (typeof value === 'string' ? value : undefined),
 	});
 	private readonly failed = signal<ReadonlySet<string>>(new Set());
@@ -73,12 +73,23 @@ export class SavegameStore {
 				this.activeSummary.set(null);
 				return;
 			}
+			if (!this.repositoryReady) {
+				this.activeSummary.set(null);
+				return;
+			}
 			void this.repositoryReady.then((repository) => repository.get(id)).then(
 				(summary) => !stale && this.activeSummary.set(summary ?? null),
 				() => !stale && this.activeSummary.set(null),
 			);
 		});
-		void this.initialize();
+		if (this.storedActive() !== null || LocalStorage.read<string>('savegames', '') === '1') {
+			this.open();
+		}
+	}
+
+	/** Opens the repository (idempotent); IndexedDB is not touched before this is called. */
+	open(): void {
+		this.ensureOpen();
 	}
 
 	status(id: string): SavegameStatus {
@@ -97,7 +108,7 @@ export class SavegameStore {
 		this.cancelRequested = false;
 		let older: string | undefined;
 		try {
-			const repository = await this.repositoryReady;
+			const repository = await this.ensureOpen();
 			if (this.cancelRequested) {
 				return { status: 'cancelled' };
 			}
@@ -105,7 +116,7 @@ export class SavegameStore {
 				await this.refresh(repository);
 			}
 			const stop = () => this.task?.cancel();
-			this.task = this.parser(file, {
+			this.task = this.parser.parse(file, {
 				onProgress: (read, total) => this.loadingState.update((s) => s && { ...s, read, total }),
 				onInfo: (info) => {
 					const existing = this.list()?.find((s) => s.id === info.guid);
@@ -170,7 +181,7 @@ export class SavegameStore {
 
 	/** Rejects when the save could not be deleted; the list is refreshed either way. */
 	async remove(id: string): Promise<void> {
-		const repository = await this.repositoryReady;
+		const repository = await this.ensureOpen();
 		try {
 			await repository.remove(id);
 			if (this.storedActive() === id) {
@@ -182,9 +193,17 @@ export class SavegameStore {
 		}
 	}
 
-	private async initialize() {
+	private ensureOpen(): Promise<SavegameRepository> {
+		if (!this.repositoryReady) {
+			this.repositoryReady = this.openRepository();
+			void this.initialize(this.repositoryReady);
+		}
+		return this.repositoryReady;
+	}
+
+	private async initialize(ready: Promise<SavegameRepository>) {
 		try {
-			const repository = await this.repositoryReady;
+			const repository = await ready;
 			this.persistentState.set(repository.persistent);
 			await this.refresh(repository);
 			await this.reextract(repository);
@@ -204,7 +223,9 @@ export class SavegameStore {
 	}
 
 	private async refresh(repository: SavegameRepository) {
-		this.list.set(await repository.list());
+		const items = await repository.list();
+		this.list.set(items);
+		LocalStorage.write('savegames', items.length > 0 ? '1' : undefined);
 		this.revision.update((n) => n + 1);
 		try {
 			const estimate = await navigator.storage?.estimate?.();
@@ -236,7 +257,7 @@ export class SavegameStore {
 				if (!blob || !current) {
 					throw new Error('missing');
 				}
-				const parsed = await this.parser(blob, {}).result;
+				const parsed = await this.parser.parse(blob, {}).result;
 				const latest = await repository.get(item.id);
 				if (!latest || latest.info.savedAt !== current.info.savedAt) {
 					continue; // replaced by a load in the meantime

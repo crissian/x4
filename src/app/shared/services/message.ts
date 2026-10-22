@@ -1,3 +1,5 @@
+import type { TemplateRef } from '@angular/core';
+
 export class MessageType {
   static primary = 'primary';
   static secondary = 'secondary';
@@ -7,7 +9,9 @@ export class MessageType {
   static info = 'info';
 }
 
-export interface Message {
-  content: string;
+export interface Message<C = unknown> {
+  /** plain text, or a template from the caller's .html rendered with `context` */
+  content: string | TemplateRef<C>;
+  context?: C;
   type: string;
 }

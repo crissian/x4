@@ -1,0 +1,17 @@
+@if (store.showLabels()) {
+	@for (label of labels(); track $index) {
+		@for (line of label.lines; track $index) {
+			<svg:text
+				[attr.x]="label.x"
+				[attr.y]="label.y + ($index - (label.lines.length - 1) / 2) * store.fontSize() * 1.2"
+				dominant-baseline="middle"
+				paint-order="stroke"
+				stroke="#05080f"
+				[attr.stroke-width]="store.fontSize() * 0.25"
+				[attr.font-weight]="line.startsWith('☀') ? 400 : 600"
+			>
+				{{ line }}
+			</svg:text>
+		}
+	}
+}

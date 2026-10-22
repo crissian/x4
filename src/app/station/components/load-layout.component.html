@@ -69,3 +69,13 @@
 		<button type="button" class="btn btn-secondary" (click)="dialogRef.close()" i18n="@@cancel">Cancel</button>
 	</ng-container>
 </app-modal>
+
+<ng-template #deleteMessage let-name>
+	<ng-container i18n
+		>Are you sure you want to delete
+		<strong>{{
+			name // i18n(ph="name")
+		}}</strong
+		>?</ng-container
+	>
+</ng-template>

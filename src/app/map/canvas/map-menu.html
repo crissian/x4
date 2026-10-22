@@ -1,0 +1,21 @@
+@if (store.menu(); as menu) {
+<div
+	class="absolute z-20 w-48 overflow-hidden rounded-md border border-white/15 bg-slate-900/95 text-sm text-slate-200 shadow-xl"
+	[style.left.px]="menu.x + 4"
+	[style.top.px]="menu.y + 4"
+	[style.transform]="store.keepInside(menu.x, menu.y)"
+	(pointerdown)="$event.stopPropagation()"
+	(pointerup)="$event.stopPropagation()"
+>
+	<div class="border-b border-white/10 px-3 py-1.5 font-semibold text-white">{{ menu.sector.name }}</div>
+	<button type="button" class="block w-full px-3 py-1.5 text-left hover:bg-white/10" (click)="action('from')" i18n>
+		Route from here
+	</button>
+	<button type="button" class="block w-full px-3 py-1.5 text-left hover:bg-white/10" (click)="action('to')" i18n>
+		Route to here
+	</button>
+	<button type="button" class="block w-full px-3 py-1.5 text-left hover:bg-white/10" (click)="action('open')" i18n>
+		Sector details
+	</button>
+</div>
+}

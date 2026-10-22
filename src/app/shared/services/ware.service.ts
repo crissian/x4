@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AllWares } from './data/wares-data';
-import { EntityStore, usesWare } from './entity.service';
+import { EntityStore } from './entity.service';
 import { Ware, WareGroup } from './model/model';
 
 @Injectable({ providedIn: 'root' })
@@ -24,7 +24,7 @@ export class WareService extends EntityStore<Ware> {
 	}
 
 	getWaresUsingWare(id: string): Ware[] {
-		return this.getEntities().filter((x) => usesWare(x, id));
+		return this.getEntities().filter((x) => EntityStore.usesWare(x, id));
 	}
 
 	compareGroups(a: WareGroup, b: WareGroup) {

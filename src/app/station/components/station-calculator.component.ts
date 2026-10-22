@@ -1,10 +1,10 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { Component, computed, effect, inject, input, linkedSignal, signal } from '@angular/core';
+import { Component, TemplateRef, computed, effect, inject, input, linkedSignal, signal, viewChild } from '@angular/core';
 import { FormField, applyEach, disabled, form, max, min } from '@angular/forms/signals';
 import { LucideFilePlus, LucideSave, LucideSaveAll, LucideFolderOpen, LucideShare2, LucideImport } from '@lucide/angular';
 import * as urlon from 'urlon';
 import { MessagesComponent } from '../../shared/components/messages.component';
-import { openDialog } from '../../shared/components/modal/dialog';
+import { AppDialog } from '../../shared/components/modal/dialog';
 import { Message, MessageType } from '../../shared/services/message';
 import { Layout, ModuleConfig } from '../../shared/services/module-config';
 import { ModuleService } from '../../shared/services/module.service';
@@ -28,20 +28,6 @@ import { StationSummaryComponent } from './station-summary/station-summary.compo
 
 const EMPTY_ROW: ModuleRow = { moduleId: '', count: 1 };
 
-/** Reads the rows of a shared layout link (`?l=...`, urlon with `=` and `&` swapped for URL-safe characters). */
-export function parseSharedLayout(value: string | undefined): ModuleRow[] | undefined {
-	if (!value) {
-		return undefined;
-	}
-	try {
-		const layoutData = urlon.parse(value.replace(/-/g, '=').replace(/,/g, '&')) as { module: string; count: number }[];
-		return layoutData.map((x) => ({ moduleId: x.module, count: x.count }));
-	} catch (err) {
-		console.log(err);
-		return undefined;
-	}
-}
-
 @Component({
 	selector: 'app-station-calculator',
 	imports: [
@@ -61,10 +47,25 @@ export function parseSharedLayout(value: string | undefined): ModuleRow[] | unde
 	templateUrl: './station-calculator.component.html',
 })
 export default class StationCalculatorComponent {
+	/** Reads the rows of a shared layout link (`?l=...`, urlon with `=` and `&` swapped for URL-safe characters). */
+	static parseSharedLayout(value: string | undefined): ModuleRow[] | undefined {
+		if (!value) {
+			return undefined;
+		}
+		try {
+			const layoutData = urlon.parse(value.replace(/-/g, '=').replace(/,/g, '&')) as { module: string; count: number }[];
+			return layoutData.map((x) => ({ moduleId: x.module, count: x.count }));
+		} catch (err) {
+			console.log(err);
+			return undefined;
+		}
+	}
+
 	private readonly dialog = inject(Dialog);
 	private readonly layoutService = inject(LayoutService);
 	private readonly wareService = inject(WareService);
 	private readonly moduleService = inject(ModuleService);
+	private readonly savedMessage = viewChild.required<TemplateRef<{ $implicit: string }>>('savedMessage');
 
 	/** Shared layout from the `l` query parameter. */
 	readonly l = input<string>();
@@ -75,7 +76,7 @@ export default class StationCalculatorComponent {
 	readonly importResult = signal<ImportResult | null>(null);
 
 	/** Station layout rows */
-	readonly rows = linkedSignal<ModuleRow[]>(() => parseSharedLayout(this.l()) ?? [{ ...EMPTY_ROW }]);
+	readonly rows = linkedSignal<ModuleRow[]>(() => StationCalculatorComponent.parseSharedLayout(this.l()) ?? [{ ...EMPTY_ROW }]);
 	readonly rowsForm = form(this.rows, (row) => {
 		applyEach(row, (item) => {
 			min(item.count, 0);
@@ -133,11 +134,11 @@ export default class StationCalculatorComponent {
 			.map((x) => ({ module: x.moduleId, count: x.count }));
 		const params = urlon.stringify(data).replace(/=/g, '-').replace(/&/g, ',');
 		const url = window.location.href.split('?')[0];
-		openDialog(this.dialog, ShareLayoutComponent, { data: `${url}?l=${params}` });
+		AppDialog.open(this.dialog, ShareLayoutComponent, { data: `${url}?l=${params}` });
 	}
 
 	saveLayoutAs() {
-		openDialog<string>(this.dialog, SaveLayoutComponent).closed.subscribe((name) => {
+		AppDialog.open<string>(this.dialog, SaveLayoutComponent).closed.subscribe((name) => {
 			if (name) {
 				this.saveLayoutInternal(name);
 			}
@@ -158,7 +159,7 @@ export default class StationCalculatorComponent {
 	}
 
 	loadLayout() {
-		openDialog<LoadLayoutResult>(this.dialog, LoadLayoutComponent, { size: 'lg' }).closed.subscribe((data) => {
+		AppDialog.open<LoadLayoutResult>(this.dialog, LoadLayoutComponent, { size: 'lg' }).closed.subscribe((data) => {
 			if (!data) {
 				return;
 			}
@@ -191,7 +192,7 @@ export default class StationCalculatorComponent {
 	}
 
 	importPlans() {
-		openDialog<ImportResult>(this.dialog, ImportPlansComponent).closed.subscribe((result) => {
+		AppDialog.open<ImportResult>(this.dialog, ImportPlansComponent).closed.subscribe((result) => {
 			if (result) {
 				this.importResult.set(result);
 			}
@@ -224,7 +225,7 @@ export default class StationCalculatorComponent {
 		this.layout.set(layout);
 		this.messages.update((messages) => [
 			...messages,
-			{ type: MessageType.success, content: $localize`<strong>${name}:name:</strong> successfully saved.` },
+			{ type: MessageType.success, content: this.savedMessage(), context: { $implicit: name } },
 		]);
 	}
 

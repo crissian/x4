@@ -98,3 +98,12 @@ export interface GodStation {
   x?: number;
   z?: number;
 }
+
+/** Predefined map zone: where it sits inside its sector. Stations in a zone are positioned relative to it. */
+export interface Zone {
+  id: string;
+  sector: string;
+  /** Offset inside the sector, in km. */
+  x: number;
+  z: number;
+}

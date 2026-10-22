@@ -1,11 +1,11 @@
 import { DecimalPipe } from '@angular/common';
-import { EnumLabelPipe, enumLabel } from '../../core/enum-labels';
+import { EnumLabelPipe, EnumLabels } from '../../core/enum-labels';
 import { Component, computed, effect, inject, input, linkedSignal, untracked } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { LucideWrench, LucideX } from '@lucide/angular';
-import { LoadoutStats, loadoutStats } from '../../shared/services/loadout';
-import { readStorage, writeStorage } from '../../core/services/local-storage';
+import { LoadoutStats, Loadouts } from '../../shared/services/loadout';
+import { LocalStorage } from '../../core/services/local-storage';
 import { Ship } from '../../shared/services/model/model';
 import { LOADOUT_PRESETS, LoadoutPreset, ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
@@ -17,39 +17,6 @@ export const MAX_COMPARED = 4;
 interface Entry {
 	id: string;
 	code?: string;
-}
-
-function parse(value: string | null | undefined): Entry[] {
-	return (value ?? '')
-		.split(',')
-		.filter((x) => x)
-		.map((x) => {
-			const [id, code] = x.split('~');
-			return { id, code: code || undefined };
-		});
-}
-
-function format(entries: Entry[]): string {
-	return entries.map((x) => (x.code ? `${x.id}~${x.code}` : x.id)).join(',');
-}
-
-function readStored(): Entry[] {
-	return parse(readStorage(STORAGE_KEY, '', (x) => (typeof x === 'string' ? x : undefined)));
-}
-
-function store(entries: Entry[]) {
-	writeStorage(STORAGE_KEY, format(entries));
-}
-
-/**
- * Adds a ship (`id` or `id~loadoutCode`) to the stored comparison, replacing the same ship and
- * dropping the oldest one above the limit. Returns the value for the `ships` query parameter.
- */
-export function addToComparison(value: string): string {
-	const [entry] = parse(value);
-	const entries = [...readStored().filter((x) => x.id !== entry.id), entry].slice(-MAX_COMPARED);
-	store(entries);
-	return format(entries);
 }
 
 /** A compared ship as edited on the page: a preset, or '' with the custom loadout code. */
@@ -80,6 +47,17 @@ interface Row {
 	templateUrl: './ship-compare.component.html',
 })
 export class ShipCompareComponent {
+	/**
+	 * Adds a ship (`id` or `id~loadoutCode`) to the stored comparison, replacing the same ship and
+	 * dropping the oldest one above the limit. Returns the value for the `ships` query parameter.
+	 */
+	static addToComparison(value: string): string {
+		const [entry] = ShipCompareComponent.parse(value);
+		const entries = [...ShipCompareComponent.readStored().filter((x) => x.id !== entry.id), entry].slice(-MAX_COMPARED);
+		ShipCompareComponent.store(entries);
+		return ShipCompareComponent.format(entries);
+	}
+
 	private readonly shipService = inject(ShipService);
 	private readonly stats = inject(ShipStatsService);
 	private readonly router = inject(Router);
@@ -91,8 +69,8 @@ export class ShipCompareComponent {
 	protected readonly allShips = [...this.shipService.getEntities()].sort((a, b) => a.name.localeCompare(b.name));
 
 	protected readonly entries = linkedSignal<Selection[]>(() => {
-		const fromUrl = parse(this.ships());
-		return (fromUrl.length ? fromUrl : untracked(readStored))
+		const fromUrl = ShipCompareComponent.parse(this.ships());
+		return (fromUrl.length ? fromUrl : untracked(() => ShipCompareComponent.readStored()))
 			.flatMap((x) => {
 				const ship = this.shipService.getEntity(x.id);
 				return ship ? [this.toSelection(ship, x.code)] : [];
@@ -110,7 +88,7 @@ export class ShipCompareComponent {
 			const loadout = entry.preset
 				? this.stats.preset(ship, entry.preset as LoadoutPreset)
 				: this.stats.decode(ship, entry.custom);
-			const stats = loadoutStats(ship, this.stats.groups(ship), loadout ?? {}, this.stats.getEquipment);
+			const stats = Loadouts.loadoutStats(ship, this.stats.groups(ship), loadout ?? {}, this.stats.getEquipment);
 			const code = this.stats.encode(ship, loadout ?? {});
 			return [{ entry, ship, code, stats, price: ship.price.avg + stats.equipmentPrice.avg }];
 		})
@@ -118,9 +96,9 @@ export class ShipCompareComponent {
 
 	protected readonly rows: Row[] = [
 		{ caption: $localize`Race`, value: (c) => c.ship.race?.name },
-		{ caption: $localize`Type`, value: (c) => enumLabel(c.ship.type) },
-		{ caption: $localize`Size`, value: (c) => enumLabel(c.ship.size) },
-		{ caption: $localize`Purpose`, value: (c) => enumLabel(c.ship.purpose) },
+		{ caption: $localize`Type`, value: (c) => EnumLabels.label(c.ship.type) },
+		{ caption: $localize`Size`, value: (c) => EnumLabels.label(c.ship.size) },
+		{ caption: $localize`Purpose`, value: (c) => EnumLabels.label(c.ship.purpose) },
 		{ caption: $localize`Hull`, value: (c) => c.ship.hull, best: 'higher' },
 		{ caption: $localize`Shield`, value: (c) => c.stats.shield, best: 'higher' },
 		{ caption: $localize`Shield recharge (/s)`, value: (c) => c.stats.shieldRecharge, best: 'higher' },
@@ -166,8 +144,8 @@ export class ShipCompareComponent {
 	constructor() {
 		effect(() => {
 			const entries = this.columns().map((c) => ({ id: c.ship.id, code: c.code }));
-			const value = format(entries);
-			store(entries);
+			const value = ShipCompareComponent.format(entries);
+			ShipCompareComponent.store(entries);
 			untracked(() => {
 				if (value !== (this.ships() ?? '')) {
 					this.router.navigate([], { queryParams: { ships: value || null }, replaceUrl: true });
@@ -197,5 +175,27 @@ export class ShipCompareComponent {
 
 	protected remove(index: number) {
 		this.entries.update((entries) => entries.filter((_, i) => i !== index));
+	}
+
+	private static parse(value: string | null | undefined): Entry[] {
+		return (value ?? '')
+			.split(',')
+			.filter((x) => x)
+			.map((x) => {
+				const [id, code] = x.split('~');
+				return { id, code: code || undefined };
+			});
+	}
+
+	private static format(entries: Entry[]): string {
+		return entries.map((x) => (x.code ? `${x.id}~${x.code}` : x.id)).join(',');
+	}
+
+	private static readStored(): Entry[] {
+		return ShipCompareComponent.parse(LocalStorage.read(STORAGE_KEY, '', (x) => (typeof x === 'string' ? x : undefined)));
+	}
+
+	private static store(entries: Entry[]) {
+		LocalStorage.write(STORAGE_KEY, ShipCompareComponent.format(entries));
 	}
 }

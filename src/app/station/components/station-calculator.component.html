@@ -65,3 +65,12 @@
 		</div>
 	</div>
 </div>
+
+<ng-template #savedMessage let-name>
+	<ng-container i18n
+		><strong>{{
+			name // i18n(ph="name")
+		}}</strong>
+		successfully saved.</ng-container
+	>
+</ng-template>

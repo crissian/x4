@@ -1,0 +1,30 @@
+@for (link of store.visibleLinks(); track $index) {
+	<svg:line
+		[attr.x1]="link.x1"
+		[attr.y1]="link.y1"
+		[attr.x2]="link.x2"
+		[attr.y2]="link.y2"
+		[attr.stroke]="link.type === 'gate' ? '#e2e8f0' : link.type === 'accelerator' ? '#fbbf24' : '#38bdf8'"
+		[attr.stroke-width]="link.type === 'gate' ? 2 : 1.5"
+		[attr.stroke-dasharray]="link.type === 'gate' ? null : link.type === 'accelerator' ? '6 4' : '2 3'"
+		stroke-linecap="round"
+		vector-effect="non-scaling-stroke"
+	/>
+	@if (link.type === 'gate') {
+		<svg:circle [attr.cx]="link.x1" [attr.cy]="link.y1" [attr.r]="store.fontSize() * 0.3" fill="#e2e8f0" />
+		<svg:circle [attr.cx]="link.x2" [attr.cy]="link.y2" [attr.r]="store.fontSize() * 0.3" fill="#e2e8f0" />
+	}
+}
+
+@if (store.routePoints()) {
+	<svg:polyline
+		[attr.points]="store.routePoints()"
+		fill="none"
+		stroke="#fde047"
+		stroke-width="5"
+		stroke-opacity="0.85"
+		stroke-linejoin="round"
+		stroke-linecap="round"
+		vector-effect="non-scaling-stroke"
+	/>
+}

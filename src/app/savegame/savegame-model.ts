@@ -1,4 +1,4 @@
-export const SAVEGAME_SCHEMA_VERSION = 1;
+export const SAVEGAME_SCHEMA_VERSION = 2;
 
 export interface SavegameExtension {
 	id: string;

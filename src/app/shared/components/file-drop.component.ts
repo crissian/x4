@@ -7,7 +7,6 @@ import { Component, ElementRef, input, output, signal, viewChild } from '@angula
 		role: 'button',
 		'[attr.tabindex]': 'disabled() ? -1 : 0',
 		'[attr.aria-disabled]': 'disabled()',
-		'[class]': 'classes()',
 		'(click)': 'open()',
 		'(keydown.enter)': 'open()',
 		'(keydown.space)': 'open(); $event.preventDefault()',
@@ -15,10 +14,7 @@ import { Component, ElementRef, input, output, signal, viewChild } from '@angula
 		'(dragleave)': 'over.set(false)',
 		'(drop)': 'drop($event)',
 	},
-	template: `
-		<ng-content />
-		<input #picker type="file" class="hidden" tabindex="-1" [attr.accept]="accept() || null" [multiple]="multiple()" (change)="picked()" />
-	`,
+	templateUrl: './file-drop.component.html',
 })
 export class FileDropComponent {
 	/** the `accept` attribute of the file picker, e.g. `.gz,.xml` */
@@ -30,20 +26,6 @@ export class FileDropComponent {
 
 	protected readonly over = signal(false);
 	private readonly picker = viewChild.required<ElementRef<HTMLInputElement>>('picker');
-
-	protected classes(): string {
-		const base =
-			'flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed px-4 py-8 text-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 ';
-		if (this.disabled()) {
-			return base + 'cursor-not-allowed border-line opacity-50';
-		}
-		return (
-			base +
-			(this.over()
-				? 'cursor-pointer border-sky-500 bg-sky-50 dark:bg-sky-950/40'
-				: 'cursor-pointer border-line-strong hover:border-sky-500 hover:bg-hover')
-		);
-	}
 
 	protected open() {
 		if (!this.disabled()) {

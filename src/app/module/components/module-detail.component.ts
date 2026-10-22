@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { ProductionCardComponent } from '../../shared/components/production-card.component';
 import { SellersComponent } from '../../shared/components/sellers.component';
 import { ModuleService } from '../../shared/services/module.service';
-import { getSlotsStr, toProductionData } from '../../shared/services/production';
+import { Production } from '../../shared/services/production';
 import { WareService } from '../../shared/services/ware.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class ModuleDetailComponent {
 	readonly id = input.required<string>();
 
 	protected readonly entity = computed(() => this.service.getEntity(this.id()));
-	protected readonly production = computed(() => toProductionData(this.entity()?.production, this.wareService));
+	protected readonly production = computed(() => Production.toProductionData(this.entity()?.production, this.wareService));
 
-	protected readonly getSlotsStr = getSlotsStr;
+	protected readonly getSlotsStr = Production.getSlotsStr;
 }

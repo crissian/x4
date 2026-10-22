@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
-import { injectRowNavigation } from '../../shared/components/list-page';
+import { RowNavigation } from '../../shared/components/list-page';
 import { Race } from '../../shared/services/model/model';
 import { RaceService } from '../../shared/services/race.service';
 
@@ -10,7 +10,7 @@ import { RaceService } from '../../shared/services/race.service';
 })
 export class RacesComponent {
 	protected readonly entities = inject(RaceService).getEntities();
-	protected readonly open = injectRowNavigation<Race>();
+	protected readonly open = RowNavigation.inject<Race>();
 
 	protected readonly columns: GridColumn<Race>[] = [
 		{ key: 'name', caption: $localize`Name` },

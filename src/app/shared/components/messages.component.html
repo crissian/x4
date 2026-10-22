@@ -1,5 +1,9 @@
 @for (message of messages(); track message) {
 	<app-alert [type]="message.type" (closed)="close(message)">
-		<span [innerHTML]="message.content"></span>
+		@if (template(message); as template) {
+			<span><ng-container [appTemplateSlot]="template" [context]="message.context" /></span>
+		} @else {
+			<span>{{ message.content }}</span>
+		}
 	</app-alert>
 }

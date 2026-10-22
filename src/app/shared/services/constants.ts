@@ -24,6 +24,12 @@ export const STATION_TYPES = [
 	{ id: 'tradestation', label: $localize`Trading station`, letter: 'T', color: '#e879f9' },
 	{ id: 'defence', label: $localize`Defence station`, letter: 'D', color: '#f87171' },
 	{ id: 'piratebase', label: $localize`Pirate base`, letter: 'P', color: '#fb923c' },
+	{ id: 'factory', label: $localize`Factory`, letter: 'F', color: '#94a3b8' },
+	{ id: 'other', label: $localize`Other station`, letter: 'O', color: '#64748b' },
 ] as const;
 
 export type StationTypeInfo = (typeof STATION_TYPES)[number];
+export type StationTypeId = StationTypeInfo['id'];
+
+/** Types of the game start stations; `factory` and `other` only exist for save stations. */
+export const GAME_START_STATION_TYPES = STATION_TYPES.filter((x) => x.id !== 'factory' && x.id !== 'other');

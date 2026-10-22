@@ -17,28 +17,30 @@ export interface MiningTrip {
 	perHour: number;
 }
 
-/** Cargo capacity a ship can use for a ware (only the holds of the ware's transport type). */
-export function minerCapacity(ship: Ship, ware: Ware): number {
-	const transport = ware.transport?.toLowerCase();
-	return (ship.cargo ?? []).filter((x) => x.types.some((t) => t.id === transport)).reduce((total, x) => total + x.max, 0);
-}
+export class Mining {
+	/** Cargo capacity a ship can use for a ware (only the holds of the ware's transport type). */
+	static minerCapacity(ship: Ship, ware: Ware): number {
+		const transport = ware.transport?.toLowerCase();
+		return (ship.cargo ?? []).filter((x) => x.types.some((t) => t.id === transport)).reduce((total, x) => total + x.max, 0);
+	}
 
-/** Mining ships able to carry the ware, largest hold first. */
-export function minersFor(ships: readonly Ship[], ware: Ware): Ship[] {
-	return ships
-		.filter((x) => x.purpose === ShipPurpose.mine && minerCapacity(x, ware) > 0)
-		.sort((a, b) => minerCapacity(b, ware) - minerCapacity(a, ware) || a.name.localeCompare(b.name));
-}
+	/** Mining ships able to carry the ware, largest hold first. */
+	static minersFor(ships: readonly Ship[], ware: Ware): Ship[] {
+		return ships
+			.filter((x) => x.purpose === ShipPurpose.mine && Mining.minerCapacity(x, ware) > 0)
+			.sort((a, b) => Mining.minerCapacity(b, ware) - Mining.minerCapacity(a, ware) || a.name.localeCompare(b.name));
+	}
 
-/**
- * @param travelTime one-way seconds between the home sector and the mining sector
- * @param capacity cargo volume in m³
- * @param fillMinutes minutes to fill the hold
- * @param dockTime seconds spent docking and selling
- */
-export function miningTrip(travelTime: number, capacity: number, ware: Ware, price: number, fillMinutes: number, dockTime = 60): MiningTrip {
-	const units = ware.volume > 0 ? Math.floor(capacity / ware.volume) : 0;
-	const tripTime = 2 * travelTime + fillMinutes * 60 + dockTime;
-	const tripValue = units * price;
-	return { units, tripTime, tripValue, perHour: tripTime > 0 ? (tripValue * 3600) / tripTime : 0 };
+	/**
+	 * @param travelTime one-way seconds between the home sector and the mining sector
+	 * @param capacity cargo volume in m³
+	 * @param fillMinutes minutes to fill the hold
+	 * @param dockTime seconds spent docking and selling
+	 */
+	static miningTrip(travelTime: number, capacity: number, ware: Ware, price: number, fillMinutes: number, dockTime = 60): MiningTrip {
+		const units = ware.volume > 0 ? Math.floor(capacity / ware.volume) : 0;
+		const tripTime = 2 * travelTime + fillMinutes * 60 + dockTime;
+		const tripValue = units * price;
+		return { units, tripTime, tripValue, perHour: tripTime > 0 ? (tripValue * 3600) / tripTime : 0 };
+	}
 }

@@ -1,0 +1,26 @@
+@if (title()) {
+	<svg:title>{{ title() }}</svg:title>
+}
+<svg:circle
+	[attr.cx]="x()"
+	[attr.cy]="y()"
+	[attr.r]="radius()"
+	[attr.fill]="color()"
+	stroke="#05080f"
+	stroke-width="1"
+	vector-effect="non-scaling-stroke"
+/>
+@if (showCount()) {
+	<svg:text
+		class="pointer-events-none"
+		[attr.x]="x()"
+		[attr.y]="y()"
+		[attr.font-size]="radius() * 1.15"
+		text-anchor="middle"
+		dominant-baseline="central"
+		font-weight="700"
+		fill="#05080f"
+	>
+		{{ count() }}
+	</svg:text>
+}

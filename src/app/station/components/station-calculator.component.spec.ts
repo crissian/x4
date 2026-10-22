@@ -4,8 +4,8 @@ import * as urlon from 'urlon';
 import { describe, expect, it } from 'vitest';
 import { ModuleService } from '../../shared/services/module.service';
 import { WareService } from '../../shared/services/ware.service';
-import StationCalculatorComponent, { parseSharedLayout } from './station-calculator.component';
-import { HQ_WORKFORCE, ResourceCalculator, StationModuleModel, amountPerCycle } from './station-calculator.model';
+import StationCalculatorComponent from './station-calculator.component';
+import { HQ_WORKFORCE, ResourceCalculator, StationModuleModel, StationCalculatorModel } from './station-calculator.model';
 
 const HULL_PARTS = 'module_gen_prod_hullparts_01';
 const HABITAT = 'module_arg_hab_m_01';
@@ -24,11 +24,11 @@ describe('station calculator', () => {
 			{ module: HULL_PARTS, count: 4 },
 			{ module: HABITAT, count: 2 },
 		]);
-		expect(parseSharedLayout(value)).toEqual([
+		expect(StationCalculatorComponent.parseSharedLayout(value)).toEqual([
 			{ moduleId: HULL_PARTS, count: 4 },
 			{ moduleId: HABITAT, count: 2 },
 		]);
-		expect(parseSharedLayout(undefined)).toBeUndefined();
+		expect(StationCalculatorComponent.parseSharedLayout(undefined)).toBeUndefined();
 	});
 
 	it('works out what a production module makes and needs per hour', () => {
@@ -101,8 +101,8 @@ describe('station calculator', () => {
 
 	it('rounds the workforce bonus down each cycle like the game', () => {
 		// 50 energy cells per cycle at +43%: 50 + floor(21.5) = 71
-		expect(amountPerCycle(50, 0.43)).toBe(71);
-		expect(amountPerCycle(294, 0)).toBe(294);
+		expect(StationCalculatorModel.amountPerCycle(50, 0.43)).toBe(71);
+		expect(StationCalculatorModel.amountPerCycle(294, 0)).toBe(294);
 
 		const modules = [model(HABITAT, 1), model(HULL_PARTS, 1)];
 		const workforce = ResourceCalculator.calculateWorkforce(modules).value;

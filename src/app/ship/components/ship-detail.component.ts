@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { EnumLabelPipe, enumLabel } from '../../core/enum-labels';
+import { EnumLabelPipe, EnumLabels } from '../../core/enum-labels';
 import { Component, computed, inject, input } from '@angular/core';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { Router, RouterLink } from '@angular/router';
@@ -7,13 +7,13 @@ import { LucideGitCompareArrows, LucideWrench } from '@lucide/angular';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
 import { ProductionCardComponent } from '../../shared/components/production-card.component';
 import { SellersComponent } from '../../shared/components/sellers.component';
-import { flightSpeeds } from '../../shared/services/loadout';
+import { ShipPerformance } from '../../shared/services/ship-performance';
 import { Equipment, ShipCargo } from '../../shared/services/model/model';
-import { getSlotsStr, toProductionData } from '../../shared/services/production';
+import { Production } from '../../shared/services/production';
 import { ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
 import { WareService } from '../../shared/services/ware.service';
-import { addToComparison } from './ship-compare.component';
+import { ShipCompareComponent } from './ship-compare.component';
 
 interface EngineRow {
 	engine: Equipment;
@@ -36,7 +36,7 @@ export class ShipDetailComponent {
 	readonly id = input.required<string>();
 
 	protected readonly entity = computed(() => this.service.getEntity(this.id()));
-	protected readonly production = computed(() => toProductionData(this.entity()?.production, this.wareService));
+	protected readonly production = computed(() => Production.toProductionData(this.entity()?.production, this.wareService));
 	protected readonly mainShields = computed(() => this.entity()?.shields?.filter((x) => !x.group) ?? []);
 	protected readonly additionalShields = computed(() => this.entity()?.shields?.filter((x) => x.group) ?? []);
 	protected readonly maxStats = computed(() => {
@@ -50,7 +50,7 @@ export class ShipDetailComponent {
 			return [];
 		}
 		return this.stats.engines(ship).map((engine) => {
-			const speeds = flightSpeeds(ship, engine);
+			const speeds = ShipPerformance.flightSpeeds(ship, engine);
 			return { engine, speed: speeds.speed, boost: speeds.boost, travel: speeds.travel, charge: speeds.travelCharge };
 		});
 	});
@@ -65,10 +65,10 @@ export class ShipDetailComponent {
 	];
 	protected readonly trackEngine = (row: EngineRow) => row.engine.id;
 
-	protected readonly getSlotsStr = getSlotsStr;
+	protected readonly getSlotsStr = Production.getSlotsStr;
 
 	protected cargoTypes(cargo: ShipCargo) {
-		return cargo.types.map((x) => enumLabel(x.name)).join(', ');
+		return cargo.types.map((x) => EnumLabels.label(x.name)).join(', ');
 	}
 
 	protected openEngine(row: EngineRow) {
@@ -76,6 +76,6 @@ export class ShipDetailComponent {
 	}
 
 	protected compare() {
-		this.router.navigate(['/ships/compare'], { queryParams: { ships: addToComparison(this.id()) } });
+		this.router.navigate(['/ships/compare'], { queryParams: { ships: ShipCompareComponent.addToComparison(this.id()) } });
 	}
 }

@@ -4,7 +4,7 @@ import { FormField, form, required } from '@angular/forms/signals';
 import { LucideImport, LucideUpload } from '@lucide/angular';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { ModuleService } from '../../shared/services/module.service';
-import { ImportResult, importConstructionPlans } from '../services/construction-plans';
+import { ImportResult, ConstructionPlans } from '../services/construction-plans';
 import { LayoutService } from '../services/layout-service';
 
 export type { ImportResult } from '../services/construction-plans';
@@ -39,7 +39,7 @@ export class ImportPlansComponent {
 	}
 
 	importPlans() {
-		const result = importConstructionPlans(this.model().xml, this.moduleService, (layout) =>
+		const result = ConstructionPlans.importConstructionPlans(this.model().xml, this.moduleService, (layout) =>
 			this.layoutService.saveLayout(layout)
 		);
 		this.dialogRef.close(result);

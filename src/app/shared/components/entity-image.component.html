@@ -1,0 +1,19 @@
+@if (src(); as src) {
+	<!-- Ware icons are white glyphs on a transparent background; renders are transparent too, so the dark frame matches the in-game encyclopedia -->
+	<img
+		[src]="src"
+		[alt]="alt()"
+		[width]="size().width"
+		[height]="size().height"
+		loading="lazy"
+		decoding="async"
+		class="mx-auto mb-3 block h-auto rounded border border-line sm:float-right sm:mb-2 sm:ml-4"
+		[class]="
+			kind() === 'sectors'
+				? 'w-full max-w-md sm:w-80 lg:w-96'
+				: kind() === 'wares'
+					? 'w-24 bg-neutral-800 p-2'
+					: 'w-full max-w-64 bg-neutral-900 sm:w-56 lg:w-64'
+		"
+	/>
+}

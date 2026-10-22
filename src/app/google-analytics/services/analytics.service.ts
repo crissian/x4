@@ -19,12 +19,12 @@ export const ANALYTICS_CONFIG = new InjectionToken<AnalyticsConfig>('analyticsCo
 	factory: () => ({ trackingId: '' }),
 });
 
-export function provideAnalytics(config: AnalyticsConfig): EnvironmentProviders {
-	return makeEnvironmentProviders([{ provide: ANALYTICS_CONFIG, useValue: config }]);
-}
-
 @Injectable({ providedIn: 'root' })
 export class AnalyticsService {
+	static provide(config: AnalyticsConfig): EnvironmentProviders {
+		return makeEnvironmentProviders([{ provide: ANALYTICS_CONFIG, useValue: config }]);
+	}
+
 	private readonly config = inject(ANALYTICS_CONFIG);
 
 	pageView(page: PageInfo) {

@@ -14,13 +14,7 @@ import { StationModule, WareGroup } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
 import { WareService } from '../../shared/services/ware.service';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
-import {
-	ModuleRow,
-	ResourceCalculator,
-	StationModuleModel,
-	WareGroupModel,
-	isRecycler,
-} from './station-calculator.model';
+import { ModuleRow, ResourceCalculator, StationModuleModel, WareGroupModel, StationCalculatorModel } from './station-calculator.model';
 
 @Component({
 	selector: 'app-station-modules',
@@ -116,7 +110,7 @@ export class StationModulesComponent {
 	private createWareGroups() {
 		const groups: Record<string, WareGroupModel & { group: WareGroup | string }> = {};
 		for (const item of this.moduleService.getModulesByType(ModuleTypes.production)) {
-			if (isRecycler(item)) {
+			if (StationCalculatorModel.isRecycler(item)) {
 				groups[ModuleTypes.recycling] ??= {
 					name: ModuleTypes.recycling,
 					group: ModuleTypes.recycling,

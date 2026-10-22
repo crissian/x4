@@ -1,10 +1,12 @@
 import { Component, effect, inject, input, signal, untracked } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LucideX } from '@lucide/angular';
 import { GAME_VERSIONS } from '../shared/services/constants';
 import { MapCanvasComponent } from './canvas/map-canvas.component';
+import { MAP_PROVIDERS } from './map-providers';
 import { MapStore, PanelTab } from './map-store';
+import { MapSaveLayer } from './save/map-save-layer';
 import { MapAbandonedPanelComponent } from './panels/map-abandoned-panel.component';
 import { MapMiningPanelComponent } from './panels/map-mining-panel.component';
 import { MapRoutePanelComponent } from './panels/map-route-panel.component';
@@ -12,6 +14,7 @@ import { MapStationsPanelComponent } from './panels/map-stations-panel.component
 
 /** Galaxy map page: map settings, the map and the side panel tabs. */
 @Component({
+	selector: 'app-map',
 	imports: [
 		FormField,
 		LucideX,
@@ -20,14 +23,15 @@ import { MapStationsPanelComponent } from './panels/map-stations-panel.component
 		MapMiningPanelComponent,
 		MapStationsPanelComponent,
 		MapAbandonedPanelComponent,
+		RouterLink,
 	],
-	providers: [MapStore],
+	providers: MAP_PROVIDERS,
 	templateUrl: './map.component.html',
-	host: { class: 'block' },
 })
 export default class MapComponent {
 	private readonly router = inject(Router);
 	protected readonly store = inject(MapStore);
+	protected readonly save = inject(MapSaveLayer);
 
 	/** Sector to highlight, from the `?sector=` query parameter. */
 	readonly sector = input<string>();

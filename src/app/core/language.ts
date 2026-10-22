@@ -1,6 +1,6 @@
 import { registerLocaleData } from '@angular/common';
 import { loadTranslations } from '@angular/localize';
-import { getGameLanguage, loadGameText } from './game-text';
+import { GameText } from './game-text';
 
 // number and date formats of the languages; English is built in
 const LOCALE_DATA: Record<string, () => Promise<{ default: unknown[] }>> = {
@@ -18,40 +18,42 @@ const LOCALE_DATA: Record<string, () => Promise<{ default: unknown[] }>> = {
 	'zh-Hant': () => import('@angular/common/locales/zh-Hant'),
 };
 
-/** The locale of the selected language, for LOCALE_ID. */
-export function getLocale(): string {
-	const language = getGameLanguage();
-	return language === 'en' ? 'en-US' : language;
-}
-
-/**
- * Loads the selected language: the game texts, the translations of the app texts and the number formats.
- * Must finish before the app code loads, as `$localize` and the data files translate when they are evaluated.
- */
-export async function loadLanguage(): Promise<void> {
-	const language = getGameLanguage();
-	if (language === 'en') {
-		return;
+export class Language {
+	/** The locale of the selected language, for LOCALE_ID. */
+	static locale(): string {
+		const language = GameText.language();
+		return language === 'en' ? 'en-US' : language;
 	}
 
-	await Promise.all([loadGameText(), loadUiText(language), loadLocaleData(language)]);
-}
-
-async function loadUiText(language: string) {
-	try {
-		const response = await fetch(new URL(`assets/i18n/ui/messages.${language}.json`, document.baseURI));
-		if (response.ok) {
-			const messages: { translations: Record<string, string> } = await response.json();
-			loadTranslations(messages.translations);
+	/**
+	 * Loads the selected language: the game texts, the translations of the app texts and the number formats.
+	 * Must finish before the app code loads, as `$localize` and the data files translate when they are evaluated.
+	 */
+	static async load(): Promise<void> {
+		const language = GameText.language();
+		if (language === 'en') {
+			return;
 		}
-	} catch {
-		// keep the English texts
-	}
-}
 
-async function loadLocaleData(language: string) {
-	const data = await LOCALE_DATA[language]?.();
-	if (data) {
-		registerLocaleData(data.default, language);
+		await Promise.all([GameText.load(), Language.loadUiText(language), Language.loadLocaleData(language)]);
+	}
+
+	private static async loadUiText(language: string) {
+		try {
+			const response = await fetch(new URL(`assets/i18n/ui/messages.${language}.json`, document.baseURI));
+			if (response.ok) {
+				const messages: { translations: Record<string, string> } = await response.json();
+				loadTranslations(messages.translations);
+			}
+		} catch {
+			// keep the English texts
+		}
+	}
+
+	private static async loadLocaleData(language: string) {
+		const data = await LOCALE_DATA[language]?.();
+		if (data) {
+			registerLocaleData(data.default, language);
+		}
 	}
 }

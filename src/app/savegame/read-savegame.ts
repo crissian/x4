@@ -1,7 +1,8 @@
-import { openTextStream } from '../core/streams/open-text-stream';
-import { runExtractors, XmlExtractor } from '../core/xml/xml-extractor';
+import { TextStream } from '../core/streams/open-text-stream';
+import { XmlExtractor, XmlExtractorRunner } from '../core/xml/xml-extractor';
 import { XmlScanError } from '../core/xml/xml-stream-scanner';
-import { createInfoExtractor } from './extractors/info-extractor';
+import { InfoExtractor } from './extractors/info-extractor';
+import { MapExtractor } from './extractors/map-extractor';
 import { SavegameError, SavegameInfo } from './savegame-model';
 
 export interface ReadSavegameOptions {
@@ -16,60 +17,69 @@ export interface ReadSavegameResult {
 	gzipCopy?: Blob;
 }
 
-function toSavegameError(error: unknown): SavegameError {
-	if (error instanceof SavegameError) {
-		return error;
+/** Checks that the root element is `savegame`; done as soon as the root was seen. */
+class RootGuard implements XmlExtractor<null> {
+	readonly key = '';
+	checked = false;
+
+	open(name: string, path: readonly string[]): void {
+		if (!this.checked && path.length === 1) {
+			this.checked = true;
+			if (name !== 'savegame') {
+				throw new SavegameError('not-a-savegame', 'The file is not an X4 savegame.');
+			}
+		}
 	}
-	if (error instanceof XmlScanError) {
-		return new SavegameError(error.code, error.message);
+
+	done(): boolean {
+		return this.checked;
 	}
-	const message = error instanceof Error ? error.message : String(error);
-	// a cut-off gzip stream makes DecompressionStream fail with a TypeError
-	return new SavegameError(error instanceof TypeError ? 'truncated' : 'read-failed', message);
+
+	result(): null {
+		return null;
+	}
 }
 
-/** Reads the whole file; info is extracted first, `data` holds the results of the other extractors. */
-export async function readSavegame(
-	bytes: ReadableStream<Uint8Array>,
-	options: ReadSavegameOptions,
-): Promise<ReadSavegameResult> {
-	let rootChecked = false;
-	const guard: XmlExtractor<null> = {
-		key: '',
-		open(name, path) {
-			if (!rootChecked && path.length === 1) {
-				rootChecked = true;
-				if (name !== 'savegame') {
-					throw new SavegameError('not-a-savegame', 'The file is not an X4 savegame.');
+export class SavegameReader {
+	/** Reads the whole file; info is extracted first, `data` holds the results of the other extractors. */
+	static async read(bytes: ReadableStream<Uint8Array>, options: ReadSavegameOptions): Promise<ReadSavegameResult> {
+		const guard = new RootGuard();
+		const extractors: XmlExtractor[] = [guard, new InfoExtractor(), new MapExtractor()];
+		try {
+			const opened = await TextStream.open(bytes, { size: options.size, onProgress: options.onProgress, keepGzip: true });
+			const results = await XmlExtractorRunner.run(opened.text, extractors, (key, result) => {
+				if (key === 'info' && result) {
+					options.onInfo?.(result as SavegameInfo);
 				}
+			});
+			const { info, ...data } = results;
+			delete data[''];
+			if (!info) {
+				throw new SavegameError('not-a-savegame', 'The file has no savegame header.');
 			}
-		},
-		done: () => rootChecked,
-		result: () => null,
-	};
-	const extractors: XmlExtractor[] = [guard, createInfoExtractor()];
-	try {
-		const opened = await openTextStream(bytes, { size: options.size, onProgress: options.onProgress, keepGzip: true });
-		const results = await runExtractors(opened.text, extractors, (key, result) => {
-			if (key === 'info' && result) {
-				options.onInfo?.(result as SavegameInfo);
+			if (!(info as SavegameInfo).guid) {
+				throw new SavegameError('not-a-savegame', 'The savegame header has no guid.');
 			}
-		});
-		const { info, ...data } = results;
-		delete data[''];
-		if (!info) {
-			throw new SavegameError('not-a-savegame', 'The file has no savegame header.');
+			return { info: info as SavegameInfo, data, gzipCopy: opened.gzipCopy ? await opened.gzipCopy : undefined };
+		} catch (error) {
+			const failure = SavegameReader.toSavegameError(error);
+			// no root element at all (empty file, plain text, packed non-XML): not a cut-off save
+			if (!guard.checked && (failure.code === 'truncated' || failure.code === 'invalid-xml')) {
+				throw new SavegameError('not-a-savegame', failure.message);
+			}
+			throw failure;
 		}
-		if (!(info as SavegameInfo).guid) {
-			throw new SavegameError('not-a-savegame', 'The savegame header has no guid.');
+	}
+
+	private static toSavegameError(error: unknown): SavegameError {
+		if (error instanceof SavegameError) {
+			return error;
 		}
-		return { info: info as SavegameInfo, data, gzipCopy: opened.gzipCopy ? await opened.gzipCopy : undefined };
-	} catch (error) {
-		const failure = toSavegameError(error);
-		// no root element at all (empty file, plain text, packed non-XML): not a cut-off save
-		if (!rootChecked && (failure.code === 'truncated' || failure.code === 'invalid-xml')) {
-			throw new SavegameError('not-a-savegame', failure.message);
+		if (error instanceof XmlScanError) {
+			return new SavegameError(error.code, error.message);
 		}
-		throw failure;
+		const message = error instanceof Error ? error.message : String(error);
+		// a cut-off gzip stream makes DecompressionStream fail with a TypeError
+		return new SavegameError(error instanceof TypeError ? 'truncated' : 'read-failed', message);
 	}
 }

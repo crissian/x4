@@ -115,7 +115,45 @@
 }
 
 @layer components {
-	.card {
+	.alert {
+		@apply mb-3 flex items-start gap-3 rounded-md border px-4 py-3;
+	}
+
+	.alert-primary {
+		@apply border-sky-300 bg-sky-50 text-sky-900 dark:border-sky-700 dark:bg-sky-950/60 dark:text-sky-200;
+	}
+
+	.alert-secondary {
+		@apply border-neutral-300 bg-neutral-100 text-neutral-800 dark:border-neutral-600 dark:bg-neutral-700/60 dark:text-neutral-200;
+	}
+
+	.alert-success {
+		@apply border-emerald-300 bg-emerald-50 text-emerald-900 dark:border-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-200;
+	}
+
+	.alert-danger {
+		@apply border-red-300 bg-red-50 text-red-900 dark:border-red-700 dark:bg-red-950/60 dark:text-red-200;
+	}
+
+	.alert-warning {
+		@apply border-amber-300 bg-amber-50 text-amber-900 dark:border-amber-700 dark:bg-amber-950/60 dark:text-amber-200;
+	}
+
+	.alert-info {
+		@apply border-cyan-300 bg-cyan-50 text-cyan-900 dark:border-cyan-700 dark:bg-cyan-950/60 dark:text-cyan-200;
+	}
+
+	.app-dialog-panel {
+		@apply rounded-lg border border-line bg-raised text-fg shadow-2xl;
+	}
+
+	.app-dialog-backdrop {
+		@apply backdrop-blur-[1px];
+	}
+
+	.card,
+	app-production-card,
+	app-savegame-card {
 		@apply rounded-lg border border-line bg-surface shadow-lg dark:shadow-black/40;
 	}
 
@@ -186,5 +224,41 @@
 		& dt {
 			@apply font-semibold text-fg-strong;
 		}
+	}
+
+	/* Component hosts: how each one lays out, kept here rather than as class strings in the components */
+	app-alert,
+	app-file-drop,
+	app-map,
+	app-map-canvas,
+	app-modal,
+	app-production-card,
+	app-progress-bar,
+	app-savegame-card,
+	app-sector-stations {
+		@apply block;
+	}
+
+	app-entity-image,
+	app-map-legend,
+	app-map-menu,
+	app-map-station-tooltip,
+	app-map-tooltip,
+	app-savegame-selector,
+	div[appDetail] {
+		@apply contents;
+	}
+
+	app-file-drop {
+		@apply outline-none;
+	}
+
+	app-station-summary {
+		@apply flex flex-col gap-4;
+	}
+
+	g[appMapLinks],
+	g[appMapLabels] {
+		@apply pointer-events-none;
 	}
 }

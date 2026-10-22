@@ -1,104 +1,37 @@
 import { DecimalPipe, PercentPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { MapStations } from '../map-stations';
 import { MapStore } from '../map-store';
 
 /** Details of the sector under the pointer. */
 @Component({
 	selector: 'app-map-tooltip',
 	imports: [DecimalPipe, PercentPipe],
-	host: { class: 'contents' },
-	template: `
-		@if (store.hovered(); as hover) {
-			@let sector = hover.shape.sector;
-			<div
-				class="pointer-events-none absolute z-10 w-64 rounded-md border border-white/15 bg-slate-900/95 p-2.5 text-xs text-slate-200 shadow-xl"
-				[style.left.px]="hover.x + 16"
-				[style.top.px]="hover.y + 16"
-				[style.transform]="store.keepInside(hover.x, hover.y)"
-			>
-				<div class="text-sm font-semibold text-white">{{ sector.name }}</div>
-				@if (hover.shape.cluster.sectors.length > 1) {
-					<div class="text-slate-400" i18n>{{ hover.shape.cluster.name }} system</div>
-				}
-				<dl class="mt-1.5 grid grid-cols-[5.5rem_1fr] gap-y-0.5">
-					<dt class="text-slate-400" i18n>Owner</dt>
-					<dd>
-						@if (faction(); as faction) {
-							<span
-								class="mr-1 inline-block size-2 rounded-full"
-								[style.background]="faction.color"
-							></span
-							>{{ faction.name }}
-						} @else {
-							<ng-container i18n>Unclaimed</ng-container>
-						}
-					</dd>
-					<dt class="text-slate-400" i18n>Sunlight</dt>
-					<dd>{{ sector.sunlight != null ? (sector.sunlight | percent) : '-' }}</dd>
-					<dt class="text-slate-400" i18n>Security</dt>
-					<dd>{{ sector.security != null ? (sector.security | percent) : '-' }}</dd>
-					<dt class="text-slate-400" i18n>Economy</dt>
-					<dd>{{ sector.economy != null ? (sector.economy | percent) : '-' }}</dd>
-					<dt class="text-slate-400" i18n>Resources</dt>
-					<dd>{{ store.resourceNames(sector) || '-' }}</dd>
-					@if (store.mode() === 'resource') {
-						<dt class="text-slate-400">{{ store.wareName(store.resource()) }}</dt>
-						<dd>{{ store.resourceAmount(sector) | number }}</dd>
-					}
-				</dl>
-				<div class="mt-1.5 text-slate-500" i18n>Click for details, right-click to plan a route</div>
-			</div>
-		}
-	`,
+	templateUrl: './map-tooltip.html',
 })
 export class MapTooltipComponent {
 	protected readonly store = inject(MapStore);
-	protected readonly faction = computed(() => this.store.faction(this.store.hovered()?.shape.sector.owner));
+	protected readonly faction = computed(() =>
+		this.store.faction(this.store.sectorOwner(this.store.hovered()?.shape.sector))
+	);
+}
+
+/** Details of the save station under the pointer. */
+@Component({
+	selector: 'app-map-station-tooltip',
+	imports: [DecimalPipe],
+	templateUrl: './map-station-tooltip.html',
+})
+export class MapStationTooltipComponent {
+	protected readonly store = inject(MapStore);
+	protected readonly stations = inject(MapStations);
 }
 
 /** Right-click menu of a sector. */
 @Component({
 	selector: 'app-map-menu',
-	host: { class: 'contents' },
-	template: `
-		@if (store.menu(); as menu) {
-			<div
-				class="absolute z-20 w-48 overflow-hidden rounded-md border border-white/15 bg-slate-900/95 text-sm text-slate-200 shadow-xl"
-				[style.left.px]="menu.x + 4"
-				[style.top.px]="menu.y + 4"
-				[style.transform]="store.keepInside(menu.x, menu.y)"
-				(pointerdown)="$event.stopPropagation()"
-				(pointerup)="$event.stopPropagation()"
-			>
-				<div class="border-b border-white/10 px-3 py-1.5 font-semibold text-white">{{ menu.sector.name }}</div>
-				<button
-					type="button"
-					class="block w-full px-3 py-1.5 text-left hover:bg-white/10"
-					(click)="action('from')"
-					i18n
-				>
-					Route from here
-				</button>
-				<button
-					type="button"
-					class="block w-full px-3 py-1.5 text-left hover:bg-white/10"
-					(click)="action('to')"
-					i18n
-				>
-					Route to here
-				</button>
-				<button
-					type="button"
-					class="block w-full px-3 py-1.5 text-left hover:bg-white/10"
-					(click)="action('open')"
-					i18n
-				>
-					Sector details
-				</button>
-			</div>
-		}
-	`,
+	templateUrl: './map-menu.html',
 })
 export class MapMenuComponent {
 	protected readonly store = inject(MapStore);

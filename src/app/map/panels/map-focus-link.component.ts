@@ -6,11 +6,7 @@ import { Sector } from '../../shared/services/model/model';
 @Component({
 	selector: 'app-map-focus-link',
 	imports: [RouterLink],
-	template: `
-		<a [routerLink]="[]" [queryParams]="{ sector: sector().id }" queryParamsHandling="merge" [replaceUrl]="true">{{
-			sector().name
-		}}</a>
-	`,
+	templateUrl: './map-focus-link.component.html',
 })
 export class MapFocusLinkComponent {
 	readonly sector = input.required<Sector>();

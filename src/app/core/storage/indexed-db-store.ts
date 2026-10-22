@@ -1,39 +1,52 @@
 import { KeyValueStore } from './key-value-store';
 
-/** Opens (and creates) the database with the given object stores; resolves null when IndexedDB is unavailable or fails to open. */
-export function openIndexedDb(name: string, version: number, stores: string[]): Promise<IDBDatabase | null> {
-	try {
-		if (typeof indexedDB === 'undefined') {
+export class IndexedDb {
+	/**
+	 * Opens (and creates) the database with the given object stores; resolves null when IndexedDB is unavailable or fails to open.
+	 * `upgrade` runs inside the versionchange transaction after the missing stores were created.
+	 */
+	static open(
+		name: string,
+		version: number,
+		stores: string[],
+		upgrade?: (db: IDBDatabase, tx: IDBTransaction, oldVersion: number) => void,
+	): Promise<IDBDatabase | null> {
+		try {
+			if (typeof indexedDB === 'undefined') {
+				return Promise.resolve(null);
+			}
+			const req = indexedDB.open(name, version);
+			return new Promise((resolve) => {
+				let settled = false;
+				const settle = (db: IDBDatabase | null) => {
+					if (settled) {
+						// the caller already got null (blocked): do not keep the late connection open
+						db?.close();
+						return;
+					}
+					settled = true;
+					resolve(db);
+				};
+				req.onupgradeneeded = (event) => {
+					for (const store of stores) {
+						if (!req.result.objectStoreNames.contains(store)) {
+							req.result.createObjectStore(store);
+						}
+					}
+					if (req.transaction) {
+						upgrade?.(req.result, req.transaction, event.oldVersion);
+					}
+				};
+				req.onsuccess = () => {
+					req.result.onversionchange = () => req.result.close();
+					settle(req.result);
+				};
+				req.onerror = () => settle(null);
+				req.onblocked = () => settle(null);
+			});
+		} catch {
 			return Promise.resolve(null);
 		}
-		const req = indexedDB.open(name, version);
-		return new Promise((resolve) => {
-			let settled = false;
-			const settle = (db: IDBDatabase | null) => {
-				if (settled) {
-					// the caller already got null (blocked): do not keep the late connection open
-					db?.close();
-					return;
-				}
-				settled = true;
-				resolve(db);
-			};
-			req.onupgradeneeded = () => {
-				for (const store of stores) {
-					if (!req.result.objectStoreNames.contains(store)) {
-						req.result.createObjectStore(store);
-					}
-				}
-			};
-			req.onsuccess = () => {
-				req.result.onversionchange = () => req.result.close();
-				settle(req.result);
-			};
-			req.onerror = () => settle(null);
-			req.onblocked = () => settle(null);
-		});
-	} catch {
-		return Promise.resolve(null);
 	}
 }
 

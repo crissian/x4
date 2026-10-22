@@ -1,6 +1,6 @@
-import { enumLabel } from '../../core/enum-labels';
+import { EnumLabels } from '../../core/enum-labels';
 import { Effects } from './data/effects-data';
-import { Dock, Production, ProductionEffect, Slot, SlotSummary, Ware } from './model/model';
+import { Dock, Production as ProductionModel, ProductionEffect, Slot, SlotSummary, Ware } from './model/model';
 import { WareService } from './ware.service';
 
 export interface ProductionWareData {
@@ -19,60 +19,62 @@ export interface ProductionData {
 
 export type PriceKind = 'min' | 'avg' | 'max';
 
-export function toProductionData(productions: Production[] | undefined, wareService: WareService): ProductionData[] {
-	return (productions ?? []).map((x) => ({
-		amount: x.amount,
-		method: x.method,
-		name: x.name,
-		time: x.time,
-		efficiency: x.effects?.find((y) => y.type == Effects.work),
-		wares: x.wares.flatMap((y) => {
-			const ware = wareService.getEntity(y.ware);
-			return ware ? [{ ware, amount: y.amount }] : [];
-		}),
-	}));
-}
-
-export function getProductionTotal(production: ProductionData, kind: PriceKind) {
-	return production.wares.reduce((total, x) => total + x.amount * x.ware.price[kind], 0);
-}
-
-export function formatProductionTime(amount: number) {
-	const minutes = Math.trunc(amount / 60);
-	const seconds = amount - minutes * 60;
-
-	let result = '';
-	if (minutes > 0) {
-		result += minutes + (minutes === 1 ? ' minute' : ' minutes');
+export class Production {
+	static toProductionData(productions: ProductionModel[] | undefined, wareService: WareService): ProductionData[] {
+		return (productions ?? []).map((x) => ({
+			amount: x.amount,
+			method: x.method,
+			name: x.name,
+			time: x.time,
+			efficiency: x.effects?.find((y) => y.type == Effects.work),
+			wares: x.wares.flatMap((y) => {
+				const ware = wareService.getEntity(y.ware);
+				return ware ? [{ ware, amount: y.amount }] : [];
+			}),
+		}));
 	}
-	if (seconds > 0) {
+
+	static getProductionTotal(production: ProductionData, kind: PriceKind) {
+		return production.wares.reduce((total, x) => total + x.amount * x.ware.price[kind], 0);
+	}
+
+	static formatProductionTime(amount: number) {
+		const minutes = Math.trunc(amount / 60);
+		const seconds = amount - minutes * 60;
+
+		let result = '';
 		if (minutes > 0) {
-			result += ' ';
+			result += minutes + (minutes === 1 ? ' minute' : ' minutes');
 		}
-		result += seconds + (seconds === 1 ? ' second' : ' seconds');
+		if (seconds > 0) {
+			if (minutes > 0) {
+				result += ' ';
+			}
+			result += seconds + (seconds === 1 ? ' second' : ' seconds');
+		}
+
+		return result;
 	}
 
-	return result;
-}
+	static getSlots(value: readonly (Slot | Dock)[] | undefined): SlotSummary[] {
+		if (!value) {
+			return [];
+		}
 
-export function getSlots(value: readonly (Slot | Dock)[] | undefined): SlotSummary[] {
-	if (!value) {
-		return [];
+		const capacities = value.reduce<Record<string, number>>((obj, slot) => {
+			obj[slot.size] = (obj[slot.size] || 0) + ((slot as Dock).capacity || 1);
+			return obj;
+		}, {});
+
+		return Object.keys(capacities).map((size) => ({ size, capacity: capacities[size] }));
 	}
 
-	const capacities = value.reduce<Record<string, number>>((obj, slot) => {
-		obj[slot.size] = (obj[slot.size] || 0) + ((slot as Dock).capacity || 1);
-		return obj;
-	}, {});
+	static getSlotsStr(value: readonly (Slot | Dock)[] | undefined) {
+		const slots = Production.getSlots(value);
+		if (slots.length == 0) {
+			return '-';
+		}
 
-	return Object.keys(capacities).map((size) => ({ size, capacity: capacities[size] }));
-}
-
-export function getSlotsStr(value: readonly (Slot | Dock)[] | undefined) {
-	const slots = getSlots(value);
-	if (slots.length == 0) {
-		return '-';
+		return slots.map((x) => `${x.capacity} x ${EnumLabels.label(x.size)}`).join(', ');
 	}
-
-	return slots.map((x) => `${x.capacity} x ${enumLabel(x.size)}`).join(', ');
 }

@@ -7,21 +7,8 @@ import { Workers } from '../../shared/services/data/workers-data';
 import { Effects } from '../../shared/services/data/effects-data';
 import { Wares } from '../../shared/services/data/wares-data';
 
-/** True for the scrap recyclers: production modules making their wares with the recycling method. */
-export function isRecycler(module: StationModule) {
-	return module.queue?.some((x) => x.method === ProductionMethods.recycling) ?? false;
-}
-
 /** Workers the player headquarters needs on top of its modules. */
 export const HQ_WORKFORCE = 200;
-
-/**
- * Wares made per cycle with the workforce bonus: the game rounds the bonus down to whole wares each cycle.
- * @param bonus workforce bonus as a fraction, e.g. 0.43 for +43%
- */
-export function amountPerCycle(amount: number, bonus: number) {
-	return amount + Math.floor(amount * bonus);
-}
 
 export interface StationResourceItemModel {
 	ware: Ware;
@@ -235,7 +222,7 @@ export class ResourceCalculator {
 								: null;
 							const perCycle = production.value.amount;
 							let efficiency =
-								effect == null ? 1 : amountPerCycle(perCycle, effect.product * multiplier) / perCycle;
+								effect == null ? 1 : StationCalculatorModel.amountPerCycle(perCycle, effect.product * multiplier) / perCycle;
 
 							if (production.ware.id === Wares.energycells.id) {
 								// add sunlight for energy cells
@@ -291,5 +278,20 @@ export class ResourceCalculator {
 		}
 
 		return resources;
+	}
+}
+
+export class StationCalculatorModel {
+	/** True for the scrap recyclers: production modules making their wares with the recycling method. */
+	static isRecycler(module: StationModule) {
+		return module.queue?.some((x) => x.method === ProductionMethods.recycling) ?? false;
+	}
+
+	/**
+	 * Wares made per cycle with the workforce bonus: the game rounds the bonus down to whole wares each cycle.
+	 * @param bonus workforce bonus as a fraction, e.g. 0.43 for +43%
+	 */
+	static amountPerCycle(amount: number, bonus: number) {
+		return amount + Math.floor(amount * bonus);
 	}
 }

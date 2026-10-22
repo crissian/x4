@@ -18,6 +18,7 @@ export interface Faction {
   id: string;
   name: string;
   description: string;
+  shortName?: string;
   race?: Race;
   icon: string;
   color?: string;

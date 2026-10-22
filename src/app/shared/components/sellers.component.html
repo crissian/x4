@@ -1,0 +1,15 @@
+@for (item of sellers(); track item.faction.id) {
+	<div>
+		<a [routerLink]="['/factions', item.faction.id]">{{ item.faction.name }}</a>
+		@if (item.license) {
+			<span class="text-fg-muted">
+				- {{ item.license.name }}
+				@if (item.license.minRelation != null) {
+					<ng-container i18n>(reputation {{ reputation(item.license.minRelation) }}+)</ng-container>
+				}
+			</span>
+		}
+	</div>
+} @empty {
+	-
+}

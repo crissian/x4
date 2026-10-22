@@ -1,6 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { relationToReputation } from '../services/loadout';
+import { Loadouts } from '../services/loadout';
 import { Faction } from '../services/model/model';
 import { ShipStatsService } from '../services/ship-stats.service';
 
@@ -8,23 +8,7 @@ import { ShipStatsService } from '../services/ship-stats.service';
 @Component({
 	selector: 'app-sellers',
 	imports: [RouterLink],
-	template: `
-		@for (item of sellers(); track item.faction.id) {
-			<div>
-				<a [routerLink]="['/factions', item.faction.id]">{{ item.faction.name }}</a>
-				@if (item.license) {
-					<span class="text-fg-muted">
-						- {{ item.license.name }}
-						@if (item.license.minRelation != null) {
-							<ng-container i18n>(reputation {{ reputation(item.license.minRelation) }}+)</ng-container>
-						}
-					</span>
-				}
-			</div>
-		} @empty {
-			-
-		}
-	`,
+	templateUrl: './sellers.component.html',
 })
 export class SellersComponent {
 	private readonly stats = inject(ShipStatsService);
@@ -35,7 +19,7 @@ export class SellersComponent {
 	protected readonly sellers = computed(() => this.stats.sellers(this.owners(), this.license()));
 
 	protected reputation(relation: number) {
-		const value = relationToReputation(relation);
+		const value = Loadouts.relationToReputation(relation);
 		return value > 0 ? `+${value}` : `${value}`;
 	}
 }

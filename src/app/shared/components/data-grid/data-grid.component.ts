@@ -1,7 +1,7 @@
 import { Component, computed, effect, input, linkedSignal, output, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { enumLabel } from '../../../core/enum-labels';
-import { readStorage, writeStorage } from '../../../core/services/local-storage';
+import { EnumLabels } from '../../../core/enum-labels';
+import { LocalStorage } from '../../../core/services/local-storage';
 import {
 	LucideArrowUpNarrowWide,
 	LucideArrowDownWideNarrow,
@@ -49,55 +49,6 @@ interface PreparedRow<T> {
 
 const NUMBER_FILTER = /^\s*(<=|>=|<>|!=|<|>|=)?\s*(-?\d+(?:[.,]\d+)?)\s*$/;
 
-/** Builds a lookup list from plain string values. */
-export function lookupOf(values: readonly string[]): GridLookupItem[] {
-	return values.map((x) => ({ value: x, label: enumLabel(x) }));
-}
-
-function getPath(row: unknown, path: string): unknown {
-	return path.split('.').reduce<unknown>((obj, key) => (obj == null ? undefined : (obj as Record<string, unknown>)[key]), row);
-}
-
-function compareValues(a: unknown, b: unknown): number {
-	if (a == null || a === '') {
-		return b == null || b === '' ? 0 : -1;
-	}
-	if (b == null || b === '') {
-		return 1;
-	}
-	if (typeof a === 'number' && typeof b === 'number') {
-		return a - b;
-	}
-	return String(a).localeCompare(String(b), undefined, { numeric: true, sensitivity: 'base' });
-}
-
-function matchesNumber(value: unknown, filter: string): boolean {
-	const match = NUMBER_FILTER.exec(filter);
-	if (!match) {
-		return String(value ?? '').includes(filter.trim());
-	}
-	if (typeof value !== 'number') {
-		return false;
-	}
-
-	const target = Number(match[2].replace(',', '.'));
-	switch (match[1]) {
-		case '<':
-			return value < target;
-		case '<=':
-			return value <= target;
-		case '>':
-			return value > target;
-		case '>=':
-			return value >= target;
-		case '<>':
-		case '!=':
-			return value !== target;
-		default:
-			return value === target;
-	}
-}
-
 @Component({
 	selector: 'app-data-grid',
 	imports: [
@@ -113,6 +64,11 @@ function matchesNumber(value: unknown, filter: string): boolean {
 	templateUrl: './data-grid.component.html',
 })
 export class DataGridComponent<T> {
+	/** Builds a lookup list from plain string values. */
+	static lookupOf(values: readonly string[]): GridLookupItem[] {
+		return values.map((x) => ({ value: x, label: EnumLabels.label(x) }));
+	}
+
 	readonly data = input.required<readonly T[]>();
 	readonly columns = input.required<readonly GridColumn<T>[]>();
 	readonly trackBy = input<(row: T) => unknown>((row) => (row as { id?: unknown } | null)?.id ?? row);
@@ -129,7 +85,7 @@ export class DataGridComponent<T> {
 	readonly shownModel = linkedSignal<Record<string, boolean>>(() => {
 		const key = this.storageKey();
 		const saved = key
-			? readStorage<string[] | null>(`grid-columns:${key}`, null, (x) => (Array.isArray(x) ? x : undefined))
+			? LocalStorage.read<string[] | null>(`grid-columns:${key}`, null, (x) => (Array.isArray(x) ? x : undefined))
 			: null;
 		return Object.fromEntries(this.columns().map((c) => [c.key, saved ? saved.includes(c.key) : !c.hidden]));
 	});
@@ -179,7 +135,7 @@ export class DataGridComponent<T> {
 			const values: Record<string, unknown> = {};
 			const texts: Record<string, string> = {};
 			for (const column of columns) {
-				const value = column.value ? column.value(row) : getPath(row, column.key);
+				const value = column.value ? column.value(row) : DataGridComponent.getPath(row, column.key);
 				values[column.key] = value;
 				texts[column.key] = this.toText(column, row, value, formatters[column.key]);
 			}
@@ -200,7 +156,7 @@ export class DataGridComponent<T> {
 		if (sorts.length) {
 			rows = [...rows].sort((a, b) => {
 				for (const sort of sorts) {
-					const result = compareValues(a.values[sort.key], b.values[sort.key]);
+					const result = DataGridComponent.compareValues(a.values[sort.key], b.values[sort.key]);
 					if (result !== 0) {
 						return result * sort.direction;
 					}
@@ -233,7 +189,7 @@ export class DataGridComponent<T> {
 			const key = this.storageKey();
 			const shown = this.visibleColumns().map((c) => c.key);
 			if (key) {
-				writeStorage(`grid-columns:${key}`, shown);
+				LocalStorage.write(`grid-columns:${key}`, shown);
 			}
 		});
 	}
@@ -304,8 +260,52 @@ export class DataGridComponent<T> {
 			return String(row.values[column.key] ?? '') === filter;
 		}
 		if (column.type === 'number') {
-			return matchesNumber(row.values[column.key], filter);
+			return DataGridComponent.matchesNumber(row.values[column.key], filter);
 		}
 		return row.texts[column.key].toLowerCase().includes(filter.trim().toLowerCase());
+	}
+
+	private static getPath(row: unknown, path: string): unknown {
+		return path.split('.').reduce<unknown>((obj, key) => (obj == null ? undefined : (obj as Record<string, unknown>)[key]), row);
+	}
+
+	private static compareValues(a: unknown, b: unknown): number {
+		if (a == null || a === '') {
+			return b == null || b === '' ? 0 : -1;
+		}
+		if (b == null || b === '') {
+			return 1;
+		}
+		if (typeof a === 'number' && typeof b === 'number') {
+			return a - b;
+		}
+		return String(a).localeCompare(String(b), undefined, { numeric: true, sensitivity: 'base' });
+	}
+
+	private static matchesNumber(value: unknown, filter: string): boolean {
+		const match = NUMBER_FILTER.exec(filter);
+		if (!match) {
+			return String(value ?? '').includes(filter.trim());
+		}
+		if (typeof value !== 'number') {
+			return false;
+		}
+
+		const target = Number(match[2].replace(',', '.'));
+		switch (match[1]) {
+			case '<':
+				return value < target;
+			case '<=':
+				return value <= target;
+			case '>':
+				return value > target;
+			case '>=':
+				return value >= target;
+			case '<>':
+			case '!=':
+				return value !== target;
+			default:
+				return value === target;
+		}
 	}
 }

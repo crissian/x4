@@ -4,9 +4,11 @@ import { MemoryKeyValueStore } from '../core/storage/key-value-store';
 import { WorkerCancelled, WorkerTask } from '../core/workers/worker-task';
 import { SavegameParser } from './parse-savegame';
 import { ReadSavegameResult } from './read-savegame';
-import { SavegameError, SavegameInfo, SavegameSummary } from './savegame-model';
-import { SAVEGAME_REPOSITORY, SavegameRepository, createSavegameRepository } from './savegame-repository';
-import { SAVEGAME_PARSER, SavegameStore } from './savegame-store';
+import { SAVEGAME_SCHEMA_VERSION, SavegameError, SavegameInfo, SavegameListItem, SavegameSummary } from './savegame-model';
+import { SAVEGAME_REPOSITORY, SavegameRepository } from './savegame-repository';
+import { SavegameStore } from './savegame-store';
+
+type ParseFn = SavegameParser['parse'];
 
 function info(guid: string, savedAt: number): SavegameInfo {
 	return {
@@ -34,7 +36,7 @@ function result(guid: string, savedAt: number, extra: Partial<ReadSavegameResult
 }
 
 /** Announces the info first, then resolves with the outcome. */
-function finishing(outcome: ReadSavegameResult | Error): SavegameParser {
+function finishing(outcome: ReadSavegameResult | Error): ParseFn {
 	return (_file, callbacks) => {
 		let reject: (e: unknown) => void = () => undefined;
 		const promise = new Promise<ReadSavegameResult>((resolve, rej) => {
@@ -48,20 +50,24 @@ function finishing(outcome: ReadSavegameResult | Error): SavegameParser {
 				}
 			});
 		});
-		const task: WorkerTask<ReadSavegameResult> = { result: promise, cancel: () => reject(new WorkerCancelled()) };
+		const task = new WorkerTask<ReadSavegameResult>(promise, () => reject(new WorkerCancelled()));
 		return task;
 	};
 }
 
-const hanging: SavegameParser = () => {
+const hanging: ParseFn = () => {
 	let reject: (e: unknown) => void = () => undefined;
 	const promise = new Promise<ReadSavegameResult>((_resolve, rej) => (reject = rej));
 	return { result: promise, cancel: () => reject(new WorkerCancelled()) };
 };
 
-async function setup(parser: SavegameParser, seed: [Omit<SavegameSummary, 'fileKept'>, Blob | undefined][] = []) {
-	const repository: SavegameRepository = createSavegameRepository(
-		new MemoryKeyValueStore<SavegameSummary>(),
+async function setup(parser: ParseFn, seed: [Omit<SavegameSummary, 'fileKept'>, Blob | undefined][] = [], flag = true) {
+	if (flag) {
+		localStorage.setItem('savegames', JSON.stringify('1'));
+	}
+	const repository: SavegameRepository = new SavegameRepository(
+		new MemoryKeyValueStore<SavegameListItem>(),
+		new MemoryKeyValueStore<Record<string, unknown>>(),
 		new MemoryKeyValueStore<Blob>(),
 		true,
 	);
@@ -71,7 +77,7 @@ async function setup(parser: SavegameParser, seed: [Omit<SavegameSummary, 'fileK
 	TestBed.configureTestingModule({
 		providers: [
 			{ provide: SAVEGAME_REPOSITORY, useValue: () => Promise.resolve(repository) },
-			{ provide: SAVEGAME_PARSER, useValue: parser },
+			{ provide: SavegameParser, useValue: { parse: parser } },
 		],
 	});
 	return { store: TestBed.inject(SavegameStore), repository };
@@ -80,13 +86,16 @@ async function setup(parser: SavegameParser, seed: [Omit<SavegameSummary, 'fileK
 const file = (name = 'a.xml.gz') => new File(['abc'], name);
 
 describe('SavegameStore', () => {
-	afterEach(() => localStorage.removeItem('activeSavegame'));
+	afterEach(() => {
+		localStorage.removeItem('activeSavegame');
+		localStorage.removeItem('savegames');
+	});
 
 	it('adds a save and lists it', async () => {
 		const { store } = await setup(finishing(result('g1', 100)));
 		expect(await store.load(file())).toEqual({ status: 'added', id: 'g1' });
 		expect(store.saves().map((s) => s.id)).toEqual(['g1']);
-		expect(store.saves()[0].schemaVersion).toBe(1);
+		expect(store.saves()[0].schemaVersion).toBe(SAVEGAME_SCHEMA_VERSION);
 		expect(store.saves()[0].fileKept).toBe(true);
 		expect(store.loading()).toBeNull();
 	});
@@ -104,7 +113,7 @@ describe('SavegameStore', () => {
 
 	it('ignores an older save of a stored playthrough', async () => {
 		const cancelSpy = vi.fn();
-		const parser: SavegameParser = (f, c) => {
+		const parser: ParseFn = (f, c) => {
 			const task = finishing(result('g1', 50))(f, c);
 			return {
 				result: task.result,
@@ -164,16 +173,24 @@ describe('SavegameStore', () => {
 	it('reports persistence as unknown until the repository is open', async () => {
 		let open: (repository: SavegameRepository) => void = () => undefined;
 		const ready = new Promise<SavegameRepository>((resolve) => (open = resolve));
+		localStorage.setItem('savegames', JSON.stringify('1'));
 		TestBed.configureTestingModule({
 			providers: [
 				{ provide: SAVEGAME_REPOSITORY, useValue: () => ready },
-				{ provide: SAVEGAME_PARSER, useValue: hanging },
+				{ provide: SavegameParser, useValue: { parse: hanging } },
 			],
 		});
 		const store = TestBed.inject(SavegameStore);
 		await Promise.resolve();
 		expect(store.persistent()).toBeNull();
-		open(createSavegameRepository(new MemoryKeyValueStore<SavegameSummary>(), new MemoryKeyValueStore<Blob>(), false));
+		open(
+			new SavegameRepository(
+				new MemoryKeyValueStore<SavegameListItem>(),
+				new MemoryKeyValueStore<Record<string, unknown>>(),
+				new MemoryKeyValueStore<Blob>(),
+				false,
+			),
+		);
 		await vi.waitFor(() => expect(store.persistent()).toBe(false));
 	});
 
@@ -213,7 +230,7 @@ describe('SavegameStore', () => {
 		await vi.waitFor(() => expect(store.status('g1')).toBe('ok'));
 		expect(parser.mock.calls[0][0]).toBe(blob);
 		const updated = await repository.get('g1');
-		expect(updated?.schemaVersion).toBe(1);
+		expect(updated?.schemaVersion).toBe(SAVEGAME_SCHEMA_VERSION);
 		expect(updated?.data).toEqual({ fresh: true });
 		expect(updated?.fileKept).toBe(true);
 	});
@@ -233,7 +250,7 @@ describe('SavegameStore', () => {
 	});
 
 	it('does not overwrite a newer save when the parse finishes before cancel takes effect', async () => {
-		const parser: SavegameParser = (f, c) => {
+		const parser: ParseFn = (f, c) => {
 			const task = finishing(result('g1', 50))(f, c);
 			return { result: task.result, cancel: () => undefined };
 		};
@@ -241,5 +258,72 @@ describe('SavegameStore', () => {
 		expect(await store.load(file())).toEqual({ status: 'older', id: 'g1' });
 		expect((await repository.get('g1'))?.info.savedAt).toBe(100);
 		expect((await repository.get('g1'))?.data).toEqual({ old: true });
+	});
+
+	it('does not open the repository without the saves flag', async () => {
+		const factory = vi.fn();
+		TestBed.configureTestingModule({
+			providers: [
+				{ provide: SAVEGAME_REPOSITORY, useValue: factory },
+				{ provide: SavegameParser, useValue: { parse: hanging } },
+			],
+		});
+		const store = TestBed.inject(SavegameStore);
+		await Promise.resolve();
+		expect(factory).not.toHaveBeenCalled();
+		expect(store.saves()).toEqual([]);
+		expect(store.persistent()).toBeNull();
+		expect(store.storage()).toBeNull();
+	});
+
+	it('opens after open() and sets the flag when saves exist', async () => {
+		const { store } = await setup(hanging, [[stored('g1', 100), undefined]], false);
+		expect(localStorage.getItem('savegames')).toBeNull();
+		store.open();
+		store.open();
+		await vi.waitFor(() => expect(store.saves()).toHaveLength(1));
+		expect(store.persistent()).toBe(true);
+		expect(localStorage.getItem('savegames')).toBe(JSON.stringify('1'));
+	});
+
+	it('opens the repository once', () => {
+		const repository = new SavegameRepository(
+			new MemoryKeyValueStore<SavegameListItem>(),
+			new MemoryKeyValueStore<Record<string, unknown>>(),
+			new MemoryKeyValueStore<Blob>(),
+			true,
+		);
+		const factory = vi.fn(() => Promise.resolve(repository));
+		TestBed.configureTestingModule({
+			providers: [
+				{ provide: SAVEGAME_REPOSITORY, useValue: factory },
+				{ provide: SavegameParser, useValue: { parse: hanging } },
+			],
+		});
+		const store = TestBed.inject(SavegameStore);
+		store.open();
+		store.open();
+		expect(factory).toHaveBeenCalledTimes(1);
+	});
+
+	it('load opens the repository itself', async () => {
+		const { store } = await setup(finishing(result('g1', 100)), [], false);
+		expect(await store.load(file())).toEqual({ status: 'added', id: 'g1' });
+		expect(localStorage.getItem('savegames')).toBe(JSON.stringify('1'));
+	});
+
+	it('clears the flag when the last save is removed', async () => {
+		const { store } = await setup(hanging, [[stored('g1', 100), undefined]]);
+		await vi.waitFor(() => expect(store.saves()).toHaveLength(1));
+		expect(localStorage.getItem('savegames')).toBe(JSON.stringify('1'));
+		await store.remove('g1');
+		expect(localStorage.getItem('savegames')).toBeNull();
+	});
+
+	it('opens when an active save is remembered without the flag', async () => {
+		localStorage.setItem('activeSavegame', JSON.stringify('g1'));
+		const { store } = await setup(hanging, [[stored('g1', 100), undefined]], false);
+		await vi.waitFor(() => expect(store.saves()).toHaveLength(1));
+		await vi.waitFor(() => expect(store.active()?.id).toBe('g1'));
 	});
 });

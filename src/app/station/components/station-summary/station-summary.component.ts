@@ -12,13 +12,7 @@ import { StationWorkforceComponent } from './station-workforce.component';
 @Component({
 	selector: 'app-station-summary',
 	imports: [StationWorkforceComponent, StationProfitComponent, StationStorageComponent, StationCostsComponent],
-	host: { class: 'flex flex-col gap-4' },
-	template: `
-		<app-station-workforce [modules]="modules()" [workforce]="workforce()" [settings]="settings()" />
-		<app-station-profit [resources]="resources()" [settings]="settings()" />
-		<app-station-storage [modules]="modules()" [resources]="resources()" [settings]="settings()" />
-		<app-station-costs [modules]="modules()" [settings]="settings()" />
-	`,
+	templateUrl: './station-summary.component.html',
 })
 export class StationSummaryComponent {
 	readonly modules = input.required<StationModuleModel[]>();

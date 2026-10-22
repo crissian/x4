@@ -1,0 +1,35 @@
+<label class="mb-2 flex items-center gap-1.5 text-sm">
+	<input type="checkbox" [formField]="store.abandonedForm.show" />
+	<ng-container i18n>Show on map</ng-container>
+</label>
+<table class="table text-sm">
+	<tbody>
+		@for (marker of store.abandoned(); track $index) {
+			<tr>
+				<td>
+					@if (marker.ship) {
+						<a [routerLink]="['/ships', marker.ship.id]">{{ marker.ship.name }}</a>
+					} @else {
+						{{ marker.item.ship }}
+					}
+					@if (marker.item.condition) {
+						<div class="text-xs text-fg-muted">{{ marker.item.condition }}</div>
+					}
+				</td>
+				<td>
+					<app-map-focus-link [sector]="marker.shape.sector" />
+					<div class="text-xs text-fg-muted">
+						{{ marker.item.x | number: '1.0-0' }}, {{ marker.item.y | number: '1.0-0' }},
+						{{ marker.item.z | number: '1.0-0' }} km
+					</div>
+				</td>
+			</tr>
+		} @empty {
+			<tr>
+				<td class="text-fg-muted" i18n>None for the selected DLCs</td>
+			</tr>
+		}
+	</tbody>
+</table>
+<!-- prettier-ignore -->
+<p class="mt-2 text-xs text-fg-muted" i18n> Ownerless ships placed at game start; claim them by boarding with a spacesuit. </p>

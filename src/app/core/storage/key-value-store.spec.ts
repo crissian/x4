@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { MemoryKeyValueStore } from './key-value-store';
-import { openIndexedDb } from './indexed-db-store';
+import { IndexedDb } from './indexed-db-store';
 
 describe('MemoryKeyValueStore', () => {
 	it('puts, gets, lists and deletes', async () => {
@@ -16,8 +16,8 @@ describe('MemoryKeyValueStore', () => {
 	});
 });
 
-describe('openIndexedDb', () => {
+describe('IndexedDb.open', () => {
 	it('resolves null when IndexedDB is unavailable', async () => {
-		expect(await openIndexedDb('test-db', 1, ['a'])).toBeNull();
+		expect(await IndexedDb.open('test-db', 1, ['a'])).toBeNull();
 	});
 });

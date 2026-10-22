@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { DataGridComponent, GridColumn, lookupOf } from './data-grid.component';
+import { DataGridComponent, GridColumn } from './data-grid.component';
 
 interface Row {
 	id: number;
@@ -25,7 +25,7 @@ class HostComponent {
 	readonly rows = ROWS;
 	readonly columns: GridColumn<Row>[] = [
 		{ key: 'name', caption: 'Name' },
-		{ key: 'size', caption: 'Size', lookup: lookupOf(['small', 'large']) },
+		{ key: 'size', caption: 'Size', lookup: DataGridComponent.lookupOf(['small', 'large']) },
 		{ key: 'price', caption: 'Price', type: 'number' },
 		{ key: 'id', caption: 'Id', type: 'number', hidden: true },
 	];

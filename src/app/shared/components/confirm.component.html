@@ -1,5 +1,9 @@
 <app-modal [title]="data.title">
-	<p [innerHTML]="data.message"></p>
+	@if (template) {
+		<p><ng-container [appTemplateSlot]="template" [context]="data.context" /></p>
+	} @else {
+		<p>{{ text }}</p>
+	}
 	<ng-container footer>
 		<button type="button" class="btn btn-primary" (click)="dialogRef.close(true)">
 			<svg lucideCheck /><span i18n="@@yes">Yes</span>

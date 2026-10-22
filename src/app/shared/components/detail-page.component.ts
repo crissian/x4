@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { gameText } from '../../core/game-text';
+import { GameText } from '../../core/game-text';
 import { EntityImageKind } from '../services/data/images-data';
 import { EntityImageComponent } from './entity-image.component';
 
@@ -13,25 +13,7 @@ const NO_DESCRIPTION = 'No information available';
 @Component({
 	selector: 'app-detail-page',
 	imports: [RouterLink, EntityImageComponent],
-	template: `
-		<div class="card">
-			<div class="card-header flex flex-wrap items-center justify-between gap-3">
-				<span
-					><a [routerLink]="sectionLink()">{{ section() }}</a> - {{ title() }}</span
-				>
-				<ng-content select="[actions]" />
-			</div>
-			<div class="card-body flow-root">
-				@if (image(); as image) {
-					<app-entity-image [kind]="image" [id]="id()" [alt]="title()" />
-				}
-				@if (shownDescription(); as description) {
-					<p class="mb-3 max-w-4xl whitespace-pre-line">{{ description }}</p>
-				}
-				<ng-content />
-			</div>
-		</div>
-	`,
+	templateUrl: './detail-page.component.html',
 })
 export class DetailPageComponent {
 	/** Name of the list page shown in the breadcrumb. */
@@ -44,7 +26,7 @@ export class DetailPageComponent {
 
 	protected readonly shownDescription = computed(() => {
 		const description = this.description();
-		return description && description !== gameText(NO_DESCRIPTION) ? description : undefined;
+		return description && description !== GameText.get(NO_DESCRIPTION) ? description : undefined;
 	});
 }
 
@@ -52,11 +34,7 @@ export class DetailPageComponent {
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector -- a <div> keeps the <dt>/<dd> pair valid inside <dl>
 	selector: 'div[appDetail]',
-	host: { class: 'contents' },
-	template: `
-		<dt>{{ appDetail() }}</dt>
-		<dd><ng-content /></dd>
-	`,
+	templateUrl: './detail.component.html',
 })
 export class DetailComponent {
 	readonly appDetail = input.required<string>();

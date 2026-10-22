@@ -1,24 +1,34 @@
-@switch (type()) {
-	@case ('success') {
-		<svg lucideCircleCheck class="mt-0.5 shrink-0 text-base" />
-	}
-	@case ('danger') {
-		<svg lucideCircleAlert class="mt-0.5 shrink-0 text-base" />
-	}
-	@case ('warning') {
-		<svg lucideTriangleAlert class="mt-0.5 shrink-0 text-base" />
-	}
-	@default {
-		<svg lucideInfo class="mt-0.5 shrink-0 text-base" />
-	}
-}
-<div class="min-w-0 flex-1"><ng-content /></div>
-<button
-	type="button"
-	class="cursor-pointer text-base leading-none opacity-70 hover:opacity-100"
-	i18n-aria-label
-	aria-label="Close"
-	(click)="closed.emit()"
+<div
+	class="alert"
+	[class.alert-primary]="type() === 'primary'"
+	[class.alert-secondary]="type() === 'secondary'"
+	[class.alert-success]="type() === 'success'"
+	[class.alert-danger]="type() === 'danger'"
+	[class.alert-warning]="type() === 'warning'"
+	[class.alert-info]="!['primary', 'secondary', 'success', 'danger', 'warning'].includes(type())"
 >
-	<svg lucideX />
-</button>
+	@switch (type()) {
+		@case ('success') {
+			<svg lucideCircleCheck class="mt-0.5 shrink-0 text-base" />
+		}
+		@case ('danger') {
+			<svg lucideCircleAlert class="mt-0.5 shrink-0 text-base" />
+		}
+		@case ('warning') {
+			<svg lucideTriangleAlert class="mt-0.5 shrink-0 text-base" />
+		}
+		@default {
+			<svg lucideInfo class="mt-0.5 shrink-0 text-base" />
+		}
+	}
+	<div class="min-w-0 flex-1"><ng-content /></div>
+	<button
+		type="button"
+		class="cursor-pointer text-base leading-none opacity-70 hover:opacity-100"
+		i18n-aria-label
+		aria-label="Close"
+		(click)="closed.emit()"
+	>
+		<svg lucideX />
+	</button>
+</div>

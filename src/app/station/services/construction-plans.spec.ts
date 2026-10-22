@@ -1,12 +1,12 @@
 import { Layout } from '../../shared/services/module-config';
 import { ModuleService } from '../../shared/services/module.service';
-import { PLAYER_HQ_MACRO, importConstructionPlans } from './construction-plans';
+import { ConstructionPlans, PLAYER_HQ_MACRO } from './construction-plans';
 import { AGREFITS_PLAN } from './testdata/agrefits-plan';
 
 describe('importConstructionPlans', () => {
 	let saved: Layout[];
 	const moduleService = new ModuleService();
-	const importXml = (xml: string) => importConstructionPlans(xml, moduleService, (layout) => saved.push(layout));
+	const importXml = (xml: string) => ConstructionPlans.importConstructionPlans(xml, moduleService, (layout) => saved.push(layout));
 
 	// macros known to exist in modules-data.ts
 	const macroA = 'prod_arg_medicalsupplies_macro';

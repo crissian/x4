@@ -1,19 +1,19 @@
-import { hashText, setGameTexts, translateGameText } from './game-text';
+import { GameText } from './game-text';
 
 describe('game text', () => {
-	afterEach(() => setGameTexts(null));
+	afterEach(() => GameText.setTexts(null));
 
 	it('hashes texts like the extractor', () => {
 		// values written by Translator.Hash in the extractor
-		expect(hashText('Claytronics')).toBe('166invo');
-		expect(hashText('Energy Cells')).toBe('9vhu1s');
+		expect(GameText.hash('Claytronics')).toBe('166invo');
+		expect(GameText.hash('Energy Cells')).toBe('9vhu1s');
 	});
 
 	it('swaps the game texts of nested data in place', () => {
-		setGameTexts({
-			[hashText('Claytronics')]: 'Nanotronik',
-			[hashText('Argon')]: 'Argonen',
-			[hashText('Yellow Star')]: 'Gelber Stern',
+		GameText.setTexts({
+			[GameText.hash('Claytronics')]: 'Nanotronik',
+			[GameText.hash('Argon')]: 'Argonen',
+			[GameText.hash('Yellow Star')]: 'Gelber Stern',
 		});
 		const race = { id: 'argon', name: 'Argon' };
 		const data = {
@@ -21,8 +21,8 @@ describe('game text', () => {
 			cluster: { suns: ['Yellow Star'] },
 		};
 
-		translateGameText(data);
-		translateGameText(data);
+		GameText.translate(data);
+		GameText.translate(data);
 
 		expect(data.claytronics.name).toBe('Nanotronik');
 		expect(data.claytronics.type).toBe('Claytronics'); // not a game text property
@@ -32,7 +32,7 @@ describe('game text', () => {
 
 	it('keeps the English texts without a language', () => {
 		const data = { name: 'Claytronics' };
-		translateGameText(data);
+		GameText.translate(data);
 		expect(data.name).toBe('Claytronics');
 	});
 });

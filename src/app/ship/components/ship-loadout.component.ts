@@ -3,12 +3,13 @@ import { Component, computed, effect, inject, input, linkedSignal, signal, untra
 import { FormField, form } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { LucideCheck, LucideGitCompareArrows, LucideLink } from '@lucide/angular';
-import { Loadout, buildWares, loadoutStats, weaponStats } from '../../shared/services/loadout';
+import { Loadouts, Loadout } from '../../shared/services/loadout';
+import { ShipPerformance } from '../../shared/services/ship-performance';
 import { Equipment } from '../../shared/services/model/model';
 import { LOADOUT_PRESETS, LoadoutPreset, ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
 import { WareService } from '../../shared/services/ware.service';
-import { addToComparison } from './ship-compare.component';
+import { ShipCompareComponent } from './ship-compare.component';
 
 @Component({
 	imports: [DecimalPipe, FormField, RouterLink, LucideLink, LucideCheck, LucideGitCompareArrows],
@@ -59,7 +60,7 @@ export class ShipLoadoutComponent {
 
 	protected readonly result = computed(() => {
 		const ship = this.entity();
-		return ship ? loadoutStats(ship, this.groups(), this.loadout(), this.stats.getEquipment) : undefined;
+		return ship ? Loadouts.loadoutStats(ship, this.groups(), this.loadout(), this.stats.getEquipment) : undefined;
 	});
 
 	protected readonly price = computed(() => {
@@ -81,7 +82,7 @@ export class ShipLoadoutComponent {
 		if (!ship || !result) {
 			return [];
 		}
-		return [...buildWares(ship, result.counts, this.stats.getEquipment, this.options().method)]
+		return [...Loadouts.buildWares(ship, result.counts, this.stats.getEquipment, this.options().method)]
 			.map(([id, amount]) => {
 				const ware = this.wares.getEntity(id);
 				return { id, ware, amount, value: (ware?.price.avg ?? 0) * amount };
@@ -135,7 +136,7 @@ export class ShipLoadoutComponent {
 			return $localize`${equipment.name}:name: - ${equipment.recharge.max.toLocaleString()}:shield: shield, ${equipment.recharge.rate.toLocaleString()}:rate:/s`;
 		}
 		if (equipment.weapon) {
-			const stats = weaponStats(equipment.weapon);
+			const stats = ShipPerformance.weaponStats(equipment.weapon);
 			return $localize`${equipment.name}:name: - ${Math.round(stats.sustainedDps).toLocaleString()}:dps: DPS, ${(stats.range / 1000).toFixed(1)}:range: km`;
 		}
 		return equipment.name;
@@ -155,7 +156,7 @@ export class ShipLoadoutComponent {
 		const ship = this.entity();
 		if (ship) {
 			const code = this.stats.encode(ship, this.loadout());
-			this.router.navigate(['/ships/compare'], { queryParams: { ships: addToComparison(`${ship.id}~${code}`) } });
+			this.router.navigate(['/ships/compare'], { queryParams: { ships: ShipCompareComponent.addToComparison(`${ship.id}~${code}`) } });
 		}
 	}
 }
