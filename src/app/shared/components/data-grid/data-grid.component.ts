@@ -1,8 +1,11 @@
 import { Component, computed, effect, input, linkedSignal, output, signal, untracked } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { Params, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { EnumLabels } from '../../../core/enum-labels';
-import { LocalStorage } from '../../../core/services/local-storage';
+import { GridColumnPrefs } from './grid-column-prefs';
+import { GridGroups } from './grid-groups';
+import { ToneDotComponent } from '../tone-dot/tone-dot.component';
+import type { GridColumn, GridGroup, GridLookupItem, SortState } from './grid-column';
 import { GridValues, PreparedRow } from './grid-values';
 import {
 	LucideArrowUpNarrowWide,
@@ -12,42 +15,10 @@ import {
 	LucideChevronRight,
 	LucideChevronsRight,
 	LucideColumns3,
+	LucideInfo,
 } from '@lucide/angular';
 
-export interface GridLookupItem {
-	value: unknown;
-	label: string;
-}
-
-export interface GridColumn<T> {
-	/** Unique column key. Also used as the (dotted) data path when `value` is not set. */
-	key: string;
-	caption: string;
-	/** Raw value used for filtering and sorting. Defaults to the value at `key`. */
-	value?: (row: T) => unknown;
-	/** Text shown in the cell. Defaults to the formatted value. */
-	display?: (row: T) => string;
-	type?: 'string' | 'number';
-	/** Number format for `number` columns. Defaults to whole numbers with grouping. */
-	format?: Intl.NumberFormatOptions;
-	/** Values for the filter dropdown; cells show the matching label. */
-	lookup?: readonly GridLookupItem[];
-	sortable?: boolean;
-	filterable?: boolean;
-	/** Router link commands that make the cell a link. */
-	link?: (row: T) => readonly unknown[] | undefined;
-	/** Query params of the cell link. */
-	queryParams?: (row: T) => Params | undefined;
-	/** Tooltip of the cell. */
-	title?: (row: T) => string | undefined;
-	/** Hidden until the user turns the column on in the column chooser. */
-	hidden?: boolean;
-}
-
-export interface SortState {
-	key: string;
-	direction: 1 | -1;
-}
+export type { GridColumn, GridDot, GridGroup, GridLookupItem, GridTone, SortState } from './grid-column';
 
 @Component({
 	selector: 'app-data-grid',
@@ -61,8 +32,11 @@ export interface SortState {
 		LucideChevronRight,
 		LucideChevronsRight,
 		LucideColumns3,
+		LucideInfo,
+		ToneDotComponent,
 	],
 	templateUrl: './data-grid.component.html',
+	styleUrl: './data-grid.component.css',
 })
 export class DataGridComponent<T> {
 	/** Builds a lookup list from plain string values. */
@@ -81,21 +55,30 @@ export class DataGridComponent<T> {
 	readonly selected = input<T>();
 	/** The sort until the user picks another. */
 	readonly sort = input<SortState>();
+	/** Headers above the columns of the groups named by `GridColumn.group`. */
+	readonly groups = input<readonly GridGroup[]>([]);
+	/** Tighter cell padding, for grids with many columns. */
+	readonly compact = input(false);
 	/** Remembers the columns chosen by the user in local storage under this key. */
 	readonly storageKey = input<string>();
 
 	readonly rowClick = output<T>();
+
+	private readonly hintPrefix = GridGroups.nextPrefix();
 
 	/**
 	 * Shown flag per column key, edited through the column chooser. Starts with the columns that are not `hidden`;
 	 * with a `storageKey`, the saved choice applies to the columns it knew, and newer columns start as defaults.
 	 */
 	readonly shownModel = linkedSignal<Record<string, boolean>>(() => {
-		const saved = DataGridComponent.readColumns(this.storageKey());
+		const saved = GridColumnPrefs.read(this.storageKey());
 		return Object.fromEntries(
 			this.columns().map((c) => [
 				c.key,
-				saved && (!saved.known || saved.known.includes(c.key)) ? saved.shown.includes(c.key) : !c.hidden,
+				c.hideable === false ||
+					(saved && (!saved.known || saved.known.includes(c.key))
+						? saved.shown.includes(c.key)
+						: this.shownByDefault(c)),
 			])
 		);
 	});
@@ -106,8 +89,23 @@ export class DataGridComponent<T> {
 		return this.columns().filter((c) => shown[c.key]);
 	});
 
+	/** The tone that tints the cells of each column, from its group, by column key. */
+	readonly tones = computed(() => {
+		const groups = this.groups();
+		return new Map(this.columns().map((c) => [c.key, GridGroups.tone(c, groups)]));
+	});
+	/** The group header row, empty without groups. */
+	readonly groupHeaders = computed(() => GridGroups.headers(this.visibleColumns(), this.groups(), this.hintPrefix));
+	/** The columns for the chooser, with the group labels. */
+	readonly chooserColumns = computed(() =>
+		GridGroups.chooser(
+			this.columns().filter((c) => c.hideable !== false),
+			this.groups()
+		)
+	);
+
 	/** The column chooser is offered when some columns start hidden. */
-	readonly choosable = computed(() => this.columns().some((c) => c.hidden));
+	readonly choosable = computed(() => this.columns().some((c) => c.hideable !== false && !this.shownByDefault(c)));
 	readonly chooserOpen = signal(false);
 
 	/** Filter values per column key, edited through a signal form. */
@@ -146,13 +144,15 @@ export class DataGridComponent<T> {
 
 		return this.data().map((row) => {
 			const values: Record<string, unknown> = {};
+			const sortValues: Record<string, unknown> = {};
 			const texts: Record<string, string> = {};
 			for (const column of columns) {
 				const value = column.value ? column.value(row) : GridValues.getPath(row, column.key);
 				values[column.key] = value;
+				sortValues[column.key] = column.sortValue ? column.sortValue(row) : value;
 				texts[column.key] = GridValues.toText(column, row, value, formatters[column.key]);
 			}
-			return { row, values, texts };
+			return { row, values, sortValues, texts };
 		});
 	});
 
@@ -169,7 +169,7 @@ export class DataGridComponent<T> {
 		if (sorts.length) {
 			rows = [...rows].sort((a, b) => {
 				for (const sort of sorts) {
-					const result = GridValues.compareValues(a.values[sort.key], b.values[sort.key]);
+					const result = GridValues.compareValues(a.sortValues[sort.key], b.sortValues[sort.key]);
 					if (result !== 0) {
 						return result * sort.direction;
 					}
@@ -203,34 +203,20 @@ export class DataGridComponent<T> {
 			const columns = this.columns().map((c) => c.key);
 			const shown = this.visibleColumns().map((c) => c.key);
 			if (key) {
-				untracked(() => DataGridComponent.writeColumns(key, columns, shown));
+				untracked(() => GridColumnPrefs.write(key, columns, shown));
 			}
 		});
 	}
 
-	/**
-	 * The saved shown columns and the columns known when saving; `known` is null for lists saved before it was
-	 * kept, which then apply to every column.
-	 */
-	private static readColumns(key: string | undefined): { shown: string[]; known: string[] | null } | null {
-		if (!key) {
-			return null;
-		}
-		const list = (x: unknown) => (Array.isArray(x) ? (x as string[]) : undefined);
-		const shown = LocalStorage.read<string[] | null>(`grid-columns:${key}`, null, list);
-		return shown && { shown, known: LocalStorage.read<string[] | null>(`grid-columns-known:${key}`, null, list) };
+	private shownByDefault(column: GridColumn<T>): boolean {
+		return !column.hidden;
 	}
 
-	/** Saves the shown columns, keeping the choice for saved columns the grid doesn't have right now. */
-	private static writeColumns(key: string, columns: readonly string[], shown: readonly string[]) {
-		const saved = DataGridComponent.readColumns(key);
-		const absent = (x: string) => !columns.includes(x);
-		LocalStorage.write(`grid-columns:${key}`, [...shown, ...(saved?.shown.filter(absent) ?? [])]);
-		LocalStorage.write(`grid-columns-known:${key}`, [...columns, ...(saved?.known?.filter(absent) ?? [])]);
-	}
+	/** Width in % of the bar of a value, for the template. */
+	protected readonly barWidth = GridValues.barWidth;
 
 	resetColumns() {
-		this.shownModel.set(Object.fromEntries(this.columns().map((c) => [c.key, !c.hidden])));
+		this.shownModel.set(Object.fromEntries(this.columns().map((c) => [c.key, this.shownByDefault(c)])));
 	}
 
 	toggleSort(column: GridColumn<T>, event: MouseEvent) {

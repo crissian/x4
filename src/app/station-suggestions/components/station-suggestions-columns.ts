@@ -1,0 +1,124 @@
+import { PlacementScorer } from '../../economy/placement-scorer';
+import type { GridColumn, GridDot } from '../../shared/components/data-grid/data-grid.component';
+import type { StationSuggestionRow } from '../station-suggestions-row';
+import { StationSuggestionTexts } from '../station-suggestions-row';
+
+/**
+ * The columns of the station suggestions table: ware, sector, Cr/h (the ranking) and room shown, the rest in the
+ * column chooser. The inputs (buying) or resources (closed loop) and the security are shown, not ranked by.
+ */
+export class StationSuggestionsColumns {
+	private static readonly WHOLE: Intl.NumberFormatOptions = { maximumFractionDigits: 0 };
+	private static readonly PERCENT = new Intl.NumberFormat(undefined, { style: 'percent', maximumFractionDigits: 0 });
+	private static readonly FACTOR = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 });
+	private static readonly PER_HOUR = new Intl.NumberFormat(undefined, {
+		maximumFractionDigits: 0,
+		signDisplay: 'exceptZero',
+	});
+
+	static all(ware: (id: string) => string, closed: boolean): GridColumn<StationSuggestionRow>[] {
+		const { WHOLE } = StationSuggestionsColumns;
+		return [
+			// TODO(hideable): merge item; the ware and the sector are never hidden (`hideable: false`, set below)
+			{
+				key: 'name',
+				caption: $localize`Ware`,
+				hideable: false,
+				link: (x) => ['/wares', x.ware],
+				title: (x) => (x.building ? $localize`Ship and station building is not counted` : undefined),
+			},
+			{ key: 'sectorName', caption: $localize`Sector`, hideable: false, link: (x) => ['/sectors', x.sector] },
+			{
+				key: 'crPerHour',
+				caption: $localize`Expected Cr/h`,
+				type: 'number',
+				format: WHOLE,
+				title: () =>
+					closed
+						? $localize`What the modules sell at the average price; the reach caps it`
+						: $localize`What the modules sell at the average price less the inputs; the reach caps it`,
+			},
+			{
+				key: 'modules',
+				caption: $localize`Room for modules`,
+				type: 'number',
+				display: (x) => `~${x.modules}`,
+				title: (x) => $localize`One module makes ${Math.round(x.moduleOutput)}:output: per hour`,
+			},
+			{
+				key: 'absorbable',
+				caption: $localize`Absorbable/h`,
+				type: 'number',
+				format: WHOLE,
+				hidden: true,
+			},
+			closed ? StationSuggestionsColumns.resources(ware) : StationSuggestionsColumns.inputs(ware),
+			{
+				key: 'security',
+				caption: $localize`Security`,
+				type: 'number',
+				value: (x) => x.security,
+				display: (x) => (x.security === undefined ? '' : StationSuggestionsColumns.PERCENT.format(x.security)),
+				hidden: true,
+			},
+			{ key: 'contributors', caption: $localize`Top demand (jumps)`, hidden: true },
+		];
+	}
+
+	/** Green with everything in reach, amber with some, red with none; no dot without any. */
+	static dot(row: StationSuggestionRow, count: number): GridDot | undefined {
+		if (!count) {
+			return undefined;
+		}
+		if (row.coverage >= 1) {
+			return { tone: 'green', level: 2 };
+		}
+		return row.coverage > 0 ? { tone: 'amber', level: 2 } : { tone: 'red', level: 2 };
+	}
+
+	private static factor(row: StationSuggestionRow): string {
+		const value = StationSuggestionsColumns.FACTOR.format(PlacementScorer.factor(row.coverage));
+		return $localize`Factor ×${value}:factor: (0.5 + 0.5 × coverage), not part of the ranking`;
+	}
+
+	private static inputs(ware: (id: string) => string): GridColumn<StationSuggestionRow> {
+		return {
+			key: 'inputs',
+			caption: $localize`Inputs`,
+			value: (x) => StationSuggestionTexts.inputs(x.inputs),
+			sortValue: (x) => x.coverage,
+			dot: (x) => StationSuggestionsColumns.dot(x, x.inputs.length),
+			title: (x) =>
+				x.inputs.length
+					? [
+							StationSuggestionsColumns.factor(x),
+							StationSuggestionTexts.inputsTitle(
+								x.inputs,
+								ware,
+								(value) =>
+									$localize`${StationSuggestionsColumns.PER_HOUR.format(value)}:value: per hour`
+							),
+						].join('\n')
+					: undefined,
+			hidden: true,
+		};
+	}
+
+	private static resources(ware: (id: string) => string): GridColumn<StationSuggestionRow> {
+		return {
+			key: 'resources',
+			caption: $localize`Resources`,
+			value: (x) => StationSuggestionTexts.resources(x.resources),
+			sortValue: (x) => x.coverage,
+			dot: (x) => StationSuggestionsColumns.dot(x, x.resources.length),
+			title: (x) =>
+				x.resources.length
+					? [
+							StationSuggestionsColumns.factor(x),
+							StationSuggestionTexts.resourcesTitle(x.resources, ware),
+						].join('\n')
+					: undefined,
+			hidden: true,
+		};
+	}
+}

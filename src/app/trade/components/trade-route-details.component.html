@@ -5,7 +5,8 @@
 	</h6>
 	<app-route-map [path]="path()" [warnSectors]="route.illegalSectors" />
 	<div class="mt-3" i18n>
-		<strong>{{ duration(route.seconds) }}</strong> per trip with docking, {route.jumps, plural, =1 {1 jump} other {{{ route.jumps }} jumps}}
+		<strong>{{ duration(route.seconds) }}</strong> per trip with docking,
+		{route.jumps, plural, =1 {1 jump} other {{{ route.jumps }} jumps}}
 	</div>
 	@if (route.startSeconds) {
 		<div class="text-sm text-fg-muted" i18n>{{ duration(route.startSeconds) }} to reach the seller</div>

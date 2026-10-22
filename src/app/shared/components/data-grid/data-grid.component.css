@@ -1,0 +1,85 @@
+/* the `--tone` of each `[data-tone]` is defined in the global styles */
+/* the group header tints strongly, the cells of the group lightly */
+.grid-groups th {
+	border-bottom: 1px solid var(--app-line);
+	font-weight: 600;
+	text-align: left;
+	background: color-mix(in oklab, var(--tone, transparent) 16%, transparent);
+}
+
+.grid-groups th + th {
+	border-left: 1px solid var(--app-line);
+}
+
+td[data-tone] {
+	background: color-mix(in oklab, var(--tone) 5%, transparent);
+}
+
+.grid-hint {
+	margin-left: 0.25rem;
+	vertical-align: middle;
+	color: var(--app-fg-muted);
+	cursor: help;
+}
+
+.grid-hint:hover,
+.grid-hint:focus-visible {
+	color: var(--app-fg-strong);
+}
+
+/* tighter cells for grids with many columns */
+.compact th,
+.compact td {
+	padding-inline: 0.375rem;
+}
+
+.compact .input {
+	min-width: 3.5rem;
+	padding-inline: 0.25rem;
+}
+
+.compact .grid-bar {
+	width: 2.5rem;
+	margin-right: 0.25rem;
+}
+
+/* keep the bar on the same line as its value */
+td:has(> .grid-bar) {
+	white-space: nowrap;
+}
+
+/* a diverging bar: green grows right from the middle mark, red grows left */
+.grid-bar {
+	position: relative;
+	display: inline-block;
+	width: 3.5rem;
+	height: 0.6rem;
+	margin-right: 0.4rem;
+	vertical-align: middle;
+	border-radius: 2px;
+	background: color-mix(in oklab, var(--app-fg-muted) 18%, transparent);
+}
+
+.grid-bar::after {
+	position: absolute;
+	top: -2px;
+	bottom: -2px;
+	left: 50%;
+	width: 1px;
+	content: '';
+	background: var(--app-fg-muted);
+}
+
+.grid-bar > span {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	background: var(--app-success);
+}
+
+.grid-bar[data-negative='true'] > span {
+	right: 50%;
+	left: auto;
+	background: var(--app-danger);
+}

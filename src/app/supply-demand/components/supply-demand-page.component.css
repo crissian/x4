@@ -1,0 +1,11 @@
+/* stacked until xl, then the table and the map side by side, the map a quarter, so the default columns fit */
+.layout {
+	display: grid;
+	gap: 1rem;
+}
+
+@media (min-width: 1280px) {
+	.layout {
+		grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+	}
+}

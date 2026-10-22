@@ -9,8 +9,11 @@
 	(click)="onButtonClick($event)"
 	(keydown.arrowdown)="onButtonArrowDown($event)"
 >
-	<svg [lucideIcon]="group().icon" class="opacity-80" />{{ group().label
-	}}<svg lucideChevronDown class="opacity-80" />
+	<svg [lucideIcon]="group().icon" class="opacity-80" />{{ group().label }}
+	@if (group().experimental) {
+		<app-experimental-badge />
+	}
+	<svg lucideChevronDown class="opacity-80" />
 </button>
 
 @if (open()) {

@@ -23,6 +23,7 @@ const ITEMS: NavItem[] = [
 	{
 		label: 'Economy',
 		icon: ICON,
+		experimental: true,
 		links: [{ path: '/trade-routes', label: 'Trade Routes', icon: ICON }],
 	},
 ];
@@ -93,9 +94,21 @@ describe('header nav', () => {
 
 	it('renders plain links and one button per group', () => {
 		expect([...element.querySelectorAll('nav > a')].map((a) => a.textContent!.trim())).toEqual(['Calc']);
-		expect(buttons().map((b) => b.textContent!.trim())).toEqual(['Database', 'Economy']);
+		expect(buttons().map((b) => b.textContent!.replace(/\s+/g, ' ').trim())).toEqual([
+			'Database',
+			'Economy Experimental',
+		]);
 		expect(buttons().map((b) => b.getAttribute('aria-expanded'))).toEqual(['false', 'false']);
 		expect(panels().length).toBe(0);
+	});
+
+	it('marks only the experimental group with a pill', async () => {
+		const pills = (root: ParentNode) => [...root.querySelectorAll('span.rounded-full')].map((x) => x.textContent);
+		expect(buttons().map((b) => pills(b))).toEqual([[], ['Experimental']]);
+		await resize(900, 500);
+		menuButton()!.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+		await settle();
+		expect(pills(element.querySelector('#app-nav-menu')!)).toEqual(['Experimental']);
 	});
 
 	it('toggles a dropdown with its links and aria attributes', async () => {
@@ -189,12 +202,12 @@ describe('header nav', () => {
 		menuButton()!.dispatchEvent(new MouseEvent('click', { bubbles: true }));
 		await settle();
 		const menu = element.querySelector('#app-nav-menu')!;
-		expect([...menu.children].map((child) => child.textContent!.trim())).toEqual([
+		expect([...menu.children].map((child) => child.textContent!.replace(/\s+/g, ' ').trim())).toEqual([
 			'Calc',
 			'Database',
 			'Wares',
 			'Ships',
-			'Economy',
+			'Economy Experimental',
 			'Trade Routes',
 		]);
 		expect(element.querySelectorAll('app-nav-dropdown').length).toBe(0);

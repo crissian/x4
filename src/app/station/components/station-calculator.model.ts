@@ -142,10 +142,13 @@ export class StationModuleModel {
 			const capacity = module.workForce.capacity ?? 0;
 			const worker: ModuleWorker = Workers.get(module.workForce.race.id);
 
-			worker.consumption.forEach((x) => {
-				this.needs.push({ amount: (x.amount * capacity) / worker.amount, ware: x.ware });
-			});
+			this.needs.push(...StationModuleModel.workerNeeds(worker, capacity));
 		}
+	}
+
+	/** Wares per hour the given number of workers of a race consume. */
+	static workerNeeds(worker: ModuleWorker, workers: number): { amount: number; ware: Ware }[] {
+		return worker.consumption.map((x) => ({ amount: (x.amount * workers) / worker.amount, ware: x.ware }));
 	}
 
 	/** The production method the module queues the ware with, the default one when the ware has no such method. */
@@ -222,7 +225,10 @@ export class ResourceCalculator {
 								: null;
 							const perCycle = production.value.amount;
 							let efficiency =
-								effect == null ? 1 : StationCalculatorModel.amountPerCycle(perCycle, effect.product * multiplier) / perCycle;
+								effect == null
+									? 1
+									: StationCalculatorModel.amountPerCycle(perCycle, effect.product * multiplier) /
+										perCycle;
 
 							if (production.ware.id === Wares.energycells.id) {
 								// add sunlight for energy cells

@@ -1,0 +1,54 @@
+<div class="rounded-md border border-line bg-surface-2 p-3 text-sm">
+	<button
+		type="button"
+		class="flex items-center gap-1 font-semibold"
+		aria-controls="station-suggestions-help"
+		[attr.aria-expanded]="open()"
+		(click)="open.set(!open())"
+	>
+		@if (open()) {
+			<svg lucideChevronDown />
+		} @else {
+			<svg lucideChevronRight />
+		}
+		<ng-container i18n>How this is ranked</ng-container>
+	</button>
+	@if (open()) {
+		<ul id="station-suggestions-help" class="mt-2 list-disc space-y-1 pl-5">
+			<li i18n>
+				A factory sells to the sectors within the jumps you pick. A sector counts fully at the spot and less
+				with every jump: with 3 jumps, 100%, 75%, 50% and 25%.
+			</li>
+			<li i18n>
+				First the market as it is: each sector that makes more than it uses supplies the sectors short of the
+				ware nearest to it, up to {{ settlementJumps }} jumps away, the closest first. A far-away surplus serves
+				the shortages near itself, so a wider reach never lowers a spot.
+			</li>
+			<li i18n>
+				Absorbable per hour is the weighted shortage left in the sectors within reach. Who owns the stations
+				does not matter, unless the owner is hostile to you.
+			</li>
+			<li i18n>
+				Room for modules is how many production modules (at full workforce, default recipe) that amount keeps
+				busy; spots without room for one module are not listed.
+			</li>
+			<li i18n>
+				Closed loop (the default): the station makes its whole production chain, sized like the station
+				calculator's autofill, and your own miners bring the raw resources. Expected Cr/h is what the
+				end-product modules sell at the ware's average price.
+			</li>
+			<li i18n>
+				Buy inputs: the station buys its inputs, so Expected Cr/h is what the modules make times the margin, the
+				average price minus the inputs at average prices. No build cost or payback is counted yet.
+			</li>
+			<li i18n>
+				The list is ranked by Expected Cr/h. The resources (closed loop) or inputs (buy inputs) in reach and the
+				sector security are shown in their own columns, not ranked by. Energy cells follow the sector sunlight.
+			</li>
+			<li i18n>
+				With "Hide hostile sectors" on, the sectors and the stations of factions hostile to you are left out, as
+				demand and as supply. Sectors whose owner bans the ware are always left out.
+			</li>
+		</ul>
+	}
+</div>

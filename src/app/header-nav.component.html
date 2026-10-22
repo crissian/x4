@@ -48,7 +48,12 @@
 	>
 		@for (section of sections(); track section.label) {
 			@if (section.label) {
-				<div class="px-4 py-1 text-sm font-semibold text-fg-muted">{{ section.label }}</div>
+				<div class="flex items-center gap-2 px-4 py-1 text-sm font-semibold text-fg-muted">
+					{{ section.label }}
+					@if (section.experimental) {
+						<app-experimental-badge />
+					}
+				</div>
 			}
 			@for (link of section.links; track link.path) {
 				<a

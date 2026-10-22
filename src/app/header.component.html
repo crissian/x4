@@ -1,11 +1,20 @@
-<header class="relative flex items-center gap-2 bg-nav px-4 shadow-lg sm:gap-3 dark:shadow-black/40">
+<header class="relative flex items-center gap-1 bg-nav px-2 shadow-lg sm:gap-3 sm:px-4 dark:shadow-black/40">
 	<app-header-nav class="flex min-h-11 min-w-9 flex-1 items-center" [items]="items" />
 
 	<app-savegame-selector />
 
-	<label class="inline-flex shrink-0 items-center gap-1 text-nav-fg" i18n-title title="Language of the game names and descriptions">
+	<label
+		class="inline-flex shrink-0 items-center gap-1 text-nav-fg"
+		i18n-title
+		title="Language of the game names and descriptions"
+	>
 		<svg lucideLanguages class="hidden opacity-80 sm:inline-block" />
-		<select class="input h-8 w-20 py-0 text-sm sm:w-auto" i18n-aria-label aria-label="Game text language" [formField]="languageForm.language">
+		<select
+			class="input h-8 w-16 py-0 text-sm sm:w-auto"
+			i18n-aria-label
+			aria-label="Game text language"
+			[formField]="languageForm.language"
+		>
 			@for (language of languages; track language.code) {
 				<option [value]="language.code">{{ language.name }}</option>
 			}

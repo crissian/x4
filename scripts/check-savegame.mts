@@ -2,6 +2,11 @@
 import { openAsBlob } from 'node:fs';
 import { SavegameReader } from '../src/app/savegame/read-savegame';
 import { SaveMap, SaveRelations } from '../src/app/savegame/map/save-map-model';
+import { Economy } from '../src/app/economy/economy';
+import { WareClasses } from '../src/app/economy/ware-classes';
+import { ModuleService } from '../src/app/shared/services/module.service';
+import { ShipService } from '../src/app/shared/services/ship.service';
+import { WareService } from '../src/app/shared/services/ware.service';
 import { Sectors } from '../src/app/shared/services/data/sectors-data';
 import { AllWares } from '../src/app/shared/services/data/wares-data';
 import type { Sector, Ware } from '../src/app/shared/services/model/model';
@@ -33,6 +38,7 @@ class CheckSavegame {
 			if (map) {
 				CheckSavegame.printMap(map);
 				CheckSavegame.printRoutes(map, relations);
+				CheckSavegame.printEconomy(map);
 			}
 			if (relations) {
 				const hostile = Object.entries(relations)
@@ -64,6 +70,54 @@ class CheckSavegame {
 		if (sample) {
 			console.log(`  sample ${JSON.stringify(sample)}`);
 		}
+	}
+
+	/** The galaxy shortages and surpluses, and how long the economy takes to work out. */
+	private static printEconomy(map: SaveMap): void {
+		const sectors = Sectors.all as unknown as Sector[];
+		const wares = new WareService();
+		let started = performance.now();
+		const modules = new ModuleService();
+		const building = WareClasses.buildingMaterials(
+			new ShipService().getEntities(),
+			modules.getEntities(),
+			wares.getEntities()
+		);
+		const economy = new Economy(map, wares, modules, sectors, building);
+		const flowsMs = performance.now() - started;
+		started = performance.now();
+		const rows = economy.rows();
+		const aggregateMs = performance.now() - started;
+		const ware = process.env['WARE'] ?? 'energycells';
+		started = performance.now();
+		const near = economy.balances(ware, 3);
+		const nearMs = performance.now() - started;
+		const spread = [...near.values()].filter((x) => x.net !== 0).length;
+		console.log(
+			`  economy: ${economy.stations.length} stations, flows ${flowsMs.toFixed(0)} ms, galaxy ${aggregateMs.toFixed(0)} ms ` +
+				`(first full ${(flowsMs + aggregateMs).toFixed(0)} ms), ${ware} within 3 jumps ${nearMs.toFixed(0)} ms ` +
+				`(${spread} of ${near.size} sectors not zero)`
+		);
+		const noPrice = [...new Set(map.stations.flatMap((x) => x.offers ?? []).map((x) => x.ware))].filter(
+			(id) => !wares.getEntity(id)?.price.avg
+		);
+		console.log(`  building materials only: ${[...building.only].sort().join(' ')}`);
+		console.log(`  building materials also used by factories: ${[...building.partly].sort().join(' ')}`);
+		console.log(`  wares with offers but no price: ${noPrice.join(', ') || '(none)'}`);
+		const line = (x: (typeof rows)[number]) =>
+			`    ${x.ware.padEnd(22)} net ${Math.round(x.net).toString().padStart(9)}/h value ${Math.round(x.value)
+				.toString()
+				.padStart(
+					11
+				)} Cr/h index ${x.priceIndex === undefined ? '-' : x.priceIndex.toFixed(0)} ${x.diagnosis.kind}`;
+		const byValue = [...rows].sort((a, b) => a.value - b.value);
+		console.log('  top shortages (value per hour):');
+		byValue.slice(0, 10).forEach((x) => console.log(line(x)));
+		console.log('  top surpluses (value per hour):');
+		byValue
+			.slice(-10)
+			.reverse()
+			.forEach((x) => console.log(line(x)));
 	}
 
 	/** The top routes of the default custom ship, and how long finding them takes. */

@@ -1,0 +1,80 @@
+<div class="card">
+	<div class="card-header flex items-center gap-2">
+		<ng-container i18n>Station Suggestions</ng-container>
+		<app-experimental-badge />
+	</div>
+	<div class="card-body">
+		@if (store.save(); as save) {
+			@if (store.saveMap()) {
+				<app-station-suggestions-filters />
+				<p class="mt-3 text-sm text-fg-muted" i18n>
+					Built capacity (modules × recipes) at full inputs, not live stock ({{ save.info.saveName }},
+					{{ store.gameTime() }}). Demand from ship and station building is not counted: building materials
+					are marked with an asterisk. Mining is not counted, so mined resources are not suggested.
+				</p>
+				<app-station-suggestions-help class="mt-3 block" />
+				<div class="layout mt-3">
+					<div class="min-w-0">
+						@if (store.here() && !store.centre()) {
+							<p class="text-fg-muted" data-pick-sector i18n>
+								Pick a sector above, or click one on the map, to see what to build there.
+							</p>
+						} @else {
+							@if (store.centreHostile()) {
+								<p class="mb-2 text-sm text-fg-muted" data-hostile i18n>
+									This sector is owned by a faction hostile to you; show hostile sectors to rank it.
+								</p>
+							}
+							<app-data-grid
+								[data]="store.rows()"
+								[columns]="columns()"
+								[trackBy]="trackBy"
+								[clickable]="true"
+								[selected]="store.selected()"
+								[sort]="sort"
+								storageKey="station-suggestions"
+								(rowClick)="store.select($event)"
+							/>
+							<p class="mt-2 text-sm text-fg-muted" data-total>
+								@if (cut()) {
+									<ng-container i18n
+										>Showing the top {{ maxRows }} of
+										{store.result().total, plural,
+											=1 {1 suggestion}
+											other {{{ store.result().total }} suggestions}
+
+										}.</ng-container
+									>
+								}
+								@if (!store.here()) {
+									<ng-container i18n
+										>Spots share nearby demand; they are listed greedily, the best
+										first.</ng-container
+									>
+								}
+							</p>
+						}
+					</div>
+					<div class="min-w-0">
+						<app-station-suggestions-map />
+						<app-station-suggestions-detail />
+					</div>
+				</div>
+			} @else if (store.saveOutdated()) {
+				<p>
+					<a routerLink="/saves" i18n>Reload this save to see station suggestions</a>
+				</p>
+			} @else {
+				<p class="text-fg-muted" role="status" i18n>Loading save…</p>
+			}
+		} @else {
+			<p class="text-fg-muted" i18n>
+				Station suggestions are worked out from the stations of a savegame: where the nearby stations use more
+				than they make, a new factory can sell.
+			</p>
+			<p class="mt-2">
+				<a routerLink="/saves" i18n>Load a savegame</a>
+			</p>
+		}
+	</div>
+</div>

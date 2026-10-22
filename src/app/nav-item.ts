@@ -11,6 +11,8 @@ export interface NavGroup {
 	label: string;
 	icon: LucideIconInput;
 	links: NavLink[];
+	/** a pill marks the group as experimental */
+	experimental?: boolean;
 }
 
 export type NavItem = NavLink | NavGroup;

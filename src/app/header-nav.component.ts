@@ -16,6 +16,7 @@ import { LucideDynamicIcon, LucideMenu } from '@lucide/angular';
 import { filter } from 'rxjs/operators';
 import { NavDropdownComponent } from './nav-dropdown.component';
 import { NavItems, type NavItem } from './nav-item';
+import { ExperimentalBadgeComponent } from './shared/components/experimental-badge.component';
 
 /**
  * The main links and link groups: in a row while they fit next to the header controls, else behind a menu button. The row width
@@ -23,7 +24,14 @@ import { NavItems, type NavItem } from './nav-item';
  */
 @Component({
 	selector: 'app-header-nav',
-	imports: [RouterLink, RouterLinkActive, LucideDynamicIcon, LucideMenu, NavDropdownComponent],
+	imports: [
+		ExperimentalBadgeComponent,
+		RouterLink,
+		RouterLinkActive,
+		LucideDynamicIcon,
+		LucideMenu,
+		NavDropdownComponent,
+	],
 	templateUrl: './header-nav.component.html',
 	host: {
 		'(document:keydown.escape)': 'closeMenu(true)',
@@ -37,7 +45,10 @@ export class HeaderNavComponent {
 	/** The menu lists the plain links first, then each group under its label. */
 	protected readonly sections = computed(() => {
 		const items = this.items();
-		return [{ label: '', links: items.filter(NavItems.isLink) }, ...items.filter(NavItems.isGroup)];
+		return [
+			{ label: '', links: items.filter(NavItems.isLink), experimental: false },
+			...items.filter(NavItems.isGroup),
+		];
 	});
 
 	protected readonly url = signal(inject(Router).url);

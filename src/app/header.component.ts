@@ -16,6 +16,7 @@ import {
 	LucideMoon,
 	LucidePackage,
 	LucideRocket,
+	LucideScale,
 	LucideSun,
 	LucideUsers,
 	LucideWrench,
@@ -81,7 +82,12 @@ export class HeaderComponent {
 		{
 			label: $localize`:Header menu group@@navEconomy:Economy`,
 			icon: LucideCoins,
-			links: [{ path: '/trade-routes', label: $localize`Trade Routes`, icon: LucideArrowLeftRight }],
+			experimental: true,
+			links: [
+				{ path: '/trade-routes', label: $localize`Trade Routes`, icon: LucideArrowLeftRight },
+				{ path: '/supply-demand', label: $localize`Supply & Demand`, icon: LucideScale },
+				{ path: '/station-suggestions', label: $localize`Station Suggestions`, icon: LucideFactory },
+			],
 		},
 	];
 }

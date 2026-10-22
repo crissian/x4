@@ -1,0 +1,53 @@
+<div class="card">
+	<div class="card-header flex items-center gap-2">
+		<ng-container i18n>Supply &amp; Demand</ng-container>
+		<app-experimental-badge />
+	</div>
+	<div class="card-body">
+		@if (store.save(); as save) {
+			@if (store.saveMap()) {
+				<app-supply-demand-filters />
+				<p class="mt-3 text-sm text-fg-muted" i18n>
+					Capacity at full input supply; market values as of save time ({{ save.info.saveName }},
+					{{ store.gameTime() }}). Mining and ship and station building are not counted, so mined resources
+					are hidden unless you show them, and wares used for building are marked with an asterisk.
+				</p>
+				<app-supply-demand-help class="mt-3 block" />
+				<div class="layout mt-3">
+					<div class="min-w-0">
+						<app-data-grid
+							[data]="store.rows()"
+							[columns]="columns"
+							[groups]="groups"
+							[compact]="true"
+							[trackBy]="trackBy"
+							[clickable]="true"
+							[selected]="store.selected()"
+							[sort]="sort"
+							storageKey="supply-demand"
+							(rowClick)="store.select($event)"
+						/>
+					</div>
+					<div class="min-w-0">
+						<app-supply-demand-map />
+						<app-supply-demand-detail />
+					</div>
+				</div>
+			} @else if (store.saveOutdated()) {
+				<p>
+					<a routerLink="/saves" i18n>Reload this save to see supply and demand</a>
+				</p>
+			} @else {
+				<p class="text-fg-muted" role="status" i18n>Loading save…</p>
+			}
+		} @else {
+			<p class="text-fg-muted" i18n>
+				Supply and demand are worked out from the stations of a savegame: what they make and use, and what they
+				offer.
+			</p>
+			<p class="mt-2">
+				<a routerLink="/saves" i18n>Load a savegame</a>
+			</p>
+		}
+	</div>
+</div>

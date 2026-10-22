@@ -1,0 +1,58 @@
+<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+	<label class="text-sm">
+		<ng-container i18n>Scope</ng-container>
+		<select id="supply-scope" class="input" [formField]="form.scope">
+			<option value="galaxy" i18n>Whole galaxy</option>
+			<option value="faction" i18n>A faction</option>
+			<option value="sector" i18n>Around a sector</option>
+		</select>
+	</label>
+	<label class="text-sm">
+		<ng-container i18n>Faction</ng-container>
+		<select id="supply-faction" class="input" [formField]="form.faction">
+			<option value="" i18n>Pick a faction</option>
+			@for (faction of store.factions(); track faction.id) {
+				<option [value]="faction.id">{{ faction.name }}</option>
+			}
+		</select>
+	</label>
+	<label class="text-sm">
+		<ng-container i18n>Sector</ng-container>
+		<input
+			id="supply-sector"
+			class="input"
+			list="supply-sectors"
+			placeholder="Pick a sector"
+			i18n-placeholder
+			[formField]="form.sector"
+		/>
+		<datalist id="supply-sectors">
+			@for (sector of store.sectors(); track sector.id) {
+				<option [value]="sector.name"></option>
+			}
+		</datalist>
+	</label>
+	<label class="text-sm" [attr.title]="store.jumpsHint()">
+		<ng-container i18n>Jumps</ng-container>
+		<input id="supply-jumps" class="input" type="number" [formField]="form.jumps" />
+	</label>
+	<label class="text-sm">
+		<ng-container i18n>Ware group</ng-container>
+		<select id="supply-group" class="input" [formField]="form.group">
+			<option value="" i18n>All groups</option>
+			@for (group of store.groups(); track group.id) {
+				<option [value]="group.id">{{ group.name }}</option>
+			}
+		</select>
+	</label>
+</div>
+<div class="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+	<label class="flex items-center gap-2">
+		<input id="supply-player" type="checkbox" [formField]="form.player" />
+		<ng-container i18n>Include my stations</ng-container>
+	</label>
+	<label class="flex items-center gap-2">
+		<input id="supply-mined" type="checkbox" [formField]="form.mined" />
+		<ng-container i18n>Show mined resources</ng-container>
+	</label>
+</div>

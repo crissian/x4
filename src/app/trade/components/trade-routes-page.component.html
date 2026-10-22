@@ -1,5 +1,8 @@
 <div class="card">
-	<div class="card-header" i18n>Trade Routes</div>
+	<div class="card-header flex items-center gap-2">
+		<ng-container i18n>Trade Routes</ng-container>
+		<app-experimental-badge />
+	</div>
 	<div class="card-body">
 		@if (store.save(); as save) {
 			@if (store.saveMap()) {

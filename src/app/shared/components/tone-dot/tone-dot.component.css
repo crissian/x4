@@ -1,0 +1,19 @@
+/* `--tone` comes from the global `[data-tone]` styles, which follow the light and dark themes */
+:host {
+	display: inline-block;
+	width: 0.75rem;
+	height: 0.75rem;
+	margin-right: 0.4rem;
+	vertical-align: -0.1em;
+	border: 1.5px solid var(--tone);
+	border-radius: 9999px;
+	background: color-mix(in oklab, var(--tone) var(--fill, 100%), transparent);
+}
+
+:host([data-level='1']) {
+	--fill: 20%;
+}
+
+:host([data-level='2']) {
+	--fill: 60%;
+}

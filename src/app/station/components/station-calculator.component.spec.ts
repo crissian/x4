@@ -4,8 +4,14 @@ import * as urlon from 'urlon';
 import { describe, expect, it } from 'vitest';
 import { ModuleService } from '../../shared/services/module.service';
 import { WareService } from '../../shared/services/ware.service';
+import { StationLayoutLink } from '../station-layout-link';
 import StationCalculatorComponent from './station-calculator.component';
-import { HQ_WORKFORCE, ResourceCalculator, StationModuleModel, StationCalculatorModel } from './station-calculator.model';
+import {
+	HQ_WORKFORCE,
+	ResourceCalculator,
+	StationModuleModel,
+	StationCalculatorModel,
+} from './station-calculator.model';
 
 const HULL_PARTS = 'module_gen_prod_hullparts_01';
 const HABITAT = 'module_arg_hab_m_01';
@@ -67,7 +73,8 @@ describe('station calculator', () => {
 			['claytronics', 360],
 			['hullparts', 1200],
 		]);
-		const needs = (id: string) => recycler.needs.filter((x) => x.ware.id === id).reduce((sum, x) => sum + x.amount, 0);
+		const needs = (id: string) =>
+			recycler.needs.filter((x) => x.ware.id === id).reduce((sum, x) => sum + x.amount, 0);
 		expect(needs('energycells')).toBe(93000);
 		expect(needs('scrapmetal')).toBe(2250);
 	});
@@ -144,5 +151,39 @@ describe('station calculator', () => {
 		const text = (fixture.nativeElement as HTMLElement).textContent;
 		expect(text).toContain('4 x Hull Part Production');
 		expect(text).toContain('Food Rations');
+	});
+
+	it('opens a shared layout at the sunlight of the link', async () => {
+		TestBed.configureTestingModule({ providers: [provideRouter([])] });
+		const fixture = TestBed.createComponent(StationCalculatorComponent);
+		fixture.componentRef.setInput('l', share([{ module: HULL_PARTS, count: 1 }]));
+		fixture.componentRef.setInput('sun', '50');
+		await fixture.whenStable();
+		expect(fixture.componentInstance.settings().sunlight).toBe(50);
+		expect(StationLayoutLink.params([{ moduleId: HULL_PARTS, count: 1 }], 49.6)).toEqual({
+			l: share([{ module: HULL_PARTS, count: 1 }]),
+			sun: 50,
+		});
+		expect(StationLayoutLink.parseSunlight('abc')).toBeUndefined();
+		expect(StationLayoutLink.parseSunlight(undefined)).toBeUndefined();
+	});
+
+	it('autofills the production chain from the button', async () => {
+		TestBed.configureTestingModule({ providers: [provideRouter([])] });
+		const fixture = TestBed.createComponent(StationCalculatorComponent);
+		fixture.componentRef.setInput('l', share([{ module: HULL_PARTS, count: 2 }]));
+		await fixture.whenStable();
+
+		const element = fixture.nativeElement as HTMLElement;
+		const button = [...element.querySelectorAll('button')].find((x) => x.textContent?.includes('Autofill'));
+		button!.click();
+		await fixture.whenStable();
+
+		const modules = TestBed.inject(ModuleService);
+		const rows = fixture.componentInstance.rows();
+		expect(rows[0]).toMatchObject({ moduleId: HULL_PARTS, count: 2 });
+		expect(rows.map((x) => modules.getEntity(x.moduleId)?.product?.[0].id)).toEqual(
+			expect.arrayContaining(['energycells', 'graphene', 'refinedmetals'])
+		);
 	});
 });

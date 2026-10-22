@@ -1,0 +1,55 @@
+@if (store.chain(); as chain) {
+	<section class="mt-3" data-chain>
+		<h6 class="text-sm" i18n>Closed-loop station (sized like the calculator's autofill)</h6>
+		<ul class="mt-1" data-chain-modules>
+			@for (module of chain.modules; track module.moduleId) {
+				<li class="flex justify-between gap-2">
+					<span>{{ store.moduleName(module.moduleId) }}</span>
+					<span class="text-fg-muted">× {{ module.count }}</span>
+				</li>
+			}
+		</ul>
+		@if (chain.workforce) {
+			<p class="mt-1 text-fg-muted" i18n>Workforce at full staffing: {{ chain.workforce | number: '1.0-0' }}</p>
+		}
+		@if (chain.mined.length) {
+			<p class="mt-2" data-chain-mined>
+				<ng-container i18n>Mined by your ships:</ng-container>
+				@for (mined of chain.mined; track mined.ware; let last = $last) {
+					<a class="ml-1" [routerLink]="['/wares', mined.ware]">{{ store.wareName(mined.ware) }}</a>
+					{{ mined.amount | number: '1.0-0' }}/h{{ last ? '' : ',' }}
+				}
+			</p>
+		}
+		@if (store.selected().resources; as resources) {
+			@if (resources.length) {
+				<p class="mt-1" data-resources>
+					<ng-container i18n>Resources within reach:</ng-container>
+					@for (resource of resources; track resource.ware; let last = $last) {
+						<span class="ml-1" [class]="resource.jumps === undefined ? 'text-danger' : 'text-success'">
+							{{ store.wareName(resource.ware) }}
+							@if (resource.jumps === undefined) {
+								✗
+							} @else {
+								✓
+								<ng-container i18n>{resource.jumps, plural,
+									=0 {here}
+									=1 {1 jump}
+									other {{{ resource.jumps }} jumps}
+								}</ng-container>
+							}</span
+						>{{ last ? '' : ',' }}
+					}
+				</p>
+			}
+		}
+		@if (chain.missing.length) {
+			<p class="mt-1 text-fg-muted" i18n>Bought in, no module makes them: {{ missing() }}</p>
+		}
+		<p class="mt-2">
+			<a [routerLink]="calculator" [queryParams]="params()" data-calculator i18n
+				>Open in the station calculator</a
+			>
+		</p>
+	</section>
+}

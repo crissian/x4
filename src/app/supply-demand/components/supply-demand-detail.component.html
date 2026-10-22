@@ -1,0 +1,127 @@
+@if (store.selected(); as row) {
+	<section class="mt-4 min-w-0" aria-live="polite">
+		<h6 class="mb-2">
+			<a [routerLink]="['/wares', row.ware]">{{ row.name }}</a>
+		</h6>
+		<p class="text-sm font-semibold" data-diagnosis>
+			@let dot = diagnosis.dot(row.diagnosis);
+			<app-tone-dot [tone]="dot.tone" [level]="dot.level" />{{ diagnosis.summary(row) }}
+		</p>
+		<p class="text-sm text-fg-muted">{{ diagnosis.explanation(row) }}</p>
+
+		<h6 class="mt-3 text-sm" i18n>Top producers</h6>
+		@if (producers().length) {
+			<ol class="list-decimal pl-6 text-sm" data-producers>
+				@for (item of producers(); track item.station.code) {
+					<li>
+						<a
+							[routerLink]="['/sectors', item.station.sector]"
+							[queryParams]="{ station: item.station.code }"
+							>{{ store.stationName(item.station) }}</a
+						>
+						<span class="text-fg-muted">
+							· {{ store.sectorName(item.station.sector) }} ·
+							<ng-container i18n>{{ item.produced | number: '1.0-0' }}/h</ng-container>
+						</span>
+					</li>
+				}
+			</ol>
+		} @else {
+			<p class="text-sm text-fg-muted" i18n>No station makes it.</p>
+		}
+
+		<h6 class="mt-3 text-sm" i18n>Top consumers</h6>
+		@if (consumers().length) {
+			<ol class="list-decimal pl-6 text-sm" data-consumers>
+				@for (item of consumers(); track item.station.code) {
+					<li>
+						<a
+							[routerLink]="['/sectors', item.station.sector]"
+							[queryParams]="{ station: item.station.code }"
+							>{{ store.stationName(item.station) }}</a
+						>
+						<span class="text-fg-muted">
+							· {{ store.sectorName(item.station.sector) }} ·
+							<ng-container i18n>{{ item.consumed | number: '1.0-0' }}/h</ng-container>
+						</span>
+					</li>
+				}
+			</ol>
+		} @else {
+			<p class="text-sm text-fg-muted" i18n>No station uses it.</p>
+		}
+
+		@if (inputs().length) {
+			<h6 class="mt-3 text-sm" i18n>Inputs, net value in Cr per hour in this scope</h6>
+			<ul class="text-sm" data-inputs>
+				@for (input of inputs(); track input.ware) {
+					<li class="flex justify-between gap-2">
+						<a [routerLink]="['/wares', input.ware]">{{ input.name }}</a>
+						@if (input.net === undefined) {
+							<span class="text-fg-muted" title="Mining is not counted" i18n-title>—</span>
+						} @else {
+							<span
+								[class]="input.net < 0 ? 'text-danger' : 'text-fg-muted'"
+								[attr.title]="perHour(input.net)"
+								i18n
+								>{{ compact(input.value!) }} Cr/h</span
+							>
+						}
+					</li>
+				}
+			</ul>
+		}
+
+		<h6 class="mt-3 text-sm" i18n>Cheapest to buy</h6>
+		@if (sellers().length) {
+			<ul class="text-sm" data-sellers>
+				@for (offer of sellers(); track $index) {
+					<li>
+						<a
+							[routerLink]="['/sectors', offer.station.sector]"
+							[queryParams]="{ station: offer.station.code }"
+							>{{ store.stationName(offer.station) }}</a
+						>
+						<span class="text-fg-muted">
+							· {{ store.sectorName(offer.station.sector) }} ·
+							<ng-container i18n
+								>{{ offer.amount | number: '1.0-0' }} at
+								{{ offer.price | number: '1.2-2' }} Cr</ng-container
+							>
+						</span>
+					</li>
+				}
+			</ul>
+		} @else {
+			<p class="text-sm text-fg-muted" i18n>Nobody sells it.</p>
+		}
+
+		<h6 class="mt-3 text-sm" i18n>Best price to sell</h6>
+		@if (buyers().length) {
+			<ul class="text-sm" data-buyers>
+				@for (offer of buyers(); track $index) {
+					<li>
+						<a
+							[routerLink]="['/sectors', offer.station.sector]"
+							[queryParams]="{ station: offer.station.code }"
+							>{{ store.stationName(offer.station) }}</a
+						>
+						<span class="text-fg-muted">
+							· {{ store.sectorName(offer.station.sector) }} ·
+							<ng-container i18n
+								>{{ offer.amount | number: '1.0-0' }} at
+								{{ offer.price | number: '1.2-2' }} Cr</ng-container
+							>
+						</span>
+					</li>
+				}
+			</ul>
+		} @else {
+			<p class="text-sm text-fg-muted" i18n>Nobody buys it.</p>
+		}
+
+		<p class="mt-3 text-sm">
+			<a [routerLink]="['/wares', row.ware]" i18n>Open {{ row.name }}</a>
+		</p>
+	</section>
+}
