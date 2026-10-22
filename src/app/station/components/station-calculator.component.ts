@@ -86,6 +86,7 @@ export default class StationCalculatorComponent {
 	readonly settingsForm = form(this.settings, (settings) => {
 		min(settings.sunlight, 0);
 		min(settings.partialWorkforce, 0);
+		min(settings.storageHours, 0);
 		max(settings.partialWorkforce, () => this.workforce().capacity);
 		for (const price of [settings.resourcesPrice, settings.productsPrice, settings.modulesResourcesPrice]) {
 			min(price, 0);
@@ -100,7 +101,7 @@ export default class StationCalculatorComponent {
 		)
 	);
 
-	readonly workforce = computed(() => ResourceCalculator.calculateWorkforce(this.modules()));
+	readonly workforce = computed(() => ResourceCalculator.calculateWorkforce(this.modules(), this.settings().isHq));
 
 	/** Workforce actually working: everything available when auto, otherwise the slider value, capped by capacity. */
 	readonly partialWorkforce = computed(() => {
@@ -109,9 +110,10 @@ export default class StationCalculatorComponent {
 		return Math.min(settings.autoWorkforce ? value : settings.partialWorkforce, capacity);
 	});
 
-	readonly resources = computed(() =>
-		ResourceCalculator.calculate(this.modules(), this.settings().sunlight, this.partialWorkforce())
-	);
+	readonly resources = computed(() => {
+		const settings = this.settings();
+		return ResourceCalculator.calculate(this.modules(), settings.sunlight, this.partialWorkforce(), settings.isHq);
+	});
 
 	constructor() {
 		// keep the workforce slider in line with the calculated value
@@ -213,6 +215,7 @@ export default class StationCalculatorComponent {
 			provideAllResources: settings.provideAllResources,
 			isHeadquarters: settings.isHq,
 			sunlight: settings.sunlight,
+			storageHours: settings.storageHours,
 			config: this.rows().map<ModuleConfig>((x) => ({ moduleId: x.moduleId, count: x.count })),
 		};
 
@@ -236,6 +239,7 @@ export default class StationCalculatorComponent {
 			provideAllResources: !!layout.provideAllResources,
 			isHq: !!layout.isHeadquarters,
 			sunlight: layout.sunlight || 100,
+			storageHours: layout.storageHours ?? DEFAULT_STATION_SETTINGS.storageHours,
 		}));
 	}
 }

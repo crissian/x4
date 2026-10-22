@@ -12,5 +12,6 @@ export interface Layout {
    provideBasicResources?: boolean;
    provideAllResources?: boolean;
    isHeadquarters?: boolean;
+   storageHours?: number;
    config: ModuleConfig[];
 }

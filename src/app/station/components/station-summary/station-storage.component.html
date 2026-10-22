@@ -1,0 +1,55 @@
+@let form = settings();
+@let expanded = expand.state();
+
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col" i18n="@@storage">Storage</th>
+			<th scope="col" class="text-right" i18n="@@neededCapacity">Needed / Capacity</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (item of storage(); track item.type) {
+			<tr
+				class="cursor-pointer hover:bg-hover"
+				[class.text-danger]="item.needed > item.capacity"
+				[class.text-success]="item.needed <= item.capacity"
+				[attr.aria-expanded]="!!expanded[item.type]"
+				(click)="expand.toggle(item.type)"
+			>
+				<td>
+					@if (expanded[item.type]) {<svg lucideChevronsUp class="mr-1" />} @else {<svg lucideChevronsDown class="mr-1" />}
+					{{ item.type }}
+				</td>
+				<td class="text-right">{{ item.needed | number: '1.0-0' }} / {{ item.capacity | number: '1.0-0' }} m³</td>
+			</tr>
+			@if (expanded[item.type]) {
+				@for (ware of item.wares; track ware.name) {
+					<tr class="text-danger">
+						<td class="pl-8">{{ ware.name }}</td>
+						<td class="text-right">{{ ware.volume | number: '1.0-0' }}</td>
+					</tr>
+				}
+				@for (module of item.modules; track module.name) {
+					<tr class="text-success">
+						<td class="pl-8">{{ module.name }}</td>
+						<td class="text-right">+{{ module.volume | number: '1.0-0' }}</td>
+					</tr>
+				}
+			}
+		} @empty {
+			<tr>
+				<td colspan="2" class="text-fg-muted">No wares to store.</td>
+			</tr>
+		}
+		<tr>
+			<td colspan="2">
+				<label class="flex items-center gap-2">
+					<span i18n="@@storageHours">Hold production and consumption for</span>
+					<input type="number" class="input w-20" step="0.5" [formField]="form.storageHours" />
+					<span i18n="@@hours">hours</span>
+				</label>
+			</td>
+		</tr>
+	</tbody>
+</table>

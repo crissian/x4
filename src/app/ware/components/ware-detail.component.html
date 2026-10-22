@@ -59,6 +59,7 @@
 									}
 									@let perHour = (3600 / item.time) * item.amount;
 									@let efficiency = item.efficiency?.product ?? 0;
+									@let maxPerHour = (3600 / item.time) * amountPerCycle(item.amount, efficiency);
 									<h6>Production</h6>
 									<table class="table">
 										<tbody>
@@ -112,7 +113,7 @@
 														<span class="text-danger"
 															>Min:
 															<strong>{{
-																entity.price.min * perHour * (1 + efficiency)
+																entity.price.min * maxPerHour
 																	| number: '1.0-0'
 															}}</strong>
 															/
@@ -120,7 +121,7 @@
 														<span class="text-primary"
 															>Avg:
 															<strong>{{
-																entity.price.avg * perHour * (1 + efficiency)
+																entity.price.avg * maxPerHour
 																	| number: '1.0-0'
 															}}</strong>
 															/
@@ -128,7 +129,7 @@
 														<span class="text-success"
 															>Max:
 															<strong>{{
-																entity.price.max * perHour * (1 + efficiency)
+																entity.price.max * maxPerHour
 																	| number: '1.0-0'
 															}}</strong></span
 														>
@@ -140,6 +141,18 @@
 								</div>
 							</div>
 						}
+					</div>
+				}
+				@case ('producedBy') {
+					<div class="card max-w-2xl">
+						<div class="card-header">Station Modules</div>
+						<div class="card-body grid gap-1 sm:grid-cols-2">
+							@for (module of producedBy(); track module.id) {
+								<a [routerLink]="['/modules', module.id]">{{ module.name }}</a>
+							} @empty {
+								<span class="text-info">No station module produces this ware.</span>
+							}
+						</div>
 					</div>
 				}
 				@case ('requiredFor') {

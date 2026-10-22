@@ -2,10 +2,8 @@ import { DecimalPipe } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { FieldTree, FormField } from '@angular/forms/signals';
 import { LucideChevronsDown, LucideChevronsUp } from '@lucide/angular';
-import { StationModuleModel, StationSettings } from '../station-calculator.model';
+import { HQ_WORKFORCE, StationModuleModel, StationSettings } from '../station-calculator.model';
 import { ExpandState } from './station-summary.shared';
-
-const HQ_WORKFORCE = 200;
 
 interface WorkforceItem {
 	amount: number;
@@ -28,7 +26,7 @@ export class StationWorkforceComponent {
 	private readonly values = computed(() => this.settings()().value());
 
 	readonly hqWorkforce = HQ_WORKFORCE;
-	readonly totalWorkforce = computed(() => this.workforce().value + (this.values().isHq ? HQ_WORKFORCE : 0));
+	readonly totalWorkforce = computed(() => this.workforce().value);
 	readonly totalWorkforceCapacity = computed(() => this.workforce().capacity);
 
 	readonly workforceNeeded = computed<WorkforceItem[]>(() =>

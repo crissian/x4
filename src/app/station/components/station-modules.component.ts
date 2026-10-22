@@ -16,10 +16,10 @@ import { WareService } from '../../shared/services/ware.service';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import {
 	ModuleRow,
-	RECYCLING_MODULES,
 	ResourceCalculator,
 	StationModuleModel,
 	WareGroupModel,
+	isRecycler,
 } from './station-calculator.model';
 
 @Component({
@@ -115,7 +115,7 @@ export class StationModulesComponent {
 	private createWareGroups() {
 		const groups: Record<string, WareGroupModel & { group: WareGroup | string }> = {};
 		for (const item of this.moduleService.getModulesByType(ModuleTypes.production)) {
-			if (RECYCLING_MODULES.includes(item.id)) {
+			if (isRecycler(item)) {
 				groups[ModuleTypes.recycling] ??= {
 					name: ModuleTypes.recycling,
 					group: ModuleTypes.recycling,

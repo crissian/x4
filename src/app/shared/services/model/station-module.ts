@@ -24,6 +24,10 @@ export interface StationModule {
   owners?: Faction[];
   production: Production[];
   product?: Ware[];
+  /** Wares a production module makes in turn, each with the production method it uses. */
+  queue?: { ware: Ware; method: string }[];
+  /** Wares a processing module makes from recyclables, and how many per production cycle. */
+  processing?: { ware: Ware; amount: number }[];
   type: string;
   cargo?: Cargo;
   workForce?: {

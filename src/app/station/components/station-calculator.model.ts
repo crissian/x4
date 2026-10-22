@@ -7,7 +7,21 @@ import { Workers } from '../../shared/services/data/workers-data';
 import { Effects } from '../../shared/services/data/effects-data';
 import { Wares } from '../../shared/services/data/wares-data';
 
-export const RECYCLING_MODULES = ['module_gen_prod_scrap_recycler', 'module_ter_prod_scrap_recycler'];
+/** True for the scrap recyclers: production modules making their wares with the recycling method. */
+export function isRecycler(module: StationModule) {
+	return module.queue?.some((x) => x.method === ProductionMethods.recycling) ?? false;
+}
+
+/** Workers the player headquarters needs on top of its modules. */
+export const HQ_WORKFORCE = 200;
+
+/**
+ * Wares made per cycle with the workforce bonus: the game rounds the bonus down to whole wares each cycle.
+ * @param bonus workforce bonus as a fraction, e.g. 0.43 for +43%
+ */
+export function amountPerCycle(amount: number, bonus: number) {
+	return amount + Math.floor(amount * bonus);
+}
 
 export interface StationResourceItemModel {
 	ware: Ware;
@@ -59,6 +73,8 @@ export interface StationSettings {
 	isHq: boolean;
 	autoWorkforce: boolean;
 	partialWorkforce: number;
+	/** hours of production and consumption the storage should hold */
+	storageHours: number;
 	provideBasicResources: boolean;
 	provideAllResources: boolean;
 	resourcesPrice: number;
@@ -71,6 +87,7 @@ export const DEFAULT_STATION_SETTINGS: StationSettings = {
 	isHq: false,
 	autoWorkforce: true,
 	partialWorkforce: 0,
+	storageHours: 2,
 	provideBasicResources: false,
 	provideAllResources: false,
 	resourcesPrice: 50,
@@ -98,20 +115,39 @@ export class StationModuleModel {
 		this.production = [];
 
 		if (module.type == ModuleTypes.production) {
-			for (const ware of module.product ?? []) {
+			const productions = (module.product ?? []).flatMap((ware) => {
 				const production = this.productionOf(module, ware);
-				if (!production) {
-					continue;
-				}
+				return production ? [{ ware, production }] : [];
+			});
+			// modules making several wares (the scrap recyclers) run one cycle of each in turn
+			const queueTime = productions.reduce((sum, x) => sum + x.production.time, 0);
 
+			for (const { ware, production } of productions) {
 				// cycles per hour
-				const cycles = 3600 / production.time;
+				const cycles = 3600 / queueTime;
 
 				this.production.push({ amount: production.amount * cycles, ware, value: production });
 				for (const x of production.wares) {
 					const neededWare = this.wareService.getEntity(x.ware);
 					if (neededWare) {
 						this.needs.push({ amount: x.amount * cycles, ware: neededWare });
+					}
+				}
+			}
+		} else if (module.type == ModuleTypes.processingmodule) {
+			// processors turn recyclables into scrap with the processing method, many wares per cycle
+			for (const { ware, amount } of module.processing ?? []) {
+				const production = ware.production?.find((x) => x.method == ProductionMethods.processing);
+				if (!production) {
+					continue;
+				}
+
+				const cycles = 3600 / production.time;
+				this.production.push({ amount: production.amount * amount * cycles, ware, value: production });
+				for (const x of production.wares) {
+					const neededWare = this.wareService.getEntity(x.ware);
+					if (neededWare) {
+						this.needs.push({ amount: x.amount * amount * cycles, ware: neededWare });
 					}
 				}
 			}
@@ -125,22 +161,18 @@ export class StationModuleModel {
 		}
 	}
 
-	/** Recyclers use the recycling method, race specific modules their race method, the rest the default one. */
+	/** The production method the module queues the ware with, the default one when the ware has no such method. */
 	private productionOf(module: StationModule, ware: Ware): Production | undefined {
 		const productions = ware.production ?? [];
-		const byMethod = (method: string) => productions.find((x) => x.method == method);
-		if (RECYCLING_MODULES.includes(module.id)) {
-			const recycling = byMethod(ProductionMethods.recycling);
-			if (recycling) {
-				return recycling;
-			}
-		}
-		return (module.makerRace && byMethod(module.makerRace.id)) || byMethod(ProductionMethods.default);
+		const byMethod = (method?: string) => productions.find((x) => x.method == method);
+		const method = module.queue?.find((x) => x.ware.id == ware.id)?.method;
+		return byMethod(method) || byMethod(ProductionMethods.default);
 	}
 }
 
 export class ResourceCalculator {
-	static calculateWorkforce(modules: StationModuleModel[]) {
+	/** Workforce needed (`value`, including the HQ workers) and housed (`capacity`) by the station. */
+	static calculateWorkforce(modules: StationModuleModel[], isHq = false) {
 		const totalWorkforce = modules.reduce((acc, item) => {
 			if (item.module && item.module.workForce && item.module.workForce.max) {
 				return acc + item.count * item.module.workForce.max;
@@ -155,11 +187,11 @@ export class ResourceCalculator {
 			return acc;
 		}, 0);
 
-		return { value: totalWorkforce, capacity: workforce };
+		return { value: totalWorkforce + (isHq ? HQ_WORKFORCE : 0), capacity: workforce };
 	}
 
-	static calculate(modules: StationModuleModel[], sunlight: number, partialWorkforce: number) {
-		const work = this.calculateWorkforce(modules);
+	static calculate(modules: StationModuleModel[], sunlight: number, partialWorkforce: number, isHq = false) {
+		const work = this.calculateWorkforce(modules, isHq);
 
 		let multiplier = work.capacity == 0 || work.value == 0 ? 0 : partialWorkforce / work.value;
 
@@ -201,7 +233,9 @@ export class ResourceCalculator {
 							const effect = production.value.effects
 								? production.value.effects.find((e) => e.type == Effects.work)
 								: null;
-							let efficiency = effect == null ? 1 : 1 + effect.product * multiplier;
+							const perCycle = production.value.amount;
+							let efficiency =
+								effect == null ? 1 : amountPerCycle(perCycle, effect.product * multiplier) / perCycle;
 
 							if (production.ware.id === Wares.energycells.id) {
 								// add sunlight for energy cells

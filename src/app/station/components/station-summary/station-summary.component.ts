@@ -3,18 +3,20 @@ import { FieldTree } from '@angular/forms/signals';
 import { StationModuleModel, StationResourceModel, StationSettings } from '../station-calculator.model';
 import { StationCostsComponent } from './station-costs.component';
 import { StationProfitComponent } from './station-profit.component';
+import { StationStorageComponent } from './station-storage.component';
 import { StationWorkforceComponent } from './station-workforce.component';
 
 /**
- * The Station Summary component: workforce, hourly profit and build costs of the station.
+ * The Station Summary component: workforce, hourly profit, storage and build costs of the station.
  */
 @Component({
 	selector: 'app-station-summary',
-	imports: [StationWorkforceComponent, StationProfitComponent, StationCostsComponent],
+	imports: [StationWorkforceComponent, StationProfitComponent, StationStorageComponent, StationCostsComponent],
 	host: { class: 'flex flex-col gap-4' },
 	template: `
 		<app-station-workforce [modules]="modules()" [workforce]="workforce()" [settings]="settings()" />
 		<app-station-profit [resources]="resources()" [settings]="settings()" />
+		<app-station-storage [modules]="modules()" [resources]="resources()" [settings]="settings()" />
 		<app-station-costs [modules]="modules()" [settings]="settings()" />
 	`,
 })

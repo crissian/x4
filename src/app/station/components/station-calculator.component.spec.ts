@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { ModuleService } from '../../shared/services/module.service';
 import { WareService } from '../../shared/services/ware.service';
 import StationCalculatorComponent, { parseSharedLayout } from './station-calculator.component';
-import { ResourceCalculator, StationModuleModel } from './station-calculator.model';
+import { HQ_WORKFORCE, ResourceCalculator, StationModuleModel, amountPerCycle } from './station-calculator.model';
 
 const HULL_PARTS = 'module_gen_prod_hullparts_01';
 const HABITAT = 'module_arg_hab_m_01';
@@ -58,6 +58,71 @@ describe('station calculator', () => {
 		expect(total('hullparts')).toBeCloseTo(4 * 1176);
 		expect(total('energycells')).toBeCloseTo(-4 * 320);
 		expect(total('refinedmetals')).toBeCloseTo(-4 * 1120);
+	});
+
+	it('alternates the scrap recycler between its products', () => {
+		const recycler = model('module_gen_prod_scrap_recycler', 1);
+		// one 5 minute cycle of each in turn: 6 cycles per hour of 60 claytronics and 6 of 200 hull parts
+		expect(recycler.production?.map((x) => [x.ware.id, x.amount])).toEqual([
+			['claytronics', 360],
+			['hullparts', 1200],
+		]);
+		const needs = (id: string) => recycler.needs.filter((x) => x.ware.id === id).reduce((sum, x) => sum + x.amount, 0);
+		expect(needs('energycells')).toBe(93000);
+		expect(needs('scrapmetal')).toBe(2250);
+	});
+
+	it("recycles Kha'ak scrap into alloy", () => {
+		// 100 alloy every 5 minutes from 6000 energy cells, 300 Kha'ak scrap and 200 nividium
+		const recycler = model('module_gen_prod_scrap_recyclerkhaak', 1);
+		expect(recycler.production?.map((x) => [x.ware.id, x.amount])).toEqual([['khaakalloy', 1200]]);
+		expect(recycler.needs.map((x) => [x.ware.id, x.amount])).toEqual([
+			['energycells', 72000],
+			['khaakscrapmetal', 3600],
+			['nividium', 2400],
+		]);
+	});
+
+	it('processes raw scrap into scrap metal', () => {
+		// 150 scrap metal per minute, each from 1 raw scrap and 10 energy cells
+		const processor = model('module_gen_proc_scrapworks', 1);
+		expect(processor.production?.map((x) => [x.ware.id, x.amount])).toEqual([['scrapmetal', 9000]]);
+		expect(processor.needs.map((x) => [x.ware.id, x.amount])).toEqual([
+			['energycells', 90000],
+			['rawscrap', 9000],
+		]);
+	});
+
+	it('uses the production method the module queues', () => {
+		const teladi = model('module_tel_prod_hullparts_01', 1);
+		expect(teladi.production?.[0].value.method).toBe('teladi');
+		expect(teladi.needs.map((x) => x.ware.id)).toContain('teladianium');
+	});
+
+	it('rounds the workforce bonus down each cycle like the game', () => {
+		// 50 energy cells per cycle at +43%: 50 + floor(21.5) = 71
+		expect(amountPerCycle(50, 0.43)).toBe(71);
+		expect(amountPerCycle(294, 0)).toBe(294);
+
+		const modules = [model(HABITAT, 1), model(HULL_PARTS, 1)];
+		const workforce = ResourceCalculator.calculateWorkforce(modules).value;
+		const resources = ResourceCalculator.calculate(modules, 100, workforce);
+		// 294 + floor(294 * 0.37) = 402 hull parts, 4 cycles per hour
+		expect(resources.find((x) => x.ware.id === 'hullparts')?.amount).toBe(4 * 402);
+	});
+
+	it('counts the headquarters workers', () => {
+		const modules = [model(HABITAT, 2), model(HULL_PARTS, 1)];
+		const workforce = ResourceCalculator.calculateWorkforce(modules).value;
+		expect(ResourceCalculator.calculateWorkforce(modules, true).value).toBe(workforce + HQ_WORKFORCE);
+
+		// the HQ workers fill the habitats, so they eat more
+		const food = (isHq: boolean) => {
+			const needed = ResourceCalculator.calculateWorkforce(modules, isHq);
+			const resources = ResourceCalculator.calculate(modules, 100, Math.min(needed.value, needed.capacity), isHq);
+			return resources.find((x) => x.ware.id === 'foodrations')?.amount ?? 0;
+		};
+		expect(food(true)).toBeLessThan(food(false));
 	});
 
 	it('loads a shared layout from the query parameter', async () => {

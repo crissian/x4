@@ -66,6 +66,39 @@ export class LayoutService {
 		this.saveLayoutsInternal(layouts);
 	}
 
+	/** All saved layouts as JSON, in the same format they are kept in local storage. */
+	exportLayouts(): string {
+		const data = this.getCurrentService().getSaveData(this.getLayouts());
+		return JSON.stringify({ ...data, version: LayoutService.version }, null, 2);
+	}
+
+	/**
+	 * Adds the layouts of an exported JSON file to the saved ones, replacing layouts with the same name.
+	 * @returns the number of imported layouts
+	 */
+	importLayouts(json: string): number {
+		const data = JSON.parse(json) as { version?: number };
+		const service = this.services[data?.version ?? 0];
+		const imported = service?.getLayouts(data);
+		if (!Array.isArray(imported) || imported.some((x) => typeof x?.name !== 'string' || !Array.isArray(x.config))) {
+			throw new Error('Not a layouts file');
+		}
+
+		const layouts = this.getLayouts();
+		for (const layout of imported) {
+			const index = layouts.findIndex((x) => x.name.toLowerCase() === layout.name.toLowerCase());
+			if (index >= 0) {
+				layouts[index] = layout;
+			} else {
+				layouts.push(layout);
+			}
+		}
+
+		this.analytics.event({ label: String(imported.length), category: 'Layouts', action: 'Import Layouts' });
+		this.saveLayoutsInternal(layouts);
+		return imported.length;
+	}
+
 	saveLayoutsInternal(layouts: Layout[]) {
 		const data = this.getCurrentService().getSaveData(layouts);
 		this.storageService.add(LayoutService.storageKey, { ...data, version: LayoutService.version });

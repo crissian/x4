@@ -5,29 +5,40 @@
 		i18n-placeholder="@@select"
 		placeholder="( Select )"
 		aria-label="Module"
+		role="combobox"
+		aria-autocomplete="list"
+		[attr.aria-expanded]="visible()"
+		[attr.aria-controls]="listId"
+		[attr.aria-activedescendant]="activeId() ? listId + '-' + activeId() : null"
 		[formField]="queryField"
 		(focus)="onFocus()"
 		(blur)="onBlur()"
+		(keydown)="onKeydown($event)"
 	/>
 	@if (visible()) {
 		<div
-			tabindex="0"
+			[id]="listId"
+			role="listbox"
+			aria-label="Modules"
 			class="absolute z-10 mt-1 max-h-[40vh] min-w-full overflow-y-auto rounded-md border border-line-strong bg-raised py-1 shadow-xl"
-			(focus)="onFocus()"
-			(blur)="onBlur()"
+			(mousedown)="$event.preventDefault()"
 		>
 			@for (group of filteredGroups(); track group.name) {
-				<div class="px-2.5 pt-1.5 font-bold text-fg">{{ group.name }}</div>
+				<div role="presentation" class="px-2.5 pt-1.5 font-bold text-fg">{{ group.name }}</div>
 				@for (module of group.modules; track module.id) {
-					<button
-						type="button"
-						tabindex="-1"
+					<div
+						role="option"
+						[id]="optionId(module)"
+						[attr.data-id]="module.id"
+						[attr.aria-selected]="module.id === activeId()"
 						class="block w-full cursor-pointer py-0.5 pr-2.5 pl-5 text-left whitespace-nowrap hover:bg-hover"
-						(mousedown)="$event.preventDefault()"
+						[class.bg-hover]="module.id === activeId()"
+						tabindex="-1"
 						(click)="onClick(module)"
+						(keydown.enter)="onClick(module)"
 					>
 						{{ module.name }}
-					</button>
+					</div>
 				}
 			} @empty {
 				<div class="px-2.5 py-1 text-fg-muted">No modules found</div>

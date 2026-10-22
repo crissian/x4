@@ -1,4 +1,7 @@
 <app-modal i18n-title="@@loadLayout" title="Load Layout">
+	@if (importMessage(); as message) {
+		<p class="mb-3" [class.text-danger]="message.error" [class.text-success]="!message.error">{{ message.text }}</p>
+	}
 	<div class="divide-y divide-line overflow-hidden rounded-md border border-line">
 		@for (entity of entities(); track entity.name) {
 			<div
@@ -43,6 +46,24 @@
 		}
 	</div>
 	<ng-container footer>
+		<button
+			type="button"
+			class="btn btn-info mr-auto"
+			[disabled]="entities().length === 0"
+			(click)="exportLayouts()"
+			title="Download all saved layouts as a backup file"
+		>
+			<svg lucideDownload /><span i18n="@@exportLayouts">Export</span>
+		</button>
+		<input #file type="file" accept=".json,application/json" class="hidden" (change)="importLayouts($event)" />
+		<button
+			type="button"
+			class="btn btn-info"
+			(click)="file.click()"
+			title="Add the layouts of an exported backup file"
+		>
+			<svg lucideUpload /><span i18n="@@importLayouts">Import</span>
+		</button>
 		<button type="button" class="btn btn-secondary" (click)="dialogRef.close()" i18n="@@cancel">Cancel</button>
 	</ng-container>
 </app-modal>
