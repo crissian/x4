@@ -1,4 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LocalStorage } from '../../core/services/local-storage';
 import { MapStations } from '../map-stations';
 import { MapStore } from '../map-store';
 import { StationTypeBadgeComponent } from '../station-type-badge.component';
@@ -11,8 +12,14 @@ import { StationTypeBadgeComponent } from '../station-type-badge.component';
 })
 export class MapLegendComponent {
 	protected readonly store = inject(MapStore);
-	/** Starts collapsed on narrow screens, where it would cover much of the map. */
-	protected readonly open = signal(!globalThis.matchMedia?.('(max-width: 639px)').matches);
+	/** Remembered between visits; at first starts collapsed on narrow screens, where it would cover much of the map. */
+	protected readonly open = LocalStorage.persistedSignal(
+		'map-legend-open',
+		!globalThis.matchMedia?.('(max-width: 639px)').matches,
+		{
+			parse: (value) => (typeof value === 'boolean' ? value : undefined),
+		}
+	);
 	protected readonly hideLabel = $localize`Hide`;
 	protected readonly legendLabel = $localize`Legend`;
 	protected readonly stations = inject(MapStations);

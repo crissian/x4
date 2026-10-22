@@ -1,0 +1,31 @@
+<button
+	#button
+	type="button"
+	class="inline-flex items-center gap-1.5 px-3 py-3 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
+	[class]="active() || open() ? '!text-fg-strong bg-nav-active' : ''"
+	[attr.aria-current]="active() ? 'true' : null"
+	[attr.aria-controls]="panelId"
+	[attr.aria-expanded]="open()"
+	(click)="onButtonClick($event)"
+	(keydown.arrowdown)="onButtonArrowDown($event)"
+>
+	<svg [lucideIcon]="group().icon" class="opacity-80" />{{ group().label
+	}}<svg lucideChevronDown class="opacity-80" />
+</button>
+
+@if (open()) {
+	<div [id]="panelId" class="absolute top-full z-30 border border-line bg-nav py-1 shadow-lg">
+		@for (link of group().links; track link.path) {
+			<a
+				#item
+				[routerLink]="link.path"
+				routerLinkActive="!text-fg-strong bg-nav-active"
+				class="flex items-center gap-2 px-4 py-2.5 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
+				(click)="openChange.emit(false)"
+				(keydown.arrowdown)="onItemArrow($event, 1)"
+				(keydown.arrowup)="onItemArrow($event, -1)"
+				><svg [lucideIcon]="link.icon" class="opacity-80" />{{ link.label }}</a
+			>
+		}
+	</div>
+}

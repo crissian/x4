@@ -1,0 +1,130 @@
+<div
+	#area
+	class="relative touch-none overflow-hidden rounded border border-line bg-[#05080f] select-none"
+	[class]="fill() ? 'size-full' : 'aspect-[4/3] w-full'"
+	role="region"
+	aria-label="Route map"
+	i18n-aria-label
+	(wheel)="surface.wheel($event)"
+	(pointerdown)="surface.pointerDown($event)"
+	(pointermove)="surface.pointerMove($event)"
+	(pointerup)="surface.pointerUp($event)"
+	(pointercancel)="surface.pointerUp($event)"
+>
+	@if (route(); as route) {
+		@let unit = fontSize();
+		<svg class="absolute inset-0 size-full" [attr.viewBox]="panZoom.viewBox()" preserveAspectRatio="xMidYMid meet">
+			@for (shape of route.context; track shape.sector.id) {
+				<polygon
+					[attr.points]="shape.points"
+					fill="#94a3b8"
+					fill-opacity="0.04"
+					stroke="#94a3b8"
+					stroke-opacity="0.25"
+					stroke-width="1"
+					vector-effect="non-scaling-stroke"
+				/>
+			}
+			@for (link of route.links; track $index) {
+				<line
+					[attr.x1]="link.x1"
+					[attr.y1]="link.y1"
+					[attr.x2]="link.x2"
+					[attr.y2]="link.y2"
+					stroke="#94a3b8"
+					stroke-opacity="0.3"
+					stroke-width="1"
+					[attr.stroke-dasharray]="link.type === 'gate' ? null : '3 3'"
+					vector-effect="non-scaling-stroke"
+				/>
+			}
+			@for (item of route.sectors; track $index) {
+				<polygon
+					[attr.data-path]="item.shape.sector.id"
+					[attr.points]="item.shape.points"
+					[attr.fill]="item.color"
+					fill-opacity="0.25"
+					[attr.stroke]="item.color"
+					stroke-opacity="0.9"
+					stroke-width="1.5"
+					vector-effect="non-scaling-stroke"
+				>
+					<svg:title>{{ item.shape.sector.name }}</svg:title>
+				</polygon>
+			}
+			@for (item of route.sectors; track $index) {
+				@if (item.warn) {
+					<polygon
+						[attr.data-warn]="item.shape.sector.id"
+						[attr.points]="item.shape.points"
+						fill="none"
+						stroke="#ef4444"
+						stroke-width="3"
+						vector-effect="non-scaling-stroke"
+					/>
+				}
+			}
+
+			<polyline
+				[attr.points]="route.points"
+				fill="none"
+				stroke="#facc15"
+				stroke-width="3"
+				stroke-linejoin="round"
+				stroke-linecap="round"
+				vector-effect="non-scaling-stroke"
+			/>
+
+			@for (item of route.sectors; track $index) {
+				<text
+					[attr.x]="item.shape.x"
+					[attr.y]="item.shape.y + item.shape.r * 0.55"
+					[attr.font-size]="unit"
+					[attr.stroke-width]="unit * 0.2"
+					text-anchor="middle"
+					dominant-baseline="middle"
+					paint-order="stroke"
+					stroke="#05080f"
+					fill="#e2e8f0"
+				>
+					{{ item.shape.sector.name }}
+				</text>
+			}
+
+			<circle
+				data-end="start"
+				[attr.cx]="route.start.x"
+				[attr.cy]="route.start.y"
+				[attr.r]="unit * 0.8"
+				fill="#22c55e"
+				stroke="#05080f"
+				stroke-width="2"
+				vector-effect="non-scaling-stroke"
+			>
+				<svg:title i18n>Start: {{ route.start.sector.name }}</svg:title>
+			</circle>
+			<circle
+				data-end="end"
+				[attr.cx]="route.end.x"
+				[attr.cy]="route.end.y"
+				[attr.r]="unit * 0.8"
+				fill="#ef4444"
+				stroke="#05080f"
+				stroke-width="2"
+				vector-effect="non-scaling-stroke"
+			>
+				<svg:title i18n>End: {{ route.end.sector.name }}</svg:title>
+			</circle>
+		</svg>
+
+		<app-map-zoom-buttons
+			resetLabel="Show the whole route"
+			i18n-resetLabel
+			[expandable]="!fill()"
+			(zoomIn)="zoom(0.7)"
+			(zoomOut)="zoom(1.4)"
+			(fit)="reset()"
+			(expand)="expand()"
+		/>
+	}
+</div>

@@ -1,25 +1,14 @@
-import {
-	Component,
-	DestroyRef,
-	ElementRef,
-	afterNextRender,
-	computed,
-	effect,
-	inject,
-	input,
-	signal,
-	untracked,
-	viewChild,
-} from '@angular/core';
+import { Component, ElementRef, computed, effect, inject, input, signal, untracked, viewChild } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { RouterLink } from '@angular/router';
-import { LucideExpand, LucideMaximize2, LucideZoomIn, LucideZoomOut } from '@lucide/angular';
 import { LazyValue } from '../../core/lazy-value';
 import { StationMarkersComponent } from '../../map/canvas/station-markers';
 import { StationTooltipComponent } from '../../map/canvas/station-tooltip';
 import { GalaxyLayout } from '../../map/galaxy-layout';
+import { MapZoomButtonsComponent } from '../../map/map-zoom-buttons.component';
 import { MapGeometry } from '../../map/map-geometry';
-import { PanZoom, PanZoomLimits, Rect, ViewBox, ViewSize } from '../../map/pan-zoom';
+import { PanZoom, PanZoomLimits, Rect } from '../../map/pan-zoom';
+import { PanZoomArea } from '../../map/pan-zoom-area';
 import { MAP_SHAPES, MapSaveLayer } from '../../map/save/map-save-layer';
 import { StationHover, StationMarker, StationMarkers } from '../../map/station-marker';
 import type { SaveMap } from '../../savegame/map/save-map-model';
@@ -38,10 +27,7 @@ import { SectorMapDialogComponent } from './sector-map-dialog.component';
 	selector: 'app-sector-map',
 	imports: [
 		RouterLink,
-		LucideZoomIn,
-		LucideZoomOut,
-		LucideExpand,
-		LucideMaximize2,
+		MapZoomButtonsComponent,
 		StationMarkersComponent,
 		StationTooltipComponent,
 	],
@@ -49,9 +35,6 @@ import { SectorMapDialogComponent } from './sector-map-dialog.component';
 	providers: [MapGeometry, MapSaveLayer, { provide: MAP_SHAPES, useFactory: () => inject(MapGeometry).shapeById }],
 })
 export class SectorMapComponent {
-	/** Label size in screen pixels. */
-	private static readonly LABEL_PX = 11;
-
 	readonly sector = input.required<string>();
 	/** Fills its container, as in the enlarged dialog, instead of the fixed size beside the description. */
 	readonly fill = input(false);
@@ -64,11 +47,16 @@ export class SectorMapComponent {
 	private readonly dialog = inject(Dialog);
 	private readonly area = viewChild.required<ElementRef<HTMLElement>>('area');
 
-	readonly size = signal<ViewSize>({ width: 600, height: 400 });
-	readonly view = signal<ViewBox>({ x: 0, y: 0, w: 1 });
-	readonly panZoom = new PanZoom(this.view, this.size, () => this.limits());
+	protected readonly surface = new PanZoomArea(
+		this.area,
+		() => this.limits(),
+		() => this.reset()
+	);
+	readonly size = this.surface.size;
+	readonly view = this.surface.view;
+	readonly panZoom = this.surface.panZoom;
+	readonly fontSize = this.surface.fontSize;
 	readonly hovered = signal<StationHover | undefined>(undefined);
-	readonly fontSize = computed(() => SectorMapComponent.LABEL_PX / this.panZoom.scale());
 
 	readonly shape = computed(() => this.geometry.shapeById.get(this.sector()));
 	/** Same source as the stations card: the active save when it has map data. */
@@ -127,22 +115,6 @@ export class SectorMapComponent {
 				this.reset();
 			});
 		});
-		const destroyRef = inject(DestroyRef);
-		afterNextRender(() => {
-			let first = true;
-			const observer = new ResizeObserver(([entry]) => {
-				const { width, height } = entry.contentRect;
-				if (width > 0 && height > 0) {
-					this.size.set({ width, height });
-					if (first) {
-						first = false;
-						this.reset();
-					}
-				}
-			});
-			observer.observe(this.area().nativeElement);
-			destroyRef.onDestroy(() => observer.disconnect());
-		});
 	}
 
 	/** Fits the whole hex into the view. */
@@ -159,27 +131,13 @@ export class SectorMapComponent {
 	}
 
 	zoom(factor: number) {
-		this.panZoom.zoom(this.area().nativeElement, factor);
-	}
-
-	protected onWheel(event: WheelEvent) {
-		this.panZoom.wheel(this.area().nativeElement, event);
-	}
-
-	protected onPointerDown(event: PointerEvent) {
-		if (event.button === 0) {
-			this.panZoom.start(event);
-		}
+		this.surface.zoom(factor);
 	}
 
 	protected onPointerMove(event: PointerEvent) {
-		if (this.panZoom.move(this.area().nativeElement, event)) {
+		if (this.surface.pointerMove(event)) {
 			this.hovered.set(undefined);
 		}
-	}
-
-	protected onPointerUp(event: PointerEvent) {
-		this.panZoom.end(event);
 	}
 
 	/** The bounding box of the hex: the view centre stays inside it, and it limits zooming out. */

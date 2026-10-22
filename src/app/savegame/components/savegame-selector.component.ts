@@ -1,7 +1,7 @@
 import { Component, effect, inject, linkedSignal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { RouterLink } from '@angular/router';
-import { LucideSave } from '@lucide/angular';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { LucideFolderOpen, LucideSave } from '@lucide/angular';
 import { SavegameListItem } from '../savegame-model';
 import { SavegameFormat } from '../savegame-format';
 import { SavegameStore } from '../savegame-store';
@@ -9,7 +9,7 @@ import { SavegameStore } from '../savegame-store';
 /** Header select to pick the active save, or a link to the saves page when there are none. */
 @Component({
 	selector: 'app-savegame-selector',
-	imports: [FormField, RouterLink, LucideSave],
+	imports: [FormField, RouterLink, RouterLinkActive, LucideFolderOpen, LucideSave],
 	templateUrl: './savegame-selector.component.html',
 })
 export class SavegameSelectorComponent {

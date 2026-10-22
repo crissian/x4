@@ -7,11 +7,11 @@
 		role="region"
 		aria-label="Sector map"
 		i18n-aria-label
-		(wheel)="onWheel($event)"
-		(pointerdown)="onPointerDown($event)"
+		(wheel)="surface.wheel($event)"
+		(pointerdown)="surface.pointerDown($event)"
 		(pointermove)="onPointerMove($event)"
-		(pointerup)="onPointerUp($event)"
-		(pointercancel)="onPointerUp($event)"
+		(pointerup)="surface.pointerUp($event)"
+		(pointercancel)="surface.pointerUp($event)"
 		(pointerleave)="hovered.set(undefined)"
 	>
 		@if (shape(); as shape) {
@@ -76,30 +76,15 @@
 			</svg>
 		}
 
-		<div class="absolute top-3 right-3 flex flex-col gap-1" (pointerdown)="$event.stopPropagation()">
-			<button type="button" class="btn btn-dark" title="Zoom in" i18n-title (click)="zoom(0.7)">
-				<svg lucideZoomIn />
-			</button>
-			<button type="button" class="btn btn-dark" title="Zoom out" i18n-title (click)="zoom(1.4)">
-				<svg lucideZoomOut />
-			</button>
-			<button type="button" class="btn btn-dark" title="Show the whole sector" i18n-title (click)="reset()">
-				<svg lucideExpand />
-			</button>
-			@if (!fill()) {
-				<button
-					type="button"
-					class="btn btn-dark"
-					title="Open a larger map"
-					i18n-title
-					aria-label="Open a larger map"
-					i18n-aria-label
-					(click)="expand()"
-				>
-					<svg lucideMaximize2 />
-				</button>
-			}
-		</div>
+		<app-map-zoom-buttons
+			resetLabel="Show the whole sector"
+			i18n-resetLabel
+			[expandable]="!fill()"
+			(zoomIn)="zoom(0.7)"
+			(zoomOut)="zoom(1.4)"
+			(fit)="reset()"
+			(expand)="expand()"
+		/>
 	</div>
 
 	<app-station-tooltip [hover]="hovered()" [size]="size()" [spill]="!fill()" />

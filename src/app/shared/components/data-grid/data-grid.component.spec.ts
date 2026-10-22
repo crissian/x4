@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { DataGridComponent, GridColumn } from './data-grid.component';
 
@@ -32,6 +33,44 @@ class HostComponent {
 	readonly clicked = signal<Row | undefined>(undefined);
 }
 
+@Component({
+	imports: [DataGridComponent],
+	template: `<app-data-grid
+		[data]="rows"
+		[columns]="columns"
+		[clickable]="true"
+		[selected]="selected()"
+		[sort]="{ key: 'price', direction: -1 }"
+		(rowClick)="selected.set($event)"
+	/>`,
+})
+class SelectHostComponent {
+	readonly rows = ROWS.slice(0, 3);
+	readonly columns: GridColumn<Row>[] = [
+		{
+			key: 'name',
+			caption: 'Name',
+			link: (x) => ['/items', x.id],
+			queryParams: (x) => ({ size: x.size }),
+			title: (x) => `About ${x.name}`,
+		},
+		{ key: 'price', caption: 'Price', type: 'number' },
+	];
+	readonly selected = signal<Row | undefined>(ROWS[1]);
+}
+
+@Component({
+	imports: [DataGridComponent],
+	template: `<app-data-grid [data]="rows" [columns]="columns()" storageKey="dynamic" />`,
+})
+class DynamicHostComponent {
+	readonly rows = ROWS.slice(0, 2);
+	readonly name: GridColumn<Row> = { key: 'name', caption: 'Name' };
+	readonly price: GridColumn<Row> = { key: 'price', caption: 'Price', type: 'number' };
+	readonly size: GridColumn<Row> = { key: 'size', caption: 'Size', hidden: true };
+	readonly columns = signal<GridColumn<Row>[]>([this.name, this.size]);
+}
+
 describe('DataGridComponent', () => {
 	beforeEach(() => localStorage.clear());
 
@@ -42,7 +81,8 @@ describe('DataGridComponent', () => {
 		const stable = () => fixture.whenStable();
 		const headerCells = () => element.querySelectorAll('thead tr:first-child th');
 		const headers = () => [...headerCells()].map((x) => x.textContent!.trim());
-		const firstColumn = () => [...element.querySelectorAll('tbody tr')].map((x) => x.querySelector('td')!.textContent);
+		const firstColumn = () =>
+			[...element.querySelectorAll('tbody tr')].map((x) => x.querySelector('td')!.textContent);
 		const footer = () => element.querySelector('tfoot')!.textContent!.trim();
 		const set = async (selector: string, value: string) => {
 			const control = element.querySelector<HTMLInputElement | HTMLSelectElement>(selector)!;
@@ -123,5 +163,79 @@ describe('DataGridComponent', () => {
 		const { fixture, element, click } = await setup();
 		await click(element.querySelectorAll('tbody tr')[2]);
 		expect(fixture.componentInstance.clicked()?.id).toBe(3);
+	});
+
+	it('starts with the given sort, marks the selected row and selects rows with Enter', async () => {
+		TestBed.configureTestingModule({ providers: [provideRouter([])] });
+		const fixture = TestBed.createComponent(SelectHostComponent);
+		await fixture.whenStable();
+		const element: HTMLElement = fixture.nativeElement;
+		const rows = () => [...element.querySelectorAll('tbody tr')];
+		expect(rows().map((x) => x.querySelector('td')!.textContent)).toEqual(['Item 3', 'Item 2', 'Item 1']);
+		expect(element.querySelectorAll('thead th')[1].getAttribute('aria-sort')).toBe('descending');
+		expect(rows().map((x) => x.getAttribute('aria-current'))).toEqual([null, 'true', null]);
+		expect(rows()[0].getAttribute('tabindex')).toBe('0');
+
+		rows()[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+		await fixture.whenStable();
+		expect(fixture.componentInstance.selected()?.id).toBe(3);
+		expect(rows()[0].getAttribute('aria-current')).toBe('true');
+		expect(rows()[1].getAttribute('aria-current')).toBeNull();
+
+		// Space selects too, without scrolling the page
+		const space = new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true });
+		rows()[2].dispatchEvent(space);
+		await fixture.whenStable();
+		expect(space.defaultPrevented).toBe(true);
+		expect(fixture.componentInstance.selected()?.id).toBe(1);
+
+		// Enter on a cell link follows the link without selecting the row
+		const link = rows()[0].querySelector('a')!;
+		link.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+		await fixture.whenStable();
+		expect(fixture.componentInstance.selected()?.id).toBe(1);
+
+		const cell = rows()[0].querySelector('td')!;
+		expect(cell.getAttribute('title')).toBe('About Item 3');
+		expect(cell.querySelector('a')!.getAttribute('href')).toBe('/items/3?size=large');
+	});
+
+	it('shows columns added after the saved choice by their default', async () => {
+		const create = async () => {
+			const fixture = TestBed.createComponent(DynamicHostComponent);
+			await fixture.whenStable();
+			const headers = () =>
+				[...fixture.nativeElement.querySelectorAll('thead tr:first-child th')].map((x: Element) =>
+					x.textContent!.trim()
+				);
+			return { fixture, headers };
+		};
+		const { fixture, headers } = await create();
+		expect(headers()).toEqual(['Name']);
+
+		const host = fixture.componentInstance;
+		host.columns.set([host.name, host.price, host.size]);
+		await fixture.whenStable();
+		expect(headers()).toEqual(['Name', 'Price']);
+
+		// a column the saved choice knew keeps it, even while it is absent
+		host.columns.set([host.name, host.size]);
+		await fixture.whenStable();
+		host.columns.set([host.name, host.price, host.size]);
+		await fixture.whenStable();
+		expect(headers()).toEqual(['Name', 'Price']);
+		expect(JSON.parse(localStorage.getItem('grid-columns-known:dynamic')!)).toEqual(['name', 'price', 'size']);
+	});
+
+	it('applies a list saved without the known columns to every column', async () => {
+		localStorage.setItem('grid-columns:dynamic', JSON.stringify(['name']));
+		const fixture = TestBed.createComponent(DynamicHostComponent);
+		const host = fixture.componentInstance;
+		host.columns.set([host.name, host.price, host.size]);
+		await fixture.whenStable();
+		const headers = [...fixture.nativeElement.querySelectorAll('thead tr:first-child th')].map((x: Element) =>
+			x.textContent!.trim()
+		);
+		expect(headers).toEqual(['Name']);
 	});
 });

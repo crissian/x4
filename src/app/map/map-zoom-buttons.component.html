@@ -1,0 +1,46 @@
+<div class="absolute top-3 right-3 flex flex-col gap-1" (pointerdown)="$event.stopPropagation()">
+	<button
+		type="button"
+		class="btn btn-dark"
+		title="Zoom in"
+		i18n-title
+		aria-label="Zoom in"
+		i18n-aria-label
+		(click)="zoomIn.emit()"
+	>
+		<svg lucideZoomIn />
+	</button>
+	<button
+		type="button"
+		class="btn btn-dark"
+		title="Zoom out"
+		i18n-title
+		aria-label="Zoom out"
+		i18n-aria-label
+		(click)="zoomOut.emit()"
+	>
+		<svg lucideZoomOut />
+	</button>
+	<button
+		type="button"
+		class="btn btn-dark"
+		[attr.title]="resetLabel()"
+		[attr.aria-label]="resetLabel()"
+		(click)="fit.emit()"
+	>
+		<svg lucideExpand />
+	</button>
+	@if (expandable()) {
+		<button
+			type="button"
+			class="btn btn-dark"
+			title="Open a larger map"
+			i18n-title
+			aria-label="Open a larger map"
+			i18n-aria-label
+			(click)="expand.emit()"
+		>
+			<svg lucideMaximize2 />
+		</button>
+	}
+</div>

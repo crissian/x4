@@ -1,5 +1,5 @@
 <header class="relative flex items-center gap-2 bg-nav px-4 shadow-lg sm:gap-3 dark:shadow-black/40">
-	<app-header-nav class="flex min-h-11 min-w-9 flex-1 items-center" [links]="links" />
+	<app-header-nav class="flex min-h-11 min-w-9 flex-1 items-center" [items]="items" />
 
 	<app-savegame-selector />
 
@@ -47,4 +47,15 @@
 			class="text-amber-500 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110"
 		/><span class="hidden lg:inline" i18n>Buy me a coffee</span></a
 	>
+
+	<a
+		routerLink="/about"
+		routerLinkActive="!text-fg-strong bg-nav-active"
+		class="inline-flex size-9 shrink-0 items-center justify-center rounded-md text-nav-fg hover:bg-hover hover:text-fg-strong"
+		i18n-aria-label
+		aria-label="About"
+		i18n-title
+		title="About"
+		><svg lucideInfo
+	/></a>
 </header>

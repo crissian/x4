@@ -65,13 +65,17 @@ export class PanZoom {
 		private readonly limits: () => PanZoomLimits
 	) {}
 
-	/** The view showing all of `area`, centred, with a margin as a share of its size. */
-	static fit(area: Rect, size: ViewSize, margin = 0): ViewBox {
+	/**
+	 * The view showing all of `area`, centred, with a margin as a share of its size. `reserveRight` keeps that many
+	 * pixels free on the right, such as for a column of buttons.
+	 */
+	static fit(area: Rect, size: ViewSize, margin = 0, reserveRight = 0): ViewBox {
+		const free = Math.max(size.width - reserveRight, 1);
 		const w = area.w * (1 + margin * 2);
 		const h = area.h * (1 + margin * 2);
-		const fitW = Math.max(w, (h * size.width) / size.height);
-		const fitH = (fitW * size.height) / size.width;
-		return { x: area.x + area.w / 2 - fitW / 2, y: area.y + area.h / 2 - fitH / 2, w: fitW };
+		const fitW = Math.max(w, (h * free) / size.height);
+		const fitH = (fitW * size.height) / free;
+		return { x: area.x + area.w / 2 - fitW / 2, y: area.y + area.h / 2 - fitH / 2, w: (fitW * size.width) / free };
 	}
 
 	/** CSS transform keeping a popup at (x, y) inside a view of the given size. */

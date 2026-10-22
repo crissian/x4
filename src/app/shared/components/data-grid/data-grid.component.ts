@@ -1,6 +1,6 @@
-import { Component, computed, effect, input, linkedSignal, output, signal } from '@angular/core';
+import { Component, computed, effect, input, linkedSignal, output, signal, untracked } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { RouterLink } from '@angular/router';
+import { Params, RouterLink } from '@angular/router';
 import { EnumLabels } from '../../../core/enum-labels';
 import { LocalStorage } from '../../../core/services/local-storage';
 import { GridValues, PreparedRow } from './grid-values';
@@ -36,11 +36,15 @@ export interface GridColumn<T> {
 	filterable?: boolean;
 	/** Router link commands that make the cell a link. */
 	link?: (row: T) => readonly unknown[] | undefined;
+	/** Query params of the cell link. */
+	queryParams?: (row: T) => Params | undefined;
+	/** Tooltip of the cell. */
+	title?: (row: T) => string | undefined;
 	/** Hidden until the user turns the column on in the column chooser. */
 	hidden?: boolean;
 }
 
-interface SortState {
+export interface SortState {
 	key: string;
 	direction: 1 | -1;
 }
@@ -73,18 +77,27 @@ export class DataGridComponent<T> {
 	readonly features = input(true);
 	readonly pageSizes = input<readonly number[]>([10, 20, 50, 100]);
 	readonly clickable = input(false);
+	/** The row shown as selected, for clickable rows. */
+	readonly selected = input<T>();
+	/** The sort until the user picks another. */
+	readonly sort = input<SortState>();
 	/** Remembers the columns chosen by the user in local storage under this key. */
 	readonly storageKey = input<string>();
 
 	readonly rowClick = output<T>();
 
-	/** Shown flag per column key, edited through the column chooser. Starts with the columns that are not `hidden`. */
+	/**
+	 * Shown flag per column key, edited through the column chooser. Starts with the columns that are not `hidden`;
+	 * with a `storageKey`, the saved choice applies to the columns it knew, and newer columns start as defaults.
+	 */
 	readonly shownModel = linkedSignal<Record<string, boolean>>(() => {
-		const key = this.storageKey();
-		const saved = key
-			? LocalStorage.read<string[] | null>(`grid-columns:${key}`, null, (x) => (Array.isArray(x) ? x : undefined))
-			: null;
-		return Object.fromEntries(this.columns().map((c) => [c.key, saved ? saved.includes(c.key) : !c.hidden]));
+		const saved = DataGridComponent.readColumns(this.storageKey());
+		return Object.fromEntries(
+			this.columns().map((c) => [
+				c.key,
+				saved && (!saved.known || saved.known.includes(c.key)) ? saved.shown.includes(c.key) : !c.hidden,
+			])
+		);
 	});
 	readonly shownForm = form(this.shownModel);
 
@@ -103,7 +116,10 @@ export class DataGridComponent<T> {
 	);
 	readonly filterForm = form(this.filterModel);
 
-	readonly sorts = signal<SortState[]>([]);
+	readonly sorts = linkedSignal<SortState[]>(() => {
+		const sort = this.sort();
+		return sort ? [sort] : [];
+	});
 	/** Sorts on the visible columns only, so hiding a column drops its sort. */
 	private readonly activeSorts = computed(() => {
 		const shown = this.shownModel();
@@ -184,11 +200,33 @@ export class DataGridComponent<T> {
 	constructor() {
 		effect(() => {
 			const key = this.storageKey();
+			const columns = this.columns().map((c) => c.key);
 			const shown = this.visibleColumns().map((c) => c.key);
 			if (key) {
-				LocalStorage.write(`grid-columns:${key}`, shown);
+				untracked(() => DataGridComponent.writeColumns(key, columns, shown));
 			}
 		});
+	}
+
+	/**
+	 * The saved shown columns and the columns known when saving; `known` is null for lists saved before it was
+	 * kept, which then apply to every column.
+	 */
+	private static readColumns(key: string | undefined): { shown: string[]; known: string[] | null } | null {
+		if (!key) {
+			return null;
+		}
+		const list = (x: unknown) => (Array.isArray(x) ? (x as string[]) : undefined);
+		const shown = LocalStorage.read<string[] | null>(`grid-columns:${key}`, null, list);
+		return shown && { shown, known: LocalStorage.read<string[] | null>(`grid-columns-known:${key}`, null, list) };
+	}
+
+	/** Saves the shown columns, keeping the choice for saved columns the grid doesn't have right now. */
+	private static writeColumns(key: string, columns: readonly string[], shown: readonly string[]) {
+		const saved = DataGridComponent.readColumns(key);
+		const absent = (x: string) => !columns.includes(x);
+		LocalStorage.write(`grid-columns:${key}`, [...shown, ...(saved?.shown.filter(absent) ?? [])]);
+		LocalStorage.write(`grid-columns-known:${key}`, [...columns, ...(saved?.known?.filter(absent) ?? [])]);
 	}
 
 	resetColumns() {

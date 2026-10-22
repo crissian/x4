@@ -1,0 +1,52 @@
+<div class="card">
+	<div class="card-header" i18n>Trade Routes</div>
+	<div class="card-body">
+		@if (store.save(); as save) {
+			@if (store.saveMap()) {
+				<app-trade-route-filters />
+				@if (store.reloadNeeded()) {
+					<p class="mt-3 text-sm">
+						<a routerLink="/saves" i18n>Reload this save to hide hostile factions</a>
+					</p>
+				}
+				<p class="mt-3 text-sm text-fg-muted" i18n>
+					Prices as of save time ({{ save.info.saveName }}, {{ store.gameTime() }}). Prices change quickly in
+					game; large offers are more reliable.
+				</p>
+				<div class="mt-3 grid gap-4 lg:grid-cols-[minmax(0,1fr)_24rem]">
+					<div class="min-w-0">
+						<app-data-grid
+							[data]="store.rows()"
+							[columns]="columns()"
+							[trackBy]="trackBy"
+							[clickable]="true"
+							[selected]="store.selected()"
+							[sort]="sort"
+							storageKey="trade-routes"
+							(rowClick)="store.select($event)"
+						/>
+						@if (store.result().total > store.result().routes.length) {
+							<p class="mt-2 text-sm text-fg-muted" i18n>
+								Showing the top {{ maxRows }} of {{ store.result().total }} routes.
+							</p>
+						}
+					</div>
+					@if (store.selected(); as row) {
+						<app-trade-route-details [row]="row" [steps]="store.steps()" />
+					}
+				</div>
+			} @else if (store.saveOutdated()) {
+				<p>
+					<a routerLink="/saves" i18n>Reload this save to find trade routes</a>
+				</p>
+			} @else {
+				<p class="text-fg-muted" role="status" i18n>Loading save…</p>
+			}
+		} @else {
+			<p class="text-fg-muted" i18n>Trade routes are found from the station offers in a savegame.</p>
+			<p class="mt-2">
+				<a routerLink="/saves" i18n>Load a savegame</a>
+			</p>
+		}
+	</div>
+</div>

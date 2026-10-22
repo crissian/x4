@@ -2,12 +2,14 @@ import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { LazyValue } from '../core/lazy-value';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { SavegameStore, type SavegameStatus } from '../savegame/savegame-store';
 import MapComponent from './map.component';
 import { MapSaveLayer } from './save/map-save-layer';
 
 describe('MapComponent', () => {
+	afterEach(() => localStorage.removeItem('map-legend-open'));
+
 	async function setup() {
 		TestBed.configureTestingModule({ providers: [provideRouter([])] });
 		const fixture = TestBed.createComponent(MapComponent);
@@ -39,6 +41,18 @@ describe('MapComponent', () => {
 		const speed = element.querySelector<HTMLInputElement>('app-map-route-panel input[type=number]')!;
 		expect(speed.disabled).toBe(true);
 		expect(speed.value).not.toBe('3000');
+	});
+
+	it('remembers whether the legend is open', async () => {
+		localStorage.setItem('map-legend-open', 'false');
+		const { fixture, element } = await setup();
+		const toggle = () => element.querySelector<HTMLButtonElement>('app-map-legend button')!;
+		expect(toggle().textContent?.trim()).toBe('Legend');
+
+		toggle().click();
+		await fixture.whenStable();
+		expect(toggle().textContent?.trim()).toBe('Hide');
+		expect(localStorage.getItem('map-legend-open')).toBe('true');
 	});
 
 	describe('with a save', () => {

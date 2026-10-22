@@ -1,0 +1,81 @@
+<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+	<label class="text-sm">
+		<ng-container i18n>Ship</ng-container>
+		<select id="trade-ship" class="input" [formField]="form.ship">
+			<option [value]="custom" i18n>Custom ship</option>
+			@for (ship of store.ships; track ship.id) {
+				<option [value]="ship.id">
+					{{ ship.name }} ({{ ship.size | enumLabel }}, {{ ship.capacity | number: '1.0-0' }} m³)
+				</option>
+			}
+		</select>
+	</label>
+	<label class="text-sm">
+		<ng-container i18n>Near sector</ng-container>
+		<input
+			id="trade-near"
+			class="input"
+			list="trade-sectors"
+			placeholder="Anywhere"
+			i18n-placeholder
+			[formField]="form.near"
+		/>
+		<datalist id="trade-sectors">
+			@for (sector of store.sectors(); track sector.id) {
+				<option [value]="sector.name"></option>
+			}
+		</datalist>
+	</label>
+	<label class="text-sm">
+		<ng-container i18n>Max jumps to the seller</ng-container>
+		<input id="trade-jumps" class="input" type="number" [formField]="form.jumps" />
+	</label>
+	<label class="text-sm">
+		<ng-container i18n>Ware</ng-container>
+		<select id="trade-ware" class="input" [formField]="form.ware">
+			<option value="" i18n>All wares</option>
+			@for (ware of store.wares(); track ware.id) {
+				<option [value]="ware.id">{{ ware.name }}</option>
+			}
+		</select>
+	</label>
+	@if (store.custom()) {
+		<label class="text-sm">
+			<ng-container i18n>Cargo volume (m³)</ng-container>
+			<input id="trade-cargo" class="input" type="number" [formField]="form.cargo" />
+		</label>
+		<label class="text-sm">
+			<ng-container i18n>Cargo type</ng-container>
+			<select id="trade-cargo-type" class="input" [formField]="form.cargoType">
+				@for (type of cargoTypes; track type.id) {
+					<option [value]="type.id">{{ type.label }}</option>
+				}
+			</select>
+		</label>
+		<label class="text-sm">
+			<ng-container i18n>Travel speed (m/s)</ng-container>
+			<input id="trade-speed" class="input" type="number" [formField]="form.speed" />
+		</label>
+		<label class="text-sm">
+			<ng-container i18n>Drive charge (s)</ng-container>
+			<input id="trade-charge" class="input" type="number" [formField]="form.charge" />
+		</label>
+	}
+</div>
+<div class="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+	<label class="flex items-center gap-2">
+		<input id="trade-hostile" type="checkbox" [formField]="form.hideHostile" />
+		<ng-container i18n>Hide hostile factions</ng-container>
+	</label>
+	<label class="flex items-center gap-2">
+		<ng-container i18n>Illegal wares</ng-container>
+		<select id="trade-illegal" class="input w-auto" [formField]="form.illegal">
+			<option value="show" i18n>Show, marked</option>
+			<option value="hide" i18n>Hide</option>
+		</select>
+	</label>
+	<label class="flex items-center gap-2">
+		<input id="trade-shady" type="checkbox" [formField]="form.playerOnly" />
+		<ng-container i18n>Include player-only offers</ng-container>
+	</label>
+</div>
