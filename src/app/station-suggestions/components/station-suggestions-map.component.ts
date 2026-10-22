@@ -1,8 +1,9 @@
 import { Component, computed, inject } from '@angular/core';
 import { PlacementRanking } from '../../economy/placement-ranking';
-import { HeatMapMarker, MarkedHeatMapComponent } from '../../map/heat-map/marked-heat-map.component';
-import { SupplyDemandDetail } from '../../supply-demand/supply-demand-detail';
+import { HeatMapComponent } from '../../map/heat-map/heat-map.component';
+import type { HeatMapMarker } from '../../map/heat-map/heat-map-markers';
 import { StationSuggestionsStore } from '../station-suggestions-store';
+import { CompactNumber } from '../../shared/format/compact-number';
 
 /**
  * The galaxy map of the picked row's ware: each sector shaded by its Cr/h for that ware on its own (no shared
@@ -11,7 +12,7 @@ import { StationSuggestionsStore } from '../station-suggestions-store';
  */
 @Component({
 	selector: 'app-station-suggestions-map',
-	imports: [MarkedHeatMapComponent],
+	imports: [HeatMapComponent],
 	templateUrl: './station-suggestions-map.component.html',
 })
 export class StationSuggestionsMapComponent {
@@ -70,7 +71,7 @@ export class StationSuggestionsMapComponent {
 		if (!spot) {
 			return $localize`${name}:name:: no room for a factory` + star;
 		}
-		const value = SupplyDemandDetail.compact(spot.crPerHour).replace(/^\+/, '');
+		const value = CompactNumber.format(spot.crPerHour).replace(/^\+/, '');
 		return $localize`${name}:name:: ${value}:value: Cr/h · modules: ~${spot.modules}:modules:` + star;
 	};
 

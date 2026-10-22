@@ -11,6 +11,7 @@ import { StationNamer } from '../savegame/map/station-name';
 import { SavegameFormat } from '../savegame/savegame-format';
 import { SavegameStore } from '../savegame/savegame-store';
 import { FactionService } from '../shared/services/faction.service';
+import { FilterLookups } from '../shared/services/filter-lookups';
 import { ModuleService } from '../shared/services/module.service';
 import { ShipService } from '../shared/services/ship.service';
 import { SectorService } from '../shared/services/universe.service';
@@ -101,13 +102,8 @@ export class SupplyDemandStore {
 	});
 
 	private readonly lookups: SupplyDemandLookups = {
+		...new FilterLookups(this.sectorService, this.wareService),
 		faction: (id) => !!id && !!this.factionService.getEntity(id),
-		group: (id) => !!id && this.wareService.getEntities().some((x) => x.group?.id === id),
-		sectorName: (id) => this.sectorService.getEntity(id)?.name,
-		sectorId: (name) => {
-			const key = name.trim().toLowerCase();
-			return key ? this.sectorService.getEntities().find((x) => x.name.toLowerCase() === key)?.id : undefined;
-		},
 	};
 
 	readonly model = signal<SupplyDemandModel>(
@@ -182,6 +178,13 @@ export class SupplyDemandStore {
 	private urlKey = '';
 
 	constructor() {
+		// a faction from the URL that owns no station in the save can't be picked in the form: drop it
+		effect(() => {
+			const { faction } = this.model();
+			if (faction && this.saveMap() && !this.factions().some((x) => x.id === faction)) {
+				untracked(() => this.model.update((x) => ({ ...x, faction: '' })));
+			}
+		});
 		// the filters and the selection are kept in the URL
 		effect(() => {
 			const queryParams = this.params(this.filterModel(), this.selectedKey());

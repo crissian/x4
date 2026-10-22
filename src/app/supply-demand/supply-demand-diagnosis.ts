@@ -1,7 +1,7 @@
 import type { Diagnosis, DiagnosisKind, Severity } from '../economy/diagnosis';
 import type { WareEconomy } from '../economy/economy-model';
 import type { GridDot, GridTone } from '../shared/components/data-grid/data-grid.component';
-import { SupplyDemandDetail } from './supply-demand-detail';
+import { CompactNumber } from '../shared/format/compact-number';
 
 /** The words, explanations and colours of a ware's diagnosis. */
 export class SupplyDemandDiagnosis {
@@ -22,7 +22,7 @@ export class SupplyDemandDiagnosis {
 	};
 
 	private static readonly MEANINGS: Record<DiagnosisKind, string> = {
-		short: $localize`Not enough is built and prices are high`,
+		short: $localize`Not enough is built, and prices are high or nothing is on sale`,
 		starved: $localize`Enough is built, but little reaches the market: factories likely lack inputs, or ship building uses it`,
 		tight: $localize`Prices are high, though the built capacity is balanced`,
 		covered: $localize`Built short, but stock or traders cover it for now`,
@@ -112,7 +112,7 @@ export class SupplyDemandDiagnosis {
 			const index = row.priceIndex === undefined ? undefined : Math.round(row.priceIndex);
 			return index === undefined ? label : `${label} — ${$localize`price index ${index}:INDEX:%`}`;
 		}
-		const value = SupplyDemandDetail.compact(row.value);
+		const value = CompactNumber.format(row.value);
 		return `${label} — ${SupplyDemandDiagnosis.balance(row.balance)}, ${$localize`${value}:VALUE: Cr/h`}`;
 	}
 }

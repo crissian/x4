@@ -1,5 +1,11 @@
 import type { Sector } from '../shared/services/model/model';
 
+/** A sector and its distance in jumps from another. */
+export interface SectorRing {
+	sector: string;
+	jumps: number;
+}
+
 /**
  * Sector adjacency by jumps: a gate, accelerator or highway link counts when the sector on the other side links
  * back, the same rule as `RoutePlanner`.
@@ -7,6 +13,7 @@ import type { Sector } from '../shared/services/model/model';
 export class SectorGraph {
 	private readonly adjacent = new Map<string, string[]>();
 	private readonly cache = new Map<number, Map<string, readonly string[]>>();
+	private readonly ringCache = new Map<string, readonly SectorRing[]>();
 
 	constructor(sectors: readonly Sector[]) {
 		const links = new Set<string>();
@@ -50,6 +57,40 @@ export class SectorGraph {
 		if (!result) {
 			result = this.adjacent.has(from) ? this.search(from, jumps) : [];
 			perSector.set(from, result);
+		}
+		return result;
+	}
+
+	/**
+	 * The sectors within `jumps` jumps of `from` with their distance, nearest first (`from` itself at 0); empty for
+	 * an unknown sector. Cached per sector and jumps.
+	 */
+	rings(from: string, jumps: number): readonly SectorRing[] {
+		const key = `${from}|${jumps}`;
+		let result = this.ringCache.get(key);
+		if (!result) {
+			result = this.adjacent.has(from) ? this.searchRings(from, jumps) : [];
+			this.ringCache.set(key, result);
+		}
+		return result;
+	}
+
+	private searchRings(from: string, jumps: number): SectorRing[] {
+		const result: SectorRing[] = [{ sector: from, jumps: 0 }];
+		const seen = new Set([from]);
+		let frontier = [from];
+		for (let step = 1; step <= jumps && frontier.length; step++) {
+			const next: string[] = [];
+			for (const id of frontier) {
+				for (const to of this.adjacent.get(id) ?? []) {
+					if (!seen.has(to)) {
+						seen.add(to);
+						next.push(to);
+						result.push({ sector: to, jumps: step });
+					}
+				}
+			}
+			frontier = next;
 		}
 		return result;
 	}

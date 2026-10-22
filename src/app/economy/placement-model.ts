@@ -20,7 +20,9 @@ export interface PlacementTarget {
 	weight: number;
 	/** the sector's own net per hour (produced minus consumed) */
 	net: number;
-	/** weight × -net: positive for a shortage the spot can sell into, negative for competing supply */
+	/** the shortage per hour left once the existing surpluses supplied their nearest short sectors, 0 or more */
+	left: number;
+	/** weight × left: what the sector adds to the absorbable */
 	pull: number;
 }
 
@@ -49,7 +51,7 @@ export interface PlacementSpot {
 	sector: string;
 	/** the production modules the reachable shortage has room for */
 	modules: number;
-	/** units per hour the weighted shortage minus the weighted supply within reach can take */
+	/** units per hour the reach can take: the weighted shortage left within reach after the existing supply */
 	absorbable: number;
 	/** units per hour one production module makes at full workforce (with the sector's sunlight for energy cells) */
 	moduleOutput: number;
@@ -68,7 +70,7 @@ export interface PlacementSpot {
 	inputs: PlacementInput[];
 	/** the mined wares of the closed-loop chain and where they are, else empty */
 	resources: PlacementResource[];
-	/** the sectors behind the balance, the biggest pull first; sectors whose stations neither make nor use it are left out */
+	/** the sectors behind the absorbable, the biggest pull first; sectors whose stations neither make nor use it are left out */
 	targets: PlacementTarget[];
 }
 

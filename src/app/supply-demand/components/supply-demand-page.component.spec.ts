@@ -156,6 +156,17 @@ describe('SupplyDemandPageComponent', () => {
 		expect(router.url).toBe(`/supply-demand?scope=sector&sector=${ARGON_PRIME}&jumps=1`);
 	});
 
+	it('drops a faction from the URL that owns no station in the save', async () => {
+		const { store, router } = await setup('/supply-demand?scope=faction&faction=xenon');
+		expect(store.model().faction).toBe('');
+		expect(router.url).toBe('/supply-demand');
+	});
+
+	it('keeps a faction from the URL that owns stations in the save', async () => {
+		const { store } = await setup('/supply-demand?scope=faction&faction=teladi');
+		expect(store.model().faction).toBe('teladi');
+	});
+
 	it('leaves the player stations out when asked', async () => {
 		const { element, store, router, settle } = await setup();
 		element.querySelector<HTMLInputElement>('#supply-player')!.click();
@@ -335,7 +346,7 @@ describe('SupplyDemandPageComponent', () => {
 		expect(diagnosis.textContent).toContain(SupplyDemandDiagnosis.KINDS[row.diagnosis.kind]);
 		expect(diagnosis.querySelector('app-tone-dot')).not.toBeNull();
 		expect(diagnosis.getAttribute('title')).toBeTruthy();
-		expect(cells.some((x) => x.querySelector('.grid-bar') && /%$/.test(x.textContent!))).toBe(true);
+		expect(cells.some((x) => x.querySelector('.grid-bar') && /%\*?$/.test(x.textContent!))).toBe(true);
 	});
 
 	it('repeats the diagnosis in the detail panel header', async () => {

@@ -22,7 +22,12 @@
 			</p>
 		}
 
-		<h6 class="mt-3 text-sm" i18n>Demand and supply within reach (weighted per hour)</h6>
+		<h6 class="mt-3 text-sm" i18n>Demand within reach, after the nearby supply (weighted per hour)</h6>
+		<p class="text-fg-muted" data-settlement i18n>
+			Sectors that make more than they use first supply the short sectors nearest to them, up to
+			{{ settlementJumps }} jumps away. Only the shortage left counts here, by weight; nearby surpluses are not
+			taken off again. In where to build, Left short/h is also lowered by the spots ranked above this one.
+		</p>
 		@if (targets().length) {
 			<table class="table mt-1 w-full" data-targets>
 				<thead>
@@ -30,7 +35,18 @@
 						<th scope="col" i18n>Sector</th>
 						<th scope="col" class="text-right" i18n>Weight</th>
 						<th scope="col" class="text-right" i18n>Own net/h</th>
-						<th scope="col" class="text-right" title="Own net × weight" i18n-title i18n>Counts here /h</th>
+						<th
+							scope="col"
+							class="text-right"
+							title="The shortage left once the nearest surpluses supplied it"
+							i18n-title
+							i18n
+						>
+							Left short/h
+						</th>
+						<th scope="col" class="text-right" title="Left short × weight" i18n-title i18n>
+							Counts here /h
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -45,8 +61,11 @@
 								}</span>
 							</td>
 							<td class="text-right">{{ target.weight | percent }}</td>
-							<td class="text-right">{{ target.net | number: '1.0-0' }}</td>
-							<td class="text-right" [class]="target.pull > 0 ? 'text-success' : 'text-danger'">
+							<td class="text-right" [class]="target.net < 0 ? 'text-danger' : 'text-success'">
+								{{ target.net | number: '1.0-0' }}
+							</td>
+							<td class="text-right">{{ target.left | number: '1.0-0' }}</td>
+							<td class="text-right" [class]="target.pull > 0 ? 'text-success' : 'text-fg-muted'">
 								{{ target.pull | number: '1.0-0' }}
 							</td>
 						</tr>
@@ -56,7 +75,7 @@
 		}
 
 		@if (row.inputs.length) {
-			<h6 class="mt-3 text-sm" i18n>Inputs within reach (weighted net per hour)</h6>
+			<h6 class="mt-3 text-sm" i18n>Inputs within reach (weighted net per hour, after the nearby supply)</h6>
 			<ul data-inputs>
 				@for (input of row.inputs; track input.ware) {
 					<li class="flex justify-between gap-2">

@@ -20,8 +20,13 @@
 				with every jump: with 3 jumps, 100%, 75%, 50% and 25%.
 			</li>
 			<li i18n>
-				Absorbable per hour is the weighted shortage of the sectors that use more than they make, minus the
-				weighted surplus of those that make more than they use. Who owns the stations does not matter.
+				First the market as it is: each sector that makes more than it uses supplies the sectors short of the
+				ware nearest to it, up to {{ settlementJumps }} jumps away, the closest first. A far-away surplus serves
+				the shortages near itself, so a wider reach never lowers a spot.
+			</li>
+			<li i18n>
+				Absorbable per hour is the weighted shortage left in the sectors within reach. Who owns the stations
+				does not matter, unless the owner is hostile to you.
 			</li>
 			<li i18n>
 				Room for modules is how many production modules (at full workforce, default recipe) that amount keeps
@@ -40,7 +45,10 @@
 				The list is ranked by Expected Cr/h. The resources (closed loop) or inputs (buy inputs) in reach and the
 				sector security are shown in their own columns, not ranked by. Energy cells follow the sector sunlight.
 			</li>
-			<li i18n>Sectors of factions hostile to you, and sectors whose owner bans the ware, are left out.</li>
+			<li i18n>
+				With "Hide hostile sectors" on, the sectors and the stations of factions hostile to you are left out, as
+				demand and as supply. Sectors whose owner bans the ware are always left out.
+			</li>
 		</ul>
 	}
 </div>

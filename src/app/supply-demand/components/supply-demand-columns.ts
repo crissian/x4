@@ -46,6 +46,7 @@ export class SupplyDemandColumns {
 	private static readonly MINING = $localize`Mining is not counted`;
 	private static readonly BUILDING = $localize`Excludes ship and station building`;
 	private static readonly PARTLY_BUILDING = $localize`Also used to build ships and stations; real demand is higher`;
+	private static readonly BALANCE = $localize`Net as a share of the larger of produced and consumed: how much of the demand is unmet, or of the output unused`;
 
 	static all(): GridColumn<SupplyDemandRow>[] {
 		const { NET, PER_HOUR } = SupplyDemandColumns;
@@ -62,8 +63,17 @@ export class SupplyDemandColumns {
 				format: NET,
 				group: SupplyDemandColumns.CAPACITY,
 				value: (x) => x.value,
-				display: (x) => (x.mined ? '' : SupplyDemandColumns.number(x.value, SupplyDemandColumns.COMPACT)),
-				title: (x) => (x.mined ? SupplyDemandColumns.MINING : SupplyDemandColumns.number(x.value, NET)),
+				display: (x) =>
+					x.mined
+						? ''
+						: SupplyDemandColumns.number(x.value, SupplyDemandColumns.COMPACT) +
+							SupplyDemandColumns.mark(x),
+				title: (x) =>
+					x.mined
+						? SupplyDemandColumns.MINING
+						: [SupplyDemandColumns.number(x.value, NET), SupplyDemandColumns.buildingNote(x)]
+								.filter(Boolean)
+								.join(' · '),
 			},
 			SupplyDemandColumns.count('producers', $localize`Producers`),
 			SupplyDemandColumns.count('consumers', $localize`Consumers`),
@@ -93,12 +103,15 @@ export class SupplyDemandColumns {
 			type: 'number',
 			group: SupplyDemandColumns.CAPACITY,
 			value: (x) => (x.mined ? undefined : x.balance * 100),
-			display: (x) => (x.mined ? SupplyDemandColumns.DASH : SupplyDemandDiagnosis.percent(x.balance)),
+			display: (x) =>
+				x.mined
+					? SupplyDemandColumns.DASH
+					: SupplyDemandDiagnosis.percent(x.balance) + SupplyDemandColumns.mark(x),
 			bar: (x) => (x.mined ? undefined : x.balance),
 			title: (x) =>
 				x.mined
 					? SupplyDemandColumns.MINING
-					: $localize`Net as a share of the larger of produced and consumed: how much of the demand is unmet, or of the output unused`,
+					: [SupplyDemandColumns.BALANCE, SupplyDemandColumns.buildingNote(x)].filter(Boolean).join(' · '),
 		};
 	}
 
@@ -115,6 +128,19 @@ export class SupplyDemandColumns {
 			dot: (x) => SupplyDemandDiagnosis.dot(x.diagnosis),
 			title: (x) => SupplyDemandDiagnosis.explanation(x),
 		};
+	}
+
+	/** The asterisk of the capacity numbers of building materials, whose building demand isn't counted. */
+	private static mark(row: SupplyDemandRow): string {
+		return row.building || row.partlyBuilding ? '*' : '';
+	}
+
+	/** Why a building material's capacity numbers are marked; undefined for other wares. */
+	private static buildingNote(row: SupplyDemandRow): string | undefined {
+		if (row.building) {
+			return SupplyDemandColumns.BUILDING;
+		}
+		return row.partlyBuilding ? SupplyDemandColumns.PARTLY_BUILDING : undefined;
 	}
 
 	private static number(value: number, format: Intl.NumberFormatOptions): string {
@@ -141,15 +167,8 @@ export class SupplyDemandColumns {
 			display: (x) =>
 				blank(x)
 					? SupplyDemandColumns.DASH
-					: SupplyDemandColumns.number(x[key], format) + (x.building || x.partlyBuilding ? '*' : ''),
-			title: (x) =>
-				blank(x)
-					? SupplyDemandColumns.MINING
-					: x.building
-						? SupplyDemandColumns.BUILDING
-						: x.partlyBuilding
-							? SupplyDemandColumns.PARTLY_BUILDING
-							: undefined,
+					: SupplyDemandColumns.number(x[key], format) + SupplyDemandColumns.mark(x),
+			title: (x) => (blank(x) ? SupplyDemandColumns.MINING : SupplyDemandColumns.buildingNote(x)),
 		};
 	}
 

@@ -1,10 +1,11 @@
 import { Component, computed, effect, input, linkedSignal, output, signal, untracked } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { Params, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { EnumLabels } from '../../../core/enum-labels';
 import { GridColumnPrefs } from './grid-column-prefs';
 import { GridGroups } from './grid-groups';
-import { Tone, ToneDotComponent } from '../tone-dot/tone-dot.component';
+import { ToneDotComponent } from '../tone-dot/tone-dot.component';
+import type { GridColumn, GridGroup, GridLookupItem, SortState } from './grid-column';
 import { GridValues, PreparedRow } from './grid-values';
 import {
 	LucideArrowUpNarrowWide,
@@ -17,71 +18,7 @@ import {
 	LucideInfo,
 } from '@lucide/angular';
 
-export interface GridLookupItem {
-	value: unknown;
-	label: string;
-}
-
-export interface GridColumn<T> {
-	/** Unique column key. Also used as the (dotted) data path when `value` is not set. */
-	key: string;
-	caption: string;
-	/** Raw value used for filtering and sorting. Defaults to the value at `key`. */
-	value?: (row: T) => unknown;
-	/** Text shown in the cell. Defaults to the formatted value. */
-	display?: (row: T) => string;
-	type?: 'string' | 'number';
-	/** Number format for `number` columns. Defaults to whole numbers with grouping. */
-	format?: Intl.NumberFormatOptions;
-	/** Values for the filter dropdown; cells show the matching label. */
-	lookup?: readonly GridLookupItem[];
-	sortable?: boolean;
-	filterable?: boolean;
-	/** Router link commands that make the cell a link. */
-	link?: (row: T) => readonly unknown[] | undefined;
-	/** Query params of the cell link. */
-	queryParams?: (row: T) => Params | undefined;
-	/** Tooltip of the cell. */
-	title?: (row: T) => string | undefined;
-	/** Hidden until the user turns the column on in the column chooser. */
-	hidden?: boolean;
-	/** False keeps the column always shown: it is not offered in the column chooser and a saved choice can't hide it. */
-	hideable?: boolean;
-	/** Hidden by default on narrow screens (below 640 px), like `hidden`. */
-	narrowHidden?: boolean;
-	/** The key of the `GridGroup` the column belongs to; the columns of a group should be neighbours. */
-	group?: string;
-	/** Raw value used for sorting, when it differs from the one used for filtering. */
-	sortValue?: (row: T) => unknown;
-	/** A coloured dot before the cell text. */
-	dot?: (row: T) => GridDot | undefined;
-	/** A bar before the cell text, growing right from the middle for positive values and left for negative ones; -1..1. */
-	bar?: (row: T) => number | undefined;
-}
-
-/** The colour of a group header or of a dot in a cell. */
-export type GridTone = Tone;
-
-/** A coloured dot before the cell text; `level` 1 is the palest shade and 3 the strongest. */
-export interface GridDot {
-	tone: GridTone;
-	level: 1 | 2 | 3;
-}
-
-/** A header above the columns of one group; neighbouring visible columns of the group share it. */
-export interface GridGroup {
-	key: string;
-	label: string;
-	/** Explains the group in a tooltip behind an info button. */
-	hint?: string;
-	/** Tints the group header and, lightly, its cells. */
-	tone?: GridTone;
-}
-
-export interface SortState {
-	key: string;
-	direction: 1 | -1;
-}
+export type { GridColumn, GridDot, GridGroup, GridLookupItem, GridTone, SortState } from './grid-column';
 
 @Component({
 	selector: 'app-data-grid',
@@ -127,13 +64,12 @@ export class DataGridComponent<T> {
 
 	readonly rowClick = output<T>();
 
+	private readonly hintPrefix = GridGroups.nextPrefix();
+
 	/**
 	 * Shown flag per column key, edited through the column chooser. Starts with the columns that are not `hidden`;
 	 * with a `storageKey`, the saved choice applies to the columns it knew, and newer columns start as defaults.
 	 */
-	private readonly narrow = globalThis.matchMedia?.('(max-width: 639px)').matches ?? false;
-	private readonly hintPrefix = GridGroups.nextPrefix();
-
 	readonly shownModel = linkedSignal<Record<string, boolean>>(() => {
 		const saved = GridColumnPrefs.read(this.storageKey());
 		return Object.fromEntries(
@@ -153,6 +89,11 @@ export class DataGridComponent<T> {
 		return this.columns().filter((c) => shown[c.key]);
 	});
 
+	/** The tone that tints the cells of each column, from its group, by column key. */
+	readonly tones = computed(() => {
+		const groups = this.groups();
+		return new Map(this.columns().map((c) => [c.key, GridGroups.tone(c, groups)]));
+	});
 	/** The group header row, empty without groups. */
 	readonly groupHeaders = computed(() => GridGroups.headers(this.visibleColumns(), this.groups(), this.hintPrefix));
 	/** The columns for the chooser, with the group labels. */
@@ -268,12 +209,7 @@ export class DataGridComponent<T> {
 	}
 
 	private shownByDefault(column: GridColumn<T>): boolean {
-		return !column.hidden && !(this.narrow && column.narrowHidden);
-	}
-
-	/** The tone that tints the cells of a column, from its group. */
-	toneOf(column: GridColumn<T>) {
-		return GridGroups.tone(column, this.groups());
+		return !column.hidden;
 	}
 
 	/** Width in % of the bar of a value, for the template. */

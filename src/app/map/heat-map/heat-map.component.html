@@ -58,6 +58,27 @@
 					vector-effect="non-scaling-stroke"
 				/>
 			}
+			@for (marker of markerShapes(); track marker.sector) {
+				<g class="cursor-pointer" [attr.data-sector]="marker.sector" data-marker>
+					<polygon
+						[attr.points]="marker.points"
+						fill="#facc15"
+						stroke="#05080f"
+						stroke-width="1"
+						vector-effect="non-scaling-stroke"
+					/>
+					<text
+						class="pointer-events-none font-bold"
+						[attr.x]="marker.x"
+						[attr.y]="marker.y + marker.size * 0.2"
+						[attr.font-size]="marker.size * 0.6"
+						text-anchor="middle"
+						fill="#05080f"
+					>
+						{{ marker.label }}
+					</text>
+				</g>
+			}
 		</svg>
 
 		<app-map-zoom-buttons
@@ -72,7 +93,7 @@
 	<div class="mt-1 flex items-center gap-2 text-xs text-fg-muted" data-legend>
 		<span>{{ lowLabel() }}</span>
 		<div class="flex h-3 flex-1 overflow-hidden rounded">
-			@for (color of swatches; track $index) {
+			@for (color of swatches(); track $index) {
 				<span class="h-full flex-1" [style.background]="color"></span>
 			}
 		</div>

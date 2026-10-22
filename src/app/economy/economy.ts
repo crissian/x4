@@ -15,7 +15,6 @@ export class Economy {
 	readonly graph: SectorGraph;
 	readonly stations: StationFlows[];
 	private byWare?: Map<string, WareStationFlow[]>;
-	private readonly neighbourhoods = new Map<string, Map<string, number>>();
 	private readonly balanced = new Map<string, Map<string, SectorBalance>>();
 
 	constructor(
@@ -53,20 +52,9 @@ export class Economy {
 	}
 
 	/**
-	 * Net per hour of a ware per sector, summed over the sectors within `jumps` jumps of it (itself included).
-	 * Only the faction and player parts of the scope apply. Cached per ware, jumps and those.
+	 * Produced, consumed and net per hour of a ware per sector, summed over the sectors within `jumps` jumps of it
+	 * (itself included). Only the faction and player parts of the scope apply. Cached per ware, jumps and those.
 	 */
-	neighbourhood(ware: string, jumps: number, scope: EconomyScope = {}): ReadonlyMap<string, number> {
-		const key = this.key(ware, jumps, scope);
-		let result = this.neighbourhoods.get(key);
-		if (!result) {
-			result = new Map([...this.balances(ware, jumps, scope)].map(([id, x]) => [id, x.net]));
-			this.neighbourhoods.set(key, result);
-		}
-		return result;
-	}
-
-	/** Produced, consumed and net per hour of a ware per sector within `jumps` jumps of it; cached like `neighbourhood`. */
 	balances(ware: string, jumps: number, scope: EconomyScope = {}): ReadonlyMap<string, SectorBalance> {
 		const key = this.key(ware, jumps, scope);
 		let result = this.balanced.get(key);
@@ -110,17 +98,11 @@ export class Economy {
 	): { sector: string; jumps: number; net: number } | undefined {
 		const own = this.balances(ware, 0, scope);
 		let top: { sector: string; jumps: number; net: number } | undefined;
-		const seen = new Set<string>();
-		for (let distance = 0; distance <= jumps; distance++) {
-			for (const id of this.graph.within(sector, distance)) {
-				if (seen.has(id)) {
-					continue;
-				}
-				seen.add(id);
-				const net = own.get(id)?.net ?? 0;
-				if (net && (!top || Math.abs(net) > Math.abs(top.net))) {
-					top = { sector: id, jumps: distance, net };
-				}
+		// nearest first, so a tie keeps the nearer sector
+		for (const ring of this.graph.rings(sector, jumps)) {
+			const net = own.get(ring.sector)?.net ?? 0;
+			if (net && (!top || Math.abs(net) > Math.abs(top.net))) {
+				top = { sector: ring.sector, jumps: ring.jumps, net };
 			}
 		}
 		return top;

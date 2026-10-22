@@ -11,7 +11,7 @@ interface Candidate {
 /**
  * Ranks the suggested factories: galaxy-wide (where to build), or the wares of one sector (what to build here).
  * Galaxy-wide, the spots of one ware share the demand around them: the best spot is picked first, what it sells is
- * taken out of the nearby shortages, and the others are scored again (greedy).
+ * taken out of the shortages left near it after the existing supply, and the others are scored again (greedy).
  */
 export class PlacementRanking {
 	/** Rows listed at most. */
@@ -51,10 +51,10 @@ export class PlacementRanking {
 	 * fresh value still beats the stale value of the next one is the best (lazy greedy).
 	 */
 	static greedy(context: PlacementContext, ware: string, options: PlacementOptions): PlacementSpot[] {
-		const net = new Map(context.localNet(ware, options.includePlayer));
+		const shortage = new Map(context.residual(ware, options));
 		const queue: Candidate[] = [];
 		for (const sector of context.sectors()) {
-			const spot = PlacementScorer.spot(context, ware, sector, options, net);
+			const spot = PlacementScorer.spot(context, ware, sector, options, shortage);
 			if (spot) {
 				queue.push({ sector, spot });
 			}
@@ -63,13 +63,13 @@ export class PlacementRanking {
 		const picked: PlacementSpot[] = [];
 		while (queue.length && picked.length < PlacementRanking.MAX_ROWS) {
 			const best = queue.shift()!;
-			const fresh = PlacementScorer.spot(context, ware, best.sector, options, net, best.spot);
+			const fresh = PlacementScorer.spot(context, ware, best.sector, options, shortage, best.spot);
 			if (!fresh) {
 				continue;
 			}
 			if (!queue.length || PlacementRanking.compare(fresh, queue[0].spot) <= 0) {
 				picked.push(fresh);
-				PlacementScorer.allocate(fresh, net);
+				PlacementScorer.allocate(fresh, shortage);
 			} else {
 				PlacementRanking.insert(queue, { sector: best.sector, spot: fresh });
 			}

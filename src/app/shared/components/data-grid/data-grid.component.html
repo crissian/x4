@@ -134,7 +134,7 @@
 						@let dot = column.dot?.(item.row);
 						@let bar = column.bar?.(item.row);
 						<!-- no whitespace around the text: the cell text is its content -->
-						<td [class.text-right]="column.type === 'number'" [attr.title]="column.title?.(item.row) ?? null" [attr.data-tone]="toneOf(column)">@if (dot) {<app-tone-dot [tone]="dot.tone" [level]="dot.level" />}@if (bar !== undefined) {<span class="grid-bar" [attr.data-negative]="bar < 0"><span [style.width.%]="barWidth(bar)"></span></span>}@if (link) {<a [routerLink]="link" [queryParams]="column.queryParams?.(item.row)" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" (keydown.space)="$event.stopPropagation()">{{ item.texts[column.key] }}</a>} @else {<ng-container>{{ item.texts[column.key] }}</ng-container>}</td>
+						<td [class.text-right]="column.type === 'number'" [attr.title]="column.title?.(item.row) ?? null" [attr.data-tone]="tones().get(column.key)">@if (dot) {<app-tone-dot [tone]="dot.tone" [level]="dot.level" />}@if (bar !== undefined) {<span class="grid-bar" [attr.data-negative]="bar < 0"><span [style.width.%]="barWidth(bar)"></span></span>}@if (link) {<a [routerLink]="link" [queryParams]="column.queryParams?.(item.row)" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" (keydown.space)="$event.stopPropagation()">{{ item.texts[column.key] }}</a>} @else {<ng-container>{{ item.texts[column.key] }}</ng-container>}</td>
 					}
 				</tr>
 			} @empty {

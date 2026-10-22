@@ -1,4 +1,4 @@
-import type { GridColumn } from './data-grid.component';
+import type { GridColumn } from './grid-column';
 
 /** A data row with the raw value and the cell text of each column. */
 export interface PreparedRow<T> {

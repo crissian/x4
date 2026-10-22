@@ -112,6 +112,31 @@
 	input[type='checkbox'] {
 		@apply size-4 rounded accent-sky-600 dark:accent-sky-500;
 	}
+
+	/* the colour of a tone (`Tone`: dots, grid group tints), from the app tokens so it follows the themes */
+	[data-tone='red'] {
+		--tone: var(--app-danger);
+	}
+
+	[data-tone='orange'] {
+		--tone: color-mix(in oklab, var(--app-danger) 45%, var(--app-warning));
+	}
+
+	[data-tone='amber'] {
+		--tone: var(--app-warning);
+	}
+
+	[data-tone='green'] {
+		--tone: var(--app-success);
+	}
+
+	[data-tone='teal'] {
+		--tone: var(--app-info);
+	}
+
+	[data-tone='grey'] {
+		--tone: var(--app-fg-muted);
+	}
 }
 
 @layer components {

@@ -8,10 +8,12 @@ import { SupplyDemandColumns } from './supply-demand-columns';
 import { SupplyDemandDetailComponent } from './supply-demand-detail.component';
 import { SupplyDemandFiltersComponent } from './supply-demand-filters.component';
 import { SupplyDemandHelpComponent } from './supply-demand-help.component';
+import { ExperimentalBadgeComponent } from '../../shared/components/experimental-badge.component';
 
 /** Shows which wares are short or in surplus in the active save, from what its stations make and use. */
 @Component({
 	imports: [
+		ExperimentalBadgeComponent,
 		DataGridComponent,
 		RouterLink,
 		SupplyDemandFiltersComponent,

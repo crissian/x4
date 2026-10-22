@@ -11,6 +11,7 @@ import { WareClasses } from '../economy/ware-classes';
 import type { SaveMap, SaveRelations } from '../savegame/map/save-map-model';
 import { SavegameFormat } from '../savegame/savegame-format';
 import { SavegameStore } from '../savegame/savegame-store';
+import { FilterLookups } from '../shared/services/filter-lookups';
 import type { WareGroup } from '../shared/services/model/model';
 import { ModuleService } from '../shared/services/module.service';
 import { ShipService } from '../shared/services/ship.service';
@@ -70,7 +71,9 @@ export class StationSuggestionsStore {
 		const sectors = this.sectorService.getEntities();
 		const economy = new Economy(map, this.wareService, this.moduleService, sectors, building);
 		const recipes = new PlacementRecipes(this.wareService, this.moduleService);
-		return new PlacementContext(economy, this.wareService, recipes, sectors, map, this.relations(), building.only);
+		// all building materials are marked: the demand of ship and station building is not counted for any of them
+		const materials = new Set([...building.only, ...building.partly]);
+		return new PlacementContext(economy, this.wareService, recipes, sectors, map, this.relations(), materials);
 	});
 	/** The wares a factory can be suggested for, by name. */
 	readonly wares = computed(() =>
@@ -86,13 +89,8 @@ export class StationSuggestionsStore {
 	});
 
 	private readonly lookups: StationSuggestionsLookups = {
+		...new FilterLookups(this.sectorService, this.wareService),
 		ware: (id) => !!id && !!this.wareService.getEntity(id),
-		group: (id) => !!id && this.wareService.getEntities().some((x) => x.group?.id === id),
-		sectorName: (id) => this.sectorService.getEntity(id)?.name,
-		sectorId: (name) => {
-			const key = name.trim().toLowerCase();
-			return key ? this.sectorService.getEntities().find((x) => x.name.toLowerCase() === key)?.id : undefined;
-		},
 	};
 
 	readonly model = signal<StationSuggestionsModel>(
@@ -180,13 +178,35 @@ export class StationSuggestionsStore {
 		if (!row || !context || !recipe) {
 			return undefined;
 		}
-		return context.recipes.chains.chain(recipe.module, row.modules, context.sector(row.sector)?.sunlight ?? 1);
+		return context.recipes.chains.chain(recipe.module, row.modules, this.chainSunlight());
+	});
+	/** The sunlight of the picked row's sector, which sizes its chain; 1 = 100%. */
+	readonly chainSunlight = computed(() => {
+		const row = this.selected();
+		return (row && this.context()?.sector(row.sector)?.sunlight) ?? 1;
 	});
 
 	/** The URL params last written to, or read from, the URL. */
 	private urlKey = '';
 
 	constructor() {
+		// once the save is known, a ware no factory is suggested for, or a pick that is not in the table, is dropped
+		effect(() => {
+			if (!this.context()) {
+				return;
+			}
+			const { ware } = this.model();
+			if (ware && !this.wares().some((x) => x.id === ware)) {
+				untracked(() => this.model.update((x) => ({ ...x, ware: '' })));
+				return;
+			}
+			// while a sector name is being typed there is no table yet, so the pick is kept
+			const pick = this.pickKey();
+			const typing = this.here() && !this.centre();
+			if (pick && !typing && !this.rows().some((x) => x.key === pick)) {
+				untracked(() => this.pickKey.set(''));
+			}
+		});
 		effect(() => {
 			const queryParams = this.params(this.filterModel(), this.pickKey());
 			const key = JSON.stringify(queryParams);

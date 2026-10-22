@@ -81,7 +81,8 @@ describe('economy', () => {
 
 	it('sums the net of the sectors within some jumps', () => {
 		const model = economy();
-		const at = (jumps: number, scope = {}) => model.neighbourhood(ENERGY, jumps, scope);
+		const at = (jumps: number, scope = {}) =>
+			new Map([...model.balances(ENERGY, jumps, scope)].map(([id, x]) => [id, x.net]));
 		expect(at(0).get('a')).toBeCloseTo(15000);
 		expect(at(0).get('c')).toBeCloseTo(-320);
 		expect(at(1).get('a')).toBeCloseTo(22500);
@@ -91,15 +92,26 @@ describe('economy', () => {
 		expect(at(3).get('x')).toBe(0);
 		expect(at(1, { includePlayer: false }).get('c')).toBeCloseTo(7500);
 		expect(at(1, { faction: 'argon' }).get('a')).toBeCloseTo(7500);
-		expect(at(1)).toBe(at(1));
+		expect(model.balances(ENERGY, 1)).toBe(model.balances(ENERGY, 1));
+	});
+
+	it('lists the sectors within some jumps with their distance, nearest first', () => {
+		const graph = economy().graph;
+		expect(graph.rings('a', 2)).toEqual([
+			{ sector: 'a', jumps: 0 },
+			{ sector: 'b', jumps: 1 },
+			{ sector: 'c', jumps: 2 },
+		]);
+		expect(graph.rings('x', 3)).toEqual([{ sector: 'x', jumps: 0 }]);
+		expect(graph.rings('nowhere', 3)).toEqual([]);
+		expect(graph.rings('a', 2)).toBe(graph.rings('a', 2));
 	});
 
 	it('gives produced, consumed and net per sector, cached', () => {
 		const model = economy();
 		const balances = model.balances(ENERGY, 1);
-		for (const [id, x] of balances) {
+		for (const x of balances.values()) {
 			expect(x.net).toBeCloseTo(x.produced - x.consumed);
-			expect(x.net).toBeCloseTo(model.neighbourhood(ENERGY, 1).get(id)!);
 		}
 		expect(balances.get('c')).toMatchObject({ net: expect.closeTo(7180) });
 		expect(balances.get('x')).toEqual({ produced: 0, consumed: 0, net: 0 });

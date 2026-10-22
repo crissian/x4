@@ -3,12 +3,12 @@ import type { SaveRelations, SaveStation } from '../savegame/map/save-map-model'
 import { TradeRouteTesting } from '../trade/trade-route-testing';
 import type { Sector } from '../shared/services/model/model';
 import { EconomyTesting } from './economy-testing';
-import { PlacementChains } from './placement-chain';
 import { PlacementContext } from './placement-context';
 import type { PlacementOptions } from './placement-model';
 import { PlacementRanking } from './placement-ranking';
 import { PlacementRecipes } from './placement-recipes';
 import { PlacementScorer } from './placement-scorer';
+import { StationAutofill } from '../station/components/station-autofill';
 
 const ENERGY = 'energycells';
 const HULL = 'hullparts';
@@ -58,19 +58,33 @@ describe('PlacementScorer', () => {
 		expect(recipes.recipe('ore')).toBeUndefined();
 	});
 
-	it('takes the weighted shortage minus the weighted surplus as absorbable', () => {
+	it('takes the weighted shortage left after the existing supply as absorbable', () => {
 		const targets = [
-			{ sector: 'a', jumps: 0, weight: 1, net: -100, pull: 100 },
-			{ sector: 'b', jumps: 2, weight: 0.5, net: 60, pull: -30 },
+			{ sector: 'a', jumps: 0, weight: 1, net: -100, left: 40, pull: 40 },
+			{ sector: 'b', jumps: 2, weight: 0.5, net: 60, left: 0, pull: 0 },
+			{ sector: 'c', jumps: 2, weight: 0.5, net: -20, left: 20, pull: 10 },
 		];
-		expect(PlacementScorer.absorbable(targets)).toBe(70);
-		expect(PlacementScorer.absorbable([{ ...targets[1], pull: -30 }])).toBe(0);
+		expect(PlacementScorer.absorbable(targets)).toBe(50);
+		expect(PlacementScorer.absorbable([targets[1]])).toBe(0);
+	});
+
+	it('settles a nearby surplus before scoring the spots around it', () => {
+		// energy cells made in a, one jump from b and two from the hull parts factories in c
+		const energy = EconomyTesting.station('E', 'a', { modules: [EconomyTesting.ENERGY], moduleCounts: [2] });
+		const world = context([hull('H', 'c', 400), energy]);
+		const own = world.localNet(ENERGY, OPTIONS);
+		const left = world.residual(ENERGY, OPTIONS).get('c') ?? 0;
+		expect(left).toBeCloseTo(-(own.get('c') ?? 0) - (own.get('a') ?? 0));
+		const spot = PlacementScorer.spot(world, ENERGY, 'c', OPTIONS)!;
+		expect(spot.absorbable).toBeCloseTo(left);
+		const a = spot.targets.find((x) => x.sector === 'a')!;
+		expect(a).toMatchObject({ jumps: 2, left: 0, pull: 0 });
 	});
 
 	it('scores a spot by the modules the reach has room for', () => {
 		const world = context([hull('H', 'c', 400)]);
 		const recipe = world.recipes.recipe(ENERGY)!;
-		const short = -(world.localNet(ENERGY, true).get('c') ?? 0);
+		const short = -(world.localNet(ENERGY, OPTIONS).get('c') ?? 0);
 		const spot = PlacementScorer.spot(world, ENERGY, 'c', OPTIONS)!;
 		expect(spot.absorbable).toBeCloseTo(short);
 		expect(spot.modules).toBe(Math.floor(short / recipe.output));
@@ -90,6 +104,22 @@ describe('PlacementScorer', () => {
 		expect(PlacementScorer.coverage(inputs)).toBe(0);
 	});
 
+	it('leaves the stations of hostile factions out of the demand and the supply when asked', () => {
+		const xenon = (station: SaveStation): SaveStation => ({ ...station, owner: 'xenon' });
+		const relations = { xenon: -1 };
+		// a shortage held only by hostile stations gives no spot
+		const demand = context([xenon(hull('H', 'c', 400))], relations);
+		expect(PlacementScorer.spot(demand, ENERGY, 'c', OPTIONS)).toBeUndefined();
+		expect(PlacementScorer.spot(demand, ENERGY, 'c', { ...OPTIONS, hideHostile: false })).toBeDefined();
+		// a hostile surplus nearby does not supply the shortage
+		const energy = EconomyTesting.station('E', 'b', { modules: [EconomyTesting.ENERGY], moduleCounts: [2] });
+		const supply = context([hull('H', 'c', 400), xenon(energy)], relations);
+		const short = -(supply.localNet(ENERGY, OPTIONS).get('c') ?? 0);
+		expect(supply.localNet(ENERGY, OPTIONS).has('b')).toBe(false);
+		expect(supply.residual(ENERGY, OPTIONS).get('c')).toBeCloseTo(short);
+		expect(supply.residual(ENERGY, { ...OPTIONS, hideHostile: false }).get('c')).toBeLessThan(short);
+	});
+
 	it('leaves out hostile sectors when asked, and sectors whose owner bans the ware', () => {
 		const world = context([hull('H', 'c', 400)], { xenon: -1 }, { c: 'xenon' });
 		expect(PlacementScorer.spot(world, ENERGY, 'c', OPTIONS)).toBeUndefined();
@@ -103,7 +133,7 @@ describe('PlacementScorer', () => {
 describe('PlacementRanking', () => {
 	it('shares the demand between the spots of a ware', () => {
 		const world = context([hull('H', 'c', 400)]);
-		const short = -(world.localNet(ENERGY, true).get('c') ?? 0);
+		const short = -(world.localNet(ENERGY, OPTIONS).get('c') ?? 0);
 		const spots = PlacementRanking.greedy(world, ENERGY, OPTIONS);
 		expect(spots[0].sector).toBe('c');
 		const sold = spots.reduce((sum, x) => sum + x.modules * x.moduleOutput, 0);
@@ -133,7 +163,7 @@ describe('closed loop', () => {
 		expect(chain.mined.map((x) => x.ware)).toContain('ore');
 		expect(chain.missing).toEqual([]);
 		expect(chain.workforce).toBeGreaterThan(0);
-		const rows = PlacementChains.fill(EconomyTesting.wares, EconomyTesting.modules, chain.modules, 100, 0);
+		const rows = StationAutofill.fill(EconomyTesting.wares, EconomyTesting.modules, chain.modules, 100, 0);
 		expect(rows).toEqual(chain.modules);
 	});
 

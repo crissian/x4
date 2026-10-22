@@ -12,16 +12,6 @@ export interface StationOffer {
 export class SupplyDemandDetail {
 	/** Stations listed per group. */
 	static readonly TOP = 5;
-	private static readonly COMPACT = new Intl.NumberFormat(undefined, {
-		notation: 'compact',
-		maximumFractionDigits: 1,
-		signDisplay: 'exceptZero',
-	});
-
-	/** A signed number in a short form, such as +340K or -1.2M. */
-	static compact(value: number): string {
-		return SupplyDemandDetail.COMPACT.format(value);
-	}
 
 	/** The stations that make the most of the ware per hour. */
 	static producers(flows: readonly WareStationFlow[]): WareStationFlow[] {

@@ -43,7 +43,9 @@ describe('SupplyDemandDiagnosis', () => {
 		expect(SupplyDemandDiagnosis.explanation(row(0, 110, { building: true, marketBased: true }))).toContain(
 			'Ship and station building'
 		);
-		expect(SupplyDemandDiagnosis.explanation(row(-0.4, 130))).toBe('Not enough is built and prices are high');
+		expect(SupplyDemandDiagnosis.explanation(row(-0.4, 130))).toBe(
+			'Not enough is built, and prices are high or nothing is on sale'
+		);
 	});
 
 	it('colours the dot by kind and shades it by severity', () => {

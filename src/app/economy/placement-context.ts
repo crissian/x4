@@ -1,9 +1,11 @@
 import type { SaveMap, SaveRelations } from '../savegame/map/save-map-model';
 import type { Sector } from '../shared/services/model/model';
 import type { WareService } from '../shared/services/ware.service';
-import { TradeRules } from '../trade/trade-route-model';
+import { TradeRouteFinder } from '../trade/trade-route-finder';
 import type { Economy } from './economy';
+import { MarketSettlement, type SettlementRing } from './market-settlement';
 import type { PlacementOptions } from './placement-model';
+import type { SectorBalance } from './sector-balance';
 import { PlacementRecipes } from './placement-recipes';
 import { WareClasses } from './ware-classes';
 
@@ -18,21 +20,20 @@ export interface PlacementSector {
 	resources: ReadonlySet<string>;
 }
 
+/** Which stations the nets of the placement count. */
+export type PlacementScope = Pick<PlacementOptions, 'includePlayer' | 'hideHostile'>;
+
 /** A sector within reach and its distance. */
-export interface PlacementRing {
-	sector: string;
-	jumps: number;
-}
+export type PlacementRing = SettlementRing;
 
 /**
  * What the placement scoring reads from a save: the economy's own sector balances, the sectors (owner, sunlight,
- * security, resources), the player relations and the ware prices. Caches the reach of each sector and the own net
- * per sector of each ware.
+ * security, resources), the player relations and the ware prices. Caches the reach of each sector, and the own net
+ * and the shortage left after the existing supply per sector of each ware.
  */
 export class PlacementContext {
 	readonly recipes: PlacementRecipes;
 	private readonly sectorInfo = new Map<string, PlacementSector>();
-	private readonly rings = new Map<string, PlacementRing[]>();
 	private readonly nets = new Map<string, ReadonlyMap<string, number>>();
 
 	constructor(
@@ -92,12 +93,7 @@ export class PlacementContext {
 	/** Owned by a faction whose relation to the player is hostile, the rule of the trade routes. */
 	hostile(sector: string): boolean {
 		const owner = this.sector(sector)?.owner;
-		return (
-			!!owner &&
-			owner !== 'player' &&
-			this.relations != null &&
-			(this.relations[owner] ?? 0) <= TradeRules.HOSTILE_RELATION
-		);
+		return !!owner && TradeRouteFinder.isHostile(owner, this.relations);
 	}
 
 	/** The ware is illegal for the sector's owner. */
@@ -113,44 +109,75 @@ export class PlacementContext {
 
 	/** The sectors within `jumps` of a sector, itself first, then by distance. */
 	reach(sector: string, jumps: number): readonly PlacementRing[] {
-		const key = `${sector}|${jumps}`;
-		let result = this.rings.get(key);
+		return this.economy.graph.rings(sector, jumps);
+	}
+
+	/**
+	 * Each sector's own net per hour of a ware (its stations only). With `hideHostile`, the stations of factions
+	 * hostile to the player are left out, as supply and as demand: they don't trade with the player.
+	 */
+	localNet(ware: string, scope: PlacementScope): ReadonlyMap<string, number> {
+		return this.cached(`${ware}`, scope, () => {
+			const own = [...this.own(ware, scope)].filter(([, x]) => x.net !== 0);
+			return new Map(own.map(([id, x]) => [id, x.net]));
+		});
+	}
+
+	/**
+	 * The shortage per hour left in each sector of a ware once the existing surpluses supplied the short sectors
+	 * nearest to them, see `MarketSettlement`; positive values, only the sectors still short. Cached like `localNet`.
+	 */
+	residual(ware: string, scope: PlacementScope, maxJumps = MarketSettlement.MAX_JUMPS): ReadonlyMap<string, number> {
+		return this.cached(`~${ware}|${maxJumps}`, scope, () => {
+			const settled = [...this.settled(ware, scope, maxJumps)];
+			return new Map(settled.filter(([, x]) => x < 0).map(([id, x]) => [id, -x]));
+		});
+	}
+
+	/**
+	 * Each sector's net per hour of a ware after the settlement (`MarketSettlement.settled`): the surplus left, or
+	 * the shortage left as a negative number. The stations count as in `localNet`; cached the same way.
+	 */
+	settled(ware: string, scope: PlacementScope, maxJumps = MarketSettlement.MAX_JUMPS): ReadonlyMap<string, number> {
+		return this.cached(`=${ware}|${maxJumps}`, scope, () =>
+			MarketSettlement.settled(this.localNet(ware, scope), (sector, jumps) => this.reach(sector, jumps), maxJumps)
+		);
+	}
+
+	/** Each sector's own production per hour of a ware, to tell an input that is made nearby; stations as `localNet`. */
+	localProduced(ware: string, scope: PlacementScope): ReadonlyMap<string, number> {
+		return this.cached(`+${ware}`, scope, () => {
+			const own = [...this.own(ware, scope)].filter(([, x]) => x.produced > 0);
+			return new Map(own.map(([id, x]) => [id, x.produced]));
+		});
+	}
+
+	private cached(
+		key: string,
+		scope: PlacementScope,
+		make: () => ReadonlyMap<string, number>
+	): ReadonlyMap<string, number> {
+		const full = `${key}|${scope.includePlayer}|${scope.hideHostile}`;
+		let result = this.nets.get(full);
 		if (!result) {
-			result = [];
-			const seen = new Set<string>();
-			for (let distance = 0; distance <= jumps; distance++) {
-				for (const id of this.economy.graph.within(sector, distance)) {
-					if (!seen.has(id)) {
-						seen.add(id);
-						result.push({ sector: id, jumps: distance });
-					}
-				}
+			result = make();
+			this.nets.set(full, result);
+		}
+		return result;
+	}
+
+	/** Produced, consumed and net per sector of the stations that count. */
+	private own(ware: string, scope: PlacementScope): Map<string, SectorBalance> {
+		const result = new Map<string, SectorBalance>();
+		for (const x of this.economy.wareStations(ware, { includePlayer: scope.includePlayer })) {
+			if (scope.hideHostile && TradeRouteFinder.isHostile(x.station.owner, this.relations)) {
+				continue;
 			}
-			this.rings.set(key, result);
-		}
-		return result;
-	}
-
-	/** Each sector's own net per hour of a ware (its stations only). */
-	localNet(ware: string, includePlayer: boolean): ReadonlyMap<string, number> {
-		const key = `${ware}|${includePlayer}`;
-		let result = this.nets.get(key);
-		if (!result) {
-			const balances = this.economy.balances(ware, 0, { includePlayer });
-			result = new Map([...balances].filter(([, x]) => x.net !== 0).map(([id, x]) => [id, x.net]));
-			this.nets.set(key, result);
-		}
-		return result;
-	}
-
-	/** Each sector's own production per hour of a ware, to tell an input that is made nearby. */
-	localProduced(ware: string, includePlayer: boolean): ReadonlyMap<string, number> {
-		const key = `+${ware}|${includePlayer}`;
-		let result = this.nets.get(key);
-		if (!result) {
-			const balances = this.economy.balances(ware, 0, { includePlayer });
-			result = new Map([...balances].filter(([, x]) => x.produced > 0).map(([id, x]) => [id, x.produced]));
-			this.nets.set(key, result);
+			const sum = result.get(x.station.sector) ?? { produced: 0, consumed: 0, net: 0 };
+			sum.produced += x.produced;
+			sum.consumed += x.consumed;
+			sum.net = sum.produced - sum.consumed;
+			result.set(x.station.sector, sum);
 		}
 		return result;
 	}

@@ -22,7 +22,7 @@ export class StationSuggestionTexts {
 		return `${ware}${StationSuggestionTexts.SEPARATOR}${sector}`;
 	}
 
-	/** The top sectors that pull: those short of the ware, the biggest weighted shortage first, with their jumps. */
+	/** The top sectors that pull: those still short of the ware after the nearby supply, the biggest first, with their jumps. */
 	static contributors(targets: readonly PlacementTarget[], name: (sector: string) => string): string {
 		return targets
 			.filter((x) => x.pull > 0)

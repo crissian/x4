@@ -1,4 +1,4 @@
-/* the colours are app tokens, so they follow the light and dark themes */
+/* `--tone` comes from the global `[data-tone]` styles, which follow the light and dark themes */
 :host {
 	display: inline-block;
 	width: 0.75rem;
@@ -8,30 +8,6 @@
 	border: 1.5px solid var(--tone);
 	border-radius: 9999px;
 	background: color-mix(in oklab, var(--tone) var(--fill, 100%), transparent);
-}
-
-:host([data-tone='red']) {
-	--tone: var(--app-danger);
-}
-
-:host([data-tone='orange']) {
-	--tone: color-mix(in oklab, var(--app-danger) 45%, var(--app-warning));
-}
-
-:host([data-tone='amber']) {
-	--tone: var(--app-warning);
-}
-
-:host([data-tone='green']) {
-	--tone: var(--app-success);
-}
-
-:host([data-tone='teal']) {
-	--tone: var(--app-info);
-}
-
-:host([data-tone='grey']) {
-	--tone: var(--app-fg-muted);
 }
 
 :host([data-level='1']) {

@@ -1,4 +1,4 @@
-import type { GridColumn, GridGroup, GridTone } from './data-grid.component';
+import type { GridColumn, GridGroup, GridTone } from './grid-column';
 
 /** A header cell above the column headers: a group label spanning its visible columns, or a gap. */
 export interface GridGroupHeader {

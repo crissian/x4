@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import { HeatColors } from './heat-colors';
 import { HeatMapComponent } from './heat-map.component';
+import { OneSidedHeatColors } from './one-sided-heat-colors';
 
 const ARGON_PRIME = 'cluster_14_sector001';
 const SECOND_CONTACT = 'cluster_13_sector001';
@@ -178,5 +179,23 @@ describe('HeatMapComponent', () => {
 		expect(legend.textContent).toContain('Surplus');
 		expect(legend.querySelectorAll('span.flex-1').length).toBe(9);
 		expect(legend.querySelector('[data-ticks]')).toBeNull();
+	});
+
+	it('colours on the positive scale and marks sectors with a numbered star', async () => {
+		const { fixture, element, hex, clicks } = await setup({ [ARGON_PRIME]: 10, [SECOND_CONTACT]: 0 });
+		expect(element.querySelector('[data-marker]')).toBeNull();
+		fixture.componentRef.setInput('palette', 'positive');
+		fixture.componentRef.setInput('markers', [{ sector: SECOND_CONTACT, label: '1' }]);
+		await fixture.whenStable();
+		expect(hex(ARGON_PRIME).getAttribute('fill')).toBe(OneSidedHeatColors.legend()[8]);
+		expect(hex(SECOND_CONTACT).getAttribute('fill')).toBe(OneSidedHeatColors.legend()[0]);
+		const legend = element.querySelector('[data-legend]')!;
+		expect(legend.querySelector('span.flex-1')!.getAttribute('style')).toContain('background');
+		const marker = element.querySelector<SVGGElement>('[data-marker]')!;
+		expect(marker.getAttribute('data-sector')).toBe(SECOND_CONTACT);
+		expect(marker.textContent!.trim()).toBe('1');
+		marker.dispatchEvent(new MouseEvent('pointerdown', { bubbles: true, button: 0, clientX: 5, clientY: 0 }));
+		marker.dispatchEvent(new MouseEvent('pointerup', { bubbles: true, button: 0, clientX: 5, clientY: 0 }));
+		expect(clicks).toEqual([SECOND_CONTACT]);
 	});
 });

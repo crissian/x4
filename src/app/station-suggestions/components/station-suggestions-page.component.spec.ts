@@ -80,6 +80,10 @@ describe('StationSuggestionsPageComponent', () => {
 		const rows = store.rows();
 		expect(rows.map((x) => x.ware)).toContain('energycells');
 		expect(rows[0].sector).toBe(ARGON_PRIME);
+		// energy cells also go into ship and station building, so they are marked like the building-only wares
+		const cells = rows.find((x) => x.ware === 'energycells')!;
+		expect(cells.building).toBe(true);
+		expect(cells.name.endsWith('*')).toBe(true);
 		const headers = [...element.querySelectorAll('th')].map((x) => x.textContent?.trim() ?? '');
 		expect(headers.some((x) => x.includes('Expected Cr/h'))).toBe(true);
 		expect(headers.some((x) => x.includes('Room for modules'))).toBe(true);
@@ -107,6 +111,38 @@ describe('StationSuggestionsPageComponent', () => {
 		expect(store.rows().every((x) => x.sector === SECOND_CONTACT)).toBe(true);
 	});
 
+	it('drops a ware no factory is suggested for, and a stale pick, from the URL', async () => {
+		const { store, router } = await setup('/station-suggestions?ware=ore&pick=nothing');
+		expect(store.model().ware).toBe('');
+		expect(router.url).not.toContain('ware=');
+		expect(router.url).not.toContain('pick=');
+	});
+
+	it('keeps a pick from the URL that is in the table', async () => {
+		const { store, router, settle } = await setup('/station-suggestions?loop=open');
+		const key = store.rows().at(-1)!.key;
+		await router.navigateByUrl(`/station-suggestions?loop=open&pick=${encodeURIComponent(key)}`);
+		await settle();
+		expect(store.selected()!.key).toBe(key);
+		expect(router.url).toContain('pick=');
+	});
+
+	it('keeps the pick while a sector name is typed', async () => {
+		const { store, settle, router } = await setup();
+		store.showSector(SECOND_CONTACT);
+		await settle();
+		const row = store.rows().at(-1)!;
+		store.select(row);
+		await settle();
+		const name = store.sectorName(SECOND_CONTACT);
+		store.model.update((x) => ({ ...x, sector: name.slice(0, 3) }));
+		await settle();
+		expect(router.url).toContain('pick=');
+		store.model.update((x) => ({ ...x, sector: name }));
+		await settle();
+		expect(store.selected()!.key).toBe(row.key);
+	});
+
 	it('asks for a sector in what to build here', async () => {
 		const { element } = await setup('/station-suggestions?mode=here');
 		expect(element.querySelector('[data-pick-sector]')).not.toBeNull();
@@ -122,6 +158,8 @@ describe('StationSuggestionsPageComponent', () => {
 		const l = new URL(link.href).searchParams.get('l')!;
 		const rows = StationCalculatorComponent.parseSharedLayout(l);
 		expect(rows).toEqual(chain.modules);
+		// the calculator opens at the sunlight the chain was sized for
+		expect(Number(new URL(link.href).searchParams.get('sun'))).toBe(Math.round(store.chainSunlight() * 100));
 		expect(element.querySelectorAll('[data-marker]').length).toBeGreaterThan(0);
 	});
 

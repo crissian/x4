@@ -83,7 +83,7 @@ export class SupplyDemandQuery {
 		};
 	}
 
-	/** The model with a jumps number that is below the minimum or not a number back at its default. */
+	/** The model with a jumps number that is below the minimum or not a whole number back at its default. */
 	static clean(model: SupplyDemandModel): SupplyDemandModel {
 		return SupplyDemandQuery.validJumps(model.jumps)
 			? model
@@ -91,7 +91,7 @@ export class SupplyDemandQuery {
 	}
 
 	private static validJumps(value: number): boolean {
-		return Number.isFinite(value) && value >= SupplyDemandQuery.MIN.jumps;
+		return Number.isInteger(value) && value >= SupplyDemandQuery.MIN.jumps;
 	}
 
 	private static jumps(raw: string | null): number {

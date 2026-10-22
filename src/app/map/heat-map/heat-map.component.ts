@@ -5,6 +5,8 @@ import { MapZoomButtonsComponent } from '../map-zoom-buttons.component';
 import { PanZoom, PanZoomLimits } from '../pan-zoom';
 import { PanZoomArea } from '../pan-zoom-area';
 import { HeatColors } from './heat-colors';
+import { HeatMapMarker, HeatMapMarkers } from './heat-map-markers';
+import { HeatPaletteName, HeatPalettes } from './heat-palette';
 
 /** A sector hex of the heat map. */
 export interface HeatMapCell {
@@ -20,8 +22,9 @@ export interface HeatMapCell {
 }
 
 /**
- * A zoomable galaxy map that fills every sector by a value on a scale that is symmetric around zero: red below,
- * grey at zero, green above. Click a sector, or press Enter on it, to pick it. Each sector has a title with its
+ * A zoomable galaxy map that fills every sector by a value: on a scale that is symmetric around zero (red below,
+ * grey at zero, green above), or for values that are never negative from grey to green. Sectors can carry ★
+ * markers. Click a sector, or press Enter on it, to pick it. Each sector has a title with its
  * name and value, and the picked centre is outlined.
  */
 @Component({
@@ -54,6 +57,10 @@ export class HeatMapComponent {
 	/** The legend label of the highest values, already translated. */
 	readonly highLabel = input.required<string>();
 	readonly mapLabel = input.required<string>();
+	/** The colour scale: `diverging` around zero, or `positive` from grey at zero to green. */
+	readonly palette = input<HeatPaletteName>('diverging');
+	/** Sectors marked with a ★ and a label. */
+	readonly markers = input<readonly HeatMapMarker[]>([]);
 	/** Fills its container instead of a fixed size. */
 	readonly fill = input(false);
 	/** A sector was clicked, or Enter was pressed on it. */
@@ -70,12 +77,14 @@ export class HeatMapComponent {
 	readonly size = this.surface.size;
 	readonly view = this.surface.view;
 	readonly panZoom = this.surface.panZoom;
-	protected readonly swatches = HeatColors.legend();
+	private readonly colours = computed(() => HeatPalettes.of(this.palette()));
+	protected readonly swatches = computed(() => this.colours().legend());
 
 	/** The largest absolute value, the end of the colour scale. */
 	readonly max = computed(() => {
 		const idle = this.idle();
-		return this.scale() ?? HeatColors.scale([...this.values()].filter(([id]) => !idle.has(id)).map(([, x]) => x));
+		const values = [...this.values()].filter(([id]) => !idle.has(id)).map(([, x]) => x);
+		return this.scale() ?? this.colours().scale(values);
 	});
 	readonly cells = computed<HeatMapCell[]>(() => {
 		const values = this.values();
@@ -83,17 +92,18 @@ export class HeatMapComponent {
 		const idle = this.idle();
 		const area = this.outline();
 		const format = this.format();
+		const colours = this.colours();
 		const cells = this.geometry.layout.shapes.map((shape): HeatMapCell => {
 			const id = shape.sector.id;
 			const value = values.get(id);
 			const inArea = area.has(id);
 			const outside = !!area.size && !inArea;
 			return value === undefined
-				? { shape, color: HeatColors.fill(0, max), title: shape.sector.name, inArea, outside }
+				? { shape, color: colours.fill(0, max), title: shape.sector.name, inArea, outside }
 				: {
 						shape,
 						value,
-						color: idle.has(id) ? HeatColors.IDLE : HeatColors.fill(value, max),
+						color: idle.has(id) ? HeatColors.IDLE : colours.fill(value, max),
 						title: format(id, shape.sector.name, value),
 						inArea,
 						outside,
@@ -106,6 +116,7 @@ export class HeatMapComponent {
 		const id = this.centre();
 		return id ? this.geometry.shapeById.get(id) : undefined;
 	});
+	protected readonly markerShapes = computed(() => HeatMapMarkers.shapes(this.markers(), this.geometry.shapeById));
 
 	/** Fits the whole galaxy in the view. */
 	reset() {
@@ -116,7 +127,7 @@ export class HeatMapComponent {
 		this.surface.zoom(factor);
 	}
 
-	/** Ends a drag; a click on a sector with a value picks it. */
+	/** Ends a drag; a click on a sector with a value, or its marker, picks it. */
 	protected up(event: PointerEvent) {
 		const click = this.panZoom.end(event);
 		const id = click ? (event.target as Element).closest?.('[data-sector]')?.getAttribute('data-sector') : null;

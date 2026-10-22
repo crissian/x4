@@ -27,37 +27,43 @@ export class PlacementScorer {
 	}
 
 	/**
-	 * Units per hour the reach can take: the weighted shortage of the sectors that use more than they make, less the
-	 * weighted surplus of those that make more than they use; never below 0.
+	 * Units per hour the reach can take: the weighted shortage left in the sectors within reach once the existing
+	 * surpluses supplied their nearest short sectors (see `MarketSettlement`). Surpluses within reach no longer
+	 * subtract: they were settled first, against the shortages nearest to them.
 	 */
 	static absorbable(targets: readonly PlacementTarget[]): number {
-		return Math.max(
-			0,
-			targets.reduce((sum, x) => sum + x.pull, 0)
-		);
+		return targets.reduce((sum, x) => sum + x.pull, 0);
 	}
 
-	/** The sectors within reach of a spot whose own stations make or use the ware, the biggest pull first. */
+	/**
+	 * The sectors within reach of a spot whose own stations make or use the ware, the biggest pull first.
+	 * @param net each sector's own net per hour
+	 * @param shortage each sector's shortage per hour left after the existing supply and the spots already picked
+	 */
 	static targets(
 		context: PlacementContext,
 		sector: string,
 		jumps: number,
-		net: ReadonlyMap<string, number>
+		net: ReadonlyMap<string, number>,
+		shortage: ReadonlyMap<string, number>
 	): PlacementTarget[] {
 		const result: PlacementTarget[] = [];
 		for (const ring of context.reach(sector, jumps)) {
 			const value = net.get(ring.sector) ?? 0;
-			if (value) {
+			const left = Math.max(0, shortage.get(ring.sector) ?? 0);
+			if (value || left) {
 				const weight = PlacementScorer.weight(ring.jumps, jumps);
-				result.push({ ...ring, weight, net: value, pull: -weight * value });
+				result.push({ ...ring, weight, net: value, left, pull: weight * left });
 			}
 		}
-		return result.sort((a, b) => Math.abs(b.pull) - Math.abs(a.pull) || a.jumps - b.jumps);
+		return result.sort((a, b) => b.pull - a.pull || Math.abs(b.net) - Math.abs(a.net) || a.jumps - b.jumps);
 	}
 
 	/**
-	 * The inputs of the ware's recipe around a spot. An input is in reach when its weighted net within reach is not
-	 * negative and some station within reach makes it; a mined one when a sector within reach has the resource.
+	 * The inputs of the ware's recipe around a spot. An input is in reach when its weighted net within reach, after
+	 * the settlement of the existing market, is not negative and some station within reach makes it; a mined one
+	 * when a sector within reach has the resource. The settled nets don't depend on the reach, so a wider reach
+	 * doesn't net far-away surpluses against the shortages they already serve.
 	 */
 	static inputs(
 		context: PlacementContext,
@@ -72,8 +78,8 @@ export class PlacementScorer {
 				const covered = reach.some((x) => context.sector(x.sector)?.resources.has(input.ware));
 				return { ware: input.ware, mined: true, covered };
 			}
-			const net = context.localNet(input.ware, options.includePlayer);
-			const produced = context.localProduced(input.ware, options.includePlayer);
+			const net = context.settled(input.ware, options);
+			const produced = context.localProduced(input.ware, options);
 			let balance = 0;
 			let made = false;
 			for (const ring of reach) {
@@ -116,15 +122,16 @@ export class PlacementScorer {
 
 	/**
 	 * The spot, or undefined when it is excluded, the reach has no room for a single module or the ware earns
-	 * nothing. `net` is each sector's own net per hour, lowered by the spots already picked. A closed-loop
-	 * station sells at the average price; one that buys its inputs earns the price less their cost.
+	 * nothing. `shortage` is each sector's shortage per hour left after the existing supply, lowered by the spots
+	 * already picked. A closed-loop station sells at the average price; one that buys its inputs earns the price
+	 * less their cost.
 	 */
 	static spot(
 		context: PlacementContext,
 		ware: string,
 		sector: string,
 		options: PlacementOptions,
-		net: ReadonlyMap<string, number> = context.localNet(ware, options.includePlayer),
+		shortage: ReadonlyMap<string, number> = context.residual(ware, options),
 		known?: Pick<PlacementSpot, 'inputs' | 'resources'>
 	): PlacementSpot | undefined {
 		const recipe = context.recipes.recipe(ware);
@@ -132,7 +139,8 @@ export class PlacementScorer {
 		if (!recipe || !info || context.excluded(ware, sector, options)) {
 			return undefined;
 		}
-		const targets = PlacementScorer.targets(context, sector, options.jumps, net);
+		const net = context.localNet(ware, options);
+		const targets = PlacementScorer.targets(context, sector, options.jumps, net, shortage);
 		const absorbable = PlacementScorer.absorbable(targets);
 		const moduleOutput = PlacementRecipes.output(recipe, info.sunlight);
 		const modules = moduleOutput > 0 ? Math.floor(absorbable / moduleOutput) : 0;
@@ -168,20 +176,20 @@ export class PlacementScorer {
 	}
 
 	/**
-	 * Takes what a picked spot sells out of the shortages around it, the nearest sectors first, so the next spots
-	 * of the same ware don't count the same demand again.
+	 * Takes what a picked spot sells out of the shortages left around it, the nearest sectors first, so the next
+	 * spots of the same ware don't count the same demand again.
 	 */
-	static allocate(spot: PlacementSpot, net: Map<string, number>): void {
+	static allocate(spot: PlacementSpot, shortage: Map<string, number>): void {
 		let left = spot.modules * spot.moduleOutput;
-		const short = spot.targets.filter((x) => x.net < 0).sort((a, b) => a.jumps - b.jumps || a.net - b.net);
+		const short = spot.targets.filter((x) => x.left > 0).sort((a, b) => a.jumps - b.jumps || b.left - a.left);
 		for (const target of short) {
 			if (left <= 0) {
 				break;
 			}
-			const current = net.get(target.sector) ?? 0;
-			const take = Math.min(left, -current);
+			const current = shortage.get(target.sector) ?? 0;
+			const take = Math.min(left, current);
 			if (take > 0) {
-				net.set(target.sector, current + take);
+				shortage.set(target.sector, current - take);
 				left -= take;
 			}
 		}

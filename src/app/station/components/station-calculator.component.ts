@@ -1,8 +1,25 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { Component, TemplateRef, computed, effect, inject, input, linkedSignal, signal, viewChild } from '@angular/core';
+import {
+	Component,
+	TemplateRef,
+	computed,
+	effect,
+	inject,
+	input,
+	linkedSignal,
+	signal,
+	untracked,
+	viewChild,
+} from '@angular/core';
 import { FormField, applyEach, disabled, form, max, min } from '@angular/forms/signals';
-import { LucideFilePlus, LucideSave, LucideSaveAll, LucideFolderOpen, LucideShare2, LucideImport } from '@lucide/angular';
-import * as urlon from 'urlon';
+import {
+	LucideFilePlus,
+	LucideSave,
+	LucideSaveAll,
+	LucideFolderOpen,
+	LucideShare2,
+	LucideImport,
+} from '@lucide/angular';
 import { MessagesComponent } from '../../shared/components/messages.component';
 import { AppDialog } from '../../shared/components/modal/dialog';
 import { Message, MessageType } from '../../shared/services/message';
@@ -10,6 +27,7 @@ import { Layout, ModuleConfig } from '../../shared/services/module-config';
 import { ModuleService } from '../../shared/services/module.service';
 import { WareService } from '../../shared/services/ware.service';
 import { LayoutService } from '../services/layout-service';
+import { StationLayoutLink } from '../station-layout-link';
 import { ImportPlanResultComponent } from './import-plan-result.component';
 import { ImportPlansComponent, ImportResult } from './import-plans.component';
 import { LoadLayoutComponent, LoadLayoutResult, LoadLayoutType } from './load-layout.component';
@@ -47,18 +65,9 @@ const EMPTY_ROW: ModuleRow = { moduleId: '', count: 1 };
 	templateUrl: './station-calculator.component.html',
 })
 export default class StationCalculatorComponent {
-	/** Reads the rows of a shared layout link (`?l=...`, urlon with `=` and `&` swapped for URL-safe characters). */
+	/** Reads the rows of a shared layout link (`?l=...`, see `StationLayoutLink`). */
 	static parseSharedLayout(value: string | undefined): ModuleRow[] | undefined {
-		if (!value) {
-			return undefined;
-		}
-		try {
-			const layoutData = urlon.parse(value.replace(/-/g, '=').replace(/,/g, '&')) as { module: string; count: number }[];
-			return layoutData.map((x) => ({ moduleId: x.module, count: x.count }));
-		} catch (err) {
-			console.log(err);
-			return undefined;
-		}
+		return StationLayoutLink.parse(value);
 	}
 
 	private readonly dialog = inject(Dialog);
@@ -69,6 +78,8 @@ export default class StationCalculatorComponent {
 
 	/** Shared layout from the `l` query parameter. */
 	readonly l = input<string>();
+	/** The sunlight in percent of a shared layout, from the `sun` query parameter. */
+	readonly sun = input<string>();
 
 	readonly layout = signal<Layout | null>(null);
 	protected readonly stationModulesTitle = $localize`Station Modules`;
@@ -76,7 +87,9 @@ export default class StationCalculatorComponent {
 	readonly importResult = signal<ImportResult | null>(null);
 
 	/** Station layout rows */
-	readonly rows = linkedSignal<ModuleRow[]>(() => StationCalculatorComponent.parseSharedLayout(this.l()) ?? [{ ...EMPTY_ROW }]);
+	readonly rows = linkedSignal<ModuleRow[]>(
+		() => StationCalculatorComponent.parseSharedLayout(this.l()) ?? [{ ...EMPTY_ROW }]
+	);
 	readonly rowsForm = form(this.rows, (row) => {
 		applyEach(row, (item) => {
 			min(item.count, 0);
@@ -118,6 +131,13 @@ export default class StationCalculatorComponent {
 	});
 
 	constructor() {
+		// a shared layout sized for a sector's sunlight opens with that sunlight
+		effect(() => {
+			const sunlight = StationLayoutLink.parseSunlight(this.sun());
+			if (sunlight !== undefined) {
+				untracked(() => this.settings.update((settings) => ({ ...settings, sunlight })));
+			}
+		});
 		// keep the workforce slider in line with the calculated value
 		effect(() => {
 			const partialWorkforce = this.partialWorkforce();
@@ -129,12 +149,9 @@ export default class StationCalculatorComponent {
 	}
 
 	shareLayout() {
-		const data = this.rows()
-			.filter((x) => x.count > 0 && x.moduleId)
-			.map((x) => ({ module: x.moduleId, count: x.count }));
-		const params = urlon.stringify(data).replace(/=/g, '-').replace(/&/g, ',');
+		const params = StationLayoutLink.params(this.rows());
 		const url = window.location.href.split('?')[0];
-		AppDialog.open(this.dialog, ShareLayoutComponent, { data: `${url}?l=${params}` });
+		AppDialog.open(this.dialog, ShareLayoutComponent, { data: `${url}?l=${params['l']}` });
 	}
 
 	saveLayoutAs() {

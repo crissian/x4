@@ -11,11 +11,7 @@
 >
 	<svg [lucideIcon]="group().icon" class="opacity-80" />{{ group().label }}
 	@if (group().experimental) {
-		<span
-			class="rounded-full border border-amber-400 px-1.5 text-xs text-amber-800 dark:text-amber-200"
-			i18n="@@navExperimental"
-			>Experimental</span
-		>
+		<app-experimental-badge />
 	}
 	<svg lucideChevronDown class="opacity-80" />
 </button>

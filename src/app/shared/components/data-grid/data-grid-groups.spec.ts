@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { DataGridComponent, GridColumn, GridGroup } from './data-grid.component';
 import { GridGroups } from './grid-groups';
 
@@ -160,37 +160,6 @@ describe('DataGridComponent hideable', () => {
 		const fixture = TestBed.createComponent(FixedHostComponent);
 		await fixture.whenStable();
 		expect(headers(fixture.nativeElement)).toEqual(['Name', 'Net']);
-	});
-});
-
-describe('DataGridComponent narrow screens', () => {
-	beforeEach(() => localStorage.clear());
-
-	@Component({
-		imports: [DataGridComponent],
-		template: `<app-data-grid [data]="rows" [columns]="columns" />`,
-	})
-	class NarrowHostComponent {
-		readonly rows = ROWS;
-		readonly columns: GridColumn<Row>[] = [
-			{ key: 'name', caption: 'Name' },
-			{ key: 'net', caption: 'Net', type: 'number', narrowHidden: true },
-		];
-	}
-
-	async function headers(narrow: boolean) {
-		vi.stubGlobal('matchMedia', () => ({ matches: narrow }));
-		const fixture = TestBed.createComponent(NarrowHostComponent);
-		await fixture.whenStable();
-		vi.unstubAllGlobals();
-		return [...fixture.nativeElement.querySelectorAll('thead tr:first-child th')].map((x: Element) =>
-			x.textContent!.trim()
-		);
-	}
-
-	it('hides the narrow-hidden columns by default on a phone only', async () => {
-		expect(await headers(true)).toEqual(['Name']);
-		expect(await headers(false)).toEqual(['Name', 'Net']);
 	});
 });
 

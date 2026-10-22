@@ -14,11 +14,12 @@ import {
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LucideChevronDown, LucideDynamicIcon } from '@lucide/angular';
 import type { NavGroup } from './nav-item';
+import { ExperimentalBadgeComponent } from './shared/components/experimental-badge.component';
 
 /** A header button that toggles a panel of links. The parent owns the open state, so only one panel is open. */
 @Component({
 	selector: 'app-nav-dropdown',
-	imports: [RouterLink, RouterLinkActive, LucideDynamicIcon, LucideChevronDown],
+	imports: [ExperimentalBadgeComponent, RouterLink, RouterLinkActive, LucideDynamicIcon, LucideChevronDown],
 	templateUrl: './nav-dropdown.component.html',
 	host: {
 		class: 'relative',

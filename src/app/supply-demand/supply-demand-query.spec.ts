@@ -46,6 +46,7 @@ describe('SupplyDemandQuery', () => {
 		expect(read({ map: 'x' }).map).toBe('local');
 		expect(read({ jumps: 'abc' }).jumps).toBe(3);
 		expect(read({ jumps: '0' }).jumps).toBe(0);
+		expect(read({ jumps: '2.5' }).jumps).toBe(3);
 	});
 
 	it('writes null for defaults and only the params the scope uses', () => {

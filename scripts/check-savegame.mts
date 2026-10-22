@@ -90,9 +90,9 @@ class CheckSavegame {
 		const aggregateMs = performance.now() - started;
 		const ware = process.env['WARE'] ?? 'energycells';
 		started = performance.now();
-		const near = economy.neighbourhood(ware, 3);
+		const near = economy.balances(ware, 3);
 		const nearMs = performance.now() - started;
-		const spread = [...near.values()].filter((x) => x !== 0).length;
+		const spread = [...near.values()].filter((x) => x.net !== 0).length;
 		console.log(
 			`  economy: ${economy.stations.length} stations, flows ${flowsMs.toFixed(0)} ms, galaxy ${aggregateMs.toFixed(0)} ms ` +
 				`(first full ${(flowsMs + aggregateMs).toFixed(0)} ms), ${ware} within 3 jumps ${nearMs.toFixed(0)} ms ` +

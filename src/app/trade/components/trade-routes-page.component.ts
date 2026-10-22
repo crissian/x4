@@ -6,10 +6,17 @@ import { TradeRules, type TradeRoute } from '../trade-route-model';
 import { TradeRouteRow, TradeRoutesStore } from '../trade-routes-store';
 import { TradeRouteDetailsComponent } from './trade-route-details.component';
 import { TradeRouteFiltersComponent } from './trade-route-filters.component';
+import { ExperimentalBadgeComponent } from '../../shared/components/experimental-badge.component';
 
 /** Ranks the buy-here, sell-there trades of the active save by profit per minute. */
 @Component({
-	imports: [DataGridComponent, RouterLink, TradeRouteDetailsComponent, TradeRouteFiltersComponent],
+	imports: [
+		ExperimentalBadgeComponent,
+		DataGridComponent,
+		RouterLink,
+		TradeRouteDetailsComponent,
+		TradeRouteFiltersComponent,
+	],
 	templateUrl: './trade-routes-page.component.html',
 	providers: [TradeRoutesStore],
 })

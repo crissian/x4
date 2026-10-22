@@ -33,7 +33,9 @@ describe('Diagnoses', () => {
 		expect(Diagnoses.of(-0.24, 120, false)).toEqual({ kind: 'short', severity: 'moderate', marketOnly: false });
 		expect(Diagnoses.of(-0.5, 100, false)).toEqual({ kind: 'covered', severity: 'severe', marketOnly: false });
 		expect(Diagnoses.of(-0.05, 80, false)).toEqual({ kind: 'covered', severity: 'slight', marketOnly: false });
-		expect(Diagnoses.of(-0.5, undefined, false).kind).toBe('covered');
+		// nothing on sale covers the gap
+		expect(Diagnoses.of(-0.5, undefined, false)).toEqual({ kind: 'short', severity: 'severe', marketOnly: false });
+		expect(Diagnoses.of(0.5, undefined, false).kind).toBe('surplus');
 	});
 
 	it('combines a surplus capacity with the market', () => {

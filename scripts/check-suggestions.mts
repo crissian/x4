@@ -7,6 +7,7 @@ import { PlacementContext } from '../src/app/economy/placement-context';
 import type { PlacementOptions, PlacementSpot } from '../src/app/economy/placement-model';
 import { PlacementRanking } from '../src/app/economy/placement-ranking';
 import { PlacementRecipes } from '../src/app/economy/placement-recipes';
+import { PlacementScorer } from '../src/app/economy/placement-scorer';
 import { WareClasses } from '../src/app/economy/ware-classes';
 import { ModuleService } from '../src/app/shared/services/module.service';
 import { ShipService } from '../src/app/shared/services/ship.service';
@@ -16,7 +17,6 @@ import type { Sector } from '../src/app/shared/services/model/model';
 
 class CheckSuggestions {
 	static readonly ARGON_PRIME = 'cluster_14_sector001';
-	static readonly GETSU_FUNE = 'cluster_48_sector001';
 	static readonly OPTIONS: PlacementOptions = { loop: 'closed', jumps: 3, hideHostile: true, includePlayer: true };
 	static readonly OPEN: PlacementOptions = { ...CheckSuggestions.OPTIONS, loop: 'open' };
 
@@ -113,22 +113,45 @@ class CheckSuggestions {
 		console.log(`  top 5 in Argon Prime (${here.total} wares):`);
 		here.spots.slice(0, 5).forEach((x) => console.log(line(x)));
 
+		CheckSuggestions.reach(context, candidates, line);
+
+		// with hostile sectors hidden, the terran stations (and Getsu Fune's demand) are left out
 		const mre = PlacementRanking.greedy(context, 'terranmre', CheckSuggestions.OPTIONS);
-		console.log(
-			`  terranmre: ${mre.length} spots; Getsu Fune own net ${Math.round(context.localNet('terranmre', true).get(CheckSuggestions.GETSU_FUNE) ?? 0)}/h`
-		);
+		console.log(`  terranmre: ${mre.length} spots`);
 		mre.slice(0, 5).forEach((x) => console.log(line(x)));
-		const recipe = context.recipes.recipe('terranmre');
-		const net = context.localNet('terranmre', true);
-		const around = context
-			.reach(CheckSuggestions.GETSU_FUNE, 3)
-			.filter((x) => net.get(x.sector))
-			.map((x) => `${name(x.sector)} ${x.jumps}j ${Math.round(net.get(x.sector)!)}`);
-		console.log(
-			`  terranmre module ${recipe?.module} ${Math.round(recipe?.output ?? 0)}/h; around Getsu Fune: ${around.join(', ')}`
-		);
 		const prime = mre.findIndex((x) => x.sector === CheckSuggestions.ARGON_PRIME);
 		console.log(`  terranmre in Argon Prime: ${prime < 0 ? 'not listed' : `#${prime + 1}`}`);
+	}
+
+	/** A wider reach must never lower a spot: the top 10 at 3 jumps, scored on their own at 1 to 6 jumps. */
+	private static reach(context: PlacementContext, candidates: string[], line: (x: PlacementSpot) => string): void {
+		const top = PlacementRanking.where(context, candidates, CheckSuggestions.OPTIONS).spots.slice(0, 10);
+		let failures = 0;
+		for (const spot of top) {
+			const values = [1, 2, 3, 4, 5, 6].map(
+				(jumps) =>
+					PlacementScorer.spot(context, spot.ware, spot.sector, { ...CheckSuggestions.OPTIONS, jumps }) ?? {
+						absorbable: 0,
+						crPerHour: 0,
+					}
+			);
+			const rising = values.every(
+				(x, i) =>
+					!i ||
+					(x.absorbable >= values[i - 1].absorbable - 1e-6 && x.crPerHour >= values[i - 1].crPerHour - 1e-6)
+			);
+			failures += rising ? 0 : 1;
+			console.log(
+				`    ${rising ? 'ok  ' : 'FAIL'} ${spot.ware} ${spot.sector}: Cr/h at 1..6 jumps ${values.map((x) => Math.round(x.crPerHour)).join(' ')}`
+			);
+		}
+		console.log(`  reach 1..6 on the top 10: ${failures ? `${failures} FAILED` : 'non-decreasing'}`);
+		for (const jumps of [1, 3, 5, 6]) {
+			const started = performance.now();
+			const where = PlacementRanking.where(context, candidates, { ...CheckSuggestions.OPTIONS, jumps });
+			console.log(`  top 5 closed loop at ${jumps} jumps (${(performance.now() - started).toFixed(0)} ms):`);
+			where.spots.slice(0, 5).forEach((x) => console.log(line(x)));
+		}
 	}
 }
 

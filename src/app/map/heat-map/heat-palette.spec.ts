@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { MarkedHeatMapComponent } from './marked-heat-map.component';
+import { HeatColors } from './heat-colors';
+import { HeatMapMarkers } from './heat-map-markers';
+import { HeatPalettes } from './heat-palette';
 import { OneSidedHeatColors } from './one-sided-heat-colors';
 
 describe('OneSidedHeatColors', () => {
@@ -21,9 +23,18 @@ describe('OneSidedHeatColors', () => {
 	});
 });
 
-describe('MarkedHeatMapComponent', () => {
+describe('HeatPalettes', () => {
+	it('colours by the diverging or the positive scale', () => {
+		expect(HeatPalettes.of('diverging').legend()).toEqual(HeatColors.legend());
+		expect(HeatPalettes.of('diverging').fill(-5, 10)).toBe(HeatColors.fill(-5, 10));
+		expect(HeatPalettes.of('positive').legend()).toEqual(OneSidedHeatColors.legend());
+		expect(HeatPalettes.of('positive').fill(5, 10)).toBe(OneSidedHeatColors.fill(5, 10));
+	});
+});
+
+describe('HeatMapMarkers', () => {
 	it('draws a five-pointed star pointing up', () => {
-		const points = MarkedHeatMapComponent.star(0, 0, 10).split(' ');
+		const points = HeatMapMarkers.star(0, 0, 10).split(' ');
 		expect(points.length).toBe(10);
 		expect(points[0]).toBe('0.0,-10.0');
 	});

@@ -70,7 +70,8 @@ export class Diagnoses {
 
 	/**
 	 * @param balance net divided by the larger of produced and consumed, -1..1
-	 * @param priceIndex average offer price as % of the ware's average price
+	 * @param priceIndex average sell offer price as % of the ware's average price; undefined without sell offers,
+	 * which makes a ware built short `short` (nothing covers it)
 	 * @param marketOnly mined and building wares, whose capacity is not known: only the market counts
 	 */
 	static of(balance: number, priceIndex: number | undefined, marketOnly: boolean): Diagnosis {
@@ -82,7 +83,9 @@ export class Diagnoses {
 		}
 		const severity = Diagnoses.balanceSeverity(balance);
 		if (balance < 0) {
-			return { kind: market === 'tight' ? 'short' : 'covered', severity, marketOnly };
+			// nothing on sale covers the gap, so a ware without sell offers is short as well
+			const uncovered = market === 'tight' || priceIndex === undefined;
+			return { kind: uncovered ? 'short' : 'covered', severity, marketOnly };
 		}
 		return { kind: market === 'tight' ? 'starved' : 'surplus', severity, marketOnly };
 	}

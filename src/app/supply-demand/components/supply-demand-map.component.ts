@@ -2,9 +2,10 @@ import { Component, computed, inject } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { SectorBalances } from '../../economy/sector-balance';
 import { HeatMapComponent } from '../../map/heat-map/heat-map.component';
+import { JumpTexts } from '../../shared/format/jump-texts';
 import { WareService } from '../../shared/services/ware.service';
-import { SupplyDemandDetail } from '../supply-demand-detail';
 import { SupplyDemandStore } from '../supply-demand-store';
+import { CompactNumber } from '../../shared/format/compact-number';
 
 /** How many producers and consumers of the ware a sector has. */
 interface SectorStations {
@@ -103,7 +104,7 @@ export class SupplyDemandMapComponent {
 		const stations = this.stations().get(id);
 		const consumers = stations?.consumers ?? 0;
 		const producers = stations?.producers ?? 0;
-		const value = SupplyDemandDetail.compact((this.mined() ? -balance.consumed : balance.net) * this.price());
+		const value = CompactNumber.format((this.mined() ? -balance.consumed : balance.net) * this.price());
 		if (this.mined()) {
 			return $localize`${name}:name:: ${value}:value: Cr/h used · consumers: ${consumers}:count:`;
 		}
@@ -122,16 +123,17 @@ export class SupplyDemandMapComponent {
 			return $localize`${name}:name:: nothing made or used`;
 		}
 		const percent = SupplyDemandMapComponent.PERCENT.format(SectorBalances.ratio(balance));
-		const value = SupplyDemandDetail.compact((this.mined() ? -balance.consumed : balance.net) * this.price());
+		const value = CompactNumber.format((this.mined() ? -balance.consumed : balance.net) * this.price());
+		const within = JumpTexts.within(jumps);
 		let title: string;
 		if (this.mined()) {
-			title = $localize`${name}:name:: within ${jumps}:jumps: jumps ${value}:value: Cr/h used`;
+			title = $localize`${name}:name:: ${within}:within: ${value}:value: Cr/h used`;
 		} else if (!balance.net) {
-			title = $localize`${name}:name:: within ${jumps}:jumps: jumps balanced`;
+			title = $localize`${name}:name:: ${within}:within: balanced`;
 		} else if (balance.net < 0) {
-			title = $localize`${name}:name:: within ${jumps}:jumps: jumps ${value}:value: Cr/h short (${percent}:percent:)`;
+			title = $localize`${name}:name:: ${within}:within: ${value}:value: Cr/h short (${percent}:percent:)`;
 		} else {
-			title = $localize`${name}:name:: within ${jumps}:jumps: jumps ${value}:value: Cr/h surplus (${percent}:percent:)`;
+			title = $localize`${name}:name:: ${within}:within: ${value}:value: Cr/h surplus (${percent}:percent:)`;
 		}
 		const ware = this.store.selectedWare();
 		const top = ware && this.store.economy()?.topContributor(ware, id, jumps, this.counted());
@@ -139,7 +141,7 @@ export class SupplyDemandMapComponent {
 			return title;
 		}
 		return top.jumps
-			? `${title} · ${$localize`mostly ${this.store.sectorName(top.sector)}:sector:, ${top.jumps}:distance: jumps`}`
+			? `${title} · ${$localize`mostly ${this.store.sectorName(top.sector)}:sector:, ${JumpTexts.distance(top.jumps)}:distance:`}`
 			: `${title} · ${$localize`mostly this sector`}`;
 	}
 }

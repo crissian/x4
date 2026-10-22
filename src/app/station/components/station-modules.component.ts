@@ -14,11 +14,23 @@ import { StationModule, WareGroup } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
 import { WareService } from '../../shared/services/ware.service';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
-import { ModuleRow, ResourceCalculator, StationModuleModel, WareGroupModel, StationCalculatorModel } from './station-calculator.model';
+import { StationAutofill } from './station-autofill';
+import { ModuleRow, StationModuleModel, WareGroupModel, StationCalculatorModel } from './station-calculator.model';
 
 @Component({
 	selector: 'app-station-modules',
-	imports: [FormField, CdkDropList, CdkDrag, CdkDragHandle, CdkDragPreview, AutocompleteComponent, LucideGripVertical, LucideTrash, LucideSquarePlus, LucideWandSparkles],
+	imports: [
+		FormField,
+		CdkDropList,
+		CdkDrag,
+		CdkDragHandle,
+		CdkDragPreview,
+		AutocompleteComponent,
+		LucideGripVertical,
+		LucideTrash,
+		LucideSquarePlus,
+		LucideWandSparkles,
+	],
 	templateUrl: './station-modules.component.html',
 	styleUrl: './station-modules.component.css',
 })
@@ -56,55 +68,15 @@ export class StationModulesComponent {
 
 	/** Adds production modules until every needed resource is produced by the station. */
 	autofillModules() {
-		const toModels = (rows: ModuleRow[]) =>
-			rows.map(
-				(x) => new StationModuleModel(this.wareService, this.moduleService, x.moduleId, Number(x.count) || 0)
-			);
-
-		const rows = this.rows()()
-			.value()
-			.map((x) => ({ ...x }));
-		const habitat = toModels(rows).find((x) => x.module?.type === ModuleTypes.habitation);
-		const method = habitat?.module?.makerRace?.id ?? 'default';
-
-		let didChange = true;
-		while (didChange) {
-			didChange = false;
-			const resources = ResourceCalculator.calculate(toModels(rows), this.sunlight(), this.partialWorkforce());
-
-			for (const resource of resources) {
-				if (resource.amount >= 0) {
-					continue;
-				}
-
-				const module =
-					this.moduleService.getModuleByWare(resource.ware.id, method) ||
-					this.moduleService.getModuleByWare(resource.ware.id);
-				if (module == null) {
-					continue;
-				}
-
-				didChange = true;
-
-				const productions = module.product?.find((x) => x.id == resource.ware.id)?.production ?? [];
-				const productionWare =
-					productions.find((p) => p.method == method) || productions.find((p) => p.method == 'default');
-				if (!productionWare) {
-					continue;
-				}
-				const productionPerHour = productionWare.amount * (3600 / productionWare.time);
-				const moduleCount = Math.ceil(-resource.amount / productionPerHour);
-
-				const existing = rows.find((m) => m.moduleId == module.id);
-				if (existing == null) {
-					rows.push({ moduleId: module.id, count: moduleCount });
-				} else {
-					existing.count += moduleCount;
-				}
-			}
-		}
-
-		this.rows()().value.set(rows);
+		this.rows()().value.set(
+			StationAutofill.fill(
+				this.wareService,
+				this.moduleService,
+				this.rows()().value(),
+				this.sunlight(),
+				this.partialWorkforce()
+			)
+		);
 	}
 
 	private createWareGroups() {

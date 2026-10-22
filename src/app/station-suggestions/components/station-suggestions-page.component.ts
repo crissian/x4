@@ -9,10 +9,12 @@ import { StationSuggestionsDetailComponent } from './station-suggestions-detail.
 import { StationSuggestionsFiltersComponent } from './station-suggestions-filters.component';
 import { StationSuggestionsHelpComponent } from './station-suggestions-help.component';
 import { StationSuggestionsMapComponent } from './station-suggestions-map.component';
+import { ExperimentalBadgeComponent } from '../../shared/components/experimental-badge.component';
 
 /** Suggests where to build a factory, or what to build in a sector, from the shortages around each sector. */
 @Component({
 	imports: [
+		ExperimentalBadgeComponent,
 		DataGridComponent,
 		RouterLink,
 		StationSuggestionsFiltersComponent,
