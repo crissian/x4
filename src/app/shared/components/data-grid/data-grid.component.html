@@ -6,7 +6,7 @@
 			[attr.aria-expanded]="chooserOpen()"
 			(click)="chooserOpen.set(!chooserOpen())"
 		>
-			<svg lucideColumns3 />Columns
+			<svg lucideColumns3 /><ng-container i18n>Columns</ng-container>
 		</button>
 		@if (chooserOpen()) {
 			<div
@@ -19,8 +19,8 @@
 					</label>
 				}
 				<div class="mt-1 flex justify-between border-t border-line pt-2">
-					<button type="button" class="link-button text-link" (click)="resetColumns()">Reset</button>
-					<button type="button" class="link-button text-link" (click)="chooserOpen.set(false)">Close</button>
+					<button type="button" class="link-button text-link" (click)="resetColumns()" i18n>Reset</button>
+					<button type="button" class="link-button text-link" (click)="chooserOpen.set(false)" i18n>Close</button>
 				</div>
 			</div>
 		}
@@ -40,6 +40,7 @@
 						[class.text-right]="column.type === 'number'"
 						[attr.aria-sort]="sort ? (sort.direction === 1 ? 'ascending' : 'descending') : null"
 						(click)="toggleSort(column, $event)"
+						i18n-title
 						title="Click to sort, Shift+Click to sort by multiple columns"
 					>
 						{{ column.caption }}
@@ -65,9 +66,9 @@
 									<select
 										class="input"
 										[formField]="filterForm[column.key]"
-										[attr.aria-label]="'Filter ' + column.caption"
+										[attr.aria-label]="filterLabel(column)"
 									>
-										<option value="">(All)</option>
+										<option value="" i18n>(All)</option>
 										@for (item of column.lookup; track item.value) {
 											<option [value]="item.value">{{ item.label }}</option>
 										}
@@ -79,7 +80,7 @@
 										[class.text-right]="column.type === 'number'"
 										[formField]="filterForm[column.key]"
 										[placeholder]="column.type === 'number' ? '=, <, >' : ''"
-										[attr.aria-label]="'Filter ' + column.caption"
+										[attr.aria-label]="filterLabel(column)"
 									/>
 								}
 							}
@@ -97,14 +98,14 @@
 				</tr>
 			} @empty {
 				<tr>
-					<td class="py-6 text-center text-fg-muted" [attr.colspan]="visibleColumns().length">No data</td>
+					<td class="py-6 text-center text-fg-muted" [attr.colspan]="visibleColumns().length" i18n>No data</td>
 				</tr>
 			}
 		</tbody>
 		@if (features()) {
 			<tfoot>
 				<tr>
-					<td class="text-fg-muted" [attr.colspan]="visibleColumns().length">
+					<td class="text-fg-muted" [attr.colspan]="visibleColumns().length" i18n>
 						Count: {{ filtered().length }}
 					</td>
 				</tr>
@@ -116,7 +117,7 @@
 @if (features()) {
 	<div class="mt-2 flex flex-wrap items-center justify-between gap-2 text-fg-soft">
 		<label class="flex items-center gap-2">
-			<span>Page size</span>
+			<span i18n>Page size</span>
 			<select class="input w-auto" [formField]="pagerForm.pageSize">
 				@for (size of pageSizes(); track size) {
 					<option [value]="size">{{ size }}</option>
@@ -130,6 +131,7 @@
 				class="btn btn-secondary"
 				[disabled]="page() === 0"
 				(click)="goTo(0)"
+				i18n-aria-label
 				aria-label="First page"
 			>
 				<svg lucideChevronsLeft />
@@ -139,16 +141,18 @@
 				class="btn btn-secondary"
 				[disabled]="page() === 0"
 				(click)="goTo(page() - 1)"
+				i18n-aria-label
 				aria-label="Previous page"
 			>
 				<svg lucideChevronLeft />
 			</button>
-			<span class="px-2">Page {{ page() + 1 }} of {{ pageCount() }}</span>
+			<span class="px-2" i18n>Page {{ page() + 1 }} of {{ pageCount() }}</span>
 			<button
 				type="button"
 				class="btn btn-secondary"
 				[disabled]="page() >= pageCount() - 1"
 				(click)="goTo(page() + 1)"
+				i18n-aria-label
 				aria-label="Next page"
 			>
 				<svg lucideChevronRight />
@@ -158,6 +162,7 @@
 				class="btn btn-secondary"
 				[disabled]="page() >= pageCount() - 1"
 				(click)="goTo(pageCount() - 1)"
+				i18n-aria-label
 				aria-label="Last page"
 			>
 				<svg lucideChevronsRight />

@@ -1,3 +1,4 @@
+import { translateGameText } from '../../../core/game-text';
 /* tslint:disable:max-line-length */
 const entities = {
   cluster_01: {"id":"cluster_01","version":0,"name":"Grand Exchange","description":"Shortly before the Jump Gate shutdown, when Gates would sporadically swap between active and inactive, in some systems on a daily bases, scientists across all races began to notice a worrying number of warp anomalies across all of Grand Exchange. Before they could be properly investigated, however, the Jump Gates to the system shut down completely.\n\nWhen the Gates reopened, scientists were quick to notice anomalies reappearing, though none as intense or frequent as previously. Though many resources have been dedicated to solving the mystery, none have yet been able to work out what is causing the anomalies.","x":0.0,"z":0.0,"environment":"Thin Nebula","suns":["White Dwarf"],"planets":[{"name":"Goldminer's Dream","class":"Ringed Gas Giant","geology":"None","atmosphere":"Hydrogen/Helium","population":"$POPULATION$","maxPopulation":420000,"settlements":"Agora Ouranos","moons":[{"name":"Goldminer's Dream I","geology":"Craters","atmosphere":"None","population":"Uninhabited","settlements":"None"}]}],"sectors":["cluster_01_sector001","cluster_01_sector002","cluster_01_sector003"]},
@@ -261,3 +262,5 @@ export const Clusters = {
     entities.cluster_740,
   ]
 };
+
+translateGameText(Clusters);

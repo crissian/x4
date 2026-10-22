@@ -1,6 +1,7 @@
 @if (entity(); as entity) {
 	<app-detail-page
 		section="Station Modules"
+		i18n-section
 		sectionLink="/modules"
 		[title]="entity.name"
 		[id]="entity.id"
@@ -9,15 +10,15 @@
 	>
 		<div class="grid gap-x-6 gap-y-3 md:grid-cols-2">
 			<dl class="details">
-				<div appDetail="Race">
+				<div appDetail="Race" i18n-appDetail>
 					@if (entity.makerRace) {
 						<a [routerLink]="['/races', entity.makerRace.id]">{{ entity.makerRace.name }}</a>
 					} @else {
 						-
 					}
 				</div>
-				<div appDetail="Type">{{ entity.type || '-' }}</div>
-				<div appDetail="Product">
+				<div appDetail="Type" i18n-appDetail>{{ (entity.type | enumLabel) || '-' }}</div>
+				<div appDetail="Product" i18n-appDetail>
 					@for (prod of entity.product; track prod.id) {
 						<div>
 							<a [routerLink]="['/wares', prod.id]">{{ prod.name }}</a>
@@ -27,20 +28,20 @@
 					}
 				</div>
 				@if (entity.cargo) {
-					<dt>Storage Capacity ({{ entity.cargo.type.name }})</dt>
+					<dt i18n>Storage Capacity ({{ entity.cargo.type.name | enumLabel }})</dt>
 					<dd>{{ entity.cargo.max | number }}</dd>
 				}
-				<div appDetail="Hull">{{ entity.hull | number }}</div>
-				<div appDetail="Explosion Damage">
+				<div appDetail="Hull" i18n-appDetail>{{ entity.hull | number }}</div>
+				<div appDetail="Explosion Damage" i18n-appDetail>
 					{{ entity.explosionDamage ? (entity.explosionDamage | number) : '-' }}
 				</div>
 				@if (entity.workForce?.max) {
-					<div appDetail="Workforce Needed">{{ entity.workForce.max }}</div>
+					<div appDetail="Workforce Needed" i18n-appDetail>{{ entity.workForce.max }}</div>
 				}
 				@if (entity.workForce?.capacity) {
-					<div appDetail="Workforce Capacity">{{ entity.workForce.capacity }}</div>
+					<div appDetail="Workforce Capacity" i18n-appDetail>{{ entity.workForce.capacity }}</div>
 				}
-				<div appDetail="Owners">
+				<div appDetail="Owners" i18n-appDetail>
 					<ul>
 						@for (item of entity.owners; track item.id) {
 							<li>
@@ -51,12 +52,12 @@
 				</div>
 			</dl>
 			<dl class="details self-start">
-				<div appDetail="Turrets">{{ getSlotsStr(entity.turrets) }}</div>
-				<div appDetail="Shields">{{ getSlotsStr(entity.shields) }}</div>
+				<div appDetail="Turrets" i18n-appDetail>{{ getSlotsStr(entity.turrets) }}</div>
+				<div appDetail="Shields" i18n-appDetail>{{ getSlotsStr(entity.shields) }}</div>
 				@if (entity.dimensions; as d) {
-					<div appDetail="Size (approx.)">{{ d.x | number }} × {{ d.y | number }} × {{ d.z | number }} m</div>
+					<div appDetail="Size (approx.)" i18n-appDetail i18n>{{ d.x | number }} × {{ d.y | number }} × {{ d.z | number }} m</div>
 				}
-				<div appDetail="Blueprint sold by">
+				<div appDetail="Blueprint sold by" i18n-appDetail>
 					<app-sellers [owners]="entity.owners" [license]="entity.license" />
 				</div>
 			</dl>

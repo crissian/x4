@@ -1,4 +1,5 @@
 import { DecimalPipe } from '@angular/common';
+import { EnumLabelPipe } from '../../core/enum-labels';
 import { Component, computed, inject, input } from '@angular/core';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { RouterLink } from '@angular/router';
@@ -9,7 +10,7 @@ import { getSlotsStr, toProductionData } from '../../shared/services/production'
 import { WareService } from '../../shared/services/ware.service';
 
 @Component({
-	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, ProductionCardComponent, SellersComponent],
+	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, ProductionCardComponent, SellersComponent, EnumLabelPipe],
 	templateUrl: './module-detail.component.html',
 })
 export class ModuleDetailComponent {

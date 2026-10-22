@@ -16,7 +16,7 @@ import { ShipStatsService } from '../services/ship-stats.service';
 					<span class="text-fg-muted">
 						- {{ item.license.name }}
 						@if (item.license.minRelation != null) {
-							(reputation {{ reputation(item.license.minRelation) }}+)
+							<ng-container i18n>(reputation {{ reputation(item.license.minRelation) }}+)</ng-container>
 						}
 					</span>
 				}

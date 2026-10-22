@@ -1,3 +1,4 @@
+import { translateGameText } from '../../../core/game-text';
 /* tslint:disable:max-line-length */
 import { WareGroups } from './ware-groups-data';
 import { TransportType } from './transport-data';
@@ -1863,3 +1864,5 @@ export const AllWares = [
  Wares.bogas,
  Wares.plankton,
 ];
+
+translateGameText(Wares);

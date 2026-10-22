@@ -53,7 +53,7 @@ export class MapLinksLayer {
 			@for (marker of store.abandoned(); track $index) {
 				@let size = store.fontSize() * 0.9;
 				<svg:g class="cursor-pointer" [attr.data-sector]="marker.item.sector">
-					<svg:title>
+					<svg:title i18n>
 						Abandoned {{ marker.ship?.name ?? marker.item.ship
 						}}{{ marker.item.condition ? ' (' + marker.item.condition + ')' : '' }}
 					</svg:title>

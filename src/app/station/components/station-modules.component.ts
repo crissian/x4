@@ -37,6 +37,7 @@ export class StationModulesComponent {
 	readonly sunlight = input(100);
 	readonly partialWorkforce = input(0);
 
+	protected readonly selectText = $localize`:@@select:( Select )`;
 	readonly wareGroups: WareGroupModel[] = this.createWareGroups();
 
 	removeModule(index: number) {

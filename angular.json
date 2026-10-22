@@ -58,6 +58,11 @@
 								"glob": "**/*",
 								"input": "src/assets",
 								"output": "assets"
+							},
+							{
+								"glob": "messages.*.json",
+								"input": "src/locale",
+								"output": "assets/i18n/ui"
 							}
 						],
 						"allowedCommonJsDependencies": ["urlon", "xml-js"],
@@ -108,7 +113,9 @@
 				"extract-i18n": {
 					"builder": "@angular/build:extract-i18n",
 					"options": {
-						"buildTarget": "x4-new:build"
+						"buildTarget": "x4-new:build",
+						"format": "json",
+						"outputPath": "src/locale"
 					}
 				},
 				"test": {

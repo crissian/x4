@@ -6,6 +6,6 @@ import { SectorDetailComponent } from './components/sector-detail.component';
 import { SectorsComponent } from './components/sectors.component';
 
 export default [
-	{ path: '', component: SectorsComponent, title: `${BASE_TITLE} - Sectors` },
-	{ path: ':id', component: SectorDetailComponent, title: entityTitle(SectorService, 'Sectors') },
+	{ path: '', component: SectorsComponent, title: `${BASE_TITLE} - ${$localize`Sectors`}` },
+	{ path: ':id', component: SectorDetailComponent, title: entityTitle(SectorService, $localize`Sectors`) },
 ] satisfies Routes;

@@ -30,8 +30,8 @@ export class SaveLayoutComponent {
 		if (this.layoutService.getLayout(name)) {
 			openDialog<boolean, ConfirmData>(this.dialog, ConfirmComponent, {
 				data: {
-					title: 'Confirm Save',
-					message: `<strong>${name}</strong> already exists. Confirm overwrite?`,
+					title: $localize`Confirm Save`,
+					message: $localize`<strong>${name}:name:</strong> already exists. Confirm overwrite?`,
 				},
 			}).closed.subscribe((res) => {
 				if (res) {

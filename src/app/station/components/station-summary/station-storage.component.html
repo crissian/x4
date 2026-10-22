@@ -19,7 +19,7 @@
 			>
 				<td>
 					@if (expanded[item.type]) {<svg lucideChevronsUp class="mr-1" />} @else {<svg lucideChevronsDown class="mr-1" />}
-					{{ item.type }}
+					{{ item.type | enumLabel }}
 				</td>
 				<td class="text-right">{{ item.needed | number: '1.0-0' }} / {{ item.capacity | number: '1.0-0' }} m³</td>
 			</tr>
@@ -39,15 +39,15 @@
 			}
 		} @empty {
 			<tr>
-				<td colspan="2" class="text-fg-muted">No wares to store.</td>
+				<td colspan="2" class="text-fg-muted" i18n>No wares to store.</td>
 			</tr>
 		}
 		<tr>
 			<td colspan="2">
-				<label class="flex items-center gap-2">
-					<span i18n="@@storageHours">Hold production and consumption for</span>
+				<label class="flex items-center gap-2" i18n="@@storageHours">
+					Hold production and consumption for
 					<input type="number" class="input w-20" step="0.5" [formField]="form.storageHours" />
-					<span i18n="@@hours">hours</span>
+					hours
 				</label>
 			</td>
 		</tr>

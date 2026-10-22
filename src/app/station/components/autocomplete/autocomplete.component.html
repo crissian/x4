@@ -4,7 +4,7 @@
 		class="input"
 		i18n-placeholder="@@select"
 		placeholder="( Select )"
-		aria-label="Module"
+		i18n-aria-label aria-label="Module"
 		role="combobox"
 		aria-autocomplete="list"
 		[attr.aria-expanded]="visible()"
@@ -19,6 +19,7 @@
 		<div
 			[id]="listId"
 			role="listbox"
+			i18n-aria-label
 			aria-label="Modules"
 			class="absolute z-10 mt-1 max-h-[40vh] min-w-full overflow-y-auto rounded-md border border-line-strong bg-raised py-1 shadow-xl"
 			(mousedown)="$event.preventDefault()"
@@ -41,7 +42,7 @@
 					</div>
 				}
 			} @empty {
-				<div class="px-2.5 py-1 text-fg-muted">No modules found</div>
+				<div class="px-2.5 py-1 text-fg-muted" i18n>No modules found</div>
 			}
 		</div>
 	}

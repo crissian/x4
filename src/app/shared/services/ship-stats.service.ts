@@ -1,4 +1,5 @@
 import { Injectable, inject } from '@angular/core';
+import { enumLabel } from '../../core/enum-labels';
 import { EquipmentService } from './equipment.service';
 import { FactionService } from './faction.service';
 import { Loadout, SlotGroup, bestLoadout, flightSpeeds, slotGroups, weaponStats } from './loadout';
@@ -6,11 +7,11 @@ import { Equipment, Faction, License, Ship } from './model/model';
 
 export type LoadoutPreset = 'combat' | 'travel' | 'cheapest' | 'empty';
 
-export const LOADOUT_PRESETS: { id: LoadoutPreset; label: string }[] = [
-	{ id: 'combat', label: 'Best combat (fastest engines, strongest shields and weapons)' },
-	{ id: 'travel', label: 'Best travel (fastest travel drive, strongest shields)' },
-	{ id: 'cheapest', label: 'Cheapest' },
-	{ id: 'empty', label: 'Empty' },
+export const LOADOUT_PRESETS: { id: LoadoutPreset; name: string; label: string }[] = [
+	{ id: 'combat', name: $localize`Combat`, label: $localize`Best combat (fastest engines, strongest shields and weapons)` },
+	{ id: 'travel', name: $localize`Travel`, label: $localize`Best travel (fastest travel drive, strongest shields)` },
+	{ id: 'cheapest', name: $localize`Cheapest`, label: $localize`Cheapest` },
+	{ id: 'empty', name: $localize`Empty`, label: $localize`Empty` },
 ];
 
 /** Best values a ship can reach with any compatible equipment, used by the ship list. */
@@ -63,7 +64,7 @@ export class ShipStatsService {
 				travel: Math.max(0, ...engines.map((x) => x.travel)),
 				shield,
 				cargo: (ship.cargo ?? []).reduce((total, x) => total + x.max, 0),
-				cargoTypes: [...new Set((ship.cargo ?? []).flatMap((x) => x.types.map((t) => t.name)))].join(', '),
+				cargoTypes: [...new Set((ship.cargo ?? []).flatMap((x) => x.types.map((t) => enumLabel(t.name))))].join(', '),
 			};
 			this.maxCache.set(ship.id, stats);
 		}

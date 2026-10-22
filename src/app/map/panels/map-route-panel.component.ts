@@ -2,12 +2,13 @@ import { DecimalPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
+import { EnumLabelPipe } from '../../core/enum-labels';
 import { MapStore } from '../map-store';
-import { formatDuration } from '../route-planner';
+import { StepType, formatDuration } from '../route-planner';
 
 @Component({
 	selector: 'app-map-route-panel',
-	imports: [DecimalPipe, FormField, RouterLink],
+	imports: [DecimalPipe, EnumLabelPipe, FormField, RouterLink],
 	template: `
 		<div class="grid gap-2">
 			<div class="flex gap-1">
@@ -16,40 +17,44 @@ import { formatDuration } from '../route-planner';
 						class="input"
 						list="map-sectors"
 						placeholder="From sector..."
+						i18n-placeholder
 						aria-label="From sector"
+						i18n-aria-label
 						[formField]="form.from"
 					/>
 					<input
 						class="input"
 						list="map-sectors"
 						placeholder="To sector..."
+						i18n-placeholder
 						aria-label="To sector"
+						i18n-aria-label
 						[formField]="form.to"
 					/>
 				</div>
-				<button type="button" class="btn btn-secondary self-center" title="Swap" (click)="store.swapRoute()">
+				<button type="button" class="btn btn-secondary self-center" title="Swap" i18n-title (click)="store.swapRoute()">
 					⇅
 				</button>
 			</div>
-			<select class="input" aria-label="Ship" [formField]="form.ship">
-				<option value="">Custom travel speed</option>
+			<select class="input" aria-label="Ship" i18n-aria-label [formField]="form.ship">
+				<option value="" i18n>Custom travel speed</option>
 				@for (ship of store.routeShips; track ship.id) {
-					<option [value]="ship.id">{{ ship.name }} ({{ ship.size }})</option>
+					<option [value]="ship.id">{{ ship.name }} ({{ ship.size | enumLabel }})</option>
 				}
 			</select>
 			<div class="grid grid-cols-2 gap-2">
 				<label class="text-sm">
-					Travel speed (m/s)
+					<ng-container i18n>Travel speed (m/s)</ng-container>
 					<input class="input" type="number" [formField]="form.speed" />
 				</label>
 				<label class="text-sm">
-					Drive charge (s)
+					<ng-container i18n>Drive charge (s)</ng-container>
 					<input class="input" type="number" [formField]="form.charge" />
 				</label>
 			</div>
 		</div>
 		@if (store.route(); as route) {
-			<div class="mt-3">
+			<div class="mt-3" i18n>
 				<strong>{{ formatDuration(route.time) }}</strong
 				>, {{ route.jumps }} jumps, {{ route.distance | number: '1.0-0' }} km in sectors
 			</div>
@@ -58,17 +63,17 @@ import { formatDuration } from '../route-planner';
 					<li>
 						<a [routerLink]="['/sectors', step.sector.id]">{{ step.sector.name }}</a>
 						@if (step.type !== 'start') {
-							<span class="text-fg-muted"> - {{ step.type }}, {{ formatDuration(step.time) }}</span>
+							<span class="text-fg-muted"> - {{ stepLabels[step.type] }}, {{ formatDuration(step.time) }}</span>
 						}
 					</li>
 				}
 			</ol>
 		} @else if (store.routeFrom() && store.routeTo()) {
-			<p class="mt-3 text-fg-muted">No route between these sectors with the selected DLCs.</p>
+			<p class="mt-3 text-fg-muted" i18n>No route between these sectors with the selected DLCs.</p>
 		} @else {
-			<p class="mt-3 text-sm text-fg-muted">Pick two sectors, or right-click sectors on the map.</p>
+			<p class="mt-3 text-sm text-fg-muted" i18n>Pick two sectors, or right-click sectors on the map.</p>
 		}
-		<p class="mt-3 text-xs text-fg-muted">
+		<p class="mt-3 text-xs text-fg-muted" i18n>
 			Center to center with the travel drive between gates; gates and accelerators count 10 s, superhighways 40 s.
 			Estimates only.
 		</p>
@@ -78,4 +83,9 @@ export class MapRoutePanelComponent {
 	protected readonly store = inject(MapStore);
 	protected readonly form = this.store.routeForm;
 	protected readonly formatDuration = formatDuration;
+	protected readonly stepLabels: Record<Exclude<StepType, 'start'>, string> = {
+		gate: $localize`gate`,
+		accelerator: $localize`accelerator`,
+		highway: $localize`highway`,
+	};
 }

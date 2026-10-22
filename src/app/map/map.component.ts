@@ -38,10 +38,10 @@ export default class MapComponent {
 	protected readonly gameVersions = GAME_VERSIONS;
 	protected readonly versionsOpen = signal(false);
 	protected readonly tabs: { id: PanelTab; label: string }[] = [
-		{ id: 'route', label: 'Route' },
-		{ id: 'mining', label: 'Mining' },
-		{ id: 'stations', label: 'Stations' },
-		{ id: 'abandoned', label: 'Abandoned' },
+		{ id: 'route', label: $localize`Route` },
+		{ id: 'mining', label: $localize`Mining` },
+		{ id: 'stations', label: $localize`Stations` },
+		{ id: 'abandoned', label: $localize`Abandoned` },
 	];
 
 	constructor() {

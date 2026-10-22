@@ -10,13 +10,23 @@
 		}
 	</nav>
 
+	<label class="inline-flex shrink-0 items-center gap-1 text-nav-fg" i18n-title title="Language of the game names and descriptions">
+		<svg lucideLanguages class="opacity-80" />
+		<select class="input h-8 w-auto py-0 text-sm" i18n-aria-label aria-label="Game text language" [formField]="languageForm.language">
+			@for (language of languages; track language.code) {
+				<option [value]="language.code">{{ language.name }}</option>
+			}
+		</select>
+	</label>
+
 	<button
 		type="button"
 		role="switch"
 		class="relative inline-flex h-7 w-13 shrink-0 cursor-pointer items-center rounded-full border border-line-strong bg-surface-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
 		[attr.aria-checked]="theme.isDark()"
+		i18n-aria-label
 		aria-label="Dark theme"
-		[title]="theme.isDark() ? 'Switch to light theme' : 'Switch to dark theme'"
+		[title]="theme.isDark() ? switchToLight : switchToDark"
 		(click)="theme.toggle()"
 	>
 		<span
@@ -35,11 +45,13 @@
 		target="_blank"
 		rel="noopener"
 		href="https://www.buymeacoffee.com/crissian"
+		i18n-title
 		title="Enjoying the planner? Buy me a coffee"
+		i18n-aria-label
 		aria-label="Buy me a coffee"
 		><svg
 			lucideCoffee
 			class="text-amber-500 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110"
-		/><span class="hidden sm:inline">Buy me a coffee</span></a
+		/><span class="hidden sm:inline" i18n>Buy me a coffee</span></a
 	>
 </header>

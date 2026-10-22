@@ -23,26 +23,26 @@ export class SectorsComponent {
 	protected readonly open = injectRowNavigation<Sector>();
 
 	protected readonly columns: GridColumn<Sector>[] = [
-		{ key: 'name', caption: 'Name' },
-		{ key: 'cluster', caption: 'System', value: (x) => this.clusters.getEntity(x.cluster)?.name },
+		{ key: 'name', caption: $localize`Name` },
+		{ key: 'cluster', caption: $localize`System`, value: (x) => this.clusters.getEntity(x.cluster)?.name },
 		{
 			key: 'owner',
-			caption: 'Owner',
+			caption: $localize`Owner`,
 			lookup: inject(FactionService)
 				.getEntities()
 				.filter((f) => this.entities.some((s) => s.owner === f.id))
 				.map((f) => ({ value: f.id, label: f.name })),
 		},
-		{ key: 'sunlight', caption: 'Sunlight', type: 'number', format: percent },
-		{ key: 'security', caption: 'Security', type: 'number', format: percent },
-		{ key: 'economy', caption: 'Economy', type: 'number', format: percent },
+		{ key: 'sunlight', caption: $localize`Sunlight`, type: 'number', format: percent },
+		{ key: 'security', caption: $localize`Security`, type: 'number', format: percent },
+		{ key: 'economy', caption: $localize`Economy`, type: 'number', format: percent },
 		{
 			key: 'resources',
-			caption: 'Resources',
+			caption: $localize`Resources`,
 			value: (x) => [...new Set(x.resources.map((r) => this.wares.getEntity(r.ware)?.name ?? r.ware))].join(', '),
 			sortable: false,
 		},
-		{ key: 'gates', caption: 'Gates', type: 'number', value: (x) => x.gates.length },
-		{ key: 'version', caption: 'DLC', lookup: GAME_VERSION_LOOKUP },
+		{ key: 'gates', caption: $localize`Gates`, type: 'number', value: (x) => x.gates.length },
+		{ key: 'version', caption: $localize`DLC`, lookup: GAME_VERSION_LOOKUP },
 	];
 }

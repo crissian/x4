@@ -1,4 +1,4 @@
-import { DecimalPipe, TitleCasePipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { Component, computed, effect, inject, input, linkedSignal, signal, untracked } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
@@ -11,7 +11,7 @@ import { WareService } from '../../shared/services/ware.service';
 import { addToComparison } from './ship-compare.component';
 
 @Component({
-	imports: [DecimalPipe, TitleCasePipe, FormField, RouterLink, LucideLink, LucideCheck, LucideGitCompareArrows],
+	imports: [DecimalPipe, FormField, RouterLink, LucideLink, LucideCheck, LucideGitCompareArrows],
 	templateUrl: './ship-loadout.component.html',
 })
 export class ShipLoadoutComponent {
@@ -129,14 +129,14 @@ export class ShipLoadoutComponent {
 
 	protected optionLabel(equipment: Equipment): string {
 		if (equipment.thrust) {
-			return `${equipment.name} - ${Math.round(equipment.thrust.forward)} thrust, travel ×${equipment.travel?.thrust ?? 0}`;
+			return $localize`${equipment.name}:name: - ${Math.round(equipment.thrust.forward)}:thrust: thrust, travel ×${equipment.travel?.thrust ?? 0}:travel:`;
 		}
 		if (equipment.recharge) {
-			return `${equipment.name} - ${equipment.recharge.max.toLocaleString()} shield, ${equipment.recharge.rate.toLocaleString()}/s`;
+			return $localize`${equipment.name}:name: - ${equipment.recharge.max.toLocaleString()}:shield: shield, ${equipment.recharge.rate.toLocaleString()}:rate:/s`;
 		}
 		if (equipment.weapon) {
 			const stats = weaponStats(equipment.weapon);
-			return `${equipment.name} - ${Math.round(stats.sustainedDps).toLocaleString()} DPS, ${(stats.range / 1000).toFixed(1)} km`;
+			return $localize`${equipment.name}:name: - ${Math.round(stats.sustainedDps).toLocaleString()}:dps: DPS, ${(stats.range / 1000).toFixed(1)}:range: km`;
 		}
 		return equipment.name;
 	}

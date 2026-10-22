@@ -15,15 +15,15 @@ export class WaresComponent {
 	protected readonly open = injectRowNavigation<Ware>();
 
 	protected readonly columns: GridColumn<Ware>[] = [
-		{ key: 'name', caption: 'Name' },
-		{ key: 'transport', caption: 'Transport', lookup: lookupOf(EnumFn.values(TransportType)) },
-		{ key: 'price.min', caption: 'Min Price', type: 'number' },
-		{ key: 'price.avg', caption: 'Avg Price', type: 'number' },
-		{ key: 'price.max', caption: 'Max Price', type: 'number' },
-		{ key: 'volume', caption: 'Volume', type: 'number' },
+		{ key: 'name', caption: $localize`Name` },
+		{ key: 'transport', caption: $localize`Transport`, lookup: lookupOf(EnumFn.values(TransportType)) },
+		{ key: 'price.min', caption: $localize`Min Price`, type: 'number' },
+		{ key: 'price.avg', caption: $localize`Avg Price`, type: 'number' },
+		{ key: 'price.max', caption: $localize`Max Price`, type: 'number' },
+		{ key: 'volume', caption: $localize`Volume`, type: 'number' },
 		{
 			key: 'priceDiffPerVolume',
-			caption: 'Price Diff / Volume',
+			caption: $localize`Price Diff / Volume`,
 			type: 'number',
 			format: { minimumFractionDigits: 2, maximumFractionDigits: 2 },
 			value: (ware) => (ware.price.max - ware.price.min) / ware.volume,

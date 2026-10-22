@@ -6,6 +6,6 @@ import { WareDetailComponent } from './components/ware-detail.component';
 import { WaresComponent } from './components/wares.component';
 
 export default [
-	{ path: '', component: WaresComponent, title: `${BASE_TITLE} - Wares` },
-	{ path: ':id', component: WareDetailComponent, title: entityTitle(WareService, 'Wares') },
+	{ path: '', component: WaresComponent, title: `${BASE_TITLE} - ${$localize`Wares`}` },
+	{ path: ':id', component: WareDetailComponent, title: entityTitle(WareService, $localize`Wares`) },
 ] satisfies Routes;

@@ -75,7 +75,7 @@ function toLayouts(result: ConstructionPlan, moduleService: Pick<ModuleService, 
 			}
 		}
 
-		const layout: Layout = { name: plan._attributes?.name || 'Imported Plan', config: modules };
+		const layout: Layout = { name: plan._attributes?.name || $localize`Imported Plan`, config: modules };
 		if (isHeadquarters) {
 			layout.isHeadquarters = true;
 		}

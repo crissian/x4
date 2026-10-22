@@ -15,11 +15,11 @@ export class ImportPlanResultComponent {
 		const result = this.result();
 		const hasLayouts = !!result?.layouts?.length;
 		if (result?.error && !hasLayouts) {
-			return { type: 'danger', message: 'Failed to import plans.' };
+			return { type: 'danger', message: $localize`Failed to import plans.` };
 		}
 		if (result?.error) {
-			return { type: 'warning', message: 'Imported plans, but errors occurred trying to import some of them.' };
+			return { type: 'warning', message: $localize`Imported plans, but errors occurred trying to import some of them.` };
 		}
-		return { type: 'success', message: 'Successfully imported plans' };
+		return { type: 'success', message: $localize`Successfully imported plans` };
 	});
 }

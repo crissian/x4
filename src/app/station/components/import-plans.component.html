@@ -1,22 +1,22 @@
-<app-modal title="Import Plans">
-	<p>
+<app-modal i18n-title title="Import Plans">
+	<p i18n>
 		Choose an X4 construction plans file, or paste its content below. The plans will be added to your saved layout
 		list.
 	</p>
 	<ul class="mt-1 list-inside list-disc text-xs text-fg-muted">
 		<li>
-			All plans saved in game:
+			<ng-container i18n>All plans saved in game:</ng-container>
 			<span class="text-info italic">Documents\Egosoft\X4\[12345678]\constructionplans.xml</span>
 		</li>
 		<li>
-			A single exported plan:
+			<ng-container i18n>A single exported plan:</ng-container>
 			<span class="text-info italic">Documents\Egosoft\X4\[12345678]\constructionplan\[name].xml</span>
 		</li>
 	</ul>
 	<div class="mt-3 flex flex-wrap items-center gap-2">
 		<input #file type="file" accept=".xml,text/xml,application/xml" class="hidden" (change)="loadFile($event)" />
 		<button type="button" class="btn btn-info" (click)="file.click()">
-			<svg lucideUpload /><span>Choose file</span>
+			<svg lucideUpload /><span i18n>Choose file</span>
 		</button>
 		@if (fileName(); as name) {
 			<span class="text-xs text-fg-muted">{{ name }}</span>
@@ -25,12 +25,13 @@
 	<textarea
 		class="input mt-2 font-mono text-xs"
 		rows="10"
+		i18n-aria-label
 		aria-label="Construction plans XML"
 		[formField]="importForm.xml"
 	></textarea>
 	<ng-container footer>
 		<button type="button" class="btn btn-success" (click)="importPlans()" [disabled]="importForm().invalid()">
-			<svg lucideImport /><span>Import</span>
+			<svg lucideImport /><span i18n>Import</span>
 		</button>
 		<button type="button" class="btn btn-secondary" (click)="dialogRef.close()" i18n="@@cancel">Cancel</button>
 	</ng-container>

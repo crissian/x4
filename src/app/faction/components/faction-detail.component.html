@@ -1,5 +1,6 @@
 @if (entity(); as entity) {
 	<app-detail-page
+		i18n-section
 		section="Factions"
 		sectionLink="/factions"
 		[title]="entity.name"
@@ -7,7 +8,7 @@
 		[description]="entity.description"
 	>
 		<dl class="details mb-4 max-w-xl">
-			<div appDetail="Race">
+			<div i18n-appDetail appDetail="Race">
 				@if (entity.race) {
 					<a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
 				} @else {
@@ -17,7 +18,7 @@
 		</dl>
 		@if (entity.licenses?.length) {
 			<div class="card">
-				<div class="card-header">Licenses</div>
+				<div class="card-header" i18n>Licenses</div>
 				<div class="card-body">
 					<app-data-grid [data]="entity.licenses" [columns]="licenseColumns" [features]="false" />
 				</div>

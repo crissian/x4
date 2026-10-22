@@ -70,6 +70,7 @@ export default class StationCalculatorComponent {
 	readonly l = input<string>();
 
 	readonly layout = signal<Layout | null>(null);
+	protected readonly stationModulesTitle = $localize`Station Modules`;
 	readonly messages = signal<Message[]>([]);
 	readonly importResult = signal<ImportResult | null>(null);
 
@@ -223,7 +224,7 @@ export default class StationCalculatorComponent {
 		this.layout.set(layout);
 		this.messages.update((messages) => [
 			...messages,
-			{ type: MessageType.success, content: `<strong>${name}</strong> successfully saved.` },
+			{ type: MessageType.success, content: $localize`<strong>${name}:name:</strong> successfully saved.` },
 		]);
 	}
 

@@ -1,3 +1,4 @@
+import { enumLabel } from '../../core/enum-labels';
 import { Effects } from './data/effects-data';
 import { Dock, Production, ProductionEffect, Slot, SlotSummary, Ware } from './model/model';
 import { WareService } from './ware.service';
@@ -73,5 +74,5 @@ export function getSlotsStr(value: readonly (Slot | Dock)[] | undefined) {
 		return '-';
 	}
 
-	return slots.map((x) => `${x.capacity} x ${x.size}`).join(', ');
+	return slots.map((x) => `${x.capacity} x ${enumLabel(x.size)}`).join(', ');
 }

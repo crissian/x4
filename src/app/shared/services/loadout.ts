@@ -1,3 +1,4 @@
+import { enumLabel } from '../../core/enum-labels';
 import { EquipmentType } from './data/equipment-type-data';
 import { Equipment, MissileData, Production, Ship, Slot, WeaponData } from './model/model';
 
@@ -162,17 +163,19 @@ export function slotGroups(ship: Ship, equipment: readonly Equipment[]): SlotGro
 }
 
 function groupLabel(kind: SlotKind, slot: Slot, count: number, index: number): string {
-	const size = slot.size ? slot.size.charAt(0).toUpperCase() + slot.size.slice(1) : '';
+	const size = slot.size ? enumLabel(slot.size.charAt(0).toUpperCase() + slot.size.slice(1)) : '';
 	const amount = count > 1 ? ` ×${count}` : '';
 	switch (kind) {
 		case 'engines':
-			return `Engines${amount}`;
+			return $localize`Engines${amount}:amount:`;
 		case 'shields':
-			return `${slot.group ? `Shield group ${index}` : 'Main shields'} (${size})${amount}`;
+			return slot.group
+				? $localize`Shield group ${index}:index: (${size}:size:)${amount}:amount:`
+				: $localize`Main shields (${size}:size:)${amount}:amount:`;
 		case 'weapons':
-			return `Weapon ${index} (${size})`;
+			return $localize`Weapon ${index}:index: (${size}:size:)`;
 		case 'turrets':
-			return `Turret group ${index} (${size})${amount}`;
+			return $localize`Turret group ${index}:index: (${size}:size:)${amount}:amount:`;
 	}
 }
 

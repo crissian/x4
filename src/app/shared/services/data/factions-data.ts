@@ -1,3 +1,4 @@
+import { translateGameText } from '../../../core/game-text';
 /* tslint:disable:max-line-length */
 import { Races } from './race-data';
 
@@ -712,3 +713,5 @@ export const Factions = {
     entities.kaori,
   ]
 };
+
+translateGameText(Factions);

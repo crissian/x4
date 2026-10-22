@@ -33,23 +33,23 @@ export class ModulesComponent {
 	protected readonly open = injectRowNavigation<StationModule>();
 
 	protected readonly columns: GridColumn<StationModule>[] = [
-		{ key: 'name', caption: 'Name' },
-		{ key: 'type', caption: 'Type', lookup: lookupOf(EnumFn.values(ModuleTypes)) },
+		{ key: 'name', caption: $localize`Name` },
+		{ key: 'type', caption: $localize`Type`, lookup: lookupOf(EnumFn.values(ModuleTypes)) },
 		{
 			key: 'makerRace.id',
-			caption: 'Race',
+			caption: $localize`Race`,
 			lookup: inject(RaceService)
 				.getEntities()
 				.map((x) => ({ value: x.id, label: x.name })),
 		},
 		{
 			key: 'productName',
-			caption: 'Product',
+			caption: $localize`Product`,
 			value: (item) => item.product?.map((x) => x.name).join(', '),
 		},
 		{
 			key: 'maxEfficiency',
-			caption: 'Max Efficiency',
+			caption: $localize`Max Efficiency`,
 			type: 'number',
 			value: (item) => (item.product == null ? null : maxEfficiency(item)),
 			display: (item) => (item.product == null ? '-' : `${maxEfficiency(item)}%`),

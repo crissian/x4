@@ -11,7 +11,7 @@ export const appRoutes: Routes = [
 	{
 		path: 'about',
 		component: AboutComponent,
-		title: `${BASE_TITLE} - About`,
+		title: `${BASE_TITLE} - ${$localize`About`}`,
 	},
 	{
 		path: 'ships',
@@ -44,11 +44,11 @@ export const appRoutes: Routes = [
 	{
 		path: 'map',
 		loadComponent: () => import('./map/map.component'),
-		title: `${BASE_TITLE} - Galaxy Map`,
+		title: `${BASE_TITLE} - ${$localize`Galaxy Map`}`,
 	},
 	{
 		path: 'station-calculator',
 		loadComponent: () => import('./station/components/station-calculator.component'),
-		title: `${BASE_TITLE} - Station Calculator`,
+		title: `${BASE_TITLE} - ${$localize`Station Calculator`}`,
 	},
 ];

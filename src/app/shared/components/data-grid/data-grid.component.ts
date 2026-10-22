@@ -1,5 +1,6 @@
 import { Component, computed, effect, input, linkedSignal, output, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
+import { enumLabel } from '../../../core/enum-labels';
 import { readStorage, writeStorage } from '../../../core/services/local-storage';
 import {
 	LucideArrowUpNarrowWide,
@@ -50,7 +51,7 @@ const NUMBER_FILTER = /^\s*(<=|>=|<>|!=|<|>|=)?\s*(-?\d+(?:[.,]\d+)?)\s*$/;
 
 /** Builds a lookup list from plain string values. */
 export function lookupOf(values: readonly string[]): GridLookupItem[] {
-	return values.map((x) => ({ value: x, label: x }));
+	return values.map((x) => ({ value: x, label: enumLabel(x) }));
 }
 
 function getPath(row: unknown, path: string): unknown {
@@ -272,6 +273,10 @@ export class DataGridComponent<T> {
 		const sorts = this.activeSorts();
 		const index = sorts.findIndex((x) => x.key === column.key);
 		return index < 0 ? null : { direction: sorts[index].direction, order: sorts.length > 1 ? index + 1 : null };
+	}
+
+	filterLabel(column: GridColumn<T>) {
+		return $localize`Filter ${column.caption}:column:`;
 	}
 
 	goTo(page: number) {

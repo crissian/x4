@@ -1,15 +1,15 @@
 <div class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_24rem]">
 	<div class="card">
 		<div class="card-header flex flex-wrap items-center gap-x-4 gap-y-2">
-			<span class="mr-auto">Galaxy map</span>
+			<span class="mr-auto" i18n>Galaxy map</span>
 
 			<label class="flex items-center gap-2 text-sm font-normal">
-				Color by
+				<ng-container i18n>Color by</ng-container>
 				<select class="input w-auto" [formField]="store.settingsForm.mode">
-					<option value="owner">Owner</option>
-					<option value="sunlight">Sunlight</option>
-					<option value="security">Security</option>
-					<option value="resource">Resource</option>
+					<option value="owner" i18n>Owner</option>
+					<option value="sunlight" i18n>Sunlight</option>
+					<option value="security" i18n>Security</option>
+					<option value="resource" i18n>Resource</option>
 				</select>
 			</label>
 
@@ -17,6 +17,7 @@
 				<select
 					class="input w-auto text-sm font-normal"
 					aria-label="Resource"
+					i18n-aria-label
 					[formField]="store.settingsForm.resource"
 				>
 					@for (ware of store.resourceWares; track ware.id) {
@@ -26,7 +27,7 @@
 			}
 
 			<div class="relative text-sm font-normal">
-				<button type="button" class="btn btn-secondary" (click)="versionsOpen.set(!versionsOpen())">
+				<button type="button" class="btn btn-secondary" (click)="versionsOpen.set(!versionsOpen())" i18n>
 					DLC ({{ store.shownVersionCount() }}/{{ gameVersions.length }})
 				</button>
 				@if (versionsOpen()) {
@@ -37,7 +38,7 @@
 								{{ name }}
 							</label>
 						}
-						<button type="button" class="link-button mt-1" (click)="versionsOpen.set(false)">Close</button>
+						<button type="button" class="link-button mt-1" (click)="versionsOpen.set(false)" i18n>Close</button>
 					</div>
 				}
 			</div>
@@ -47,7 +48,9 @@
 					class="input w-52"
 					list="map-sectors"
 					placeholder="Find sector..."
+					i18n-placeholder
 					aria-label="Find sector"
+					i18n-aria-label
 					[formField]="store.settingsForm.search"
 				/>
 				<datalist id="map-sectors">
@@ -56,7 +59,7 @@
 					}
 				</datalist>
 				@if (store.selected()) {
-					<button type="button" class="btn btn-secondary" title="Clear selection" (click)="clearSelection()">
+					<button type="button" class="btn btn-secondary" title="Clear selection" i18n-title (click)="clearSelection()">
 						<svg lucideX />
 					</button>
 				}

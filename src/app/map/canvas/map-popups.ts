@@ -19,10 +19,10 @@ import { MapStore } from '../map-store';
 			>
 				<div class="text-sm font-semibold text-white">{{ sector.name }}</div>
 				@if (hover.shape.cluster.sectors.length > 1) {
-					<div class="text-slate-400">{{ hover.shape.cluster.name }} system</div>
+					<div class="text-slate-400" i18n>{{ hover.shape.cluster.name }} system</div>
 				}
 				<dl class="mt-1.5 grid grid-cols-[5.5rem_1fr] gap-y-0.5">
-					<dt class="text-slate-400">Owner</dt>
+					<dt class="text-slate-400" i18n>Owner</dt>
 					<dd>
 						@if (faction(); as faction) {
 							<span
@@ -31,23 +31,23 @@ import { MapStore } from '../map-store';
 							></span
 							>{{ faction.name }}
 						} @else {
-							Unclaimed
+							<ng-container i18n>Unclaimed</ng-container>
 						}
 					</dd>
-					<dt class="text-slate-400">Sunlight</dt>
+					<dt class="text-slate-400" i18n>Sunlight</dt>
 					<dd>{{ sector.sunlight != null ? (sector.sunlight | percent) : '-' }}</dd>
-					<dt class="text-slate-400">Security</dt>
+					<dt class="text-slate-400" i18n>Security</dt>
 					<dd>{{ sector.security != null ? (sector.security | percent) : '-' }}</dd>
-					<dt class="text-slate-400">Economy</dt>
+					<dt class="text-slate-400" i18n>Economy</dt>
 					<dd>{{ sector.economy != null ? (sector.economy | percent) : '-' }}</dd>
-					<dt class="text-slate-400">Resources</dt>
+					<dt class="text-slate-400" i18n>Resources</dt>
 					<dd>{{ store.resourceNames(sector) || '-' }}</dd>
 					@if (store.mode() === 'resource') {
 						<dt class="text-slate-400">{{ store.wareName(store.resource()) }}</dt>
 						<dd>{{ store.resourceAmount(sector) | number }}</dd>
 					}
 				</dl>
-				<div class="mt-1.5 text-slate-500">Click for details, right-click to plan a route</div>
+				<div class="mt-1.5 text-slate-500" i18n>Click for details, right-click to plan a route</div>
 			</div>
 		}
 	`,
@@ -76,6 +76,7 @@ export class MapTooltipComponent {
 					type="button"
 					class="block w-full px-3 py-1.5 text-left hover:bg-white/10"
 					(click)="action('from')"
+					i18n
 				>
 					Route from here
 				</button>
@@ -83,6 +84,7 @@ export class MapTooltipComponent {
 					type="button"
 					class="block w-full px-3 py-1.5 text-left hover:bg-white/10"
 					(click)="action('to')"
+					i18n
 				>
 					Route to here
 				</button>
@@ -90,6 +92,7 @@ export class MapTooltipComponent {
 					type="button"
 					class="block w-full px-3 py-1.5 text-left hover:bg-white/10"
 					(click)="action('open')"
+					i18n
 				>
 					Sector details
 				</button>

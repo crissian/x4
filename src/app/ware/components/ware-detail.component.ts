@@ -1,5 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject, input, signal } from '@angular/core';
+import { EnumLabelPipe } from '../../core/enum-labels';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { RouterLink } from '@angular/router';
 import { ProductionRequirementsComponent } from '../../shared/components/production-requirements.component';
@@ -12,7 +13,7 @@ import { amountPerCycle } from '../../station/components/station-calculator.mode
 type WareTab = 'construction' | 'producedBy' | 'requiredFor';
 
 @Component({
-	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, ProductionRequirementsComponent],
+	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, ProductionRequirementsComponent, EnumLabelPipe],
 	templateUrl: './ware-detail.component.html',
 })
 export class WareDetailComponent {
@@ -23,9 +24,9 @@ export class WareDetailComponent {
 	readonly id = input.required<string>();
 
 	protected readonly tabs: { id: WareTab; label: string }[] = [
-		{ id: 'construction', label: 'Construction' },
-		{ id: 'producedBy', label: 'Produced By' },
-		{ id: 'requiredFor', label: 'Required For' },
+		{ id: 'construction', label: $localize`Construction` },
+		{ id: 'producedBy', label: $localize`Produced By` },
+		{ id: 'requiredFor', label: $localize`Required For` },
 	];
 	protected readonly activeTab = signal<WareTab>('construction');
 

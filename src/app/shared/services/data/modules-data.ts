@@ -1,3 +1,4 @@
+import { translateGameText } from '../../../core/game-text';
 /* tslint:disable:max-line-length */
 import { Races } from './race-data';
 import { Wares } from './wares-data';
@@ -12332,3 +12333,5 @@ export const AllModules = [
  Modules.module_hab_arg_antigonepillar_01,
  Modules.module_hab_arg_antigonespire_01,
 ];
+
+translateGameText(Modules);

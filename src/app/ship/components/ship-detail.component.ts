@@ -1,4 +1,5 @@
 import { DecimalPipe } from '@angular/common';
+import { EnumLabelPipe, enumLabel } from '../../core/enum-labels';
 import { Component, computed, inject, input } from '@angular/core';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { Router, RouterLink } from '@angular/router';
@@ -23,7 +24,7 @@ interface EngineRow {
 }
 
 @Component({
-	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, ProductionCardComponent, SellersComponent, DataGridComponent, LucideWrench, LucideGitCompareArrows],
+	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, ProductionCardComponent, SellersComponent, DataGridComponent, LucideWrench, LucideGitCompareArrows, EnumLabelPipe],
 	templateUrl: './ship-detail.component.html',
 })
 export class ShipDetailComponent {
@@ -55,19 +56,19 @@ export class ShipDetailComponent {
 	});
 
 	protected readonly engineColumns: GridColumn<EngineRow>[] = [
-		{ key: 'engine.name', caption: 'Engine' },
-		{ key: 'speed', caption: 'Speed (m/s)', type: 'number' },
-		{ key: 'boost', caption: 'Boost (m/s)', type: 'number' },
-		{ key: 'travel', caption: 'Travel (m/s)', type: 'number' },
-		{ key: 'charge', caption: 'Travel charge (s)', type: 'number', format: { maximumFractionDigits: 1 } },
-		{ key: 'engine.price.avg', caption: 'Price (each)', type: 'number' },
+		{ key: 'engine.name', caption: $localize`Engine` },
+		{ key: 'speed', caption: $localize`Speed (m/s)`, type: 'number' },
+		{ key: 'boost', caption: $localize`Boost (m/s)`, type: 'number' },
+		{ key: 'travel', caption: $localize`Travel (m/s)`, type: 'number' },
+		{ key: 'charge', caption: $localize`Travel charge (s)`, type: 'number', format: { maximumFractionDigits: 1 } },
+		{ key: 'engine.price.avg', caption: $localize`Price (each)`, type: 'number' },
 	];
 	protected readonly trackEngine = (row: EngineRow) => row.engine.id;
 
 	protected readonly getSlotsStr = getSlotsStr;
 
 	protected cargoTypes(cargo: ShipCargo) {
-		return cargo.types.map((x) => x.name).join(', ');
+		return cargo.types.map((x) => enumLabel(x.name)).join(', ');
 	}
 
 	protected openEngine(row: EngineRow) {

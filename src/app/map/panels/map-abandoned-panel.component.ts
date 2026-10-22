@@ -11,7 +11,7 @@ import { MapFocusLinkComponent } from './map-focus-link.component';
 	template: `
 		<label class="mb-2 flex items-center gap-1.5 text-sm">
 			<input type="checkbox" [formField]="store.abandonedForm.show" />
-			Show on map
+			<ng-container i18n>Show on map</ng-container>
 		</label>
 		<table class="table text-sm">
 			<tbody>
@@ -37,12 +37,12 @@ import { MapFocusLinkComponent } from './map-focus-link.component';
 					</tr>
 				} @empty {
 					<tr>
-						<td class="text-fg-muted">None for the selected DLCs</td>
+						<td class="text-fg-muted" i18n>None for the selected DLCs</td>
 					</tr>
 				}
 			</tbody>
 		</table>
-		<p class="mt-2 text-xs text-fg-muted">
+		<p class="mt-2 text-xs text-fg-muted" i18n>
 			Ownerless ships placed at game start; claim them by boarding with a spacesuit.
 		</p>
 	`,

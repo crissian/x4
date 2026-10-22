@@ -1,3 +1,4 @@
+import { translateGameText } from '../../../core/game-text';
 const entities = {
   agricultural: {
       id: 'agricultural',
@@ -91,3 +92,5 @@ export const WareGroups = {
     entities.water,
   ]
 };
+
+translateGameText(WareGroups);

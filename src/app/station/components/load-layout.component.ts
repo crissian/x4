@@ -62,8 +62,8 @@ export class LoadLayoutComponent {
 
 		openDialog<boolean, ConfirmData>(this.dialog, ConfirmComponent, {
 			data: {
-				title: 'Confirm Delete',
-				message: `Are you sure you want to delete <strong>${item.name}</strong>?`,
+				title: $localize`Confirm Delete`,
+				message: $localize`Are you sure you want to delete <strong>${item.name}:name:</strong>?`,
 			},
 		}).closed.subscribe((res) => {
 			if (res) {
@@ -95,9 +95,9 @@ export class LoadLayoutComponent {
 		try {
 			const count = this.layoutService.importLayouts(await file.text());
 			this.entities.set(this.readLayouts());
-			this.importMessage.set({ error: false, text: `Imported ${count} layout(s) from ${file.name}.` });
+			this.importMessage.set({ error: false, text: $localize`Imported ${count}:count: layout(s) from ${file.name}:fileName:.` });
 		} catch {
-			this.importMessage.set({ error: true, text: `${file.name} is not an exported layouts file.` });
+			this.importMessage.set({ error: true, text: $localize`${file.name}:fileName: is not an exported layouts file.` });
 		}
 	}
 

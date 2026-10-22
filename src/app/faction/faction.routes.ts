@@ -6,6 +6,6 @@ import { FactionDetailComponent } from './components/faction-detail.component';
 import { FactionsComponent } from './components/factions.component';
 
 export default [
-	{ path: '', component: FactionsComponent, title: `${BASE_TITLE} - Factions` },
-	{ path: ':id', component: FactionDetailComponent, title: entityTitle(FactionService, 'Factions') },
+	{ path: '', component: FactionsComponent, title: `${BASE_TITLE} - ${$localize`Factions`}` },
+	{ path: ':id', component: FactionDetailComponent, title: entityTitle(FactionService, $localize`Factions`) },
 ] satisfies Routes;

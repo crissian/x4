@@ -2,6 +2,7 @@ import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { FieldTree, FormField } from '@angular/forms/signals';
 import { LucideChevronsDown, LucideChevronsUp } from '@lucide/angular';
+import { EnumLabelPipe } from '../../../core/enum-labels';
 import { ModuleTypes } from '../../../shared/services/data/module-types-data';
 import { WareService } from '../../../shared/services/ware.service';
 import { StationModuleModel, StationResourceModel, StationSettings } from '../station-calculator.model';
@@ -26,7 +27,7 @@ interface StorageType {
  */
 @Component({
 	selector: 'app-station-storage',
-	imports: [DecimalPipe, FormField, LucideChevronsDown, LucideChevronsUp],
+	imports: [DecimalPipe, EnumLabelPipe, FormField, LucideChevronsDown, LucideChevronsUp],
 	templateUrl: './station-storage.component.html',
 })
 export class StationStorageComponent {

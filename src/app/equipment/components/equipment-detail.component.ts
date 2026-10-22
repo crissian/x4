@@ -1,4 +1,5 @@
 import { DecimalPipe } from '@angular/common';
+import { EnumLabelPipe, enumLabel } from '../../core/enum-labels';
 import { Component, computed, inject, input } from '@angular/core';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { Router, RouterLink } from '@angular/router';
@@ -20,7 +21,7 @@ interface ShipRow {
 }
 
 @Component({
-	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, DataGridComponent, ProductionCardComponent, SellersComponent],
+	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, DataGridComponent, ProductionCardComponent, SellersComponent, EnumLabelPipe],
 	templateUrl: './equipment-detail.component.html',
 })
 export class EquipmentDetailComponent {
@@ -59,12 +60,21 @@ export class EquipmentDetailComponent {
 	});
 
 	protected readonly shipColumns: GridColumn<ShipRow>[] = [
-		{ key: 'ship.name', caption: 'Ship' },
-		{ key: 'ship.size', caption: 'Size' },
-		{ key: 'ship.type', caption: 'Type' },
-		{ key: 'slots', caption: 'Slots', type: 'number' },
+		{ key: 'ship.name', caption: $localize`Ship` },
+		{ key: 'ship.size', caption: $localize`Size`, value: (x) => enumLabel(x.ship.size) },
+		{ key: 'ship.type', caption: $localize`Type`, value: (x) => enumLabel(x.ship.type) },
+		{ key: 'slots', caption: $localize`Slots`, type: 'number' },
 	];
 	protected readonly trackShip = (row: ShipRow) => row.ship.id;
+
+	protected readonly labels = {
+		repair: $localize`Repair/s`,
+		dps: $localize`DPS`,
+		beamDamage: $localize`Damage/s (beam)`,
+		damage: $localize`Damage`,
+		yes: $localize`:@@yes:Yes`,
+		no: $localize`:@@no:No`,
+	};
 
 	protected openShip(row: ShipRow) {
 		this.router.navigate(['/ships', row.ship.id]);

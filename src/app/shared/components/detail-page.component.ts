@@ -1,5 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { gameText } from '../../core/game-text';
 import { EntityImageKind } from '../services/data/images-data';
 import { EntityImageComponent } from './entity-image.component';
 
@@ -43,7 +44,7 @@ export class DetailPageComponent {
 
 	protected readonly shownDescription = computed(() => {
 		const description = this.description();
-		return description && description !== NO_DESCRIPTION ? description : undefined;
+		return description && description !== gameText(NO_DESCRIPTION) ? description : undefined;
 	});
 }
 

@@ -1,5 +1,6 @@
 import { Injectable, computed, effect, inject, linkedSignal, signal, untracked } from '@angular/core';
 import { disabled, form, min } from '@angular/forms/signals';
+import { enumLabel } from '../core/enum-labels';
 import { persistedSignal } from '../core/services/local-storage';
 import { GAME_VERSIONS, STATION_TYPES, StationTypeInfo } from '../shared/services/constants';
 import { AbandonedShips } from '../shared/services/data/abandoned-ships-data';
@@ -280,11 +281,11 @@ export class MapStore {
 	});
 
 	readonly buyOptions = [
-		...this.ships.getEntities().map((x) => ({ id: `ship:${x.id}`, name: `${x.name} (ship, ${x.size})` })),
+		...this.ships.getEntities().map((x) => ({ id: `ship:${x.id}`, name: $localize`${x.name}:name: (ship, ${enumLabel(x.size)}:size:)` })),
 		...this.equipment
 			.getEntities()
 			.filter((x) => x.owners?.length)
-			.map((x) => ({ id: `equipment:${x.id}`, name: `${x.name} (${x.type ?? 'equipment'})` })),
+			.map((x) => ({ id: `equipment:${x.id}`, name: `${x.name} (${x.type ? enumLabel(x.type) : $localize`equipment`})` })),
 	].sort((a, b) => a.name.localeCompare(b.name));
 	readonly buyItem = computed(() => {
 		const name = this.stationsModel().buy.trim().toLowerCase();
@@ -353,7 +354,7 @@ export class MapStore {
 		return [...counts]
 			.map(([id, count]) => {
 				const faction: Faction | undefined = this.factions.getEntity(id);
-				return { id, count, name: faction?.name ?? 'Unclaimed', color: faction?.color ?? NEUTRAL };
+				return { id, count, name: faction?.name ?? $localize`Unclaimed`, color: faction?.color ?? NEUTRAL };
 			})
 			.sort((a, b) => b.count - a.count);
 	});

@@ -1,10 +1,13 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 
-import { AppComponent } from './app/app.component';
-import { appConfig } from './app/app.config';
+import { loadLanguage } from './app/core/language';
 import { redirectLegacyHashUrl } from './app/core/legacy-hash-url';
 
 // keep links and bookmarks from the hash URL days working
 redirectLegacyHashUrl();
 
-bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));
+// the app texts and the data files are translated when they load, so load the app after the selected language
+loadLanguage()
+	.then(() => Promise.all([import('./app/app.component'), import('./app/app.config')]))
+	.then(([{ AppComponent }, { appConfig }]) => bootstrapApplication(AppComponent, appConfig))
+	.catch((err) => console.error(err));

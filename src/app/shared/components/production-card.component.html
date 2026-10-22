@@ -1,15 +1,15 @@
-<div class="card-header">
+<div class="card-header" i18n>
 	Production: <em>{{ production().name }}</em>
 </div>
 <div class="card-body">
 	@if (production().wares.length) {
 		<app-production-requirements [production]="production()" />
 	}
-	<h6>Production</h6>
+	<h6 i18n>Production</h6>
 	<table class="table">
 		<tbody>
 			<tr>
-				<td>Time</td>
+				<td i18n>Time</td>
 				<td class="text-right">{{ formatTime(production().time) }}</td>
 			</tr>
 		</tbody>

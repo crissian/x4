@@ -36,9 +36,9 @@
 </svg>
 
 <div class="absolute top-3 right-3 flex flex-col gap-1" (pointerdown)="$event.stopPropagation()">
-	<button type="button" class="btn btn-dark" title="Zoom in" (click)="zoom(0.7)"><svg lucideZoomIn /></button>
-	<button type="button" class="btn btn-dark" title="Zoom out" (click)="zoom(1.4)"><svg lucideZoomOut /></button>
-	<button type="button" class="btn btn-dark" title="Show the whole galaxy" (click)="store.resetView()">
+	<button type="button" class="btn btn-dark" title="Zoom in" i18n-title (click)="zoom(0.7)"><svg lucideZoomIn /></button>
+	<button type="button" class="btn btn-dark" title="Zoom out" i18n-title (click)="zoom(1.4)"><svg lucideZoomOut /></button>
+	<button type="button" class="btn btn-dark" title="Show the whole galaxy" i18n-title (click)="store.resetView()">
 		<svg lucideExpand />
 	</button>
 </div>

@@ -13,7 +13,7 @@ export class FactionsComponent {
 	protected readonly open = injectRowNavigation<Faction>();
 
 	protected readonly columns: GridColumn<Faction>[] = [
-		{ key: 'name', caption: 'Name' },
-		{ key: 'description', caption: 'Description' },
+		{ key: 'name', caption: $localize`Name` },
+		{ key: 'description', caption: $localize`Description` },
 	];
 }

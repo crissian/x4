@@ -1,11 +1,11 @@
 <app-modal i18n-title="@@shareLayout" title="Share Layout">
 	<div class="flex">
-		<input class="input rounded-r-none" [value]="url" readonly aria-label="Layout URL" #urlInput />
+		<input class="input rounded-r-none" [value]="url" readonly i18n-aria-label aria-label="Layout URL" #urlInput />
 		<button class="btn btn-secondary shrink-0 rounded-l-none" type="button" (click)="copy(urlInput)">
 			@if (copied()) {
-				<svg lucideCheck /><span>Copied</span>
+				<svg lucideCheck /><span i18n>Copied</span>
 			} @else {
-				<svg lucideCopy /><span>Copy</span>
+				<svg lucideCopy /><span i18n>Copy</span>
 			}
 		</button>
 	</div>

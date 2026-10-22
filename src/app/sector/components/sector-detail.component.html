@@ -1,5 +1,6 @@
 @if (entity(); as entity) {
 	<app-detail-page
+		i18n-section
 		section="Sectors"
 		sectionLink="/sectors"
 		[title]="entity.name"
@@ -8,41 +9,41 @@
 		[description]="entity.description"
 	>
 		<span actions class="flex gap-4 text-sm font-normal">
-			<a routerLink="/map" [queryParams]="{ sector: entity.id }"
+			<a routerLink="/map" [queryParams]="{ sector: entity.id }" i18n
 				><svg lucideMapPinned class="mr-0.5" /> Show on map</a
 			>
-			<a routerLink="/map" [queryParams]="{ sector: entity.id, to: entity.id }"
+			<a routerLink="/map" [queryParams]="{ sector: entity.id, to: entity.id }" i18n
 				><svg lucideRoute class="mr-0.5" /> Plan route here</a
 			>
 		</span>
 
 		<div class="mb-4 grid gap-x-6 gap-y-3 md:grid-cols-3">
 			<dl class="details">
-				<div appDetail="System">{{ cluster()?.name }}</div>
-				<div appDetail="Owner">
+				<div i18n-appDetail appDetail="System">{{ cluster()?.name }}</div>
+				<div i18n-appDetail appDetail="Owner">
 					@if (owner(); as owner) {
 						<span class="mr-1 inline-block size-2.5 rounded-full" [style.background]="owner.color"></span>
 						<a [routerLink]="['/factions', owner.id]">{{ owner.name }}</a>
 					} @else {
-						None
+						<ng-container i18n>None</ng-container>
 					}
 				</div>
-				<div appDetail="DLC">{{ versions[entity.version] }}</div>
+				<div i18n-appDetail appDetail="DLC">{{ versions[entity.version] }}</div>
 			</dl>
 			<dl class="details">
-				<div appDetail="Sunlight">{{ entity.sunlight != null ? (entity.sunlight | percent) : '-' }}</div>
-				<div appDetail="Security">{{ entity.security != null ? (entity.security | percent) : '-' }}</div>
-				<div appDetail="Economy">{{ entity.economy != null ? (entity.economy | percent) : '-' }}</div>
+				<div i18n-appDetail appDetail="Sunlight">{{ entity.sunlight != null ? (entity.sunlight | percent) : '-' }}</div>
+				<div i18n-appDetail appDetail="Security">{{ entity.security != null ? (entity.security | percent) : '-' }}</div>
+				<div i18n-appDetail appDetail="Economy">{{ entity.economy != null ? (entity.economy | percent) : '-' }}</div>
 			</dl>
 			<dl class="details">
-				<div appDetail="Sun">{{ cluster()?.suns?.join(', ') || '-' }}</div>
-				<div appDetail="Environment">{{ cluster()?.environment ?? '-' }}</div>
+				<div i18n-appDetail appDetail="Sun">{{ cluster()?.suns?.join(', ') || '-' }}</div>
+				<div i18n-appDetail appDetail="Environment">{{ cluster()?.environment ?? '-' }}</div>
 			</dl>
 		</div>
 
 		<div class="grid gap-4 lg:grid-cols-3">
 			<div class="card">
-				<div class="card-header">Connections</div>
+				<div class="card-header" i18n>Connections</div>
 				<div class="card-body">
 					<ul class="space-y-1">
 						@for (item of gates(); track item.sector.id) {
@@ -54,7 +55,7 @@
 								}
 								<a [routerLink]="['/sectors', item.sector.id]">{{ item.sector.name }}</a>
 								<span class="ml-1 text-sm text-fg-muted">{{
-									item.type === 'gate' ? 'jump gate' : 'accelerator'
+									item.type === 'gate' ? jumpGate : accelerator
 								}}</span>
 							</li>
 						}
@@ -62,16 +63,16 @@
 							<li>
 								<svg lucideRoute class="mr-1 text-fg-muted" />
 								<a [routerLink]="['/sectors', item.id]">{{ item.name }}</a>
-								<span class="ml-1 text-sm text-fg-muted">superhighway</span>
+								<span class="ml-1 text-sm text-fg-muted" i18n>superhighway</span>
 							</li>
 						}
 						@if (!gates().length && !highways().length) {
-							<li class="text-fg-muted">No connections</li>
+							<li class="text-fg-muted" i18n>No connections</li>
 						}
 					</ul>
 					@if (neighbours().length) {
 						<div class="mt-3 border-t border-line pt-3 text-sm">
-							Other sectors in {{ cluster()?.name }}:
+							<ng-container i18n>Other sectors in {{ cluster()?.name }}:</ng-container>
 							@for (item of neighbours(); track item.id; let last = $last) {
 								<a [routerLink]="['/sectors', item.id]">{{ item.name }}</a
 								>{{ last ? '' : ', ' }}
@@ -82,7 +83,7 @@
 			</div>
 
 			<div class="card min-w-0 lg:col-span-2">
-				<div class="card-header">Resources</div>
+				<div class="card-header" i18n>Resources</div>
 				<div class="card-body">
 					@if (entity.resources.length) {
 						<div class="mb-3 flex flex-wrap gap-2">
@@ -106,7 +107,7 @@
 							/>
 						</div>
 					} @else {
-						<p class="text-fg-muted">No mineable resources.</p>
+						<p class="text-fg-muted" i18n>No mineable resources.</p>
 					}
 				</div>
 			</div>
@@ -114,7 +115,7 @@
 
 		@if (cluster(); as cluster) {
 			<div class="card mt-4">
-				<div class="card-header">System - {{ cluster.name }}</div>
+				<div class="card-header" i18n>System - {{ cluster.name }}</div>
 				<div class="card-body">
 					@if (cluster.description && cluster.description !== entity.description) {
 						<p class="mb-3 max-w-4xl whitespace-pre-line">{{ cluster.description }}</p>
@@ -129,7 +130,7 @@
 							/>
 						</div>
 					} @else {
-						<p class="text-fg-muted">No planets recorded.</p>
+						<p class="text-fg-muted" i18n>No planets recorded.</p>
 					}
 				</div>
 			</div>

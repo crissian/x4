@@ -1,4 +1,5 @@
 import { DecimalPipe } from '@angular/common';
+import { EnumLabelPipe, enumLabel } from '../../core/enum-labels';
 import { Component, computed, effect, inject, input, linkedSignal, untracked } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
@@ -75,7 +76,7 @@ interface Row {
 }
 
 @Component({
-	imports: [DecimalPipe, FormField, RouterLink, LucideX, LucideWrench],
+	imports: [DecimalPipe, FormField, RouterLink, LucideX, LucideWrench, EnumLabelPipe],
 	templateUrl: './ship-compare.component.html',
 })
 export class ShipCompareComponent {
@@ -116,35 +117,35 @@ export class ShipCompareComponent {
 	);
 
 	protected readonly rows: Row[] = [
-		{ caption: 'Race', value: (c) => c.ship.race?.name },
-		{ caption: 'Type', value: (c) => c.ship.type },
-		{ caption: 'Size', value: (c) => c.ship.size },
-		{ caption: 'Purpose', value: (c) => c.ship.purpose },
-		{ caption: 'Hull', value: (c) => c.ship.hull, best: 'higher' },
-		{ caption: 'Shield', value: (c) => c.stats.shield, best: 'higher' },
-		{ caption: 'Shield recharge (/s)', value: (c) => c.stats.shieldRecharge, best: 'higher' },
-		{ caption: 'Speed (m/s)', value: (c) => c.stats.speeds.speed, best: 'higher' },
-		{ caption: 'Boost (m/s)', value: (c) => c.stats.speeds.boost, best: 'higher' },
-		{ caption: 'Travel (m/s)', value: (c) => c.stats.speeds.travel, best: 'higher' },
-		{ caption: 'Cargo', value: (c) => this.stats.maxStats(c.ship).cargo || null, best: 'higher' },
-		{ caption: 'Cargo type', value: (c) => this.stats.maxStats(c.ship).cargoTypes },
-		{ caption: 'Weapons', value: (c) => c.ship.weapons?.length ?? 0, best: 'higher' },
-		{ caption: 'Turrets', value: (c) => c.ship.turrets?.length ?? 0, best: 'higher' },
-		{ caption: 'Weapon DPS', value: (c) => c.stats.weaponDps, best: 'higher' },
-		{ caption: 'Turret DPS', value: (c) => c.stats.turretDps, best: 'higher' },
+		{ caption: $localize`Race`, value: (c) => c.ship.race?.name },
+		{ caption: $localize`Type`, value: (c) => enumLabel(c.ship.type) },
+		{ caption: $localize`Size`, value: (c) => enumLabel(c.ship.size) },
+		{ caption: $localize`Purpose`, value: (c) => enumLabel(c.ship.purpose) },
+		{ caption: $localize`Hull`, value: (c) => c.ship.hull, best: 'higher' },
+		{ caption: $localize`Shield`, value: (c) => c.stats.shield, best: 'higher' },
+		{ caption: $localize`Shield recharge (/s)`, value: (c) => c.stats.shieldRecharge, best: 'higher' },
+		{ caption: $localize`Speed (m/s)`, value: (c) => c.stats.speeds.speed, best: 'higher' },
+		{ caption: $localize`Boost (m/s)`, value: (c) => c.stats.speeds.boost, best: 'higher' },
+		{ caption: $localize`Travel (m/s)`, value: (c) => c.stats.speeds.travel, best: 'higher' },
+		{ caption: $localize`Cargo`, value: (c) => this.stats.maxStats(c.ship).cargo || null, best: 'higher' },
+		{ caption: $localize`Cargo type`, value: (c) => this.stats.maxStats(c.ship).cargoTypes },
+		{ caption: $localize`Weapons`, value: (c) => c.ship.weapons?.length ?? 0, best: 'higher' },
+		{ caption: $localize`Turrets`, value: (c) => c.ship.turrets?.length ?? 0, best: 'higher' },
+		{ caption: $localize`Weapon DPS`, value: (c) => c.stats.weaponDps, best: 'higher' },
+		{ caption: $localize`Turret DPS`, value: (c) => c.stats.turretDps, best: 'higher' },
 		{
-			caption: 'Max range (km)',
+			caption: $localize`Max range (km)`,
 			value: (c) => (c.stats.maxRange ? c.stats.maxRange / 1000 : null),
 			best: 'higher',
 			format: '1.0-1',
 		},
-		{ caption: 'Missiles', value: (c) => c.ship.storage?.missile, best: 'higher' },
-		{ caption: 'Drones', value: (c) => c.ship.storage?.unit, best: 'higher' },
-		{ caption: 'Crew', value: (c) => c.ship.people, best: 'higher' },
-		{ caption: 'Mass (t)', value: (c) => c.ship.mass, format: '1.0-1' },
-		{ caption: 'Ship price', value: (c) => c.ship.price.avg, best: 'lower' },
-		{ caption: 'Equipment price', value: (c) => c.stats.equipmentPrice.avg, best: 'lower' },
-		{ caption: 'Total price', value: (c) => c.price, best: 'lower' },
+		{ caption: $localize`Missiles`, value: (c) => c.ship.storage?.missile, best: 'higher' },
+		{ caption: $localize`Drones`, value: (c) => c.ship.storage?.unit, best: 'higher' },
+		{ caption: $localize`Crew`, value: (c) => c.ship.people, best: 'higher' },
+		{ caption: $localize`Mass (t)`, value: (c) => c.ship.mass, format: '1.0-1' },
+		{ caption: $localize`Ship price`, value: (c) => c.ship.price.avg, best: 'lower' },
+		{ caption: $localize`Equipment price`, value: (c) => c.stats.equipmentPrice.avg, best: 'lower' },
+		{ caption: $localize`Total price`, value: (c) => c.price, best: 'lower' },
 	];
 
 	/** Best value per row, only highlighted when at least two ships are compared. */

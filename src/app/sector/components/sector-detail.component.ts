@@ -25,6 +25,8 @@ export class SectorDetailComponent {
 	readonly id = input.required<string>();
 
 	protected readonly versions = GAME_VERSIONS;
+	protected readonly jumpGate = $localize`jump gate`;
+	protected readonly accelerator = $localize`accelerator`;
 	protected readonly trackRow = (row: unknown) => row;
 
 	protected readonly entity = computed(() => this.sectors.getEntity(this.id()));
@@ -64,22 +66,22 @@ export class SectorDetailComponent {
 	});
 
 	protected readonly resourceColumns: GridColumn<SectorResource>[] = [
-		{ key: 'ware', caption: 'Ware', value: (x) => this.wares.getEntity(x.ware)?.name ?? x.ware },
-		{ key: 'count', caption: 'Areas', type: 'number' },
-		{ key: 'size', caption: 'Size' },
-		{ key: 'radius', caption: 'Radius (km)', type: 'number', value: (x) => x.radius / 1000 },
-		{ key: 'yield', caption: 'Yield' },
-		{ key: 'yieldAmount', caption: 'Amount per area', type: 'number' },
-		{ key: 'speed', caption: 'Gather speed' },
-		{ key: 'respawnDelay', caption: 'Respawn (min)', type: 'number' },
+		{ key: 'ware', caption: $localize`Ware`, value: (x) => this.wares.getEntity(x.ware)?.name ?? x.ware },
+		{ key: 'count', caption: $localize`Areas`, type: 'number' },
+		{ key: 'size', caption: $localize`Size` },
+		{ key: 'radius', caption: $localize`Radius (km)`, type: 'number', value: (x) => x.radius / 1000 },
+		{ key: 'yield', caption: $localize`Yield` },
+		{ key: 'yieldAmount', caption: $localize`Amount per area`, type: 'number' },
+		{ key: 'speed', caption: $localize`Gather speed` },
+		{ key: 'respawnDelay', caption: $localize`Respawn (min)`, type: 'number' },
 	];
 
 	protected readonly planetColumns: GridColumn<PlanetRow>[] = [
-		{ key: 'name', caption: 'Name', display: (x) => (x.moon ? '↳ ' : '') + (x.name ?? '-') },
-		{ key: 'class', caption: 'Class' },
-		{ key: 'geology', caption: 'Geology' },
-		{ key: 'atmosphere', caption: 'Atmosphere' },
-		{ key: 'population', caption: 'Population' },
-		{ key: 'settlements', caption: 'Settlements' },
+		{ key: 'name', caption: $localize`Name`, display: (x) => (x.moon ? '↳ ' : '') + (x.name ?? '-') },
+		{ key: 'class', caption: $localize`Class` },
+		{ key: 'geology', caption: $localize`Geology` },
+		{ key: 'atmosphere', caption: $localize`Atmosphere` },
+		{ key: 'population', caption: $localize`Population` },
+		{ key: 'settlements', caption: $localize`Settlements` },
 	];
 }

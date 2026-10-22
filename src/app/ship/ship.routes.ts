@@ -8,8 +8,8 @@ import { ShipLoadoutComponent } from './components/ship-loadout.component';
 import { ShipsComponent } from './components/ships.component';
 
 export default [
-	{ path: '', component: ShipsComponent, title: `${BASE_TITLE} - Ships` },
-	{ path: 'compare', component: ShipCompareComponent, title: `${BASE_TITLE} - Compare Ships` },
-	{ path: ':id/loadout', component: ShipLoadoutComponent, title: entityTitle(ShipService, 'Loadout') },
-	{ path: ':id', component: ShipDetailComponent, title: entityTitle(ShipService, 'Ships') },
+	{ path: '', component: ShipsComponent, title: `${BASE_TITLE} - ${$localize`Ships`}` },
+	{ path: 'compare', component: ShipCompareComponent, title: `${BASE_TITLE} - ${$localize`Compare Ships`}` },
+	{ path: ':id/loadout', component: ShipLoadoutComponent, title: entityTitle(ShipService, $localize`Loadout`) },
+	{ path: ':id', component: ShipDetailComponent, title: entityTitle(ShipService, $localize`Ships`) },
 ] satisfies Routes;

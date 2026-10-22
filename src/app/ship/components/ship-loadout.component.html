@@ -1,20 +1,20 @@
 @if (entity(); as entity) {
 	<div class="card">
 		<div class="card-header flex flex-wrap items-center justify-between gap-3">
-			<span
+			<span i18n
 				><a routerLink="/ships">Ships</a> - <a [routerLink]="['/ships', entity.id]">{{ entity.name }}</a> -
 				Loadout builder</span
 			>
 			<span class="flex gap-2">
 				<button type="button" class="btn btn-secondary" (click)="copyLink()">
 					@if (copied()) {
-						<svg lucideCheck />Copied
+						<svg lucideCheck /><ng-container i18n>Copied</ng-container>
 					} @else {
-						<svg lucideLink />Copy link
+						<svg lucideLink /><ng-container i18n>Copy link</ng-container>
 					}
 				</button>
 				<button type="button" class="btn btn-primary" (click)="compare()">
-					<svg lucideGitCompareArrows />Add to comparison
+					<svg lucideGitCompareArrows /><ng-container i18n>Add to comparison</ng-container>
 				</button>
 			</span>
 		</div>
@@ -22,7 +22,7 @@
 			<div class="grid gap-4 lg:grid-cols-5">
 				<div class="min-w-0 lg:col-span-3">
 					<div class="mb-3 flex flex-wrap items-center gap-2">
-						<span class="text-fg-muted">Preset:</span>
+						<span class="text-fg-muted" i18n>Preset:</span>
 						@for (preset of presets; track preset.id) {
 							<button
 								type="button"
@@ -30,7 +30,7 @@
 								[title]="preset.label"
 								(click)="applyPreset(preset.id)"
 							>
-								{{ preset.id | titlecase }}
+								{{ preset.name }}
 							</button>
 						}
 					</div>
@@ -38,42 +38,42 @@
 						<label class="mb-2 grid items-center gap-1 sm:grid-cols-[12rem_1fr]">
 							<span>{{ group.label }}</span>
 							<select class="input" [formField]="slotsForm[group.key]">
-								<option value="">- none -</option>
+								<option value="" i18n>- none -</option>
 								@for (option of group.options; track option.id) {
 									<option [value]="option.id">{{ optionLabel(option) }}</option>
 								}
 							</select>
 						</label>
 					} @empty {
-						<p class="text-fg-muted">This ship has no configurable slots.</p>
+						<p class="text-fg-muted" i18n>This ship has no configurable slots.</p>
 					}
 				</div>
 
 				@if (result(); as r) {
 					<div class="lg:col-span-2">
 						<dl class="details">
-							<dt>Speed</dt>
+							<dt i18n>Speed</dt>
 							<dd>{{ r.speeds.speed | number: '1.0-0' }} m/s</dd>
-							<dt>Boost</dt>
+							<dt i18n>Boost</dt>
 							<dd>{{ r.speeds.boost | number: '1.0-0' }} m/s</dd>
-							<dt>Travel</dt>
+							<dt i18n>Travel</dt>
 							<dd>{{ r.speeds.travel | number: '1.0-0' }} m/s</dd>
-							<dt>Hull</dt>
+							<dt i18n>Hull</dt>
 							<dd>{{ r.hull | number }}</dd>
-							<dt>Shield</dt>
+							<dt i18n>Shield</dt>
 							<dd>{{ r.shield | number: '1.0-0' }} ({{ r.shieldRecharge | number: '1.0-0' }}/s)</dd>
-							<dt>Weapon DPS</dt>
+							<dt i18n>Weapon DPS</dt>
 							<dd>{{ r.weaponDps | number: '1.0-0' }}</dd>
-							<dt>Turret DPS</dt>
+							<dt i18n>Turret DPS</dt>
 							<dd>{{ r.turretDps | number: '1.0-0' }}</dd>
-							<dt>Max Range</dt>
+							<dt i18n>Max Range</dt>
 							<dd>{{ r.maxRange ? (r.maxRange / 1000 | number: '1.0-1') + ' km' : '-' }}</dd>
-							<dt>Ship Price</dt>
+							<dt i18n>Ship Price</dt>
 							<dd>{{ entity.price.avg | number }}</dd>
-							<dt>Equipment Price</dt>
+							<dt i18n>Equipment Price</dt>
 							<dd>{{ r.equipmentPrice.avg | number: '1.0-0' }}</dd>
 							@if (price(); as price) {
-								<dt>Total Price</dt>
+								<dt i18n>Total Price</dt>
 								<dd>
 									<strong>{{ price.avg | number: '1.0-0' }}</strong>
 									<div class="text-xs text-fg-muted">
@@ -84,7 +84,7 @@
 						</dl>
 
 						@if (equipmentList().length) {
-							<h6 class="mt-4">Equipment</h6>
+							<h6 class="mt-4" i18n>Equipment</h6>
 							<table class="table">
 								<tbody>
 									@for (item of equipmentList(); track item.equipment.id) {
@@ -107,10 +107,11 @@
 			@if (wareTotals().length) {
 				<div class="mt-4 card">
 					<div class="card-header flex flex-wrap items-center justify-between gap-3">
-						<span>Wares to build ship and equipment</span>
+						<span i18n>Wares to build ship and equipment</span>
 						@if (methods().length > 1) {
 							<select
 								class="input w-auto"
+								i18n-aria-label
 								aria-label="Production method"
 								[formField]="optionsForm.method"
 							>
@@ -124,9 +125,9 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th>Ware</th>
-									<th class="text-right">Amount</th>
-									<th class="text-right">Value (avg)</th>
+									<th i18n>Ware</th>
+									<th class="text-right" i18n>Amount</th>
+									<th class="text-right" i18n>Value (avg)</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -142,12 +143,12 @@
 							</tbody>
 							<tfoot>
 								<tr>
-									<th colspan="2">Total</th>
+									<th colspan="2" i18n>Total</th>
 									<th class="text-right">{{ wareTotalValue() | number: '1.0-0' }}</th>
 								</tr>
 							</tfoot>
 						</table>
-						<p class="mt-2 text-xs text-fg-muted">
+						<p class="mt-2 text-xs text-fg-muted" i18n>
 							Uses the selected production method where available, otherwise the universal one. Equipment
 							without its own production is not included.
 						</p>

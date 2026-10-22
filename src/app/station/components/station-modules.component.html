@@ -3,8 +3,8 @@
 		<tr>
 			<th i18n="@@module" scope="col">Module</th>
 			<th i18n="@@count" scope="col" class="w-28">Count</th>
-			<th scope="col" class="w-6"><span class="sr-only">Move</span></th>
-			<th scope="col" class="w-6"><span class="sr-only">Remove</span></th>
+			<th scope="col" class="w-6"><span class="sr-only" i18n>Move</span></th>
+			<th scope="col" class="w-6"><span class="sr-only" i18n>Remove</span></th>
 		</tr>
 	</thead>
 	<tbody cdkDropList (cdkDropListDropped)="drop($event)">
@@ -12,7 +12,7 @@
 			<tr cdkDrag cdkDragLockAxis="y">
 				<td>
 					<div *cdkDragPreview class="rounded-md bg-raised px-5 py-4 text-fg-strong shadow-2xl">
-						{{ modules()[i]?.module?.name || '( Select )' }}
+						{{ modules()[i]?.module?.name || selectText }}
 					</div>
 					<app-autocomplete
 						[id]="row.moduleId().value()"
@@ -24,7 +24,9 @@
 					<input
 						type="number"
 						class="input"
+						i18n-placeholder
 						placeholder="Module Count"
+						i18n-aria-label
 						aria-label="Module Count"
 						[formField]="row.count"
 					/>
@@ -36,6 +38,7 @@
 					<button
 						type="button"
 						class="cursor-pointer text-fg-muted hover:text-danger"
+						i18n-aria-label
 						aria-label="Remove module"
 						(click)="removeModule(i)"
 					>
@@ -50,10 +53,10 @@
 			<th colspan="4" class="pt-3">
 				<div class="flex flex-wrap gap-2">
 					<button (click)="addModule()" class="btn btn-secondary" type="button">
-						<svg lucideSquarePlus /><span>Add Module</span>
+						<svg lucideSquarePlus /><span i18n>Add Module</span>
 					</button>
 					<button (click)="autofillModules()" class="btn btn-info" type="button">
-						<svg lucideWandSparkles /><span>Autofill Modules</span>
+						<svg lucideWandSparkles /><span i18n>Autofill Modules</span>
 					</button>
 				</div>
 			</th>

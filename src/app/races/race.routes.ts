@@ -6,6 +6,6 @@ import { RaceDetailComponent } from './components/race-detail.component';
 import { RacesComponent } from './components/races.component';
 
 export default [
-	{ path: '', component: RacesComponent, title: `${BASE_TITLE} - Races` },
-	{ path: ':id', component: RaceDetailComponent, title: entityTitle(RaceService, 'Races') },
+	{ path: '', component: RacesComponent, title: `${BASE_TITLE} - ${$localize`Races`}` },
+	{ path: ':id', component: RaceDetailComponent, title: entityTitle(RaceService, $localize`Races`) },
 ] satisfies Routes;

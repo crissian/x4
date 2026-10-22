@@ -26,8 +26,8 @@
 		<div class="grid gap-6 lg:grid-cols-3">
 			<section>
 				<div class="mb-2 flex items-center gap-2">
-					<h6 class="mb-0 flex-1">{{ layout()?.name || 'Station Modules' }}</h6>
-					<label for="sun-light" class="whitespace-nowrap">Sun Light</label>
+					<h6 class="mb-0 flex-1">{{ layout()?.name || stationModulesTitle }}</h6>
+					<label for="sun-light" class="whitespace-nowrap" i18n>Sun Light</label>
 					<div class="flex items-center">
 						<input
 							type="number"
@@ -50,11 +50,11 @@
 				/>
 			</section>
 			<section>
-				<h6>Station Resources</h6>
+				<h6 i18n>Station Resources</h6>
 				<app-station-resources [resources]="resources()" />
 			</section>
 			<section>
-				<h6>Station Summary</h6>
+				<h6 i18n>Station Summary</h6>
 				<app-station-summary
 					[modules]="modules()"
 					[resources]="resources()"

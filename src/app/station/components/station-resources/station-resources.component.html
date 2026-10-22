@@ -27,14 +27,14 @@
 						<td class="pl-8">
 							<strong>{{ moduleRes.count }}</strong> x <strong>{{ moduleRes.name }}</strong>
 							@if (moduleRes.total > 0) {
-								<span i18n="@@at"> at</span>&nbsp;<strong
-									>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong
-								>&nbsp;<span i18n="@@efficiency">efficiency</span>
+								<ng-container i18n="@@atEfficiency"
+									>&nbsp;at&nbsp;<strong>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong>&nbsp;efficiency</ng-container
+								>
 							}
 							@if (moduleRes.type === 'Habitation') {
-								<span i18n="@@at"> at</span>&nbsp;<strong
-									>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong
-								>&nbsp;<span i18n="@@capacity">capacity</span>
+								<ng-container i18n="@@atCapacity"
+									>&nbsp;at&nbsp;<strong>{{ moduleRes.efficiency | number: '1.0-0' }}%</strong>&nbsp;capacity</ng-container
+								>
 							}
 						</td>
 						<td class="text-right">{{ moduleRes.total | number: '1.0-0' }}</td>

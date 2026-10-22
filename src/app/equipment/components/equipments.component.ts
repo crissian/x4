@@ -34,28 +34,28 @@ export class EquipmentsComponent {
 	}
 
 	protected readonly columns: GridColumn<Equipment>[] = [
-		{ key: 'name', caption: 'Name' },
-		{ key: 'size', caption: 'Size', lookup: lookupOf(EnumFn.values(Size)) },
+		{ key: 'name', caption: $localize`Name` },
+		{ key: 'size', caption: $localize`Size`, lookup: lookupOf(EnumFn.values(Size)) },
 		{
 			key: 'race.id',
-			caption: 'Race',
+			caption: $localize`Race`,
 			lookup: inject(RaceService)
 				.getEntities()
 				.map((x) => ({ value: x.id, label: x.name })),
 		},
-		{ key: 'type', caption: 'Type', lookup: lookupOf(EnumFn.values(EquipmentType)) },
-		{ key: 'equipmentClass', caption: 'Class', lookup: lookupOf(EnumFn.values(EquipmentClass)) },
-		{ key: 'price.avg', caption: 'Price', type: 'number' },
-		{ key: 'hull', caption: 'Hull', type: 'number', hidden: true },
+		{ key: 'type', caption: $localize`Type`, lookup: lookupOf(EnumFn.values(EquipmentType)) },
+		{ key: 'equipmentClass', caption: $localize`Class`, lookup: lookupOf(EnumFn.values(EquipmentClass)) },
+		{ key: 'price.avg', caption: $localize`Price`, type: 'number' },
+		{ key: 'hull', caption: $localize`Hull`, type: 'number', hidden: true },
 		{
 			key: 'dps',
-			caption: 'DPS',
+			caption: $localize`DPS`,
 			type: 'number',
 			value: (x) => this.weapon(x)?.sustainedDps ?? (x.missile ? missileDps(x.missile) : null),
 		},
 		{
 			key: 'range',
-			caption: 'Range (km)',
+			caption: $localize`Range (km)`,
 			type: 'number',
 			format: { maximumFractionDigits: 1 },
 			value: (x) => {
@@ -63,17 +63,17 @@ export class EquipmentsComponent {
 				return range ? range / 1000 : null;
 			},
 		},
-		{ key: 'missile.damage', caption: 'Missile Damage', type: 'number', hidden: true },
-		{ key: 'recharge.max', caption: 'Shield', type: 'number' },
-		{ key: 'recharge.rate', caption: 'Recharge (/s)', type: 'number', hidden: true },
-		{ key: 'thrust.forward', caption: 'Thrust', type: 'number' },
-		{ key: 'boost.thrust', caption: 'Boost ×', type: 'number', hidden: true, format: { maximumFractionDigits: 2 } },
-		{ key: 'travel.thrust', caption: 'Travel ×', type: 'number', format: { maximumFractionDigits: 2 } },
-		{ key: 'travel.charge', caption: 'Travel Charge (s)', type: 'number', hidden: true, format: { maximumFractionDigits: 1 } },
-		{ key: 'license', caption: 'License', hidden: true },
+		{ key: 'missile.damage', caption: $localize`Missile Damage`, type: 'number', hidden: true },
+		{ key: 'recharge.max', caption: $localize`Shield`, type: 'number' },
+		{ key: 'recharge.rate', caption: $localize`Recharge (/s)`, type: 'number', hidden: true },
+		{ key: 'thrust.forward', caption: $localize`Thrust`, type: 'number' },
+		{ key: 'boost.thrust', caption: $localize`Boost ×`, type: 'number', hidden: true, format: { maximumFractionDigits: 2 } },
+		{ key: 'travel.thrust', caption: $localize`Travel ×`, type: 'number', format: { maximumFractionDigits: 2 } },
+		{ key: 'travel.charge', caption: $localize`Travel Charge (s)`, type: 'number', hidden: true, format: { maximumFractionDigits: 1 } },
+		{ key: 'license', caption: $localize`License`, hidden: true },
 		{
 			key: 'version',
-			caption: 'DLC',
+			caption: $localize`DLC`,
 			hidden: true,
 			lookup: GAME_VERSION_LOOKUP,
 		},

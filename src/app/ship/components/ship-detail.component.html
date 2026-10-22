@@ -1,6 +1,7 @@
 @if (entity(); as entity) {
 	<app-detail-page
 		section="Ships"
+		i18n-section
 		sectionLink="/ships"
 		[title]="entity.name"
 		[id]="entity.id"
@@ -11,59 +12,59 @@
 			<a
 				class="btn btn-primary hover:text-white hover:no-underline"
 				[routerLink]="['/ships', entity.id, 'loadout']"
-				><svg lucideWrench />Loadout builder</a
+				><svg lucideWrench /><ng-container i18n>Loadout builder</ng-container></a
 			>
 			<button type="button" class="btn btn-secondary" (click)="compare()">
-				<svg lucideGitCompareArrows />Compare
+				<svg lucideGitCompareArrows /><ng-container i18n>Compare</ng-container>
 			</button>
 		</span>
 		<div class="grid gap-x-6 gap-y-3 md:grid-cols-3">
 			<dl class="details">
-				<div appDetail="Race">
+				<div appDetail="Race" i18n-appDetail>
 					@if (entity.race) {
 						<a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
 					} @else {
 						-
 					}
 				</div>
-				<div appDetail="Type">{{ entity.type || '-' }}</div>
-				<div appDetail="Size">{{ entity.size }}</div>
-				<div appDetail="Purpose">{{ entity.purpose }}</div>
-				<div appDetail="Hull">{{ entity.hull | number }}</div>
-				<div appDetail="Explosion Damage">{{ (entity.explosionDamage | number) || '-' }}</div>
-				<div appDetail="Price">{{ entity.price.min | number }} - {{ entity.price.max | number }}</div>
+				<div appDetail="Type" i18n-appDetail>{{ (entity.type | enumLabel) || '-' }}</div>
+				<div appDetail="Size" i18n-appDetail>{{ entity.size | enumLabel }}</div>
+				<div appDetail="Purpose" i18n-appDetail>{{ entity.purpose | enumLabel }}</div>
+				<div appDetail="Hull" i18n-appDetail>{{ entity.hull | number }}</div>
+				<div appDetail="Explosion Damage" i18n-appDetail>{{ (entity.explosionDamage | number) || '-' }}</div>
+				<div appDetail="Price" i18n-appDetail>{{ entity.price.min | number }} - {{ entity.price.max | number }}</div>
 			</dl>
 			<dl class="details">
-				<div appDetail="Cargo">
+				<div appDetail="Cargo" i18n-appDetail>
 					@for (item of entity.cargo; track $index) {
 						<div>{{ item.max | number }} {{ cargoTypes(item) }}</div>
 					} @empty {
 						-
 					}
 				</div>
-				<div appDetail="Missile Storage">
+				<div appDetail="Missile Storage" i18n-appDetail>
 					{{ entity.storage?.missile ? (entity.storage.missile | number) : '-' }}
 				</div>
-				<div appDetail="Drone Storage">{{ entity.storage?.unit ? (entity.storage.unit | number) : '-' }}</div>
-				<div appDetail="Crew">{{ (entity.people | number) || '-' }}</div>
-				<div appDetail="Docks">{{ getSlotsStr(entity.docks) }}</div>
-				<div appDetail="Mass">{{ entity.mass | number: '1.0-1' }} t</div>
+				<div appDetail="Drone Storage" i18n-appDetail>{{ entity.storage?.unit ? (entity.storage.unit | number) : '-' }}</div>
+				<div appDetail="Crew" i18n-appDetail>{{ (entity.people | number) || '-' }}</div>
+				<div appDetail="Docks" i18n-appDetail>{{ getSlotsStr(entity.docks) }}</div>
+				<div appDetail="Mass" i18n-appDetail>{{ entity.mass | number: '1.0-1' }} t</div>
 			</dl>
 			<dl class="details">
-				<div appDetail="Engines">{{ getSlotsStr(entity.engines) }}</div>
-				<div appDetail="Weapons">{{ getSlotsStr(entity.weapons) }}</div>
-				<div appDetail="Turrets">{{ getSlotsStr(entity.turrets) }}</div>
-				<div appDetail="Main Shields">{{ getSlotsStr(mainShields()) }}</div>
-				<div appDetail="Additional Shields">{{ getSlotsStr(additionalShields()) }}</div>
+				<div appDetail="Engines" i18n-appDetail>{{ getSlotsStr(entity.engines) }}</div>
+				<div appDetail="Weapons" i18n-appDetail>{{ getSlotsStr(entity.weapons) }}</div>
+				<div appDetail="Turrets" i18n-appDetail>{{ getSlotsStr(entity.turrets) }}</div>
+				<div appDetail="Main Shields" i18n-appDetail>{{ getSlotsStr(mainShields()) }}</div>
+				<div appDetail="Additional Shields" i18n-appDetail>{{ getSlotsStr(additionalShields()) }}</div>
 				@if (maxStats(); as max) {
-					<div appDetail="Max Shield">{{ max.shield ? (max.shield | number: '1.0-0') : '-' }}</div>
+					<div appDetail="Max Shield" i18n-appDetail>{{ max.shield ? (max.shield | number: '1.0-0') : '-' }}</div>
 				}
 			</dl>
 		</div>
 
 		<div class="mt-4 grid gap-4 lg:grid-cols-3">
 			<div class="card min-w-0 lg:col-span-2">
-				<div class="card-header">Speed by engine</div>
+				<div class="card-header" i18n>Speed by engine</div>
 				<div class="card-body">
 					@if (engines().length) {
 						<div class="overflow-x-auto">
@@ -76,17 +77,17 @@
 								(rowClick)="openEngine($event)"
 							/>
 						</div>
-						<p class="mt-2 text-xs text-fg-muted">
+						<p class="mt-2 text-xs text-fg-muted" i18n>
 							Speed = engine thrust × {{ entity.engines.length }} engines / drag
 							{{ entity.drag.forward | number: '1.0-2' }}. Equipment mods and crew skill are not included.
 						</p>
 					} @else {
-						<p class="text-fg-muted">No compatible engines found.</p>
+						<p class="text-fg-muted" i18n>No compatible engines found.</p>
 					}
 				</div>
 			</div>
 			<div class="card">
-				<div class="card-header">Sold by</div>
+				<div class="card-header" i18n>Sold by</div>
 				<div class="card-body">
 					<app-sellers [owners]="entity.owners" [license]="entity.license" />
 				</div>
@@ -94,7 +95,7 @@
 		</div>
 
 		@if (production().length) {
-			<h6 class="mt-4">Production</h6>
+			<h6 class="mt-4" i18n>Production</h6>
 			<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 				@for (item of production(); track $index) {
 					<app-production-card [production]="item" />

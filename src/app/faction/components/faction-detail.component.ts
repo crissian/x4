@@ -17,11 +17,11 @@ export class FactionDetailComponent {
 	protected readonly entity = computed(() => this.service.getEntity(this.id()));
 
 	protected readonly licenseColumns: GridColumn<License>[] = [
-		{ key: 'name', caption: 'Name' },
-		{ key: 'price', caption: 'Price', type: 'number' },
+		{ key: 'name', caption: $localize`Name` },
+		{ key: 'price', caption: $localize`Price`, type: 'number' },
 		{
 			key: 'minRelation',
-			caption: 'Reputation',
+			caption: $localize`Reputation`,
 			type: 'number',
 			value: (x) => (x.minRelation != null ? relationToReputation(x.minRelation) : null),
 		},

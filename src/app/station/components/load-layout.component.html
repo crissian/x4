@@ -42,7 +42,7 @@
 				<div class="text-xs text-fg-muted">{{ getModules(entity) }}</div>
 			</div>
 		} @empty {
-			<div class="px-4 py-3 text-fg-muted">No saved layouts.</div>
+			<div class="px-4 py-3 text-fg-muted" i18n>No saved layouts.</div>
 		}
 	</div>
 	<ng-container footer>
@@ -51,6 +51,7 @@
 			class="btn btn-info mr-auto"
 			[disabled]="entities().length === 0"
 			(click)="exportLayouts()"
+			i18n-title
 			title="Download all saved layouts as a backup file"
 		>
 			<svg lucideDownload /><span i18n="@@exportLayouts">Export</span>
@@ -60,6 +61,7 @@
 			type="button"
 			class="btn btn-info"
 			(click)="file.click()"
+			i18n-title
 			title="Add the layouts of an exported backup file"
 		>
 			<svg lucideUpload /><span i18n="@@importLayouts">Import</span>

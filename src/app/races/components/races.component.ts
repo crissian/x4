@@ -13,7 +13,7 @@ export class RacesComponent {
 	protected readonly open = injectRowNavigation<Race>();
 
 	protected readonly columns: GridColumn<Race>[] = [
-		{ key: 'name', caption: 'Name' },
-		{ key: 'description', caption: 'Description' },
+		{ key: 'name', caption: $localize`Name` },
+		{ key: 'description', caption: $localize`Description` },
 	];
 }

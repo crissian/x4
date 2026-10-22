@@ -19,12 +19,14 @@ import { MapFocusLinkComponent } from './map-focus-link.component';
 			}
 		</div>
 
-		<h6>Where to buy</h6>
+		<h6 i18n>Where to buy</h6>
 		<input
 			class="input"
 			list="map-buy-items"
 			placeholder="Ship or equipment..."
+			i18n-placeholder
 			aria-label="Ship or equipment"
+			i18n-aria-label
 			[formField]="form.buy"
 		/>
 		<datalist id="map-buy-items">
@@ -35,11 +37,11 @@ import { MapFocusLinkComponent } from './map-focus-link.component';
 		@if (store.buyItem()) {
 			<p class="my-2 text-xs text-fg-muted">
 				@if (store.routeFrom(); as from) {
-					Closest to {{ store.sectorName(from) }}.
+					<ng-container i18n>Closest to {{ store.sectorName(from) }}.</ng-container>
 				} @else {
-					Set a route start to sort by travel time.
+					<ng-container i18n>Set a route start to sort by travel time.</ng-container>
 				}
-				Licence and reputation still apply.
+				<ng-container i18n>Licence and reputation still apply.</ng-container>
 			</p>
 			<table class="table text-sm">
 				<tbody>
@@ -60,14 +62,14 @@ import { MapFocusLinkComponent } from './map-focus-link.component';
 						</tr>
 					} @empty {
 						<tr>
-							<td class="text-fg-muted">No station sells it at game start.</td>
+							<td class="text-fg-muted" i18n>No station sells it at game start.</td>
 						</tr>
 					}
 				</tbody>
 			</table>
 		}
 
-		<h6 class="mt-4">All stations ({{ store.stationMarkers().length }})</h6>
+		<h6 class="mt-4" i18n>All stations ({{ store.stationMarkers().length }})</h6>
 		<table class="table text-sm">
 			<tbody>
 				@for (item of store.stationMarkers(); track item.station.id) {
@@ -85,7 +87,7 @@ import { MapFocusLinkComponent } from './map-focus-link.component';
 				}
 			</tbody>
 		</table>
-		<p class="mt-2 text-xs text-fg-muted">
+		<p class="mt-2 text-xs text-fg-muted" i18n>
 			Stations the game creates at the start; factions build and lose stations as the game goes on.
 		</p>
 	`,

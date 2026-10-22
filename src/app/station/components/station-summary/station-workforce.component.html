@@ -34,7 +34,7 @@
 			}
 			@if (form.isHq().value()) {
 				<tr class="text-danger">
-					<td class="pl-8">1 x Headquarters</td>
+					<td class="pl-8" i18n>1 x Headquarters</td>
 					<td class="text-right">-{{ hqWorkforce }}</td>
 				</tr>
 			}
@@ -77,7 +77,7 @@
 		<tr>
 			<td colspan="2">
 				<label for="workforce-slider" class="mb-1 block">
-					<span>Actual Workforce:</span>&nbsp;<strong>{{
+					<span i18n>Actual Workforce:</span>&nbsp;<strong>{{
 						form.partialWorkforce().value() | number: '1.0-0'
 					}}</strong>
 				</label>

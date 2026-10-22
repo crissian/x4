@@ -1,6 +1,13 @@
 <app-modal i18n-title="@@saveLayout" title="Save Layout">
 	<form (submit)="$event.preventDefault(); saveLayout()">
-		<input class="input" aria-label="Layout name" placeholder="Layout name" [formField]="saveForm.name" />
+		<input
+			class="input"
+			i18n-aria-label
+			aria-label="Layout name"
+			i18n-placeholder
+			placeholder="Layout name"
+			[formField]="saveForm.name"
+		/>
 	</form>
 	<ng-container footer>
 		<button
