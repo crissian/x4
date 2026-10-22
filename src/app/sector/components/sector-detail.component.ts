@@ -1,20 +1,38 @@
 import { DecimalPipe, PercentPipe } from '@angular/common';
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, LOCALE_ID, computed, inject, input, viewChild } from '@angular/core';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute } from '@lucide/angular';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
+import { TabItem, TabsComponent } from '../../shared/components/tabs/tabs.component';
 import { FactionService } from '../../shared/services/faction.service';
 import { Planet, SectorResource } from '../../shared/services/model/model';
 import { GAME_VERSIONS } from '../../shared/services/constants';
 import { ClusterService, SectorService } from '../../shared/services/universe.service';
 import { WareService } from '../../shared/services/ware.service';
+import { PlanetPopulation } from '../planet-population';
+import { SectorMapComponent } from './sector-map.component';
 import { SectorStationsComponent } from './sector-stations.component';
 
 type PlanetRow = Planet & { moon?: boolean };
+export type SectorTab = 'stations' | 'connections' | 'resources' | 'system';
 
 @Component({
-	imports: [DetailPageComponent, DetailComponent, RouterLink, DataGridComponent, DecimalPipe, PercentPipe, LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute, SectorStationsComponent],
+	imports: [
+		DetailPageComponent,
+		DetailComponent,
+		RouterLink,
+		DataGridComponent,
+		DecimalPipe,
+		PercentPipe,
+		LucideMapPinned,
+		LucideCircleDot,
+		LucideChevronsRight,
+		LucideRoute,
+		SectorMapComponent,
+		SectorStationsComponent,
+		TabsComponent,
+	],
 	templateUrl: './sector-detail.component.html',
 })
 export class SectorDetailComponent {
@@ -22,8 +40,54 @@ export class SectorDetailComponent {
 	private readonly clusters = inject(ClusterService);
 	private readonly factions = inject(FactionService);
 	private readonly wares = inject(WareService);
+	private readonly locale = inject(LOCALE_ID);
+	private readonly router = inject(Router);
 
 	readonly id = input.required<string>();
+	/** The `tab` query parameter: the selected tab, kept in the URL so links can open it. */
+	readonly tab = input<string>();
+	/** The `station` query parameter: the code of the selected station. */
+	readonly station = input<string>();
+
+	private readonly stationList = viewChild(SectorStationsComponent);
+	/** Stations in the sector, from the active save or the game start data; null while they load. */
+	protected readonly stationCount = computed(() => {
+		const groups = this.stationList()?.groups();
+		return groups ? groups.reduce((sum, x) => sum + x.stations.length, 0) : null;
+	});
+
+	protected readonly tabs = computed(() => {
+		const tabs: TabItem<SectorTab>[] = [
+			{ id: 'stations', label: $localize`Stations`, count: this.stationCount() ?? undefined },
+			{ id: 'connections', label: $localize`Connections` },
+			{ id: 'resources', label: $localize`Resources` },
+		];
+		return this.cluster() ? [...tabs, { id: 'system' as const, label: $localize`System` }] : tabs;
+	});
+	protected readonly activeTab = computed(() =>
+		SectorDetailComponent.pickTab(
+			this.tab(),
+			this.tabs().map((x) => x.id),
+			this.stationCount()
+		)
+	);
+
+	/**
+	 * The tab to show: the one in the URL when the page has it, else Stations when the sector has stations (or
+	 * while they load), else Connections.
+	 */
+	static pickTab(requested: string | undefined, available: readonly SectorTab[], stations: number | null): SectorTab {
+		const found = available.find((x) => x === requested);
+		if (found) {
+			return found;
+		}
+		return stations === 0 ? 'connections' : 'stations';
+	}
+
+	/** Keeps the selected tab or station in the URL, so the page can be shared as it is. */
+	protected query(params: { tab?: SectorTab; station?: string }) {
+		void this.router.navigate([], { queryParams: params, queryParamsHandling: 'merge', replaceUrl: true });
+	}
 
 	protected readonly versions = GAME_VERSIONS;
 	protected readonly jumpGate = $localize`jump gate`;
@@ -82,7 +146,11 @@ export class SectorDetailComponent {
 		{ key: 'class', caption: $localize`Class` },
 		{ key: 'geology', caption: $localize`Geology` },
 		{ key: 'atmosphere', caption: $localize`Atmosphere` },
-		{ key: 'population', caption: $localize`Population` },
+		{
+			key: 'population',
+			caption: $localize`Population`,
+			display: (x) => PlanetPopulation.label(x, this.locale),
+		},
 		{ key: 'settlements', caption: $localize`Settlements` },
 	];
 }

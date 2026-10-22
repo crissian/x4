@@ -12,20 +12,16 @@ import { WareService } from '../shared/services/ware.service';
 import { CLUSTER_RADIUS, GalaxyLayout, SectorShape } from './galaxy-layout';
 import { MapGeometry } from './map-geometry';
 import { Mining } from './mining';
+import { PanZoom, ViewBox } from './pan-zoom';
 import { RoutePlanner } from './route-planner';
 import { MapSaveLayer } from './save/map-save-layer';
+import { StationMarkers } from './station-marker';
 
 export type ColorMode = 'owner' | 'sunlight' | 'security' | 'resource';
 export type PriceLevel = 'min' | 'avg' | 'max';
 export type PanelTab = 'route' | 'mining' | 'stations' | 'abandoned';
 
-export interface ViewBox {
-	x: number;
-	y: number;
-	w: number;
-}
-
-export const NEUTRAL = '#6b7280';
+export const NEUTRAL = StationMarkers.NEUTRAL;
 const LABEL_PX = 11;
 
 /**
@@ -334,10 +330,7 @@ export class MapStore {
 
 	/** CSS transform keeping a popup at (x, y) inside the map. */
 	keepInside(x: number, y: number) {
-		const size = this.size();
-		const dx = x > size.width - 290 ? 'calc(-100% - 2rem)' : '0';
-		const dy = y > size.height - 220 ? 'calc(-100% - 2rem)' : '0';
-		return `translate(${dx}, ${dy})`;
+		return PanZoom.keepInside(x, y, this.size());
 	}
 
 	sectorByName(name: string): Sector | undefined {
@@ -376,12 +369,9 @@ export class MapStore {
 	}
 
 	private home(): ViewBox {
-		const { x, y, w, h } = this.layout.bounds;
 		const size = untracked(() => this.size?.() ?? { width: 1000, height: 700 });
 		// fit the whole galaxy, centered
-		const fitW = Math.max(w, (h * size.width) / size.height);
-		const fitH = (fitW * size.height) / size.width;
-		return { x: x - (fitW - w) / 2, y: y - (fitH - h) / 2, w: fitW };
+		return PanZoom.fit(this.layout.bounds, size);
 	}
 
 	/** Sunlight 0% .. 200%+ from deep blue to bright yellow. */

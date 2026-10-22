@@ -37,17 +37,15 @@
 			stroke-width="1"
 			vector-effect="non-scaling-stroke"
 		/>
-		<svg:text
+		@let iconSize = store.fontSize() * 0.8;
+		<svg:svg
 			class="pointer-events-none"
-			[attr.x]="marker.x"
-			[attr.y]="marker.y"
-			[attr.font-size]="store.fontSize() * 0.8"
-			text-anchor="middle"
-			dominant-baseline="central"
-			font-weight="700"
-			fill="#05080f"
-		>
-			{{ marker.type.letter }}
-		</svg:text>
+			[lucideIcon]="icons.of(marker.type)"
+			[attr.x]="marker.x - iconSize / 2"
+			[attr.y]="marker.y - iconSize / 2"
+			[size]="iconSize"
+			[color]="dark"
+			[strokeWidth]="2.5"
+		/>
 	</svg:g>
 }

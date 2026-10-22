@@ -8,7 +8,8 @@ const NO_DESCRIPTION = 'No information available';
 
 /**
  * Frame of an entity detail page: breadcrumb header with optional `[actions]`, the encyclopedia
- * render and description, followed by the projected content.
+ * render and description, followed by the projected content. With `aside` set, the description (with `[summary]`
+ * content under it), the projected `[aside]` content and the render form columns.
  */
 @Component({
 	selector: 'app-detail-page',
@@ -23,6 +24,9 @@ export class DetailPageComponent {
 	readonly id = input<string>();
 	readonly image = input<EntityImageKind>();
 	readonly description = input<string>();
+
+	/** Lays out the description, the `[aside]` content and the render in columns. */
+	readonly aside = input(false);
 
 	protected readonly shownDescription = computed(() => {
 		const description = this.description();

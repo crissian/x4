@@ -1,9 +1,12 @@
 import { Component, computed, inject } from '@angular/core';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { SectorShape } from '../galaxy-layout';
 import { MapLabel } from '../map-label';
 import { MapStations } from '../map-stations';
 import { MapStore } from '../map-store';
 import { MapSaveLayer } from '../save/map-save-layer';
+import { StationIcons } from '../station-icons';
+import { StationMarkersComponent } from './station-markers';
 
 /** Gates, accelerators, superhighways and the planned route. */
 @Component({
@@ -19,12 +22,15 @@ export class MapLinksLayer {
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector -- SVG content has to be an attribute on <g>
 	selector: 'g[appMapMarkers]',
+	imports: [LucideDynamicIcon],
 	templateUrl: './map-markers-layer.html',
 })
 export class MapMarkersLayer {
 	protected readonly store = inject(MapStore);
 	protected readonly stations = inject(MapStations);
 	protected readonly save = inject(MapSaveLayer);
+	protected readonly icons = StationIcons;
+	protected readonly dark = StationMarkersComponent.DARK;
 }
 
 /** Sector names, or cluster names when zoomed out too far for the sector names. */
@@ -69,7 +75,11 @@ export class MapLabelsLayer {
 				result.push({ x: shape.x, y: shape.y, lines: this.sectorLines(shape) });
 			} else if (!seen.has(shape.cluster.id)) {
 				seen.add(shape.cluster.id);
-				result.push({ x: shape.cluster.x / 1000, y: -shape.cluster.z / 1000, lines: MapLabel.wrap(shape.cluster.name) });
+				result.push({
+					x: shape.cluster.x / 1000,
+					y: -shape.cluster.z / 1000,
+					lines: MapLabel.wrap(shape.cluster.name),
+				});
 			}
 		}
 		return result;

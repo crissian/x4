@@ -1,0 +1,23 @@
+/* The list on the left and the selected station's panel on the right; the panel stacks under the list on narrow screens. */
+.station-browser {
+	display: grid;
+	gap: 1rem 1.5rem;
+}
+.station-panel {
+	min-width: 0;
+	align-self: start;
+	scroll-margin-top: 1rem;
+}
+.station-kind {
+	max-width: 50%;
+}
+@media (min-width: 64rem) {
+	.station-browser {
+		grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+	}
+	/* stays in view while the list scrolls, so changing the selection never moves the page */
+	.station-panel {
+		position: sticky;
+		top: 1rem;
+	}
+}

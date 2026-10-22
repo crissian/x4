@@ -71,14 +71,13 @@
 			}
 			@for (type of stations.typeList(); track type.id) {
 				@if (stations.stationsModel().types[type.id]) {
-					<span
-						><span
-							class="mr-1 inline-block size-2.5 rounded-full align-middle"
-							[style.background]="type.color"
-						></span
-						>{{ type.label }}</span
+					<span class="inline-flex items-center gap-1"
+						><app-station-type-badge [type]="type" />{{ type.label }}</span
 					>
 				}
+			}
+			@if (store.saveActive() && stations.stationsModel().types['factory']) {
+				<span class="w-full" i18n>Factories show the ware they produce</span>
 			}
 		</div>
 	}

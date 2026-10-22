@@ -225,7 +225,8 @@ describe('SavegameStore', () => {
 	it('re-reads outdated saves that kept their file', async () => {
 		const blob = new Blob(['kept']);
 		const parser = vi.fn(finishing(result('g1', 100)));
-		const { store, repository } = await setup(parser, [[stored('g1', 100, 0), blob]]);
+		// schema 2 saves have no trade offers, module counts or workforce yet
+		const { store, repository } = await setup(parser, [[stored('g1', 100, 2), blob]]);
 		await vi.waitFor(() => expect(store.saves()).toHaveLength(1));
 		await vi.waitFor(() => expect(store.status('g1')).toBe('ok'));
 		expect(parser.mock.calls[0][0]).toBe(blob);

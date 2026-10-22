@@ -6,11 +6,29 @@
 		<ng-content select="[actions]" />
 	</div>
 	<div class="card-body flow-root">
-		@if (image(); as image) {
-			<app-entity-image [kind]="image" [id]="id()" [alt]="title()" />
-		}
-		@if (shownDescription(); as description) {
-			<p class="mb-3 max-w-4xl whitespace-pre-line">{{ description }}</p>
+		@if (aside()) {
+			<!-- description and [summary], the aside and the render in columns on wide screens, stacked on narrow ones -->
+			<div class="mb-3 grid items-start gap-4 lg:grid-cols-[1fr_auto_auto]">
+				<div class="min-w-0">
+					@if (shownDescription(); as description) {
+						<p class="mb-3 whitespace-pre-line">{{ description }}</p>
+					}
+					<ng-content select="[summary]" />
+				</div>
+				<div class="min-w-0">
+					<ng-content select="[aside]" />
+				</div>
+				@if (image(); as image) {
+					<app-entity-image [kind]="image" [id]="id()" [alt]="title()" />
+				}
+			</div>
+		} @else {
+			@if (image(); as image) {
+				<app-entity-image [kind]="image" [id]="id()" [alt]="title()" />
+			}
+			@if (shownDescription(); as description) {
+				<p class="mb-3 max-w-4xl whitespace-pre-line">{{ description }}</p>
+			}
 		}
 		<ng-content />
 	</div>

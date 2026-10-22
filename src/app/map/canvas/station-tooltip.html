@@ -1,10 +1,11 @@
-@if (stations.hovered(); as hover) {
-	@let marker = hover.marker;
+@if (hover(); as current) {
+	@let marker = current.marker;
 	<div
-		class="pointer-events-none absolute z-10 w-64 rounded-md border border-white/15 bg-slate-900/95 p-2.5 text-xs text-slate-200 shadow-xl"
-		[style.left.px]="hover.x + 16"
-		[style.top.px]="hover.y + 16"
-		[style.transform]="store.keepInside(hover.x, hover.y)"
+		class="absolute z-10 w-64 rounded-md border border-white/15 bg-slate-900/95 p-2.5 text-xs text-slate-200 shadow-xl"
+		[style.left.px]="left()"
+		[style.top.px]="current.y + 16"
+		[style.transform]="transform()"
+		[class.pointer-events-none]="!interactive()"
 	>
 		<div class="text-sm font-semibold text-white">{{ marker.name || marker.type.label }}</div>
 		<dl class="mt-1.5 grid grid-cols-[5.5rem_1fr] gap-y-0.5">
@@ -20,11 +21,30 @@
 				}
 			</dd>
 			<dt class="text-slate-400" i18n>Type</dt>
-			<dd>{{ marker.type.label }}</dd>
+			<dd class="flex items-center gap-1"><app-station-type-badge [type]="marker.type" />{{ marker.type.label }}</dd>
+			@if (marker.product; as product) {
+				<dt class="text-slate-400" i18n>Produces</dt>
+				<dd>
+					@if (interactive()) {
+						<a [routerLink]="['/wares', product]">{{ productName() }}</a>
+					} @else {
+						{{ productName() }}
+					}
+				</dd>
+			}
 			<dt class="text-slate-400" i18n>Code</dt>
 			<dd>{{ marker.id }}</dd>
 			<dt class="text-slate-400" i18n>Sector</dt>
 			<dd>{{ marker.shape.sector.name }}</dd>
+			@let offers = trade();
+			@if (offers.sells.names.length) {
+				<dt class="text-slate-400" i18n>Sells</dt>
+				<dd>{{ offers.sells.names.join(', ') }}@if (offers.sells.more) { +{{ offers.sells.more }} }</dd>
+			}
+			@if (offers.buys.names.length) {
+				<dt class="text-slate-400" i18n>Buys</dt>
+				<dd>{{ offers.buys.names.join(', ') }}@if (offers.buys.more) { +{{ offers.buys.more }} }</dd>
+			}
 		</dl>
 		@if (marker.state === 'construction') {
 			<div class="mt-1 text-amber-300" i18n>Under construction</div>

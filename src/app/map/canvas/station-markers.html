@@ -1,0 +1,86 @@
+@let detail = scale() >= detailScale;
+<svg:g
+	[style.--dot]="2.5 / scale() + 'px'"
+	[style.--size]="fontSize() + 'px'"
+	[style.--icon-scale]="(fontSize() * iconShare) / 24"
+>
+	@for (marker of markers(); track marker.id) {
+	<svg:g
+		class="cursor-pointer"
+		role="img"
+		[attr.aria-label]="(marker.name || marker.type.label) + (marker.faction ? ' - ' + marker.faction.name : '')"
+		[attr.data-sector]="marker.sector"
+		[attr.opacity]="marker.known ? 1 : 0.4"
+		(pointermove)="show($event, marker)"
+		(pointerleave)="stationHover.emit(undefined)"
+	>
+		@if (detail) { @if (marker.player) {
+		<svg:circle
+			class="map-marker-ring"
+			[attr.cx]="marker.x"
+			[attr.cy]="marker.y"
+			fill="none"
+			stroke="#fff"
+			stroke-width="2"
+			vector-effect="non-scaling-stroke"
+		/>
+		}
+		@let ware = marker.productIcon;
+		<svg:circle
+			class="map-marker"
+			[attr.cx]="marker.x"
+			[attr.cy]="marker.y"
+			[attr.fill]="ware ? wareFill : marker.type.color"
+			[attr.stroke]="ware ? marker.type.color : dark"
+			[attr.stroke-width]="ware ? 1.5 : 1"
+			vector-effect="non-scaling-stroke"
+		/>
+		<svg:g class="pointer-events-none" [attr.transform]="'translate(' + marker.x + ' ' + marker.y + ')'">
+			@if (ware) {
+			<svg:image class="map-marker-ware" [attr.href]="ware" />
+			} @else {
+			<!-- a 24-unit icon centred on the marker, scaled to it by --icon-scale -->
+			<svg:g class="map-marker-icon">
+				<svg:svg x="-12" y="-12" [size]="24" [lucideIcon]="icons.of(marker.type)" [color]="dark" [strokeWidth]="2.25" />
+			</svg:g>
+			}
+		</svg:g>
+		@if (scale() >= labelScale && marker.name) {
+		<svg:text
+			class="map-marker-label pointer-events-none"
+			[attr.x]="marker.x"
+			[attr.y]="marker.y"
+			text-anchor="middle"
+			dominant-baseline="middle"
+			paint-order="stroke"
+			stroke="#05080f"
+			fill="#e2e8f0"
+		>
+			{{ marker.name }}
+		</svg:text>
+		} } @else {
+		<svg:circle class="map-dot-hit" [attr.cx]="marker.x" [attr.cy]="marker.y" fill="transparent" />
+		@if (marker.player) {
+		<svg:circle
+			class="map-dot-ring"
+			[attr.cx]="marker.x"
+			[attr.cy]="marker.y"
+			fill="none"
+			stroke="#fff"
+			stroke-width="1.5"
+			vector-effect="non-scaling-stroke"
+		/>
+		}
+		<svg:circle
+			[attr.class]="marker.player ? 'map-dot-player' : 'map-dot'"
+			[attr.cx]="marker.x"
+			[attr.cy]="marker.y"
+			[attr.fill]="marker.faction?.color ?? neutral"
+			stroke="#05080f"
+			stroke-width="0.5"
+			vector-effect="non-scaling-stroke"
+		/>
+		}
+	</svg:g>
+	}
+</svg:g>

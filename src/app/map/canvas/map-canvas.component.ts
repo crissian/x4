@@ -2,12 +2,15 @@ import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject } 
 import { Router } from '@angular/router';
 import { LucideExpand, LucideZoomIn, LucideZoomOut } from '@lucide/angular';
 import { CLUSTER_RADIUS, SectorShape } from '../galaxy-layout';
-import { MapStore, ViewBox } from '../map-store';
+import { MapStations } from '../map-stations';
+import { MapStore } from '../map-store';
+import { PanZoom } from '../pan-zoom';
 import { MapSaveLayer } from '../save/map-save-layer';
 import { MapLegendComponent } from './map-legend.component';
 import { MapLabelsLayer, MapLinksLayer, MapMarkersLayer } from './map-layers';
-import { MapMenuComponent, MapStationTooltipComponent, MapTooltipComponent } from './map-popups';
+import { MapMenuComponent, MapTooltipComponent } from './map-popups';
 import { MapSaveMarkers } from './map-save-markers';
+import { StationTooltipComponent } from './station-tooltip';
 
 /** The galaxy map: sectors, layers and overlays, with drag to pan and wheel to zoom. */
 @Component({
@@ -19,7 +22,7 @@ import { MapSaveMarkers } from './map-save-markers';
 		MapLinksLayer,
 		MapMarkersLayer,
 		MapSaveMarkers,
-		MapStationTooltipComponent,
+		StationTooltipComponent,
 		MapLabelsLayer,
 		MapLegendComponent,
 		MapTooltipComponent,
@@ -41,6 +44,7 @@ export class MapCanvasComponent {
 
 	protected readonly store = inject(MapStore);
 	protected readonly save = inject(MapSaveLayer);
+	protected readonly stations = inject(MapStations);
 	private readonly router = inject(Router);
 	private readonly element: HTMLElement = inject(ElementRef).nativeElement;
 
@@ -52,7 +56,10 @@ export class MapCanvasComponent {
 		() => new Set([...this.save.sectors()].filter(([, x]) => x.contested).map(([id]) => id))
 	);
 
-	private drag: { x: number; y: number; view: ViewBox; moved: boolean } | undefined;
+	private readonly panZoom = new PanZoom(this.store.view, this.store.size, () => ({
+		minWidth: MapCanvasComponent.MIN_VIEW_WIDTH,
+		maxWidth: this.store.layout.bounds.w * 3,
+	}));
 
 	constructor() {
 		const destroyRef = inject(DestroyRef);
@@ -79,22 +86,12 @@ export class MapCanvasComponent {
 		});
 	}
 
-	protected zoom(factor: number, clientX?: number, clientY?: number) {
-		const rect = this.element.getBoundingClientRect();
-		const px = clientX == null ? 0.5 : (clientX - rect.left) / rect.width;
-		const py = clientY == null ? 0.5 : (clientY - rect.top) / rect.height;
-		const bounds = this.store.layout.bounds;
-		this.store.view.update((view) => {
-			const h = (view.w * rect.height) / rect.width;
-			const w = Math.min(Math.max(view.w * factor, MapCanvasComponent.MIN_VIEW_WIDTH), bounds.w * 3);
-			const nh = (w * rect.height) / rect.width;
-			return { x: view.x + (view.w - w) * px, y: view.y + (h - nh) * py, w };
-		});
+	protected zoom(factor: number) {
+		this.panZoom.zoom(this.element, factor);
 	}
 
 	protected onWheel(event: WheelEvent) {
-		event.preventDefault();
-		this.zoom(Math.exp(event.deltaY * 0.0015), event.clientX, event.clientY);
+		this.panZoom.wheel(this.element, event);
 	}
 
 	protected onPointerDown(event: PointerEvent) {
@@ -102,29 +99,15 @@ export class MapCanvasComponent {
 			return;
 		}
 		this.store.menu.set(undefined);
-		this.drag = { x: event.clientX, y: event.clientY, view: this.store.view(), moved: false };
+		this.panZoom.start(event);
 	}
 
 	protected onPointerMove(event: PointerEvent, shape?: SectorShape) {
-		const rect = this.element.getBoundingClientRect();
-		if (this.drag) {
-			const dx = event.clientX - this.drag.x;
-			const dy = event.clientY - this.drag.y;
-			if (!this.drag.moved && Math.hypot(dx, dy) > 4) {
-				this.drag.moved = true;
-				this.element.setPointerCapture?.(event.pointerId);
-			}
-			if (this.drag.moved) {
-				const scale = this.store.scale();
-				this.store.view.set({
-					x: this.drag.view.x - dx / scale,
-					y: this.drag.view.y - dy / scale,
-					w: this.drag.view.w,
-				});
-				this.store.hovered.set(undefined);
-				return;
-			}
+		if (this.panZoom.move(this.element, event)) {
+			this.store.hovered.set(undefined);
+			return;
 		}
+		const rect = this.element.getBoundingClientRect();
 		if (shape) {
 			this.store.hovered.set({ shape, x: event.clientX - rect.left, y: event.clientY - rect.top });
 		} else if (!(event.target as Element).closest('[data-sector]')) {
@@ -133,9 +116,7 @@ export class MapCanvasComponent {
 	}
 
 	protected onPointerUp(event: PointerEvent) {
-		const drag = this.drag;
-		this.drag = undefined;
-		if (event.button !== 0 || !drag || drag.moved) {
+		if (!this.panZoom.end(event) || event.button !== 0) {
 			return;
 		}
 		// a click without dragging: open the sector under the pointer

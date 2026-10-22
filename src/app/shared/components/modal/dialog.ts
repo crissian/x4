@@ -1,10 +1,10 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { ComponentType } from '@angular/cdk/portal';
 
-export type DialogSize = 'md' | 'lg';
+export type DialogSize = 'md' | 'lg' | 'xl';
 
 export class AppDialog {
-	private static readonly WIDTHS: Record<DialogSize, string> = { md: '32rem', lg: '50rem' };
+	private static readonly WIDTHS: Record<DialogSize, string> = { md: '32rem', lg: '50rem', xl: '90vw' };
 
 	/** Opens a component in a CDK dialog styled for the app. */
 	static open<R, D = unknown, C = unknown>(

@@ -1,7 +1,9 @@
 import { Component, computed, effect, input, linkedSignal, output, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
+import { RouterLink } from '@angular/router';
 import { EnumLabels } from '../../../core/enum-labels';
 import { LocalStorage } from '../../../core/services/local-storage';
+import { GridValues, PreparedRow } from './grid-values';
 import {
 	LucideArrowUpNarrowWide,
 	LucideArrowDownWideNarrow,
@@ -32,6 +34,8 @@ export interface GridColumn<T> {
 	lookup?: readonly GridLookupItem[];
 	sortable?: boolean;
 	filterable?: boolean;
+	/** Router link commands that make the cell a link. */
+	link?: (row: T) => readonly unknown[] | undefined;
 	/** Hidden until the user turns the column on in the column chooser. */
 	hidden?: boolean;
 }
@@ -41,18 +45,11 @@ interface SortState {
 	direction: 1 | -1;
 }
 
-interface PreparedRow<T> {
-	row: T;
-	values: Record<string, unknown>;
-	texts: Record<string, string>;
-}
-
-const NUMBER_FILTER = /^\s*(<=|>=|<>|!=|<|>|=)?\s*(-?\d+(?:[.,]\d+)?)\s*$/;
-
 @Component({
 	selector: 'app-data-grid',
 	imports: [
 		FormField,
+		RouterLink,
 		LucideArrowUpNarrowWide,
 		LucideArrowDownWideNarrow,
 		LucideChevronsLeft,
@@ -135,9 +132,9 @@ export class DataGridComponent<T> {
 			const values: Record<string, unknown> = {};
 			const texts: Record<string, string> = {};
 			for (const column of columns) {
-				const value = column.value ? column.value(row) : DataGridComponent.getPath(row, column.key);
+				const value = column.value ? column.value(row) : GridValues.getPath(row, column.key);
 				values[column.key] = value;
-				texts[column.key] = this.toText(column, row, value, formatters[column.key]);
+				texts[column.key] = GridValues.toText(column, row, value, formatters[column.key]);
 			}
 			return { row, values, texts };
 		});
@@ -149,14 +146,14 @@ export class DataGridComponent<T> {
 
 		let rows = this.prepared();
 		if (active.length) {
-			rows = rows.filter((row) => active.every((column) => this.matches(column, row, filters[column.key])));
+			rows = rows.filter((row) => active.every((column) => GridValues.matches(column, row, filters[column.key])));
 		}
 
 		const sorts = this.activeSorts();
 		if (sorts.length) {
 			rows = [...rows].sort((a, b) => {
 				for (const sort of sorts) {
-					const result = DataGridComponent.compareValues(a.values[sort.key], b.values[sort.key]);
+					const result = GridValues.compareValues(a.values[sort.key], b.values[sort.key]);
 					if (result !== 0) {
 						return result * sort.direction;
 					}
@@ -237,75 +234,5 @@ export class DataGridComponent<T> {
 
 	goTo(page: number) {
 		this.page.set(Math.max(0, Math.min(page, this.pageCount() - 1)));
-	}
-
-	private toText(column: GridColumn<T>, row: T, value: unknown, formatter?: Intl.NumberFormat): string {
-		if (column.display) {
-			return column.display(row) ?? '';
-		}
-		if (column.lookup) {
-			return column.lookup.find((x) => x.value === value)?.label ?? String(value ?? '');
-		}
-		if (value == null) {
-			return '';
-		}
-		if (formatter && typeof value === 'number') {
-			return formatter.format(value);
-		}
-		return String(value);
-	}
-
-	private matches(column: GridColumn<T>, row: PreparedRow<T>, filter: string) {
-		if (column.lookup) {
-			return String(row.values[column.key] ?? '') === filter;
-		}
-		if (column.type === 'number') {
-			return DataGridComponent.matchesNumber(row.values[column.key], filter);
-		}
-		return row.texts[column.key].toLowerCase().includes(filter.trim().toLowerCase());
-	}
-
-	private static getPath(row: unknown, path: string): unknown {
-		return path.split('.').reduce<unknown>((obj, key) => (obj == null ? undefined : (obj as Record<string, unknown>)[key]), row);
-	}
-
-	private static compareValues(a: unknown, b: unknown): number {
-		if (a == null || a === '') {
-			return b == null || b === '' ? 0 : -1;
-		}
-		if (b == null || b === '') {
-			return 1;
-		}
-		if (typeof a === 'number' && typeof b === 'number') {
-			return a - b;
-		}
-		return String(a).localeCompare(String(b), undefined, { numeric: true, sensitivity: 'base' });
-	}
-
-	private static matchesNumber(value: unknown, filter: string): boolean {
-		const match = NUMBER_FILTER.exec(filter);
-		if (!match) {
-			return String(value ?? '').includes(filter.trim());
-		}
-		if (typeof value !== 'number') {
-			return false;
-		}
-
-		const target = Number(match[2].replace(',', '.'));
-		switch (match[1]) {
-			case '<':
-				return value < target;
-			case '<=':
-				return value <= target;
-			case '>':
-				return value > target;
-			case '>=':
-				return value >= target;
-			case '<>':
-			case '!=':
-				return value !== target;
-			default:
-				return value === target;
-		}
 	}
 }

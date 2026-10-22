@@ -242,9 +242,9 @@
 	app-entity-image,
 	app-map-legend,
 	app-map-menu,
-	app-map-station-tooltip,
 	app-map-tooltip,
 	app-savegame-selector,
+	app-station-tooltip,
 	div[appDetail] {
 		@apply contents;
 	}

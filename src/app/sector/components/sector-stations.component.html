@@ -12,47 +12,68 @@
 	</div>
 	<div class="card-body">
 		@if (groups(); as groups) {
-			@for (group of groups; track group.owner) {
-				<h6 class="mt-3 first:mt-0">
-					@if (group.faction; as faction) {
-						<span class="mr-1 inline-block size-2.5 rounded-full" [style.background]="faction.color"></span>
-						<a [routerLink]="['/factions', faction.id]">{{ faction.name }}</a>
-					} @else if (group.owner === 'player') {
-						<ng-container i18n>Your stations</ng-container>
-					} @else {
-						<ng-container i18n>Unowned</ng-container>
-					}
-					<span class="ml-1 text-sm font-normal text-fg-muted">{{ group.stations.length }}</span>
-				</h6>
-				<table class="table mb-2">
-					<tbody>
-						@for (station of group.stations; track station.id) {
-							<tr [class.opacity-60]="!station.known">
-								<td>
-									{{ station.name }}
-									@if (station.player) {
-										<span class="ml-1 rounded bg-sky-600 px-1.5 text-xs text-white" i18n
-											>Yours</span
-										>
-									}
-									@if (station.wreck) {
-										<span class="ml-1 rounded bg-neutral-500 px-1.5 text-xs text-white" i18n
-											>Wreck</span
-										>
-									}
-								</td>
-								<td class="w-48 text-fg-muted">
+			@if (groups.length) {
+				<!-- the list on the left, the selected station's panel on the right (under the list on narrow screens) -->
+				<div class="station-browser">
+					<div class="min-w-0">
+						@for (group of groups; track group.owner) {
+							<h6 class="mt-3 first:mt-0">
+								@if (group.faction; as faction) {
 									<span
 										class="mr-1 inline-block size-2.5 rounded-full"
-										[style.background]="station.type.color"
+										[style.background]="faction.color"
 									></span>
-									{{ station.type.label }}
-								</td>
-							</tr>
+									<a [routerLink]="['/factions', faction.id]">{{ faction.name }}</a>
+								} @else if (group.owner === 'player') {
+									<ng-container i18n>Your stations</ng-container>
+								} @else {
+									<ng-container i18n>Unowned</ng-container>
+								}
+								<span class="ml-1 text-sm font-normal text-fg-muted">{{ group.stations.length }}</span>
+							</h6>
+							<ul class="mb-2">
+								@for (station of group.stations; track station.id) {
+									@let active = station === current();
+									<li class="border-b border-line">
+										<button
+											#row
+											type="button"
+											class="flex w-full cursor-pointer items-center gap-2 px-1.5 py-1 text-left hover:bg-hover"
+											[class.bg-surface-2]="active"
+											[class.opacity-60]="!station.known"
+											[attr.aria-current]="active ? 'true' : null"
+											[tabIndex]="active ? 0 : -1"
+											(click)="select(station.id)"
+											(keydown)="keydown($event)"
+										>
+											<app-station-type-badge [type]="station.type" />
+											<span class="min-w-0 flex-1 truncate">{{ station.name }}</span>
+											@if (station.player) {
+												<span class="rounded bg-sky-600 px-1.5 text-xs text-white" i18n
+													>Yours</span
+												>
+											}
+											@if (station.wreck) {
+												<span class="rounded bg-neutral-500 px-1.5 text-xs text-white" i18n
+													>Wreck</span
+												>
+											}
+											<span class="station-kind shrink-0 truncate text-sm text-fg-muted">{{
+												station.type.label + (station.product ? ' · ' + station.product : '')
+											}}</span>
+										</button>
+									</li>
+								}
+							</ul>
 						}
-					</tbody>
-				</table>
-			} @empty {
+					</div>
+					<div #panel class="station-panel">
+						@if (current(); as station) {
+							<app-sector-station-details [station]="station" />
+						}
+					</div>
+				</div>
+			} @else {
 				<p class="text-fg-muted" i18n>No stations in this sector.</p>
 			}
 		} @else {

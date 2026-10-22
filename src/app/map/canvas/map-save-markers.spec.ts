@@ -36,7 +36,7 @@ describe('MapSaveMarkers', () => {
 		return { fixture, element: fixture.nativeElement as HTMLElement, zoom, store };
 	}
 
-	it('draws dots when zoomed out and letters when zoomed in', async () => {
+	it('draws dots when zoomed out and type icons when zoomed in', async () => {
 		const { element, zoom } = await setup();
 		await zoom(MapSaveMarkers.DETAIL_SCALE / 2);
 		const markers = () => element.querySelectorAll('g[appMapSaveMarkers] g[data-sector]');
@@ -44,12 +44,10 @@ describe('MapSaveMarkers', () => {
 		expect(element.querySelector('g[appMapSaveMarkers] g[data-sector] text')).toBeNull();
 
 		await zoom(MapSaveMarkers.DETAIL_SCALE * 2);
-		const letters = [...element.querySelectorAll('g[appMapSaveMarkers] g[data-sector] text')].map((x) =>
-			x.textContent?.trim()
-		);
-		expect(letters).toContain('T');
-		expect(letters).toContain('O');
-		expect(letters).not.toContain('Argon Wharf');
+		const icons = (name: string) => element.querySelectorAll(`g[appMapSaveMarkers] svg.lucide-${name}`).length;
+		expect(icons('arrow-left-right')).toBe(1);
+		expect(icons('circle')).toBe(3);
+		expect(element.querySelector('g[appMapSaveMarkers] g[data-sector] text')).toBeNull();
 
 		await zoom(MapSaveMarkers.LABEL_SCALE * 2);
 		const texts = [...element.querySelectorAll('g[appMapSaveMarkers] g[data-sector] text')].map((x) =>
@@ -117,13 +115,13 @@ describe('MapSaveMarkers', () => {
 		const marker = element.querySelector('g[appMapSaveMarkers] g[data-sector]')!;
 		marker.dispatchEvent(new PointerEvent('pointermove', { clientX: 5, clientY: 5 }));
 		await fixture.whenStable();
-		const tooltip = element.querySelector('app-map-station-tooltip')!.textContent ?? '';
+		const tooltip = element.querySelector('app-station-tooltip')!.textContent ?? '';
 		expect(tooltip).toContain('Argon Wharf');
 		expect(tooltip).toContain('AAA-111');
 
 		const far = element.querySelectorAll('g[appMapSaveMarkers] g[data-sector]')[2];
 		far.dispatchEvent(new PointerEvent('pointermove', { clientX: 5, clientY: 5 }));
 		await fixture.whenStable();
-		expect(element.querySelector('app-map-station-tooltip')!.textContent).toMatch(/50[1-9]|[6-9]\d\d km from/);
+		expect(element.querySelector('app-station-tooltip')!.textContent).toMatch(/50[1-9]|[6-9]\d\d km from/);
 	});
 });

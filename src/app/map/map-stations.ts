@@ -1,36 +1,15 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { form } from '@angular/forms/signals';
 import { EnumLabels } from '../core/enum-labels';
-import { GAME_START_STATION_TYPES, STATION_TYPES, StationTypeInfo } from '../shared/services/constants';
+import { GAME_START_STATION_TYPES, STATION_TYPES } from '../shared/services/constants';
 import { GodStations } from '../shared/services/data/god-stations-data';
 import { Size } from '../shared/services/data/size-data';
 import { EquipmentService } from '../shared/services/equipment.service';
-import { Faction, GodStation } from '../shared/services/model/model';
+import { GodStation } from '../shared/services/model/model';
 import { ShipService } from '../shared/services/ship.service';
-import { GalaxyLayout, SectorShape } from './galaxy-layout';
 import { MapStore } from './map-store';
 import { MapSaveLayer } from './save/map-save-layer';
-
-/** A station placed on the map: a game start station, or a station of the active save. */
-export interface StationMarker {
-	id: string;
-	sector: string;
-	owner: string | undefined;
-	/** `StationTypeInfo` id */
-	typeId: string;
-	type: StationTypeInfo;
-	faction: Faction | undefined;
-	shape: SectorShape;
-	x: number;
-	y: number;
-	/** the save's station name; game start stations have none */
-	name?: string;
-	player: boolean;
-	known: boolean;
-	/** km from the sector centre when beyond the drawing range */
-	farKm?: number;
-	state?: 'construction' | 'wreck';
-}
+import { StationHover, StationMarker, StationMarkers } from './station-marker';
 
 /**
  * Stations on the map and the "where to buy" search: the stations the game creates at the start, or
@@ -51,8 +30,8 @@ export class MapStations {
 		buy: '',
 	});
 	readonly stationsForm = form(this.stationsModel);
-	/** The save station under the pointer; x/y are pixels in the map. */
-	readonly hovered = signal<{ marker: StationMarker; x: number; y: number } | undefined>(undefined);
+	/** The save station under the pointer. */
+	readonly hovered = signal<StationHover | undefined>(undefined);
 
 	/** Types with a toggle: factories and others only exist in saves. */
 	readonly typeList = computed(() => (this.save.active() ? STATION_TYPES : GAME_START_STATION_TYPES));
@@ -108,22 +87,7 @@ export class MapStations {
 	});
 
 	private saveStations(): StationMarker[] {
-		return this.save.stations().map((x) => ({
-			id: x.station.code,
-			sector: x.station.sector,
-			owner: x.station.owner,
-			typeId: x.type,
-			type: MapStations.typeInfo(x.type),
-			faction: x.faction,
-			shape: x.shape,
-			x: x.x,
-			y: x.y,
-			name: x.name,
-			player: x.player,
-			known: x.known,
-			farKm: x.farKm,
-			state: x.station.state,
-		}));
+		return this.save.stations().map((x) => StationMarkers.fromSave(x));
 	}
 
 	private gameStartStations(): StationMarker[] {
@@ -131,36 +95,7 @@ export class MapStations {
 			.filter((x) => this.store.isShown(x.version))
 			.flatMap((station, i) => {
 				const shape = this.store.shapeById.get(station.sector);
-				if (!shape) {
-					return [];
-				}
-				// stations without a fixed spot are spread around the sector center
-				const angle = i * 2.4;
-				const position =
-					station.x != null
-						? GalaxyLayout.markerPosition(shape, station.x, station.z ?? 0)
-						: {
-								x: shape.x + Math.cos(angle) * shape.r * 0.35,
-								y: shape.y + Math.sin(angle) * shape.r * 0.35,
-							};
-				return [
-					{
-						id: station.id,
-						sector: station.sector,
-						owner: station.owner,
-						typeId: station.type,
-						type: MapStations.typeInfo(station.type),
-						faction: this.store.faction(station.owner),
-						shape,
-						player: false,
-						known: true,
-						...position,
-					},
-				];
+				return shape ? [StationMarkers.fromGameStart(station, i, shape, this.store.faction(station.owner))] : [];
 			});
-	}
-
-	private static typeInfo(id: string): StationTypeInfo {
-		return STATION_TYPES.find((x) => x.id === id) ?? STATION_TYPES[STATION_TYPES.length - 1];
 	}
 }

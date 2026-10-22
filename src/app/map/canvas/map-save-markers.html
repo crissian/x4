@@ -1,85 +1,10 @@
-@let detail = detailed();
-<svg:g [style.--dot]="dot() + 'px'" [style.--size]="store.fontSize() + 'px'">
-	@for (marker of stations.stationMarkers(); track marker.id) {
-	<svg:g
-		class="cursor-pointer"
-		role="img"
-		[attr.aria-label]="(marker.name || marker.type.label) + (marker.faction ? ' - ' + marker.faction.name : '')"
-		[attr.data-sector]="marker.sector"
-		[attr.opacity]="marker.known ? 1 : 0.4"
-		(pointermove)="show($event, marker)"
-		(pointerleave)="stations.hovered.set(undefined)"
-	>
-		@if (detail) { @if (marker.player) {
-		<svg:circle
-			class="map-marker-ring"
-			[attr.cx]="marker.x"
-			[attr.cy]="marker.y"
-			fill="none"
-			stroke="#fff"
-			stroke-width="2"
-			vector-effect="non-scaling-stroke"
-		/>
-		}
-		<svg:circle
-			class="map-marker"
-			[attr.cx]="marker.x"
-			[attr.cy]="marker.y"
-			[attr.fill]="marker.type.color"
-			stroke="#05080f"
-			stroke-width="1"
-			vector-effect="non-scaling-stroke"
-		/>
-		<svg:text
-			class="map-marker-letter pointer-events-none"
-			[attr.x]="marker.x"
-			[attr.y]="marker.y"
-			text-anchor="middle"
-			dominant-baseline="central"
-			font-weight="700"
-			fill="#05080f"
-		>
-			{{ marker.type.letter }}
-		</svg:text>
-		@if (labelled() && marker.name) {
-		<svg:text
-			class="map-marker-label pointer-events-none"
-			[attr.x]="marker.x"
-			[attr.y]="marker.y"
-			text-anchor="middle"
-			dominant-baseline="middle"
-			paint-order="stroke"
-			stroke="#05080f"
-			fill="#e2e8f0"
-		>
-			{{ marker.name }}
-		</svg:text>
-		} } @else {
-		<svg:circle class="map-dot-hit" [attr.cx]="marker.x" [attr.cy]="marker.y" fill="transparent" />
-		@if (marker.player) {
-		<svg:circle
-			class="map-dot-ring"
-			[attr.cx]="marker.x"
-			[attr.cy]="marker.y"
-			fill="none"
-			stroke="#fff"
-			stroke-width="1.5"
-			vector-effect="non-scaling-stroke"
-		/>
-		}
-		<svg:circle
-			[attr.class]="marker.player ? 'map-dot-player' : 'map-dot'"
-			[attr.cx]="marker.x"
-			[attr.cy]="marker.y"
-			[attr.fill]="marker.faction?.color ?? neutral"
-			stroke="#05080f"
-			stroke-width="0.5"
-			vector-effect="non-scaling-stroke"
-		/>
-		}
-	</svg:g>
-	}
-</svg:g>
+<svg:g
+	appStationMarkers
+	[markers]="stations.stationMarkers()"
+	[scale]="store.scale()"
+	[fontSize]="store.fontSize()"
+	(stationHover)="show($event)"
+/>
 
 @for (badge of badges(); track badge.sector) {
 <svg:g

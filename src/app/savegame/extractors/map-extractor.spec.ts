@@ -21,12 +21,19 @@ async function readMap(...chunks: string[]): Promise<SaveMap> {
 describe('MapExtractor', () => {
 	it('reads sector owner, contested and known', async () => {
 		const map = await readMap(MAP_FIXTURE);
-		expect(map.sectors).toEqual([{ id: 'cluster_409_sector001', owner: 'freesplit', contested: true, known: true }]);
+		expect(map.sectors).toEqual([
+			{ id: 'cluster_409_sector001', owner: 'freesplit', contested: true, known: true },
+		]);
 	});
 
 	it('adds the tempzone position to the station', async () => {
 		const station = (await readMap(MAP_FIXTURE)).stations.find((s) => s.code === 'ACZ-528')!;
-		expect(station).toMatchObject({ macro: 'station_gen_factory_base_01', sector: 'cluster_409_sector001', x: -14, z: 24.3 });
+		expect(station).toMatchObject({
+			macro: 'station_gen_factory_base_01',
+			sector: 'cluster_409_sector001',
+			x: -14,
+			z: 24.3,
+		});
 		expect(station.zone).toBeUndefined();
 		expect(station.product).toBe('smartchips');
 	});
@@ -47,12 +54,38 @@ describe('MapExtractor', () => {
 		const split = stations.find((s) => s.code === 'HIB-700')!;
 		expect(split).toMatchObject({ name: '{20103,2001}', basename: '{20103,2001}' });
 		expect(split.modules).toEqual(['prod_gen_energycells_01', 'dock_arg_m_01']);
-		expect(stations.find((s) => s.code === 'ACZ-528')!.modules).toEqual(['pier_spl_harbor_01', 'prod_gen_energycells_01']);
+		expect(stations.find((s) => s.code === 'ACZ-528')!.modules).toEqual([
+			'pier_spl_harbor_01',
+			'prod_gen_energycells_01',
+		]);
 		const player = stations.find((s) => s.code === 'PLR-001')!;
 		expect(player).toMatchObject({ owner: 'player', nameIndex: 2, known: true, x: 55.6, z: -12.3 });
 		expect('name' in player).toBe(false);
 		expect('product' in player).toBe(false);
 		expect(player.modules).toEqual([]);
+	});
+
+	it('counts the modules', async () => {
+		const stations = (await readMap(MAP_FIXTURE)).stations;
+		expect(stations.find((s) => s.code === 'HIB-700')!.moduleCounts).toEqual([2, 1]);
+		expect(stations.find((s) => s.code === 'ACZ-528')!.moduleCounts).toEqual([2, 1]);
+		expect('moduleCounts' in stations.find((s) => s.code === 'PLR-001')!).toBe(false);
+	});
+
+	it('reads the station own offers with an amount, ignoring trade deals of ships and reference prices', async () => {
+		const stations = (await readMap(MAP_FIXTURE)).stations;
+		expect(stations.find((s) => s.code === 'ACZ-528')!.offers).toEqual([
+			{ ware: 'energycells', sell: false, price: 12.41, amount: 1377 },
+			{ ware: 'smartchips', sell: true, price: 66.7, amount: 3762 },
+			{ ware: 'majadust', sell: false, price: 412.85, amount: 154, playerOnly: true },
+		]);
+		expect(stations.filter((s) => s.offers)).toHaveLength(1);
+	});
+
+	it('reads the workforce per race', async () => {
+		const stations = (await readMap(MAP_FIXTURE)).stations;
+		expect(stations.find((s) => s.code === 'ACZ-528')!.workforce).toEqual({ split: 180, argon: 20 });
+		expect('workforce' in stations.find((s) => s.code === 'HIB-700')!).toBe(false);
 	});
 
 	it('counts player ships per sector including docked ones', async () => {

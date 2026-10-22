@@ -1,0 +1,106 @@
+<!-- the tooltip sits outside the clipped map, so it can spill over the page -->
+<div class="relative" [class.h-full]="fill()">
+	<div
+		#area
+		class="relative touch-none overflow-hidden rounded border border-line bg-[#05080f] select-none"
+		[class]="fill() ? 'size-full' : 'aspect-square w-full max-w-md lg:w-72 xl:w-[22rem]'"
+		role="region"
+		aria-label="Sector map"
+		i18n-aria-label
+		(wheel)="onWheel($event)"
+		(pointerdown)="onPointerDown($event)"
+		(pointermove)="onPointerMove($event)"
+		(pointerup)="onPointerUp($event)"
+		(pointercancel)="onPointerUp($event)"
+		(pointerleave)="hovered.set(undefined)"
+	>
+		@if (shape(); as shape) {
+			@let unit = fontSize();
+			<svg
+				class="absolute inset-0 size-full"
+				[attr.viewBox]="panZoom.viewBox()"
+				preserveAspectRatio="xMidYMid meet"
+			>
+				<polygon
+					[attr.points]="shape.points"
+					[attr.fill]="ownerColor()"
+					fill-opacity="0.15"
+					stroke="#94a3b8"
+					stroke-opacity="0.6"
+					stroke-width="1.5"
+					vector-effect="non-scaling-stroke"
+				/>
+
+				@for (gate of gates(); track gate.sector.id) {
+					@let color = gate.type === 'gate' ? '#e2e8f0' : '#fbbf24';
+					<a [routerLink]="['/sectors', gate.sector.id]" [attr.aria-label]="gate.sector.name">
+						@if (gate.type === 'gate') {
+							<svg:title i18n>Jump gate to {{ gate.sector.name }}</svg:title>
+						} @else {
+							<svg:title i18n>Accelerator to {{ gate.sector.name }}</svg:title>
+						}
+						<circle
+							[attr.cx]="gate.x"
+							[attr.cy]="gate.y"
+							[attr.r]="unit * 0.7"
+							fill="#05080f"
+							[attr.stroke]="color"
+							stroke-width="2"
+							[attr.stroke-dasharray]="gate.type === 'gate' ? null : '3 2'"
+							vector-effect="non-scaling-stroke"
+						/>
+						<circle [attr.cx]="gate.x" [attr.cy]="gate.y" [attr.r]="unit * 0.25" [attr.fill]="color" />
+						<text
+							[attr.x]="gate.x"
+							[attr.y]="gate.y + unit * 1.6"
+							[attr.font-size]="unit * 0.9"
+							[attr.stroke-width]="unit * 0.2"
+							text-anchor="middle"
+							dominant-baseline="middle"
+							paint-order="stroke"
+							stroke="#05080f"
+							[attr.fill]="color"
+						>
+							{{ gate.sector.name }}
+						</text>
+					</a>
+				}
+
+				<g
+					appStationMarkers
+					[markers]="markers()"
+					[scale]="panZoom.scale()"
+					[fontSize]="unit"
+					(stationHover)="hovered.set($event)"
+				/>
+			</svg>
+		}
+
+		<div class="absolute top-3 right-3 flex flex-col gap-1" (pointerdown)="$event.stopPropagation()">
+			<button type="button" class="btn btn-dark" title="Zoom in" i18n-title (click)="zoom(0.7)">
+				<svg lucideZoomIn />
+			</button>
+			<button type="button" class="btn btn-dark" title="Zoom out" i18n-title (click)="zoom(1.4)">
+				<svg lucideZoomOut />
+			</button>
+			<button type="button" class="btn btn-dark" title="Show the whole sector" i18n-title (click)="reset()">
+				<svg lucideExpand />
+			</button>
+			@if (!fill()) {
+				<button
+					type="button"
+					class="btn btn-dark"
+					title="Open a larger map"
+					i18n-title
+					aria-label="Open a larger map"
+					i18n-aria-label
+					(click)="expand()"
+				>
+					<svg lucideMaximize2 />
+				</button>
+			}
+		</div>
+	</div>
+
+	<app-station-tooltip [hover]="hovered()" [size]="size()" [spill]="!fill()" />
+</div>

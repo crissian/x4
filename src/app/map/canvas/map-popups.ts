@@ -1,7 +1,6 @@
 import { DecimalPipe, PercentPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { MapStations } from '../map-stations';
 import { MapStore } from '../map-store';
 
 /** Details of the sector under the pointer. */
@@ -15,17 +14,6 @@ export class MapTooltipComponent {
 	protected readonly faction = computed(() =>
 		this.store.faction(this.store.sectorOwner(this.store.hovered()?.shape.sector))
 	);
-}
-
-/** Details of the save station under the pointer. */
-@Component({
-	selector: 'app-map-station-tooltip',
-	imports: [DecimalPipe],
-	templateUrl: './map-station-tooltip.html',
-})
-export class MapStationTooltipComponent {
-	protected readonly store = inject(MapStore);
-	protected readonly stations = inject(MapStations);
 }
 
 /** Right-click menu of a sector. */

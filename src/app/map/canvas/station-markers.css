@@ -1,0 +1,40 @@
+/*
+ * The dot radius and the detail marker size come from the --dot and --size variables on the parent group, so
+ * zooming does not rewrite every marker.
+ */
+.map-dot {
+	r: var(--dot);
+}
+.map-dot-player {
+	r: calc(var(--dot) * 1.6);
+}
+.map-dot-ring {
+	r: calc(var(--dot) * 2.4);
+}
+.map-dot-hit {
+	r: calc(var(--dot) * 3);
+}
+.map-marker-ring {
+	r: calc(var(--size) * 0.95);
+}
+.map-marker {
+	r: calc(var(--size) * 0.6);
+}
+/*
+ * The type icon and the factory ware image sit centred in the marker circle, in a group translated to it, at 70% of
+ * its diameter. The Lucide icon keeps its 24-unit box and is scaled by --icon-scale (no CSS sizing for nested <svg>).
+ */
+.map-marker-icon {
+	transform: scale(var(--icon-scale));
+}
+.map-marker-ware {
+	x: calc(var(--size) * -0.42);
+	y: calc(var(--size) * -0.42);
+	width: calc(var(--size) * 0.84);
+	height: calc(var(--size) * 0.84);
+}
+.map-marker-label {
+	font-size: calc(var(--size) * 0.8);
+	stroke-width: calc(var(--size) * 0.2);
+	transform: translateY(calc(var(--size) * 1.5));
+}

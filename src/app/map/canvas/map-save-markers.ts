@@ -1,33 +1,26 @@
 import { Component, computed, inject } from '@angular/core';
-import { MapStations, StationMarker } from '../map-stations';
-import { NEUTRAL, MapStore } from '../map-store';
+import { MapStations } from '../map-stations';
+import { MapStore } from '../map-store';
 import { MapSaveLayer } from '../save/map-save-layer';
+import { StationHover } from '../station-marker';
 import { MapCountBadge } from './map-count-badge';
+import { StationMarkersComponent } from './station-markers';
 
 /** The stations of the active save and the player ship counts per sector. */
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector -- SVG content has to be an attribute on <g>
 	selector: 'g[appMapSaveMarkers]',
-	imports: [MapCountBadge],
+	imports: [MapCountBadge, StationMarkersComponent],
 	templateUrl: './map-save-markers.html',
-	styleUrl: './map-save-markers.css',
 })
 export class MapSaveMarkers {
-	/** Screen pixels per map unit from which stations show as letter markers instead of dots. */
-	static readonly DETAIL_SCALE = 14;
-	/** Screen pixels per map unit from which station names show. */
-	static readonly LABEL_SCALE = 36;
+	static readonly DETAIL_SCALE = StationMarkersComponent.DETAIL_SCALE;
+	static readonly LABEL_SCALE = StationMarkersComponent.LABEL_SCALE;
 	private static readonly SIZES = ['XS', 'S', 'M', 'L', 'XL'];
 
 	protected readonly store = inject(MapStore);
 	protected readonly stations = inject(MapStations);
 	private readonly save = inject(MapSaveLayer);
-
-	protected readonly neutral = NEUTRAL;
-	protected readonly detailed = computed(() => this.store.scale() >= MapSaveMarkers.DETAIL_SCALE);
-	protected readonly labelled = computed(() => this.store.scale() >= MapSaveMarkers.LABEL_SCALE);
-	/** Dot radius: a constant size on screen. */
-	protected readonly dot = computed(() => 2.5 / this.store.scale());
 
 	/** Badges of the drawn sectors that hold player ships. */
 	protected readonly badges = computed(() => {
@@ -52,14 +45,11 @@ export class MapSaveMarkers {
 		});
 	});
 
-	protected show(event: PointerEvent, marker: StationMarker) {
-		const rect = (event.currentTarget as SVGElement).ownerSVGElement?.getBoundingClientRect();
-		this.store.hovered.set(undefined);
-		this.stations.hovered.set({
-			marker,
-			x: event.clientX - (rect?.left ?? 0),
-			y: event.clientY - (rect?.top ?? 0),
-		});
+	protected show(hover: StationHover | undefined) {
+		if (hover) {
+			this.store.hovered.set(undefined);
+		}
+		this.stations.hovered.set(hover);
 	}
 
 	private static shipTitle(ships: { total: number; bySize: number[] }): string {

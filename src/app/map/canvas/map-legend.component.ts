@@ -1,10 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { MapStations } from '../map-stations';
 import { MapStore } from '../map-store';
+import { StationTypeBadgeComponent } from '../station-type-badge.component';
 
 /** Collapsible legend of the sector colors, connections and markers. */
 @Component({
 	selector: 'app-map-legend',
+	imports: [StationTypeBadgeComponent],
 	templateUrl: './map-legend.component.html',
 })
 export class MapLegendComponent {

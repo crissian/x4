@@ -93,7 +93,9 @@
 			@for (item of visibleRows(); track trackBy()(item.row)) {
 				<tr [class.cursor-pointer]="clickable()" (click)="rowClick.emit(item.row)">
 					@for (column of visibleColumns(); track column.key) {
-						<td [class.text-right]="column.type === 'number'">{{ item.texts[column.key] }}</td>
+						@let link = column.link?.(item.row);
+						<!-- no whitespace around the text: the cell text is its content -->
+						<td [class.text-right]="column.type === 'number'">@if (link) {<a [routerLink]="link" (click)="$event.stopPropagation()">{{ item.texts[column.key] }}</a>} @else {<ng-container>{{ item.texts[column.key] }}</ng-container>}</td>
 					}
 				</tr>
 			} @empty {

@@ -1,4 +1,7 @@
-/** Trimmed from real X4 9.00 saves: one cluster with a contested sector, stations in zones, player ships, a build plot and a job ship. */
+/**
+ * Trimmed from real X4 9.00 saves: one cluster with a contested sector, stations in zones with modules, trade offers
+ * and workforce, player ships (one with a trade deal order), a build plot and a job ship.
+ */
 export const MAP_FIXTURE = `<?xml version="1.0" encoding="UTF-8"?>
 <savegame>
 <info>
@@ -40,6 +43,35 @@ export const MAP_FIXTURE = `<?xml version="1.0" encoding="UTF-8"?>
 <entry id="[0x229f]" index="3" macro="pier_spl_harbor_01_macro"/>
 </sequence>
 </construction>
+<trade>
+<offers>
+<production>
+<trade id="[0x362f]" buyer="[0x5aca]" ware="energycells" price="1241" amount="1377" desired="1377" flags="invertfactionrestriction">
+<source class="production"/>
+</trade>
+<trade id="[0x3631]" seller="[0x5aca]" ware="smartchips" price="6670" amount="3762" flags="invertfactionrestriction">
+<source class="production"/>
+</trade>
+<trade id="[0x3632]" buyer="[0x5aca]" ware="cheltmeat" price="3687" desired="69" flags="invertfactionrestriction">
+<source class="production"/>
+</trade>
+<trade id="[0x3634]" buyer="[0x5aca]" ware="majadust" price="41285" amount="154" desired="154" flags="buyercargovirtual|buyermoneyvirtual|invertfactionrestriction|shady">
+<source class="production"/>
+<restrictions factions="player"/>
+</trade>
+</production>
+</offers>
+<prices>
+<reference>
+<ware ware="energycells" buy="15" sell="0"/>
+</reference>
+</prices>
+</trade>
+<workforces lasttime="39103.06">
+<workforce race="split" amount="180"/>
+<workforce race="argon" amount="20"/>
+<bonus value="1" endtime="40196.411" busy="0"/>
+</workforces>
 <production endtime="39633.565" originalproduct="smartchips"/>
 </component>
 </connection>
@@ -96,7 +128,22 @@ export const MAP_FIXTURE = `<?xml version="1.0" encoding="UTF-8"?>
 <component class="ship_l" macro="ship_arg_l_destroyer_01_a_macro" connection="space" code="DST-222" owner="player" knownto="player" id="[0x48a13]">
 <component class="npc" macro="character_pilot_macro" connection="parentconnection" owner="player" id="[0x48a18]"/>
 </component>
-<component class="ship_m" macro="ship_spl_m_trans_01_a_macro" connection="space" code="NPC-333" owner="split" knownto="player" id="[0x48a20]"/>
+<component class="ship_m" macro="ship_spl_m_trans_01_a_macro" connection="space" code="NPC-333" owner="split" knownto="player" id="[0x48a20]">
+<orders>
+<order order="TradeRoutine" default="1">
+<param name="tradedeal" type="trade">
+<trade id="[0x3699]" seller="[0x5aca]" ware="smartchips" price="6000" amount="100"/>
+</param>
+</order>
+</orders>
+<trade>
+<offers>
+<production>
+<trade id="[0x3700]" seller="[0x48a20]" ware="water" price="5000" amount="10"/>
+</production>
+</offers>
+</trade>
+</component>
 </component>
 </connection>
 </connections>

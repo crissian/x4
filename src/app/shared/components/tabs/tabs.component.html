@@ -1,0 +1,30 @@
+<div class="flex flex-wrap border-b border-line-strong" role="tablist" [attr.aria-label]="label()">
+	@for (tab of tabs(); track tab.id; let i = $index) {
+		@let active = tab.id === selected();
+		<button
+			#tab
+			type="button"
+			role="tab"
+			class="-mb-px cursor-pointer rounded-t-md border px-4 py-2"
+			[class]="
+				active
+					? 'border-line-strong border-b-surface bg-surface text-fg-strong'
+					: 'border-transparent text-link hover:text-link-hover'
+			"
+			[id]="tabId(tab.id)"
+			[attr.aria-selected]="active"
+			[attr.aria-controls]="panelId"
+			[tabIndex]="active || (selectedIndex() < 0 && i === 0) ? 0 : -1"
+			(click)="selected.set(tab.id)"
+			(keydown)="keydown($event, i)"
+		>
+			{{ tab.label }}
+			@if (tab.count != null) {
+				<span class="ml-1 text-sm text-fg-muted">{{ tab.count }}</span>
+			}
+		</button>
+	}
+</div>
+<div class="pt-4" role="tabpanel" tabindex="0" [id]="panelId" [attr.aria-labelledby]="tabId(selected())">
+	<ng-content />
+</div>

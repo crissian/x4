@@ -18,14 +18,14 @@ export const GAME_VERSIONS = [
 export const GAME_VERSION_LOOKUP: GridLookupItem[] = GAME_VERSIONS.map((label, value) => ({ value, label }));
 
 export const STATION_TYPES = [
-	{ id: 'shipyard', label: $localize`Shipyard`, letter: 'S', color: '#f59e0b' },
-	{ id: 'wharf', label: $localize`Wharf`, letter: 'W', color: '#22d3ee' },
-	{ id: 'equipmentdock', label: $localize`Equipment dock`, letter: 'E', color: '#a3e635' },
-	{ id: 'tradestation', label: $localize`Trading station`, letter: 'T', color: '#e879f9' },
-	{ id: 'defence', label: $localize`Defence station`, letter: 'D', color: '#f87171' },
-	{ id: 'piratebase', label: $localize`Pirate base`, letter: 'P', color: '#fb923c' },
-	{ id: 'factory', label: $localize`Factory`, letter: 'F', color: '#94a3b8' },
-	{ id: 'other', label: $localize`Other station`, letter: 'O', color: '#64748b' },
+	{ id: 'shipyard', label: $localize`Shipyard`, icon: 'anchor', color: '#f59e0b' },
+	{ id: 'wharf', label: $localize`Wharf`, icon: 'ship', color: '#22d3ee' },
+	{ id: 'equipmentdock', label: $localize`Equipment dock`, icon: 'wrench', color: '#a3e635' },
+	{ id: 'tradestation', label: $localize`Trading station`, icon: 'arrow-left-right', color: '#e879f9' },
+	{ id: 'defence', label: $localize`Defence station`, icon: 'shield', color: '#f87171' },
+	{ id: 'piratebase', label: $localize`Pirate base`, icon: 'skull', color: '#fb923c' },
+	{ id: 'factory', label: $localize`Factory`, icon: 'factory', color: '#94a3b8' },
+	{ id: 'other', label: $localize`Other station`, icon: 'circle', color: '#64748b' },
 ] as const;
 
 export type StationTypeInfo = (typeof STATION_TYPES)[number];

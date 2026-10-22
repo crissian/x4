@@ -1,0 +1,27 @@
+@if (lists(); as lists) {
+	<p class="mb-3 text-sm text-fg-muted" i18n>
+		Prices and amounts as of the save time. Only stations you have discovered are listed.
+	</p>
+	@for (list of lists; track list.sell) {
+		<h6 class="mb-1" [class.mt-4]="!$first">
+			@if (list.sell) {
+				<ng-container i18n>Sellers</ng-container>
+			} @else {
+				<ng-container i18n>Buyers</ng-container>
+			}
+		</h6>
+		@if (list.rows.length) {
+			<app-data-grid
+				[data]="list.rows"
+				[columns]="columns"
+				[trackBy]="trackRow"
+			/>
+		} @else if (list.sell) {
+			<p class="text-sm text-fg-muted" i18n>No known station sells this ware.</p>
+		} @else {
+			<p class="text-sm text-fg-muted" i18n>No known station buys this ware.</p>
+		}
+	}
+} @else {
+	<p class="text-fg-muted" role="status" i18n>Loading stations…</p>
+}

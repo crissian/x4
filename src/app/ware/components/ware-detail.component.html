@@ -28,26 +28,7 @@
 			</div>
 		</dl>
 
-		<div class="flex border-b border-line-strong" role="tablist">
-			@for (tab of tabs; track tab.id) {
-				<button
-					type="button"
-					role="tab"
-					class="-mb-px cursor-pointer rounded-t-md border px-4 py-2"
-					[class]="
-						activeTab() === tab.id
-							? 'border-line-strong border-b-surface bg-surface text-fg-strong'
-							: 'border-transparent text-link hover:text-link-hover'
-					"
-					[attr.aria-selected]="activeTab() === tab.id"
-					(click)="activeTab.set(tab.id)"
-				>
-					{{ tab.label }}
-				</button>
-			}
-		</div>
-
-		<div class="pt-4" role="tabpanel">
+		<app-tabs [tabs]="tabs()" [selected]="activeTab()" (selectedChange)="selectedTab.set($event)">
 			@switch (activeTab()) {
 				@case ('construction') {
 					<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -156,6 +137,9 @@
 						</div>
 					</div>
 				}
+				@case ('save') {
+					<app-save-ware-trade [ware]="entity.id" />
+				}
 				@case ('requiredFor') {
 					<div class="grid gap-4 md:grid-cols-3">
 						<div class="card">
@@ -191,6 +175,6 @@
 					</div>
 				}
 			}
-		</div>
+		</app-tabs>
 	</app-detail-page>
 }

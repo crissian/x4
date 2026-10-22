@@ -3,6 +3,7 @@ import { ElementStack } from '../../core/xml/element-stack';
 import { XmlExtractor } from '../../core/xml/xml-extractor';
 import { XmlAttributes } from '../../core/xml/xml-stream-scanner';
 import { SaveMap, SaveSector, SaveStation, ShipCounts } from '../map/save-map-model';
+import { StationDetails } from './station-details';
 
 const SHIP_CLASSES: Record<string, number> = { ship_xs: 0, ship_s: 1, ship_m: 2, ship_l: 3, ship_xl: 4 };
 
@@ -23,7 +24,7 @@ interface StationNode {
 	zone?: ZoneNode;
 	x: number;
 	z: number;
-	modules: Set<string>;
+	details: StationDetails;
 }
 interface ShipNode {
 	kind: 'ship';
@@ -78,10 +79,38 @@ export class MapExtractor implements XmlExtractor<SaveMap> {
 				}
 				const owner = this.ancestor(path, 3);
 				if (owner?.kind === 'station') {
-					const macro = attrs()['macro'];
-					if (macro) {
-						owner.modules.add(MacroId.of(macro));
-					}
+					owner.details.addModule(attrs()['macro']);
+				}
+				break;
+			}
+			case 'trade': {
+				// component/trade/offers/<group>/trade: the station's own offers, not those in ship orders
+				if (path[path.length - 3] !== 'offers' || path[path.length - 4] !== 'trade') {
+					break;
+				}
+				const owner = this.ancestor(path, 4);
+				if (owner?.kind === 'station') {
+					owner.details.addOffer(attrs());
+				}
+				break;
+			}
+			case 'restrictions': {
+				if (path[path.length - 2] !== 'trade' || path[path.length - 4] !== 'offers') {
+					break;
+				}
+				const owner = this.ancestor(path, 5);
+				if (owner?.kind === 'station') {
+					owner.details.restrict(attrs());
+				}
+				break;
+			}
+			case 'workforce': {
+				if (path[path.length - 2] !== 'workforces') {
+					break;
+				}
+				const owner = this.ancestor(path, 2);
+				if (owner?.kind === 'station') {
+					owner.details.addWorkforce(attrs());
 				}
 				break;
 			}
@@ -150,7 +179,7 @@ export class MapExtractor implements XmlExtractor<SaveMap> {
 			zone,
 			x: 0,
 			z: 0,
-			modules: new Set(),
+			details: new StationDetails(a['id']),
 		};
 		this.stations.push(node);
 		return node;
@@ -173,7 +202,7 @@ export class MapExtractor implements XmlExtractor<SaveMap> {
 		}
 		station.x = MapExtractor.km(x);
 		station.z = MapExtractor.km(z);
-		station.modules = [...node.modules];
+		node.details.applyTo(station);
 		return station;
 	}
 

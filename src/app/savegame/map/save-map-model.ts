@@ -5,6 +5,18 @@ export interface SaveSector {
 	known: boolean;
 }
 
+/** A buy or sell offer from the station's own `trade/offers`. */
+export interface SaveOffer {
+	ware: string;
+	/** true: the station sells the ware; false: it buys it */
+	sell: boolean;
+	/** Cr, 2 decimals */
+	price: number;
+	amount: number;
+	/** a shady offer restricted to the player */
+	playerOnly?: boolean;
+}
+
 export interface SaveStation {
 	code: string;
 	macro: string;
@@ -24,6 +36,12 @@ export interface SaveStation {
 	product?: string;
 	/** distinct module ids from construction/sequence/entry@macro, lowercased without _macro */
 	modules: string[];
+	/** how many of each module in `modules`, by position; absent when there is one of each */
+	moduleCounts?: number[];
+	/** the offers with an amount, in save order */
+	offers?: SaveOffer[];
+	/** workers by race id */
+	workforce?: Record<string, number>;
 }
 
 /** sector id -> player ship counts [xs, s, m, l, xl] */

@@ -1,0 +1,114 @@
+@let row = station();
+<h6 class="mb-1 flex items-center gap-2 text-base">
+	<app-station-type-badge [type]="row.type" />
+	<span class="min-w-0 truncate">{{ row.name }}</span>
+</h6>
+<dl class="details mb-3 text-sm">
+	<dt i18n>Owner</dt>
+	<dd>
+		@if (owner(); as faction) {
+			<span class="mr-1 inline-block size-2 rounded-full" [style.background]="faction.color"></span>
+			<a [routerLink]="['/factions', faction.id]">{{ faction.name }}</a>
+		} @else if (row.owner === 'player') {
+			<ng-container i18n>Player</ng-container>
+		} @else {
+			<ng-container i18n>Unclaimed</ng-container>
+		}
+	</dd>
+	<dt i18n>Type</dt>
+	<dd>{{ row.type.label }}</dd>
+	@if (row.product) {
+		<dt i18n>Produces</dt>
+		<dd>
+			@if (row.productLink) {
+				<a [routerLink]="['/wares', row.productLink]">{{ row.product }}</a>
+			} @else {
+				{{ row.product }}
+			}
+		</dd>
+	}
+	<dt i18n>Code</dt>
+	<dd>{{ row.id }}</dd>
+</dl>
+@if (row.save) {
+	<app-tabs [tabs]="tabs()" [(selected)]="tab">
+		@switch (tab()) {
+			@case ('modules') {
+				@for (group of moduleGroups(); track group.id) {
+					<h6 class="mt-3 mb-1 first:mt-0">
+						{{ group.label }} <span class="text-sm font-normal text-fg-muted">{{ group.total }}</span>
+					</h6>
+					<ul class="space-y-1 text-sm">
+						@for (module of group.modules; track module.id) {
+							<li>
+								<!-- "3 × Name": the space after the sign would collapse between the span and the name -->
+								<span class="text-fg-muted">{{ module.count }} ×</span>{{ ' ' }}
+								@if (module.link) {
+									<a [routerLink]="['/modules', module.link]">{{ module.name }}</a>
+								} @else {
+									{{ module.name }}
+								}
+							</li>
+						}
+					</ul>
+				} @empty {
+					<p class="text-sm text-fg-muted" i18n>No modules.</p>
+				}
+			}
+			@default {
+				@let rows = tab() === 'sells' ? sells() : buys();
+				@if (rows.length) {
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col" i18n>Ware</th>
+								<th scope="col" class="text-right" i18n>Price</th>
+								<th scope="col" class="text-right" i18n>Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+							@for (offer of rows; track $index) {
+								<tr>
+									<td>
+										@if (offer.known) {
+											<a [routerLink]="['/wares', offer.ware]">{{ offer.name }}</a>
+										} @else {
+											{{ offer.name }}
+										}
+										@if (offer.playerOnly) {
+											<span
+												class="ml-1 text-xs text-danger"
+												i18n-title
+												title="A shady offer only the player can trade"
+												i18n
+												>player only</span
+											>
+										}
+									</td>
+									<td class="text-right whitespace-nowrap">{{ offer.price | number: '1.2-2' }} Cr</td>
+									<td class="text-right">{{ offer.amount | number }}</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				} @else {
+					<p class="text-sm text-fg-muted" i18n>No offers.</p>
+				}
+			}
+		}
+	</app-tabs>
+	<h6 class="mt-4 mb-1" i18n>Workforce</h6>
+	@if (workforce().length) {
+		<ul class="space-y-1 text-sm">
+			@for (item of workforce(); track item.race) {
+				<li>
+					{{ item.name }} <span class="text-fg-muted">{{ item.amount | number }}</span>
+				</li>
+			}
+		</ul>
+	} @else {
+		<p class="text-sm text-fg-muted" i18n>No workforce.</p>
+	}
+} @else {
+	<p class="text-sm text-fg-muted" i18n>Load a save to see the offers and modules of the stations.</p>
+}
