@@ -2689,7 +2689,7 @@ export const Equipments = [
 		explosionDamage: 1000,
 		hull: 50,
 		price: { min: 1936, max: 2620, avg: 2278 },
-		missile: { damage: 1000, range: 6500, lifetime: 12, guided: false, reload: 1.2, speed: 681 },
+		missile: { damage: 1000, range: 6500, lifetime: 12, guided: false, reload: 1.2, amount: 4, magazine: { size: 5, reload: 12 }, speed: 681, tags: [ 'largedumbfire' ] },
 		production: [
 		{
 			time: 3,
@@ -2744,7 +2744,7 @@ export const Equipments = [
 		explosionDamage: 8400,
 		hull: 90,
 		price: { min: 2930, max: 3964, avg: 3447 },
-		missile: { damage: 8400, range: 12000, lifetime: 88, guided: true, reload: 1, speed: 181 },
+		missile: { damage: 8400, range: 12000, lifetime: 88, guided: true, reload: 1, magazine: { size: 2, reload: 21 }, speed: 181, tags: [ 'largeguided' ] },
 		production: [
 		{
 			time: 3,
@@ -2800,7 +2800,7 @@ export const Equipments = [
 		explosionDamage: 780,
 		hull: 1,
 		price: { min: 881, max: 1191, avg: 1036 },
-		missile: { damage: 780, range: 5500, lifetime: 10, guided: false, reload: 0.46, speed: 681 },
+		missile: { damage: 780, range: 5500, lifetime: 10, guided: false, reload: 0.46, amount: 2, magazine: { size: 4, reload: 12 }, speed: 681, tags: [ 'mediumdumbfire' ] },
 		production: [
 		{
 			time: 3,
@@ -2854,7 +2854,7 @@ export const Equipments = [
 		explosionDamage: 500,
 		hull: 1,
 		price: { min: 1058, max: 1432, avg: 1245 },
-		missile: { damage: 500, range: 5500, lifetime: 10, guided: false, reload: 0.46, speed: 681 },
+		missile: { damage: 500, range: 5500, lifetime: 10, guided: false, reload: 0.46, amount: 2, hull: 220, magazine: { size: 4, reload: 12 }, speed: 681, tags: [ 'mediumdumbfire' ] },
 		production: [
 		{
 			time: 3,
@@ -2908,7 +2908,7 @@ export const Equipments = [
 		explosionDamage: 1200,
 		hull: 1,
 		price: { min: 1671, max: 2261, avg: 1966 },
-		missile: { damage: 1200, range: 12000, lifetime: 17.5, guided: true, reload: 17, speed: 891 },
+		missile: { damage: 1200, range: 12000, lifetime: 17.5, guided: true, reload: 17, lock: 2, speed: 891, tags: [ 'mediumguided' ] },
 		production: [
 		{
 			time: 3,
@@ -2964,7 +2964,7 @@ export const Equipments = [
 		explosionDamage: 980,
 		hull: 1,
 		price: { min: 2105, max: 2849, avg: 2477 },
-		missile: { damage: 980, range: 9000, lifetime: 20, guided: true, reload: 18, speed: 804 },
+		missile: { damage: 980, range: 9000, lifetime: 20, guided: true, reload: 18, speed: 804, tags: [ 'mediumguided' ] },
 		production: [
 		{
 			time: 3,
@@ -3020,7 +3020,7 @@ export const Equipments = [
 		explosionDamage: 600,
 		hull: 1,
 		price: { min: 493, max: 667, avg: 580 },
-		missile: { damage: 600, range: 2800, lifetime: 4, guided: false, reload: 0.25, speed: 827 },
+		missile: { damage: 600, range: 2800, lifetime: 4, guided: false, reload: 0.25, magazine: { size: 8, reload: 9 }, speed: 827, tags: [ 'smalldumbfire' ] },
 		production: [
 		{
 			time: 3,
@@ -3074,7 +3074,7 @@ export const Equipments = [
 		explosionDamage: 374,
 		hull: 1,
 		price: { min: 597, max: 807, avg: 702 },
-		missile: { damage: 374, range: 2800, lifetime: 4, guided: false, reload: 0.25, speed: 827 },
+		missile: { damage: 374, range: 2800, lifetime: 4, guided: false, reload: 0.25, hull: 166, magazine: { size: 8, reload: 9 }, speed: 827, tags: [ 'smalldumbfire' ] },
 		production: [
 		{
 			time: 3,
@@ -3128,7 +3128,7 @@ export const Equipments = [
 		explosionDamage: 10,
 		hull: 1,
 		price: { min: 1016, max: 1375, avg: 1196 },
-		missile: { damage: 10, range: 22000, lifetime: 10, guided: true, reload: 12, speed: 57887 },
+		missile: { damage: 10, range: 22000, lifetime: 10, guided: true, reload: 12, lock: 2, speed: 57887, tags: [ 'smallguided' ] },
 		production: [
 		{
 			time: 3,
@@ -3183,7 +3183,7 @@ export const Equipments = [
 		explosionDamage: 1200,
 		hull: 1,
 		price: { min: 858, max: 1160, avg: 1009 },
-		missile: { damage: 1200, range: 12000, lifetime: 12.5, guided: true, reload: 10, speed: 1206 },
+		missile: { damage: 1200, range: 12000, lifetime: 12.5, guided: true, reload: 10, lock: 2, speed: 1206, tags: [ 'smallguided' ] },
 		production: [
 		{
 			time: 3,
@@ -3238,7 +3238,7 @@ export const Equipments = [
 		explosionDamage: 940,
 		hull: 1,
 		price: { min: 729, max: 986, avg: 857 },
-		missile: { damage: 940, range: 7000, lifetime: 8, guided: true, reload: 1, speed: 1447 },
+		missile: { damage: 940, range: 7000, lifetime: 8, guided: true, reload: 1, magazine: { size: 2, reload: 4.4 }, speed: 1447, tags: [ 'smallguided' ] },
 		production: [
 		{
 			time: 3,
@@ -3293,7 +3293,7 @@ export const Equipments = [
 		explosionDamage: 980,
 		hull: 1,
 		price: { min: 965, max: 1305, avg: 1135 },
-		missile: { damage: 980, range: 8000, lifetime: 16, guided: true, reload: 8, speed: 904 },
+		missile: { damage: 980, range: 8000, lifetime: 16, guided: true, reload: 8, speed: 904, tags: [ 'smallguided' ] },
 		production: [
 		{
 			time: 3,
@@ -3348,7 +3348,7 @@ export const Equipments = [
 		explosionDamage: 210,
 		hull: 1,
 		price: { min: 859, max: 1162, avg: 1010 },
-		missile: { damage: 210, range: 7000, lifetime: 15, guided: true, reload: 8, speed: 706 },
+		missile: { damage: 210, range: 7000, lifetime: 15, guided: true, reload: 8, amount: 8, lock: 1, speed: 706, tags: [ 'smallguided' ] },
 		production: [
 		{
 			time: 3,
@@ -3403,7 +3403,7 @@ export const Equipments = [
 		explosionDamage: 3660,
 		hull: 60,
 		price: { min: 1975, max: 2672, avg: 2324 },
-		missile: { damage: 3660, range: 5000, lifetime: 40, guided: true, reload: 14, speed: 181 },
+		missile: { damage: 3660, range: 5000, lifetime: 40, guided: true, reload: 14, speed: 181, tags: [ 'smalltorpedo' ] },
 		production: [
 		{
 			time: 3,
@@ -5687,7 +5687,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.large,
 		price: { min: 253435, max: 309754, avg: 281595 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 1360, pitch: 684, yaw: 684, roll: 726 },
 		tags: [ 'thruster', 'large' ],
 		production: [
 		{
@@ -5746,7 +5746,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.large,
 		price: { min: 1266139, max: 1547503, avg: 1406821 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 1659, pitch: 834, yaw: 834, roll: 886 },
 		tags: [ 'thruster', 'large' ],
 		production: [
 		{
@@ -5805,7 +5805,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.large,
 		price: { min: 6328619, max: 7734979, avg: 7031799 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 1904, pitch: 958, yaw: 958, roll: 1016 },
 		tags: [ 'thruster', 'large' ],
 		production: [
 		{
@@ -5864,7 +5864,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.medium,
 		price: { min: 11717, max: 14321, avg: 13019 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 1010, pitch: 223.4, yaw: 223.4, roll: 350 },
 		tags: [ 'thruster', 'medium' ],
 		production: [
 		{
@@ -5921,7 +5921,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.medium,
 		price: { min: 58067, max: 70971, avg: 64519 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 1212, pitch: 272.6, yaw: 272.6, roll: 427 },
 		tags: [ 'thruster', 'medium' ],
 		production: [
 		{
@@ -5980,7 +5980,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.medium,
 		price: { min: 289300, max: 353589, avg: 321445 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 1364, pitch: 308.3, yaw: 308.3, roll: 483 },
 		tags: [ 'thruster', 'medium' ],
 		production: [
 		{
@@ -6039,7 +6039,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.medium,
 		price: { min: 14899, max: 18210, avg: 16555 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 888, pitch: 259.2, yaw: 259.2, roll: 406 },
 		tags: [ 'thruster', 'medium' ],
 		production: [
 		{
@@ -6096,7 +6096,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.medium,
 		price: { min: 73978, max: 90418, avg: 82198 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 1067, pitch: 316.2, yaw: 316.2, roll: 495.3 },
 		tags: [ 'thruster', 'medium' ],
 		production: [
 		{
@@ -6155,7 +6155,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.medium,
 		price: { min: 368854, max: 450821, avg: 409838 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 1200, pitch: 357.7, yaw: 357.7, roll: 560.3 },
 		tags: [ 'thruster', 'medium' ],
 		production: [
 		{
@@ -6214,7 +6214,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.small,
 		price: { min: 5353, max: 6542, avg: 5948 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 400, pitch: 152, yaw: 152, roll: 200 },
 		tags: [ 'thruster', 'small' ],
 		production: [
 		{
@@ -6271,7 +6271,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.small,
 		price: { min: 39752, max: 48586, avg: 44169 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 480, pitch: 175, yaw: 175, roll: 230 },
 		tags: [ 'thruster', 'small' ],
 		production: [
 		{
@@ -6330,7 +6330,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.small,
 		price: { min: 157946, max: 193045, avg: 175495 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 540, pitch: 190, yaw: 190, roll: 250 },
 		tags: [ 'thruster', 'small' ],
 		production: [
 		{
@@ -6389,7 +6389,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.small,
 		price: { min: 6241, max: 7628, avg: 6934 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 352, pitch: 173.3, yaw: 173.3, roll: 228 },
 		tags: [ 'thruster', 'small' ],
 		production: [
 		{
@@ -6446,7 +6446,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.small,
 		price: { min: 83968, max: 102628, avg: 93298 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 422, pitch: 200, yaw: 200, roll: 262 },
 		tags: [ 'thruster', 'small' ],
 		production: [
 		{
@@ -6505,7 +6505,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.small,
 		price: { min: 199757, max: 244147, avg: 221952 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 475, pitch: 217, yaw: 217, roll: 285 },
 		tags: [ 'thruster', 'small' ],
 		production: [
 		{
@@ -6564,7 +6564,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.extralarge,
 		price: { min: 538346, max: 657978, avg: 598162 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 3000, pitch: 1345, yaw: 1345, roll: 1240 },
 		tags: [ 'thruster', 'extralarge' ],
 		production: [
 		{
@@ -6623,7 +6623,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.extralarge,
 		price: { min: 2690693, max: 3288625, avg: 2989659 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 3660, pitch: 1641, yaw: 1641, roll: 1513 },
 		tags: [ 'thruster', 'extralarge' ],
 		production: [
 		{
@@ -6682,7 +6682,7 @@ export const Equipments = [
 		equipmentClass: EquipmentClass.engine,
 		size: Size.extralarge,
 		price: { min: 13451392, max: 16440590, avg: 14945991 },
-		thrust: { forward: 0, reverse: 0 },
+		thruster: { strafe: 4200, pitch: 1883, yaw: 1883, roll: 1736 },
 		tags: [ 'thruster', 'extralarge' ],
 		production: [
 		{
@@ -6784,6 +6784,7 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 44955, max: 54945, avg: 49950 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		launcher: { ammo: [ 'dumbfire', 'largedumbfire' ], missile: 'missile_gen_l_dumbfire_01_mk1' },
 		tags: [ 'turret', 'large', 'missile', 'standard' ],
 		license: 'capitalequipment',
 		production: [
@@ -6823,6 +6824,7 @@ export const Equipments = [
 		hull: 3500,
 		price: { min: 62937, max: 76923, avg: 69930 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.loanshark, Factions.scavenger, Factions.kaori ],
+		launcher: { ammo: [ 'guided', 'largeguided' ], missile: 'missile_gen_l_guided_01_mk1' },
 		tags: [ 'turret', 'large', 'missile', 'standard' ],
 		license: 'capitalequipment',
 		production: [
@@ -7061,6 +7063,7 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 22478, max: 27473, avg: 24975 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		launcher: { ammo: [ 'dumbfire', 'mediumdumbfire' ], missile: 'missile_gen_m_dumbfire_01_mk1' },
 		tags: [ 'turret', 'medium', 'missile', 'standard' ],
 		license: 'militaryequipment',
 		production: [
@@ -7258,6 +7261,7 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 31469, max: 38462, avg: 34965 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		launcher: { ammo: [ 'guided', 'mediumguided' ], missile: 'missile_gen_m_guided_01_mk1' },
 		tags: [ 'turret', 'medium', 'missile', 'standard' ],
 		license: 'militaryequipment',
 		production: [
@@ -7726,6 +7730,7 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 44955, max: 54945, avg: 49950 },
 		owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		launcher: { ammo: [ 'dumbfire', 'largedumbfire' ], missile: 'missile_gen_l_dumbfire_01_mk1' },
 		tags: [ 'turret', 'large', 'missile', 'standard' ],
 		license: 'capitalequipment',
 		production: [
@@ -7754,6 +7759,7 @@ export const Equipments = [
 		hull: 3500,
 		price: { min: 62937, max: 76923, avg: 69930 },
 		owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		launcher: { ammo: [ 'guided', 'largeguided' ], missile: 'missile_gen_l_guided_01_mk1' },
 		tags: [ 'turret', 'large', 'missile', 'standard' ],
 		license: 'capitalequipment',
 		production: [
@@ -7926,6 +7932,7 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 22478, max: 27473, avg: 24975 },
 		owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		launcher: { ammo: [ 'dumbfire', 'mediumdumbfire' ], missile: 'missile_gen_m_dumbfire_01_mk1' },
 		tags: [ 'turret', 'medium', 'missile', 'standard' ],
 		license: 'militaryequipment',
 		production: [
@@ -8011,6 +8018,7 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 31469, max: 38462, avg: 34965 },
 		owners: [ Factions.alliance, Factions.holyorder, Factions.paranid, Factions.trinity ],
+		launcher: { ammo: [ 'guided', 'mediumguided' ], missile: 'missile_gen_m_guided_01_mk1' },
 		tags: [ 'turret', 'medium', 'missile', 'standard' ],
 		license: 'militaryequipment',
 		production: [
@@ -8315,6 +8323,7 @@ export const Equipments = [
 		hull: 5000,
 		price: { min: 44955, max: 54945, avg: 49950 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		launcher: { ammo: [ 'dumbfire', 'largedumbfire' ], missile: 'missile_gen_l_dumbfire_01_mk1' },
 		tags: [ 'turret', 'large', 'missile', 'standard' ],
 		license: 'capitalequipment',
 		production: [
@@ -8343,6 +8352,7 @@ export const Equipments = [
 		hull: 5000,
 		price: { min: 62937, max: 76923, avg: 69930 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		launcher: { ammo: [ 'guided', 'largeguided' ], missile: 'missile_gen_l_guided_01_mk1' },
 		tags: [ 'turret', 'large', 'missile', 'standard' ],
 		license: 'capitalequipment',
 		production: [
@@ -8515,6 +8525,7 @@ export const Equipments = [
 		hull: 1500,
 		price: { min: 22478, max: 27473, avg: 24975 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		launcher: { ammo: [ 'dumbfire', 'mediumdumbfire' ], missile: 'missile_gen_m_dumbfire_01_mk1' },
 		tags: [ 'turret', 'medium', 'missile', 'standard' ],
 		license: 'militaryequipment',
 		production: [
@@ -8622,6 +8633,7 @@ export const Equipments = [
 		hull: 1250,
 		price: { min: 31469, max: 38462, avg: 34965 },
 		owners: [ Factions.alliance, Factions.ministry, Factions.teladi ],
+		launcher: { ammo: [ 'guided', 'mediumguided' ], missile: 'missile_gen_m_guided_01_mk1' },
 		tags: [ 'turret', 'medium', 'missile', 'standard' ],
 		license: 'militaryequipment',
 		production: [
@@ -9567,6 +9579,7 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 28097, max: 34341, avg: 31219 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		launcher: { ammo: [ 'dumbfire', 'smalldumbfire' ], missile: 'missile_gen_s_dumbfire_01_mk1' },
 		tags: [ 'advanced', 'medium', 'missile', 'weapon' ],
 		license: 'militaryequipment',
 		production: [
@@ -9718,6 +9731,7 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 42483, max: 51923, avg: 47203 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		launcher: { ammo: [ 'guided', 'smallguided' ], missile: 'missile_gen_m_guided_01_mk1' },
 		tags: [ 'advanced', 'medium', 'missile', 'weapon' ],
 		license: 'militaryequipment',
 		production: [
@@ -10173,6 +10187,7 @@ export const Equipments = [
 		size: Size.medium,
 		price: { min: 60690, max: 74176, avg: 67433 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		launcher: { ammo: [ 'torpedo', 'smalltorpedo' ], missile: 'missile_gen_s_torpedo_01_mk1' },
 		tags: [ 'advanced', 'medium', 'missile', 'weapon' ],
 		license: 'militaryequipment',
 		production: [
@@ -10478,6 +10493,7 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 17982, max: 21978, avg: 19980 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.hatikvah, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.scaleplate, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		launcher: { ammo: [ 'dumbfire', 'smalldumbfire' ], missile: 'missile_gen_s_dumbfire_01_mk1' },
 		tags: [ 'advanced', 'missile', 'small', 'weapon' ],
 		license: 'militaryequipment',
 		production: [
@@ -10628,6 +10644,7 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 26853, max: 32821, avg: 29837 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		launcher: { ammo: [ 'guided', 'smallguided' ], missile: 'missile_gen_s_guided_01_mk1' },
 		tags: [ 'advanced', 'missile', 'small', 'weapon' ],
 		license: 'militaryequipment',
 		production: [
@@ -11082,6 +11099,7 @@ export const Equipments = [
 		size: Size.small,
 		price: { min: 38362, max: 46886, avg: 42624 },
 		owners: [ Factions.alliance, Factions.antigone, Factions.argon, Factions.buccaneers, Factions.holyorder, Factions.ministry, Factions.paranid, Factions.teladi, Factions.trinity, Factions.court, Factions.freesplit, Factions.split, Factions.pioneers, Factions.terran, Factions.loanshark, Factions.scavenger, Factions.boron, Factions.kaori ],
+		launcher: { ammo: [ 'torpedo', 'smalltorpedo' ], missile: 'missile_gen_s_torpedo_01_mk1' },
 		tags: [ 'advanced', 'missile', 'small', 'weapon' ],
 		license: 'militaryequipment',
 		production: [
@@ -12495,7 +12513,7 @@ export const Equipments = [
 		hull: 1,
 		price: { min: 866, max: 1171, avg: 1018 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
-		missile: { damage: 900, range: 8000, lifetime: 15, guided: true, reload: 10, speed: 965 },
+		missile: { damage: 900, range: 8000, lifetime: 15, guided: true, reload: 10, lock: 2, speed: 965, tags: [ 'smallguided' ] },
 		license: 'militaryequipment',
 		production: [
 		{
@@ -12531,7 +12549,7 @@ export const Equipments = [
 		hull: 1,
 		price: { min: 1877, max: 2540, avg: 2209 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
-		missile: { damage: 100, range: 39000, lifetime: 30, guided: true, reload: 6, speed: 4631 },
+		missile: { damage: 100, range: 39000, lifetime: 30, guided: true, reload: 6, amount: 5, lock: 2, speed: 4631, tags: [ 'smallguided' ] },
 		license: 'militaryequipment',
 		production: [
 		{
@@ -12910,6 +12928,7 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 47203, max: 57692, avg: 52448 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		launcher: { ammo: [ 'dumbfire', 'largedumbfire' ], missile: 'missile_gen_l_dumbfire_01_mk1' },
 		tags: [ 'turret', 'large', 'missile', 'standard' ],
 		license: 'capitalequipment',
 		production: [
@@ -12938,6 +12957,7 @@ export const Equipments = [
 		hull: 3500,
 		price: { min: 66084, max: 80769, avg: 73427 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		launcher: { ammo: [ 'guided', 'largeguided' ], missile: 'missile_gen_l_guided_01_mk1' },
 		tags: [ 'turret', 'large', 'missile', 'standard' ],
 		license: 'capitalequipment',
 		production: [
@@ -13110,6 +13130,7 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 23601, max: 28846, avg: 26224 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		launcher: { ammo: [ 'dumbfire', 'mediumdumbfire' ], missile: 'missile_gen_m_dumbfire_01_mk1' },
 		tags: [ 'turret', 'medium', 'missile', 'standard' ],
 		license: 'militaryequipment',
 		production: [
@@ -13252,6 +13273,7 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 33042, max: 40385, avg: 36713 },
 		owners: [ Factions.court, Factions.freesplit, Factions.split ],
+		launcher: { ammo: [ 'guided', 'mediumguided' ], missile: 'missile_gen_m_guided_01_mk1' },
 		tags: [ 'turret', 'medium', 'missile', 'standard' ],
 		license: 'militaryequipment',
 		production: [
@@ -14007,6 +14029,7 @@ export const Equipments = [
 		hull: 4000,
 		price: { min: 89910, max: 109890, avg: 99900 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		launcher: { ammo: [ 'dumbfire', 'largedumbfire' ], missile: 'missile_gen_l_dumbfire_01_mk1' },
 		tags: [ 'turret', 'large', 'missile', 'standard' ],
 		license: 'capitalequipment',
 		production: [
@@ -14066,6 +14089,7 @@ export const Equipments = [
 		hull: 3500,
 		price: { min: 125874, max: 153846, avg: 139860 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		launcher: { ammo: [ 'guided', 'largeguided' ], missile: 'missile_gen_l_guided_01_mk1' },
 		tags: [ 'turret', 'large', 'missile', 'standard' ],
 		license: 'capitalequipment',
 		production: [
@@ -14214,6 +14238,7 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 44955, max: 54945, avg: 49950 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		launcher: { ammo: [ 'dumbfire', 'mediumdumbfire' ], missile: 'missile_gen_m_dumbfire_01_mk1' },
 		tags: [ 'turret', 'medium', 'missile', 'standard' ],
 		license: 'militaryequipment',
 		production: [
@@ -14302,6 +14327,7 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 62937, max: 76923, avg: 69930 },
 		owners: [ Factions.pioneers, Factions.terran ],
+		launcher: { ammo: [ 'guided', 'mediumguided' ], missile: 'missile_gen_m_guided_01_mk1' },
 		tags: [ 'turret', 'medium', 'missile', 'standard' ],
 		license: 'militaryequipment',
 		production: [
@@ -16009,6 +16035,7 @@ export const Equipments = [
 		hull: 1200,
 		price: { min: 24725, max: 30220, avg: 27473 },
 		owners: [ Factions.boron ],
+		launcher: { ammo: [ 'dumbfire', 'mediumdumbfire' ], missile: 'missile_gen_m_dumbfire_01_mk1' },
 		tags: [ 'advanced', 'medium', 'missile', 'turret' ],
 		license: 'militaryequipment',
 		production: [
@@ -16037,6 +16064,7 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 34615, max: 42308, avg: 38462 },
 		owners: [ Factions.boron ],
+		launcher: { ammo: [ 'guided', 'mediumguided' ], missile: 'missile_gen_m_guided_01_mk1' },
 		tags: [ 'advanced', 'medium', 'missile', 'turret' ],
 		license: 'militaryequipment',
 		production: [
@@ -16800,7 +16828,7 @@ export const Equipments = [
 		hull: 10,
 		price: { min: 1564, max: 2116, avg: 1840 },
 		owners: [ Factions.ownerless ],
-		missile: { damage: 1250, range: 10000, lifetime: 30, guided: true, reload: 0.25, speed: 591 },
+		missile: { damage: 1250, range: 10000, lifetime: 30, guided: true, reload: 0.25, magazine: { size: 6, reload: 15 }, speed: 591, tags: [ 'ship_ter_l_flagship_01' ] },
 		license: 'capitalequipment',
 		production: [
 		{
@@ -16847,7 +16875,7 @@ export const Equipments = [
 		hull: 1,
 		price: { min: 1324, max: 1791, avg: 1558 },
 		owners: [ Factions.ownerless ],
-		missile: { damage: 500, range: 9000, lifetime: 16, guided: true, reload: 0.25, speed: 1072 },
+		missile: { damage: 500, range: 9000, lifetime: 16, guided: true, reload: 0.25, magazine: { size: 6, reload: 15 }, speed: 1072, tags: [ 'ship_ter_l_flagship_01' ] },
 		license: 'capitalequipment',
 		production: [
 		{
@@ -17590,6 +17618,7 @@ export const Equipments = [
 		hull: 1000,
 		price: { min: 1798200, max: 2197800, avg: 1998000 },
 		owners: [ Factions.ownerless ],
+		launcher: { ammo: [ 'ship_ter_l_flagship_01' ], missile: 'missile_flagship_heavy_mk1' },
 		tags: [ 'large', 'mandatory', 'ship_ter_l_flagship_01', 'weapon' ],
 		license: 'capitalequipment',
 		production: [
