@@ -31,13 +31,17 @@ describe('MapComponent', () => {
 	});
 
 	it('plans a route from the panel fields', async () => {
-		const { element, set } = await setup();
+		const { fixture, element, set } = await setup();
 		await set('input[placeholder="From sector..."]', 'Grand Exchange I');
 		await set('input[placeholder="To sector..."]', 'Argon Prime');
 		expect(element.querySelector('app-map-route-panel ol')?.children.length).toBeGreaterThan(1);
 		expect(element.querySelector('polyline')).toBeTruthy();
 
-		await set('select[aria-label="Ship"]', 'ship_arg_l_destroyer_01_a');
+		const ship = 'app-map-route-panel app-searchable-select input';
+		element.querySelector(ship)!.dispatchEvent(new FocusEvent('focus'));
+		await set(ship, 'Behemoth Vanguard');
+		element.querySelector(ship)!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', cancelable: true }));
+		await fixture.whenStable();
 		const speed = element.querySelector<HTMLInputElement>('app-map-route-panel input[type=number]')!;
 		expect(speed.disabled).toBe(true);
 		expect(speed.value).not.toBe('3000');

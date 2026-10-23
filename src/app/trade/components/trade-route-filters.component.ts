@@ -1,15 +1,17 @@
-import { DecimalPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
-import { EnumLabelPipe, EnumLabels } from '../../core/enum-labels';
+import { EnumLabels } from '../../core/enum-labels';
 import { TradeRoutesStore } from '../trade-routes-store';
 import { SectorInputComponent } from '../../shared/components/sector-input.component';
 import { OptionSelectComponent } from '../../shared/components/option-select.component';
+import { SearchableSelectComponent } from '../../shared/components/searchable-select/searchable-select.component';
+import { NumberFormats } from '../../core/format/number-formats';
+import { ShipPickerOptions } from '../../savegame/own-ships/ship-picker-options';
 
 /** The ship, location and ware filters of the trade routes page. */
 @Component({
 	selector: 'app-trade-route-filters',
-	imports: [OptionSelectComponent, SectorInputComponent, DecimalPipe, EnumLabelPipe, FormField],
+	imports: [OptionSelectComponent, SearchableSelectComponent, SectorInputComponent, FormField],
 	templateUrl: './trade-route-filters.component.html',
 })
 export class TradeRouteFiltersComponent {
@@ -20,4 +22,16 @@ export class TradeRouteFiltersComponent {
 		id,
 		label: EnumLabels.label(id.charAt(0).toUpperCase() + id.slice(1)),
 	}));
+	/** Custom ship, the player's cargo ships by size, then the cargo ship models; searched by name, model and sector. */
+	protected readonly shipOptions = computed(() => [
+		{ id: TradeRoutesStore.CUSTOM, name: $localize`Custom ship` },
+		...ShipPickerOptions.own(
+			this.store.ownShips(),
+			(own) => `${own.model.name}, ${NumberFormats.whole(own.capacity)} m³ · ${own.sectorName}`
+		),
+		...ShipPickerOptions.models(
+			this.store.ships,
+			(ship) => `${EnumLabels.label(ship.size)}, ${NumberFormats.whole(ship.capacity)} m³`
+		),
+	]);
 }
