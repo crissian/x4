@@ -55,3 +55,9 @@ export interface SaveMap {
 
 /** Player relation per faction id, -1..1 (relation plus booster, clamped); a missing faction means 0. */
 export type SaveRelations = Record<string, number>;
+
+/** Licences the player holds: licence type -> faction ids that granted it. */
+export type SaveLicences = Record<string, string[]>;
+
+/** Ware ids of the blueprints the player owns. */
+export type SaveBlueprints = string[];
