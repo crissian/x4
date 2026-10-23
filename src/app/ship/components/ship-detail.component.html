@@ -64,13 +64,23 @@
 				<div class="card-body">
 					@if (engines().length) {
 						<app-data-grid
-							[data]="engines()"
+							[data]="engineList.visible()"
 							[columns]="engineColumns"
 							[features]="false"
 							[clickable]="true"
 							[trackBy]="trackEngine"
 							(rowClick)="openEngine($event)"
 						/>
+						@if (engineList.hiddenCount()) {
+							<button type="button" class="link-button mt-2 text-sm text-link" (click)="engineList.toggle()">
+								@if (engineList.expanded()) {
+									<ng-container i18n="@@shipEnginesFastestOnly">Show the {{ engineList.limit }} fastest engines only</ng-container>
+								} @else {
+									<ng-container i18n="@@shipEnginesShowAll">Show all {{ engines().length }} engines</ng-container>
+								}
+							</button>
+						}
+						<p class="mt-2 text-xs text-fg-muted" i18n="@@shipEnginesSortedByTravel">Sorted by travel speed, fastest first.</p>
 						<p class="mt-2 text-xs text-fg-muted" i18n>
 							Speed = engine thrust × {{ entity.engines.length }} engines / drag
 							{{ entity.drag.forward | number: '1.0-2' }}. Equipment mods and crew skill are not included.
