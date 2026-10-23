@@ -35,8 +35,8 @@ export interface ReputationSeller extends BlueprintSeller {
 	needed?: number;
 	/** the player's in-game reputation with the faction, as of save time */
 	current: number;
-	/** reputation still missing, 0 when high enough */
-	gap: number;
+	/** reputation still missing, 0 when high enough; undefined when unknown */
+	gap?: number;
 	/** reputation is high enough but the licence isn't held yet: it comes with a ceremony or a visit */
 	pending: boolean;
 }
