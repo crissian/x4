@@ -46,11 +46,11 @@ describe('EmpireShips', () => {
 			size: 'Extra Large',
 			purpose: 'Fight',
 			sectorName: 'A',
-			order: 'Protect station',
+			order: 'ProtectStation',
 			defaultOrder: 'Wait',
 		});
-		expect(rows[0]).toMatchObject({ order: 'Auto-trade', defaultOrder: undefined });
-		expect(rows[4].assignment).toBe('Intercept');
+		expect(rows[0]).toMatchObject({ order: 'TradeRoutine', defaultOrder: undefined });
+		expect(rows[4].assignment).toBe('interception');
 	});
 
 	it('names a fleet without a fleet name after its commander, and a station fleet after the station', () => {

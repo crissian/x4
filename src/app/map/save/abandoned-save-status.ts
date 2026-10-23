@@ -13,9 +13,12 @@ export interface AbandonedMatches {
 
 /** Matches the abandoned ships of the game start to the ownerless ships of a save. */
 export class AbandonedSaveStatus {
+	/** how far a save ship may be from the listed position: the list gives positions to 0.1 km */
+	static readonly MAX_KM = 0.1;
+
 	/**
-	 * A ship of the list is unclaimed when the save has an ownerless ship of the same model in its sector, the
-	 * nearest one taken first when there are several. `position` gives a save ship's sector position in km.
+	 * A ship of the list is unclaimed when the save has an ownerless ship of the same model in its sector at the
+	 * listed position. `position` gives a save ship's sector position in km.
 	 */
 	static match(
 		list: readonly AbandonedShip[],
@@ -32,7 +35,7 @@ export class AbandonedSaveStatus {
 				}
 				const at = position(ship);
 				const distance = Math.hypot(at.x - item.x, at.z - item.z);
-				if (distance < bestDistance) {
+				if (distance <= AbandonedSaveStatus.MAX_KM && distance < bestDistance) {
 					best = ship;
 					bestDistance = distance;
 				}

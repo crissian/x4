@@ -2,7 +2,6 @@ import { convertToParamMap } from '@angular/router';
 import { describe, expect, it } from 'vitest';
 import type { EmpireShipRow, EmpireStationRow } from './empire-model';
 import { EmpireQuery } from './empire-query';
-import { ShipOrders } from './ship-orders';
 
 describe('EmpireQuery', () => {
 	it('reads the tab and filters and writes them back without the defaults', () => {
@@ -37,14 +36,5 @@ describe('EmpireQuery', () => {
 		] as unknown as EmpireStationRow[];
 		expect(EmpireQuery.stations(stations, { ...model, search: 'energy' }).map((x) => x.name)).toEqual(['Works']);
 		expect(EmpireQuery.stations(stations, { ...model, sector: 's2' }).map((x) => x.name)).toEqual(['Dock']);
-	});
-});
-
-describe('ShipOrders', () => {
-	it('labels known orders and assignments and splits unknown ids into words', () => {
-		expect(ShipOrders.label('DockAndWait')).toBe('Dock and wait');
-		expect(ShipOrders.label('FancyNewOrder_Extra')).toBe('Fancy New Order Extra');
-		expect(ShipOrders.assignment('supplyfleet')).toBe('Supply fleet');
-		expect(ShipOrders.assignment('newthing')).toBe('Newthing');
 	});
 });

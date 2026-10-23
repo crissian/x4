@@ -29,7 +29,6 @@ export class MapSaveAbandoned {
 	private readonly store = inject(MapStore);
 	private readonly ships = inject(ShipListService);
 	private readonly activeSave = inject(ActiveSave);
-	private readonly ownModels = computed(() => new Set((this.activeSave.empire()?.ships ?? []).map((x) => x.macro)));
 	/** The zone positions, for ships in a predefined zone; loaded in their own chunk with the first such ship. */
 	private readonly zones = new LazyValue(
 		() => !!this.activeSave.empire()?.ownerless.some((x) => x.zone),
@@ -55,11 +54,6 @@ export class MapSaveAbandoned {
 	/** The save status of a ship of the start list; undefined without a save. */
 	status(item: AbandonedShip): AbandonedStatus | undefined {
 		return this.matches()?.byItem.get(item);
-	}
-
-	/** The player owns a ship of this model in the save. */
-	owns(model: string): boolean {
-		return this.ownModels().has(model);
 	}
 
 	/** The ownerless ships not on the start list, in the drawn sectors. */

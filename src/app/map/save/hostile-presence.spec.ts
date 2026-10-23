@@ -15,32 +15,6 @@ describe('HostilePresence', () => {
 		...extra,
 	});
 
-	it('tells the station kinds apart by macro', () => {
-		expect(
-			[
-				'landmarks_kha_hive_01',
-				'landmarks_kha_nest_01',
-				'landmarks_kha_weaponplatform_01',
-				'station_xen_shipyard_base_01',
-				'station_xen_factory_base_01',
-				'station_xen_defence_base_01',
-				'asteroid_turret_m_01',
-				'xenon_asteroid_01_base_01',
-				'something_else',
-			].map((x) => HostilePresence.kind(x))
-		).toEqual([
-			'hive',
-			'nest',
-			'weaponplatform',
-			'shipyard',
-			'factory',
-			'defence',
-			'turret',
-			'asteroidbase',
-			'other',
-		]);
-	});
-
 	it('groups the stations and ships of each faction by sector', () => {
 		const sectors = HostilePresence.build(
 			[
@@ -53,6 +27,7 @@ describe('HostilePresence', () => {
 				station('argon', 'station_arg_shipyard', 's1'),
 			],
 			{ xenon: { s1: [3, 1, 0, 0], s4: [0, 0, 1, 1] } },
+			(x) => `name of ${x.macro}`,
 			(x) => x.known
 		);
 		expect(sectors).toEqual([
@@ -60,8 +35,8 @@ describe('HostilePresence', () => {
 				faction: 'xenon',
 				sector: 's1',
 				kinds: [
-					{ kind: 'defence', count: 2 },
-					{ kind: 'shipyard', count: 1 },
+					{ name: 'name of station_xen_defence_base_01', count: 2 },
+					{ name: 'name of station_xen_shipyard_base_01', count: 1 },
 				],
 				stations: 3,
 				ships: [3, 1, 0, 0],
@@ -70,7 +45,7 @@ describe('HostilePresence', () => {
 			{
 				faction: 'khaak',
 				sector: 's2',
-				kinds: [{ kind: 'hive', count: 1 }],
+				kinds: [{ name: 'name of landmarks_kha_hive_01', count: 1 }],
 				stations: 1,
 				ships: [0, 0, 0, 0],
 				shipTotal: 0,

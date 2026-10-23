@@ -1,16 +1,17 @@
 import { Injectable, Signal, WritableSignal, computed, inject } from '@angular/core';
 import { form } from '@angular/forms/signals';
+import { LazyValue } from '../../core/lazy-value';
 import { LocalStorage } from '../../core/services/local-storage';
 import { ActiveSave } from '../../savegame/active-save';
 import type { Sector } from '../../shared/services/model/model';
 import type { SectorShape } from '../galaxy-layout';
 import { MapStore } from '../map-store';
-import { HostileFaction, HostilePresence, HostileSector, HostileStationKind } from './hostile-presence';
+import { HostileFaction, HostilePresence, HostileSector } from './hostile-presence';
 
 /** A faction's presence in a sector, placed on the map. */
 export interface HostileMarker extends HostileSector {
 	shape: SectorShape;
-	/** "Shipyard, Defence platform ×2" */
+	/** "Xenon Defence Platform ×2, Xenon Shipyard" */
 	summary: string;
 }
 
@@ -24,6 +25,14 @@ export class MapHostiles {
 
 	private readonly store = inject(MapStore);
 	private readonly activeSave = inject(ActiveSave);
+	/** The game's station macro names, loaded in their own chunk once a save has map data. */
+	private readonly macroNames = new LazyValue(
+		() => !!this.activeSave.map(),
+		() =>
+			import('../../shared/services/data/station-macros-data').then(
+				({ StationMacros }) => new Map(StationMacros.all.map((x) => [x.id, x.name]))
+			)
+	).value;
 
 	/** The layers shown on the map. */
 	readonly layers: WritableSignal<Record<HostileFaction, boolean>> = LocalStorage.persistedSignal(
@@ -47,7 +56,8 @@ export class MapHostiles {
 	/** Every faction presence in the drawn sectors, by sector name, Xenon first. */
 	readonly sectors: Signal<HostileMarker[]> = computed(() => {
 		const map = this.activeSave.map();
-		if (!map) {
+		const names = this.macroNames();
+		if (!map || !names) {
 			return [];
 		}
 		const hide = this.store.hidesUnknown();
@@ -55,6 +65,7 @@ export class MapHostiles {
 		return HostilePresence.build(
 			map.stations,
 			this.activeSave.empire()?.hostileShips ?? {},
+			(x) => names.get(x.macro) ?? x.macro,
 			(x) => !hide || x.known
 		)
 			.flatMap((item) => {
@@ -96,33 +107,10 @@ export class MapHostiles {
 		return `${MapHostiles.factionName(marker.faction)} – ${sector.name}: ${parts.join('; ')}`;
 	}
 
-	/** The station kinds with their counts, e.g. "Hive, Weapon platform ×4". */
+	/** The station names with their counts, e.g. "Kha'ak Installation, Kha'ak Defence Platform ×4". */
 	static summary(item: HostileSector): string {
 		return item.kinds
-			.map((x) => (x.count > 1 ? `${MapHostiles.kindLabel(x.kind)} ×${x.count}` : MapHostiles.kindLabel(x.kind)))
+			.map((x) => (x.count > 1 ? `${x.name} ×${x.count}` : x.name))
 			.join(', ');
-	}
-
-	static kindLabel(kind: HostileStationKind): string {
-		switch (kind) {
-			case 'hive':
-				return $localize`:hostile station:Hive`;
-			case 'nest':
-				return $localize`:hostile station:Nest`;
-			case 'weaponplatform':
-				return $localize`:hostile station:Weapon platform`;
-			case 'shipyard':
-				return $localize`:hostile station:Shipyard`;
-			case 'factory':
-				return $localize`:hostile station:Factory`;
-			case 'defence':
-				return $localize`:hostile station:Defence platform`;
-			case 'turret':
-				return $localize`:hostile station:Turret`;
-			case 'asteroidbase':
-				return $localize`:hostile station:Asteroid base`;
-			default:
-				return $localize`:hostile station:Station`;
-		}
 	}
 }

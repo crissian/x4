@@ -2,7 +2,6 @@ import { GameTextRef } from '../core/game-text-ref';
 import type { SaveFleetShip } from '../savegame/empire/save-empire-model';
 import type { ShipListItem } from '../shared/services/model/model';
 import type { EmpireShipRow } from './empire-model';
-import { ShipOrders } from './ship-orders';
 
 /** What `EmpireShips.build` looks things up in. */
 export interface EmpireShipLookups {
@@ -96,9 +95,9 @@ export class EmpireShips {
 			purpose: model?.purpose ?? '',
 			sector: ship.sector,
 			sectorName: lookups.sectorName(ship.sector),
-			order: current ? ShipOrders.label(current) : '',
-			defaultOrder: ship.order && ship.defaultOrder ? ShipOrders.label(ship.defaultOrder) : undefined,
-			assignment: ship.assignment ? ShipOrders.assignment(ship.assignment) : undefined,
+			order: current ?? '',
+			defaultOrder: ship.order && ship.defaultOrder ? ship.defaultOrder : undefined,
+			assignment: ship.assignment,
 			...place,
 		};
 	}

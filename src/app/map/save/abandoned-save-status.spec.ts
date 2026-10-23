@@ -33,13 +33,13 @@ describe('AbandonedSaveStatus', () => {
 		expect(result.extras.map((x) => x.id)).toEqual(['b', 'c']);
 	});
 
-	it('takes the nearest ship of the model when a sector has several, each only once', () => {
+	it('needs the listed position, and takes each save ship only once', () => {
 		const result = AbandonedSaveStatus.match(
 			[item('fighter', 's1', 100, 0), item('fighter', 's1', 100, 0), item('fighter', 's1', 100, 0)],
 			[save('far', 'fighter', 's1', -500, 0), save('zoned', 'fighter', 's1', 0, 0, 'z1')],
 			position
 		);
-		expect(result.statuses).toEqual(['unclaimed', 'unclaimed', 'gone']);
-		expect(result.extras).toEqual([]);
+		expect(result.statuses).toEqual(['unclaimed', 'gone', 'gone']);
+		expect(result.extras.map((x) => x.id)).toEqual(['far']);
 	});
 });

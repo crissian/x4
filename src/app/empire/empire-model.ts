@@ -17,11 +17,11 @@ export interface EmpireShipRow {
 	purpose: string;
 	sector: string;
 	sectorName: string;
-	/** the order it runs now: the first queued one, else its default order */
+	/** the order it runs now, by its id in the save: the first queued one, else its default order */
 	order: string;
 	/** its default order when another one runs now */
 	defaultOrder?: string;
-	/** the commander's assignment for it, as a label */
+	/** the commander's assignment for it, as the save names it */
 	assignment?: string;
 	/** the commanding ship's or station's name */
 	commander?: string;

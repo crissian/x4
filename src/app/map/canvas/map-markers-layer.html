@@ -4,7 +4,7 @@
 		@let gone = abandoned.status(marker.item) === 'gone';
 		<svg:g class="cursor-pointer" [attr.data-sector]="marker.item.sector">
 			@if (gone) {
-				<svg:title i18n>Gone from your save: {{ marker.ship?.name ?? marker.item.ship }}</svg:title>
+				<svg:title i18n>Not there in your save: {{ marker.ship?.name ?? marker.item.ship }}</svg:title>
 			} @else {
 				<svg:title i18n>
 					Abandoned {{ marker.ship?.name ?? marker.item.ship

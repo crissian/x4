@@ -4,7 +4,7 @@
 </label>
 @if (save.active()) {
 	<p class="mb-2 text-xs text-fg-muted" i18n>
-		Checked against your save: still there, or gone (claimed, destroyed or not spawned yet).
+		Checked against your save: is there an ownerless ship of the same model at the listed position?
 	</p>
 }
 <table class="table text-sm">
@@ -22,14 +22,9 @@
 						<div class="text-xs text-fg-muted">{{ marker.item.condition }}</div>
 					}
 					@if (status === 'unclaimed') {
-						<div class="text-xs text-emerald-600 dark:text-emerald-400" i18n>Still there</div>
+						<div class="text-xs text-emerald-600 dark:text-emerald-400" i18n>Still there, ownerless</div>
 					} @else if (status === 'gone') {
-						<div class="text-xs text-fg-muted">
-							<ng-container i18n>Gone</ng-container>
-							@if (save.owns(marker.item.ship)) {
-								· <ng-container i18n>you own one</ng-container>
-							}
-						</div>
+						<div class="text-xs text-fg-muted" i18n>Not there in your save</div>
 					}
 				</td>
 				<td>
