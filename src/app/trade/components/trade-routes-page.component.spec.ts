@@ -6,7 +6,7 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { LazyValue } from '../../core/lazy-value';
 import { RouteMapComponent } from '../../map/route-map/route-map.component';
-import type { SaveMap, SaveOffer, SaveRelations, SaveStation } from '../../savegame/map/save-map-model';
+import type { SaveMap, SaveOffer, SaveRelations, SaveShips, SaveStation } from '../../savegame/map/save-map-model';
 import { SavegameStore } from '../../savegame/savegame-store';
 import { TradeRouteFinder } from '../trade-route-finder';
 import { TradeRoutesStore } from '../trade-routes-store';
@@ -50,7 +50,7 @@ describe('TradeRoutesPageComponent', () => {
 
 	async function setup(
 		url = '/trade-routes',
-		data: { map?: SaveMap; relations?: SaveRelations } | null = { map: MAP, relations: {} }
+		data: { map?: SaveMap; relations?: SaveRelations; ships?: SaveShips } | null = { map: MAP, relations: {} }
 	) {
 		const active = signal(
 			data && { id: 'x', schemaVersion: 4, info: { saveName: 'Save 5', gameTime: 7380 }, data }
@@ -193,6 +193,72 @@ describe('TradeRoutesPageComponent', () => {
 		await settle();
 		expect(element.querySelector<HTMLSelectElement>('#trade-ware')!.value).toBe('foodrations');
 		expect(router.url).toBe('/trade-routes?ware=foodrations');
+	});
+
+	describe('own ships', () => {
+		const SHIPS: SaveShips = [
+			{
+				id: '[0x1]',
+				code: 'ABC-001',
+				macro: 'ship_arg_m_trans_container_02_a',
+				sector: ARGON_PRIME,
+				name: 'Mule',
+				engine: 'engine_arg_m_combat_01_mk2',
+				engines: 1,
+			},
+		];
+		const data = { map: MAP, relations: {}, ships: SHIPS };
+
+		it('offers the ships of the save and times routes with their engines', async () => {
+			const { element, store, router, set } = await setup('/trade-routes', data);
+			const group = element.querySelector('#trade-ship optgroup')!;
+			expect(group.getAttribute('label')).toBe('Your ships');
+			expect(group.textContent).toContain('Mule');
+			expect(group.textContent).toContain('Argon Prime');
+			await set('#trade-ship', 'own-0x1');
+			expect(router.url).toBe('/trade-routes?ship=own-0x1');
+			expect(element.querySelector('#trade-cargo')).toBeNull();
+			const own = store.ownShips()[0];
+			expect(store.ship().speed).toBe(own.travel!.speed);
+			expect(store.ship().capacity['container']).toBe(own.capacity);
+		});
+
+		it('reads an own ship from the URL once the save has loaded', async () => {
+			const { element, store } = await setup('/trade-routes?ship=own-0x1', data);
+			expect(store.custom()).toBe(false);
+			expect(element.querySelector<HTMLSelectElement>('#trade-ship')!.value).toBe('own-0x1');
+		});
+
+		it('falls back to the custom ship for a ship not in the save', async () => {
+			const { element, store } = await setup('/trade-routes?ship=own-0x9', data);
+			expect(store.custom()).toBe(true);
+			expect(element.querySelector('#trade-cargo')).not.toBeNull();
+		});
+
+		it('offers no own ships for a save read before they were', async () => {
+			const { element } = await setup();
+			expect(element.querySelector('#trade-ship')!.textContent).not.toContain('Your ships');
+		});
+	});
+
+	describe('best sell per buy station', () => {
+		const twoBuyers: SaveMap = {
+			...MAP,
+			stations: [
+				...STATIONS,
+				station('BUY-3', ARGON_PRIME, [{ ware: 'energycells', sell: false, price: 15, amount: 5000 }]),
+			],
+		};
+
+		it('keeps the best buyer per offer until unticked', async () => {
+			const { element, store, router, settle } = await setup('/trade-routes', { map: twoBuyers, relations: {} });
+			expect(store.result().routes.filter((x) => x.seller.code === 'SEL-1').length).toBe(1);
+			expect(element.querySelector('tbody')!.textContent).toContain('+1 buyers');
+			element.querySelector<HTMLInputElement>('#trade-best')!.click();
+			await settle();
+			expect(router.url).toBe('/trade-routes?best=0');
+			expect(store.result().routes.filter((x) => x.seller.code === 'SEL-1').length).toBe(2);
+		});
 	});
 
 	describe('illegal wares', () => {

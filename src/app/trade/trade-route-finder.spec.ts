@@ -243,6 +243,20 @@ describe('trade route finder', () => {
 		}
 	});
 
+	it('keeps the best buyer per sell offer before the top 200', () => {
+		const stations = [];
+		for (let i = 0; i < 10; i++) {
+			stations.push(T.station(`S${i}`, 'a', [T.sell('ec', 10 + i, 100)]));
+		}
+		for (let i = 0; i < 25; i++) {
+			stations.push(T.station(`B${i}`, 'b', [T.buy('ec', 30 + i, 100)]));
+		}
+		const { routes, total } = find(stations, { filters: filters({ bestPerOffer: true }) });
+		expect(total).toBe(10);
+		expect(new Set(routes.map((x) => x.seller.code)).size).toBe(10);
+		expect(routes.every((x) => x.buyer.code === 'B24' && x.otherBuyers === 24)).toBe(true);
+	});
+
 	it('gives the capacity for the ware transport', () => {
 		const ship = { capacity: { container: 3000, solid: 1000 }, speed: 1, charge: 1 };
 		expect(TradeRouteFinder.capacityFor(ship, { volume: 1, transport: 'solid', illegalIn: [] })).toBe(1000);

@@ -6,6 +6,8 @@ import type { RouteStep } from '../map/route-planner';
 import { SaveStationNames } from '../map/save/save-station-names';
 import { ActiveSave } from '../savegame/active-save';
 import type { SaveStation } from '../savegame/map/save-map-model';
+import { OwnShipList } from '../savegame/own-ships/own-ship-list';
+import { OwnShips } from '../savegame/own-ships/own-ships';
 import { FilterLookups } from '../shared/services/filter-lookups';
 import { ShipListService } from '../shared/services/ship-list.service';
 import { SectorService } from '../shared/services/universe.service';
@@ -43,6 +45,7 @@ export class TradeRoutesStore {
 	private readonly wareService = inject(WareService);
 	private readonly shipService = inject(ShipListService);
 	private readonly stationNames = inject(SaveStationNames);
+	private readonly allOwnShips = inject(OwnShips);
 	private readonly wareInfos = new Map<string, TradeWareInfo | undefined>();
 
 	readonly save = this.activeSave.save;
@@ -58,8 +61,15 @@ export class TradeRoutesStore {
 		id: ship.id,
 		name: ship.name,
 		size: ship.size,
-		capacity: (ship.cargo ?? []).reduce((sum, x) => sum + x.max, 0),
+		capacity: TradeShips.capacity(ship),
 	}));
+	/** The player's cargo ships in the active save, with their total hold. */
+	readonly ownShips = computed(() =>
+		this.allOwnShips
+			.list()
+			.filter((x) => TradeShips.canTrade({ cargo: x.model.cargo, travel: x.travel }))
+			.map((own) => ({ ...own, capacity: TradeShips.capacity(own.model) }))
+	);
 	/** The sectors of the save, by name. */
 	readonly sectors = this.activeSave.sectors;
 	/** The wares the save's stations trade, by name. */
@@ -73,7 +83,8 @@ export class TradeRoutesStore {
 
 	private readonly lookups: TradeRouteLookups = {
 		...new FilterLookups(this.sectorService, this.wareService),
-		ship: (id) => this.ships.some((x) => x.id === id),
+		// own ships load with the save, after the URL is read: their keys are kept until then
+		ship: (id) => this.ships.some((x) => x.id === id) || OwnShipList.isKey(id),
 	};
 
 	readonly model = signal<TradeRoutesModel>(
@@ -89,7 +100,13 @@ export class TradeRoutesStore {
 	});
 	/** The model with out of range numbers back at their defaults. */
 	private readonly filterModel = computed(() => TradeRouteQuery.clean(this.model()));
-	readonly custom = computed(() => this.model().ship === TradeRouteQuery.CUSTOM);
+	/** The own ship picked, undefined for a ship model, the custom ship, or an own ship not in the active save. */
+	private readonly ownShip = computed(() => this.allOwnShips.find(this.model().ship));
+	/** The custom ship's numbers apply: picked, or an own ship that isn't in the active save (or not loaded yet). */
+	readonly custom = computed(() => {
+		const ship = this.model().ship;
+		return ship === TradeRouteQuery.CUSTOM || (OwnShipList.isKey(ship) && !this.ownShip());
+	});
 	readonly near = computed(() => this.lookups.sectorId(this.filterModel().near));
 	private readonly selectedKey = signal(this.activatedRoute.snapshot.queryParamMap.get('route') ?? '');
 
@@ -97,8 +114,9 @@ export class TradeRoutesStore {
 	readonly ship = computed<TradeShipSpec>(
 		() => {
 			const model = this.filterModel();
-			const ship = model.ship === TradeRouteQuery.CUSTOM ? undefined : this.shipService.getEntity(model.ship);
-			return ship
+			const own = this.ownShip();
+			const ship = own ? { ...own.model, travel: own.travel } : this.shipService.getEntity(model.ship);
+			return ship && !this.custom()
 				? TradeShips.spec(ship)
 				: TradeShips.custom(model.cargo, model.cargoType, model.speed, model.charge);
 		},
@@ -124,6 +142,7 @@ export class TradeRoutesStore {
 				ware: model.ware || undefined,
 				hideHostile: model.hideHostile,
 				playerOnly: model.playerOnly,
+				bestPerOffer: model.bestPerOffer,
 				hideIllegal: model.illegal === 'hide',
 			};
 		},
@@ -134,6 +153,7 @@ export class TradeRoutesStore {
 				a.ware === b.ware &&
 				a.hideHostile === b.hideHostile &&
 				a.playerOnly === b.playerOnly &&
+				a.bestPerOffer === b.bestPerOffer &&
 				a.hideIllegal === b.hideIllegal,
 		}
 	);
