@@ -11,8 +11,9 @@ interface StatView {
 }
 
 /**
- * A planet's stats on the game's own ranges: each whole value of the scale in its range's colour, the planet's
- * value marked, and the range's description. Stats without ranges show the value only.
+ * A planet's stats as the game's terraforming menu draws them: a block per value from 1 to the last range's end in
+ * its range's colour, filled up to the planet's value (ui/addons/ego_detailmonitor/menu_terraforming.lua:378-392),
+ * with the description of the range the value is in. Stats without ranges show the value only (:394).
  */
 @Component({
 	selector: 'app-terraforming-stats',

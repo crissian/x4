@@ -16,8 +16,8 @@ export interface TerraformingScaleCell {
 
 /**
  * The terraforming stats, projects, groups and planets of `libraries/terraforming.xml` and the md scripts, by id,
- * with the game's menu texts. A range takes the values above the previous range's end up to its own `end`; the
- * first range starts at 0.
+ * with the game's menu texts. A value is in the first range whose `end` is at least the value, as the game's
+ * terraforming menu colours a stat's blocks (ui/addons/ego_detailmonitor/menu_terraforming.lua:380-385).
  */
 export class TerraformingCatalog {
 	readonly stats: readonly TerraformingStatData[];
@@ -69,28 +69,24 @@ export class TerraformingCatalog {
 		return this.data.labels[key]?.label ?? key;
 	}
 
-	/** The range a value of the stat falls in; above the last end, the last range. */
+	/** The range a value of the stat falls in: the first whose end is at least the value. */
 	range(stat: TerraformingStatData, value: number): TerraformingRangeData | undefined {
-		return stat.ranges.find((x) => value <= x.end) ?? stat.ranges.at(-1);
+		return stat.ranges.find((x) => value <= x.end);
 	}
 
-	/** Every whole value from 0 to the last range's end, with its range; empty for a stat without ranges. */
+	/**
+	 * The blocks the game draws for a stat: one per whole value from 1 to the last range's end, in its range's colour
+	 * (menu_terraforming.lua:378-392); empty for a stat without ranges, which the menu shows as a number.
+	 */
 	scale(stat: TerraformingStatData): TerraformingScaleCell[] {
 		const last = stat.ranges.at(-1);
 		if (!last) {
 			return [];
 		}
 		const cells: TerraformingScaleCell[] = [];
-		for (let value = 0; value <= last.end; value++) {
+		for (let value = 1; value <= last.end; value++) {
 			cells.push({ value, range: this.range(stat, value)! });
 		}
 		return cells;
-	}
-
-	/** The ranges whose state is within min..max, either open. */
-	rangesInStates(stat: TerraformingStatData, min?: number, max?: number): TerraformingRangeData[] {
-		return stat.ranges.filter(
-			(x) => (min === undefined || x.state >= min) && (max === undefined || x.state <= max)
-		);
 	}
 }

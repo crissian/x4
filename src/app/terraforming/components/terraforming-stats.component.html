@@ -10,8 +10,8 @@
 					@for (cell of row.scale; track cell.value) {
 						<span
 							class="cell"
-							[class.cell-current]="cell.value === row.value"
-							[style.background-color]="cell.range.color"
+							[style.border-color]="cell.range.color"
+							[style.background-color]="cell.value <= row.value ? cell.range.color : null"
 							[title]="cell.value + (cell.range.description ? ': ' + cell.range.description : '')"
 						></span>
 					}

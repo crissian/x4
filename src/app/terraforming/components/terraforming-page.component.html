@@ -74,25 +74,23 @@
 			}
 
 			<h2 class="mt-6 text-base font-semibold text-fg-strong">{{ label('projects') }}</h2>
-			@let count = counts();
 			<p class="mb-2 text-sm text-fg-muted" i18n>
-				{{ count.total }} projects: {{ count.ready }} with their requirements met, {{ count.completed }}
-				completed.
+				{count(), plural, =1 {1 project} other {{{ count() }} projects}}
 			</p>
 			@if (!state.fromSave) {
 				<p class="mb-2 text-sm text-fg-muted" i18n>
 					Only the projects the scripts add to this planet by name. The general ones (power, industry, housing
 					and more) and the ware amounts the game asks for are known once a save is loaded; the wares shown
-					here are the library's proportions.
+					here are the library's amounts, which the save scales for each planet.
 				</p>
 			}
 			<app-tabs label="Project view" i18n-label [tabs]="tabs" [(selected)]="store.view">
 				@if (store.view() === 'graph') {
 					<p class="mb-2 text-sm text-fg-muted" i18n>
 						Required projects point right to the projects needing them; dashed lines lead to a project that
-						needs any one of them.
+						needs any one of them. The projects completed in the save are green.
 					</p>
-					<app-terraforming-graph [rows]="state.projects" />
+					<app-terraforming-graph [rows]="state.projects" [completedLabel]="label('timesCompleted')" />
 				} @else {
 					<app-data-grid
 						[data]="rows()"

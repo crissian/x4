@@ -24,7 +24,6 @@ export class TerraformingStore {
 	readonly text = new TerraformingText(this.catalog);
 	readonly save = this.activeSave.save;
 	private readonly terraforming = this.activeSave.terraforming;
-	private readonly research = this.activeSave.research;
 	/** none without a save, reload-needed for a save read before terraforming was extracted */
 	readonly status = this.activeSave.statusOf(this.terraforming);
 
@@ -50,8 +49,7 @@ export class TerraformingStore {
 			return undefined;
 		}
 		const saved = this.terraforming()?.find((x) => x.cluster === planet.cluster && x.part === planet.part);
-		const research = this.research();
-		return new TerraformingPlanetState(this.catalog, planet, saved, research ? new Set(research) : undefined);
+		return new TerraformingPlanetState(this.catalog, planet, saved);
 	});
 
 	constructor() {

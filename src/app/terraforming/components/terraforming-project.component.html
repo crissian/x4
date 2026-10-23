@@ -10,7 +10,7 @@
 			@if (project.duration) {
 				<div [appDetail]="label('duration')">{{ duration() }}</div>
 			}
-			@if (project.repeatCooldown !== undefined) {
+			@if (project.repeatCooldown) {
 				<div [appDetail]="label('cooldown')">{{ cooldown() }}</div>
 			}
 			@if (research(); as research) {
@@ -26,7 +26,7 @@
 			@if (project.resilient) {
 				<li>{{ label('resilient') }}</li>
 			}
-			@if (project.chance !== undefined) {
+			@if (project.chance !== undefined && project.chance < 100) {
 				<li>{{ chance() }}</li>
 			}
 		</ul>
@@ -38,11 +38,13 @@
 					@for (condition of conditions(); track $index) {
 						<li class="flex flex-wrap items-center gap-1">
 							<span>{{ condition.text }}</span>
-							@for (range of condition.ranges; track $index) {
+							@for (block of condition.blocks; track block.value) {
 								<span
 									class="inline-block h-3 w-3 rounded-sm border border-line"
-									[style.background-color]="range.color"
-									[title]="range.description ?? ''"
+									[style.background-color]="block.range.color"
+									[title]="
+										block.value + (block.range.description ? ': ' + block.range.description : '')
+									"
 								></span>
 							}
 						</li>
@@ -56,7 +58,7 @@
 					@for (effect of effects(); track $index) {
 						<li>{{ effect }}</li>
 					} @empty {
-						<li class="text-fg-muted">{{ label('noEffect') }}</li>
+						<li class="text-fg-muted">-</li>
 					}
 				</ul>
 
@@ -74,12 +76,6 @@
 								}
 								@if (side.effect) {
 									· {{ side.effect }}
-								}
-								@if (side.project) {
-									·
-									<a [routerLink]="['/terraforming/projects', side.project]">{{
-										side.projectName
-									}}</a>
 								}
 							</li>
 						}
@@ -105,41 +101,18 @@
 						}
 					</ul>
 				}
-				@if (blocks().length || blocksGroups().length) {
-					<h2 class="mt-4 font-semibold text-fg-strong" i18n>Blocks</h2>
-					<ul class="mt-1 text-sm">
-						@for (item of blocks(); track item.id) {
-							<li>
-								<a [routerLink]="['/terraforming/projects', item.id]">{{ item.name }}</a>
-							</li>
-						}
-						@for (group of blocksGroups(); track group) {
-							<li i18n>Group: {{ group }}</li>
-						}
-					</ul>
-				}
 			</section>
 
 			<section>
 				<h2 class="font-semibold text-fg-strong">{{ label('requiredResources') }}</h2>
 				@if (project.wares.length) {
 					<p class="text-xs text-fg-muted" i18n>
-						The library's proportions; the game scales them per planet, see the planner with a save loaded.
+						The library's amounts, which the save scales for each planet; see the planner with a save
+						loaded.
 					</p>
 					<app-ware-amounts class="mt-1 block" [items]="project.wares" />
 				} @else {
 					<p class="text-sm text-fg-muted">-</p>
-				}
-
-				@if (deliveries().length) {
-					<h2 class="mt-4 font-semibold text-fg-strong" i18n>Delivery drones</h2>
-					<ul class="mt-1 text-sm">
-						@for (drone of deliveries(); track drone.macro) {
-							<li i18n>
-								{{ drone.amount }} × {{ drone.name ?? drone.macro }}, built in {{ drone.time }}
-							</li>
-						}
-					</ul>
 				}
 
 				<h2 class="mt-4 font-semibold text-fg-strong" i18n>Offered on</h2>

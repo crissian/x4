@@ -58,7 +58,7 @@ export default class TerraformingPageComponent {
 			id: row.id,
 			row,
 			group: row.project ? catalog.groupName(row.project.group) : '',
-			conditions: (row.project?.conditions ?? []).map((x) => text.condition(x)).join(', '),
+			conditions: (row.project?.conditions ?? []).flatMap((x) => text.condition(x) ?? []).join(', '),
 			effects: (row.project?.effects ?? []).map((x) => text.effect(x)).join(', '),
 			wares: row.wares
 				.map((x) => `${this.wares.getEntity(x.ware)?.name ?? x.ware} ${NumberFormats.whole(x.amount)}`)
@@ -67,12 +67,5 @@ export default class TerraformingPageComponent {
 			predecessors: row.predecessors.map((x) => catalog.projectName(x)).join(row.any ? ' / ' : ', '),
 		}));
 	});
-	protected readonly counts = computed(() => {
-		const projects = this.store.state()?.projects ?? [];
-		return {
-			total: projects.length,
-			ready: projects.filter((x) => x.state === 'ready').length,
-			completed: projects.filter((x) => x.state === 'completed').length,
-		};
-	});
+	protected readonly count = computed(() => this.store.state()?.projects.length ?? 0);
 }

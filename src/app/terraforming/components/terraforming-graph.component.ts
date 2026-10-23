@@ -2,11 +2,11 @@ import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DagLayout, type DagLayoutOptions } from '../../shared/graph/dag-layout';
 import type { TerraformingProjectRow } from '../terraforming-planet-state';
-import { TerraformingText } from '../terraforming-text';
 
 /**
  * A planet's projects as a graph, predecessors left of the projects needing them; dashed edges lead to a project
- * that needs any one of its predecessors. The projects without any link are packed at the end; each links to its page.
+ * that needs any one of its predecessors; the projects completed in the save are green. The projects without any
+ * link are packed at the end; each links to its page.
  */
 @Component({
 	selector: 'app-terraforming-graph',
@@ -24,6 +24,8 @@ export class TerraformingGraphComponent {
 	};
 
 	readonly rows = input.required<readonly TerraformingProjectRow[]>();
+	/** the game's "Times completed" text */
+	readonly completedLabel = input.required<string>();
 
 	protected readonly size = TerraformingGraphComponent.OPTIONS;
 	protected readonly layout = computed(() =>
@@ -49,8 +51,8 @@ export class TerraformingGraphComponent {
 			x,
 			y,
 			row: node,
-			tone: TerraformingText.TONES[node.state],
-			state: TerraformingText.state(node.state),
+			tone: node.completed ? 'green' : 'grey',
+			state: node.completed ? `${this.completedLabel()}: ${node.completed}` : '',
 		}))
 	);
 }

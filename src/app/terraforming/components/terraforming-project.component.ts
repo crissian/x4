@@ -6,14 +6,14 @@ import { DetailComponent, DetailPageComponent } from '../../shared/components/de
 import { WareAmountsComponent } from '../../shared/components/ware-amounts/ware-amounts.component';
 import { Research } from '../../shared/services/data/research-data';
 import { WareGroups } from '../../shared/services/data/ware-groups-data';
-import type { TerraformingConditionData } from '../../shared/services/data/terraforming-data';
 import { WareService } from '../../shared/services/ware.service';
 import { TerraformingCatalog } from '../terraforming-catalog';
 import { TerraformingText } from '../terraforming-text';
 
 /**
  * A terraforming project: what it needs (conditions, required research, wares), what it does (effects, side
- * effects, rebates, projects it removes or blocks) and the planets that offer it, with the game's menu texts.
+ * effects, rebates, projects it removes) and the planets that offer it, laid out with the texts of the game's
+ * terraforming menu (ui/addons/ego_detailmonitor/menu_terraforming.lua:820-1110).
  */
 @Component({
 	imports: [DetailComponent, DetailPageComponent, RouterLink, WareAmountsComponent],
@@ -42,19 +42,18 @@ export class TerraformingProjectComponent {
 		return id ? { id, name: Research[id as keyof typeof Research]?.name ?? id } : undefined;
 	});
 
-	/** each condition with the colours of the ranges it allows */
+	/** the conditions the menu shows, each with the blocks that meet it (menu_terraforming.lua:1199-1232) */
 	protected readonly conditions = computed(() =>
-		(this.project()?.conditions ?? []).map((condition) => ({
-			text: this.text.condition(condition),
-			ranges: this.ranges(condition),
-		}))
+		(this.project()?.conditions ?? []).flatMap((condition) => {
+			const text = this.text.condition(condition);
+			return text ? [{ text, blocks: this.text.conditionBlocks(condition) ?? [] }] : [];
+		})
 	);
 	protected readonly effects = computed(() => (this.project()?.effects ?? []).map((x) => this.text.effect(x)));
 	protected readonly sideEffects = computed(() =>
 		(this.project()?.sideEffects ?? []).map((x) => ({
 			...x,
 			effect: x.stat ? this.text.effect({ stat: x.stat, change: x.change }) : undefined,
-			projectName: x.project ? this.catalog.projectName(x.project) : undefined,
 		}))
 	);
 	protected readonly rebates = computed(() =>
@@ -65,14 +64,7 @@ export class TerraformingProjectComponent {
 			value: x.value,
 		}))
 	);
-	protected readonly deliveries = computed(() =>
-		(this.project()?.deliveries ?? []).map((x) => ({ ...x, time: Duration.short(x.buildDuration) }))
-	);
 	protected readonly removes = computed(() => this.links(this.project()?.removes ?? []));
-	protected readonly blocks = computed(() => this.links(this.project()?.blocks ?? []));
-	protected readonly blocksGroups = computed(() =>
-		(this.project()?.blocksGroups ?? []).map((x) => this.catalog.groupName(x))
-	);
 
 	/** The planets offering the project: in the active save, else as the scripts set them up. */
 	protected readonly planets = computed(() => {
@@ -102,13 +94,5 @@ export class TerraformingProjectComponent {
 
 	private links(ids: readonly string[]) {
 		return ids.map((id) => ({ id, name: this.catalog.projectName(id), known: !!this.catalog.project(id) }));
-	}
-
-	private ranges(condition: TerraformingConditionData) {
-		const stat = this.catalog.stat(condition.stat);
-		if (!stat || (condition.min === undefined && condition.max === undefined)) {
-			return [];
-		}
-		return this.catalog.rangesInStates(stat, condition.min, condition.max);
 	}
 }
