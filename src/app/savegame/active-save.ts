@@ -6,9 +6,10 @@ import { BlueprintsExtractor } from './extractors/blueprints-extractor';
 import { LicencesExtractor } from './extractors/licences-extractor';
 import { MapExtractor } from './extractors/map-extractor';
 import { RelationsExtractor } from './extractors/relations-extractor';
+import { ResearchExtractor } from './extractors/research-extractor';
 import { RepresentativesExtractor } from './extractors/representatives-extractor';
 import { ShipsExtractor } from './extractors/ships-extractor';
-import type { SaveBlueprints, SaveLicences, SaveMap, SaveRelations, SaveRepresentatives, SaveShips } from './map/save-map-model';
+import type { SaveBlueprints, SaveLicences, SaveMap, SaveRelations, SaveRepresentatives, SaveResearch, SaveShips } from './map/save-map-model';
 import { SavegameStore } from './savegame-store';
 
 /**
@@ -29,6 +30,8 @@ export class ActiveSave {
 	readonly licences = this.data<SaveLicences>(LicencesExtractor.KEY);
 	readonly blueprints = this.data<SaveBlueprints>(BlueprintsExtractor.KEY);
 	readonly representatives = this.data<SaveRepresentatives>(RepresentativesExtractor.KEY);
+	/** The research the player has completed; undefined for a save read before it was. */
+	readonly research = this.data<SaveResearch>(ResearchExtractor.KEY);
 	/** The player's ships; undefined for a save read before they were. */
 	readonly ships = this.data<SaveShips>(ShipsExtractor.KEY);
 
