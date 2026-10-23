@@ -949,7 +949,6 @@
     "7890387002072939430": "Nessuna merce",
     "4701010703602128964": "Merci da consegnare",
     "9200619097756592723": "Totale per arrivarci",
-    "4803485423103766668": " {$INTERPOLATION} progetti non ancora completati, questo compreso: {$INTERPOLATION_1} uno dopo l'altro, ≈ {$INTERPOLATION_2} Cr di merci. ",
     "7567139540140678257": "Missioni necessarie prima:",
     "5129056057371490500": "Merci dell'intero percorso",
     "5681724108557010387": "Porta a",
@@ -964,7 +963,6 @@
     "8828691442807617096": "nessuna merce",
     "6529313817069204464": " I progetti di storia, come la ricerca sulle navi, sono esclusi: il quartier generale li offre quando la loro storia li aggiunge. ",
     "6055081555185819285": " Ora non si può iniziare nulla: il resto richiede prima una missione o un evento di storia, oppure è completato. ",
-    "2721809251099051399": " I progetti di ricerca del tuo quartier generale: cosa costa e sblocca ciascuno e cosa richiede ancora un progetto in base alla ricerca già svolta. I progetti si ricercano uno alla volta. ",
     "3074216666465421280": " {$INTERPOLATION} progetti su {$INTERPOLATION_1} completati in {$INTERPOLATION_2} ({$INTERPOLATION_3}). ",
     "6694755327399197529": "Ricarica questo salvataggio per vedere la ricerca completata",
     "6960210003530191038": " per segnare la ricerca completata e vedere cosa è disponibile dopo.",
@@ -979,6 +977,8 @@
     "7870689051450450957": "Bloccato",
     "1853743006425939413": "Da una missione",
     "2323049345561640994": "Mod di equipaggiamento",
-    "6788376847173133789": "Progetto consegnato da una ricerca del quartier generale:"
+    "6788376847173133789": "Progetto consegnato da una ricerca del quartier generale:",
+    "6906540910867877311": " {$INTERPOLATION} progetti non ancora completati, questo compreso: ≈ {$INTERPOLATION_1} Cr di merci. ",
+    "4783622877709676966": " I progetti di ricerca del tuo quartier generale: cosa costa e sblocca ciascuno e cosa richiede ancora un progetto in base alla ricerca già svolta. "
   }
 }

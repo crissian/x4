@@ -38,8 +38,8 @@
 			@if (path.steps.length > 1) {
 				<h3 class="mt-4 font-semibold text-fg-strong" i18n>Total to get here</h3>
 				<p class="text-fg-muted" i18n>
-					{{ path.researched.length }} projects not done yet, this one included: {{ pathTime() }} one after
-					another, ≈ {{ pathValue() | number: '1.0-0' }} Cr of wares.
+					{{ path.researched.length }} projects not done yet, this one included: ≈
+					{{ pathValue() | number: '1.0-0' }} Cr of wares.
 				</p>
 				@if (path.missions.length) {
 					<p class="mt-1" i18n>Missions needed first:</p>

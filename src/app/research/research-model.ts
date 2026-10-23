@@ -22,8 +22,6 @@ export interface ResearchPath {
 	researched: ResearchData[];
 	/** the steps granted by missions */
 	missions: ResearchData[];
-	/** seconds of the researched steps, one after another */
-	time: number;
 	/** the wares of the researched steps, largest amount first */
 	wares: WareAmount[];
 }

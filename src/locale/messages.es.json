@@ -949,7 +949,6 @@
     "7890387002072939430": "Sin mercancías",
     "4701010703602128964": "Mercancías a entregar",
     "9200619097756592723": "Total para llegar aquí",
-    "4803485423103766668": " {$INTERPOLATION} proyectos aún sin hacer, este incluido: {$INTERPOLATION_1} uno tras otro, ≈ {$INTERPOLATION_2} Cr en mercancías. ",
     "7567139540140678257": "Misiones necesarias primero:",
     "5129056057371490500": "Mercancías de todo el camino",
     "5681724108557010387": "Conduce a",
@@ -964,7 +963,6 @@
     "8828691442807617096": "sin mercancías",
     "6529313817069204464": " Se omiten los proyectos de historia, como la investigación de naves: el cuartel general los ofrece cuando su historia los añade. ",
     "6055081555185819285": " Ahora no se puede empezar nada: el resto necesita antes una misión o un evento de historia, o ya está hecho. ",
-    "2721809251099051399": " Los proyectos de investigación de tu cuartel general: lo que cuesta y desbloquea cada uno, y lo que aún requiere un proyecto según la investigación que ya has hecho. Los proyectos se investigan de uno en uno. ",
     "3074216666465421280": " {$INTERPOLATION} de {$INTERPOLATION_1} proyectos hechos en {$INTERPOLATION_2} ({$INTERPOLATION_3}). ",
     "6694755327399197529": "Vuelve a cargar esta partida para ver la investigación que has hecho",
     "6960210003530191038": " para marcar la investigación que has hecho y ver qué está disponible a continuación.",
@@ -979,6 +977,8 @@
     "7870689051450450957": "Bloqueado",
     "1853743006425939413": "De una misión",
     "2323049345561640994": "Mods de equipo",
-    "6788376847173133789": "Plano entregado por una investigación del cuartel general:"
+    "6788376847173133789": "Plano entregado por una investigación del cuartel general:",
+    "6906540910867877311": " {$INTERPOLATION} proyectos aún sin hacer, este incluido: ≈ {$INTERPOLATION_1} Cr en mercancías. ",
+    "4783622877709676966": " Los proyectos de investigación de tu cuartel general: lo que cuesta y desbloquea cada uno, y lo que aún requiere un proyecto según la investigación que ya has hecho. "
   }
 }

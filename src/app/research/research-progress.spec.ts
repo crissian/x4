@@ -50,7 +50,6 @@ describe('ResearchProgress', () => {
 		const progress = ProgressFixture.of();
 		const path = progress.path(progress.get('build')!);
 		expect(path.steps.map((x) => x.id)).toEqual(['dock', 'defence', 'build']);
-		expect(path.time).toBe(1800);
 		expect(path.wares).toEqual([
 			{ ware: 'energycells', amount: 5000 },
 			{ ware: 'smartchips', amount: 150 },
@@ -64,7 +63,6 @@ describe('ResearchProgress', () => {
 		const fresh = ProgressFixture.of().path(ProgressFixture.of().get('mk2')!);
 		expect(fresh.missions.map((x) => x.id)).toEqual(['pre']);
 		expect(fresh.researched.map((x) => x.id)).toEqual(['mk1', 'mk2']);
-		expect(fresh.time).toBe(1200);
 	});
 
 	it('has an empty path for a done project', () => {

@@ -949,7 +949,6 @@
     "7890387002072939430": "Aucune marchandise",
     "4701010703602128964": "Marchandises à livrer",
     "9200619097756592723": "Total pour y arriver",
-    "4803485423103766668": " {$INTERPOLATION} projets pas encore faits, celui-ci compris : {$INTERPOLATION_1} l'un après l'autre, ≈ {$INTERPOLATION_2} Cr de marchandises. ",
     "7567139540140678257": "Missions nécessaires d'abord :",
     "5129056057371490500": "Marchandises de tout le chemin",
     "5681724108557010387": "Mène à",
@@ -964,7 +963,6 @@
     "8828691442807617096": "sans marchandises",
     "6529313817069204464": " Les projets d'histoire, comme la recherche de vaisseaux, sont omis : le QG les propose une fois ajoutés par leur histoire. ",
     "6055081555185819285": " Rien ne peut être lancé pour l'instant : le reste demande d'abord une mission ou un événement d'histoire, ou est terminé. ",
-    "2721809251099051399": " Les projets de recherche de votre QG : ce que chacun coûte et débloque, et ce qu'il reste à faire pour un projet selon vos recherches déjà faites. Les projets se recherchent un à la fois. ",
     "3074216666465421280": " {$INTERPOLATION} projets sur {$INTERPOLATION_1} terminés dans {$INTERPOLATION_2} ({$INTERPOLATION_3}). ",
     "6694755327399197529": "Rechargez cette sauvegarde pour voir vos recherches terminées",
     "6960210003530191038": " pour marquer vos recherches terminées et voir ce qui est disponible ensuite.",
@@ -979,6 +977,8 @@
     "7870689051450450957": "Verrouillé",
     "1853743006425939413": "D'une mission",
     "2323049345561640994": "Mods d'équipement",
-    "6788376847173133789": "Plan remis par une recherche du QG :"
+    "6788376847173133789": "Plan remis par une recherche du QG :",
+    "6906540910867877311": " {$INTERPOLATION} projets pas encore faits, celui-ci compris : ≈ {$INTERPOLATION_1} Cr de marchandises. ",
+    "4783622877709676966": " Les projets de recherche de votre QG : ce que chacun coûte et débloque, et ce qu'il reste à faire pour un projet selon vos recherches déjà faites. "
   }
 }

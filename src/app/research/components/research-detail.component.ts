@@ -58,7 +58,6 @@ export class ResearchDetailComponent {
 		})).filter((x) => x.items.length);
 	});
 	protected readonly path = this.store.path;
-	protected readonly pathTime = computed(() => Duration.short(this.path()?.time ?? 0));
 	protected readonly pathValue = computed(() => this.store.value(this.path()?.wares ?? []));
 	protected readonly steps = computed(() => this.links(this.path()?.steps));
 

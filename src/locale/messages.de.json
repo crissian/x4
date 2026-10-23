@@ -949,7 +949,6 @@
     "7890387002072939430": "Keine Waren",
     "4701010703602128964": "Zu liefernde Waren",
     "9200619097756592723": "Gesamtaufwand bis hierher",
-    "4803485423103766668": " {$INTERPOLATION} noch nicht erledigte Projekte, dieses eingeschlossen: {$INTERPOLATION_1} nacheinander, Waren für ≈ {$INTERPOLATION_2} Cr. ",
     "7567139540140678257": "Zuerst benötigte Missionen:",
     "5129056057371490500": "Waren des ganzen Wegs",
     "5681724108557010387": "Führt zu",
@@ -964,7 +963,6 @@
     "8828691442807617096": "keine Waren",
     "6529313817069204464": " Story-Projekte wie die Schiffsforschung fehlen hier: das Hauptquartier bietet sie an, sobald ihre Geschichte sie hinzufügt. ",
     "6055081555185819285": " Gerade lässt sich nichts beginnen: der Rest braucht zuerst eine Mission oder ein Story-Ereignis oder ist erledigt. ",
-    "2721809251099051399": " Die Forschungsprojekte deines Hauptquartiers: was jedes kostet und freischaltet und was ein Projekt nach deiner bisherigen Forschung noch braucht. Projekte werden nacheinander erforscht. ",
     "3074216666465421280": " {$INTERPOLATION} von {$INTERPOLATION_1} Projekten erledigt in {$INTERPOLATION_2} ({$INTERPOLATION_3}). ",
     "6694755327399197529": "Lade diesen Spielstand neu, um deine erledigte Forschung zu sehen",
     "6960210003530191038": ", um deine erledigte Forschung zu markieren und zu sehen, was als Nächstes verfügbar ist.",
@@ -979,6 +977,8 @@
     "7870689051450450957": "Gesperrt",
     "1853743006425939413": "Aus einer Mission",
     "2323049345561640994": "Ausrüstungsmods",
-    "6788376847173133789": "Bauplan durch Forschung im Hauptquartier:"
+    "6788376847173133789": "Bauplan durch Forschung im Hauptquartier:",
+    "6906540910867877311": " {$INTERPOLATION} noch nicht erledigte Projekte, dieses eingeschlossen: Waren für ≈ {$INTERPOLATION_1} Cr. ",
+    "4783622877709676966": " Die Forschungsprojekte deines Hauptquartiers: was jedes kostet und freischaltet und was ein Projekt nach deiner bisherigen Forschung noch braucht. "
   }
 }

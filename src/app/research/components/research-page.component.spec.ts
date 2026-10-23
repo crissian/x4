@@ -79,7 +79,6 @@ describe('ResearchPageComponent', () => {
 				(id) => store.progress().get(id)!.name
 			)
 		);
-		expect(store.path()!.time).toBe(600 + 900 + 900);
 	});
 
 	it('names the mission a mod research needs', async () => {

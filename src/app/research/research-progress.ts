@@ -92,7 +92,6 @@ export class ResearchProgress {
 			steps,
 			researched,
 			missions: steps.filter((x) => x.missionOnly),
-			time: researched.reduce((sum, x) => sum + x.time, 0),
 			wares: ResearchCost.sum(researched.map((x) => x.wares)),
 		};
 	}
