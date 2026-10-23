@@ -532,7 +532,7 @@
     "1936788271886517475": "엔진별 속도",
     "shipEnginesFastestOnly": "가장 빠른 엔진 {$INTERPOLATION}개만 표시",
     "shipEnginesShowAll": "엔진 {$INTERPOLATION}개 모두 표시",
-    "shipEnginesSortedByTravel": "순항 속도순, 빠른 것부터.",
+    "shipEnginesSortedByTravel": " 순항 속도순, 빠른 것부터. ",
     "7427631456171870062": " 속도 = 엔진 추진력 × 엔진 {$INTERPOLATION}개 / 항력 {$INTERPOLATION_1}. 장비 개조와 승무원 숙련도는 포함되지 않습니다. ",
     "6863149805193218569": "호환되는 엔진이 없습니다.",
     "5389209284626508549": "순항 충전 (s)",

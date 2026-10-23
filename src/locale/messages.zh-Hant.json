@@ -532,7 +532,7 @@
     "1936788271886517475": "各引擎速度",
     "shipEnginesFastestOnly": "只顯示最快的 {$INTERPOLATION} 具引擎",
     "shipEnginesShowAll": "顯示全部 {$INTERPOLATION} 具引擎",
-    "shipEnginesSortedByTravel": "依巡航速度排序，最快的在前。",
+    "shipEnginesSortedByTravel": " 依巡航速度排序，最快的在前。 ",
     "7427631456171870062": " 速度 = 引擎推力 × {$INTERPOLATION} 個引擎 / 阻力 {$INTERPOLATION_1}。不含裝備改裝與船員技能。 ",
     "6863149805193218569": "找不到相容的引擎。",
     "5389209284626508549": "旅行充能（s）",

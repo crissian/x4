@@ -532,7 +532,7 @@
     "1936788271886517475": "Velocità per motore",
     "shipEnginesFastestOnly": "Mostra solo i {$INTERPOLATION} motori più veloci",
     "shipEnginesShowAll": "Mostra tutti i {$INTERPOLATION} motori",
-    "shipEnginesSortedByTravel": "Ordinati per velocità di viaggio, i più veloci prima.",
+    "shipEnginesSortedByTravel": " Ordinati per velocità di viaggio, i più veloci prima. ",
     "7427631456171870062": " Velocità = spinta del motore × {$INTERPOLATION} motori / resistenza {$INTERPOLATION_1}. Le modifiche all'equipaggiamento e l'abilità dell'equipaggio non sono incluse. ",
     "6863149805193218569": "Nessun motore compatibile trovato.",
     "5389209284626508549": "Carica viaggio (s)",

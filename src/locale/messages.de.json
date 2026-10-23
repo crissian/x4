@@ -532,7 +532,7 @@
     "1936788271886517475": "Geschwindigkeit nach Triebwerk",
     "shipEnginesFastestOnly": "Nur die {$INTERPOLATION} schnellsten Triebwerke zeigen",
     "shipEnginesShowAll": "Alle {$INTERPOLATION} Triebwerke zeigen",
-    "shipEnginesSortedByTravel": "Nach Reisegeschwindigkeit sortiert, schnellste zuerst.",
+    "shipEnginesSortedByTravel": " Nach Reisegeschwindigkeit sortiert, schnellste zuerst. ",
     "7427631456171870062": " Geschwindigkeit = Triebwerksschub × {$INTERPOLATION} Triebwerke / Luftwiderstand {$INTERPOLATION_1}. Ausrüstungsmods und Crew-Fähigkeiten sind nicht berücksichtigt. ",
     "6863149805193218569": "Keine kompatiblen Triebwerke gefunden.",
     "5389209284626508549": "Reiseantrieb-Aufladung (s)",

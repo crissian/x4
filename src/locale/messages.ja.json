@@ -532,7 +532,7 @@
     "1936788271886517475": "エンジン別速度",
     "shipEnginesFastestOnly": "最速の {$INTERPOLATION} 基のエンジンのみ表示",
     "shipEnginesShowAll": "全 {$INTERPOLATION} 基のエンジンを表示",
-    "shipEnginesSortedByTravel": "巡航速度順（速い順）。",
+    "shipEnginesSortedByTravel": " 巡航速度順（速い順）。 ",
     "7427631456171870062": " 速度 = エンジン推力 × エンジン数 {$INTERPOLATION} / 抗力 {$INTERPOLATION_1}。装備改造と船員のスキルは含まれません。 ",
     "6863149805193218569": "対応するエンジンが見つかりません。",
     "5389209284626508549": "トラベルチャージ (s)",

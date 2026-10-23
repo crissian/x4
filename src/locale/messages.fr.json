@@ -532,7 +532,7 @@
     "1936788271886517475": "Vitesse par moteur",
     "shipEnginesFastestOnly": "N’afficher que les {$INTERPOLATION} moteurs les plus rapides",
     "shipEnginesShowAll": "Afficher les {$INTERPOLATION} moteurs",
-    "shipEnginesSortedByTravel": "Triés par vitesse de voyage, les plus rapides d’abord.",
+    "shipEnginesSortedByTravel": " Triés par vitesse de voyage, les plus rapides d’abord. ",
     "7427631456171870062": " Vitesse = poussée du moteur × {$INTERPOLATION} moteurs / traînée {$INTERPOLATION_1}. Les mods d'équipement et les compétences de l'équipage ne sont pas pris en compte. ",
     "6863149805193218569": "Aucun moteur compatible trouvé.",
     "5389209284626508549": "Charge de croisière (s)",

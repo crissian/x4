@@ -532,7 +532,7 @@
     "1936788271886517475": "Prędkość wg silnika",
     "shipEnginesFastestOnly": "Pokaż tylko {$INTERPOLATION} najszybszych silników",
     "shipEnginesShowAll": "Pokaż wszystkie silniki ({$INTERPOLATION})",
-    "shipEnginesSortedByTravel": "Posortowane wg prędkości podróżnej, od najszybszych.",
+    "shipEnginesSortedByTravel": " Posortowane wg prędkości podróżnej, od najszybszych. ",
     "7427631456171870062": " Prędkość = ciąg silnika × {$INTERPOLATION} silników / opór {$INTERPOLATION_1}. Modyfikacje wyposażenia i umiejętności załogi nie są uwzględnione. ",
     "6863149805193218569": "Nie znaleziono kompatybilnych silników.",
     "5389209284626508549": "Ładowanie podróży (s)",

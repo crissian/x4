@@ -532,7 +532,7 @@
     "1936788271886517475": "Rychlost podle motoru",
     "shipEnginesFastestOnly": "Zobrazit jen {$INTERPOLATION} nejrychlejších motorů",
     "shipEnginesShowAll": "Zobrazit všech {$INTERPOLATION} motorů",
-    "shipEnginesSortedByTravel": "Seřazeno podle cestovní rychlosti, nejrychlejší první.",
+    "shipEnginesSortedByTravel": " Seřazeno podle cestovní rychlosti, nejrychlejší první. ",
     "7427631456171870062": " Rychlost = tah motoru × {$INTERPOLATION} motorů / odpor {$INTERPOLATION_1}. Úpravy vybavení a dovednosti posádky nejsou zahrnuty. ",
     "6863149805193218569": "Nenalezeny žádné kompatibilní motory.",
     "5389209284626508549": "Nabití cest. pohonu (s)",

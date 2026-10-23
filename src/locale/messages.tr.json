@@ -532,7 +532,7 @@
     "1936788271886517475": "Motora göre hız",
     "shipEnginesFastestOnly": "Yalnızca en hızlı {$INTERPOLATION} motoru göster",
     "shipEnginesShowAll": "{$INTERPOLATION} motorun tümünü göster",
-    "shipEnginesSortedByTravel": "Seyir hızına göre sıralı, en hızlısı önce.",
+    "shipEnginesSortedByTravel": " Seyir hızına göre sıralı, en hızlısı önce. ",
     "7427631456171870062": " Hız = motor itkisi × {$INTERPOLATION} motor / sürükleme {$INTERPOLATION_1}. Ekipman modları ve mürettebat becerisi dahil değildir. ",
     "6863149805193218569": "Uyumlu motor bulunamadı.",
     "5389209284626508549": "Seyahat şarjı (s)",

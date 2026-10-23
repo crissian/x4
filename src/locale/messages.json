@@ -535,7 +535,7 @@
     "1936788271886517475": "Speed by engine",
     "shipEnginesFastestOnly": "Show the {$INTERPOLATION} fastest engines only",
     "shipEnginesShowAll": "Show all {$INTERPOLATION} engines",
-    "shipEnginesSortedByTravel": "Sorted by travel speed, fastest first.",
+    "shipEnginesSortedByTravel": " Sorted by travel speed, fastest first. ",
     "7427631456171870062": " Speed = engine thrust × {$INTERPOLATION} engines / drag {$INTERPOLATION_1}. Equipment mods and crew skill are not included. ",
     "6863149805193218569": "No compatible engines found.",
     "5389209284626508549": "Travel charge (s)",

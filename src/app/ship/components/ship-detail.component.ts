@@ -69,7 +69,13 @@ export class ShipDetailComponent extends ProducibleDetailPage<Ship> {
 			.engines(ship)
 			.map((engine) => {
 				const speeds = ShipPerformance.flightSpeeds(ship, engine);
-				return { engine, speed: speeds.speed, boost: speeds.boost, travel: speeds.travel, charge: speeds.travelCharge };
+				return {
+					engine,
+					speed: speeds.speed,
+					boost: speeds.boost,
+					travel: speeds.travel,
+					charge: speeds.travelCharge,
+				};
 			})
 			.sort((a, b) => b.travel - a.travel || b.speed - a.speed);
 	});
