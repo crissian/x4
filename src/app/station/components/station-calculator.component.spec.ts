@@ -181,6 +181,28 @@ describe('station calculator', () => {
 		expect(StationLayoutLink.parseSunlight(undefined)).toBeUndefined();
 	});
 
+	it('opens a station of a save with the workers it really has', async () => {
+		TestBed.configureTestingModule({ providers: [provideRouter([])] });
+		const fixture = TestBed.createComponent(StationCalculatorComponent);
+		fixture.componentRef.setInput(
+			'l',
+			share([
+				{ module: HULL_PARTS, count: 4 },
+				{ module: HABITAT, count: 2 },
+			])
+		);
+		fixture.componentRef.setInput('wf', '600');
+		await fixture.whenStable();
+		const component = fixture.componentInstance;
+		expect(component.settings().autoWorkforce).toBe(false);
+		expect(component.partialWorkforce()).toBe(600);
+		expect(StationLayoutLink.params([{ moduleId: HABITAT, count: 1 }], undefined, 600)).toEqual({
+			l: share([{ module: HABITAT, count: 1 }]),
+			wf: 600,
+		});
+		expect(StationLayoutLink.parseWorkforce('-1')).toBeUndefined();
+	});
+
 	it('autofills the production chain from the button', async () => {
 		TestBed.configureTestingModule({ providers: [provideRouter([])] });
 		const fixture = TestBed.createComponent(StationCalculatorComponent);

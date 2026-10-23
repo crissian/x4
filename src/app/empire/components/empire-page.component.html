@@ -19,11 +19,7 @@
 			<app-stat-tile i18n-label label="Money" [value]="whole(summary.money) + ' Cr'" />
 			<app-stat-tile i18n-label label="Ships" [value]="whole(summary.ships)" [detail]="sizeSplit()" />
 			<app-stat-tile i18n-label label="Stations" [value]="whole(summary.stations)" />
-			<app-stat-tile
-				i18n-label
-				label="Station accounts"
-				[value]="whole(summary.stationMoney) + ' Cr'"
-			/>
+			<app-stat-tile i18n-label label="Station accounts" [value]="whole(summary.stationMoney) + ' Cr'" />
 		</div>
 		<app-empire-filters class="mt-4 block" />
 		<app-tabs class="mt-4 block" label="Empire" i18n-label [tabs]="tabs()" [(selected)]="store.tab">
@@ -36,9 +32,15 @@
 				} @else {
 					<p class="text-fg-muted" i18n>You own no ships in this save.</p>
 				}
-			} @else {
+			} @else if (store.tab() === 'stations') {
 				@if (store.stations().length) {
 					<app-empire-stations />
+				} @else {
+					<p class="text-fg-muted" i18n>You own no stations in this save.</p>
+				}
+			} @else {
+				@if (store.stations().length) {
+					<app-empire-balance />
 				} @else {
 					<p class="text-fg-muted" i18n>You own no stations in this save.</p>
 				}

@@ -1,0 +1,42 @@
+@let one = station();
+<p class="mb-2 text-sm text-fg-muted" i18n>
+	Per hour, with the Station Calculator's production model: every built module runs non-stop with all its inputs
+	available, energy cells follow the sector's sunlight, and the workforce bonus comes from the workers the save gives
+	each station (only stations with habitats have workers). Habitats count what their actual workers eat. Modules still
+	being built, modules the calculator doesn't know and construction sites are left out.
+</p>
+<p class="mb-2 text-sm">
+	<ng-container i18n>{{ store.balanceStations().length }} stations, {{ shortages() }} wares short.</ng-container>
+	@if (one?.layout; as layout) {
+		<span class="ml-2 inline-block align-top"><app-station-calculator-link [layout]="layout" /></span>
+	}
+</p>
+@if (!one && incomplete().length) {
+	<details class="mb-2 text-sm">
+		<summary class="cursor-pointer text-fg-muted" i18n>
+			{{ incomplete().length }} stations with modules left out
+		</summary>
+		<ul class="mt-1 ml-4 list-disc">
+			@for (item of incomplete(); track item.id) {
+				<li>
+					{{ item.name }}:
+					<app-station-calculator-link class="inline-block align-top" [layout]="item.layout!" />
+				</li>
+			}
+		</ul>
+	</details>
+}
+@if (store.balance().length) {
+	<app-data-grid
+		[data]="store.filteredBalance()"
+		[columns]="columns"
+		[cells]="{ chain: chainCell }"
+		[sort]="sort"
+		[trackBy]="trackBy"
+		[compact]="true"
+		storageKey="empire-balance"
+	/>
+} @else {
+	<p class="text-fg-muted" i18n>These stations make and use no wares.</p>
+}
+<ng-template #chainCell let-row><a [routerLink]="['/production-chains', row.id]" i18n>Production chain</a></ng-template>

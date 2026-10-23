@@ -1,7 +1,7 @@
 <app-data-grid
 	[data]="store.filteredStations()"
 	[columns]="columns"
-	[cells]="{ name: nameCell, sectorName: sectorCell }"
+	[cells]="{ name: nameCell, sectorName: sectorCell, calculator: calculatorCell }"
 	[trackBy]="trackBy"
 	[compact]="true"
 	storageKey="empire-stations"
@@ -13,3 +13,8 @@
 	}
 </ng-template>
 <ng-template #sectorCell let-row><app-sector-map-link [sector]="row.sector" [name]="row.sectorName" /></ng-template>
+<ng-template #calculatorCell let-row>
+	@if (row.layout; as layout) {
+		<app-station-calculator-link [layout]="layout" />
+	}
+</ng-template>

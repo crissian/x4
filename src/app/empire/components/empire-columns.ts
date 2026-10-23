@@ -1,10 +1,14 @@
 import { EnumLabels } from '../../core/enum-labels';
 import { NumberFormats } from '../../core/format/number-formats';
-import type { GridColumn } from '../../shared/components/data-grid/data-grid.component';
+import type { GridColumn, SortState } from '../../shared/components/data-grid/data-grid.component';
+import { EmpireBalance, type EmpireBalanceRow } from '../empire-balance';
 import type { EmpireShipRow, EmpireStationRow } from '../empire-model';
 
-/** The columns of the empire page's ship and station tables. */
+/** The columns of the empire page's ship, station and production balance tables. */
 export class EmpireColumns {
+	/** The production balance opens with the largest shortage first. */
+	static readonly BALANCE_SORT: SortState = { key: 'net', direction: 1 };
+
 	/** How many stored wares a station row names. */
 	private static readonly STORAGE_SHOWN = 3;
 
@@ -18,7 +22,11 @@ export class EmpireColumns {
 				link: (x) => (x.model ? ['/ships', x.modelId] : undefined),
 			},
 			{ key: 'size', caption: $localize`Size`, display: (x) => (x.size ? EnumLabels.label(x.size) : '') },
-			{ key: 'purpose', caption: $localize`Role`, display: (x) => (x.purpose ? EnumLabels.label(x.purpose) : '') },
+			{
+				key: 'purpose',
+				caption: $localize`Role`,
+				display: (x) => (x.purpose ? EnumLabels.label(x.purpose) : ''),
+			},
 			{ key: 'sectorName', caption: $localize`Sector` },
 			{
 				key: 'order',
@@ -61,7 +69,38 @@ export class EmpireColumns {
 				title: (x) => x.storage.map((item) => `${item.name}: ${NumberFormats.whole(item.amount)}`).join('\n'),
 			},
 			{ key: 'money', caption: $localize`Money (Cr)`, type: 'number' },
-			{ key: 'ships', caption: $localize`Ships`, type: 'number', display: (x) => (x.ships ? NumberFormats.whole(x.ships) : '') },
+			{
+				key: 'ships',
+				caption: $localize`Ships`,
+				type: 'number',
+				display: (x) => (x.ships ? NumberFormats.whole(x.ships) : ''),
+			},
+			{
+				key: 'calculator',
+				caption: $localize`Station Calculator`,
+				value: (x) => x.layout?.rows.length ?? 0,
+				sortable: false,
+				filterable: false,
+			},
+		];
+	}
+
+	static balance(): GridColumn<EmpireBalanceRow>[] {
+		const perHour = (value: number) => NumberFormats.whole(Math.round(value));
+		return [
+			{ key: 'name', caption: $localize`Ware`, hideable: false, link: (x) => ['/wares', x.id] },
+			{ key: 'produced', caption: $localize`Produced/h`, type: 'number', display: (x) => perHour(x.produced) },
+			{ key: 'consumed', caption: $localize`Consumed/h`, type: 'number', display: (x) => perHour(x.consumed) },
+			{
+				key: 'net',
+				caption: $localize`Net/h`,
+				type: 'number',
+				display: (x) => (x.net > 0 ? '+' : '') + perHour(x.net),
+				bar: (x) => EmpireBalance.share(x),
+				dot: (x) => (x.net < 0 ? { tone: 'red', level: 3 } : undefined),
+			},
+			{ key: 'stations', caption: $localize`Stations`, type: 'number' },
+			{ key: 'chain', caption: $localize`Production Chain`, sortable: false, filterable: false },
 		];
 	}
 
