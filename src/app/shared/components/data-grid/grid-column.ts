@@ -60,6 +60,11 @@ export interface GridGroup {
 	tone?: GridTone;
 }
 
+/** The context of a cell template (`DataGridComponent.cells`): the row as `let-row`. */
+export interface GridCell<T> {
+	$implicit: T;
+}
+
 export interface SortState {
 	key: string;
 	direction: 1 | -1;

@@ -5,6 +5,7 @@
 			<option value="" i18n>All categories</option>
 			@for (kind of store.kinds; track kind.kind) {
 				<optgroup [label]="kind.label">
+					<option [value]="kind.kind">{{ kind.all }}</option>
 					@for (category of kind.categories; track category.id) {
 						<option [value]="category.id">{{ category.label }}</option>
 					}
@@ -27,6 +28,20 @@
 		<label class="flex items-center gap-2 pb-2">
 			<input id="blueprint-complete" type="checkbox" [formField]="form.hideComplete" />
 			<ng-container i18n>Hide complete categories</ng-container>
+		</label>
+	} @else if (store.section() !== 'unsold') {
+		<label class="text-sm">
+			<ng-container i18n>Seller</ng-container>
+			<select id="blueprint-faction" class="input" [formField]="form.faction">
+				<option value="" i18n>All factions</option>
+				@for (row of store.factionTotals(); track row.faction.id) {
+					<option [value]="row.faction.id">{{ row.faction.name }} ({{ row.count }})</option>
+				}
+			</select>
+		</label>
+		<label class="flex items-center gap-2 pb-2">
+			<input id="blueprint-affordable" type="checkbox" [formField]="form.affordable" />
+			<ng-container i18n>Only what I can afford ({{ store.money() | number: '1.0-0' }} Cr)</ng-container>
 		</label>
 	}
 </div>

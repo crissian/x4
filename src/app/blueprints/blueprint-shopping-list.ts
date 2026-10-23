@@ -5,7 +5,6 @@ import type {
 	BlueprintItem,
 	BlueprintSeller,
 	BuyEntry,
-	FactionPurchase,
 	ReputationEntry,
 	ReputationSeller,
 	ShoppingList,
@@ -58,8 +57,6 @@ export class BlueprintShoppingList {
 				(a, b) => BlueprintShoppingList.gap(a.sellers[0]) - BlueprintShoppingList.gap(b.sellers[0])
 			),
 			unsold,
-			factions: BlueprintShoppingList.factions(buy),
-			total: buy.reduce((sum, x) => sum + x.item.price, 0),
 		};
 	}
 
@@ -84,21 +81,5 @@ export class BlueprintShoppingList {
 	/** unknown gaps last */
 	private static gap(seller: ReputationSeller | undefined): number {
 		return seller?.gap ?? Number.POSITIVE_INFINITY;
-	}
-
-	/** One group per faction, the most items first. */
-	private static factions(buy: BuyEntry[]): FactionPurchase[] {
-		const groups = new Map<string, FactionPurchase>();
-		for (const { item, sellers } of buy) {
-			for (const { faction } of sellers) {
-				const group = groups.get(faction.id) ?? { faction, items: [], total: 0 };
-				group.items.push(item);
-				group.total += item.price;
-				groups.set(faction.id, group);
-			}
-		}
-		return [...groups.values()].sort(
-			(a, b) => b.items.length - a.items.length || a.faction.name.localeCompare(b.faction.name)
-		);
 	}
 }

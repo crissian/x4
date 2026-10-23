@@ -42,14 +42,35 @@ export class BlueprintCategories {
 
 	private static readonly BY_ID = new Map(BlueprintCategories.ALL.map((x) => [x.id, x]));
 
-	static readonly KINDS: readonly { kind: BlueprintKind; label: string }[] = [
-		{ kind: 'module', label: $localize`:blueprint kind:Station modules` },
-		{ kind: 'ship', label: $localize`:blueprint kind:Ships` },
-		{ kind: 'equipment', label: $localize`:blueprint kind:Equipment` },
+	/** `all` labels the filter of every category of the kind. */
+	static readonly KINDS: readonly { kind: BlueprintKind; label: string; all: string }[] = [
+		{
+			kind: 'module',
+			label: $localize`:blueprint kind:Station modules`,
+			all: $localize`:blueprint kind:All station modules`,
+		},
+		{ kind: 'ship', label: $localize`:blueprint kind:Ships`, all: $localize`:blueprint kind:All ships` },
+		{
+			kind: 'equipment',
+			label: $localize`:blueprint kind:Equipment`,
+			all: $localize`:blueprint kind:All equipment`,
+		},
 	];
 
 	static get(id: string): BlueprintCategory | undefined {
 		return BlueprintCategories.BY_ID.get(id);
+	}
+
+	/** Whether a category filter is a category id or a kind (all its categories); empty is valid too. */
+	static isFilter(filter: string): boolean {
+		return (
+			!filter || BlueprintCategories.BY_ID.has(filter) || BlueprintCategories.KINDS.some((x) => x.kind === filter)
+		);
+	}
+
+	/** Whether a category passes a category filter: empty for all, a category id or a kind. */
+	static includes(filter: string, category: string): boolean {
+		return !filter || filter === category || BlueprintCategories.BY_ID.get(category)?.kind === filter;
 	}
 
 	static module(type: string): string {

@@ -85,19 +85,43 @@ describe('BlueprintsPageComponent', () => {
 		expect(element.querySelectorAll('[role=progressbar]').length).toBe(store.categories().length);
 	});
 
-	it('lists what the licences in the save let the player buy, by faction', async () => {
+	it('lists what the licences in the save let the player buy, one row per blueprint with its sellers', async () => {
 		const { element, store } = await setup('/blueprints?tab=shopping');
-		const list = store.shopping();
-		const argon = list.factions.find((x) => x.faction.id === 'argon')!;
-		expect(argon.items.some((x) => x.id === CONNECTION)).toBe(true);
+		const buy = store.filtered().buy;
+		const connection = buy.find((x) => x.item.id === CONNECTION)!;
 		// the Antigone licence isn't held
-		expect(list.factions.find((x) => x.faction.id === 'antigone')?.items.some((x) => x.id === CONNECTION)).not.toBe(
-			true
-		);
-		expect(element.textContent).toContain('Money in save: 1,234,567 Cr');
-		expect(element.querySelector(`a[href="/modules/${CONNECTION}"]`)).not.toBeNull();
+		expect(connection.sellers.map((x) => x.faction.id)).toEqual(['argon']);
+		expect(new Set(buy.map((x) => x.item.id)).size).toBe(buy.length);
 		// Kaori sells no blueprints
-		expect(list.factions.some((x) => x.faction.id === 'kaori')).toBe(false);
+		expect(buy.some((x) => x.sellers.some((s) => s.faction.id === 'kaori'))).toBe(false);
+		expect(element.textContent).toContain('Money in save: 1,234,567 Cr');
+		expect(element.textContent).toContain('Need more reputation');
+		expect(element.querySelector('#blueprint-faction')).not.toBeNull();
+	});
+
+	it('narrows the shopping list to a faction and to what the money pays for, kept in the URL', async () => {
+		const { element, router, set, settle, store } = await setup('/blueprints?tab=shopping&category=module');
+		expect(store.filtered().buy.every((x) => x.item.kind === 'module')).toBe(true);
+		const argon = store.factionTotals().find((x) => x.faction.id === 'argon')!;
+		expect(argon.count).toBe(store.filtered().buy.length);
+		await set('#blueprint-faction', 'argon');
+		expect(store.summary()).toEqual({ count: argon.count, total: argon.total });
+		const affordable = element.querySelector<HTMLInputElement>('#blueprint-affordable')!;
+		affordable.click();
+		await settle();
+		expect(store.model().affordable).toBe(true);
+		expect(store.filtered().buy.every((x) => x.item.price <= 1234567)).toBe(true);
+		expect(router.url).toBe('/blueprints?tab=shopping&category=module&faction=argon&afford=1');
+	});
+
+	it('shows the shopping list section the URL names, as a sub-tab', async () => {
+		const { element, router, settle, store } = await setup('/blueprints?tab=shopping&list=unsold');
+		expect(store.section()).toBe('unsold');
+		expect(element.textContent).toContain('No faction representative sells these.');
+		expect(element.querySelector('#blueprint-faction')).toBeNull();
+		store.section.set('buy');
+		await settle();
+		expect(router.url).toBe('/blueprints?tab=shopping');
 	});
 
 	it('reads the filters from the URL', async () => {
@@ -120,6 +144,6 @@ describe('BlueprintsPageComponent', () => {
 		store.tab.set('shopping');
 		await settle();
 		expect(router.url).toBe('/blueprints?category=equipment-weapons&q=pulse&tab=shopping');
-		expect(store.shopping().buy.every((x) => x.item.category === 'equipment-weapons')).toBe(true);
+		expect(store.filtered().buy.every((x) => x.item.category === 'equipment-weapons')).toBe(true);
 	});
 });

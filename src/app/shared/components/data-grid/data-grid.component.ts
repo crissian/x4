@@ -1,11 +1,13 @@
 import { Component, computed, effect, input, linkedSignal, output, signal, untracked } from '@angular/core';
+import type { TemplateRef } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
 import { GridColumnPrefs } from './grid-column-prefs';
 import { GridGroups } from './grid-groups';
 import { GridPageSizePrefs } from './grid-page-size-prefs';
+import { TemplateSlotDirective } from '../template-slot.directive';
 import { ToneDotComponent } from '../tone-dot/tone-dot.component';
-import type { GridColumn, GridGroup, SortState } from './grid-column';
+import type { GridCell, GridColumn, GridGroup, SortState } from './grid-column';
 import { GridValues, PreparedRow } from './grid-values';
 import {
 	LucideArrowUpNarrowWide,
@@ -19,7 +21,7 @@ import {
 } from '@lucide/angular';
 import { NumberFormats } from '../../../core/format/number-formats';
 
-export type { GridColumn, GridDot, GridGroup, GridLookupItem, GridTone, SortState } from './grid-column';
+export type { GridCell, GridColumn, GridDot, GridGroup, GridLookupItem, GridTone, SortState } from './grid-column';
 
 @Component({
 	selector: 'app-data-grid',
@@ -34,6 +36,7 @@ export type { GridColumn, GridDot, GridGroup, GridLookupItem, GridTone, SortStat
 		LucideChevronsRight,
 		LucideColumns3,
 		LucideInfo,
+		TemplateSlotDirective,
 		ToneDotComponent,
 	],
 	templateUrl: './data-grid.component.html',
@@ -60,6 +63,9 @@ export class DataGridComponent<T> {
 	 * the page size.
 	 */
 	readonly storageKey = input<string>();
+	/** Templates rendering the cells of some columns, by column key, in place of their text; filters and sorts still
+	 * use the column's value. */
+	readonly cells = input<Readonly<Record<string, TemplateRef<GridCell<T>>>>>({});
 
 	readonly rowClick = output<T>();
 

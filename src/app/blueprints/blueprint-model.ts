@@ -61,10 +61,10 @@ export interface UnsoldEntry {
 	reason: UnsoldReason;
 }
 
-/** The blueprints one faction would sell the player now. */
-export interface FactionPurchase {
+/** The blueprints of a shopping list section one faction sells. */
+export interface FactionTotal {
 	faction: Faction;
-	items: BlueprintItem[];
+	count: number;
 	/** every item bought from this faction */
 	total: number;
 }
@@ -74,10 +74,6 @@ export interface ShoppingList {
 	buy: BuyEntry[];
 	reputation: ReputationEntry[];
 	unsold: UnsoldEntry[];
-	/** the buy entries per selling faction, the most items first */
-	factions: FactionPurchase[];
-	/** every buyable blueprint once */
-	total: number;
 }
 
 export interface CategoryProgress {

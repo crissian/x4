@@ -72,6 +72,21 @@ class DynamicHostComponent {
 	readonly columns = signal<GridColumn<Row>[]>([this.name, this.size]);
 }
 
+@Component({
+	imports: [DataGridComponent],
+	template: `<app-data-grid [data]="rows" [columns]="columns" [cells]="{ name: nameCell }" />
+		<ng-template #nameCell let-row
+			><b>{{ row.name }}</b> ({{ row.size }})</ng-template
+		>`,
+})
+class CellHostComponent {
+	readonly rows = ROWS.slice(0, 2);
+	readonly columns: GridColumn<Row>[] = [
+		{ key: 'name', caption: 'Name', value: (x) => `${x.name} ${x.size}` },
+		{ key: 'price', caption: 'Price', type: 'number' },
+	];
+}
+
 describe('DataGridComponent', () => {
 	beforeEach(() => localStorage.clear());
 
@@ -263,5 +278,19 @@ describe('DataGridComponent', () => {
 			x.textContent!.trim()
 		);
 		expect(headers).toEqual(['Name']);
+	});
+
+	it('renders a cell template in place of the cell text, still filtering on the value', async () => {
+		const fixture = TestBed.createComponent(CellHostComponent);
+		await fixture.whenStable();
+		const element: HTMLElement = fixture.nativeElement;
+		const cells = () => [...element.querySelectorAll('tbody tr')].map((x) => x.querySelector('td')!.textContent);
+		expect(cells()).toEqual(['Item 1 (large)', 'Item 2 (small)']);
+		expect(element.querySelector('tbody td b')!.textContent).toBe('Item 1');
+		const filter = element.querySelector<HTMLInputElement>('thead input[type=search]')!;
+		filter.value = 'small';
+		filter.dispatchEvent(new Event('input'));
+		await fixture.whenStable();
+		expect(cells()).toEqual(['Item 2 (small)']);
 	});
 });
