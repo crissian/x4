@@ -18,6 +18,8 @@ import { Equipment, Ship, ShipCargo } from '../../shared/services/model/model';
 import { Production } from '../../shared/services/production';
 import { ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
+import { EquipmentModService } from '../../shared/services/equipment-mod.service';
+import { ModsForComponent } from '../../mods/components/mods-for.component';
 import { ShipSellersNearComponent } from '../sellers/ship-sellers-near.component';
 import { ShipCompareComponent } from './ship-compare.component';
 
@@ -44,11 +46,16 @@ interface EngineRow {
 		LucideGitCompareArrows,
 		EnumLabelPipe,
 		PriceRangePipe,
+		ModsForComponent,
 	],
 	templateUrl: './ship-detail.component.html',
 })
 export class ShipDetailComponent extends ProducibleDetailPage<Ship> {
 	protected readonly service = inject(ShipService);
+	/** Ship (chassis) mods fit every ship. */
+	protected readonly shipMods = inject(EquipmentModService)
+		.getEntities()
+		.filter((x) => x.slot === 'ship' && !x.notForPlayer);
 	protected readonly description = Descriptions.of('ships', this.id);
 	private readonly stats = inject(ShipStatsService);
 	private readonly router = inject(Router);

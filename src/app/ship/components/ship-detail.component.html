@@ -110,6 +110,8 @@
 
 		<app-ship-sellers-near class="mt-4 block" [ship]="entity" />
 
+		<app-mods-for [mods]="shipMods" slot="ship" />
+
 		<app-production-cards [items]="production()" heading="Production" i18n-heading />
 	</app-detail-page>
 }

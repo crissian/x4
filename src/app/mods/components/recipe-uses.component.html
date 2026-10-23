@@ -1,0 +1,5 @@
+@if (uses().length) {
+	<app-data-grid [data]="uses()" [columns]="columns" [trackBy]="track" [compact]="true" />
+} @else {
+	<p class="text-fg-muted" i18n>No recipe takes this item.</p>
+}

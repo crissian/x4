@@ -114,6 +114,10 @@ export class EnumLabels {
 			'log:alerts': $localize`:logbook category:Alerts`,
 			'log:upkeep': $localize`:logbook category:Upkeep`,
 			'log:tips': $localize`:logbook category:Tips`,
+
+			// ModSlot, with the Weapon and Engine equipment classes
+			Shield: $localize`:mod slot:Shield`,
+			Ship: $localize`:mod slot:Ship`,
 		};
 	}
 }

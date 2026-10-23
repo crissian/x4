@@ -1,0 +1,77 @@
+<div class="card">
+	<div class="card-header flex items-center justify-between gap-3">
+		<span i18n>Crafting</span>
+		<a class="text-sm" routerLink="/mods" i18n>All equipment mods</a>
+	</div>
+	<div class="card-body">
+		<p class="mb-3 text-fg-muted" i18n>
+			Mods and spacesuit items are crafted from inventory items, which drop from destroyed ships, crates and
+			lockboxes or are bought from traders.
+		</p>
+
+		<div class="grid gap-4 lg:grid-cols-2">
+			<section class="min-w-0">
+				<h6 i18n>What do I need to craft…</h6>
+				<div class="mb-3 flex flex-wrap items-end gap-3">
+					<label class="min-w-0 flex-1 text-sm">
+						<ng-container i18n>Mod or item</ng-container>
+						<select id="crafting-craft" class="input" [formField]="form.craft">
+							<option value="" i18n>Pick what to craft</option>
+							@for (group of recipeGroups; track group.label) {
+								<optgroup [label]="group.label">
+									@for (ware of group.options; track ware.id) {
+										<option [value]="ware.id">{{ ware.name }}</option>
+									}
+								</optgroup>
+							}
+						</select>
+					</label>
+					<label class="w-24 text-sm">
+						<ng-container i18n>How many</ng-container>
+						<input id="crafting-times" class="input" type="number" [formField]="form.times" />
+					</label>
+				</div>
+				@if (recipe(); as recipe) {
+					<app-ingredient-list [ingredients]="recipe.ingredients" [times]="times()" />
+					<a class="mt-1 inline-block text-sm" [routerLink]="link(recipe.ware.id)" i18n
+						>Open {{ recipe.ware.name }}</a
+					>
+				} @else {
+					<p class="text-fg-muted" i18n>Pick a mod or item to see its ingredients and where to find them.</p>
+				}
+			</section>
+
+			<section class="min-w-0">
+				<h6 i18n>What can I craft with…</h6>
+				<label class="mb-3 block text-sm">
+					<ng-container i18n>Item I have</ng-container>
+					<select id="crafting-have" class="input" [formField]="form.have">
+						<option value="" i18n>Pick an item</option>
+						@for (item of ingredients; track item.id) {
+							<option [value]="item.id">{{ item.name }}</option>
+						}
+					</select>
+				</label>
+				@if (have(); as have) {
+					<app-recipe-uses [ware]="have.id" />
+					<a class="mt-1 inline-block text-sm" [routerLink]="link(have.id)" i18n>Open {{ have.name }}</a>
+				} @else {
+					<p class="text-fg-muted" i18n>Pick an item to see every mod and item it goes into.</p>
+				}
+			</section>
+		</div>
+	</div>
+</div>
+
+<div class="mt-4 card">
+	<div class="card-header" i18n>Crafting items ({{ allItems.length }})</div>
+	<div class="card-body">
+		<app-data-grid
+			[data]="allItems"
+			[columns]="itemColumns"
+			[clickable]="true"
+			storageKey="crafting-items"
+			(rowClick)="openItem($event)"
+		/>
+	</div>
+</div>
