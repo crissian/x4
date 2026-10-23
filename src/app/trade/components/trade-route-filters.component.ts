@@ -28,7 +28,7 @@ export class TradeRouteFiltersComponent {
 		{ id: TradeRoutesStore.CUSTOM, name: $localize`Custom ship` },
 		...ShipPickerOptions.own(
 			this.store.ownShips(),
-			(own) => `${own.model.name}, ${NumberFormats.whole(own.capacity)} m³ · ${own.sectorName}`
+			(own) => `${own.named ? `${own.model.name}, ` : ''}${NumberFormats.whole(own.capacity)} m³ · ${own.sectorName}`
 		),
 		...ShipPickerOptions.models(
 			this.store.ships,

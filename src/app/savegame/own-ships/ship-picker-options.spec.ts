@@ -7,6 +7,7 @@ describe('ShipPickerOptions', () => {
 	const own = (key: string, label: string, size: string): OwnShip => ({
 		key,
 		label,
+		named: true,
 		model: { id: `ship_${size}`, name: `Model ${size}`, size } as ShipListItem,
 		sector: 'a',
 		sectorName: 'Argon Prime',

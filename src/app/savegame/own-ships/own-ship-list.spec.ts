@@ -14,19 +14,19 @@ describe('OwnShipList', () => {
 		sectorName: (id) => id.toUpperCase(),
 		text: (ref) => (ref === '{20101,22504}' ? 'Raven Prototype' : undefined),
 	};
-	const ship = (id: string, macro: string, code: string, name?: string, engine?: string): SaveShip => ({
+	const ship = (id: string, macro: string, code: string, name?: string, engine?: string, sector = 'a'): SaveShip => ({
 		id: `[${id}]`,
 		code,
 		macro,
-		sector: 'a',
+		sector,
 		...(name ? { name } : {}),
 		...(engine ? { engine, engines: 1 } : {}),
 	});
 
-	it('sorts named ships by name first, then the others by model and code', () => {
+	it('sorts named ships by name first, then the others by model and sector', () => {
 		const list = OwnShipList.build(
 			[
-				ship('0x1', 'scout', 'BBB-2'),
+				ship('0x1', 'scout', 'BBB-2', undefined, undefined, 'b'),
 				ship('0x2', 'hauler', 'ZZZ-9'),
 				ship('0x3', 'scout', 'AAA-1'),
 				ship('0x4', 'scout', 'X', 'Zed'),
@@ -34,10 +34,17 @@ describe('OwnShipList', () => {
 			],
 			lookups
 		);
-		expect(list.map((x) => x.label)).toEqual(['Alpha', 'Zed', 'ZZZ-9', 'AAA-1', 'BBB-2']);
+		expect(list.map((x) => [x.label, x.sectorName])).toEqual([
+			['Alpha', 'A'],
+			['Zed', 'A'],
+			['Hauler', 'A'],
+			['Scout', 'A'],
+			['Scout', 'B'],
+		]);
 		expect(list[0]).toEqual({
 			key: 'own-0x5',
 			label: 'Alpha',
+			named: true,
 			model: models['hauler'],
 			sector: 'a',
 			sectorName: 'A',
@@ -54,12 +61,15 @@ describe('OwnShipList', () => {
 		expect(plain.travel).toEqual({ speed: 5000, charge: 2 });
 	});
 
-	it('resolves game text names and falls back to the code for unknown ones', () => {
+	it('resolves game text names and falls back to the model name for unknown ones', () => {
 		const list = OwnShipList.build(
 			[ship('0x1', 'scout', 'AAA-1', '{20101,22504}'), ship('0x2', 'scout', 'BBB-2', '{1,2}')],
 			lookups
 		);
-		expect(list.map((x) => x.label)).toEqual(['Raven Prototype', 'BBB-2']);
+		expect(list.map((x) => [x.label, x.named])).toEqual([
+			['Raven Prototype', true],
+			['Scout', false],
+		]);
 	});
 
 	it('leaves out ships of unknown models', () => {

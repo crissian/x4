@@ -6,8 +6,10 @@ import type { SaveShip } from '../map/save-map-model';
 export interface OwnShip {
 	/** the picker value: `own-` and the component id without brackets */
 	key: string;
-	/** the name the player gave it, else its code */
+	/** the name the player gave it, else its model's name */
 	label: string;
+	/** whether the label is the ship's own name rather than its model's */
+	named: boolean;
 	model: ShipListItem;
 	sector: string;
 	sectorName: string;
@@ -24,7 +26,7 @@ export interface OwnShipLookups {
 	text(ref: string): string | undefined;
 }
 
-/** Turns the save's ships into picker entries: named ships by name, then the others by model and code. */
+/** Turns the save's ships into picker entries: named ships by name, then the others by model and sector. */
 export class OwnShipList {
 	static readonly PREFIX = 'own-';
 
@@ -44,7 +46,7 @@ export class OwnShipList {
 
 	/** The ships of a known model, sorted; ships of unknown (e.g. modded) models are left out. */
 	static build(ships: readonly SaveShip[], lookups: OwnShipLookups): OwnShip[] {
-		const result: { own: OwnShip; named: boolean }[] = [];
+		const result: OwnShip[] = [];
 		for (const ship of ships) {
 			const model = lookups.model(ship.macro);
 			if (!model) {
@@ -52,24 +54,20 @@ export class OwnShipList {
 			}
 			const name = OwnShipList.name(ship, lookups);
 			result.push({
+				key: OwnShipList.key(ship),
+				label: name || model.name,
 				named: !!name,
-				own: {
-					key: OwnShipList.key(ship),
-					label: name || ship.code,
-					model,
-					sector: ship.sector,
-					sectorName: lookups.sectorName(ship.sector),
-					travel: lookups.travel(ship) ?? model.travel,
-				},
+				model,
+				sector: ship.sector,
+				sectorName: lookups.sectorName(ship.sector),
+				travel: lookups.travel(ship) ?? model.travel,
 			});
 		}
-		return result
-			.sort(
-				(a, b) =>
-					Number(b.named) - Number(a.named) ||
-					(a.named ? 0 : a.own.model.name.localeCompare(b.own.model.name)) ||
-					a.own.label.localeCompare(b.own.label)
-			)
-			.map((x) => x.own);
+		return result.sort(
+			(a, b) =>
+				Number(b.named) - Number(a.named) ||
+				a.label.localeCompare(b.label) ||
+				a.sectorName.localeCompare(b.sectorName)
+		);
 	}
 }
