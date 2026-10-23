@@ -2,7 +2,7 @@ import { DestroyRef, Injectable, computed, effect, inject, signal, untracked } f
 import { form } from '@angular/forms/signals';
 import { ActivatedRoute, Router } from '@angular/router';
 import { skip } from 'rxjs';
-import type { SaveBlueprints, SaveLicences, SaveRelations } from '../savegame/map/save-map-model';
+import type { SaveBlueprints, SaveLicences, SaveRelations, SaveRepresentatives } from '../savegame/map/save-map-model';
 import { SavegameFormat } from '../savegame/savegame-format';
 import { SavegameStore } from '../savegame/savegame-store';
 import { BlueprintRules } from '../shared/services/data/blueprint-rules-data';
@@ -41,6 +41,11 @@ export class BlueprintsStore {
 	private readonly blueprints = computed(() => this.save()?.data?.['blueprints'] as SaveBlueprints | undefined);
 	private readonly licences = computed(() => (this.save()?.data?.['licences'] as SaveLicences | undefined) ?? {});
 	private readonly relations = computed(() => (this.save()?.data?.['relations'] as SaveRelations | undefined) ?? {});
+	/** unknown for saves read before representatives were extracted */
+	private readonly representatives = computed(() => {
+		const ids = this.save()?.data?.['representatives'] as SaveRepresentatives | undefined;
+		return ids && new Set(ids);
+	});
 	readonly status = computed<BlueprintsStatus>(() => {
 		const save = this.save();
 		if (!save) {
@@ -89,6 +94,7 @@ export class BlueprintsStore {
 	readonly shopping = computed<ShoppingList>(() => {
 		const { category } = this.model();
 		const search = this.search();
+		const representatives = this.representatives();
 		return BlueprintShoppingList.build({
 			items: this.catalog.filter((x) => (!category || x.category === category) && this.matches(x, search)),
 			owned: this.owned(),
@@ -99,7 +105,8 @@ export class BlueprintsStore {
 					x.owners,
 					x.license,
 					(id) => this.factions.getEntity(id),
-					BlueprintRules.noSaleFactions
+					BlueprintRules.noSaleFactions,
+					representatives
 				),
 			missionOnly: BlueprintRules.missionOnly,
 			unlockedBy: BlueprintRules.unlockedBy,

@@ -15,6 +15,11 @@ describe('BlueprintSellers', () => {
 		expect(sellers.map((x) => x.faction.id)).toEqual(['argon']);
 	});
 
+	it('drops the factions without a representative in the save', () => {
+		const sellers = BlueprintSellers.of([argon, teladi], undefined, lookup, [], new Set(['teladi']));
+		expect(sellers.map((x) => x.faction.id)).toEqual(['teladi']);
+	});
+
 	it("attaches the faction's licence of the item's type", () => {
 		const sellers = BlueprintSellers.of([{ id: 'argon' } as Faction, teladi], 'militaryship', lookup, []);
 		expect(sellers).toEqual([
