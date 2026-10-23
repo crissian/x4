@@ -2,11 +2,12 @@ import { DecimalPipe, PercentPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MapStore } from '../map-store';
+import { MapSaveSectorInfo } from './map-save-sector-info';
 
 /** Details of the sector under the pointer. */
 @Component({
 	selector: 'app-map-tooltip',
-	imports: [DecimalPipe, PercentPipe],
+	imports: [DecimalPipe, PercentPipe, MapSaveSectorInfo],
 	templateUrl: './map-tooltip.html',
 })
 export class MapTooltipComponent {

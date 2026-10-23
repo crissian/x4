@@ -3,11 +3,12 @@ import { LocalStorage } from '../../core/services/local-storage';
 import { MapStations } from '../map-stations';
 import { MapStore } from '../map-store';
 import { StationTypeBadgeComponent } from '../station-type-badge.component';
+import { MapSaveLegend } from './map-save-legend';
 
 /** Collapsible legend of the sector colors, connections and markers. */
 @Component({
 	selector: 'app-map-legend',
-	imports: [StationTypeBadgeComponent],
+	imports: [StationTypeBadgeComponent, MapSaveLegend],
 	templateUrl: './map-legend.component.html',
 })
 export class MapLegendComponent {

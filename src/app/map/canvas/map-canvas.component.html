@@ -7,6 +7,25 @@
 				<stop offset="0%" stop-color="#1e3a5f" stop-opacity="0.35" />
 				<stop offset="100%" stop-color="#05080f" stop-opacity="0" />
 			</radialGradient>
+			<!-- diagonal red lines over contested sectors, spaced by the label size so their density stays fixed on screen -->
+			@let hatch = store.fontSize() * 0.6;
+			<pattern
+				id="map-contested"
+				patternUnits="userSpaceOnUse"
+				patternTransform="rotate(45)"
+				[attr.width]="hatch"
+				[attr.height]="hatch"
+			>
+				<line
+					[attr.x1]="hatch / 2"
+					y1="0"
+					[attr.x2]="hatch / 2"
+					[attr.y2]="hatch"
+					stroke="#f87171"
+					stroke-opacity="0.7"
+					[attr.stroke-width]="hatch * 0.25"
+				/>
+			</pattern>
 		</defs>
 		<rect
 			[attr.x]="store.layout.bounds.x"
@@ -19,8 +38,8 @@
 		@for (shape of store.visibleShapes(); track shape.sector.id) {
 			@let fill = store.fills().get(shape.sector.id);
 			@let selected = store.selected() === shape.sector.id;
-			@let dim = unknown().has(shape.sector.id) ? 0.4 : 1;
-			@let isContested = contested().has(shape.sector.id);
+			@let dim = saveSectors.unknown().has(shape.sector.id) ? 0.4 : 1;
+			@let isContested = saveSectors.contested().has(shape.sector.id);
 			<polygon
 				class="cursor-pointer"
 				[attr.data-sector]="shape.sector.id"
@@ -30,10 +49,12 @@
 				[attr.stroke]="selected ? '#fde047' : isContested ? '#f87171' : '#94a3b8'"
 				[attr.stroke-opacity]="selected || isContested ? 1 : 0.45 * dim"
 				[attr.stroke-width]="selected ? 3 : isContested ? 2 : 1"
-				[attr.stroke-dasharray]="isContested && !selected ? '6 4' : null"
 				vector-effect="non-scaling-stroke"
 				(pointermove)="onPointerMove($event, shape)"
 			/>
+			@if (isContested) {
+				<polygon [attr.points]="shape.points" fill="url(#map-contested)" pointer-events="none" />
+			}
 		}
 
 		<g appMapLinks />

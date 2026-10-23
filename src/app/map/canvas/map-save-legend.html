@@ -1,0 +1,31 @@
+<div class="mt-2 border-t border-white/10 pt-1.5">
+	<div class="mb-0.5 font-semibold text-white" i18n>From your save</div>
+	<div class="flex flex-wrap gap-x-3 gap-y-0.5 text-slate-400">
+		<span i18n
+			><span
+				class="mr-1 inline-block size-2.5 rounded-sm border border-red-400 bg-[repeating-linear-gradient(45deg,#f87171_0_1.5px,transparent_1.5px_4px)] align-middle"
+			></span
+			>Contested</span
+		>
+		@if (!save.discoveredOnly()) {
+		<span i18n
+			><span
+				class="mr-1 inline-block size-2.5 rounded-sm border border-slate-400/40 bg-slate-400/40 align-middle"
+			></span
+			>Not discovered</span
+		>
+		}
+		<span i18n
+			><span
+				class="mr-1 inline-flex size-3.5 items-center justify-center rounded-full bg-sky-400 align-middle text-[9px] font-bold text-[#05080f]"
+				>3</span
+			>Your ships (count)</span
+		>
+		<span i18n
+			><span
+				class="mr-1.5 ml-0.5 inline-block size-1.5 rounded-full bg-slate-300 align-middle ring-2 ring-white ring-offset-1 ring-offset-black"
+			></span
+			>Your station</span
+		>
+	</div>
+</div>

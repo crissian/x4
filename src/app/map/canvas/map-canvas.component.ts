@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject } from '@angular/core';
+import { Component, DestroyRef, ElementRef, afterNextRender, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { LucideExpand, LucideZoomIn, LucideZoomOut } from '@lucide/angular';
 import { CLUSTER_RADIUS, SectorShape } from '../galaxy-layout';
@@ -6,6 +6,7 @@ import { MapStations } from '../map-stations';
 import { MapStore } from '../map-store';
 import { PanZoom } from '../pan-zoom';
 import { MapSaveLayer } from '../save/map-save-layer';
+import { MapSaveSectors } from '../save/map-save-sectors';
 import { MapLegendComponent } from './map-legend.component';
 import { MapLabelsLayer, MapLinksLayer, MapMarkersLayer } from './map-layers';
 import { MapMenuComponent, MapTooltipComponent } from './map-popups';
@@ -44,17 +45,10 @@ export class MapCanvasComponent {
 
 	protected readonly store = inject(MapStore);
 	protected readonly save = inject(MapSaveLayer);
+	protected readonly saveSectors = inject(MapSaveSectors);
 	protected readonly stations = inject(MapStations);
 	private readonly router = inject(Router);
 	private readonly element: HTMLElement = inject(ElementRef).nativeElement;
-
-	/** Sectors the active save has not discovered or that are contested; empty without a save. */
-	protected readonly unknown = computed(
-		() => new Set([...this.save.sectors()].filter(([, x]) => !x.known).map(([id]) => id))
-	);
-	protected readonly contested = computed(
-		() => new Set([...this.save.sectors()].filter(([, x]) => x.contested).map(([id]) => id))
-	);
 
 	private readonly panZoom = new PanZoom(this.store.view, this.store.size, () => ({
 		minWidth: MapCanvasComponent.MIN_VIEW_WIDTH,
