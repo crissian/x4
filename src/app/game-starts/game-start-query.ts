@@ -1,4 +1,5 @@
 import type { ParamMap, Params } from '@angular/router';
+import { QueryParams } from '../shared/services/query-params';
 import { GameStartTypes, type GameStartTypeFilter } from './game-start-types';
 
 export type GameStartView = 'cards' | 'table';
@@ -13,13 +14,14 @@ export interface GameStartsModel {
 /** Reads the game starts page's filters from the URL query params and writes them back, defaults left out. */
 export class GameStartQuery {
 	static readonly DEFAULTS: Readonly<GameStartsModel> = { type: '', search: '', view: 'cards' };
+	static readonly VIEWS: readonly GameStartView[] = ['cards', 'table'];
 
 	static read(params: ParamMap): GameStartsModel {
 		const type = params.get('type') ?? '';
 		return {
 			type: GameStartTypes.isFilter(type) ? type : '',
 			search: params.get('q') ?? '',
-			view: params.get('view') === 'table' ? 'table' : 'cards',
+			view: QueryParams.oneOf(params, 'view', GameStartQuery.VIEWS, 'cards'),
 		};
 	}
 
@@ -29,7 +31,7 @@ export class GameStartQuery {
 		return {
 			type: model.type || null,
 			q: search || null,
-			view: model.view === 'cards' ? null : model.view,
+			view: QueryParams.unlessDefault(model.view, 'cards'),
 		};
 	}
 }

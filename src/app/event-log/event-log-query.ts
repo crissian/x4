@@ -1,4 +1,5 @@
 import type { ParamMap, Params } from '@angular/router';
+import { QueryParams } from '../shared/services/query-params';
 
 export type EventLogTab = 'events' | 'losses';
 
@@ -23,20 +24,26 @@ export interface EventLogState {
 
 /** Reads the event log page's tab and filters from the URL query params and writes them back, defaults left out. */
 export class EventLogQuery {
-	static readonly DEFAULTS: Readonly<EventLogModel> = { search: '', category: '', faction: '', sector: '', since: '' };
+	static readonly DEFAULTS: Readonly<EventLogModel> = {
+		search: '',
+		category: '',
+		faction: '',
+		sector: '',
+		since: '',
+	};
+	static readonly TABS: readonly EventLogTab[] = ['events', 'losses'];
 	/** The choices of the time filter, in hours. */
 	static readonly SINCE = ['1', '3', '10', '24', '100'] as const;
 
 	static read(params: ParamMap): EventLogState {
-		const since = params.get('since') ?? '';
 		return {
-			tab: params.get('tab') === 'losses' ? 'losses' : 'events',
+			tab: QueryParams.oneOf(params, 'tab', EventLogQuery.TABS, 'events'),
 			model: {
 				search: params.get('q') ?? '',
 				category: params.get('category') ?? '',
 				faction: params.get('faction') ?? '',
 				sector: params.get('sector') ?? '',
-				since: (EventLogQuery.SINCE as readonly string[]).includes(since) ? since : '',
+				since: QueryParams.oneOf<string>(params, 'since', EventLogQuery.SINCE, ''),
 			},
 		};
 	}
@@ -44,7 +51,7 @@ export class EventLogQuery {
 	/** Every param, null for a default (so a merge removes it). */
 	static write({ tab, model }: EventLogState): Params {
 		return {
-			tab: tab === 'events' ? null : tab,
+			tab: QueryParams.unlessDefault(tab, 'events'),
 			q: model.search.trim() || null,
 			category: model.category || null,
 			faction: model.faction || null,

@@ -1,6 +1,7 @@
 import type { ParamMap, Params } from '@angular/router';
 import type { EquipmentMod, ModSlot } from '../shared/services/model/equipment-mod';
 import { ModSlots } from './mod-slots';
+import { QueryParams } from '../shared/services/query-params';
 
 /** The filter form of the mods page; empty values match every mod. */
 export interface ModsModel {
@@ -22,15 +23,12 @@ export class ModQuery {
 	private static readonly QUALITIES = ['1', '2', '3'];
 
 	static read(params: ParamMap, statIds: readonly string[]): ModsModel {
-		const slot = params.get('slot') as ModSlot;
-		const quality = params.get('quality') ?? '';
-		const stat = params.get('stat') ?? '';
 		return {
-			slot: ModSlots.ALL.includes(slot) ? slot : '',
-			quality: ModQuery.QUALITIES.includes(quality) ? quality : '',
-			stat: statIds.includes(stat) ? stat : '',
+			slot: QueryParams.oneOf<ModSlot | ''>(params, 'slot', ModSlots.ALL, ''),
+			quality: QueryParams.oneOf(params, 'quality', ModQuery.QUALITIES, ''),
+			stat: QueryParams.oneOf(params, 'stat', statIds, ''),
 			search: params.get('q') ?? '',
-			scenario: params.get('scenario') === '1',
+			scenario: QueryParams.flag(params, 'scenario'),
 		};
 	}
 
@@ -41,7 +39,7 @@ export class ModQuery {
 			quality: model.quality || null,
 			stat: model.stat || null,
 			q: model.search.trim() || null,
-			scenario: model.scenario ? '1' : null,
+			scenario: QueryParams.writeFlag(model.scenario),
 		};
 	}
 

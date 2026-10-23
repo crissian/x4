@@ -1,4 +1,5 @@
 import type { ParamMap, Params } from '@angular/router';
+import { QueryParams } from '../shared/services/query-params';
 
 export type ResearchView = 'tree' | 'list';
 
@@ -21,13 +22,14 @@ export interface ResearchPageState {
 /** Reads the research page's state from the URL query params and writes it back, defaults left out. */
 export class ResearchQuery {
 	static readonly DEFAULTS: Readonly<ResearchModel> = { search: '', hidden: false };
+	static readonly VIEWS: readonly ResearchView[] = ['tree', 'list'];
 
 	/** @param known whether an id names a research project */
 	static read(params: ParamMap, known: (id: string) => boolean): ResearchPageState {
 		const id = params.get('id') ?? '';
 		return {
-			model: { search: params.get('q') ?? '', hidden: params.get('hidden') === '1' },
-			view: params.get('view') === 'list' ? 'list' : 'tree',
+			model: { search: params.get('q') ?? '', hidden: QueryParams.flag(params, 'hidden') },
+			view: QueryParams.oneOf(params, 'view', ResearchQuery.VIEWS, 'tree'),
 			id: known(id) ? id : '',
 		};
 	}
@@ -35,9 +37,9 @@ export class ResearchQuery {
 	/** Every param, null for a default (so a merge removes it). */
 	static write({ model, view, id }: ResearchPageState): Params {
 		return {
-			view: view === 'tree' ? null : view,
+			view: QueryParams.unlessDefault(view, 'tree'),
 			q: model.search.trim() || null,
-			hidden: model.hidden ? '1' : null,
+			hidden: QueryParams.writeFlag(model.hidden),
 			id: id || null,
 		};
 	}
