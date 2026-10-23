@@ -20,6 +20,18 @@
 		[options]="store.sectorOptions()"
 		[formField]="form.sector"
 	/>
+	@if (store.tab() === 'balance') {
+		<app-option-select
+			class="text-sm"
+			inputId="empire-station"
+			i18n-label
+			label="Station"
+			i18n-allLabel
+			allLabel="All stations"
+			[options]="store.stationOptions()"
+			[formField]="form.station"
+		/>
+	}
 	@if (store.tab() === 'ships') {
 		<app-option-select
 			class="text-sm"

@@ -1234,6 +1234,23 @@
     "navProgress": "Fortschritt",
     "navMySave": "Mein Spielstand",
     "2482577958289330282": "Herstellung planen",
-    "1357873867588697878": "Spielstarts"
+    "1357873867588697878": "Spielstarts",
+    "4223382601878944026": " Pro Stunde, mit dem Produktionsmodell des Stationsrechners: Jedes gebaute Modul läuft ununterbrochen mit allen Rohstoffen, Energiezellen folgen dem Sonnenlicht des Sektors, und der Arbeiterbonus kommt von den Arbeitern, die der Spielstand jeder Station gibt (nur Stationen mit Wohnmodulen haben Arbeiter). Wohnmodule zählen, was ihre tatsächlichen Arbeiter verbrauchen. Module im Bau, Module, die der Rechner nicht kennt, und Baustellen bleiben außen vor. Abgebaute oder gesammelte Waren kommen von deinen Bergbauschiffen, Stationen verbrauchen sie nur.\n",
+    "8674969417773777194": "{VAR_PLURAL, plural, =1 {1 Station} other {{INTERPOLATION} Stationen}}",
+    "5595794344928638726": "{$ICU}, {$ICU_1}.",
+    "75783721197666256": "{VAR_PLURAL, plural, =0 {keine Ware knapp} =1 {1 Ware knapp} other {{INTERPOLATION} Waren knapp}}",
+    "8188789085390722636": "{VAR_PLURAL, plural, =1 {1 Station mit ausgelassenen Modulen} other {{INTERPOLATION} Stationen mit ausgelassenen Modulen}}",
+    "3109334531552011844": "Diese Stationen stellen keine Waren her und verbrauchen keine.",
+    "8442422503555912082": "Produktionskette",
+    "4370227308575957082": "Abgebaut",
+    "7995904650755175299": "Abgebaut oder gesammelt",
+    "3270263258102848269": "Produziert",
+    "7539286826648871972": "Alle Stationen",
+    "1085985734718060300": "Produktionsbilanz",
+    "2058540860781608440": "{$START_TAG__SVG_SVG}{$CLOSE_TAG__SVG_SVG}Im Stationsrechner öffnen",
+    "4922308101141951396": "Keine gebauten Module",
+    "6996746813678807241": "Nicht im Rechner:",
+    "9211062389274478445": "{VAR_PLURAL, plural, =1 {1 Modul noch im Bau, ausgelassen} other {{INTERPOLATION} Module noch im Bau, ausgelassen}}",
+    "6633634676982492446": " Die Verpflegung der Arbeiter folgt den Völkern der tatsächlichen Belegschaft im Spielstand; der Stationsrechner verpflegt stattdessen die Völker der Wohnmodule, daher kann eine Station mit gemischten Völkern dort abweichen. Dein Hauptquartier zählt die 200 zusätzlichen Arbeiter, die es braucht.\n"
   }
 }

@@ -1234,6 +1234,23 @@
     "navProgress": "Postęp",
     "navMySave": "Mój zapis",
     "2482577958289330282": "Zaplanuj wytwarzanie",
-    "1357873867588697878": "Starty gry"
+    "1357873867588697878": "Starty gry",
+    "4223382601878944026": " Na godzinę, według modelu produkcji Kalkulatora stacji: każdy zbudowany moduł pracuje bez przerwy przy wszystkich dostępnych surowcach, ogniwa energetyczne zależą od nasłonecznienia sektora, a premia siły roboczej wynika z pracowników, których zapis gry podaje dla każdej stacji (pracowników mają tylko stacje z modułami mieszkalnymi). Moduły mieszkalne liczą to, co zjadają ich faktyczni pracownicy. Moduły w budowie, moduły nieznane kalkulatorowi i place budowy są pominięte. Towary wydobywane lub zbierane pochodzą od twoich górników, stacje tylko je zużywają.\n",
+    "8674969417773777194": "{VAR_PLURAL, plural, =1 {1 stacja} few {{INTERPOLATION} stacje} other {{INTERPOLATION} stacji}}",
+    "5595794344928638726": "{$ICU}, {$ICU_1}.",
+    "75783721197666256": "{VAR_PLURAL, plural, =0 {brak niedoborów} =1 {1 towar w niedoborze} few {{INTERPOLATION} towary w niedoborze} other {{INTERPOLATION} towarów w niedoborze}}",
+    "8188789085390722636": "{VAR_PLURAL, plural, =1 {1 stacja z pominiętymi modułami} few {{INTERPOLATION} stacje z pominiętymi modułami} other {{INTERPOLATION} stacji z pominiętymi modułami}}",
+    "3109334531552011844": "Te stacje nie produkują ani nie zużywają towarów.",
+    "8442422503555912082": "Łańcuch produkcji",
+    "4370227308575957082": "Wydobywany",
+    "7995904650755175299": "Wydobywany lub zbierany",
+    "3270263258102848269": "Produkowany",
+    "7539286826648871972": "Wszystkie stacje",
+    "1085985734718060300": "Bilans produkcji",
+    "2058540860781608440": "{$START_TAG__SVG_SVG}{$CLOSE_TAG__SVG_SVG}Otwórz w Kalkulatorze stacji",
+    "4922308101141951396": "Brak zbudowanych modułów",
+    "6996746813678807241": "Brak w kalkulatorze:",
+    "9211062389274478445": "{VAR_PLURAL, plural, =1 {1 moduł wciąż w budowie, pominięty} few {{INTERPOLATION} moduły wciąż w budowie, pominięte} other {{INTERPOLATION} modułów wciąż w budowie, pominiętych}}",
+    "6633634676982492446": " Wyżywienie pracowników zależy od ras faktycznej siły roboczej z zapisu gry; Kalkulator stacji karmi zamiast tego rasy modułów mieszkalnych, więc stacja z mieszanymi rasami może się tu różnić. Twoja kwatera główna liczy 200 dodatkowych pracowników, których potrzebuje.\n"
   }
 }

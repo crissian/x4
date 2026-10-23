@@ -1234,6 +1234,23 @@
     "navProgress": "Progresso",
     "navMySave": "Meu jogo salvo",
     "2482577958289330282": "Planejar fabricação",
-    "1357873867588697878": "Inícios de jogo"
+    "1357873867588697878": "Inícios de jogo",
+    "4223382601878944026": " Por hora, com o modelo de produção da Calculadora de estação: cada módulo construído funciona sem parar com todos os insumos disponíveis, as células de energia seguem a luz solar do setor, e o bônus de força de trabalho vem dos trabalhadores que o save dá a cada estação (só estações com habitats têm trabalhadores). Os habitats contam o que seus trabalhadores reais comem. Módulos em construção, módulos que a calculadora não conhece e canteiros de obra ficam de fora. Mercadorias mineradas ou coletadas vêm dos seus mineradores; as estações só as usam.\n",
+    "8674969417773777194": "{VAR_PLURAL, plural, =1 {1 estação} other {{INTERPOLATION} estações}}",
+    "5595794344928638726": "{$ICU}, {$ICU_1}.",
+    "75783721197666256": "{VAR_PLURAL, plural, =0 {nenhuma mercadoria em falta} =1 {1 mercadoria em falta} other {{INTERPOLATION} mercadorias em falta}}",
+    "8188789085390722636": "{VAR_PLURAL, plural, =1 {1 estação com módulos de fora} other {{INTERPOLATION} estações com módulos de fora}}",
+    "3109334531552011844": "Estas estações não produzem nem usam mercadorias.",
+    "8442422503555912082": "Cadeia de produção",
+    "4370227308575957082": "Minerada",
+    "7995904650755175299": "Minerada ou coletada",
+    "3270263258102848269": "Produzida",
+    "7539286826648871972": "Todas as estações",
+    "1085985734718060300": "Balanço de produção",
+    "2058540860781608440": "{$START_TAG__SVG_SVG}{$CLOSE_TAG__SVG_SVG}Abrir na Calculadora de estação",
+    "4922308101141951396": "Nenhum módulo construído",
+    "6996746813678807241": "Fora da calculadora:",
+    "9211062389274478445": "{VAR_PLURAL, plural, =1 {1 módulo ainda em construção, de fora} other {{INTERPOLATION} módulos ainda em construção, de fora}}",
+    "6633634676982492446": " A comida dos trabalhadores segue as raças da força de trabalho real do save; a Calculadora de estação alimenta as raças dos habitats, então uma estação com raças misturadas pode diferir aí. Seu quartel-general conta os 200 trabalhadores extras de que precisa.\n"
   }
 }

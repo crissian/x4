@@ -24,6 +24,15 @@ describe('station flows', () => {
 		expect(energy?.consumed).toBe(0);
 	});
 
+	it('counts the extra workers the player headquarters needs, as the calculator does', () => {
+		const modules = [EconomyTesting.ENERGY, EconomyTesting.HABITAT];
+		const factory = EconomyTesting.station('S', 'a', { modules, workforce: { argon: 90 } });
+		const hq = { ...factory, macro: 'station_pla_headquarters_base_01' };
+		const energy = (station: typeof factory) => flow(calculator().flows(station), 'energycells')?.produced ?? 0;
+		expect(energy(factory)).toBe(250 * 60);
+		expect(energy(hq)).toBeLessThan(energy(factory));
+	});
+
 	it('gives the full bonus to a fully staffed plant and none to an empty one', () => {
 		const modules = [EconomyTesting.ENERGY, EconomyTesting.HABITAT];
 		const full = EconomyTesting.station('S', 'a', { modules, workforce: { argon: 90 } });

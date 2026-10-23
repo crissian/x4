@@ -1234,6 +1234,23 @@
     "navProgress": "Progressi",
     "navMySave": "Il mio salvataggio",
     "2482577958289330282": "Pianifica la creazione",
-    "1357873867588697878": "Inizi di partita"
+    "1357873867588697878": "Inizi di partita",
+    "4223382601878944026": " All'ora, con il modello di produzione del Calcolatore stazione: ogni modulo costruito lavora senza sosta con tutte le risorse disponibili, le celle energetiche seguono la luce solare del settore e il bonus della forza lavoro viene dai lavoratori che il salvataggio dà a ogni stazione (solo le stazioni con habitat hanno lavoratori). Gli habitat contano ciò che mangiano i loro lavoratori reali. Moduli in costruzione, moduli che il calcolatore non conosce e cantieri restano esclusi. Le merci estratte o raccolte arrivano dai tuoi minatori: le stazioni le usano soltanto.\n",
+    "8674969417773777194": "{VAR_PLURAL, plural, =1 {1 stazione} other {{INTERPOLATION} stazioni}}",
+    "5595794344928638726": "{$ICU}, {$ICU_1}.",
+    "75783721197666256": "{VAR_PLURAL, plural, =0 {nessuna merce scarsa} =1 {1 merce scarsa} other {{INTERPOLATION} merci scarse}}",
+    "8188789085390722636": "{VAR_PLURAL, plural, =1 {1 stazione con moduli esclusi} other {{INTERPOLATION} stazioni con moduli esclusi}}",
+    "3109334531552011844": "Queste stazioni non producono né usano merci.",
+    "8442422503555912082": "Catena di produzione",
+    "4370227308575957082": "Estratta",
+    "7995904650755175299": "Estratta o raccolta",
+    "3270263258102848269": "Prodotta",
+    "7539286826648871972": "Tutte le stazioni",
+    "1085985734718060300": "Bilancio di produzione",
+    "2058540860781608440": "{$START_TAG__SVG_SVG}{$CLOSE_TAG__SVG_SVG}Apri nel Calcolatore stazione",
+    "4922308101141951396": "Nessun modulo costruito",
+    "6996746813678807241": "Non nel calcolatore:",
+    "9211062389274478445": "{VAR_PLURAL, plural, =1 {1 modulo ancora in costruzione, escluso} other {{INTERPOLATION} moduli ancora in costruzione, esclusi}}",
+    "6633634676982492446": " Il cibo dei lavoratori segue le razze della forza lavoro reale del salvataggio; il Calcolatore stazione nutre invece le razze degli habitat, quindi una stazione con razze miste può differire. Il tuo quartier generale conta i 200 lavoratori in più di cui ha bisogno.\n"
   }
 }

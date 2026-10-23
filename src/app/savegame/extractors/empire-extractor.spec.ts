@@ -68,7 +68,9 @@ describe('EmpireExtractor', () => {
 			'<orders><order id="[0x13]" default="1" order="TradeRoutine"/></orders>',
 			'<connection connection="commander" id="[0xb]"><connected connection="[0x7]"/></connection>'
 		);
-		const empire = await EmpireRunner.read(EmpireRunner.save(EmpireRunner.sector(sector, carrier + fighter + station + trader)));
+		const empire = await EmpireRunner.read(
+			EmpireRunner.save(EmpireRunner.sector(sector, carrier + fighter + station + trader))
+		);
 
 		expect(empire.ships).toEqual([
 			{
@@ -106,15 +108,52 @@ describe('EmpireExtractor', () => {
 				sector: 'cluster_01_sector001',
 				money: 12345,
 				storage: { energycells: 600, hullparts: 20 },
+				modules: [],
 			},
 		]);
 	});
 
-	it('reads ownerless ships with their position and counts Xenon and Kha\'ak ships per sector', async () => {
+	it('reads the built modules of a player station, without those still being built', async () => {
+		const entry = (id: number, macro: string) => `<entry id="[0x${id}]" index="${id}" macro="${macro}_macro"/>`;
+		const module = (cls: string, entryId: number, state = '') =>
+			EmpireRunner.component(
+				`class="${cls}" macro="m_macro" ${state} construction="[0x${entryId}]" id="[0x9${entryId}]"`
+			);
+		const station = EmpireRunner.component(
+			'class="station" macro="station_gen_factory_base_01_macro" code="CCC-003" owner="player" id="[0x6]"',
+			'<construction><sequence>' +
+				entry(1, 'dockarea_arg_m_station_01') +
+				entry(2, 'prod_gen_energycells') +
+				entry(3, 'prod_gen_energycells') +
+				entry(4, 'prod_gen_energycells') +
+				'</sequence></construction>',
+			module('dockarea', 1) +
+				module('production', 2) +
+				module('production', 3, 'state="construction"') +
+				module('production', 4) +
+				// a docked ship's parts are not the station's
+				EmpireRunner.component(
+					'class="ship_s" macro="ship_arg_s_scout_01_a_macro" owner="player" id="[0x50]"',
+					'',
+					module('engine', 1, 'state="construction"')
+				)
+		);
+		const empire = await EmpireRunner.read(EmpireRunner.save(EmpireRunner.sector(sector, station)));
+		expect(empire.stations[0].modules).toEqual([
+			{ macro: 'dockarea_arg_m_station_01', count: 1 },
+			{ macro: 'prod_gen_energycells', count: 2 },
+		]);
+		expect(empire.stations[0].building).toBe(1);
+	});
+
+	it("reads ownerless ships with their position and counts Xenon and Kha'ak ships per sector", async () => {
 		const ship = (attrs: string, offset = '') => EmpireRunner.component(attrs, offset);
 		const at = (x: number, z: number) => `<offset><position x="${x}" y="0" z="${z}"/></offset>`;
 		const ships =
-			ship('class="ship_l" macro="ship_par_l_destroyer_01_a_macro" code="ZLK-539" owner="ownerless" id="[0x20]"', at(-1500, 2500)) +
+			ship(
+				'class="ship_l" macro="ship_par_l_destroyer_01_a_macro" code="ZLK-539" owner="ownerless" id="[0x20]"',
+				at(-1500, 2500)
+			) +
 			ship('class="ship_s" macro="ship_xen_s_fighter_01_a_macro" owner="xenon" id="[0x21]"') +
 			ship('class="ship_s" macro="ship_xen_s_fighter_01_a_macro" owner="xenon" id="[0x22]"') +
 			ship('class="ship_xl" macro="ship_xen_xl_carrier_01_a_macro" owner="xenon" id="[0x23]"') +
@@ -129,7 +168,14 @@ describe('EmpireExtractor', () => {
 		);
 
 		expect(empire.ownerless).toEqual([
-			{ id: '[0x20]', code: 'ZLK-539', macro: 'ship_par_l_destroyer_01_a', sector: 'cluster_01_sector001', x: 98.5, z: -47.5 },
+			{
+				id: '[0x20]',
+				code: 'ZLK-539',
+				macro: 'ship_par_l_destroyer_01_a',
+				sector: 'cluster_01_sector001',
+				x: 98.5,
+				z: -47.5,
+			},
 		]);
 		expect(empire.hostileShips).toEqual({
 			xenon: { cluster_01_sector001: [2, 0, 0, 1] },

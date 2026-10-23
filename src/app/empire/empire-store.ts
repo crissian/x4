@@ -3,6 +3,8 @@ import { form } from '@angular/forms/signals';
 import { ActivatedRoute } from '@angular/router';
 import { EnumLabels } from '../core/enum-labels';
 import { GameTextRef } from '../core/game-text-ref';
+import { StationFlowCalculator } from '../economy/station-flow-calculator';
+import { WareClasses } from '../economy/ware-classes';
 import { QueryParamSync } from '../core/router/query-param-sync';
 import { SaveStationNames } from '../map/save/save-station-names';
 import { ActiveSave } from '../savegame/active-save';
@@ -13,14 +15,16 @@ import { ModuleService } from '../shared/services/module.service';
 import { ShipListService } from '../shared/services/ship-list.service';
 import { SectorService } from '../shared/services/universe.service';
 import { WareService } from '../shared/services/ware.service';
+import { EmpireBalance, type EmpireBalanceRow } from './empire-balance';
 import type { EmpireShipRow, EmpireStationRow, EmpireSummary } from './empire-model';
 import { EmpireModel, EmpireQuery, EmpireTab } from './empire-query';
 import { EmpireShips } from './empire-ships';
 import { EmpireStations } from './empire-stations';
+import { OwnStationLayouts } from './own-station-layout';
 
 /**
  * State of the empire page: the player's ships (in fleet order) and stations of the active save, the summary
- * tiles and the filters (a signal form kept in the URL query params). Provided by the page.
+ * tiles, the production balance of the stations and the filters (a signal form kept in the URL query params). Provided by the page.
  */
 @Injectable()
 export class EmpireStore {
@@ -33,6 +37,12 @@ export class EmpireStore {
 	private readonly modules = inject(ModuleService);
 	private readonly wares = inject(WareService);
 	private readonly stationNames = inject(SaveStationNames);
+	/** the station calculator's production model, with the sector sunlight */
+	private readonly flowCalculator = new StationFlowCalculator(
+		this.wares,
+		this.modules,
+		this.sectorService.getEntities()
+	);
 
 	readonly save = this.activeSave.save;
 	readonly gameTime = this.activeSave.gameTime;
@@ -76,6 +86,7 @@ export class EmpireStore {
 			stationName: (x) => namer?.name(x) ?? x.name ?? x.code,
 			products: (id) => this.modules.getEntity(id)?.product?.map((x) => x.id) ?? [],
 			wareName: (id) => this.wares.getEntity(id)?.name ?? id,
+			layout: (own, station) => OwnStationLayouts.of(own, station, this.flowCalculator),
 		});
 	});
 	readonly summary = computed<EmpireSummary>(() =>
@@ -84,6 +95,28 @@ export class EmpireStore {
 
 	readonly filteredShips = computed(() => EmpireQuery.ships(this.ships(), this.model()));
 	readonly filteredStations = computed(() => EmpireQuery.stations(this.stations(), this.model()));
+
+	/** The stations the production balance counts: those with built modules, but no construction sites. */
+	private readonly producing = computed(() => this.stations().filter((x) => x.layout && x.state !== 'construction'));
+	/** The hourly flows of each producing station, by station id. */
+	private readonly flows = computed(
+		() => new Map(this.producing().map((x) => [x.id, this.flowCalculator.flows(x.layout!.flows)]))
+	);
+	/** The stations the production balance sums up now (the station or sector filter). */
+	readonly balanceStations = computed(() => EmpireQuery.balanceStations(this.producing(), this.model()));
+	readonly balance = computed<EmpireBalanceRow[]>(() => {
+		const flows = this.flows();
+		return EmpireBalance.rows(
+			this.balanceStations().map((x) => flows.get(x.id) ?? []),
+			(id) => {
+				const ware = this.wares.getEntity(id);
+				return { name: ware?.name ?? id, mined: ware ? WareClasses.isMined(ware) : false };
+			}
+		);
+	});
+	readonly filteredBalance = computed(() => EmpireQuery.balance(this.balance(), this.model()));
+	/** The producing stations to choose from in the production balance. */
+	readonly stationOptions = computed(() => this.producing().map((x) => ({ id: x.id, name: x.name })));
 
 	/** The filter choices: the sectors with a ship or station, the sizes and roles of the ships. */
 	readonly sectorOptions = computed(() =>
