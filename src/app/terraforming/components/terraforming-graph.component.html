@@ -1,0 +1,42 @@
+@let drawing = layout();
+<div class="max-h-[75vh] overflow-auto rounded border border-line bg-surface p-2">
+	<svg
+		class="block"
+		[attr.width]="drawing.width"
+		[attr.height]="drawing.height"
+		[attr.viewBox]="'0 0 ' + drawing.width + ' ' + drawing.height"
+		role="group"
+		aria-label="Terraforming projects"
+		i18n-aria-label
+	>
+		@for (edge of drawing.edges; track edge.from + '>' + edge.to) {
+			<path class="edge" [class.edge-any]="anyOf().has(edge.to)" [attr.d]="edge.path" />
+		}
+		@for (item of nodes(); track item.id) {
+			<foreignObject
+				[attr.x]="item.x"
+				[attr.y]="item.y"
+				[attr.width]="size.nodeWidth"
+				[attr.height]="size.nodeHeight"
+			>
+				@if (item.row.project) {
+					<a
+						class="node"
+						[attr.data-tone]="item.tone"
+						[routerLink]="['/terraforming/projects', item.id]"
+						[title]="item.state ? item.row.name + ' · ' + item.state : item.row.name"
+					>
+						<span class="node-name">{{ item.row.name }}</span>
+						@if (item.state) {
+							<span class="node-line">{{ item.state }}</span>
+						}
+					</a>
+				} @else {
+					<span class="node" [attr.data-tone]="item.tone">
+						<span class="node-name">{{ item.row.name }}</span>
+					</span>
+				}
+			</foreignObject>
+		}
+	</svg>
+</div>

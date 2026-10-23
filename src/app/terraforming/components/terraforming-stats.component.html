@@ -1,0 +1,32 @@
+<ul class="grid gap-3 sm:grid-cols-2">
+	@for (row of rows(); track row.stat.id) {
+		<li class="rounded-md border border-line bg-surface-2 px-3 py-2 text-sm">
+			<div class="flex items-baseline justify-between gap-2">
+				<span class="font-semibold text-fg-strong">{{ row.stat.name }}</span>
+				<span class="font-semibold">{{ row.value.toLocaleString() }}</span>
+			</div>
+			@if (row.scale.length) {
+				<div class="scale mt-1" role="img" [attr.aria-label]="row.stat.name + ': ' + row.value">
+					@for (cell of row.scale; track cell.value) {
+						<span
+							class="cell"
+							[style.border-color]="cell.range.color"
+							[style.background-color]="cell.value <= row.value ? cell.range.color : null"
+							[title]="cell.value + (cell.range.description ? ': ' + cell.range.description : '')"
+						></span>
+					}
+				</div>
+			}
+			@if (row.range; as range) {
+				@if (range.notHabitable) {
+					<p class="mt-1 font-semibold text-danger" i18n>Not habitable</p>
+				}
+				@if (range.description) {
+					<p class="mt-1 text-xs text-fg-muted">{{ range.description }}</p>
+				}
+			}
+		</li>
+	} @empty {
+		<li class="text-fg-muted" i18n>No stats recorded.</li>
+	}
+</ul>

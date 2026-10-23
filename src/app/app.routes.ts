@@ -152,6 +152,14 @@ export const appRoutes: Routes = [
 			),
 	},
 	{
+		path: 'terraforming',
+		loadChildren: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'research', 'terraforming'],
+				() => import('./terraforming/terraforming.routes')
+			),
+	},
+	{
 		path: 'game-starts',
 		loadChildren: () =>
 			GameText.withTexts(

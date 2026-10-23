@@ -1,0 +1,165 @@
+@if (project(); as project) {
+	<app-detail-page
+		[section]="label('terraforming')"
+		sectionLink="/terraforming"
+		[title]="project.name"
+		[description]="project.description"
+	>
+		<dl class="details">
+			<div appDetail="Group" i18n-appDetail>{{ group() }}</div>
+			@if (project.duration) {
+				<div [appDetail]="label('duration')">{{ duration() }}</div>
+			}
+			@if (project.repeatCooldown) {
+				<div [appDetail]="label('cooldown')">{{ cooldown() }}</div>
+			}
+			@if (research(); as research) {
+				<div [appDetail]="label('requiredResearch')">
+					<a routerLink="/research" [queryParams]="{ id: research.id }">{{ research.name }}</a>
+				</div>
+			}
+		</dl>
+		<ul class="mt-2 text-sm">
+			@if (project.repeatCooldown !== undefined) {
+				<li>{{ label('repeatable') }}</li>
+			}
+			@if (project.resilient) {
+				<li>{{ label('resilient') }}</li>
+			}
+			@if (project.chance !== undefined && project.chance < 100) {
+				<li>{{ chance() }}</li>
+			}
+		</ul>
+
+		<div class="mt-4 grid gap-6 md:grid-cols-2">
+			<section>
+				<h2 class="font-semibold text-fg-strong">{{ label('conditions') }}</h2>
+				<ul class="mt-1 text-sm">
+					@for (condition of conditions(); track $index) {
+						<li class="flex flex-wrap items-center gap-1">
+							<span>{{ condition.text }}</span>
+							@for (block of condition.blocks; track block.value) {
+								<span
+									class="inline-block h-3 w-3 rounded-sm border border-line"
+									[style.background-color]="block.range.color"
+									[title]="
+										block.value + (block.range.description ? ': ' + block.range.description : '')
+									"
+								></span>
+							}
+						</li>
+					} @empty {
+						<li class="text-fg-muted">-</li>
+					}
+				</ul>
+
+				<h2 class="mt-4 font-semibold text-fg-strong">{{ label('primaryEffects') }}</h2>
+				<ul class="mt-1 text-sm">
+					@for (effect of effects(); track $index) {
+						<li>{{ effect }}</li>
+					} @empty {
+						<li class="text-fg-muted">-</li>
+					}
+				</ul>
+
+				@if (sideEffects().length) {
+					<h2 class="mt-4 font-semibold text-fg-strong">{{ label('sideEffects') }}</h2>
+					<ul class="mt-1 space-y-1 text-sm">
+						@for (side of sideEffects(); track $index) {
+							<li>
+								<span class="font-medium">{{ label('chance') }} {{ side.chance }}%</span>
+								@if (side.text) {
+									· <span [class.text-danger]="side.harmful">{{ side.text }}</span>
+								}
+								@if (side.setback) {
+									· {{ label('setback') }} {{ side.setback }}%
+								}
+								@if (side.effect) {
+									· {{ side.effect }}
+								}
+							</li>
+						}
+					</ul>
+				}
+
+				@if (rebates().length) {
+					<h2 class="mt-4 font-semibold text-fg-strong">{{ label('rebates') }}</h2>
+					<ul class="mt-1 text-sm">
+						@for (rebate of rebates(); track rebate.name) {
+							<li>{{ rebate.name }}: {{ rebate.value }}%</li>
+						}
+					</ul>
+				}
+
+				@if (removes().length) {
+					<h2 class="mt-4 font-semibold text-fg-strong">{{ label('removesProjects') }}</h2>
+					<ul class="mt-1 text-sm">
+						@for (item of removes(); track item.id) {
+							<li>
+								<a [routerLink]="['/terraforming/projects', item.id]">{{ item.name }}</a>
+							</li>
+						}
+					</ul>
+				}
+			</section>
+
+			<section>
+				<h2 class="font-semibold text-fg-strong">{{ label('requiredResources') }}</h2>
+				@if (project.wares.length) {
+					<p class="text-xs text-fg-muted" i18n>
+						The library's amounts, which the save scales for each planet; see the planner with a save
+						loaded.
+					</p>
+					<app-ware-amounts class="mt-1 block" [items]="project.wares" />
+				} @else {
+					<p class="text-sm text-fg-muted">-</p>
+				}
+
+				<h2 class="mt-4 font-semibold text-fg-strong" i18n>Offered on</h2>
+				@if (!fromSave()) {
+					<p class="text-xs text-fg-muted" i18n>
+						The planets the scripts add it to by name; load a save for every planet that offers it.
+					</p>
+				}
+				<ul class="mt-1 space-y-1 text-sm">
+					@for (planet of planets(); track planet.cluster) {
+						<li>
+							<a routerLink="/terraforming" [queryParams]="{ planet: planet.cluster }">{{
+								planet.name
+							}}</a>
+							@if (planet.completed) {
+								<span class="text-fg-muted">
+									· {{ label('timesCompleted') }}: {{ planet.completed }}</span
+								>
+							}
+							@if (planet.predecessors.length) {
+								<div class="text-fg-muted">
+									{{ planet.any ? label('requiresAnyOf') : label('requiredProjects') }}:
+									@for (item of planet.predecessors; track item.id; let last = $last) {
+										@if (item.known) {
+											<a [routerLink]="['/terraforming/projects', item.id]">{{ item.name }}</a>
+										} @else {
+											{{ item.name }}
+										}
+										@if (!last) {
+											,
+										}
+									}
+								</div>
+							}
+						</li>
+					} @empty {
+						<li class="text-fg-muted" i18n>No planet offers it.</li>
+					}
+				</ul>
+			</section>
+		</div>
+	</app-detail-page>
+} @else {
+	<div class="card">
+		<div class="card-body">
+			<p i18n>Unknown terraforming project.</p>
+			<a routerLink="/terraforming">{{ label('terraforming') }}</a>
+		</div>
+	</div>
+}

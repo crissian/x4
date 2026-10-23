@@ -126,7 +126,7 @@
 						@if (planets().length) {
 							<app-data-grid
 								[data]="planets()"
-								[columns]="planetColumns"
+								[columns]="planetColumns()"
 								[features]="false"
 								[trackBy]="trackRow"
 							/>

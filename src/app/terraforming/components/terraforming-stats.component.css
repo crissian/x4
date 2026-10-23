@@ -1,0 +1,12 @@
+.scale {
+	display: flex;
+	gap: 2px;
+}
+
+.cell {
+	flex: 1 1 0;
+	height: 0.9rem;
+	min-width: 0.5rem;
+	border: 2px solid;
+	border-radius: 2px;
+}
