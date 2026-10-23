@@ -7,9 +7,7 @@
 				<input type="checkbox" [formField]="vaults.positionsForm.show" />
 				<ng-container i18n>Show positions</ng-container>
 			</label>
-			<a class="text-sm" routerLink="/map" [queryParams]="{ sector: sector(), layer: 'vaults' }" i18n
-				><svg lucideMapPinned class="mr-0.5" /> Show on map</a
-			>
+			<app-show-on-map-link class="text-sm" [sector]="sector()" layer="vaults" />
 		</div>
 		<app-vault-table [groups]="groups()" [headers]="false" />
 	</section>

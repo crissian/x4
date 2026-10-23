@@ -5,6 +5,7 @@ import { EnumLabels } from '../../core/enum-labels';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { EntityDetailPage } from '../../shared/components/entity-detail-page';
 import { FactionLabelComponent } from '../../shared/components/faction-label.component';
+import { SectorMapLinkComponent } from '../../shared/components/sector-map-link.component';
 import { GAME_VERSIONS } from '../../shared/services/constants';
 import { FactionService } from '../../shared/services/faction.service';
 import { Loadouts } from '../../shared/services/loadout';
@@ -29,6 +30,7 @@ const SHOWN_INFO = new Set(['location', 'ship', 'cash']);
 		DetailComponent,
 		FactionLabelComponent,
 		GameStartItemsComponent,
+		SectorMapLinkComponent,
 	],
 	templateUrl: './game-start-detail.component.html',
 })

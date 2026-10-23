@@ -18,4 +18,6 @@
 <ng-template #factionCell let-row>
 	<app-faction-label class="whitespace-nowrap" [faction]="row.faction">{{ row.entry.factionName }}</app-faction-label>
 </ng-template>
-<ng-template #sectorCell let-row><app-sector-links [sector]="row.sector" /></ng-template>
+<ng-template #sectorCell let-row
+	><app-sector-map-link [sector]="row.sector?.id" [name]="row.sector?.name"
+/></ng-template>

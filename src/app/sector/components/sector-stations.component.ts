@@ -1,9 +1,9 @@
 import { Component, ElementRef, computed, inject, input, model, viewChild, viewChildren } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { SaveStationNames } from '../../map/save/save-station-names';
 import { StationTypeBadgeComponent } from '../../map/station-type-badge.component';
 import { ActiveSave } from '../../savegame/active-save';
 import type { SaveStation } from '../../savegame/map/save-map-model';
+import { ShowOnMapLinkComponent } from '../../shared/components/show-on-map-link.component';
 import type { StationTypeInfo } from '../../shared/services/constants';
 import { FactionService } from '../../shared/services/faction.service';
 import { StationTypes } from '../../shared/services/station-types';
@@ -41,7 +41,7 @@ export interface SectorStationGroup {
  */
 @Component({
 	selector: 'app-sector-stations',
-	imports: [FactionLabelComponent, RouterLink, SectorStationDetailsComponent, StationTypeBadgeComponent],
+	imports: [FactionLabelComponent, SectorStationDetailsComponent, ShowOnMapLinkComponent, StationTypeBadgeComponent],
 	templateUrl: './sector-stations.component.html',
 	styleUrl: './sector-stations.component.css',
 })

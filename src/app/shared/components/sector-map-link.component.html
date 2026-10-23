@@ -1,10 +1,14 @@
-<a [routerLink]="['/sectors', sector()]">{{ name() }}</a>
-<a
-	routerLink="/map"
-	[queryParams]="{ sector: sector() }"
-	title="Show on map"
-	i18n-title
-	aria-label="Show on map"
-	i18n-aria-label
-	><svg lucideMapPinned class="size-3.5" aria-hidden="true"
-/></a>
+@if (sector(); as id) {
+	<a [routerLink]="['/sectors', id]">{{ name() ?? id }}</a>
+	<a
+		routerLink="/map"
+		[queryParams]="{ sector: id }"
+		title="Show on map"
+		i18n-title
+		aria-label="Show on map"
+		i18n-aria-label
+		><svg lucideMapPinned class="size-3.5" aria-hidden="true"
+	/></a>
+} @else {
+	<span class="text-fg-muted">{{ fallback() }}</span>
+}

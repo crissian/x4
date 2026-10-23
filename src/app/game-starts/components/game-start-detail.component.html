@@ -26,10 +26,7 @@
 			</div>
 			<div i18n-appDetail appDetail="Location">
 				@if (summary.sector; as sector) {
-					<a [routerLink]="['/sectors', sector.id]">{{ sector.name }}</a>
-					<a class="ml-2 text-sm" [routerLink]="['/map']" [queryParams]="{ sector: sector.id }" i18n
-						>Show on map</a
-					>
+					<app-sector-map-link [sector]="sector.id" [name]="sector.name" />
 					@if (start.docked) {
 						<span class="text-fg-muted" i18n> (docked at a station)</span>
 					}

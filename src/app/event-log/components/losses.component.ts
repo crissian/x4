@@ -1,15 +1,15 @@
 import { Component, computed, inject } from '@angular/core';
 import { DataGridComponent } from '../../shared/components/data-grid/data-grid.component';
+import { SectorMapLinkComponent } from '../../shared/components/sector-map-link.component';
 import { StatTileComponent, type StatTileItem } from '../../shared/components/stat-tile.component';
 import type { LossRow } from '../event-log-rows';
 import { EventLogStore } from '../event-log-store';
 import { EventLogColumns } from './event-log-columns';
-import { SectorLinksComponent } from './sector-links.component';
 
 /** The player-owned ships and stations the log reports destroyed: totals per sector and killer, then the list. */
 @Component({
 	selector: 'app-losses',
-	imports: [DataGridComponent, StatTileComponent, SectorLinksComponent],
+	imports: [DataGridComponent, StatTileComponent, SectorMapLinkComponent],
 	templateUrl: './losses.component.html',
 })
 export class LossesComponent {

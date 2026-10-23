@@ -8,7 +8,7 @@
 				<ng-container i18n>At game start</ng-container>
 			}
 		</span>
-		<a class="text-sm font-normal" routerLink="/map" [queryParams]="{ sector: sector() }" i18n>Show on map</a>
+		<app-show-on-map-link class="text-sm font-normal" [sector]="sector()" />
 	</div>
 	<div class="card-body">
 		@if (groups(); as groups) {

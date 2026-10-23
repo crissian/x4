@@ -1,7 +1,7 @@
 @if (store.losses().length === 0) {
 	<p class="text-sm text-fg-muted" i18n>
-		Your logbook reports no destroyed ships or stations. The game logs every player-owned ship or station it
-		loses, with the killer when one was recorded.
+		Your logbook reports no destroyed ships or stations. The game logs every player-owned ship or station it loses,
+		with the killer when one was recorded.
 	</p>
 } @else {
 	<div class="grid gap-3 sm:grid-cols-3">
@@ -45,4 +45,6 @@
 	</div>
 }
 
-<ng-template #sectorCell let-row><app-sector-links [sector]="row.sector" [fallback]="row.loss.location" /></ng-template>
+<ng-template #sectorCell let-row
+	><app-sector-map-link [sector]="row.sector?.id" [name]="row.sector?.name" [fallback]="row.loss.location"
+/></ng-template>
