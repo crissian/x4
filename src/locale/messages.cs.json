@@ -1224,6 +1224,12 @@
     "7532912644436869510": " Porovnáno s vaší uloženou hrou: je na uvedené pozici loď bez vlastníka stejného modelu? ",
     "8228248409639498263": "Stále tam, bez vlastníka",
     "6917917506178078543": "Ve vaší uložené hře tam není",
-    "1867992058937397585": "Modul"
+    "1867992058937397585": "Modul",
+    "navItems": "Předměty",
+    "navWorld": "Svět",
+    "navProgress": "Postup",
+    "navMySave": "Moje uložená hra",
+    "2482577958289330282": "Naplánovat výrobu",
+    "1357873867588697878": "Začátky hry"
   }
 }

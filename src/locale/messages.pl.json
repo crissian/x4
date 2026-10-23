@@ -1224,6 +1224,12 @@
     "7532912644436869510": " Sprawdzone z twoim zapisem: czy w podanej pozycji jest statek bez właściciela tego samego modelu? ",
     "8228248409639498263": "Nadal jest, bez właściciela",
     "6917917506178078543": "Brak w twoim zapisie",
-    "1867992058937397585": "Moduł"
+    "1867992058937397585": "Moduł",
+    "navItems": "Przedmioty",
+    "navWorld": "Świat",
+    "navProgress": "Postęp",
+    "navMySave": "Mój zapis",
+    "2482577958289330282": "Zaplanuj wytwarzanie",
+    "1357873867588697878": "Starty gry"
   }
 }

@@ -1224,6 +1224,12 @@
     "7532912644436869510": " Comparé à votre sauvegarde : y a-t-il un vaisseau sans propriétaire du même modèle à la position indiquée ? ",
     "8228248409639498263": "Toujours là, sans propriétaire",
     "6917917506178078543": "Absent de votre sauvegarde",
-    "1867992058937397585": "Module"
+    "1867992058937397585": "Module",
+    "navItems": "Objets",
+    "navWorld": "Monde",
+    "navProgress": "Progression",
+    "navMySave": "Ma sauvegarde",
+    "2482577958289330282": "Planifier la fabrication",
+    "1357873867588697878": "Débuts de partie"
   }
 }

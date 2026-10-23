@@ -1224,6 +1224,12 @@
     "7532912644436869510": " Conferido com seu save: há uma nave sem dono do mesmo modelo na posição indicada? ",
     "8228248409639498263": "Ainda lá, sem dono",
     "6917917506178078543": "Não está no seu save",
-    "1867992058937397585": "Módulo"
+    "1867992058937397585": "Módulo",
+    "navItems": "Itens",
+    "navWorld": "Mundo",
+    "navProgress": "Progresso",
+    "navMySave": "Meu jogo salvo",
+    "2482577958289330282": "Planejar fabricação",
+    "1357873867588697878": "Inícios de jogo"
   }
 }

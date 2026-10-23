@@ -1224,6 +1224,12 @@
     "7532912644436869510": " Comprobado con tu partida: ¿hay una nave sin dueño del mismo modelo en la posición indicada? ",
     "8228248409639498263": "Sigue ahí, sin dueño",
     "6917917506178078543": "No está en tu partida",
-    "1867992058937397585": "Módulo"
+    "1867992058937397585": "Módulo",
+    "navItems": "Objetos",
+    "navWorld": "Mundo",
+    "navProgress": "Progreso",
+    "navMySave": "Mi partida",
+    "2482577958289330282": "Planificar fabricación",
+    "1357873867588697878": "Inicios de partida"
   }
 }
