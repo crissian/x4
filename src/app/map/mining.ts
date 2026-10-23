@@ -24,10 +24,15 @@ export class Mining {
 		return (ship.cargo ?? []).filter((x) => x.types.some((t) => t.id === transport)).reduce((total, x) => total + x.max, 0);
 	}
 
+	/** Whether the ship is a miner with a hold for the ware: solid miners for ore, gas miners for gases. */
+	static canMine(ship: Pick<ShipListItem, 'purpose' | 'cargo'>, ware: Ware): boolean {
+		return ship.purpose === ShipPurpose.mine && Mining.minerCapacity(ship, ware) > 0;
+	}
+
 	/** Mining ships able to carry the ware, largest hold first. */
 	static minersFor<T extends ShipListItem>(ships: readonly T[], ware: Ware): T[] {
 		return ships
-			.filter((x) => x.purpose === ShipPurpose.mine && Mining.minerCapacity(x, ware) > 0)
+			.filter((x) => Mining.canMine(x, ware))
 			.sort((a, b) => Mining.minerCapacity(b, ware) - Mining.minerCapacity(a, ware) || a.name.localeCompare(b.name));
 	}
 

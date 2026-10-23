@@ -5,6 +5,7 @@ import { GAME_VERSIONS } from '../shared/services/constants';
 import { AbandonedShips } from '../shared/services/data/abandoned-ships-data';
 import { FactionService } from '../shared/services/faction.service';
 import { AbandonedShip, Faction, Sector, ShipListItem } from '../shared/services/model/model';
+import type { OwnShip } from '../savegame/own-ships/own-ship-list';
 import { OwnShips } from '../savegame/own-ships/own-ships';
 import { ShipListService } from '../shared/services/ship-list.service';
 import { TravelDrives } from '../shared/services/travel-drives';
@@ -13,6 +14,7 @@ import { WareService } from '../shared/services/ware.service';
 import { CLUSTER_RADIUS, GalaxyLayout, SectorShape } from './galaxy-layout';
 import { MapGeometry } from './map-geometry';
 import { Mining } from './mining';
+import { MinerPicker } from './mining/miner-picker';
 import { PanZoom, ViewBox } from './pan-zoom';
 import { RouteOptions, RoutePlanner } from './route-planner';
 import { MapSaveLayer } from './save/map-save-layer';
@@ -146,24 +148,37 @@ export class MapStore {
 
 	// mining: the home sector is the route start
 	readonly miningWare = computed(() => this.wares.getEntity(this.resource()));
+	/** The miner models able to carry the resource, largest hold first. */
 	readonly miners = computed(() => {
 		const ware = this.miningWare();
 		return ware ? Mining.minersFor(this.ships.getEntities(), ware) : [];
 	});
-	/** Mining settings; the miner resets to the first one able to carry the resource. */
-	readonly miningModel = linkedSignal<ShipListItem[], { miner: string; fillMinutes: number; price: PriceLevel }>({
-		source: this.miners,
-		computation: (miners, previous) => ({
-			fillMinutes: 10,
-			price: 'avg',
-			...previous?.value,
-			miner: miners[0]?.id ?? '',
-		}),
+	/** The player's ships of the active save able to mine the resource. */
+	readonly ownMiners = computed(() => {
+		const ware = this.miningWare();
+		return ware ? MinerPicker.own(this.ownShips.list(), ware) : [];
+	});
+	private readonly minerChoices = computed(() => ({ models: this.miners(), own: this.ownMiners() }));
+	/** Mining settings; the miner stays while it can mine the resource, else resets to the largest model. */
+	readonly miningModel = linkedSignal<
+		{ models: ShipListItem[]; own: OwnShip[] },
+		{ miner: string; fillMinutes: number; price: PriceLevel }
+	>({
+		source: this.minerChoices,
+		computation: ({ models, own }, previous) => {
+			const kept = previous?.value.miner ?? '';
+			return {
+				fillMinutes: 10,
+				price: 'avg',
+				...previous?.value,
+				miner: MinerPicker.find(kept, own, models) ? kept : (models[0]?.id ?? ''),
+			};
+		},
 	});
 	readonly miningForm = form(this.miningModel, (mining) => {
 		min(mining.fillMinutes, 1);
 	});
-	readonly miner = computed(() => this.miners().find((x) => x.id === this.miningModel().miner));
+	readonly miner = computed(() => MinerPicker.find(this.miningModel().miner, this.ownMiners(), this.miners()));
 	readonly minerSpeed = computed(() => {
 		const miner = this.miner();
 		return miner?.travel?.speed ?? 0;

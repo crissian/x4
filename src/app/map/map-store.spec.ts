@@ -165,6 +165,36 @@ describe('MapStore', () => {
 		expect(own[0].travel!.speed).not.toBe(model.travel!.speed);
 	});
 
+	it('offers the own miners of the resource and times them with their engines', async () => {
+		const testing = new MapSaveTesting();
+		const solid = { id: '[0x1]', code: 'ABC-001', macro: 'ship_arg_m_miner_solid_01_a', sector: MapSaveTesting.B };
+		const gas = { id: '[0x2]', code: 'ABC-002', macro: 'ship_arg_m_miner_liquid_01_a', sector: MapSaveTesting.B };
+		const engine = { engine: 'engine_arg_m_travel_01_mk3', engines: 1 };
+		const map = { sectors: [], stations: [], playerShips: {} };
+		const ships = [
+			{ ...solid, ...engine },
+			{ ...gas, ...engine },
+		];
+		testing.active.set({ id: 'x', data: { map, ships } } as unknown as SavegameSummary);
+		testing.activeId.set('x');
+		const store = TestBed.inject(MapStore);
+		TestBed.tick();
+		await LazyValue.settled();
+		expect(store.ownMiners().map((x) => x.key)).toEqual(['own-0x1']);
+		const model = store.miningModel().miner;
+		store.miningModel.update((x) => ({ ...x, miner: 'own-0x1' }));
+		const own = store.ownMiners()[0];
+		expect(store.miner()?.id).toBe(solid.macro);
+		expect(store.minerSpeed()).toBe(own.travel!.speed);
+		// still a solid resource: the own miner stays; a gas: the largest gas miner model
+		store.settings.update((x) => ({ ...x, resource: 'silicon' }));
+		expect(store.miningModel().miner).toBe('own-0x1');
+		store.settings.update((x) => ({ ...x, resource: 'hydrogen' }));
+		expect(store.ownMiners().map((x) => x.key)).toEqual(['own-0x2']);
+		expect(store.miningModel().miner).toBe(store.miners()[0].id);
+		expect(store.miningModel().miner).not.toBe(model);
+	});
+
 	it('keeps the content pack choice as a list of shown versions', () => {
 		const store = setup();
 		store.versions.update((x) => x.map((_, i) => i !== 1));

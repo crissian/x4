@@ -27,13 +27,18 @@
 			[formField]="store.routeForm.from"
 		/>
 	}
-	<select class="input" aria-label="Miner" i18n-aria-label [formField]="form.miner">
-		@for (ship of store.miners(); track ship.id) {
-			<option [value]="ship.id">{{ ship.name }} ({{ ship.size | enumLabel }})</option>
-		} @empty {
-			<option value="" i18n>No miner carries this ware</option>
-		}
-	</select>
+	@if (minerOptions().length) {
+		<app-searchable-select
+			i18n-label
+			label="Miner"
+			[hideLabel]="true"
+			recentKey="map-mining-recent-miners"
+			[options]="minerOptions()"
+			[formField]="form.miner"
+		/>
+	} @else {
+		<p class="text-sm text-fg-muted" i18n>No miner carries this ware</p>
+	}
 	<div class="grid grid-cols-2 gap-2">
 		<label class="text-sm">
 			<ng-container i18n>Minutes to fill hold</ng-container>
@@ -103,9 +108,17 @@
 	</table>
 }
 @if (store.miner(); as miner) {
-	<p class="mt-2 text-xs text-fg-muted" i18n>
-		{{ miner.name }}: {{ store.miningUnits() | number }} units per trip, travel
-		{{ store.minerSpeed() | number: '1.0-0' }} m/s with its fastest engine. Mining speed depends on the asteroid,
-		equipment and crew, so set the fill time from experience.
-	</p>
+	@if (miner.own) {
+		<p class="mt-2 text-xs text-fg-muted" i18n>
+			{{ miner.name }}: {{ store.miningUnits() | number }} units per trip, travel
+			{{ store.minerSpeed() | number: '1.0-0' }} m/s with its engines. Mining speed depends on the asteroid,
+			equipment and crew, so set the fill time from experience.
+		</p>
+	} @else {
+		<p class="mt-2 text-xs text-fg-muted" i18n>
+			{{ miner.name }}: {{ store.miningUnits() | number }} units per trip, travel
+			{{ store.minerSpeed() | number: '1.0-0' }} m/s with its fastest engine. Mining speed depends on the
+			asteroid, equipment and crew, so set the fill time from experience.
+		</p>
+	}
 }
