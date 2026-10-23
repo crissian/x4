@@ -6,7 +6,9 @@ import { GameTextRef } from '../core/game-text-ref';
 import { QueryParamSync } from '../core/router/query-param-sync';
 import { SaveStationNames } from '../map/save/save-station-names';
 import { ActiveSave } from '../savegame/active-save';
+import { FleetAssignments } from '../shared/services/data/fleet-assignments-data';
 import { GameTexts } from '../shared/services/data/game-texts-data';
+import { ShipOrders } from '../shared/services/data/ship-orders-data';
 import { ModuleService } from '../shared/services/module.service';
 import { ShipListService } from '../shared/services/ship-list.service';
 import { SectorService } from '../shared/services/universe.service';
@@ -22,6 +24,9 @@ import { EmpireStations } from './empire-stations';
  */
 @Injectable()
 export class EmpireStore {
+	private static readonly ORDERS = new Map(ShipOrders.all.map((x) => [x.id, x.name]));
+	private static readonly ASSIGNMENTS = new Map(FleetAssignments.all.map((x) => [x.id, x.name]));
+
 	private readonly activeSave = inject(ActiveSave);
 	private readonly models = inject(ShipListService);
 	private readonly sectorService = inject(SectorService);
@@ -60,6 +65,8 @@ export class EmpireStore {
 			sectorName: (id) => this.sectorName(id),
 			text: (ref) => GameTextRef.resolve(ref, GameTexts),
 			stationName: (id) => this.stationNameById().get(id),
+			orderName: (id) => EmpireStore.ORDERS.get(id),
+			assignmentName: (id) => EmpireStore.ASSIGNMENTS.get(id),
 		})
 	);
 	readonly stations = computed<EmpireStationRow[]>(() => {

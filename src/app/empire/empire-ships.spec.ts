@@ -14,6 +14,8 @@ describe('EmpireShips', () => {
 		sectorName: (id) => id.toUpperCase(),
 		text: (ref) => (ref === '{1,2}' ? 'Story Ship' : undefined),
 		stationName: (id) => (id === '[st]' ? 'My Factory' : undefined),
+		orderName: (id) => ({ ProtectStation: 'Protect Station', TradeRoutine: 'AutoTrade' })[id],
+		assignmentName: (id) => (id === 'interception' ? 'Interception' : undefined),
 	};
 	const ship = (id: string, macro: string, extra: Partial<SaveFleetShip> = {}): SaveFleetShip => ({
 		id,
@@ -46,11 +48,12 @@ describe('EmpireShips', () => {
 			size: 'Extra Large',
 			purpose: 'Fight',
 			sectorName: 'A',
-			order: 'ProtectStation',
+			order: 'Protect Station',
+			orderId: 'ProtectStation',
 			defaultOrder: 'Wait',
 		});
-		expect(rows[0]).toMatchObject({ order: 'TradeRoutine', defaultOrder: undefined });
-		expect(rows[4].assignment).toBe('interception');
+		expect(rows[0]).toMatchObject({ order: 'AutoTrade', orderId: 'TradeRoutine', defaultOrder: undefined });
+		expect(rows[4]).toMatchObject({ assignment: 'Interception', assignmentId: 'interception' });
 	});
 
 	it('names a fleet without a fleet name after its commander, and a station fleet after the station', () => {

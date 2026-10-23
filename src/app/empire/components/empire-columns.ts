@@ -23,9 +23,17 @@ export class EmpireColumns {
 			{
 				key: 'order',
 				caption: $localize`Order`,
-				title: (x) => (x.defaultOrder ? $localize`Default order: ${x.defaultOrder}:order:` : undefined),
+				title: (x) =>
+					[x.orderId, x.defaultOrder ? $localize`Default order: ${x.defaultOrder}:order:` : '']
+						.filter(Boolean)
+						.join(' · ') || undefined,
 			},
-			{ key: 'assignment', caption: $localize`Assignment`, value: (x) => x.assignment ?? '' },
+			{
+				key: 'assignment',
+				caption: $localize`Assignment`,
+				value: (x) => x.assignment ?? '',
+				title: (x) => x.assignmentId,
+			},
 			{ key: 'commander', caption: $localize`Commander`, value: (x) => x.commander ?? '' },
 			{ key: 'fleet', caption: $localize`Fleet`, hidden: true },
 			{

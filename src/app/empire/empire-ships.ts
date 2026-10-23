@@ -11,6 +11,10 @@ export interface EmpireShipLookups {
 	text(ref: string): string | undefined;
 	/** the name of a player station by component id; undefined for an unknown id */
 	stationName(id: string): string | undefined;
+	/** the game's name of an order id; undefined when the game data has none */
+	orderName(id: string): string | undefined;
+	/** the game's name of a fleet assignment id; undefined when the game data has none */
+	assignmentName(id: string): string | undefined;
 }
 
 /**
@@ -95,9 +99,12 @@ export class EmpireShips {
 			purpose: model?.purpose ?? '',
 			sector: ship.sector,
 			sectorName: lookups.sectorName(ship.sector),
-			order: current ?? '',
-			defaultOrder: ship.order && ship.defaultOrder ? ship.defaultOrder : undefined,
-			assignment: ship.assignment,
+			order: current ? (lookups.orderName(current) ?? current) : '',
+			orderId: current,
+			defaultOrder:
+				ship.order && ship.defaultOrder ? (lookups.orderName(ship.defaultOrder) ?? ship.defaultOrder) : undefined,
+			assignment: ship.assignment ? (lookups.assignmentName(ship.assignment) ?? ship.assignment) : undefined,
+			assignmentId: ship.assignment,
 			...place,
 		};
 	}
