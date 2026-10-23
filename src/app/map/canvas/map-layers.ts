@@ -5,6 +5,7 @@ import { MapLabel } from '../map-label';
 import { MapStations } from '../map-stations';
 import { MapStore } from '../map-store';
 import { MapSaveLayer } from '../save/map-save-layer';
+import { MapSaveSectors } from '../save/map-save-sectors';
 import { StationIcons } from '../station-icons';
 import { StationMarkersComponent } from './station-markers';
 
@@ -46,15 +47,22 @@ export class MapMarkersLayer {
 })
 export class MapLabelsLayer {
 	protected readonly store = inject(MapStore);
+	private readonly saveSectors = inject(MapSaveSectors);
 
 	protected readonly labels = computed(() => {
 		const store = this.store;
 		if (!store.showSectorLabels()) {
 			return this.clusterLabels();
 		}
+		const unknown = this.saveSectors.unknown();
 		return store
 			.visibleShapes()
-			.map((shape) => ({ x: shape.x, y: shape.y, lines: this.sectorLines(shape) }))
+			.map((shape) => ({
+				x: shape.x,
+				y: shape.y,
+				lines: this.sectorLines(shape),
+				dim: unknown.has(shape.sector.id),
+			}))
 			.filter((x) => x.lines.length);
 	});
 
@@ -66,19 +74,28 @@ export class MapLabelsLayer {
 		return lines;
 	}
 
-	/** Single sector systems keep their sector name; larger systems show the system name. */
+	/**
+	 * Single sector systems keep their sector name (dimmed when undiscovered); larger systems show the system name.
+	 */
 	private clusterLabels() {
 		const seen = new Set<string>();
-		const result: { x: number; y: number; lines: string[] }[] = [];
+		const unknown = this.saveSectors.unknown();
+		const result: { x: number; y: number; lines: string[]; dim: boolean }[] = [];
 		for (const shape of this.store.visibleShapes()) {
 			if (shape.cluster.sectors.length === 1) {
-				result.push({ x: shape.x, y: shape.y, lines: this.sectorLines(shape) });
+				result.push({
+					x: shape.x,
+					y: shape.y,
+					lines: this.sectorLines(shape),
+					dim: unknown.has(shape.sector.id),
+				});
 			} else if (!seen.has(shape.cluster.id)) {
 				seen.add(shape.cluster.id);
 				result.push({
 					x: shape.cluster.x / 1000,
 					y: -shape.cluster.z / 1000,
 					lines: MapLabel.wrap(shape.cluster.name),
+					dim: false,
 				});
 			}
 		}

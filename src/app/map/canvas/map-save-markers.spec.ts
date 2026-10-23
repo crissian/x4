@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { describe, expect, it } from 'vitest';
+import { MapLabel } from '../map-label';
 import { MapSaveTesting } from '../map-save-testing';
 import { MapStore } from '../map-store';
 import { MapCanvasComponent } from './map-canvas.component';
@@ -90,13 +91,27 @@ describe('MapSaveMarkers', () => {
 		expect(element.querySelector('g[appMapCountBadge] text')).not.toBeNull();
 	});
 
-	it('dims unknown sectors and outlines contested ones', async () => {
-		const { element } = await setup();
+	it('dims unknown sectors and their names and hatches contested ones', async () => {
+		const { element, zoom, store } = await setup();
+		await zoom(MapSaveMarkers.DETAIL_SCALE / 2);
 		const a = element.querySelector(`polygon[data-sector="${A}"]`)!;
 		const b = element.querySelector(`polygon[data-sector="${B}"]`)!;
-		expect(a.getAttribute('stroke-dasharray')).toBeNull();
-		expect(b.getAttribute('stroke-dasharray')).toBeTruthy();
+		expect(b.getAttribute('stroke')).toBe('#f87171');
+		expect(b.getAttribute('stroke-dasharray')).toBeNull();
 		expect(Number(b.getAttribute('fill-opacity'))).toBeLessThan(Number(a.getAttribute('fill-opacity')));
+
+		const hatches = element.querySelectorAll('polygon[fill="url(#map-contested)"]');
+		expect(hatches.length).toBe(1);
+		expect(hatches[0].getAttribute('points')).toBe(b.getAttribute('points'));
+		expect(hatches[0].getAttribute('pointer-events')).toBe('none');
+		expect(element.querySelector('pattern#map-contested')).not.toBeNull();
+
+		const label = (id: string) =>
+			[...element.querySelectorAll('g[appMapLabels] text')].find(
+				(x) => x.textContent?.trim() === MapLabel.wrap(store.shapeById.get(id)!.sector.name)[0]
+			)!;
+		expect(label(B).getAttribute('opacity')).toBe('0.5');
+		expect(label(A).getAttribute('opacity')).toBeNull();
 	});
 
 	it('names every marker for assistive tech without a native tooltip', async () => {
