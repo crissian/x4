@@ -1,0 +1,73 @@
+@let list = store.shopping();
+<section>
+	<h2 class="text-lg font-medium" i18n>Buy now</h2>
+	<p class="mt-1 text-sm text-fg-muted" i18n>
+		Faction representatives sell these to you today, with the licences in your save. A blueprint several factions
+		sell is listed under each; the price is the same everywhere.
+	</p>
+	@if (list.buy.length > 0) {
+		<p class="mt-2 text-sm">
+			<ng-container i18n
+				>All {{ list.buy.length }} blueprints: {{ list.total | number: '1.0-0' }} Cr (game prices)</ng-container
+			>
+			·
+			<ng-container i18n>Money in save: {{ store.money() | number: '1.0-0' }} Cr</ng-container>
+		</p>
+		<div class="mt-3 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+			@for (group of list.factions; track group.faction.id) {
+				<section class="card">
+					<div class="card-header flex items-baseline justify-between gap-2">
+						<a [routerLink]="['/factions', group.faction.id]">{{ group.faction.name }}</a>
+						<span class="text-sm text-fg-muted" i18n
+							>{{ group.items.length }} for {{ group.total | number: '1.0-0' }} Cr</span
+						>
+					</div>
+					<ul class="card-body space-y-0.5 text-sm">
+						@for (item of group.items; track item.id) {
+							<li class="flex justify-between gap-2">
+								<app-blueprint-item-link [item]="item" />
+								<span class="whitespace-nowrap text-fg-muted"
+									>{{ item.price | number: '1.0-0' }} Cr</span
+								>
+							</li>
+						}
+					</ul>
+				</section>
+			}
+		</div>
+	} @else {
+		<p class="mt-2 text-sm" i18n>Nothing to buy right now.</p>
+	}
+</section>
+
+<section class="mt-6">
+	<h2 class="text-lg font-medium" i18n>Need more reputation</h2>
+	<p class="mt-1 text-sm text-fg-muted" i18n>
+		Sold, but you lack the licence. Reputation as of save time; some licences come only with a ceremony.
+	</p>
+	<div class="mt-2">
+		<app-data-grid
+			[data]="store.reputationRows()"
+			[columns]="reputationColumns"
+			[trackBy]="reputationTrackBy"
+			[sort]="reputationSort"
+			storageKey="blueprints-reputation"
+		/>
+	</div>
+</section>
+
+<section class="mt-6">
+	<h2 class="text-lg font-medium" i18n>Not sold anywhere</h2>
+	<p class="mt-1 text-sm text-fg-muted" i18n>
+		No faction representative sells these. The source comes from the game's scripts that hand them out.
+	</p>
+	<div class="mt-2">
+		<app-data-grid
+			[data]="list.unsold"
+			[columns]="unsoldColumns"
+			[trackBy]="unsoldTrackBy"
+			[sort]="unsoldSort"
+			storageKey="blueprints-unsold"
+		/>
+	</div>
+</section>

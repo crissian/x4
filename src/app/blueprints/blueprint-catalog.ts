@@ -5,6 +5,17 @@ import { BlueprintPrice } from './blueprint-price';
 
 /** Every blueprint the player can own: the station modules, ships and equipment of the game data. */
 export class BlueprintCatalog {
+	private static readonly PATHS: Record<BlueprintKind, string> = {
+		module: '/modules',
+		ship: '/ships',
+		equipment: '/equipment',
+	};
+
+	/** Router link commands of the item's detail page. */
+	static link(item: BlueprintItem): string[] {
+		return [BlueprintCatalog.PATHS[item.kind], item.id];
+	}
+
 	/**
 	 * @param notForPlayer ids the player can never own (`BlueprintRules.notForPlayer`)
 	 * @returns the items by kind, then by name; software is left out

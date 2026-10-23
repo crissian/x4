@@ -15,6 +15,7 @@ import {
 	LucidePackage,
 	LucideRocket,
 	LucideScale,
+	LucideScrollText,
 	LucideSun,
 	LucideUsers,
 	LucideWrench,
@@ -87,6 +88,7 @@ export class HeaderComponent {
 				{ path: '/trade-routes', label: $localize`Trade Routes`, icon: LucideArrowLeftRight },
 				{ path: '/supply-demand', label: $localize`Supply & Demand`, icon: LucideScale },
 				{ path: '/station-suggestions', label: $localize`Station Suggestions`, icon: LucideFactory },
+				{ path: '/blueprints', label: $localize`Blueprints`, icon: LucideScrollText },
 			],
 		},
 	];

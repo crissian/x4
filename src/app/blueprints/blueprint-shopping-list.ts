@@ -36,9 +36,7 @@ export class BlueprintShoppingList {
 		const buy: BuyEntry[] = [];
 		const reputation: ReputationEntry[] = [];
 		const unsold: UnsoldEntry[] = [];
-		const missing = input.items
-			.filter((x) => !input.owned.has(x.id))
-			.sort((a, b) => a.name.localeCompare(b.name));
+		const missing = input.items.filter((x) => !input.owned.has(x.id)).sort((a, b) => a.name.localeCompare(b.name));
 		for (const item of missing) {
 			const sellers = missionOnly.has(item.id) ? [] : input.sellers(item);
 			if (!sellers.length) {

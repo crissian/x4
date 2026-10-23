@@ -1,0 +1,32 @@
+<div class="flex flex-wrap items-end gap-x-6 gap-y-3">
+	<label class="text-sm">
+		<ng-container i18n>Category</ng-container>
+		<select id="blueprint-category" class="input" [formField]="form.category">
+			<option value="" i18n>All categories</option>
+			@for (kind of store.kinds; track kind.kind) {
+				<optgroup [label]="kind.label">
+					@for (category of kind.categories; track category.id) {
+						<option [value]="category.id">{{ category.label }}</option>
+					}
+				</optgroup>
+			}
+		</select>
+	</label>
+	<label class="text-sm">
+		<ng-container i18n>Search</ng-container>
+		<input
+			id="blueprint-search"
+			class="input"
+			type="search"
+			placeholder="Blueprint name"
+			i18n-placeholder
+			[formField]="form.search"
+		/>
+	</label>
+	@if (store.tab() === 'progress') {
+		<label class="flex items-center gap-2 pb-2">
+			<input id="blueprint-complete" type="checkbox" [formField]="form.hideComplete" />
+			<ng-container i18n>Hide complete categories</ng-container>
+		</label>
+	}
+</div>
