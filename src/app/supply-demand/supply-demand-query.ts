@@ -81,6 +81,12 @@ export class SupplyDemandQuery {
 		};
 	}
 
+	/** How many of the filters under "More filters" (my stations, mined resources) are not at their default. */
+	static moreFiltersSet(model: SupplyDemandModel): number {
+		const defaults = SupplyDemandQuery.DEFAULTS;
+		return Number(model.player !== defaults.player) + Number(model.mined !== defaults.mined);
+	}
+
 	/** The model with a jumps number that is below the minimum or not a whole number back at its default. */
 	static clean(model: SupplyDemandModel): SupplyDemandModel {
 		return QueryParams.clean(model, SupplyDemandQuery.RANGES, SupplyDemandQuery.DEFAULTS);

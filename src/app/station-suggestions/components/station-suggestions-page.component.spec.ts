@@ -86,9 +86,15 @@ describe('StationSuggestionsPageComponent', () => {
 		expect(cells.name.endsWith('*')).toBe(true);
 		const headers = [...element.querySelectorAll('th')].map((x) => x.textContent?.trim() ?? '');
 		expect(headers.some((x) => x.includes('Expected Cr/h'))).toBe(true);
-		expect(headers.some((x) => x.includes('Room for modules'))).toBe(true);
+		expect(headers.some((x) => x.includes('Modules to build'))).toBe(true);
+		// a plain whole number: the old "~231" read like a negative number
+		const modules = headers.findIndex((x) => x.includes('Modules to build'));
+		const cell = element.querySelectorAll('app-data-grid tbody tr')[0].querySelectorAll('td')[modules];
+		expect(cell.textContent?.trim()).toBe(String(rows[0].modules));
+		expect(cell.getAttribute('title')).toContain('rounded down');
 		expect(headers.some((x) => x.includes('Absorbable'))).toBe(false);
 		expect(element.querySelector('[data-detail]')?.textContent).toContain('Cr/h');
+		expect(element.querySelector('[data-detail]')?.textContent).toContain('Modules to build:');
 	});
 
 	it('keeps the filters and the pick in the URL', async () => {

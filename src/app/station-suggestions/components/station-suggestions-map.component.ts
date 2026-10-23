@@ -73,7 +73,7 @@ export class StationSuggestionsMapComponent {
 			return $localize`${name}:name:: no room for a factory` + star;
 		}
 		const value = NumberFormats.compact(spot.crPerHour);
-		return $localize`${name}:name:: ${value}:value: Cr/h · modules: ~${spot.modules}:modules:` + star;
+		return $localize`${name}:name:: ${value}:value: Cr/h · modules to build: ${spot.modules}:modules:` + star;
 	};
 
 	protected pick(sectorId: string) {

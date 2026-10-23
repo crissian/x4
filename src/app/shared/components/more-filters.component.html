@@ -1,0 +1,28 @@
+<button
+	type="button"
+	class="link-button flex items-center gap-1 text-sm text-link"
+	[attr.aria-controls]="id()"
+	[attr.aria-expanded]="open()"
+	(click)="toggle()"
+>
+	@if (open()) {
+		<svg lucideChevronDown />
+	} @else {
+		<svg lucideChevronRight />
+	}
+	<ng-container i18n>More filters</ng-container>
+	@if (!open() && active()) {
+		<span
+			class="rounded-full border border-line-strong px-1.5 text-xs text-fg-strong"
+			title="Filters set in here"
+			i18n-title
+			data-active-count
+			>{{ active() }}</span
+		>
+	}
+</button>
+@if (open()) {
+	<div class="mt-2" [id]="id()">
+		<ng-content />
+	</div>
+}

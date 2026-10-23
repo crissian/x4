@@ -88,4 +88,13 @@ describe('SupplyDemandQuery', () => {
 		expect(SupplyDemandQuery.clean({ ...model, jumps: NaN }).jumps).toBe(3);
 		expect(SupplyDemandQuery.clean({ ...model, jumps: 0 }).jumps).toBe(0);
 	});
+
+	it('counts the filters under "More filters" that are not at their default', () => {
+		const model = { ...SupplyDemandQuery.DEFAULTS };
+		expect(SupplyDemandQuery.moreFiltersSet(model)).toBe(0);
+		expect(SupplyDemandQuery.moreFiltersSet({ ...model, mined: true })).toBe(1);
+		expect(SupplyDemandQuery.moreFiltersSet({ ...model, mined: true, player: false })).toBe(2);
+		// the scope and the ware group stay in view, so they don't count
+		expect(SupplyDemandQuery.moreFiltersSet({ ...model, scope: 'faction', group: 'food' })).toBe(0);
+	});
 });
