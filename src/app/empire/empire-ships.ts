@@ -76,10 +76,13 @@ export class EmpireShips {
 		return rows;
 	}
 
-	/** The ship's name, with game text references resolved; its code when it has none or the reference is unknown. */
-	static label(ship: SaveFleetShip, lookups: Pick<EmpireShipLookups, 'text'>): string {
+	/**
+	 * The ship's name, with game text references resolved. A ship the player never renamed has no name in the save and
+	 * the game shows its model's name; the code is the last resort for an unknown model.
+	 */
+	static label(ship: SaveFleetShip, lookups: Pick<EmpireShipLookups, 'text' | 'model'>): string {
 		const name = ship.name && GameTextRef.isRef(ship.name) ? lookups.text(ship.name) : ship.name;
-		return name || ship.code;
+		return name || lookups.model(ship.macro)?.name || ship.code;
 	}
 
 	private static row(

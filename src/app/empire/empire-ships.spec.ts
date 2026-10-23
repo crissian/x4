@@ -67,7 +67,7 @@ describe('EmpireShips', () => {
 		);
 		expect(rows.map((x) => [x.label, x.fleet, x.commander, x.commanderId])).toEqual([
 			['Big', 'Big', undefined, undefined],
-			['W-001', 'Big', 'Big', 'c'],
+			['Elite', 'Big', 'Big', 'c'],
 			['Hauler', 'My Factory', 'My Factory', '[st]'],
 		]);
 	});
@@ -81,7 +81,16 @@ describe('EmpireShips', () => {
 			],
 			lookups
 		);
-		expect(rows.map((x) => x.label)).toEqual(['Story Ship', 'X-001', 'Y-001']);
+		expect(rows.map((x) => [x.label, x.code])).toEqual([
+			['Story Ship', 'S-001'],
+			['Elite', 'X-001'],
+			['Elite', 'Y-001'],
+		]);
 		expect(rows[0]).toMatchObject({ modelName: 'modded', size: '', model: undefined });
+	});
+
+	it('names an unnamed ship after its model, the way the game does, and an unknown model by its code', () => {
+		const rows = EmpireShips.build([ship('t', 'trader'), ship('m', 'modded')], lookups);
+		expect(rows.map((x) => x.label).sort()).toEqual(['M-001', 'Mercury']);
 	});
 });
