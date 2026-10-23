@@ -9,6 +9,12 @@ export interface WareAmountItem {
 	amount: number;
 }
 
+/** The name of a ware and the page it links to, if any. */
+export interface WareAmountTarget {
+	name: string;
+	link?: readonly unknown[];
+}
+
 /** A list of ware amounts, each ware linked to its page, the amounts aligned right. */
 @Component({
 	selector: 'app-ware-amounts',
@@ -21,6 +27,15 @@ export class WareAmountsComponent {
 	readonly items = input.required<readonly WareAmountItem[]>();
 	/** written after each amount, e.g. `/h` */
 	readonly unit = input('');
+	/** Names and links of wares without a ware page, such as inventory items; their ware page by default. */
+	readonly resolve = input<(ware: string) => WareAmountTarget | undefined>();
 
-	protected readonly rows = computed(() => this.items().map((x) => ({ ...x, entity: this.wares.getEntity(x.ware) })));
+	protected readonly rows = computed(() =>
+		this.items().map((x) => ({ ...x, target: this.resolve()?.(x.ware) ?? this.target(x.ware) }))
+	);
+
+	private target(id: string): WareAmountTarget | undefined {
+		const ware = this.wares.getEntity(id);
+		return ware && { name: ware.name, link: ['/wares', ware.id] };
+	}
 }
