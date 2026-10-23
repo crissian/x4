@@ -57,7 +57,7 @@ describe('GameStartsPageComponent', () => {
 		const { harness, settle } = await setup('/game-starts');
 		const store = harness.routeDebugElement!.injector.get(GameStartsStore);
 		const all = store.filtered().length;
-		store.owned.update((x) => x.map((owned, i) => owned && i !== 4));
+		store.owned.update((x) => ({ ...x, 4: false }));
 		await settle();
 		expect(store.filtered().some((x) => x.start.version === 4)).toBe(false);
 		expect(store.filtered().length).toBeLessThan(all);

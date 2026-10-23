@@ -7,7 +7,7 @@ export interface GameStartCriteria {
 	/** part of the name, character or location; lower case */
 	search: string;
 	/** owned content packs, indexed by version; the base game is always owned */
-	owned: readonly boolean[];
+	owned: Readonly<Record<number, boolean>>;
 }
 
 /** Filters and orders the game starts. */
@@ -21,7 +21,7 @@ export class GameStartFilter {
 	}
 
 	/** True when the start's content pack is owned. */
-	static owned(start: GameStart, owned: readonly boolean[]): boolean {
+	static owned(start: GameStart, owned: Readonly<Record<number, boolean>>): boolean {
 		return start.version === 0 || owned[start.version] !== false;
 	}
 

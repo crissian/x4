@@ -35,18 +35,10 @@ export class MapHostiles {
 	).value;
 
 	/** The layers shown on the map. */
-	readonly layers: WritableSignal<Record<HostileFaction, boolean>> = LocalStorage.persistedSignal(
+	readonly layers: WritableSignal<Record<HostileFaction, boolean>> = LocalStorage.persistedTicks(
 		'map-hostile-layers',
-		{ xenon: false, khaak: false },
-		{
-			parse: (value) =>
-				value && typeof value === 'object'
-					? {
-							xenon: (value as Record<string, unknown>)['xenon'] === true,
-							khaak: (value as Record<string, unknown>)['khaak'] === true,
-						}
-					: undefined,
-		}
+		['xenon', 'khaak'],
+		false
 	);
 	readonly layersForm = form(this.layers);
 
@@ -109,8 +101,6 @@ export class MapHostiles {
 
 	/** The station names with their counts, e.g. "Kha'ak Installation, Kha'ak Defence Platform ×4". */
 	static summary(item: HostileSector): string {
-		return item.kinds
-			.map((x) => (x.count > 1 ? `${x.name} ×${x.count}` : x.name))
-			.join(', ');
+		return item.kinds.map((x) => (x.count > 1 ? `${x.name} ×${x.count}` : x.name)).join(', ');
 	}
 }

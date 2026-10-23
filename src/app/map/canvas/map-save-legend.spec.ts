@@ -55,6 +55,6 @@ describe('MapSaveLegend', () => {
 		xenon!.click();
 		await fixture.whenStable();
 		expect(TestBed.inject(MapHostiles).layers()).toEqual({ xenon: true, khaak: false });
-		expect(JSON.parse(localStorage.getItem('map-hostile-layers')!)).toEqual({ xenon: true, khaak: false });
+		expect(JSON.parse(localStorage.getItem('map-hostile-layers')!)).toEqual(['xenon']);
 	});
 });

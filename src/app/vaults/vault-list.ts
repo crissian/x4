@@ -27,10 +27,11 @@ export class VaultList {
 	).value;
 
 	/** The vaults the player ticked as found, by id; every vault of the game data has a key. */
-	readonly found = LocalStorage.persistedSignal<Record<string, boolean>>('vaults-found', VaultList.ticks([]), {
-		parse: (value) => (Array.isArray(value) ? VaultList.ticks(value) : undefined),
-		serialize: (value) => Object.keys(value).filter((id) => value[id]),
-	});
+	readonly found = LocalStorage.persistedTicks(
+		'vaults-found',
+		VaultList.DATA.map((x) => x.id),
+		false
+	);
 	readonly foundForm = form(this.found);
 
 	/** Positions are spoilers: shown once asked for, for the rest of the visit. */
@@ -59,9 +60,5 @@ export class VaultList {
 	/** Whether the player has the vault: opened in the save when it can tell, else ticked. */
 	isDone(entry: VaultEntry): boolean {
 		return entry.save?.opened ?? !!this.found()[entry.id];
-	}
-
-	private static ticks(ids: unknown[]): Record<string, boolean> {
-		return Object.fromEntries(VaultList.DATA.map((x) => [x.id, ids.includes(x.id)]));
 	}
 }

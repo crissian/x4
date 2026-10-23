@@ -19,6 +19,8 @@ import { GameStartService } from './game-start.service';
  */
 @Injectable()
 export class GameStartsStore {
+	private static readonly VERSIONS = GAME_VERSIONS.map((_, version) => version);
+
 	private readonly ships = inject(ShipListService);
 	private readonly sectors = inject(SectorService);
 	private readonly starts = inject(GameStartService).getEntities();
@@ -31,16 +33,9 @@ export class GameStartsStore {
 	readonly form = form(this.model);
 
 	/** Owned content packs, indexed by version; stored as the list of the ones not owned, so new DLCs start owned. */
-	readonly owned = LocalStorage.persistedSignal<boolean[]>(
-		'game-starts-owned',
-		GAME_VERSIONS.map(() => true),
-		{
-			parse: (value) => (Array.isArray(value) ? GAME_VERSIONS.map((_, i) => !value.includes(i)) : undefined),
-			serialize: (value) => value.flatMap((owned, i) => (owned ? [] : [i])),
-		}
-	);
+	readonly owned = LocalStorage.persistedTicks('game-starts-owned', GameStartsStore.VERSIONS, true);
 	readonly ownedForm = form(this.owned);
-	readonly notOwnedCount = computed(() => this.owned().filter((x) => !x).length);
+	readonly notOwnedCount = computed(() => Object.values(this.owned()).filter((x) => !x).length);
 
 	readonly filtered = computed<GameStartSummary[]>(() => {
 		const { type, search } = this.model();
@@ -68,7 +63,7 @@ export class GameStartsStore {
 
 	reset(): void {
 		this.model.set({ ...GameStartQuery.DEFAULTS, view: this.model().view });
-		this.owned.set(GAME_VERSIONS.map(() => true));
+		this.owned.set(LocalStorage.ticks(GameStartsStore.VERSIONS, true));
 	}
 
 	private summary(start: GameStart): GameStartSummary {

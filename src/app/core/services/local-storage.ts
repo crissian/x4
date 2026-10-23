@@ -45,4 +45,28 @@ export class LocalStorage {
 		});
 		return value;
 	}
+
+	/**
+	 * Checkbox ticks by key, e.g. the vaults found: stored as the list of the keys that differ from `byDefault`, so
+	 * keys added later start at the default. Needs an injection context.
+	 */
+	static persistedTicks<K extends string | number>(
+		key: string,
+		keys: readonly K[],
+		byDefault: boolean
+	): WritableSignal<Record<K, boolean>> {
+		return LocalStorage.persistedSignal(key, LocalStorage.ticks(keys, byDefault), {
+			parse: (value) => (Array.isArray(value) ? LocalStorage.ticks(keys, byDefault, value) : undefined),
+			serialize: (value) => keys.filter((x) => value[x] !== byDefault),
+		});
+	}
+
+	/** Every key at `byDefault`, except the `changed` ones. */
+	static ticks<K extends string | number>(
+		keys: readonly K[],
+		byDefault: boolean,
+		changed: readonly unknown[] = []
+	): Record<K, boolean> {
+		return Object.fromEntries(keys.map((x) => [x, changed.includes(x) !== byDefault])) as Record<K, boolean>;
+	}
 }
