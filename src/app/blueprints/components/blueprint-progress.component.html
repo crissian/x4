@@ -1,0 +1,47 @@
+@let progress = store.progress();
+<p class="text-sm">
+	<ng-container i18n>You own {{ progress.owned }} of {{ progress.total }} blueprints.</ng-container>
+	@if (progress.other > 0) {
+		<span class="text-fg-muted" i18n>
+			Plus {{ progress.other }} other blueprints in your save (paint mods, ship mods and deployables), not tracked
+			here.
+		</span>
+	}
+</p>
+<div class="mt-3 grid gap-4 lg:grid-cols-3">
+	@for (kind of kinds(); track kind.kind) {
+		<section class="card">
+			<h2 class="card-header">{{ kind.label }}</h2>
+			<div class="card-body space-y-3">
+				@for (row of kind.categories; track row.category.id) {
+					<div>
+						<div class="flex items-baseline justify-between gap-2 text-sm">
+							<span>{{ row.category.label }}</span>
+							<span class="text-fg-muted">{{ row.owned }} / {{ row.total }}</span>
+						</div>
+						<app-progress-bar
+							class="mt-1 block"
+							[value]="row.owned"
+							[max]="row.total"
+							[label]="row.category.label"
+						/>
+						@if (row.missing.length > 0) {
+							<details class="mt-1 text-sm">
+								<summary class="cursor-pointer text-fg-muted" i18n>
+									Missing {{ row.missing.length }}
+								</summary>
+								<ul class="mt-1 space-y-0.5 pl-4">
+									@for (item of row.missing; track item.id) {
+										<li><app-blueprint-item-link [item]="item" /></li>
+									}
+								</ul>
+							</details>
+						}
+					</div>
+				}
+			</div>
+		</section>
+	} @empty {
+		<p class="text-fg-muted" i18n>No category matches the filters.</p>
+	}
+</div>

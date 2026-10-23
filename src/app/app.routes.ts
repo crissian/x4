@@ -62,6 +62,11 @@ export const appRoutes: Routes = [
 		title: `${BASE_TITLE} - ${$localize`Station Suggestions`}`,
 	},
 	{
+		path: 'blueprints',
+		loadComponent: () => import('./blueprints/components/blueprints-page.component'),
+		title: `${BASE_TITLE} - ${$localize`Blueprints`}`,
+	},
+	{
 		path: 'saves',
 		loadComponent: () => import('./savegame/components/savegames-page.component'),
 		title: `${BASE_TITLE} - ${$localize`Savegames`}`,
