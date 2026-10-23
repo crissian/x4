@@ -1,0 +1,61 @@
+<label class="block" [attr.for]="id()" [class.sr-only]="hideLabel()">{{ label() }}</label>
+<div class="relative">
+	<input
+		type="search"
+		class="input"
+		autocomplete="off"
+		role="combobox"
+		aria-autocomplete="list"
+		[id]="id()"
+		[attr.placeholder]="shownPlaceholder()"
+		[attr.aria-expanded]="open()"
+		[attr.aria-controls]="listId"
+		[attr.aria-activedescendant]="activeOptionId()"
+		[formField]="queryField"
+		(focus)="onFocus($event)"
+		(input)="onInput()"
+		(blur)="onBlur()"
+		(keydown)="onKeydown($event)"
+	/>
+	@if (open()) {
+		<div
+			[id]="listId"
+			role="listbox"
+			[attr.aria-label]="label()"
+			class="absolute z-20 mt-1 max-h-[50vh] w-full min-w-48 overflow-y-auto rounded-md border border-line-strong bg-raised py-1 shadow-xl"
+			(mousedown)="$event.preventDefault()"
+		>
+			@for (group of matches().groups; track $index) {
+				@if (group.name) {
+					<div role="presentation" class="px-2.5 pt-1.5 font-bold text-fg">{{ group.name }}</div>
+				}
+				@for (entry of group.entries; track entry.index) {
+					<div
+						role="option"
+						tabindex="-1"
+						[id]="optionId(entry.index)"
+						[attr.data-index]="entry.index"
+						[attr.aria-selected]="entry.index === activeIndex()"
+						class="cursor-pointer py-0.5 pr-2.5 hover:bg-hover"
+						[class.pl-5]="group.name"
+						[class.pl-2.5]="!group.name"
+						[class.bg-hover]="entry.index === activeIndex()"
+						[class.font-semibold]="entry.option.id === value()"
+						(click)="pick(entry.option)"
+						(keydown.enter)="pick(entry.option)"
+					>
+						{{ entry.option.name }}
+						@if (entry.option.detail) {
+							<span class="text-sm font-normal text-fg-muted">{{ entry.option.detail }}</span>
+						}
+					</div>
+				}
+			} @empty {
+				<div class="px-2.5 py-1 text-fg-muted" i18n>No matches</div>
+			}
+			@if (matches().more) {
+				<div class="px-2.5 pt-1 text-sm text-fg-muted" i18n>{{ matches().more }} more, keep typing</div>
+			}
+		</div>
+	}
+</div>
