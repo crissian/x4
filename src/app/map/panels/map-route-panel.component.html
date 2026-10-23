@@ -26,9 +26,18 @@
 	</div>
 	<select class="input" aria-label="Ship" i18n-aria-label [formField]="form.ship">
 		<option value="" i18n>Custom travel speed</option>
-		@for (ship of store.routeShips; track ship.id) {
-			<option [value]="ship.id">{{ ship.name }} ({{ ship.size | enumLabel }})</option>
+		@if (store.routeOwnShips().length) {
+			<optgroup label="Your ships" i18n-label>
+				@for (own of store.routeOwnShips(); track own.key) {
+					<option [value]="own.key">{{ own.label }} ({{ own.model.name }}) · {{ own.sectorName }}</option>
+				}
+			</optgroup>
 		}
+		<optgroup label="Ship models" i18n-label>
+			@for (ship of store.routeShips; track ship.id) {
+				<option [value]="ship.id">{{ ship.name }} ({{ ship.size | enumLabel }})</option>
+			}
+		</optgroup>
 	</select>
 	<div class="grid grid-cols-2 gap-2">
 		<label class="text-sm">

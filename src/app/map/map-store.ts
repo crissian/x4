@@ -5,6 +5,7 @@ import { GAME_VERSIONS } from '../shared/services/constants';
 import { AbandonedShips } from '../shared/services/data/abandoned-ships-data';
 import { FactionService } from '../shared/services/faction.service';
 import { AbandonedShip, Faction, Sector, ShipListItem } from '../shared/services/model/model';
+import { OwnShips } from '../savegame/own-ships/own-ships';
 import { ShipListService } from '../shared/services/ship-list.service';
 import { TravelDrives } from '../shared/services/travel-drives';
 import { SectorService } from '../shared/services/universe.service';
@@ -38,6 +39,7 @@ export class MapStore {
 	private readonly factions = inject(FactionService);
 	private readonly wares = inject(WareService);
 	private readonly ships = inject(ShipListService);
+	private readonly ownShips = inject(OwnShips);
 	private readonly save = inject(MapSaveLayer);
 	private readonly geometry = inject(MapGeometry);
 
@@ -111,6 +113,8 @@ export class MapStore {
 	readonly routeShips = [...this.ships.getEntities()]
 		.filter((x) => TravelDrives.canTravel(x))
 		.sort((a, b) => a.name.localeCompare(b.name));
+	/** The player's ships in the active save that have a travel drive. */
+	readonly routeOwnShips = computed(() => this.ownShips.list().filter((x) => TravelDrives.canTravel(x)));
 	readonly routeModel = signal({ from: '', to: '', ship: '', ...RoutePlanner.DEFAULT_OPTIONS });
 	readonly routeForm = form(this.routeModel, (route) => {
 		min(route.speed, RoutePlanner.MIN_SPEED);
@@ -295,14 +299,17 @@ export class MapStore {
 	});
 
 	constructor() {
-		// a picked ship sets the travel speed and drive charge
+		// a picked ship sets the travel speed and drive charge; an own ship also its sector as the start
 		effect(() => {
-			const ship = this.ships.getEntity(this.routeShip());
+			const key = this.routeShip();
+			const own = this.ownShips.find(key);
+			const ship = own ?? this.ships.getEntity(key);
 			if (ship) {
 				untracked(() => {
 					this.routeModel.update((route) => {
 						const options = TravelDrives.options(ship, route);
-						return { ...route, speed: Math.round(options.speed), charge: options.charge };
+						const from = route.from || (own ? this.sectorName(own.sector) : '');
+						return { ...route, from, speed: Math.round(options.speed), charge: options.charge };
 					});
 				});
 			}
