@@ -37,6 +37,11 @@ describe('SelectOptionFilter', () => {
 		expect(SelectOptionFilter.matches(options, 'nothing').groups).toEqual([]);
 	});
 
+	it('matches the keywords too', () => {
+		const tagged = [...options, { id: 'shield', name: 'Shield Mk1', group: 'Shields', keywords: 'Shields' }];
+		expect(SelectOptionFilter.matches(tagged, 'shields mk1').options.map((x) => x.id)).toEqual(['shield']);
+	});
+
 	it('lists at most the limit and counts the rest', () => {
 		const many = Array.from({ length: 120 }, (_, i) => ({
 			id: `${i}`,

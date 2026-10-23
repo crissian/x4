@@ -6,6 +6,8 @@ export interface SelectOption {
 	group?: string;
 	/** secondary text shown after the name, searched too (such as "Argon, 4,300 m³ · Sector") */
 	detail?: string;
+	/** extra searched text that is not shown, such as what the group header already says */
+	keywords?: string;
 }
 
 /** A listed option with its place in the list, for keyboard navigation and element ids. */
@@ -40,7 +42,7 @@ export interface SelectFilterSettings {
 }
 
 /**
- * Filters the options of a searchable select: every typed word must be in the name or the detail, ignoring case.
+ * Filters the options of a searchable select: every typed word must be in the name, detail or keywords, ignoring case.
  * Matches keep their order and are grouped by their group, in the order the groups first appear.
  */
 export class SelectOptionFilter {
@@ -107,7 +109,7 @@ export class SelectOptionFilter {
 	}
 
 	private static isMatch(option: SelectOption, terms: readonly string[]): boolean {
-		const text = option.detail ? `${option.name} ${option.detail}`.toLowerCase() : option.name.toLowerCase();
+		const text = [option.name, option.detail, option.keywords].filter((x) => x).join(' ').toLowerCase();
 		return terms.every((term) => text.includes(term));
 	}
 }

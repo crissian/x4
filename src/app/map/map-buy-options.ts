@@ -4,7 +4,8 @@ import { SizeOrder } from '../shared/services/size-order';
 
 /**
  * The options of the map's "where to buy" picker, valued `ship:<id>` or `equipment:<id>`: the ships by size,
- * smallest first, then the equipment by type, each by name. The kind and size or type is the searchable detail.
+ * smallest first, then the equipment by type, each by name. The kind and size or type, already in the group header,
+ * is searchable but not repeated next to each name.
  */
 export class MapBuyOptions {
 	static build(
@@ -18,13 +19,13 @@ export class MapBuyOptions {
 				id: `ship:${x.id}`,
 				name: x.name,
 				group: $localize`:where to buy header, ships of one size:Ships, ${size}:size:`,
-				detail: $localize`:where to buy detail of a ship:ship, ${size}:size:`,
+				keywords: $localize`:where to buy detail of a ship:ship, ${size}:size:`,
 			};
 		});
 		const equipmentOptions = equipment
 			.map((x) => {
 				const type = x.type ? EnumLabels.label(x.type) : $localize`equipment`;
-				return { id: `equipment:${x.id}`, name: x.name, group: type, detail: type };
+				return { id: `equipment:${x.id}`, name: x.name, group: type, keywords: type };
 			})
 			.sort((a, b) => a.group.localeCompare(b.group) || a.name.localeCompare(b.name));
 		return [...shipOptions, ...equipmentOptions];
