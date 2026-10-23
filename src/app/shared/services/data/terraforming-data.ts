@@ -319,7 +319,7 @@ export const Terraforming: TerraformingDataSet = {
     payout: {"label":"Payout"},
     environment: {"label":"Environmental Statistics"},
     requiredProjects: {"label":"Required projects"},
-    requiresAnyOf: {"label":"Requires any of the following projects"},
+    requiresAnyProject: {"label":"Requires any project"},
     requiredResearch: {"label":"Required Research"},
     projects: {"label":"Terraforming Projects"},
     removesProjects: {"label":"Removes other projects"},

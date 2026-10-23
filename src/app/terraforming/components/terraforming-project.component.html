@@ -134,7 +134,7 @@
 							}
 							@if (planet.predecessors.length) {
 								<div class="text-fg-muted">
-									{{ planet.any ? label('requiresAnyOf') : label('requiredProjects') }}:
+									{{ planet.any ? label('requiresAnyProject') : label('requiredProjects') }}:
 									@for (item of planet.predecessors; track item.id; let last = $last) {
 										@if (item.known) {
 											<a [routerLink]="['/terraforming/projects', item.id]">{{ item.name }}</a>
