@@ -3,6 +3,7 @@ import { EnumLabels } from '../../core/enum-labels';
 import { EquipmentService } from './equipment.service';
 import { FactionService } from './faction.service';
 import { SlotGroup, Loadouts, Loadout } from './loadout';
+import { LoadoutMissiles } from './loadout-missiles';
 import { ShipPerformance } from './ship-performance';
 import { Equipment, Faction, License, Ship } from './model/model';
 
@@ -89,6 +90,8 @@ export class ShipStatsService {
 								: (x.thrust?.forward ?? 0);
 						case 'shields':
 							return x.recharge?.max ?? 0;
+						case 'thrusters':
+							return (x.thruster?.pitch ?? 0) + (x.thruster?.yaw ?? 0);
 						default:
 							return x.weapon && !x.weapon.repair ? ShipPerformance.weaponStats(x.weapon).sustainedDps : null;
 					}
@@ -96,25 +99,50 @@ export class ShipStatsService {
 		}
 	}
 
-	/** Loadout as text for URLs: the equipment id of every slot group in order, '-' for none. */
+	/**
+	 * Loadout as text for URLs: the equipment id of every slot group in order ('-' for none), then the
+	 * missile of every launcher-capable group ('-' for the launcher's default).
+	 */
 	encode(ship: Ship, loadout: Loadout): string {
-		return this.groups(ship)
-			.map((x) => loadout[x.key] ?? '-')
-			.join('.');
+		const groups = this.groups(ship);
+		const missiles = groups.filter((x) => LoadoutMissiles.isLauncherGroup(x)).map((x) => loadout[LoadoutMissiles.key(x)] || '-');
+		return [...groups.map((x) => loadout[x.key] ?? '-'), ...missiles].join('.');
 	}
 
+	/**
+	 * Codes made before a slot group was added (the thrusters) are shorter: the groups they do not
+	 * cover get the combat preset's pick, missing or unusable missiles the launcher's default.
+	 */
 	decode(ship: Ship, code: string | null | undefined): Loadout | undefined {
 		if (!code) {
 			return undefined;
 		}
 		const ids = code.split('.');
+		const groups = this.groups(ship);
 		const result: Loadout = {};
-		this.groups(ship).forEach((group, i) => {
+		let combat: Loadout | undefined;
+		groups.forEach((group, i) => {
+			if (i >= ids.length) {
+				combat ??= this.preset(ship, 'combat');
+				if (combat[group.key]) {
+					result[group.key] = combat[group.key];
+				}
+				return;
+			}
 			const id = ids[i];
 			if (id && id !== '-' && group.options.some((x) => x.id === id)) {
 				result[group.key] = id;
 			}
 		});
+		groups
+			.filter((x) => LoadoutMissiles.isLauncherGroup(x))
+			.forEach((group, i) => {
+				const id = ids[groups.length + i];
+				const launcher = result[group.key] ? this.getEquipment(result[group.key])?.launcher : undefined;
+				if (id && launcher && LoadoutMissiles.effective(launcher, id, this.getEquipment)?.id === id) {
+					result[LoadoutMissiles.key(group)] = id;
+				}
+			});
 		return result;
 	}
 

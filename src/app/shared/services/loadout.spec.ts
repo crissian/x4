@@ -1,7 +1,10 @@
+import { TestBed } from '@angular/core/testing';
 import { EquipmentService } from './equipment.service';
 import { Loadouts } from './loadout';
+import { LoadoutMissiles } from './loadout-missiles';
 import { ShipPerformance } from './ship-performance';
 import { ShipService } from './ship.service';
+import { ShipStatsService } from './ship-stats.service';
 
 describe('loadout', () => {
 	const equipment = new EquipmentService();
@@ -97,5 +100,56 @@ describe('loadout', () => {
 		expect(Loadouts.relationToReputation(0.01)).toBe(10);
 		expect(Loadouts.relationToReputation(-0.01)).toBe(-10);
 		expect(Loadouts.relationToReputation(1)).toBe(30);
+	});
+
+	describe('share codes', () => {
+		const nova = ships.getEntity('ship_arg_s_fighter_01_a')!;
+		const stats = () => TestBed.inject(ShipStatsService);
+		const groups = Loadouts.slotGroups(nova, all);
+		const thrusters = groups.at(-1)!;
+		const launcherGroup = groups.find((g) => LoadoutMissiles.isLauncherGroup(g))!;
+
+		it('adds one thruster group last', () => {
+			expect(thrusters.kind).toBe('thrusters');
+			expect(thrusters.slots.length).toBe(1);
+			expect(thrusters.options.every((x) => x.thruster)).toBe(true);
+		});
+
+		it('decodes a code made before thrusters to the same equipment plus the combat thruster', () => {
+			const legacy = 'engine_arg_s_combat_01_mk1.shield_arg_s_standard_01_mk1.weapon_gen_s_laser_01_mk1.weapon_gen_s_laser_01_mk1.weapon_gen_s_guided_02_mk1';
+			const loadout = stats().decode(nova, legacy)!;
+
+			expect(groups.slice(0, -1).map((g) => loadout[g.key])).toEqual(legacy.split('.'));
+			expect(loadout[thrusters.key]).toBeDefined();
+			expect(loadout[thrusters.key]).toBe(stats().preset(nova, 'combat')[thrusters.key]);
+			expect(loadout[LoadoutMissiles.key(launcherGroup)]).toBeUndefined();
+		});
+
+		it('round-trips the thruster and missile choices', () => {
+			const loadout = {
+				...stats().preset(nova, 'combat'),
+				[launcherGroup.key]: 'weapon_gen_s_guided_02_mk1',
+				[LoadoutMissiles.key(launcherGroup)]: 'missile_gen_s_swarm_01_mk1',
+				[thrusters.key]: 'thruster_gen_s_allround_01_mk2',
+			};
+			const code = stats().encode(nova, loadout);
+
+			expect(code.endsWith('.thruster_gen_s_allround_01_mk2.missile_gen_s_swarm_01_mk1')).toBe(true);
+			expect(stats().decode(nova, code)).toEqual(loadout);
+		});
+
+		it('ignores missiles the launcher does not accept', () => {
+			const code = stats().encode(nova, { [launcherGroup.key]: 'weapon_gen_s_guided_02_mk1', [LoadoutMissiles.key(launcherGroup)]: 'missile_gen_s_dumbfire_01_mk1' });
+			expect(stats().decode(nova, code)![LoadoutMissiles.key(launcherGroup)]).toBeUndefined();
+		});
+
+		it('counts the thruster once in the totals', () => {
+			const loadout = { [thrusters.key]: 'thruster_gen_s_combat_01_mk1' };
+			const result = Loadouts.loadoutStats(nova, groups, loadout, get);
+
+			expect(result.counts.get('thruster_gen_s_combat_01_mk1')).toBe(1);
+			expect(result.equipmentPrice.avg).toBe(get('thruster_gen_s_combat_01_mk1').price!.avg);
+			expect(result.handling.strafeH).toBeCloseTo(88);
+		});
 	});
 });
