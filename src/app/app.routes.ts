@@ -55,6 +55,11 @@ export const appRoutes: Routes = [
 			GameText.withTexts([...TEXTS.base, ...TEXTS.universe, 'modules'], () => import('./ware/ware.routes')),
 	},
 	{
+		path: 'production-chains',
+		loadChildren: () =>
+			GameText.withTexts([...TEXTS.base, 'modules'], () => import('./production-chain/production-chain.routes')),
+	},
+	{
 		path: 'sectors',
 		loadChildren: () =>
 			GameText.withTexts([...TEXTS.base, ...TEXTS.universe, 'modules'], () => import('./sector/sector.routes')),
