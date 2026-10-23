@@ -57,13 +57,16 @@ export const appRoutes: Routes = [
 	{
 		path: 'sectors',
 		loadChildren: () =>
-			GameText.withTexts([...TEXTS.base, ...TEXTS.universe, 'modules'], () => import('./sector/sector.routes')),
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'modules', 'data-vaults'],
+				() => import('./sector/sector.routes')
+			),
 	},
 	{
 		path: 'map',
 		loadComponent: () =>
 			GameText.withTexts(
-				[...TEXTS.base, ...TEXTS.universe, 'modules', 'ship-list'],
+				[...TEXTS.base, ...TEXTS.universe, 'modules', 'ship-list', 'data-vaults'],
 				() => import('./map/map.component')
 			),
 		title: `${BASE_TITLE} - ${$localize`Galaxy Map`}`,
