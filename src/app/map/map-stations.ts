@@ -1,6 +1,5 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { form } from '@angular/forms/signals';
-import { EnumLabels } from '../core/enum-labels';
 import { GameText } from '../core/game-text';
 import { LazyValue } from '../core/lazy-value';
 import { GAME_START_STATION_TYPES, STATION_TYPES } from '../shared/services/constants';
@@ -8,6 +7,7 @@ import { GodStations } from '../shared/services/data/god-stations-data';
 import { Size } from '../shared/services/data/size-data';
 import { GodStation } from '../shared/services/model/model';
 import { ShipListService } from '../shared/services/ship-list.service';
+import { MapBuyOptions } from './map-buy-options';
 import { MapStore } from './map-store';
 import { MapSaveLayer } from './save/map-save-layer';
 import { StationHover, StationMarker, StationMarkers } from './station-marker';
@@ -36,7 +36,7 @@ export class MapStations {
 		types: Object.fromEntries(
 			STATION_TYPES.map((x) => [x.id, x.id !== 'defence' && x.id !== 'piratebase'])
 		) as Record<string, boolean>,
-		/** Name of the ship or equipment to buy, picked from a datalist. */
+		/** The ship or equipment to buy: `ship:<id>` or `equipment:<id>`, empty for none. */
 		buy: '',
 	});
 	readonly stationsForm = form(this.stationsModel);
@@ -59,19 +59,14 @@ export class MapStations {
 		return this.stationList().filter((x) => !hide || (x.known && drawn.has(x.sector)));
 	});
 
-	/** Ships, and equipment once loaded, by name. */
+	/** Ships by size, and equipment by type once loaded, for the "where to buy" picker. */
 	readonly buyOptions = computed(() =>
-		[
-			...this.ships.getEntities().map((x) => ({ id: `ship:${x.id}`, name: $localize`${x.name}:name: (ship, ${EnumLabels.label(x.size)}:size:)` })),
-			...(this.equipment.value()?.getEntities() ?? [])
-				.filter((x) => x.owners?.length)
-				.map((x) => ({ id: `equipment:${x.id}`, name: `${x.name} (${x.type ? EnumLabels.label(x.type) : $localize`equipment`})` })),
-		].sort((a, b) => a.name.localeCompare(b.name))
+		MapBuyOptions.build(
+			this.ships.getEntities(),
+			(this.equipment.value()?.getEntities() ?? []).filter((x) => x.owners?.length)
+		)
 	);
-	readonly buyItem = computed(() => {
-		const name = this.stationsModel().buy.trim().toLowerCase();
-		return name ? this.buyOptions().find((x) => x.name.toLowerCase() === name)?.id : undefined;
-	});
+	readonly buyItem = computed(() => this.stationsModel().buy || undefined);
 
 	/** Stations selling the chosen item, closest to the route start first. Player stations never sell. */
 	readonly sellers = computed(() => {

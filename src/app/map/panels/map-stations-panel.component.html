@@ -9,20 +9,17 @@
 </div>
 
 <h6 i18n>Where to buy</h6>
-<input
-	class="input"
-	list="map-buy-items"
-	placeholder="Ship or equipment..."
+<app-searchable-select
+	i18n-label
+	label="Ship or equipment"
+	[hideLabel]="true"
 	i18n-placeholder
-	aria-label="Ship or equipment"
-	i18n-aria-label
+	placeholder="Ship or equipment..."
+	recentKey="map-buy-recent-items"
+	[clearable]="true"
+	[options]="stations.buyOptions()"
 	[formField]="form.buy"
 />
-<datalist id="map-buy-items">
-	@for (item of stations.buyOptions(); track item.id) {
-		<option [value]="item.name"></option>
-	}
-</datalist>
 @if (stations.buyItem()) {
 	<p class="my-2 text-xs text-fg-muted">
 		@if (store.routeFrom(); as from) {

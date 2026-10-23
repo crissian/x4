@@ -5,10 +5,11 @@ import { MapStore } from '../map-store';
 import { MapFocusLinkComponent } from './map-focus-link.component';
 import { Duration } from '../../core/format/duration';
 import { ColorDotComponent } from '../../shared/components/color-dot.component';
+import { SearchableSelectComponent } from '../../shared/components/searchable-select/searchable-select.component';
 
 @Component({
 	selector: 'app-map-stations-panel',
-	imports: [ColorDotComponent, FormField, MapFocusLinkComponent],
+	imports: [ColorDotComponent, FormField, MapFocusLinkComponent, SearchableSelectComponent],
 	templateUrl: './map-stations-panel.component.html',
 })
 export class MapStationsPanelComponent {

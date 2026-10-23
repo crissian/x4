@@ -64,8 +64,8 @@ describe('MapStations', () => {
 			],
 		});
 		const ship = 'ship_arg_l_destroyer_01_a';
-		const name = stations.buyOptions().find((x) => x.id === `ship:${ship}`)!.name;
-		stations.stationsModel.update((x) => ({ ...x, buy: name }));
+		expect(stations.buyOptions().some((x) => x.id === `ship:${ship}`)).toBe(true);
+		stations.stationsModel.update((x) => ({ ...x, buy: `ship:${ship}` }));
 		const sellers = stations.sellers();
 		expect(sellers.map((x) => x.id).sort()).toEqual(['FAR', 'OK']);
 		expect(sellers.find((x) => x.id === 'FAR')!.known).toBe(false);
