@@ -20,6 +20,8 @@ import { ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
 import { ShipSellersNearComponent } from '../sellers/ship-sellers-near.component';
 import { ShipCompareComponent } from './ship-compare.component';
+import { ResearchNeededComponent } from '../../research/components/research-needed.component';
+import { ResearchUnlocks } from '../../research/research-unlocks';
 
 interface EngineRow {
 	engine: Equipment;
@@ -44,12 +46,15 @@ interface EngineRow {
 		LucideGitCompareArrows,
 		EnumLabelPipe,
 		PriceRangePipe,
+		ResearchNeededComponent,
 	],
 	templateUrl: './ship-detail.component.html',
 })
 export class ShipDetailComponent extends ProducibleDetailPage<Ship> {
 	protected readonly service = inject(ShipService);
 	protected readonly description = Descriptions.of('ships', this.id);
+	/** the headquarters research handing out the blueprint */
+	protected readonly research = computed(() => ResearchUnlocks.of(this.entity()?.id));
 	private readonly stats = inject(ShipStatsService);
 	private readonly router = inject(Router);
 

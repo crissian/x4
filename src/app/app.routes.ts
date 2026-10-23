@@ -28,7 +28,7 @@ export const appRoutes: Routes = [
 		path: 'ships',
 		loadChildren: () =>
 			GameText.withTexts(
-				[...TEXTS.base, ...TEXTS.universe, 'ships', 'equipment'],
+				[...TEXTS.base, ...TEXTS.universe, 'ships', 'equipment', 'research'],
 				() => import('./ship/ship.routes')
 			),
 	},
@@ -47,7 +47,8 @@ export const appRoutes: Routes = [
 	},
 	{
 		path: 'modules',
-		loadChildren: () => GameText.withTexts([...TEXTS.base, 'modules'], () => import('./module/module.routes')),
+		loadChildren: () =>
+			GameText.withTexts([...TEXTS.base, 'modules', 'research'], () => import('./module/module.routes')),
 	},
 	{
 		path: 'wares',
@@ -103,6 +104,15 @@ export const appRoutes: Routes = [
 				() => import('./blueprints/components/blueprints-page.component')
 			),
 		title: `${BASE_TITLE} - ${$localize`Blueprints`}`,
+	},
+	{
+		path: 'research',
+		loadComponent: () =>
+			GameText.withTexts(
+				[...TEXTS.base, 'modules', 'ships', 'equipment', 'research'],
+				() => import('./research/components/research-page.component')
+			),
+		title: `${BASE_TITLE} - ${$localize`Research`}`,
 	},
 	{
 		path: 'saves',

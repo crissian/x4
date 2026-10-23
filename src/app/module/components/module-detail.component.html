@@ -47,6 +47,11 @@
 				<div appDetail="Blueprint sold by" i18n-appDetail>
 					<app-sellers [owners]="entity.owners" [license]="entity.license" />
 				</div>
+				@if (research().length) {
+					<div appDetail="Research needed" i18n-appDetail>
+						<app-research-needed [projects]="research()" />
+					</div>
+				}
 			</dl>
 		</div>
 		<app-production-cards [items]="production()" />
