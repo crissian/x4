@@ -933,6 +933,24 @@
     "1381398185793449271": "Couleur : les Cr/h de chaque secteur pour cette marchandise seule ; ★ les 5 meilleurs. Contour : les secteurs {$INTERPOLATION}.",
     "4076957274695941858": "Couleur : ce qu'une station construite ici pourrait vendre ou acheter {$INTERPOLATION}.",
     "7485595341901964130": "{$START_TAG_STRONG}{$INTERPOLATION}{$CLOSE_TAG_STRONG} par trajet avec amarrage, {$INTERPOLATION_1} ",
-    "jumps.here": "ici"
+    "jumps.here": "ici",
+    "1936785939261688382": "{$START_TAG_SPAN}{$CLOSE_TAG_SPAN}Coffre des données",
+    "106570372500627578": "Coffre des données {$INTERPOLATION} ({$INTERPOLATION_1})",
+    "7889055458511145268": "Coffres",
+    "7655120555795514151": "Afficher les positions",
+    "984055362325369374": "{$INTERPOLATION} sur {$INTERPOLATION_1} trouvés",
+    "7523646605811025013": "Cochez les coffres trouvés, ou {$START_LINK}chargez une sauvegarde{$CLOSE_LINK} pour voir lesquels vous avez ouverts.",
+    "597313815551836862": " Réparez les fuites de signal d'un coffre des données pour débloquer son entrée de chronologie ; les coffres de l'Erlking contiennent les plans de son équipement. ",
+    "4981266758190051997": "Coffres des données",
+    "7113642028805566716": "Emplacement aléatoire",
+    "602821270955747507": "Trouvé",
+    "2576349490164100020": "Plan :",
+    "3271102131509251072": "Coffre des données",
+    "7287078438578844087": "Ouvert",
+    "4878292894705708393": "Pas encore placé dans cette sauvegarde",
+    "7874572044900813552": "Découvert, non ouvert",
+    "4952939008584725545": "Apparaît pendant une mission scénarisée",
+    "1130688445830294314": "Placé à un endroit aléatoire en début de partie ; chargez une sauvegarde pour voir où",
+    "6118209750240050084": "Aucun coffre des données"
   }
 }

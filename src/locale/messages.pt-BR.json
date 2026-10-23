@@ -933,6 +933,24 @@
     "1381398185793449271": "Cor: os Cr/h de cada setor para esta mercadoria isoladamente; ★ os 5 melhores. Contorno: os setores {$INTERPOLATION}.",
     "4076957274695941858": "Cor: o que uma estação construída aqui poderia vender ou comprar {$INTERPOLATION}.",
     "7485595341901964130": "{$START_TAG_STRONG}{$INTERPOLATION}{$CLOSE_TAG_STRONG} por viagem com atracação, {$INTERPOLATION_1} ",
-    "jumps.here": "aqui"
+    "jumps.here": "aqui",
+    "1936785939261688382": "{$START_TAG_SPAN}{$CLOSE_TAG_SPAN}Depósito de Dados",
+    "106570372500627578": "Depósito de Dados {$INTERPOLATION} ({$INTERPOLATION_1})",
+    "7889055458511145268": "Depósitos",
+    "7655120555795514151": "Mostrar posições",
+    "984055362325369374": "{$INTERPOLATION} de {$INTERPOLATION_1} encontrados",
+    "7523646605811025013": "Marque os depósitos que você encontrou ou {$START_LINK}carregue um jogo salvo{$CLOSE_LINK} para ver quais você abriu.",
+    "597313815551836862": " Repare os vazamentos de sinal de um depósito de dados para desbloquear sua entrada na linha do tempo; os depósitos do Erlking guardam as plantas do seu equipamento. ",
+    "4981266758190051997": "Depósitos de Dados",
+    "7113642028805566716": "Local aleatório",
+    "602821270955747507": "Encontrado",
+    "2576349490164100020": "Planta:",
+    "3271102131509251072": "Depósito de Dados",
+    "7287078438578844087": "Aberto",
+    "4878292894705708393": "Ainda não posicionado neste jogo salvo",
+    "7874572044900813552": "Descoberto, não aberto",
+    "4952939008584725545": "Aparece durante uma missão da história",
+    "1130688445830294314": "Posicionado em um local aleatório no início do jogo; carregue um jogo salvo para ver onde",
+    "6118209750240050084": "Nenhum depósito de dados"
   }
 }

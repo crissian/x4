@@ -933,6 +933,24 @@
     "1381398185793449271": "Kolor: Cr/h każdego sektora dla tego towaru osobno; ★ pierwsze 5. Obrys: sektory {$INTERPOLATION}.",
     "4076957274695941858": "Kolor: co stacja zbudowana tutaj mogłaby sprzedać lub kupić {$INTERPOLATION}.",
     "7485595341901964130": "{$START_TAG_STRONG}{$INTERPOLATION}{$CLOSE_TAG_STRONG} na kurs z dokowaniem, {$INTERPOLATION_1} ",
-    "jumps.here": "tutaj"
+    "jumps.here": "tutaj",
+    "1936785939261688382": "{$START_TAG_SPAN}{$CLOSE_TAG_SPAN}Skarbiec danych",
+    "106570372500627578": "Skarbiec danych {$INTERPOLATION} ({$INTERPOLATION_1})",
+    "7889055458511145268": "Skarbce",
+    "7655120555795514151": "Pokaż pozycje",
+    "984055362325369374": "Znaleziono {$INTERPOLATION} z {$INTERPOLATION_1}",
+    "7523646605811025013": "Zaznacz znalezione skarbce lub {$START_LINK}wczytaj zapis{$CLOSE_LINK}, aby zobaczyć, które otworzyłeś.",
+    "597313815551836862": " Napraw wycieki sygnału skarbca danych, aby odblokować jego wpis na osi czasu; skarbce Erlkinga zawierają plany jego wyposażenia. ",
+    "4981266758190051997": "Skarbce danych",
+    "7113642028805566716": "Losowe miejsce",
+    "602821270955747507": "Znaleziony",
+    "2576349490164100020": "Plan:",
+    "3271102131509251072": "Skarbiec danych",
+    "7287078438578844087": "Otwarty",
+    "4878292894705708393": "Jeszcze nie umieszczony w tym zapisie",
+    "7874572044900813552": "Odkryty, nieotwarty",
+    "4952939008584725545": "Pojawia się podczas misji fabularnej",
+    "1130688445830294314": "Umieszczony w losowym miejscu na początku gry; wczytaj zapis, aby zobaczyć gdzie",
+    "6118209750240050084": "Brak skarbców danych"
   }
 }

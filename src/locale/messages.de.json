@@ -933,6 +933,24 @@
     "1381398185793449271": "Farbe: die Cr/h jedes Sektors für diese Ware allein; ★ die besten 5. Umrandet: die Sektoren {$INTERPOLATION}.",
     "4076957274695941858": "Farbe: was eine hier gebaute Station {$INTERPOLATION} verkaufen oder kaufen könnte.",
     "7485595341901964130": "{$START_TAG_STRONG}{$INTERPOLATION}{$CLOSE_TAG_STRONG} pro Fahrt mit Andocken, {$INTERPOLATION_1} ",
-    "jumps.here": "hier"
+    "jumps.here": "hier",
+    "1936785939261688382": "{$START_TAG_SPAN}{$CLOSE_TAG_SPAN}Datentresor",
+    "106570372500627578": "Datentresor {$INTERPOLATION} ({$INTERPOLATION_1})",
+    "7889055458511145268": "Tresore",
+    "7655120555795514151": "Positionen anzeigen",
+    "984055362325369374": "{$INTERPOLATION} von {$INTERPOLATION_1} gefunden",
+    "7523646605811025013": "Hake die gefundenen Tresore ab oder {$START_LINK}Spielstand laden{$CLOSE_LINK}, um zu sehen, welche du geöffnet hast.",
+    "597313815551836862": " Repariere die Signallecks eines Datentresors, um seinen Zeitleisteneintrag freizuschalten; die Erlking-Tresore enthalten die Baupläne seiner Ausrüstung. ",
+    "4981266758190051997": "Datentresore",
+    "7113642028805566716": "Zufälliger Ort",
+    "602821270955747507": "Gefunden",
+    "2576349490164100020": "Bauplan:",
+    "3271102131509251072": "Datentresor",
+    "7287078438578844087": "Geöffnet",
+    "4878292894705708393": "In diesem Spielstand noch nicht platziert",
+    "7874572044900813552": "Entdeckt, nicht geöffnet",
+    "4952939008584725545": "Erscheint während einer Story-Mission",
+    "1130688445830294314": "Bei Spielbeginn an einem zufälligen Ort platziert; lade einen Spielstand, um zu sehen, wo",
+    "6118209750240050084": "Keine Datentresore"
   }
 }
