@@ -2,6 +2,7 @@ import { TextStream } from '../core/streams/open-text-stream';
 import { XmlExtractor, XmlExtractorRunner } from '../core/xml/xml-extractor';
 import { XmlScanError } from '../core/xml/xml-stream-scanner';
 import { BlueprintsExtractor } from './extractors/blueprints-extractor';
+import { DiplomacyExtractor } from './extractors/diplomacy-extractor';
 import { EmpireExtractor } from './extractors/empire-extractor';
 import { InfoExtractor } from './extractors/info-extractor';
 import { MapExtractor } from './extractors/map-extractor';
@@ -66,6 +67,7 @@ export class SavegameReader {
 			new LogExtractor(),
 			new VaultsExtractor(),
 			new EmpireExtractor(),
+			new DiplomacyExtractor(),
 		];
 		try {
 			const opened = await TextStream.open(bytes, { size: options.size, onProgress: options.onProgress, keepGzip: true });

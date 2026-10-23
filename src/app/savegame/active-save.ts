@@ -3,6 +3,7 @@ import { Duration } from '../core/format/duration';
 import type { Sector } from '../shared/services/model/model';
 import { SectorService } from '../shared/services/universe.service';
 import { BlueprintsExtractor } from './extractors/blueprints-extractor';
+import { DiplomacyExtractor, type SaveDiplomacy } from './extractors/diplomacy-extractor';
 import { EmpireExtractor } from './extractors/empire-extractor';
 import { LicencesExtractor } from './extractors/licences-extractor';
 import { LogExtractor } from './extractors/log-extractor';
@@ -45,6 +46,8 @@ export class ActiveSave {
 	readonly vaults = this.data<SaveVaults>(VaultsExtractor.KEY);
 	/** Fleets, station accounts, ownerless ships and hostile ship counts; undefined for a save read before them. */
 	readonly empire = this.data<SaveEmpire>(EmpireExtractor.KEY);
+	/** Which diplomacy actions the menu shows; undefined for a save read before they were. */
+	readonly diplomacy = this.data<SaveDiplomacy>(DiplomacyExtractor.KEY);
 
 	/** Whether the map data can be shown. */
 	readonly status = this.statusOf(this.map);
