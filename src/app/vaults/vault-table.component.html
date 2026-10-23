@@ -18,12 +18,13 @@
 				@let done = vaults.isDone(entry);
 				<tr [class.text-fg-muted]="done">
 					<td class="w-6 align-top">
-						@if (entry.save?.opened != null) {
+						@let save = entry.save;
+						@if (save && save.opened != null) {
 							<span
 								class="inline-block size-2.5 rounded-full"
-								[class.bg-emerald-400]="entry.save?.opened"
-								[class.bg-amber-400]="!entry.save?.opened && entry.save?.known"
-								[class.bg-slate-500]="!entry.save?.opened && !entry.save?.known"
+								[class.bg-emerald-400]="save.opened"
+								[class.bg-amber-400]="!save.opened && save.known"
+								[class.bg-slate-500]="!save.opened && !save.known"
 							></span>
 						} @else {
 							<input
