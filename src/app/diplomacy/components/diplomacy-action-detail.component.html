@@ -1,0 +1,142 @@
+@if (entity(); as action) {
+	@let i = info()!;
+	<app-detail-page
+		i18n-section
+		section="Diplomacy"
+		sectionLink="/diplomacy"
+		[title]="action.name"
+		[id]="action.id"
+		[description]="action.description"
+	>
+		@if (shown() !== undefined) {
+			<p class="mb-3 text-sm">
+				@if (shown()) {
+					<ng-container i18n>The diplomacy menu of your save offers this action.</ng-container>
+				} @else {
+					<ng-container i18n>The diplomacy menu of your save doesn't offer this action yet.</ng-container>
+				}
+			</p>
+		}
+		<dl class="details mb-4 max-w-2xl">
+			<div i18n-appDetail appDetail="Category">{{ i.category }}</div>
+			<div i18n-appDetail appDetail="Agent experience">{{ i.agentType?.name }}</div>
+			@if (i.experience) {
+				<div i18n-appDetail appDetail="Recommended experience">{{ i.experience }}</div>
+			}
+			<div i18n-appDetail appDetail="Risk to agent">
+				{{ i.risk?.name }}
+				@if (i.risk?.description; as text) {
+					<span class="text-fg-muted"> - {{ text }}</span>
+				}
+			</div>
+			<div i18n-appDetail appDetail="Success chance">{{ i.success }}</div>
+			<div i18n-appDetail appDetail="Duration">{{ i.duration }}</div>
+			<div i18n-appDetail appDetail="Cooldown">{{ i.cooldown }}</div>
+			@if (action.unique) {
+				<div i18n-appDetail appDetail="Unique">
+					<ng-container i18n>Only one can run at a time</ng-container>
+				</div>
+			}
+			@if (i.version) {
+				<div i18n-appDetail appDetail="DLC">{{ i.version }}</div>
+			}
+		</dl>
+
+		<div class="grid gap-4 lg:grid-cols-2">
+			<div class="card">
+				<div class="card-header" i18n>Cost</div>
+				<div class="card-body text-sm">
+					<dl class="details">
+						<div i18n-appDetail appDetail="Influence">{{ action.cost.influence }}</div>
+						<div i18n-appDetail appDetail="Money">{{ i.money }} Cr</div>
+					</dl>
+					@if (action.cost.wares.length) {
+						<h3 class="mt-3 font-semibold text-fg-strong" i18n>Required items</h3>
+						<app-ware-amounts class="mt-1 block" [items]="action.cost.wares" [resolve]="wares.resolve" />
+					}
+					@if (giftWares().length) {
+						<h3 class="mt-3 font-semibold text-fg-strong" i18n>Optional gift or bribe</h3>
+						<p class="text-fg-muted" i18n>
+							A gift listed for the target faction changes the success chance by
+							{{ signed(giftEffect.positive) }}%; the other default is {{ signed(giftEffect.negative) }}%.
+						</p>
+						<ul class="mt-1">
+							@for (ware of giftWares(); track ware.name) {
+								<li>
+									@if (ware.link) {
+										<a [routerLink]="ware.link">{{ ware.name }}</a>
+									} @else {
+										{{ ware.name }}
+									}
+								</li>
+							}
+						</ul>
+					}
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="card-header" i18n>Outcome</div>
+				<div class="card-body text-sm">
+					@if (action.reward.influence) {
+						<dl class="details">
+							<div i18n-appDetail appDetail="Influence gained">{{ action.reward.influence }}</div>
+						</dl>
+					}
+					@if (action.reward.text) {
+						<p class="mt-2 whitespace-pre-line">{{ action.reward.text }}</p>
+					}
+					@if (action.success.text) {
+						<h3 class="mt-3 font-semibold text-fg-strong" i18n>On success</h3>
+						<p class="whitespace-pre-line">{{ action.success.text }}</p>
+					}
+					@if (action.failure?.text; as text) {
+						<h3 class="mt-3 font-semibold text-fg-strong" i18n>On failure</h3>
+						<p class="whitespace-pre-line">{{ text }}</p>
+					}
+				</div>
+			</div>
+
+			@if (targets().length) {
+				<div class="card lg:col-span-2">
+					<div class="card-header" i18n>Targets</div>
+					<div class="card-body text-sm">
+						<ul class="grid gap-2">
+							@for (row of targets(); track row.target.id) {
+								<li>
+									<span class="font-semibold">{{ row.target.text }}</span>
+									@if (row.wares.length) {
+										<div class="text-fg-muted">
+											<ng-container i18n>Picks from:</ng-container>
+											@for (ware of row.wares; track ware.name; let last = $last) {
+												@if (ware.link) {
+													<a [routerLink]="ware.link">{{ ware.name }}</a>
+												} @else {
+													{{ ware.name }}
+												}
+												@if (!last) {
+													,
+												}
+											}
+										</div>
+									}
+									@if (row.excluded.length) {
+										<div class="text-fg-muted">
+											<ng-container i18n>Can't be:</ng-container>
+											@for (faction of row.excluded; track faction.id; let last = $last) {
+												<app-faction-label [faction]="faction" />
+												@if (!last) {
+													,
+												}
+											}
+										</div>
+									}
+								</li>
+							}
+						</ul>
+					</div>
+				</div>
+			}
+		</div>
+	</app-detail-page>
+}

@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { FactionDiplomacyComponent } from '../../diplomacy/components/faction-diplomacy.component';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { EntityDetailPage } from '../../shared/components/entity-detail-page';
 import { EntityLinkComponent } from '../../shared/components/entity-link.component';
@@ -8,7 +9,7 @@ import { Loadouts } from '../../shared/services/loadout';
 import { Faction, License } from '../../shared/services/model/model';
 
 @Component({
-	imports: [DetailPageComponent, DetailComponent, EntityLinkComponent, DataGridComponent],
+	imports: [DetailPageComponent, DetailComponent, EntityLinkComponent, DataGridComponent, FactionDiplomacyComponent],
 	templateUrl: './faction-detail.component.html',
 })
 export class FactionDetailComponent extends EntityDetailPage<Faction> {

@@ -1,0 +1,35 @@
+@if (gifts().length || excluded().length) {
+	<div class="card">
+		<div class="card-header" i18n>Diplomacy</div>
+		<div class="card-body text-sm">
+			@if (gifts().length) {
+				<h3 class="font-semibold text-fg-strong" i18n>Gifts</h3>
+				<p class="text-fg-muted" i18n>
+					Given with an agent action aimed at this faction, one of these changes its success chance by
+					{{ signed(giftEffect.positive) }}%.
+				</p>
+				<ul class="mt-1">
+					@for (ware of gifts(); track ware.name) {
+						<li>
+							@if (ware.link) {
+								<a [routerLink]="ware.link">{{ ware.name }}</a>
+							} @else {
+								{{ ware.name }}
+							}
+						</li>
+					}
+				</ul>
+			}
+			@if (excluded().length) {
+				<h3 class="mt-3 font-semibold text-fg-strong" i18n>Agent actions that can't target this faction</h3>
+				<ul class="mt-1">
+					@for (action of excluded(); track action.id) {
+						<li>
+							<a [routerLink]="['/diplomacy', action.id]">{{ action.name }}</a>
+						</li>
+					}
+				</ul>
+			}
+		</div>
+	</div>
+}
