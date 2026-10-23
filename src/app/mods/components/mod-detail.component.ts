@@ -1,4 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { PriceRangePipe } from '../../core/format/price-range.pipe';
 import { DataGridComponent } from '../../shared/components/data-grid/data-grid.component';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
@@ -20,6 +21,7 @@ import { ModEffectListComponent } from './mod-effect-list.component';
 		IngredientListComponent,
 		ModEffectListComponent,
 		PriceRangePipe,
+		RouterLink,
 	],
 	templateUrl: './mod-detail.component.html',
 })

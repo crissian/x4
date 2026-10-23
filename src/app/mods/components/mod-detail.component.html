@@ -29,7 +29,12 @@
 
 		@if (mod.ingredients?.length && !mod.notForPlayer) {
 			<div class="mt-4 card">
-				<div class="card-header" i18n>Crafting ingredients</div>
+				<div class="card-header flex items-center justify-between gap-3">
+					<span i18n>Crafting ingredients</span>
+					<a class="text-sm font-normal" routerLink="/mods/crafting" [queryParams]="{ craft: mod.id }" i18n
+						>Plan crafting</a
+					>
+				</div>
 				<div class="card-body">
 					<app-ingredient-list [ingredients]="mod.ingredients!" />
 					@if (info()?.research; as research) {
