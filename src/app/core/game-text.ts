@@ -42,6 +42,8 @@ const TEXT_KEYS = new Set([
 	'character',
 	'label',
 	'text',
+	// diplomacy
+	'shortDescription',
 ]);
 
 export class GameText {
