@@ -8,6 +8,7 @@ import { MapExtractor } from './extractors/map-extractor';
 import { RelationsExtractor } from './extractors/relations-extractor';
 import { RepresentativesExtractor } from './extractors/representatives-extractor';
 import { ShipsExtractor } from './extractors/ships-extractor';
+import { SaveVaults, VaultsExtractor } from './extractors/vaults-extractor';
 import type { SaveBlueprints, SaveLicences, SaveMap, SaveRelations, SaveRepresentatives, SaveShips } from './map/save-map-model';
 import { SavegameStore } from './savegame-store';
 
@@ -31,6 +32,8 @@ export class ActiveSave {
 	readonly representatives = this.data<SaveRepresentatives>(RepresentativesExtractor.KEY);
 	/** The player's ships; undefined for a save read before they were. */
 	readonly ships = this.data<SaveShips>(ShipsExtractor.KEY);
+	/** The data vaults; undefined for a save read before they were. */
+	readonly vaults = this.data<SaveVaults>(VaultsExtractor.KEY);
 
 	/** Whether the map data can be shown. */
 	readonly status = this.statusOf(this.map);
