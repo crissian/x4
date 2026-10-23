@@ -27,9 +27,7 @@
 						/>
 						@if (row.missing.length > 0) {
 							<details class="mt-1 text-sm">
-								<summary class="cursor-pointer text-fg-muted" i18n>
-									Missing {{ row.missing.length }}
-								</summary>
+								<summary class="cursor-pointer text-fg-muted" i18n>Missing {{ row.missing.length }}</summary>
 								<ul class="mt-1 space-y-0.5 pl-4">
 									@for (item of row.missing; track item.id) {
 										<li><app-blueprint-item-link [item]="item" /></li>
