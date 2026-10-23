@@ -39,7 +39,9 @@ describe('VaultsExtractor', () => {
 			'<removed><connection macro="connection_pickup"/></removed>' +
 			'<movement><offset><position x="9" y="9" z="9"/></offset></movement>' +
 			'<offset><position x="-2087" y="300" z="2604"/></offset><unlock state="unlocked"/></component>';
-		const xml = VaultsRunner.save(VaultsRunner.zone('zone004_cluster_18_sector001_macro', '<offset default="1"/>', vault));
+		const xml = VaultsRunner.save(
+			VaultsRunner.zone('zone004_cluster_18_sector001_macro', '<offset default="1"/>', vault)
+		);
 		expect(await VaultsRunner.read(xml)).toEqual([
 			{
 				macro: 'landmarks_vault_01',

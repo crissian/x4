@@ -138,7 +138,16 @@ export class VaultsExtractor implements XmlExtractor<SaveVaults> {
 		}
 		const node: VaultNode = {
 			kind: 'vault',
-			vault: { macro, sector: sector.id, x: 0, y: 0, z: 0, known: a['knownto'] === 'player', unlocked: false, looted: false },
+			vault: {
+				macro,
+				sector: sector.id,
+				x: 0,
+				y: 0,
+				z: 0,
+				known: a['knownto'] === 'player',
+				unlocked: false,
+				looted: false,
+			},
 			zone: this.stack.nearest((n) => n.kind === 'zone')?.value as ZoneNode | undefined,
 		};
 		this.vaults.push(node);
