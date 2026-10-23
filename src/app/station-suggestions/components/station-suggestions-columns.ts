@@ -5,7 +5,7 @@ import { StationSuggestionTexts } from '../station-suggestions-row';
 import { NumberFormats } from '../../core/format/number-formats';
 
 /**
- * The columns of the station suggestions table: ware, sector, Cr/h (the ranking) and room shown, the rest in the
+ * The columns of the station suggestions table: ware, sector, Cr/h (the ranking) and the modules to build shown, the rest in the
  * column chooser. The inputs (buying) or resources (closed loop) and the security are shown, not ranked by.
  */
 export class StationSuggestionsColumns {
@@ -33,10 +33,12 @@ export class StationSuggestionsColumns {
 			},
 			{
 				key: 'modules',
-				caption: $localize`Room for modules`,
+				// never below 1: spots without room for one module are not listed
+				caption: $localize`Modules to build`,
 				type: 'number',
-				display: (x) => `~${x.modules}`,
-				title: (x) => $localize`One module makes ${Math.round(x.moduleOutput)}:output: per hour`,
+				format: WHOLE,
+				title: (x) =>
+					$localize`Production modules of ${NumberFormats.whole(x.moduleOutput)}:output:/h each that the ${NumberFormats.whole(x.absorbable)}:absorbable:/h the reach absorbs keeps busy, rounded down`,
 			},
 			{
 				key: 'absorbable',

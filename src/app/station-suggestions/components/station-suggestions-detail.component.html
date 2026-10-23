@@ -7,18 +7,18 @@
 		</h6>
 		@if (row.loop === 'closed') {
 			<p i18n>
-				{{ row.crPerHour | number: '1.0-0' }} Cr/h with
-				{row.modules, plural, =1 {1 module} other {{{ row.modules }} modules}} of
-				{{ row.moduleOutput | number: '1.0-0' }}/h each, sold at the average price of
-				{{ row.margin | number: '1.0-2' }} Cr; the reach absorbs {{ row.absorbable | number: '1.0-0' }}/h.
+				Modules to build: {{ row.modules | number: '1.0-0' }} of {{ row.moduleOutput | number: '1.0-0' }}/h
+				each, as many as the {{ row.absorbable | number: '1.0-0' }}/h the reach absorbs keeps busy. Sold at the
+				average price of {{ row.margin | number: '1.0-2' }} Cr, they earn {{ row.crPerHour | number: '1.0-0' }}
+				Cr/h.
 			</p>
 			<app-station-suggestions-chain />
 		} @else {
 			<p i18n>
-				{{ row.crPerHour | number: '1.0-0' }} Cr/h with
-				{row.modules, plural, =1 {1 module} other {{{ row.modules }} modules}} of
-				{{ row.moduleOutput | number: '1.0-0' }}/h each; the reach absorbs
-				{{ row.absorbable | number: '1.0-0' }}/h at a margin of {{ row.margin | number: '1.0-2' }} Cr per unit.
+				Modules to build: {{ row.modules | number: '1.0-0' }} of {{ row.moduleOutput | number: '1.0-0' }}/h
+				each, as many as the {{ row.absorbable | number: '1.0-0' }}/h the reach absorbs keeps busy. At a margin
+				of {{ row.margin | number: '1.0-2' }} Cr per unit, they earn {{ row.crPerHour | number: '1.0-0' }}
+				Cr/h.
 			</p>
 		}
 
