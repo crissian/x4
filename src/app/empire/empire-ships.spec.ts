@@ -30,12 +30,7 @@ describe('EmpireShips', () => {
 			[
 				ship('w2', 'fighter', { name: 'Wing B', commander: 'c', assignment: 'interception' }),
 				ship('solo', 'trader', { name: 'Alone', defaultOrder: 'TradeRoutine' }),
-				ship('c', 'carrier', {
-					name: 'Big',
-					fleet: 'Home Fleet',
-					defaultOrder: 'Wait',
-					order: 'ProtectStation',
-				}),
+				ship('c', 'carrier', { name: 'Big', fleet: 'Home Fleet', defaultOrder: 'Wait', order: 'ProtectStation' }),
 				ship('w1', 'fighter', { name: 'Wing A', commander: 'c' }),
 				ship('w3', 'fighter', { name: 'Wingman', commander: 'w1' }),
 			],
