@@ -1,0 +1,93 @@
+@let drawn = layout();
+<div class="overflow-x-auto rounded-lg border border-line bg-surface-2 p-3" data-chain-graph>
+	<div class="relative" [style.width.px]="drawn.width" [style.height.px]="drawn.height">
+		<svg
+			class="pointer-events-none absolute inset-0 overflow-visible"
+			[attr.width]="drawn.width"
+			[attr.height]="drawn.height"
+			aria-hidden="true"
+		>
+			@for (item of drawn.edges; track item.from + '>' + item.to) {
+				<path
+					[attr.d]="item.path"
+					fill="none"
+					stroke-width="2"
+					[class]="touches(item, hovered()) ? 'stroke-sky-500 opacity-100' : 'stroke-line-strong opacity-80'"
+				>
+					<title>{{ item.title }}</title>
+				</path>
+			}
+		</svg>
+		@for (item of drawn.nodes; track item.node.ware.id) {
+			@let node = item.node;
+			<div
+				class="absolute flex flex-col gap-0.5 overflow-hidden rounded-md border bg-surface px-2 py-1.5 text-xs shadow-sm"
+				[class]="item.root ? 'border-sky-500 ring-1 ring-sky-500' : 'border-line'"
+				[style.left.px]="item.x"
+				[style.top.px]="item.y"
+				[style.width.px]="sizes.nodeWidth"
+				[style.height.px]="sizes.nodeHeight"
+				[attr.data-ware]="node.ware.id"
+				(mouseenter)="hovered.set(node.ware.id)"
+				(mouseleave)="hovered.set(undefined)"
+			>
+				<div class="flex min-w-0 items-center gap-1.5">
+					@if (item.icon; as icon) {
+						<img
+							[src]="icon"
+							alt=""
+							width="20"
+							height="20"
+							class="size-5 shrink-0 rounded bg-neutral-800 p-0.5"
+						/>
+					}
+					<a
+						class="truncate text-sm font-medium"
+						[routerLink]="['/wares', node.ware.id]"
+						[title]="node.ware.name"
+						>{{ node.ware.name }}</a
+					>
+				</div>
+				<div class="truncate text-fg-soft">
+					@if (usedBy()) {
+						@if (node.production) {
+							<ng-container i18n>{{ node.rate | number: '1.0-0' }}/h per module</ng-container>
+						}
+					} @else {
+						<strong class="text-fg-strong">{{ node.rate | number: '1.0-0' }}/h</strong>
+						@if (node.production) {
+							·
+							<ng-container i18n>{node.modules, plural,
+								=1 {1 module}
+								other {{{ node.modules | number: '1.0-2' }} modules}
+							}</ng-container>
+						} @else {
+							· <span class="text-warning" i18n>raw, mine or buy</span>
+						}
+					}
+				</div>
+				@if ((node.ware.production?.length ?? 0) > 1) {
+					<div class="flex flex-wrap gap-1" role="group" i18n-aria-label aria-label="Production method">
+						@for (production of node.ware.production; track production.method) {
+							<button
+								type="button"
+								class="cursor-pointer rounded border px-1 leading-4"
+								[class]="
+									production.method === node.production?.method
+										? 'border-sky-500 bg-sky-500/15 text-fg-strong'
+										: 'border-line text-fg-muted hover:bg-hover'
+								"
+								[attr.aria-pressed]="production.method === node.production?.method"
+								(click)="pickMethod.emit({ ware: node.ware.id, method: production.method })"
+							>
+								{{ production.name }}
+							</button>
+						}
+					</div>
+				} @else if (node.production) {
+					<div class="truncate text-fg-muted">{{ node.production.name }}</div>
+				}
+			</div>
+		}
+	</div>
+</div>

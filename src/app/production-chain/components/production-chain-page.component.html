@@ -1,0 +1,69 @@
+<div class="card">
+	<div class="card-header" i18n>Production Chains</div>
+	<div class="card-body">
+		<p class="text-fg-muted" i18n>
+			What a ware is made of, down to the raw resources, or what is made from it: with the amounts per hour, the
+			modules to build and the production method of every ware.
+		</p>
+		<label class="mt-3 block max-w-md text-sm">
+			<ng-container i18n>Find a ware</ng-container>
+			<input
+				id="chain-search"
+				class="input"
+				type="search"
+				autocomplete="off"
+				i18n-placeholder
+				placeholder="Ware name"
+				[formField]="searchForm.text"
+			/>
+		</label>
+
+		@if (listShown()) {
+			<div class="mt-3 grid gap-x-4 gap-y-3 sm:grid-cols-2 lg:grid-cols-4" data-ware-picker>
+				@for (group of groups(); track group.name) {
+					<div class="min-w-0">
+						<h6 class="text-sm font-semibold text-fg-strong">{{ group.name }}</h6>
+						<ul class="mt-1">
+							@for (item of group.wares; track item.ware.id) {
+								<li>
+									<a
+										class="flex items-center gap-1.5 py-0.5"
+										[routerLink]="['/production-chains', item.ware.id]"
+										queryParamsHandling="preserve"
+										[class.font-semibold]="item.ware.id === ware()?.id"
+									>
+										@if (item.icon; as icon) {
+											<img
+												[src]="icon"
+												alt=""
+												width="16"
+												height="16"
+												loading="lazy"
+												class="size-4 shrink-0 rounded bg-neutral-800 p-px"
+											/>
+										}
+										<span class="truncate">{{ item.ware.name }}</span>
+									</a>
+								</li>
+							}
+						</ul>
+					</div>
+				} @empty {
+					<p class="text-info" i18n>No ware matches the search.</p>
+				}
+			</div>
+		}
+
+		@if (ware(); as ware) {
+			<h2 class="mt-4 flex items-center gap-2 text-lg font-semibold text-fg-strong">
+				@if (icon(); as icon) {
+					<img [src]="icon" alt="" width="28" height="28" class="size-7 rounded bg-neutral-800 p-1" />
+				}
+				<a [routerLink]="['/wares', ware.id]">{{ ware.name }}</a>
+			</h2>
+			<app-production-chain class="mt-3" [ware]="ware.id" />
+		} @else if (id()) {
+			<p class="mt-4 text-danger" i18n>Unknown ware. Pick one from the list.</p>
+		}
+	</div>
+</div>
