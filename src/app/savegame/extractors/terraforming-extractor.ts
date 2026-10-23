@@ -1,6 +1,7 @@
 import { MacroId } from '../../core/macro-id';
 import { XmlExtractor } from '../../core/xml/xml-extractor';
 import { XmlAttributes } from '../../core/xml/xml-stream-scanner';
+import { SavePosition } from './save-position';
 
 /** A ware amount the game scaled for a project of the save. */
 export interface SaveTerraformingWare {
@@ -69,7 +70,7 @@ export class TerraformingExtractor implements XmlExtractor<SaveTerraforming> {
 		const list = path[this.depth];
 		const a = attrs();
 		if (level === 2 && list === 'stats' && name === 'stat' && a['id']) {
-			this.planet!.stats[a['id']] = TerraformingExtractor.num(a['value']);
+			this.planet!.stats[a['id']] = SavePosition.num(a['value']);
 		} else if (level === 2 && (list === 'projects' || list === 'events') && a['id']) {
 			this.project = TerraformingExtractor.project(a);
 			(list === 'projects' ? this.planet!.projects : this.planet!.events).push(this.project);
@@ -78,7 +79,7 @@ export class TerraformingExtractor implements XmlExtractor<SaveTerraforming> {
 		} else if (this.project && level === 5 && name === 'project' && path[this.depth + 2] === 'predecessors' && a['id']) {
 			this.project.predecessors.push(a['id']);
 		} else if (this.project && level === 4 && name === 'ware' && path[this.depth + 2] === 'scaledresources' && a['ware']) {
-			this.project.wares.push({ ware: a['ware'], amount: TerraformingExtractor.num(a['amount'] ?? '1') });
+			this.project.wares.push({ ware: a['ware'], amount: SavePosition.num(a['amount'] ?? '1') });
 		}
 	}
 
@@ -107,12 +108,12 @@ export class TerraformingExtractor implements XmlExtractor<SaveTerraforming> {
 
 	private static project(a: XmlAttributes): SaveTerraformingProject {
 		const project: SaveTerraformingProject = { id: a['id']!, predecessors: [], wares: [] };
-		const completed = TerraformingExtractor.num(a['completed']);
+		const completed = SavePosition.num(a['completed']);
 		if (completed > 0) {
 			project.completed = completed;
 		}
 		if (a['scaledprice'] !== undefined) {
-			project.price = TerraformingExtractor.num(a['scaledprice']);
+			project.price = SavePosition.num(a['scaledprice']);
 		}
 		return project;
 	}
@@ -120,11 +121,5 @@ export class TerraformingExtractor implements XmlExtractor<SaveTerraforming> {
 	/** `1` or `true` */
 	private static yes(value: string | undefined): boolean {
 		return value === '1' || value === 'true';
-	}
-
-	/** A number attribute, 0 when missing or invalid. */
-	private static num(value: string | undefined): number {
-		const parsed = Number(value);
-		return Number.isFinite(parsed) ? parsed : 0;
 	}
 }

@@ -4,6 +4,7 @@ import { XmlExtractor } from '../../core/xml/xml-extractor';
 import { XmlAttributes } from '../../core/xml/xml-stream-scanner';
 import { SaveMap, SaveSector, SaveStation, ShipCounts } from '../map/save-map-model';
 import { StationDetails } from './station-details';
+import { SavePosition } from './save-position';
 
 const SHIP_CLASSES: Record<string, number> = { ship_xs: 0, ship_s: 1, ship_m: 2, ship_l: 3, ship_xl: 4 };
 
@@ -53,8 +54,8 @@ export class MapExtractor implements XmlExtractor<SaveMap> {
 				const owner = this.ancestor(path, 2);
 				if (owner?.kind === 'station' || owner?.kind === 'zone') {
 					const a = attrs();
-					owner.x = MapExtractor.num(a['x']);
-					owner.z = MapExtractor.num(a['z']);
+					owner.x = SavePosition.num(a['x']);
+					owner.z = SavePosition.num(a['z']);
 				}
 				break;
 			}
@@ -202,19 +203,10 @@ export class MapExtractor implements XmlExtractor<SaveMap> {
 			x += zone.x;
 			z += zone.z;
 		}
-		station.x = MapExtractor.km(x);
-		station.z = MapExtractor.km(z);
+		station.x = SavePosition.km(x);
+		station.z = SavePosition.km(z);
 		node.details.applyTo(station);
 		return station;
-	}
-
-	private static km(metres: number): number {
-		return Math.round(metres / 100) / 10;
-	}
-
-	private static num(value: string | undefined): number {
-		const parsed = Number(value);
-		return Number.isFinite(parsed) ? parsed : 0;
 	}
 
 	private static createStation(a: XmlAttributes, sectorId: string): SaveStation {
@@ -238,7 +230,7 @@ export class MapExtractor implements XmlExtractor<SaveMap> {
 			station.basename = a['basename'];
 		}
 		if (a['nameindex'] !== undefined) {
-			station.nameIndex = MapExtractor.num(a['nameindex']);
+			station.nameIndex = SavePosition.num(a['nameindex']);
 		}
 		return station;
 	}
