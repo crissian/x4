@@ -1,0 +1,25 @@
+@let item = estimate();
+<div class="mt-2 rounded-md border border-line p-2 text-sm" data-miners-needed>
+	<div class="font-semibold text-fg-strong" i18n>Miners needed</div>
+	@if (item.capacityMiners; as miners) {
+		<div class="mt-1" data-capacity>
+			<div class="text-xs text-fg-muted" i18n>Built capacity: modules at full supply</div>
+			<div i18n>
+				{{ miners }} × {{ miner() }} keep it full ({{ item.consumedPerHour | number: '1.0-0' }} units per hour)
+			</div>
+		</div>
+	}
+	<div class="mt-1" data-market>
+		<div class="text-xs text-fg-muted" i18n>Market now, at save time ({{ gameTime() }})</div>
+		<div i18n>
+			Wants {{ item.wantedNow | number }} now = {{ item.holdsNow | number }} full holds; one miner clears it in
+			~{{ item.hoursNowOneMiner | number: '1.0-1' }} h
+		</div>
+	</div>
+	@if (item.outpaces) {
+		<div class="mt-1 text-amber-700 dark:text-amber-300" data-regrowth i18n>
+			May outpace the fields' regrowth (≈{{ item.regrowth | number: '1.0-0' }} units per hour, approximate)
+		</div>
+	}
+	<p class="mt-1 text-xs text-fg-muted" i18n>Prices as of save time; they change within minutes in game.</p>
+</div>

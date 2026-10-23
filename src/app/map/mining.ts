@@ -36,9 +36,18 @@ export class Mining {
 	 * @param capacity cargo volume in m³
 	 * @param fillMinutes minutes to fill the hold
 	 * @param dockTime seconds spent docking and selling
+	 * @param maxUnits units the buyer takes, when fewer than a full hold
 	 */
-	static miningTrip(travelTime: number, capacity: number, ware: Ware, price: number, fillMinutes: number, dockTime = 60): MiningTrip {
-		const units = ware.volume > 0 ? Math.floor(capacity / ware.volume) : 0;
+	static miningTrip(
+		travelTime: number,
+		capacity: number,
+		ware: Ware,
+		price: number,
+		fillMinutes: number,
+		dockTime = 60,
+		maxUnits = Infinity
+	): MiningTrip {
+		const units = ware.volume > 0 ? Math.min(Math.floor(capacity / ware.volume), maxUnits) : 0;
 		const tripTime = 2 * travelTime + fillMinutes * 60 + dockTime;
 		const tripValue = units * price;
 		return { units, tripTime, tripValue, perHour: tripTime > 0 ? (tripValue * 3600) / tripTime : 0 };

@@ -42,4 +42,11 @@ describe('mining', () => {
 		expect(trip.tripTime).toBe(900);
 		expect(trip.perHour).toBe(200_000);
 	});
+
+	it('caps the units per trip at what the buyer takes', () => {
+		const trip = Mining.miningTrip(120, 10_000, ore, 50, 10, 60, 300);
+		expect(trip.units).toBe(300);
+		expect(trip.tripValue).toBe(15_000);
+		expect(trip.tripTime).toBe(900);
+	});
 });
