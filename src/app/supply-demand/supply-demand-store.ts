@@ -88,6 +88,8 @@ export class SupplyDemandStore {
 		// the jumps are the area around the sector and the reach of the map
 		disabled(x.jumps, ({ valueOf }) => valueOf(x.scope) !== 'sector' && valueOf(x.map) !== 'reach');
 	});
+	/** How many of the filters under "More filters" are set, to open it and count them while closed. */
+	readonly moreFiltersSet = computed(() => SupplyDemandQuery.moreFiltersSet(this.model()));
 	/** The model with out of range numbers back at their defaults. */
 	private readonly filterModel = computed(() => SupplyDemandQuery.clean(this.model()));
 	private readonly selectedKey = signal(this.wareParam(this.activatedRoute.snapshot.queryParamMap.get('ware')));

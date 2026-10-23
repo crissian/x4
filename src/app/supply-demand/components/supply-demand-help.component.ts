@@ -3,7 +3,7 @@ import { LucideChevronDown, LucideChevronRight } from '@lucide/angular';
 import { LocalStorage } from '../../core/services/local-storage';
 import { SupplyDemandDiagnosis } from '../supply-demand-diagnosis';
 
-/** A collapsible note on how to read the table; whether it is closed is remembered. */
+/** A collapsible note on how to read the table, closed at first; whether it is open is remembered. */
 @Component({
 	selector: 'app-supply-demand-help',
 	imports: [LucideChevronDown, LucideChevronRight],
@@ -11,7 +11,7 @@ import { SupplyDemandDiagnosis } from '../supply-demand-diagnosis';
 })
 export class SupplyDemandHelpComponent {
 	protected readonly kinds = SupplyDemandDiagnosis.KINDS;
-	protected readonly open = LocalStorage.persistedSignal('supply-demand-help-open', true, {
+	protected readonly open = LocalStorage.persistedSignal('supply-demand-help-expanded', false, {
 		parse: (x) => (typeof x === 'boolean' ? x : undefined),
 	});
 }

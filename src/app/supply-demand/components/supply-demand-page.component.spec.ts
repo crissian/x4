@@ -127,6 +127,8 @@ describe('SupplyDemandPageComponent', () => {
 
 	it('shows mined resources with a dash where mining is not counted', async () => {
 		const { element, store, wares, router, settle } = await setup();
+		element.querySelector<HTMLButtonElement>('button[aria-controls="supply-demand-more-filters-panel"]')!.click();
+		await settle();
 		element.querySelector<HTMLInputElement>('#supply-mined')!.click();
 		await settle();
 		expect(wares()).toContain('ore');
@@ -169,6 +171,8 @@ describe('SupplyDemandPageComponent', () => {
 
 	it('leaves the player stations out when asked', async () => {
 		const { element, store, router, settle } = await setup();
+		element.querySelector<HTMLButtonElement>('button[aria-controls="supply-demand-more-filters-panel"]')!.click();
+		await settle();
 		element.querySelector<HTMLInputElement>('#supply-player')!.click();
 		await settle();
 		expect(store.rows().find((x) => x.ware === 'energycells')!.producers).toBe(2);
@@ -356,13 +360,25 @@ describe('SupplyDemandPageComponent', () => {
 		expect(line).toContain('Cr/h');
 	});
 
-	it('remembers that the note on how to read the table was closed', async () => {
+	it('starts with the note on how to read the table closed and remembers that it was opened', async () => {
 		const first = await setup();
-		expect(first.element.querySelector('#supply-demand-help')).not.toBeNull();
+		expect(first.element.querySelector('#supply-demand-help')).toBeNull();
 		first.element.querySelector<HTMLButtonElement>('button[aria-controls="supply-demand-help"]')!.click();
 		await first.settle();
-		expect(first.element.querySelector('#supply-demand-help')).toBeNull();
-		expect(localStorage.getItem('supply-demand-help-open')).toBe('false');
+		expect(first.element.querySelector('#supply-demand-help')).not.toBeNull();
+		expect(localStorage.getItem('supply-demand-help-expanded')).toBe('true');
+	});
+
+	it('keeps the station and mined switches under More filters, open when the URL sets one', async () => {
+		const closed = await setup();
+		expect(closed.element.querySelector('#supply-scope')).not.toBeNull();
+		expect(closed.element.querySelector('#supply-group')).not.toBeNull();
+		expect(closed.element.querySelector('#supply-mined')).toBeNull();
+		expect(closed.element.querySelector('#supply-player')).toBeNull();
+		TestBed.resetTestingModule();
+
+		const fromUrl = await setup('/supply-demand?player=0');
+		expect(fromUrl.element.querySelector<HTMLInputElement>('#supply-player')!.checked).toBe(false);
 	});
 
 	it('enables the jumps for a sector scope or the Reach map, and says what they affect', async () => {
