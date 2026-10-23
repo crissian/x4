@@ -956,7 +956,6 @@
     "2583172082393323499": "Sin planos; la descripción dice lo que hace.",
     "3104699617596113161": " Elige un proyecto en el árbol o en la lista para ver su coste, lo que desbloquea y lo que aún requiere. ",
     "5604633551304508065": "Árbol de investigación",
-    "6333458618640145657": "historia",
     "6068890137571792274": "Disponible a continuación",
     "5796923587832541189": "Por dónde empezar",
     "4313039080028292870": "≈ {$INTERPOLATION} Cr",
@@ -979,6 +978,7 @@
     "2323049345561640994": "Mods de equipo",
     "6788376847173133789": "Plano entregado por una investigación del cuartel general:",
     "6906540910867877311": " {$INTERPOLATION} proyectos aún sin hacer, este incluido: ≈ {$INTERPOLATION_1} Cr en mercancías. ",
-    "4783622877709676966": " Los proyectos de investigación de tu cuartel general: lo que cuesta y desbloquea cada uno, y lo que aún requiere un proyecto según la investigación que ya has hecho. "
+    "4783622877709676966": " Los proyectos de investigación de tu cuartel general: lo que cuesta y desbloquea cada uno, y lo que aún requiere un proyecto según la investigación que ya has hecho. ",
+    "5107975103106160828": "De la historia"
   }
 }

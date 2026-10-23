@@ -21,7 +21,7 @@ export class ResearchColumns {
 	static readonly SORT: SortState = { key: 'state', direction: 1 };
 	/** keeps a time on one line */
 	private static readonly NO_BREAK = String.fromCharCode(0xa0);
-	private static readonly STATES: readonly ResearchState[] = ['available', 'locked', 'mission', 'done'];
+	private static readonly STATES: readonly ResearchState[] = ['available', 'locked', 'story', 'mission', 'done'];
 
 	static build(): GridColumn<ResearchRow>[] {
 		return [

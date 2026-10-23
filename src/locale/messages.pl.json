@@ -956,7 +956,6 @@
     "2583172082393323499": "Brak planów; opis mówi, co robi.",
     "3104699617596113161": " Wybierz projekt w drzewie lub na liście, aby zobaczyć jego koszt, co odblokowuje i czego jeszcze wymaga. ",
     "5604633551304508065": "Drzewo badań",
-    "6333458618640145657": "fabuła",
     "6068890137571792274": "Dostępne teraz",
     "5796923587832541189": "Od czego zacząć",
     "4313039080028292870": "≈ {$INTERPOLATION} Cr",
@@ -979,6 +978,7 @@
     "2323049345561640994": "Modyfikacje wyposażenia",
     "6788376847173133789": "Plan przekazywany przez badanie w kwaterze głównej:",
     "6906540910867877311": " {$INTERPOLATION} jeszcze nieukończonych projektów, łącznie z tym: towary za ≈ {$INTERPOLATION_1} Cr. ",
-    "4783622877709676966": " Projekty badawcze twojej kwatery głównej: ile każdy kosztuje i co odblokowuje oraz czego projekt jeszcze wymaga względem ukończonych badań. "
+    "4783622877709676966": " Projekty badawcze twojej kwatery głównej: ile każdy kosztuje i co odblokowuje oraz czego projekt jeszcze wymaga względem ukończonych badań. ",
+    "5107975103106160828": "Z fabuły"
   }
 }

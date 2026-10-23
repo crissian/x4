@@ -956,7 +956,6 @@
     "2583172082393323499": "Plan yok; ne yaptığını açıklama söyler.",
     "3104699617596113161": " Maliyetini, açtıklarını ve hâlâ gerekenleri görmek için ağaçta veya listede bir proje seçin. ",
     "5604633551304508065": "Araştırma ağacı",
-    "6333458618640145657": "hikâye",
     "6068890137571792274": "Sıradaki kullanılabilir",
     "5796923587832541189": "Nereden başlamalı",
     "4313039080028292870": "≈ {$INTERPOLATION} Cr",
@@ -979,6 +978,7 @@
     "2323049345561640994": "Ekipman modları",
     "6788376847173133789": "Plan karargâh araştırmasıyla verilir:",
     "6906540910867877311": " Bu dahil henüz yapılmamış {$INTERPOLATION} proje: ≈ {$INTERPOLATION_1} Cr değerinde mal. ",
-    "4783622877709676966": " Karargâhınızın araştırma projeleri: her birinin maliyeti ve açtıkları, yaptığınız araştırmaya göre bir projenin hâlâ neler gerektirdiği. "
+    "4783622877709676966": " Karargâhınızın araştırma projeleri: her birinin maliyeti ve açtıkları, yaptığınız araştırmaya göre bir projenin hâlâ neler gerektirdiği. ",
+    "5107975103106160828": "Hikâyeden"
   }
 }

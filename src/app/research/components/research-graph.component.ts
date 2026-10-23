@@ -25,7 +25,6 @@ export class ResearchGraphComponent {
 		groupGap: 36,
 	};
 
-	private readonly story = $localize`:research flag:story`;
 
 	private readonly wares = inject(WareService);
 
@@ -59,13 +58,7 @@ export class ResearchGraphComponent {
 				y,
 				project: node,
 				tone: ResearchLabels.TONES[state],
-				meta: [
-					ResearchLabels.state(state),
-					Duration.short(node.time),
-					node.story && state !== 'done' ? this.story : '',
-				]
-					.filter((x) => x)
-					.join(' · '),
+				meta: [ResearchLabels.state(state), Duration.short(node.time)].join(' · '),
 				cost: cost.join(' · '),
 				title: [node.name, ...cost].join('\n'),
 			};

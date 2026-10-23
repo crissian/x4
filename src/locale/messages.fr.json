@@ -956,7 +956,6 @@
     "2583172082393323499": "Aucun plan ; la description indique ce qu'il fait.",
     "3104699617596113161": " Choisissez un projet dans l'arbre ou la liste pour voir son coût, ce qu'il débloque et ce qu'il reste à faire. ",
     "5604633551304508065": "Arbre de recherche",
-    "6333458618640145657": "histoire",
     "6068890137571792274": "Disponible ensuite",
     "5796923587832541189": "Par où commencer",
     "4313039080028292870": "≈ {$INTERPOLATION} Cr",
@@ -979,6 +978,7 @@
     "2323049345561640994": "Mods d'équipement",
     "6788376847173133789": "Plan remis par une recherche du QG :",
     "6906540910867877311": " {$INTERPOLATION} projets pas encore faits, celui-ci compris : ≈ {$INTERPOLATION_1} Cr de marchandises. ",
-    "4783622877709676966": " Les projets de recherche de votre QG : ce que chacun coûte et débloque, et ce qu'il reste à faire pour un projet selon vos recherches déjà faites. "
+    "4783622877709676966": " Les projets de recherche de votre QG : ce que chacun coûte et débloque, et ce qu'il reste à faire pour un projet selon vos recherches déjà faites. ",
+    "5107975103106160828": "De l'histoire"
   }
 }

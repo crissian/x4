@@ -956,7 +956,6 @@
     "2583172082393323499": "Sem projetos; a descrição diz o que faz.",
     "3104699617596113161": " Escolha um projeto na árvore ou na lista para ver o custo, o que desbloqueia e o que ainda falta. ",
     "5604633551304508065": "Árvore de pesquisa",
-    "6333458618640145657": "história",
     "6068890137571792274": "Disponível a seguir",
     "5796923587832541189": "Por onde começar",
     "4313039080028292870": "≈ {$INTERPOLATION} Cr",
@@ -979,6 +978,7 @@
     "2323049345561640994": "Mods de equipamento",
     "6788376847173133789": "Projeto entregue por pesquisa do quartel-general:",
     "6906540910867877311": " {$INTERPOLATION} projetos ainda não concluídos, incluindo este: ≈ {$INTERPOLATION_1} Cr em mercadorias. ",
-    "4783622877709676966": " Os projetos de pesquisa do seu quartel-general: quanto cada um custa e o que desbloqueia, e o que um projeto ainda exige com base na pesquisa já feita. "
+    "4783622877709676966": " Os projetos de pesquisa do seu quartel-general: quanto cada um custa e o que desbloqueia, e o que um projeto ainda exige com base na pesquisa já feita. ",
+    "5107975103106160828": "Da história"
   }
 }

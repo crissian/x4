@@ -956,7 +956,6 @@
     "2583172082393323499": "Nessun progetto; la descrizione dice cosa fa.",
     "3104699617596113161": " Scegli un progetto nell'albero o nell'elenco per vederne il costo, cosa sblocca e cosa richiede ancora. ",
     "5604633551304508065": "Albero della ricerca",
-    "6333458618640145657": "storia",
     "6068890137571792274": "Disponibili ora",
     "5796923587832541189": "Da dove iniziare",
     "4313039080028292870": "≈ {$INTERPOLATION} Cr",
@@ -979,6 +978,7 @@
     "2323049345561640994": "Mod di equipaggiamento",
     "6788376847173133789": "Progetto consegnato da una ricerca del quartier generale:",
     "6906540910867877311": " {$INTERPOLATION} progetti non ancora completati, questo compreso: ≈ {$INTERPOLATION_1} Cr di merci. ",
-    "4783622877709676966": " I progetti di ricerca del tuo quartier generale: cosa costa e sblocca ciascuno e cosa richiede ancora un progetto in base alla ricerca già svolta. "
+    "4783622877709676966": " I progetti di ricerca del tuo quartier generale: cosa costa e sblocca ciascuno e cosa richiede ancora un progetto in base alla ricerca già svolta. ",
+    "5107975103106160828": "Dalla storia"
   }
 }

@@ -6,7 +6,11 @@ export type { ResearchData, ResearchUnlockData, ResearchUnlockKind } from '../sh
  * Where a project stands in the save: `done`, `available` (every prerequisite done), `locked` (a prerequisite
  * missing) or `mission` (granted by a mission, never researched at the headquarters).
  */
-export type ResearchState = 'done' | 'available' | 'locked' | 'mission';
+/**
+ * mission: granted by a mission; story: offered only once a story or event adds it, which the data can't tell, so
+ * it has no available/locked state.
+ */
+export type ResearchState = 'done' | 'available' | 'locked' | 'mission' | 'story';
 
 /** A ware amount delivered to the headquarters. */
 export interface WareAmount {

@@ -9,8 +9,9 @@ export class ResearchProgress {
 	private static readonly STATE_ORDER: Record<ResearchState, number> = {
 		available: 0,
 		locked: 1,
-		mission: 2,
-		done: 3,
+		story: 2,
+		mission: 3,
+		done: 4,
 	};
 
 	private readonly byId: ReadonlyMap<string, ResearchData>;
@@ -50,6 +51,9 @@ export class ResearchProgress {
 		}
 		if (project.missionOnly) {
 			return 'mission';
+		}
+		if (project.story) {
+			return 'story';
 		}
 		return project.requires.every((x) => this.done.has(x)) ? 'available' : 'locked';
 	}

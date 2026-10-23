@@ -956,7 +956,6 @@
     "2583172082393323499": "Žádné plány; popis říká, co dělá.",
     "3104699617596113161": " Vyberte projekt ve stromu nebo v seznamu a uvidíte jeho cenu, co odemyká a co ještě vyžaduje. ",
     "5604633551304508065": "Strom výzkumu",
-    "6333458618640145657": "příběh",
     "6068890137571792274": "Další dostupné",
     "5796923587832541189": "Kde začít",
     "4313039080028292870": "≈ {$INTERPOLATION} Cr",
@@ -979,6 +978,7 @@
     "2323049345561640994": "Úpravy vybavení",
     "6788376847173133789": "Plán předá výzkum v ústředí:",
     "6906540910867877311": " {$INTERPOLATION} dosud nedokončených projektů včetně tohoto: zboží za ≈ {$INTERPOLATION_1} Cr. ",
-    "4783622877709676966": " Výzkumné projekty vašeho ústředí: co který stojí a odemyká a co projekt ještě vyžaduje podle vašeho dosavadního výzkumu. "
+    "4783622877709676966": " Výzkumné projekty vašeho ústředí: co který stojí a odemyká a co projekt ještě vyžaduje podle vašeho dosavadního výzkumu. ",
+    "5107975103106160828": "Z příběhu"
   }
 }

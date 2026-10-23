@@ -956,7 +956,6 @@
     "2583172082393323499": "Keine Baupläne; die Beschreibung sagt, was es bewirkt.",
     "3104699617596113161": " Wähle ein Projekt im Baum oder in der Liste, um seine Kosten, Freischaltungen und den restlichen Aufwand zu sehen. ",
     "5604633551304508065": "Forschungsbaum",
-    "6333458618640145657": "Story",
     "6068890137571792274": "Als Nächstes verfügbar",
     "5796923587832541189": "Wo anfangen",
     "4313039080028292870": "≈ {$INTERPOLATION} Cr",
@@ -979,6 +978,7 @@
     "2323049345561640994": "Ausrüstungsmods",
     "6788376847173133789": "Bauplan durch Forschung im Hauptquartier:",
     "6906540910867877311": " {$INTERPOLATION} noch nicht erledigte Projekte, dieses eingeschlossen: Waren für ≈ {$INTERPOLATION_1} Cr. ",
-    "4783622877709676966": " Die Forschungsprojekte deines Hauptquartiers: was jedes kostet und freischaltet und was ein Projekt nach deiner bisherigen Forschung noch braucht. "
+    "4783622877709676966": " Die Forschungsprojekte deines Hauptquartiers: was jedes kostet und freischaltet und was ein Projekt nach deiner bisherigen Forschung noch braucht. ",
+    "5107975103106160828": "Aus der Story"
   }
 }

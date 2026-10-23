@@ -8,6 +8,7 @@ export class ResearchLabels {
 		available: 'teal',
 		locked: 'grey',
 		mission: 'amber',
+		story: 'orange',
 	};
 
 	private static readonly ROUTES: Partial<Record<ResearchUnlockKind, string>> = {
@@ -25,6 +26,7 @@ export class ResearchLabels {
 			available: $localize`:research state:Available`,
 			locked: $localize`:research state:Locked`,
 			mission: $localize`:research state:From a mission`,
+			story: $localize`:research state:From the story`,
 		};
 		return ResearchLabels.states[state];
 	}

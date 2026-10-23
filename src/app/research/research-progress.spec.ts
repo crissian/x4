@@ -76,11 +76,22 @@ describe('ResearchProgress', () => {
 		expect(progress.requiredBy(progress.get('dock')!).map((x) => x.id)).toEqual(['defence', 'build']);
 	});
 
+	it('gives story projects no availability, whatever their prerequisites', () => {
+		const progress = new ResearchProgress(
+			[...ResearchTesting.tree(), ResearchTesting.project('ship', { story: true })],
+			new Set()
+		);
+		expect(progress.state(progress.get('ship')!)).toBe('story');
+		const done = new ResearchProgress([ResearchTesting.project('ship', { story: true })], new Set(['ship']));
+		expect(done.state(done.get('ship')!)).toBe('done');
+	});
+
 	it('ranks available first and done last', () => {
-		const states = ['done', 'mission', 'available', 'locked'] as const;
+		const states = ['done', 'mission', 'story', 'available', 'locked'] as const;
 		expect([...states].sort((a, b) => ResearchProgress.rank(a) - ResearchProgress.rank(b))).toEqual([
 			'available',
 			'locked',
+			'story',
 			'mission',
 			'done',
 		]);
