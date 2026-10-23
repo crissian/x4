@@ -1,0 +1,17 @@
+.scale {
+	display: flex;
+	gap: 2px;
+}
+
+.cell {
+	flex: 1 1 0;
+	height: 0.9rem;
+	min-width: 0.5rem;
+	border: 1px solid var(--color-line);
+	border-radius: 2px;
+}
+
+.cell-current {
+	outline: 2px solid var(--color-fg-strong);
+	outline-offset: 1px;
+}

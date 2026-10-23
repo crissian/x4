@@ -140,6 +140,14 @@ export const appRoutes: Routes = [
 		title: `${BASE_TITLE} - ${$localize`Research`}`,
 	},
 	{
+		path: 'terraforming',
+		loadChildren: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'research', 'terraforming'],
+				() => import('./terraforming/terraforming.routes')
+			),
+	},
+	{
 		path: 'game-starts',
 		loadChildren: () =>
 			GameText.withTexts(
