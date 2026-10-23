@@ -1,0 +1,60 @@
+@if (store.losses().length === 0) {
+	<p class="text-sm text-fg-muted" i18n>
+		Your logbook reports no destroyed ships. The game logs every player-owned ship or station it loses, with the
+		killer when one was recorded.
+	</p>
+} @else {
+	<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+		<section class="rounded-md border border-line bg-surface-2 p-3 text-sm">
+			<h3 class="text-fg-muted" i18n>Losses</h3>
+			<p class="text-2xl font-semibold text-fg-strong">{{ store.summary().total }}</p>
+			<p class="text-xs text-fg-muted" i18n>
+				Ships and stations destroyed, matching the filters. The type is found by the ship's name, so renamed
+				ships show none.
+			</p>
+		</section>
+		<app-count-tile heading="Per ship class" i18n-heading [items]="sizes()" />
+		<app-count-tile
+			heading="Per sector"
+			i18n-heading
+			[items]="sectors()"
+			pickTitle="Show only this sector"
+			i18n-pickTitle
+			(picked)="store.filter({ sector: $event })"
+		/>
+		<app-count-tile
+			heading="Per enemy faction"
+			i18n-heading
+			[items]="factions()"
+			pickTitle="Show only this faction"
+			i18n-pickTitle
+			empty="No killer recorded"
+			i18n-empty
+			(picked)="store.filter({ faction: $event })"
+		/>
+	</div>
+	<div class="mt-4">
+		<app-data-grid
+			[data]="store.filteredLosses()"
+			[columns]="columns.losses"
+			[cells]="{ type: typeCell, sector: sectorCell, killerFaction: factionCell }"
+			[trackBy]="trackBy"
+			[sort]="columns.newest"
+			[pageSizes]="pageSizes"
+			[compact]="true"
+			storageKey="event-log-losses"
+		/>
+	</div>
+}
+
+<ng-template #typeCell let-row>
+	@if (row.ship) {
+		<a [routerLink]="['/ships', row.ship.id]">{{ row.ship.name }}</a>
+	} @else {
+		<span class="text-fg-muted">-</span>
+	}
+</ng-template>
+<ng-template #sectorCell let-row><app-sector-links [sector]="row.sector" [fallback]="row.loss.location" /></ng-template>
+<ng-template #factionCell let-row
+	><app-faction-label class="whitespace-nowrap" [faction]="row.killerFaction">-</app-faction-label></ng-template
+>

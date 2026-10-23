@@ -1,0 +1,21 @@
+<app-data-grid
+	[data]="store.filteredEvents()"
+	[columns]="columns.events"
+	[cells]="{ entry: entryCell, faction: factionCell, sector: sectorCell }"
+	[trackBy]="trackBy"
+	[sort]="columns.newest"
+	[pageSizes]="pageSizes"
+	[compact]="true"
+	storageKey="event-log"
+/>
+
+<ng-template #entryCell let-row>
+	<div class="font-medium">{{ row.entry.title }}</div>
+	@if (row.entry.text) {
+		<div class="whitespace-pre-line text-fg-muted">{{ row.entry.text }}</div>
+	}
+</ng-template>
+<ng-template #factionCell let-row>
+	<app-faction-label class="whitespace-nowrap" [faction]="row.faction">{{ row.entry.factionName }}</app-faction-label>
+</ng-template>
+<ng-template #sectorCell let-row><app-sector-links [sector]="row.sector" /></ng-template>

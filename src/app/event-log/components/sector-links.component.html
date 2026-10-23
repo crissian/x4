@@ -1,0 +1,17 @@
+@if (sector(); as sector) {
+	<span class="whitespace-nowrap">
+		<a [routerLink]="['/sectors', sector.id]">{{ sector.name }}</a>
+		<a
+			class="ml-1 text-fg-muted"
+			routerLink="/map"
+			[queryParams]="{ sector: sector.id }"
+			title="Show on map"
+			i18n-title
+			aria-label="Show on map"
+			i18n-aria-label
+			><svg lucideMap class="inline size-3.5"></svg
+		></a>
+	</span>
+} @else {
+	<span class="text-fg-muted">{{ fallback() }}</span>
+}

@@ -1,0 +1,32 @@
+<app-save-page
+	heading="Event log"
+	i18n-heading
+	[status]="store.status()"
+	reloadText="Reload this save to read its logbook"
+	i18n-reloadText
+>
+	<p intro class="text-fg-muted" i18n>
+		The event log reads the logbook of a savegame: missions, news, alerts, reputation and the ships you lost.
+	</p>
+	<ng-template>
+		@let save = store.save()!;
+		@let log = store.log()!;
+		<p class="text-sm text-fg-muted">
+			<ng-container i18n
+				>Logbook as of save time ({{ save.info.saveName }}, {{ store.gameTime() }}), in the language the game
+				ran in.</ng-container
+			>
+			@if (store.capped()) {
+				<ng-container i18n>Showing the newest {{ log.entries.length }} of {{ log.total }} entries.</ng-container>
+			}
+		</p>
+		<app-event-log-filters class="mt-3 block" />
+		<app-tabs class="mt-4 block" label="Event log" i18n-label [tabs]="tabs()" [(selected)]="store.tab">
+			@if (store.tab() === 'losses') {
+				<app-ship-losses />
+			} @else {
+				<app-event-log-events />
+			}
+		</app-tabs>
+	</ng-template>
+</app-save-page>
