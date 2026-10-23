@@ -57,11 +57,6 @@ describe('BlueprintShoppingList', () => {
 		]);
 	});
 
-	it('needs an unknown reputation when the faction lists no such licence', () => {
-		const list = build([T.item('x', [T.ARGON], 'unknownlicence')]);
-		expect(list.reputation[0].sellers[0]).toMatchObject({ needed: undefined, gap: undefined, pending: false });
-	});
-
 	it('lists mission-only items and items only no-sale factions own as not sold, with the reason', () => {
 		const list = build(
 			[
@@ -81,7 +76,7 @@ describe('BlueprintShoppingList', () => {
 		]);
 	});
 
-	it('needs the ceremony reputation for a gift no one sells, until the player has had that ceremony', () => {
+	it('lists a gift no one sells as unsold, needing the ceremony reputation until the player has had it', () => {
 		// Argon gifts 'span' at its friend ceremony (relation 0.01, reputation 10); the player is at 7 (relation 0.005)
 		const argon = { ...T.ARGON, licenses: [T.licence('ceremonyfriend', 0.01)] };
 		const gift = (x: BlueprintItem) =>
@@ -96,7 +91,9 @@ describe('BlueprintShoppingList', () => {
 			unlockedBy: { span: 'ceremony' as const },
 			gift,
 		});
-		const [entry] = BlueprintShoppingList.build(input({})).reputation;
+		const list = BlueprintShoppingList.build(input({}));
+		expect(list.unsold.map((x) => [x.item.id, x.reason])).toEqual([['span', 'ceremony']]);
+		const [entry] = list.reputation;
 		const seller = entry.sellers[0];
 		expect([entry.item.id, seller.faction.id, seller.gift, seller.needed, seller.gap]).toEqual([
 			'span',

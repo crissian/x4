@@ -26,12 +26,12 @@ export class BlueprintTesting {
 	}
 
 	static sellers(item: BlueprintItem): BlueprintSeller[] {
-		return BlueprintSellers.of(
-			item.owners,
-			item.license,
-			(id) => BlueprintTesting.FACTIONS.find((x) => x.id === id),
-			['kaori']
-		);
+		return BlueprintSellers.of(item, {
+			faction: (id) => BlueprintTesting.FACTIONS.find((x) => x.id === id),
+			noSale: ['kaori'],
+			soldByAll: new Set(),
+			sellingFactions: [],
+		});
 	}
 
 	static module(id: string, type: string, owners: Faction[] = []): StationModule {

@@ -13,7 +13,7 @@ import { BlueprintCategories } from './blueprint-categories';
 import type { BlueprintItem, CategoryProgress, FactionTotal, ShoppingList } from './blueprint-model';
 import { BlueprintProgress } from './blueprint-progress';
 import { BlueprintQuery, type BlueprintTab, type BlueprintsModel, type ShoppingSection } from './blueprint-query';
-import { BlueprintSellers } from './blueprint-sellers';
+import { BlueprintSellers, type SellerRules } from './blueprint-sellers';
 import { BlueprintShoppingFilter } from './blueprint-shopping-filter';
 import { BlueprintShoppingList } from './blueprint-shopping-list';
 
@@ -40,6 +40,12 @@ export class BlueprintsStore {
 	readonly gameTime = this.activeSave.gameTime;
 	readonly money = computed(() => this.save()?.info.money ?? 0);
 	private readonly owned = computed(() => new Set(this.blueprints() ?? []));
+	private readonly sellerRules: SellerRules = {
+		faction: (id) => this.factions.getEntity(id),
+		noSale: BlueprintRules.noSaleFactions,
+		soldByAll: new Set(BlueprintRules.soldByAll),
+		sellingFactions: BlueprintRules.sellingFactions,
+	};
 
 	/** Every blueprint the player can own. */
 	readonly catalog = BlueprintCatalog.build(
@@ -86,14 +92,7 @@ export class BlueprintsStore {
 			owned: this.owned(),
 			licences: this.licences(),
 			relations: this.relations(),
-			sellers: (x) =>
-				BlueprintSellers.of(
-					x.owners,
-					x.license,
-					(id) => this.factions.getEntity(id),
-					BlueprintRules.noSaleFactions,
-					representatives
-				),
+			sellers: (x) => BlueprintSellers.of(x, { ...this.sellerRules, representatives }),
 			missionOnly: BlueprintRules.missionOnly,
 			unlockedBy: BlueprintRules.unlockedBy,
 			gift: (x) => BlueprintSellers.gift(BlueprintRules.giftedBy[x.id], (id) => this.factions.getEntity(id)),
