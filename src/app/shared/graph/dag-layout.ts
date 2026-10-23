@@ -49,6 +49,15 @@ export interface DagLayoutResult<T> {
 export class DagLayout {
 	private static readonly SWEEPS = 4;
 
+	/** The parents of each node from a list of edges, for a graph kept as edges rather than parent lists. */
+	static parentsFrom(edges: readonly { from: string; to: string }[]): (id: string) => readonly string[] {
+		const parents = new Map<string, string[]>();
+		for (const edge of edges) {
+			(parents.get(edge.to) ?? parents.set(edge.to, []).get(edge.to)!).push(edge.from);
+		}
+		return (id) => parents.get(id) ?? [];
+	}
+
 	static layout<T>(
 		nodes: readonly T[],
 		idOf: (node: T) => string,

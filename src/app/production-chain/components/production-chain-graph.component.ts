@@ -2,7 +2,7 @@ import { DecimalPipe } from '@angular/common';
 import { NumberFormats } from '../../core/format/number-formats';
 import { Component, computed, input, output, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LayeredGraphLayout, type PlacedEdge } from '../../core/graph/layered-graph-layout';
+import { DagLayout, type DagLayoutOptions } from '../../shared/graph/dag-layout';
 import { entityImage } from '../../shared/services/data/images-data';
 import type { ChainGraph, ChainNode } from '../production-chain';
 
@@ -32,7 +32,13 @@ interface DrawnNode {
 	host: { class: 'block' },
 })
 export class ProductionChainGraphComponent {
-	static readonly SIZES = { nodeWidth: 208, nodeHeight: 92, layerGap: 56, nodeGap: 12 };
+	static readonly SIZES: DagLayoutOptions = {
+		nodeWidth: 208,
+		nodeHeight: 92,
+		layerGap: 56,
+		nodeGap: 12,
+		groupGap: 24,
+	};
 
 	readonly graph = input.required<ChainGraph>();
 	readonly pickMethod = output<ChainMethodPick>();
@@ -43,13 +49,15 @@ export class ProductionChainGraphComponent {
 
 	protected readonly layout = computed(() => {
 		const graph = this.graph();
-		const layout = LayeredGraphLayout.layout(
-			graph.nodes.map((x) => x.ware.id),
-			graph.edges,
+		const parents = DagLayout.parentsFrom(graph.edges);
+		const layout = DagLayout.layout(
+			graph.nodes,
+			(x) => x.ware.id,
+			(x) => parents(x.ware.id),
 			ProductionChainGraphComponent.SIZES
 		);
-		const nodes: DrawnNode[] = layout.nodes.map((placed, i) => ({
-			node: graph.nodes[i],
+		const nodes: DrawnNode[] = layout.nodes.map((placed) => ({
+			node: placed.node,
 			x: placed.x,
 			y: placed.y,
 			icon: entityImage('wares', placed.id),
@@ -57,7 +65,7 @@ export class ProductionChainGraphComponent {
 		}));
 		const rates = new Map(graph.edges.map((x) => [`${x.from}>${x.to}`, x]));
 		const names = new Map(graph.nodes.map((x) => [x.ware.id, x.ware.name]));
-		const edges = layout.edges.map((edge: PlacedEdge) => {
+		const edges = layout.edges.map((edge) => {
 			const from = names.get(edge.from) ?? edge.from;
 			const to = names.get(edge.to) ?? edge.to;
 			const rate = NumberFormats.whole(rates.get(`${edge.from}>${edge.to}`)?.rate ?? 0);

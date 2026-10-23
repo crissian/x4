@@ -97,6 +97,17 @@ describe('DagLayout', () => {
 		expect(result.edges).toHaveLength(1);
 	});
 
+	it('reads the parents of a graph kept as edges', () => {
+		const parents = DagLayout.parentsFrom([
+			{ from: 'a', to: 'c' },
+			{ from: 'b', to: 'c' },
+		]);
+		expect(parents('c')).toEqual(['a', 'b']);
+		expect(parents('a')).toEqual([]);
+		const result = DagLayout.layout(['a', 'b', 'c'], (x) => x, parents, DagFixture.OPTIONS);
+		expect(result.nodes.map((x) => x.layer)).toEqual([0, 0, 1]);
+	});
+
 	it('returns an empty drawing without nodes', () => {
 		expect(DagFixture.run([])).toEqual({ nodes: [], edges: [], width: 0, height: 0 });
 	});
