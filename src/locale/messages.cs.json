@@ -1006,6 +1006,25 @@
     "3470723771814059297": " Váš lodní deník nehlásí žádné zničené lodě ani stanice. Hra zaznamenává každou ztracenou loď nebo stanici hráče, včetně útočníka, pokud byl zaznamenán. ",
     "7303374613931833745": "Zničené lodě a stanice odpovídající filtrům.",
     "8925744073786065472": "Nejčastější útočníci",
-    "5788631669985171526": "Zobrazit jen tohoto útočníka"
+    "5788631669985171526": "Zobrazit jen tohoto útočníka",
+    "1936785939261688382": "{$START_TAG_SPAN}{$CLOSE_TAG_SPAN}Datová schránka",
+    "106570372500627578": "Datová schránka {$INTERPOLATION} ({$INTERPOLATION_1})",
+    "7889055458511145268": "Schránky",
+    "7655120555795514151": "Zobrazit polohy",
+    "984055362325369374": "Nalezeno {$INTERPOLATION} z {$INTERPOLATION_1}",
+    "7523646605811025013": "Zaškrtněte nalezené schránky, nebo {$START_LINK}načtěte uloženou hru{$CLOSE_LINK} a uvidíte, které jste otevřeli.",
+    "597313815551836862": " Opravte úniky signálu datové schránky a odemknete její záznam na časové ose; schránky Erlkingu obsahují plány jeho vybavení. ",
+    "4981266758190051997": "Datové schránky",
+    "7113642028805566716": "Náhodné místo",
+    "602821270955747507": "Nalezeno",
+    "2576349490164100020": "Plán:",
+    "3271102131509251072": "Datová schránka",
+    "7287078438578844087": "Otevřeno",
+    "4878292894705708393": "V této uložené hře zatím není umístěna",
+    "7874572044900813552": "Objevena, neotevřena",
+    "4952939008584725545": "Objeví se během příběhové mise",
+    "1130688445830294314": "Na začátku hry umístěna na náhodné místo; načtěte uloženou hru a uvidíte kde",
+    "6118209750240050084": "Žádné datové schránky",
+    "7100802969453393338": "Objevena"
   }
 }

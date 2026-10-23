@@ -1006,6 +1006,25 @@
     "3470723771814059297": " Seyir defteriniz yok edilen gemi veya istasyon bildirmiyor. Oyun, kaybedilen her oyuncu gemisini veya istasyonunu, kaydedildiyse saldıranla birlikte günlüğe yazar. ",
     "7303374613931833745": "Filtrelere uyan yok edilmiş gemiler ve istasyonlar.",
     "8925744073786065472": "En sık saldıranlar",
-    "5788631669985171526": "Yalnızca bu saldıranı göster"
+    "5788631669985171526": "Yalnızca bu saldıranı göster",
+    "1936785939261688382": "{$START_TAG_SPAN}{$CLOSE_TAG_SPAN}Veri Bankası",
+    "106570372500627578": "Veri Bankası {$INTERPOLATION} ({$INTERPOLATION_1})",
+    "7889055458511145268": "Bankalar",
+    "7655120555795514151": "Konumları göster",
+    "984055362325369374": "{$INTERPOLATION} / {$INTERPOLATION_1} bulundu",
+    "7523646605811025013": "Bulduğun bankaları işaretle ya da hangilerini açtığını görmek için {$START_LINK}bir kayıt yükle{$CLOSE_LINK}.",
+    "597313815551836862": " Zaman çizelgesi kaydının kilidini açmak için bir veri bankasının sinyal sızıntılarını onar; Erlking bankaları onun ekipmanlarının planlarını barındırır. ",
+    "4981266758190051997": "Veri Bankaları",
+    "7113642028805566716": "Rastgele konum",
+    "602821270955747507": "Bulundu",
+    "2576349490164100020": "Plan:",
+    "3271102131509251072": "Veri Bankası",
+    "7287078438578844087": "Açıldı",
+    "4878292894705708393": "Bu kayıtta henüz yerleştirilmedi",
+    "7874572044900813552": "Keşfedildi, açılmadı",
+    "4952939008584725545": "Bir hikâye görevi sırasında ortaya çıkar",
+    "1130688445830294314": "Oyun başında rastgele bir yere yerleştirilir; nerede olduğunu görmek için bir kayıt yükle",
+    "6118209750240050084": "Veri bankası yok",
+    "7100802969453393338": "Keşfedildi"
   }
 }

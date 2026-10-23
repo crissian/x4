@@ -1006,6 +1006,25 @@
     "3470723771814059297": " Tu bitácora no registra naves ni estaciones destruidas. El juego anota cada nave o estación del jugador que pierde, con el atacante si se registró. ",
     "7303374613931833745": "Naves y estaciones destruidas que coinciden con los filtros.",
     "8925744073786065472": "Atacantes más frecuentes",
-    "5788631669985171526": "Mostrar solo este atacante"
+    "5788631669985171526": "Mostrar solo este atacante",
+    "1936785939261688382": "{$START_TAG_SPAN}{$CLOSE_TAG_SPAN}Bóveda de datos",
+    "106570372500627578": "Bóveda de datos {$INTERPOLATION} ({$INTERPOLATION_1})",
+    "7889055458511145268": "Bóvedas",
+    "7655120555795514151": "Mostrar posiciones",
+    "984055362325369374": "{$INTERPOLATION} de {$INTERPOLATION_1} encontradas",
+    "7523646605811025013": "Marca las bóvedas que encontraste o {$START_LINK}carga una partida{$CLOSE_LINK} para ver cuáles abriste.",
+    "597313815551836862": " Repara las fugas de señal de una bóveda de datos para desbloquear su entrada de la cronología; las bóvedas del Erlking guardan los planos de su equipo. ",
+    "4981266758190051997": "Bóvedas de datos",
+    "7113642028805566716": "Lugar aleatorio",
+    "602821270955747507": "Encontrada",
+    "2576349490164100020": "Plano:",
+    "3271102131509251072": "Bóveda de datos",
+    "7287078438578844087": "Abierta",
+    "4878292894705708393": "Aún no colocada en esta partida",
+    "7874572044900813552": "Descubierta, sin abrir",
+    "4952939008584725545": "Aparece durante una misión de la historia",
+    "1130688445830294314": "Colocada en un lugar aleatorio al inicio de la partida; carga una partida para ver dónde",
+    "6118209750240050084": "No hay bóvedas de datos",
+    "7100802969453393338": "Descubierta"
   }
 }

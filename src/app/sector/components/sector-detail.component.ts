@@ -16,6 +16,7 @@ import { PlanetPopulation } from '../planet-population';
 import { SectorMapComponent } from './sector-map.component';
 import { SectorStationsComponent } from './sector-stations.component';
 import { FactionLabelComponent } from '../../shared/components/faction-label.component';
+import { SectorVaultsComponent } from '../../vaults/sector-vaults.component';
 
 type PlanetRow = Planet & { moon?: boolean };
 export type SectorTab = 'stations' | 'connections' | 'resources' | 'system';
@@ -36,6 +37,7 @@ export type SectorTab = 'stations' | 'connections' | 'resources' | 'system';
 		SectorMapComponent,
 		SectorStationsComponent,
 		TabsComponent,
+		SectorVaultsComponent,
 	],
 	templateUrl: './sector-detail.component.html',
 })

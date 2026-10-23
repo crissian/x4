@@ -1006,6 +1006,25 @@
     "3470723771814059297": " Seu diário de bordo não registra naves nem estações destruídas. O jogo registra cada nave ou estação do jogador perdida, com o atacante quando houve registro. ",
     "7303374613931833745": "Naves e estações destruídas que correspondem aos filtros.",
     "8925744073786065472": "Atacantes mais frequentes",
-    "5788631669985171526": "Mostrar só este atacante"
+    "5788631669985171526": "Mostrar só este atacante",
+    "1936785939261688382": "{$START_TAG_SPAN}{$CLOSE_TAG_SPAN}Depósito de Dados",
+    "106570372500627578": "Depósito de Dados {$INTERPOLATION} ({$INTERPOLATION_1})",
+    "7889055458511145268": "Depósitos",
+    "7655120555795514151": "Mostrar posições",
+    "984055362325369374": "{$INTERPOLATION} de {$INTERPOLATION_1} encontrados",
+    "7523646605811025013": "Marque os depósitos que você encontrou ou {$START_LINK}carregue um jogo salvo{$CLOSE_LINK} para ver quais você abriu.",
+    "597313815551836862": " Repare os vazamentos de sinal de um depósito de dados para desbloquear sua entrada na linha do tempo; os depósitos do Erlking guardam as plantas do seu equipamento. ",
+    "4981266758190051997": "Depósitos de Dados",
+    "7113642028805566716": "Local aleatório",
+    "602821270955747507": "Encontrado",
+    "2576349490164100020": "Planta:",
+    "3271102131509251072": "Depósito de Dados",
+    "7287078438578844087": "Aberto",
+    "4878292894705708393": "Ainda não posicionado neste jogo salvo",
+    "7874572044900813552": "Descoberto, não aberto",
+    "4952939008584725545": "Aparece durante uma missão da história",
+    "1130688445830294314": "Posicionado em um local aleatório no início do jogo; carregue um jogo salvo para ver onde",
+    "6118209750240050084": "Nenhum depósito de dados",
+    "7100802969453393338": "Descoberto"
   }
 }

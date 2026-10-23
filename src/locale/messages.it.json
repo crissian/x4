@@ -1006,6 +1006,25 @@
     "3470723771814059297": " Il tuo diario di bordo non riporta navi o stazioni distrutte. Il gioco registra ogni nave o stazione del giocatore persa, con l'uccisore se è stato registrato. ",
     "7303374613931833745": "Navi e stazioni distrutte che corrispondono ai filtri.",
     "8925744073786065472": "Uccisori più frequenti",
-    "5788631669985171526": "Mostra solo questo uccisore"
+    "5788631669985171526": "Mostra solo questo uccisore",
+    "1936785939261688382": "{$START_TAG_SPAN}{$CLOSE_TAG_SPAN}Archivio dati",
+    "106570372500627578": "Archivio dati {$INTERPOLATION} ({$INTERPOLATION_1})",
+    "7889055458511145268": "Archivi",
+    "7655120555795514151": "Mostra posizioni",
+    "984055362325369374": "{$INTERPOLATION} di {$INTERPOLATION_1} trovati",
+    "7523646605811025013": "Spunta gli archivi che hai trovato, oppure {$START_LINK}carica un salvataggio{$CLOSE_LINK} per vedere quali hai aperto.",
+    "597313815551836862": " Ripara le perdite di segnale di un archivio dati per sbloccare la sua voce della cronologia; gli archivi dell'Erlking contengono i progetti del suo equipaggiamento. ",
+    "4981266758190051997": "Archivi dati",
+    "7113642028805566716": "Posizione casuale",
+    "602821270955747507": "Trovato",
+    "2576349490164100020": "Progetto:",
+    "3271102131509251072": "Archivio dati",
+    "7287078438578844087": "Aperto",
+    "4878292894705708393": "Non ancora piazzato in questo salvataggio",
+    "7874572044900813552": "Scoperto, non aperto",
+    "4952939008584725545": "Appare durante una missione della storia",
+    "1130688445830294314": "Piazzato in un punto casuale all'inizio della partita; carica un salvataggio per vedere dove",
+    "6118209750240050084": "Nessun archivio dati",
+    "7100802969453393338": "Scoperto"
   }
 }
