@@ -21,19 +21,17 @@
 			</select>
 		</label>
 	}
-	<label class="text-sm">
-		@if (losses) {
-			<ng-container i18n>Enemy faction</ng-container>
-		} @else {
+	@if (!losses) {
+		<label class="text-sm">
 			<ng-container i18n>Faction</ng-container>
-		}
-		<select id="event-log-faction" class="input" [formField]="form.faction">
-			<option value="" i18n>All factions</option>
-			@for (option of store.factionOptions(); track option.value) {
-				<option [value]="option.value">{{ option.label }} ({{ option.count }})</option>
-			}
-		</select>
-	</label>
+			<select id="event-log-faction" class="input" [formField]="form.faction">
+				<option value="" i18n>All factions</option>
+				@for (option of store.factionOptions(); track option.value) {
+					<option [value]="option.value">{{ option.label }} ({{ option.count }})</option>
+				}
+			</select>
+		</label>
+	}
 	<label class="text-sm">
 		<ng-container i18n>Sector</ng-container>
 		<select id="event-log-sector" class="input" [formField]="form.sector">

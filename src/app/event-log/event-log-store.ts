@@ -6,8 +6,6 @@ import { QueryParamSync } from '../core/router/query-param-sync';
 import { LogExtractor } from '../savegame/extractors/log-extractor';
 import { ActiveSave } from '../savegame/active-save';
 import { FactionService } from '../shared/services/faction.service';
-import type { Ship } from '../shared/services/model/ship';
-import { ShipService } from '../shared/services/ship.service';
 import { SectorService } from '../shared/services/universe.service';
 import { EventLogQuery, type EventLogModel, type EventLogTab } from './event-log-query';
 import { EventLogRows, type EventLogLookups } from './event-log-rows';
@@ -41,26 +39,10 @@ export class EventLogStore {
 	readonly model = signal<EventLogModel>(this.initial.model);
 	readonly form = form(this.model);
 
-	private readonly lookups: EventLogLookups = (() => {
-		const ships = new Map<string, Ship>();
-		for (const ship of inject(ShipService).getEntities()) {
-			if (!ships.has(ship.name)) {
-				ships.set(ship.name, ship);
-			}
-		}
-		const byShortName = new Map(
-			this.factions
-				.getEntities()
-				.filter((x) => x.shortName)
-				.map((x) => [x.shortName!, x])
-		);
-		return {
-			faction: (id) => this.factions.getEntity(id),
-			sector: (id) => this.sectors.getEntity(id),
-			ship: (name) => ships.get(name),
-			factionByShortName: (shortName) => byShortName.get(shortName),
-		};
-	})();
+	private readonly lookups: EventLogLookups = {
+		faction: (id) => this.factions.getEntity(id),
+		sector: (id) => this.sectors.getEntity(id),
+	};
 
 	private readonly saveTime = computed(() => this.save()?.info.gameTime ?? 0);
 	readonly events = computed(() => EventLogRows.events(this.log()?.entries ?? [], this.saveTime(), this.lookups));
@@ -74,11 +56,9 @@ export class EventLogStore {
 	readonly categories = computed(() =>
 		this.options(this.events(), (x) => x.category, (x) => EnumLabels.label(`log:${x.category}`))
 	);
-	/** The factions the entries name, or on the losses tab the killers' factions. */
+	/** The factions the entries name. */
 	readonly factionOptions = computed(() =>
-		this.tab() === 'losses'
-			? this.options(this.losses(), (x) => x.killerFaction?.id ?? '', (x) => x.killerFaction?.name ?? '')
-			: this.options(this.events(), (x) => x.factionKey, (x) => x.faction?.name ?? x.entry.factionName ?? '')
+		this.options(this.events(), (x) => x.factionKey, (x) => x.faction?.name ?? x.entry.factionName ?? '')
 	);
 	readonly sectorOptions = computed(() =>
 		this.tab() === 'losses'

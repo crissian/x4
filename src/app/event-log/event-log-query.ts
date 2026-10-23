@@ -4,11 +4,11 @@ export type EventLogTab = 'events' | 'losses';
 
 /** The filter form of the event log page. */
 export interface EventLogModel {
-	/** part of an entry's title or text, or of a lost ship's name */
+	/** part of an entry's title or text, or of a loss's name, id code or killer */
 	search: string;
 	/** a logbook category, `general` for entries without one; empty for all */
 	category: string;
-	/** events: the faction id or name an entry names; losses: the killer's faction id; empty for all */
+	/** the faction id or name an entry names (events only); empty for all */
 	faction: string;
 	/** a sector id; empty for all */
 	sector: string;

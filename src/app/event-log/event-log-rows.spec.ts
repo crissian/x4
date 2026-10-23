@@ -1,7 +1,6 @@
 import { convertToParamMap } from '@angular/router';
 import { describe, expect, it } from 'vitest';
 import type { Faction } from '../shared/services/model/faction';
-import type { Ship } from '../shared/services/model/ship';
 import type { Sector } from '../shared/services/model/universe';
 import { EventLogQuery, type EventLogModel } from './event-log-query';
 import { EventLogRows, type EventLogLookups } from './event-log-rows';
@@ -10,14 +9,10 @@ import { LossSummaries } from './loss-summary';
 const xenon = { id: 'xenon', name: 'Xenon', shortName: 'XEN' } as Faction;
 const argon = { id: 'argon', name: 'Argon Federation', shortName: 'ARG' } as Faction;
 const prime = { id: 'cluster_14_sector001', name: 'Argon Prime' } as Sector;
-const eclipse = { id: 'ship_par_m_fighter_01_a', name: 'Eclipse Vanguard', size: 'Medium' } as Ship;
-const behemoth = { id: 'ship_arg_l_destroyer_01_a', name: 'Behemoth Vanguard', size: 'Large' } as Ship;
 
 const lookups: EventLogLookups = {
 	faction: (id) => [xenon, argon].find((x) => x.id === id),
 	sector: (id) => (id === prime.id ? prime : undefined),
-	ship: (name) => [eclipse, behemoth].find((x) => x.name === name),
-	factionByShortName: (short) => [xenon, argon].find((x) => x.shortName === short),
 };
 
 const model = (patch: Partial<EventLogModel> = {}): EventLogModel => ({ ...EventLogQuery.DEFAULTS, ...patch });
@@ -56,28 +51,27 @@ describe('EventLogRows', () => {
 		lookups
 	);
 
-	it('matches the ship type by name and the killer faction by prefix', () => {
-		expect(losses[0]).toMatchObject({ ship: eclipse, sector: prime, killerFaction: xenon, ago: 500 });
-		expect(losses[2].killerFaction).toBeUndefined();
-		expect(losses[3].ship).toBeUndefined();
+	it('builds loss rows with the age and sector only', () => {
+		expect(losses[0]).toEqual({ id: 0, loss: expect.any(Object), ago: 500, sector: prime });
+		expect(losses[3].sector).toBeUndefined();
 	});
 
-	it('filters losses by killer faction, sector and search', () => {
-		expect(EventLogRows.filterLosses(losses, model({ faction: 'xenon' })).length).toBe(2);
+	it('filters losses by sector and search, not by faction', () => {
+		expect(EventLogRows.filterLosses(losses, model({ faction: 'xenon' })).length).toBe(4);
 		expect(EventLogRows.filterLosses(losses, model({ sector: prime.id })).length).toBe(2);
 		expect(EventLogRows.filterLosses(losses, model({ search: 'behemoth' })).map((x) => x.id)).toEqual([2]);
+		expect(EventLogRows.filterLosses(losses, model({ search: 'raiding' })).map((x) => x.id)).toEqual([0]);
 	});
 
-	it('sums the losses per class, sector and killer faction', () => {
+	it('sums the losses per sector and killer as written', () => {
 		const summary = LossSummaries.build(losses);
 		expect(summary.total).toBe(4);
-		expect(summary.bySize.map((x) => [x.key, x.count])).toEqual([
-			['Large', 1],
-			['Medium', 2],
-			['', 1],
-		]);
 		expect(summary.bySector).toEqual([{ key: prime.id, value: prime, count: 2 }]);
-		expect(summary.byFaction).toEqual([{ key: 'xenon', value: xenon, count: 2 }]);
+		expect(summary.byKiller.map((x) => [x.key, x.count])).toEqual([
+			['Someone', 1],
+			['XEN Destroyer K', 1],
+			['XEN Raiding Party', 1],
+		]);
 	});
 });
 

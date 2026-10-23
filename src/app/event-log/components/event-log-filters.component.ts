@@ -14,5 +14,5 @@ export class EventLogFiltersComponent {
 	protected readonly form = this.store.form;
 	protected readonly since = EventLogQuery.SINCE;
 	protected readonly entryPlaceholder = $localize`Title or text`;
-	protected readonly shipPlaceholder = $localize`Ship, type or killer`;
+	protected readonly shipPlaceholder = $localize`Name, id code or killer`;
 }

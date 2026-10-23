@@ -1,6 +1,5 @@
 import type { SaveLogEntry, SaveLoss } from '../savegame/log/save-log-model';
 import type { Faction } from '../shared/services/model/faction';
-import type { Ship } from '../shared/services/model/ship';
 import type { Sector } from '../shared/services/model/universe';
 import type { EventLogModel } from './event-log-query';
 
@@ -17,24 +16,18 @@ export interface EventRow {
 	sector?: Sector;
 }
 
-/** A lost ship with its ship type, matched by name, and the killer's faction, from the name prefix. */
+/** A destroyed player-owned ship or station, as the log states it. */
 export interface LossRow {
 	id: number;
 	loss: SaveLoss;
 	ago: number;
-	ship?: Ship;
 	sector?: Sector;
-	killerFaction?: Faction;
 }
 
 /** How rows look up the game data. */
 export interface EventLogLookups {
 	faction(id: string): Faction | undefined;
 	sector(id: string): Sector | undefined;
-	/** the ship type with the name, in the selected language */
-	ship(name: string): Ship | undefined;
-	/** the faction with the short name, e.g. `XEN` */
-	factionByShortName(shortName: string): Faction | undefined;
 }
 
 /** Builds and filters the rows of the event log page. */
@@ -55,17 +48,12 @@ export class EventLogRows {
 	}
 
 	static losses(losses: readonly SaveLoss[], saveTime: number, lookups: EventLogLookups): LossRow[] {
-		return losses.map((loss, id) => {
-			const prefix = loss.killer?.split(' ')[0];
-			return {
-				id,
-				loss,
-				ago: Math.max(0, saveTime - loss.time),
-				ship: lookups.ship(loss.name),
-				sector: loss.sector ? lookups.sector(loss.sector) : undefined,
-				killerFaction: prefix ? lookups.factionByShortName(prefix) : undefined,
-			};
-		});
+		return losses.map((loss, id) => ({
+			id,
+			loss,
+			ago: Math.max(0, saveTime - loss.time),
+			sector: loss.sector ? lookups.sector(loss.sector) : undefined,
+		}));
 	}
 
 	static filterEvents(rows: readonly EventRow[], model: EventLogModel): EventRow[] {
@@ -88,11 +76,10 @@ export class EventLogRows {
 		const since = EventLogRows.sinceSeconds(model);
 		return rows.filter(
 			(x) =>
-				(!model.faction || x.killerFaction?.id === model.faction) &&
 				(!model.sector || x.loss.sector === model.sector) &&
 				x.ago <= since &&
 				(!search ||
-					[x.loss.name, x.loss.code, x.ship?.name, x.loss.killer].some((v) => v?.toLowerCase().includes(search)))
+					[x.loss.name, x.loss.code, x.loss.killer].some((v) => v?.toLowerCase().includes(search)))
 		);
 	}
 

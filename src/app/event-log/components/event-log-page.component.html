@@ -6,7 +6,7 @@
 	i18n-reloadText
 >
 	<p intro class="text-fg-muted" i18n>
-		The event log reads the logbook of a savegame: missions, news, alerts, reputation and the ships you lost.
+		The event log reads the logbook of a savegame: missions, news, alerts, reputation and the ships and stations you lost.
 	</p>
 	<ng-template>
 		@let save = store.save()!;
@@ -23,7 +23,7 @@
 		<app-event-log-filters class="mt-3 block" />
 		<app-tabs class="mt-4 block" label="Event log" i18n-label [tabs]="tabs()" [(selected)]="store.tab">
 			@if (store.tab() === 'losses') {
-				<app-ship-losses />
+				<app-losses />
 			} @else {
 				<app-event-log-events />
 			}

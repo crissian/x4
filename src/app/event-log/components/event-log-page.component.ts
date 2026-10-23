@@ -5,11 +5,11 @@ import type { EventLogTab } from '../event-log-query';
 import { EventLogStore } from '../event-log-store';
 import { EventLogEventsComponent } from './event-log-events.component';
 import { EventLogFiltersComponent } from './event-log-filters.component';
-import { ShipLossesComponent } from './ship-losses.component';
+import { LossesComponent } from './losses.component';
 
 /** The logbook of the active save, and the ships the player lost. */
 @Component({
-	imports: [EventLogEventsComponent, EventLogFiltersComponent, SavePageComponent, ShipLossesComponent, TabsComponent],
+	imports: [EventLogEventsComponent, EventLogFiltersComponent, SavePageComponent, LossesComponent, TabsComponent],
 	templateUrl: './event-log-page.component.html',
 	providers: [EventLogStore],
 })
@@ -18,6 +18,6 @@ export default class EventLogPageComponent {
 
 	protected readonly tabs = computed<TabItem<EventLogTab>[]>(() => [
 		{ id: 'events', label: $localize`:event log tab:Events`, count: this.store.filteredEvents().length },
-		{ id: 'losses', label: $localize`:event log tab:Ship losses`, count: this.store.filteredLosses().length },
+		{ id: 'losses', label: $localize`:event log tab:Losses`, count: this.store.filteredLosses().length },
 	]);
 }

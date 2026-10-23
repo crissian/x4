@@ -4,7 +4,7 @@ import type { EventRow, LossRow } from '../event-log-rows';
 import { LogTime } from '../log-time';
 
 /**
- * The data grid columns of the event log and the ship losses. The entry, sector, faction and ship cells are rendered
+ * The data grid columns of the event log and the losses. The entry, sector and faction cells are rendered
  * by templates; their values here filter and sort.
  */
 export class EventLogColumns {
@@ -36,16 +36,9 @@ export class EventLogColumns {
 		this.gameTime<LossRow>((x) => x.loss.time),
 		{
 			key: 'name',
-			caption: $localize`Ship`,
+			caption: $localize`Name`,
 			value: (x) => `${x.loss.name} (${x.loss.code})`,
 			hideable: false,
-		},
-		{ key: 'type', caption: $localize`Ship type`, value: (x) => x.ship?.name ?? '' },
-		{
-			key: 'size',
-			caption: $localize`Class`,
-			value: (x) => (x.ship ? EnumLabels.label(x.ship.size) : ''),
-			sortValue: (x) => x.ship?.size ?? '',
 		},
 		{ key: 'sector', caption: $localize`Sector`, value: (x) => x.sector?.name ?? x.loss.location ?? '' },
 		{
@@ -53,7 +46,6 @@ export class EventLogColumns {
 			caption: $localize`Destroyed by`,
 			value: (x) => (x.loss.killer ? `${x.loss.killer} (${x.loss.killerCode ?? '?'})` : ''),
 		},
-		{ key: 'killerFaction', caption: $localize`Enemy faction`, value: (x) => x.killerFaction?.name ?? '' },
 		{ key: 'commander', caption: $localize`Commander`, value: (x) => x.loss.commander ?? '', hidden: true },
 	];
 
