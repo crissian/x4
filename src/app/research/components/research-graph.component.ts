@@ -14,7 +14,7 @@ import type { ResearchProgress } from '../research-progress';
 @Component({
 	selector: 'app-research-graph',
 	templateUrl: './research-graph.component.html',
-	styleUrl: './research-graph.component.css',
+	styleUrls: ['../../shared/graph/dag-graph.css', './research-graph.component.css'],
 })
 export class ResearchGraphComponent {
 	static readonly OPTIONS: DagLayoutOptions = {

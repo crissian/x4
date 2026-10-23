@@ -12,7 +12,7 @@ import type { TerraformingProjectRow } from '../terraforming-planet-state';
 	selector: 'app-terraforming-graph',
 	imports: [RouterLink],
 	templateUrl: './terraforming-graph.component.html',
-	styleUrl: './terraforming-graph.component.css',
+	styleUrls: ['../../shared/graph/dag-graph.css', './terraforming-graph.component.css'],
 })
 export class TerraformingGraphComponent {
 	static readonly OPTIONS: DagLayoutOptions = {
