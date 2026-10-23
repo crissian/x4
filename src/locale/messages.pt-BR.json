@@ -966,7 +966,6 @@
     "5076385087498131845": "Ingredientes de fabricação",
     "7671563246551707880": "A fabricação exige a pesquisa {$INTERPOLATION}.",
     "6583152719418576978": "Outros mods de {$INTERPOLATION} ({$INTERPOLATION_1})",
-    "5449601918650810117": "({$INTERPOLATION} das escolhas)",
     "5139000722929833503": "Mods para isto ({$INTERPOLATION})",
     "2928356633506797533": "Todos os mods",
     "4069847964023945615": " Mods são fabricados com itens de inventário e instalados em um comerciante de modificações de naves. Cada mod fabricado sorteia seu efeito principal e seus efeitos bônus dentro das faixas mostradas; verde ajuda, vermelho prejudica, âmbar pode ir para qualquer lado. ",
@@ -990,14 +989,13 @@
     "2116968611382897884": "Item de missão",
     "5622911553245493144": "Slot",
     "3890609616200528737": "Efeito principal",
-    "3238701052775605547": "Efeitos bônus",
     "1474686706933834581": "{$from} a {$to}",
-    "2696249041151398884": "{$chance} de chance de:",
-    "6576349816301064582": "Além disso:",
-    "4305375274948541795": "{$chance} de chance de até {$count} de:",
-    "6457730810422582895": "Além disso, até {$count} de:",
-    "2540454705236921219": "Armas da nave (não torretas)",
     "7945774136382257914": "Geradores de escudo",
-    "6341382154141664364": "A própria nave (chassi)"
+    "6341382154141664364": "A própria nave (chassi)",
+    "3476769805917140953": "Propriedades adicionais",
+    "1739895185668193413": "Até mais 1 propriedade",
+    "658303781322718208": "Até {$count} mais propriedades",
+    "8721861281513890587": "Propriedades",
+    "1218998852509406329": "Probabilidades para propriedades adicionais:"
   }
 }

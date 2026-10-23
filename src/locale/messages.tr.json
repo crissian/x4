@@ -966,7 +966,6 @@
     "5076385087498131845": "Üretim malzemeleri",
     "7671563246551707880": "Üretim için {$INTERPOLATION} araştırması gerekir.",
     "6583152719418576978": "Diğer {$INTERPOLATION} modları ({$INTERPOLATION_1})",
-    "5449601918650810117": "(seçimlerin {$INTERPOLATION} kadarı)",
     "5139000722929833503": "Bunun için modlar ({$INTERPOLATION})",
     "2928356633506797533": "Tüm modlar",
     "4069847964023945615": " Modlar envanter eşyalarından üretilir ve bir gemi modifikasyon satıcısında takılır. Üretilen her mod ana etkisini ve bonus etkilerini gösterilen aralıklarda rastgele alır; yeşil faydalı, kırmızı zararlı, kehribar her iki yöne de gidebilir. ",
@@ -990,14 +989,13 @@
     "2116968611382897884": "Görev eşyası",
     "5622911553245493144": "Yuva",
     "3890609616200528737": "Ana etki",
-    "3238701052775605547": "Bonus etkiler",
     "1474686706933834581": "{$from} ile {$to} arası",
-    "2696249041151398884": "{$chance} olasılıkla:",
-    "6576349816301064582": "Ayrıca:",
-    "4305375274948541795": "{$chance} olasılıkla şunlardan en fazla {$count} tanesi:",
-    "6457730810422582895": "Ayrıca şunlardan en fazla {$count} tanesi:",
-    "2540454705236921219": "Gemi silahları (taretler hariç)",
     "7945774136382257914": "Kalkan jeneratörleri",
-    "6341382154141664364": "Geminin kendisi (gövde)"
+    "6341382154141664364": "Geminin kendisi (gövde)",
+    "3476769805917140953": "Ek özellikler",
+    "1739895185668193413": "En fazla 1 ek özellik",
+    "658303781322718208": "En fazla {$count} ek özellik",
+    "8721861281513890587": "Özellikler",
+    "1218998852509406329": "Ek özelliklerin olasılıkları:"
   }
 }

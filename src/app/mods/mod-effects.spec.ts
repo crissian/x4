@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { ModBonus, ModStat } from '../shared/services/model/equipment-mod';
+import type { ModStat } from '../shared/services/model/equipment-mod';
 import { ModEffects } from './mod-effects';
 
 describe('ModEffects', () => {
@@ -20,7 +20,7 @@ describe('ModEffects', () => {
 
 	it('shows added units and fractions in their own form', () => {
 		expect(ModEffects.range(stat('add'), { min: 1, max: 4 })).toBe('+1 to +4');
-		expect(ModEffects.range(stat('fraction'), { min: 0.6, max: 0.9 })).toBe('60% to 90%');
+		expect(ModEffects.range(stat('fraction'), { min: 0.6, max: 0.9 })).toBe('+60% to +90%');
 		expect(ModEffects.range(stat('fraction'), { min: -0.45, max: -0.3 })).toBe('-45% to -30%');
 	});
 
@@ -42,27 +42,17 @@ describe('ModEffects', () => {
 		expect(ModEffects.best(stat('factor', true), { min: 0.8, max: 0.95 })).toBeCloseTo(0.2);
 	});
 
-	it('describes how many bonus effects roll', () => {
-		const one: ModBonus = { chance: 1, max: 1, effects: [{ stat: 'cooling', min: 0.7, max: 0.75 }] };
-		const two: ModBonus = { ...one, max: 2, effects: [...one.effects, { stat: 'reload', min: 0.7, max: 2 }] };
-		expect(ModEffects.bonus(one)).toBe('Plus:');
-		expect(ModEffects.bonus(two)).toBe('Plus up to 2 of:');
-		expect(ModEffects.bonus({ ...two, max: 5 })).toBe('Plus up to 2 of:');
-		expect(ModEffects.bonus({ ...two, chance: 0.5 })).toBe('50% chance of up to 2 of:');
-	});
-
-	it('gives the share of the picks only when the weights differ and not every effect rolls', () => {
-		const bonus: ModBonus = {
-			chance: 1,
-			max: 1,
-			effects: [
-				{ stat: 'reload', min: 1, max: 2, weight: 1 },
-				{ stat: 'mining', min: 1, max: 2, weight: 3 },
-			],
-		};
-		expect(ModEffects.odds(bonus, bonus.effects[1])).toBeCloseTo(0.75);
-		expect(ModEffects.odds({ ...bonus, max: 2 }, bonus.effects[1])).toBeUndefined();
-		const even = { ...bonus, effects: bonus.effects.map((x) => ({ ...x, weight: 1 })) };
-		expect(ModEffects.odds(even, even.effects[0])).toBeUndefined();
+	it('words the bonus as the game does, with its chances of each number of properties', () => {
+		expect(ModEffects.bonus({ max: 1 })).toBe('Up to 1 more property');
+		expect(ModEffects.bonus({ max: 3 })).toBe('Up to 3 more properties');
+		expect(ModEffects.bonusChances({ max: 2, chance: 1 })).toEqual([
+			{ count: 1, chance: 0 },
+			{ count: 2, chance: 1 },
+		]);
+		const half = ModEffects.bonusChances({ max: 3, chance: 0.5 }).map((x) => x.chance);
+		expect(half).toEqual([0.25, 0.125, 0.125]);
+		expect(ModEffects.bonusTooltip({ max: 1, chance: 1 })).toBe(
+			'Probabilities for additional properties:\n+1 Properties: 100%'
+		);
 	});
 });

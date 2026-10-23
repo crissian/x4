@@ -26,7 +26,7 @@ export interface ModEffect {
 	stat: string;
 	min: number;
 	max: number;
-	/** bonus effects: the odds of this one being picked among the others; 1 when missing */
+	/** bonus effects: the `weight` of equipmentmods.xml, as given; missing there when missing here */
 	weight?: number;
 }
 

@@ -966,7 +966,6 @@
     "5076385087498131845": "Ingrédients de fabrication",
     "7671563246551707880": "La fabrication nécessite la recherche {$INTERPOLATION}.",
     "6583152719418576978": "Autres mods de {$INTERPOLATION} ({$INTERPOLATION_1})",
-    "5449601918650810117": "({$INTERPOLATION} des tirages)",
     "5139000722929833503": "Mods pour ceci ({$INTERPOLATION})",
     "2928356633506797533": "Tous les mods",
     "4069847964023945615": " Les mods se fabriquent à partir d'objets d'inventaire et s'installent chez un marchand de modifications de vaisseaux. Chaque mod fabriqué tire son effet principal et ses effets bonus dans les plages affichées ; vert aide, rouge nuit, ambre peut aller dans les deux sens. ",
@@ -990,14 +989,13 @@
     "2116968611382897884": "Objet de mission",
     "5622911553245493144": "Emplacement",
     "3890609616200528737": "Effet principal",
-    "3238701052775605547": "Effets bonus",
     "1474686706933834581": "{$from} à {$to}",
-    "2696249041151398884": "{$chance} de chances de :",
-    "6576349816301064582": "En plus :",
-    "4305375274948541795": "{$chance} de chances d'obtenir jusqu'à {$count} parmi :",
-    "6457730810422582895": "En plus, jusqu'à {$count} parmi :",
-    "2540454705236921219": "Armes du vaisseau (pas les tourelles)",
     "7945774136382257914": "Générateurs de bouclier",
-    "6341382154141664364": "Le vaisseau lui-même (châssis)"
+    "6341382154141664364": "Le vaisseau lui-même (châssis)",
+    "3476769805917140953": "Propriétés supplémentaires",
+    "1739895185668193413": "Jusqu'à 1 propriété de plus",
+    "658303781322718208": "Jusqu'à {$count} propriétés de plus",
+    "8721861281513890587": "Propriétés",
+    "1218998852509406329": "Probabilités de caractéristiques supplémentaires :"
   }
 }

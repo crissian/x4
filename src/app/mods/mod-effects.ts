@@ -4,7 +4,10 @@ import type { ModBonus, ModEffect, ModStat, ModStatKind } from '../shared/servic
 /** Whether an effect helps, hurts, or can do either across its range. */
 export type EffectTone = 'good' | 'bad' | 'mixed';
 
-/** Readable texts of equipment mod effects: "+5% to +20%", "+1 to +4", "60% to 90%". */
+/**
+ * Readable texts of equipment mod effects: "+5% to +20%", "+1 to +4", "+60% to +90%". Like the game's mod menu
+ * (text {1001,8041}), every value is signed.
+ */
 export class ModEffects {
 	private static readonly SIGNED_PERCENT: Intl.NumberFormatOptions = {
 		style: 'percent',
@@ -18,7 +21,7 @@ export class ModEffects {
 		return kind === 'factor' ? value - 1 : value;
 	}
 
-	/** One value as shown: +15% for a factor of 1.15, +2 for an added 2, 60% for a fraction of 0.6. */
+	/** One value as shown: +15% for a factor of 1.15, +2 for an added 2, +60% for a fraction of 0.6. */
 	static value(kind: ModStatKind, value: number): string {
 		switch (kind) {
 			case 'factor':
@@ -26,7 +29,7 @@ export class ModEffects {
 			case 'add':
 				return NumberFormats.signedWhole(value);
 			case 'fraction':
-				return NumberFormats.format(value, ModEffects.PERCENT);
+				return NumberFormats.format(value, ModEffects.SIGNED_PERCENT);
 		}
 	}
 
@@ -69,26 +72,33 @@ export class ModEffects {
 	}
 
 	/**
-	 * What the bonus rolls: "Plus:" for a single effect, else "Plus up to 2 of:"; with the chance when it may roll
-	 * nothing. The game rolls a number of effects up to the bonus max.
+	 * The game's own line for the bonus of a mod (ui/addons/ego_detailmonitor/menu_ship_configuration.lua,
+	 * texts {1001,8039} and {1001,8040}): "Up to 1 more property", "Up to 3 more properties".
 	 */
-	static bonus(bonus: ModBonus): string {
-		const chance = NumberFormats.percent(bonus.chance);
-		const count = Math.min(bonus.max, bonus.effects.length);
-		if (bonus.effects.length === 1) {
-			return bonus.chance < 1 ? $localize`:mod bonus:${chance}:chance: chance of:` : $localize`:mod bonus:Plus:`;
-		}
-		return bonus.chance < 1
-			? $localize`:mod bonus:${chance}:chance: chance of up to ${count}:count: of:`
-			: $localize`:mod bonus:Plus up to ${count}:count: of:`;
+	static bonus(bonus: Pick<ModBonus, 'max'>): string {
+		return bonus.max === 1
+			? $localize`:mod bonus:Up to 1 more property`
+			: $localize`:mod bonus:Up to ${bonus.max}:count: more properties`;
 	}
 
-	/** The share of the picks a bonus effect gets by its weight; undefined when every effect is as likely. */
-	static odds(bonus: ModBonus, effect: ModEffect): number | undefined {
-		const weights = bonus.effects.map((x) => x.weight ?? 1);
-		if (bonus.max >= weights.length || weights.every((x) => x === weights[0])) {
-			return undefined;
-		}
-		return (effect.weight ?? 1) / weights.reduce((a, b) => a + b, 0);
+	/**
+	 * The chance of each number of bonus properties, as the game works it out for its tooltip: p^n * (1 - p) below the
+	 * bonus max, p^max at it.
+	 */
+	static bonusChances(bonus: Pick<ModBonus, 'max' | 'chance'>): { count: number; chance: number }[] {
+		return Array.from({ length: bonus.max }, (_, i) => {
+			const count = i + 1;
+			const rest = count === bonus.max ? 1 : 1 - bonus.chance;
+			return { count, chance: bonus.chance ** count * rest };
+		});
+	}
+
+	/** The game's tooltip of the bonus line: "Probabilities for additional properties:" and "+1 Properties: 25%". */
+	static bonusTooltip(bonus: Pick<ModBonus, 'max' | 'chance'>): string {
+		const lines = ModEffects.bonusChances(bonus).map(
+			(x) =>
+				`${NumberFormats.signedWhole(x.count)} ${$localize`:mod bonus:Properties`}: ${NumberFormats.format(x.chance, ModEffects.PERCENT)}`
+		);
+		return [$localize`:mod bonus:Probabilities for additional properties:`, ...lines].join('\n');
 	}
 }

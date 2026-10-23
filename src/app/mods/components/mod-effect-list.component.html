@@ -7,9 +7,6 @@
 		>{{ row.range }}</span
 	>
 	<span [attr.title]="row.description">{{ row.name }}</span>
-	@if (row.odds) {
-		<span class="text-sm text-fg-muted" i18n>({{ row.odds | percent }} of picks)</span>
-	}
 </ng-template>
 
 <ul class="space-y-1">
@@ -18,7 +15,7 @@
 	</li>
 </ul>
 @if (bonus(); as bonus) {
-	<p class="mt-2 mb-1 text-sm text-fg-muted">{{ bonus.heading }}</p>
+	<p class="mt-2 mb-1 text-sm text-fg-muted" [attr.title]="bonus.tooltip">{{ bonus.heading }}</p>
 	<ul class="space-y-1">
 		@for (row of bonus.rows; track row.stat) {
 			<li class="flex flex-wrap items-baseline gap-x-2">

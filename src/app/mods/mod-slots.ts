@@ -2,7 +2,7 @@ import { EnumLabels } from '../core/enum-labels';
 import type { Equipment } from '../shared/services/model/equipment';
 import type { EquipmentMod, ModSlot } from '../shared/services/model/equipment-mod';
 
-/** The equipment the mods of each slot go on, and which mods make sense on a piece of equipment. */
+/** The equipment the mods of each slot go on. */
 export class ModSlots {
 	static readonly ALL: readonly ModSlot[] = ['weapon', 'engine', 'shield', 'ship'];
 
@@ -14,13 +14,6 @@ export class ModSlots {
 		ship: 'Ship',
 	};
 
-	/** Weapon stats only some weapons have; a mod changing one of them does nothing on the others. */
-	private static readonly WEAPON_ONLY: Record<string, (equipment: Equipment) => boolean> = {
-		beamlength: (x) => !!x.weapon?.beam,
-		chargetime: (x) => !!x.weapon?.chargeTime,
-		mining: (x) => x.id.includes('mining'),
-	};
-
 	static label(slot: ModSlot): string {
 		return EnumLabels.label(ModSlots.LABELS[slot]);
 	}
@@ -29,7 +22,7 @@ export class ModSlots {
 	static appliesTo(slot: ModSlot): string {
 		switch (slot) {
 			case 'weapon':
-				return $localize`:mod applies to:Ship weapons (not turrets)`;
+				return $localize`:mod applies to:Weapons`;
 			case 'engine':
 				return $localize`:mod applies to:Engines`;
 			case 'shield':
@@ -43,7 +36,7 @@ export class ModSlots {
 	static ofEquipment(equipment: Equipment): ModSlot | undefined {
 		switch (equipment.equipmentClass) {
 			case 'Weapon':
-				return equipment.weapon && !equipment.weapon.repair ? 'weapon' : undefined;
+				return equipment.weapon ? 'weapon' : undefined;
 			case 'Engine':
 				// thrusters share the class, but mods go on the engines
 				return equipment.type === 'Engines' ? 'engine' : undefined;
@@ -54,15 +47,12 @@ export class ModSlots {
 		}
 	}
 
-	/** The mods that fit the equipment and change a stat it has. */
+	/**
+	 * The mods of the slot the equipment takes. The game decides per weapon which weapon mods fit (in code, not in the
+	 * game data), so every weapon mod is listed.
+	 */
 	static forEquipment(mods: readonly EquipmentMod[], equipment: Equipment): EquipmentMod[] {
 		const slot = ModSlots.ofEquipment(equipment);
-		return slot ? mods.filter((x) => x.slot === slot && ModSlots.affects(x, equipment)) : [];
-	}
-
-	/** False when the mod's main stat is one the weapon doesn't have, such as beam length on a cannon. */
-	static affects(mod: EquipmentMod, equipment: Equipment): boolean {
-		const has = ModSlots.WEAPON_ONLY[mod.effect.stat];
-		return mod.slot !== 'weapon' || !has || has(equipment);
+		return slot ? mods.filter((x) => x.slot === slot) : [];
 	}
 }

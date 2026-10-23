@@ -53,7 +53,7 @@ export class ModColumns {
 			},
 			{
 				key: 'bonus',
-				caption: $localize`Bonus effects`,
+				caption: $localize`Additional properties`,
 				value: (x) =>
 					x.bonus?.effects
 						.map((e) => `${stat(e)?.name ?? e.stat} ${ModEffects.range(stat(e), e)}`)

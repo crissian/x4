@@ -966,7 +966,6 @@
     "5076385087498131845": "Suroviny k výrobě",
     "7671563246551707880": "Výroba vyžaduje výzkum {$INTERPOLATION}.",
     "6583152719418576978": "Další modifikace – {$INTERPOLATION} ({$INTERPOLATION_1})",
-    "5449601918650810117": "({$INTERPOLATION} výběrů)",
     "5139000722929833503": "Modifikace pro toto ({$INTERPOLATION})",
     "2928356633506797533": "Všechny modifikace",
     "4069847964023945615": " Modifikace se vyrábějí z předmětů inventáře a instalují se u prodejce lodních úprav. Každá vyrobená modifikace si hlavní a bonusové účinky náhodně určí v uvedených rozsazích; zelená pomáhá, červená škodí, oranžová může obojí. ",
@@ -990,14 +989,13 @@
     "2116968611382897884": "Misijní předmět",
     "5622911553245493144": "Slot",
     "3890609616200528737": "Hlavní účinek",
-    "3238701052775605547": "Bonusové účinky",
     "1474686706933834581": "{$from} až {$to}",
-    "2696249041151398884": "{$chance} šance na:",
-    "6576349816301064582": "Navíc:",
-    "4305375274948541795": "{$chance} šance až na {$count} z:",
-    "6457730810422582895": "Navíc až {$count} z:",
-    "2540454705236921219": "Lodní zbraně (ne věže)",
     "7945774136382257914": "Generátory štítů",
-    "6341382154141664364": "Samotná loď (trup)"
+    "6341382154141664364": "Samotná loď (trup)",
+    "3476769805917140953": "Další vlastnosti",
+    "1739895185668193413": "Maximálně 1 vlastnost",
+    "658303781322718208": "Až o {$count} vlastnosti navíc",
+    "8721861281513890587": "Vlastnosti",
+    "1218998852509406329": "Pravděpodobnost dalších vlastností:"
   }
 }

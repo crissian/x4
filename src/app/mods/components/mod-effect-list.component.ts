@@ -1,5 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { NgTemplateOutlet, PercentPipe } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { EquipmentModService } from '../../shared/services/equipment-mod.service';
 import type { EquipmentMod, ModEffect } from '../../shared/services/model/equipment-mod';
 import { type EffectTone, ModEffects } from '../mod-effects';
@@ -10,14 +10,12 @@ interface EffectRow {
 	description?: string;
 	range: string;
 	tone: EffectTone;
-	/** bonus effects of unequal weight: the share of the picks */
-	odds?: number;
 }
 
-/** The main effect of a mod and its bonus effects, as readable ranges coloured by whether they help. */
+/** The main effect of a mod and the properties its bonus may add, as readable ranges coloured by whether they help. */
 @Component({
 	selector: 'app-mod-effect-list',
-	imports: [NgTemplateOutlet, PercentPipe],
+	imports: [NgTemplateOutlet],
 	templateUrl: './mod-effect-list.component.html',
 })
 export class ModEffectListComponent {
@@ -30,12 +28,13 @@ export class ModEffectListComponent {
 		return bonus
 			? {
 					heading: ModEffects.bonus(bonus),
-					rows: bonus.effects.map((x) => this.row(x, ModEffects.odds(bonus, x))),
+					tooltip: ModEffects.bonusTooltip(bonus),
+					rows: bonus.effects.map((x) => this.row(x)),
 				}
 			: undefined;
 	});
 
-	private row(effect: ModEffect, odds?: number): EffectRow {
+	private row(effect: ModEffect): EffectRow {
 		const stat = this.service.stat(effect.stat);
 		return {
 			stat: effect.stat,
@@ -43,7 +42,6 @@ export class ModEffectListComponent {
 			description: stat?.description,
 			range: ModEffects.range(stat, effect),
 			tone: ModEffects.tone(stat, effect),
-			odds,
 		};
 	}
 }

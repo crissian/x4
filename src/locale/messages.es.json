@@ -966,7 +966,6 @@
     "5076385087498131845": "Ingredientes de fabricación",
     "7671563246551707880": "Fabricarlo requiere la investigación {$INTERPOLATION}.",
     "6583152719418576978": "Otros mods de {$INTERPOLATION} ({$INTERPOLATION_1})",
-    "5449601918650810117": "({$INTERPOLATION} de las tiradas)",
     "5139000722929833503": "Mods para esto ({$INTERPOLATION})",
     "2928356633506797533": "Todos los mods",
     "4069847964023945615": " Los mods se fabrican con objetos de inventario y se instalan en un comerciante de modificaciones de naves. Cada mod fabricado obtiene al azar su efecto principal y sus efectos extra dentro de los rangos mostrados; verde ayuda, rojo perjudica, ámbar puede ir en ambos sentidos. ",
@@ -990,14 +989,13 @@
     "2116968611382897884": "Objeto de misión",
     "5622911553245493144": "Ranura",
     "3890609616200528737": "Efecto principal",
-    "3238701052775605547": "Efectos extra",
     "1474686706933834581": "{$from} a {$to}",
-    "2696249041151398884": "{$chance} de probabilidad de:",
-    "6576349816301064582": "Además:",
-    "4305375274948541795": "{$chance} de probabilidad de hasta {$count} de:",
-    "6457730810422582895": "Además, hasta {$count} de:",
-    "2540454705236921219": "Armas de la nave (no torretas)",
     "7945774136382257914": "Generadores de escudo",
-    "6341382154141664364": "La propia nave (chasis)"
+    "6341382154141664364": "La propia nave (chasis)",
+    "3476769805917140953": "Propiedades adicionales",
+    "1739895185668193413": "Hasta 1 propiedad más",
+    "658303781322718208": "Hasta {$count} propiedades más",
+    "8721861281513890587": "Propiedades",
+    "1218998852509406329": "Probabilidades de propiedades adicionales:"
   }
 }
