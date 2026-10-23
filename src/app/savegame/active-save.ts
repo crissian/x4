@@ -3,6 +3,7 @@ import { Duration } from '../core/format/duration';
 import type { Sector } from '../shared/services/model/model';
 import { SectorService } from '../shared/services/universe.service';
 import { BlueprintsExtractor } from './extractors/blueprints-extractor';
+import { EmpireExtractor } from './extractors/empire-extractor';
 import { LicencesExtractor } from './extractors/licences-extractor';
 import { LogExtractor } from './extractors/log-extractor';
 import { MapExtractor } from './extractors/map-extractor';
@@ -13,6 +14,7 @@ import { ShipsExtractor } from './extractors/ships-extractor';
 import { SaveVaults, VaultsExtractor } from './extractors/vaults-extractor';
 import type { SaveBlueprints, SaveLicences, SaveMap, SaveRelations, SaveRepresentatives, SaveResearch, SaveShips } from './map/save-map-model';
 import type { SaveLog } from './log/save-log-model';
+import type { SaveEmpire } from './empire/save-empire-model';
 import { SavegameStore } from './savegame-store';
 
 /**
@@ -41,6 +43,8 @@ export class ActiveSave {
 	readonly log = this.data<SaveLog>(LogExtractor.KEY);
 	/** The data vaults; undefined for a save read before they were. */
 	readonly vaults = this.data<SaveVaults>(VaultsExtractor.KEY);
+	/** Fleets, station accounts, ownerless ships and hostile ship counts; undefined for a save read before them. */
+	readonly empire = this.data<SaveEmpire>(EmpireExtractor.KEY);
 
 	/** Whether the map data can be shown. */
 	readonly status = this.statusOf(this.map);

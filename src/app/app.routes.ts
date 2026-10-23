@@ -148,6 +148,15 @@ export const appRoutes: Routes = [
 			),
 	},
 	{
+		path: 'empire',
+		loadComponent: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'modules', 'ship-list', 'game-texts', 'ship-orders', 'fleet-assignments'],
+				() => import('./empire/components/empire-page.component')
+			),
+		title: `${BASE_TITLE} - ${$localize`Empire`}`,
+	},
+	{
 		path: 'saves',
 		loadComponent: () => import('./savegame/components/savegames-page.component'),
 		title: `${BASE_TITLE} - ${$localize`Savegames`}`,

@@ -4,6 +4,8 @@ import { MapStations } from './map-stations';
 import { MapStore } from './map-store';
 import { MapVaults } from './map-vaults';
 import { MAP_SHAPES, MapSaveLayer } from './save/map-save-layer';
+import { MapSaveAbandoned } from './save/map-save-abandoned';
+import { MapHostiles } from './save/map-hostiles';
 import { MapSaveSectors } from './save/map-save-sectors';
 
 /**
@@ -17,5 +19,7 @@ export const MAP_PROVIDERS: Provider[] = [
 	MapVaults,
 	MapSaveLayer,
 	MapSaveSectors,
+	MapSaveAbandoned,
+	MapHostiles,
 	{ provide: MAP_SHAPES, useFactory: () => inject(MapGeometry).shapeById },
 ];

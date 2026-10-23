@@ -1,20 +1,43 @@
 @if (store.abandonedModel().show) {
 	@for (marker of store.abandoned(); track $index) {
 		@let size = store.panZoom.fontSize() * 0.9;
+		@let gone = abandoned.status(marker.item) === 'gone';
 		<svg:g class="cursor-pointer" [attr.data-sector]="marker.item.sector">
-			<svg:title i18n>
-				Abandoned {{ marker.ship?.name ?? marker.item.ship
-				}}{{ marker.item.condition ? ' (' + marker.item.condition + ')' : '' }}
-			</svg:title>
+			@if (gone) {
+				<svg:title i18n>Not there in your save: {{ marker.ship?.name ?? marker.item.ship }}</svg:title>
+			} @else {
+				<svg:title i18n>
+					Abandoned {{ marker.ship?.name ?? marker.item.ship
+					}}{{ marker.item.condition ? ' (' + marker.item.condition + ')' : '' }}
+				</svg:title>
+			}
 			<svg:rect
 				[attr.x]="marker.x - size / 2"
 				[attr.y]="marker.y - size / 2"
 				[attr.width]="size"
 				[attr.height]="size"
 				[attr.transform]="'rotate(45 ' + marker.x + ' ' + marker.y + ')'"
-				[attr.fill]="marker.item.condition ? '#c084fc' : '#f472b6'"
+				[attr.fill]="gone ? '#64748b' : marker.item.condition ? '#c084fc' : '#f472b6'"
+				[attr.fill-opacity]="gone ? 0.6 : 1"
 				stroke="#05080f"
 				stroke-width="1"
+				vector-effect="non-scaling-stroke"
+			/>
+		</svg:g>
+	}
+	@for (extra of abandoned.extras(); track extra.ship.id) {
+		@let size = store.panZoom.fontSize() * 0.9;
+		<svg:g class="cursor-pointer" [attr.data-sector]="extra.ship.sector">
+			<svg:title i18n>Ownerless in your save: {{ extra.model?.name ?? extra.ship.macro }}</svg:title>
+			<svg:rect
+				[attr.x]="extra.x - size / 2"
+				[attr.y]="extra.y - size / 2"
+				[attr.width]="size"
+				[attr.height]="size"
+				[attr.transform]="'rotate(45 ' + extra.x + ' ' + extra.y + ')'"
+				fill="#f472b6"
+				stroke="#fde047"
+				stroke-width="1.5"
 				vector-effect="non-scaling-stroke"
 			/>
 		</svg:g>
