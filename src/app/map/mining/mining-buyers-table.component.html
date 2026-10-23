@@ -6,7 +6,6 @@
 	<thead>
 		<tr>
 			<th i18n>Sector</th>
-			<th i18n>Best buyer</th>
 			<th class="text-right" i18n>Cr/unit</th>
 			<th class="text-right" i18n>Trip</th>
 			<th class="text-right">Cr/h</th>
@@ -26,14 +25,14 @@
 						{{ row.sectorName }}
 					</button>
 					<div class="text-xs text-fg-muted" i18n>{{ row.pair.amount | number }} units</div>
-				</td>
-				<td>
-					{{ row.name }}
-					@if (row.pair.thin) {
-						<span class="text-xs text-amber-700 dark:text-amber-300" i18n="mining buyer marker">thin</span>
-					}
-					<div class="text-xs text-fg-muted" i18n>
-						{{ row.owner ?? '' }} {{ row.buyerSectorName }}, {{ row.pair.jumps }} jumps
+					<div class="mt-1 text-xs">
+						→ {{ row.name }}
+						@if (row.pair.thin) {
+							<span class="text-amber-700 dark:text-amber-300" i18n="mining buyer marker">thin</span>
+						}
+						<div class="text-fg-muted" i18n>
+							{{ row.owner ?? '' }} {{ row.buyerSectorName }}, {{ row.pair.jumps }} jumps
+						</div>
 					</div>
 				</td>
 				<td class="text-right">{{ row.pair.price | number: '1.0-0' }}</td>
@@ -42,7 +41,7 @@
 			</tr>
 			@if (expanded) {
 				<tr>
-					<td colspan="5">
+					<td colspan="4">
 						<fieldset class="grid gap-1">
 							<legend class="text-xs text-fg-muted" i18n>Buyers for {{ row.sectorName }}</legend>
 							@for (buyer of store.buyers(); track buyer.key) {
@@ -74,7 +73,7 @@
 			}
 		} @empty {
 			<tr>
-				<td colspan="5" class="text-fg-muted" i18n>No known station buys this resource</td>
+				<td colspan="4" class="text-fg-muted" i18n>No known station buys this resource</td>
 			</tr>
 		}
 	</tbody>
