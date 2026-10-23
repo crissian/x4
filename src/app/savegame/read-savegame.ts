@@ -7,6 +7,7 @@ import { MapExtractor } from './extractors/map-extractor';
 import { LicencesExtractor } from './extractors/licences-extractor';
 import { RelationsExtractor } from './extractors/relations-extractor';
 import { RepresentativesExtractor } from './extractors/representatives-extractor';
+import { ShipsExtractor } from './extractors/ships-extractor';
 import { SavegameError, SavegameInfo } from './savegame-model';
 
 export interface ReadSavegameOptions {
@@ -56,6 +57,7 @@ export class SavegameReader {
 			new LicencesExtractor(),
 			new BlueprintsExtractor(),
 			new RepresentativesExtractor(),
+			new ShipsExtractor(),
 		];
 		try {
 			const opened = await TextStream.open(bytes, { size: options.size, onProgress: options.onProgress, keepGzip: true });
