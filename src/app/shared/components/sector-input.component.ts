@@ -1,24 +1,37 @@
-import { Component, input, model } from '@angular/core';
+import { Component, computed, inject, input, model } from '@angular/core';
 import { FormField, form, type FormValueControl } from '@angular/forms/signals';
+import { FactionService } from '../services/faction.service';
+import { SearchableSelectComponent } from './searchable-select/searchable-select.component';
 
-/** A sector name box suggesting the sector names while typing, bound with [formField]. */
+/**
+ * A searchable sector picker whose value is the sector name, bound with [formField]; emptying it clears the value.
+ * Sectors show their owner faction (at game start) as the detail, so typing a faction finds its sectors.
+ */
 @Component({
 	selector: 'app-sector-input',
-	imports: [FormField],
+	imports: [FormField, SearchableSelectComponent],
 	templateUrl: './sector-input.component.html',
 	host: { class: 'block' },
 })
 export class SectorInputComponent implements FormValueControl<string> {
-	private static nextId = 0;
+	private readonly factions = inject(FactionService);
 
 	readonly value = model('');
-	readonly sectors = input.required<readonly { id: string; name: string }[]>();
+	readonly sectors = input.required<readonly { id: string; name: string; owner?: string }[]>();
 	readonly label = input.required<string>();
 	/** Keeps the label for screen readers only. */
 	readonly hideLabel = input(false);
 	readonly placeholder = input<string>();
 	readonly inputId = input<string>();
+	/** Storage key of the recently picked sectors, listed first; none without it. */
+	readonly recentKey = input<string>();
 
 	protected readonly field = form(this.value);
-	protected readonly listId = `app-sector-input-${SectorInputComponent.nextId++}`;
+	protected readonly options = computed(() =>
+		this.sectors().map(({ name, owner }) => ({
+			id: name,
+			name,
+			detail: owner ? this.factions.getEntity(owner)?.name : undefined,
+		}))
+	);
 }

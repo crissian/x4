@@ -12,6 +12,7 @@
 			i18n-placeholder
 			placeholder="Sell near (optional)..."
 			[sectors]="store.sectorList"
+			recentKey="map-route-recent-sectors"
 			[formField]="store.routeForm.from"
 		/>
 	} @else {
@@ -22,6 +23,7 @@
 			i18n-placeholder
 			placeholder="Home sector (where you sell)..."
 			[sectors]="store.sectorList"
+			recentKey="map-route-recent-sectors"
 			[formField]="store.routeForm.from"
 		/>
 	}
