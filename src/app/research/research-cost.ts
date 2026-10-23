@@ -14,9 +14,4 @@ export class ResearchCost {
 			.map(([ware, amount]) => ({ ware, amount }))
 			.sort((a, b) => b.amount - a.amount || a.ware.localeCompare(b.ware));
 	}
-
-	/** The worth of the wares at the given unit prices; a ware without a price counts nothing. */
-	static value(wares: readonly WareAmount[], price: (ware: string) => number | undefined): number {
-		return wares.reduce((sum, x) => sum + x.amount * (price(x.ware) ?? 0), 0);
-	}
 }

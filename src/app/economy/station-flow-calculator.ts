@@ -6,12 +6,20 @@ import type { ModuleService } from '../shared/services/module.service';
 import type { WareService } from '../shared/services/ware.service';
 import type { SaveStation } from '../savegame/map/save-map-model';
 import { ResourceCalculator, StationModuleModel } from '../station/components/station-calculator.model';
+import { PlayerHeadquarters } from '../station/player-headquarters';
 import type { StationFlow, StationFlows } from './economy-model';
 
 /**
+ * What the flows of a station are calculated from: its modules (macro ids, see `SaveStation`), workers and sector,
+ * and its station macro, which tells the player headquarters.
+ */
+export type StationFlowInput = Pick<SaveStation, 'modules' | 'moduleCounts' | 'workforce' | 'sector'> &
+	Partial<Pick<SaveStation, 'macro'>>;
+
+/**
  * Hourly flows of the stations of a save, at full input supply, with the station calculator maths: the workforce
- * bonus scales with the workers the station really has, energy cells with the sector sunlight, and habitats feed
- * the workers actually living there.
+ * bonus scales with the workers the station really has (the player headquarters needs its extra workers), energy
+ * cells with the sector sunlight, and habitats feed the workers actually living there.
  */
 export class StationFlowCalculator {
 	private readonly sunlight = new Map<string, number>();
@@ -37,7 +45,7 @@ export class StationFlowCalculator {
 		return stations.filter((x) => !x.state).map((station) => ({ station, flows: this.flows(station) }));
 	}
 
-	flows(station: SaveStation): StationFlow[] {
+	flows(station: StationFlowInput): StationFlow[] {
 		const byWare = new Map<string, StationFlow>();
 		const flow = (ware: string) => {
 			let item = byWare.get(ware);
@@ -51,9 +59,14 @@ export class StationFlowCalculator {
 		const workforce = Object.entries(station.workforce ?? {});
 		const workers = workforce.reduce((sum, [, count]) => sum + count, 0);
 		const models = station.modules.map((id, i) => this.model(id, station.moduleCounts?.[i] ?? 1));
-		const sunlight = Math.round((this.sunlight.get(station.sector) ?? 1) * 100);
+		const sunlight = this.sunlightOf(station.sector);
 
-		for (const resource of ResourceCalculator.calculate(models, sunlight, workers)) {
+		for (const resource of ResourceCalculator.calculate(
+			models,
+			sunlight,
+			workers,
+			PlayerHeadquarters.is(station.macro)
+		)) {
 			for (const item of resource.items) {
 				// habitats are fed from the real workers below, not from their capacity
 				if (item.type === ModuleTypes.habitation) {
@@ -78,11 +91,21 @@ export class StationFlowCalculator {
 		return [...byWare.values()];
 	}
 
+	/** The module id of the macro id a save names a module with; undefined for a module the site doesn't know. */
+	moduleId(macroId: string): string | undefined {
+		return this.moduleByMacro.get(macroId);
+	}
+
+	/** The sunlight of a sector in percent, as the flows use it. */
+	sunlightOf(sector: string): number {
+		return Math.round((this.sunlight.get(sector) ?? 1) * 100);
+	}
+
 	private model(macroId: string, count: number): StationModuleModel {
 		const key = `${macroId}*${count}`;
 		let model = this.models.get(key);
 		if (!model) {
-			model = new StationModuleModel(this.wares, this.modules, this.moduleByMacro.get(macroId) ?? '', count);
+			model = new StationModuleModel(this.wares, this.modules, this.moduleId(macroId) ?? '', count);
 			this.models.set(key, model);
 		}
 		return model;

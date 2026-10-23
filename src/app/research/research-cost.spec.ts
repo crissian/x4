@@ -16,17 +16,4 @@ describe('ResearchCost', () => {
 			{ ware: 'b', amount: 10 },
 		]);
 	});
-
-	it('values the wares at their prices, unknown ones at nothing', () => {
-		const prices: Record<string, number> = { a: 2 };
-		expect(
-			ResearchCost.value(
-				[
-					{ ware: 'a', amount: 10 },
-					{ ware: 'x', amount: 3 },
-				],
-				(id) => prices[id]
-			)
-		).toBe(20);
-	});
 });

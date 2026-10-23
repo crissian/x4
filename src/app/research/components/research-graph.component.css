@@ -1,41 +1,11 @@
-/* `--tone` comes from the global `[data-tone]` styles of the research state */
-.edge {
-	fill: none;
-	stroke: var(--color-line-strong);
-	stroke-width: 1.5;
-}
-
+/* on top of shared/graph/dag-graph.css */
 .edge-path {
 	stroke: var(--color-primary);
 	stroke-width: 2.5;
 }
 
 .node {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 100%;
-	height: 100%;
-	padding: 0.25rem 0.5rem;
-	overflow: hidden;
-	text-align: left;
-	font-size: 0.75rem;
-	line-height: 1.15rem;
-	color: var(--color-fg);
-	background: var(--color-raised);
-	border: 1px solid var(--color-line);
-	border-left: 5px solid var(--tone);
-	border-radius: 0.375rem;
 	cursor: pointer;
-}
-
-.node:hover {
-	background: var(--color-hover);
-}
-
-.node:focus-visible {
-	outline: 2px solid var(--color-primary);
-	outline-offset: -2px;
 }
 
 .node-path {
@@ -51,20 +21,4 @@
 
 .node-dim {
 	opacity: 0.35;
-}
-
-.node-name {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	font-size: 0.8125rem;
-	font-weight: 600;
-	color: var(--color-fg-strong);
-}
-
-.node-line {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	color: var(--color-fg-muted);
 }

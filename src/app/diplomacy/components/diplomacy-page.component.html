@@ -1,0 +1,139 @@
+<div class="card">
+	<div class="card-header">
+		<h1 i18n>Diplomacy</h1>
+	</div>
+	<div class="card-body">
+		<p class="text-sm text-fg-muted" i18n>
+			What your agents can do in the diplomacy menu, what each action takes and gives, the diplomatic events they
+			can sway and the gifts listed for each faction, as the game data defines them.
+		</p>
+		@switch (saveStatus()) {
+			@case ('ready') {
+				@if (diplomacy()!.found) {
+					<p class="mt-1 text-sm" i18n>
+						{{ shownCount() }} of {{ service.getEntities().length }} agent actions available in
+						{{ save()!.info.saveName }} ({{ gameTime() }}).
+					</p>
+				} @else {
+					<p class="mt-1 text-sm text-fg-muted" i18n>
+						{{ save()!.info.saveName }} has no diplomacy yet: it was saved before the game's 8.0 update.
+					</p>
+				}
+			}
+			@case ('reload-needed') {
+				<p class="mt-1 text-sm">
+					<a routerLink="/saves" i18n>Reload this save to see which agent actions it offers</a>
+				</p>
+			}
+			@case ('loading') {
+				<p class="mt-1 text-sm text-fg-muted" role="status" i18n>Loading save…</p>
+			}
+			@default {
+				<p class="mt-1 text-sm">
+					<a routerLink="/saves" i18n>Load a savegame</a>
+					<ng-container i18n> to see which agent actions your game offers.</ng-container>
+				</p>
+			}
+		}
+
+		<app-tabs class="mt-4 block" label="Diplomacy view" i18n-label [tabs]="tabs" [(selected)]="tab">
+			@switch (tab()) {
+				@case ('actions') {
+					<div class="mb-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+						<app-option-select
+							class="text-sm"
+							inputId="diplomacy-category"
+							i18n-label
+							label="Category"
+							i18n-allLabel
+							allLabel="All categories"
+							[options]="categories"
+							[formField]="form.category"
+						/>
+						<app-option-select
+							class="text-sm"
+							inputId="diplomacy-agent"
+							i18n-label
+							label="Agent experience"
+							i18n-allLabel
+							allLabel="Any experience"
+							[options]="agentTypes"
+							[formField]="form.agentType"
+						/>
+						<label class="text-sm">
+							<ng-container i18n>Search</ng-container>
+							<input
+								id="diplomacy-search"
+								class="input"
+								type="search"
+								i18n-placeholder
+								placeholder="Action name"
+								[formField]="form.search"
+							/>
+						</label>
+						@if (diplomacy()?.found) {
+							<label class="flex items-center gap-2 pb-2 text-sm sm:self-end">
+								<input id="diplomacy-shown" type="checkbox" [formField]="form.shown" />
+								<ng-container i18n>Only actions available in your save</ng-container>
+							</label>
+						}
+					</div>
+					<app-data-grid
+						[data]="actions()"
+						[columns]="actionColumns()"
+						[clickable]="true"
+						storageKey="diplomacy-actions"
+						(rowClick)="open($event)"
+					/>
+				}
+				@case ('events') {
+					<p class="mb-3 text-sm text-fg-muted" i18n>
+						Each event between two factions ends in one of its options, picked by the options' weights; an
+						agent focused on an option can sway it, at the cost listed, paid when the event concludes. The
+						resulting reputation is the relation the two factions end with.
+					</p>
+					<app-data-grid
+						[data]="options"
+						[columns]="optionColumns"
+						[compact]="true"
+						storageKey="diplomacy-events"
+					/>
+				}
+				@case ('gifts') {
+					<p class="mb-3 text-sm text-fg-muted" i18n>
+						An agent action can take an optional gift or bribe. Its effect on the success chance depends on
+						the ware and the target faction, and the diplomacy menu shows it once an action has revealed it.
+					</p>
+					<app-data-grid
+						[data]="gifts"
+						[columns]="giftColumns"
+						[compact]="true"
+						storageKey="diplomacy-gifts"
+					/>
+				}
+				@case ('agents') {
+					<div class="grid gap-4 md:grid-cols-2">
+						<div>
+							<h2 class="mb-2" i18n>Experience levels</h2>
+							<app-data-grid
+								[data]="service.catalog.experience"
+								[columns]="experienceColumns"
+								[features]="false"
+								[compact]="true"
+							/>
+						</div>
+						<div>
+							<h2 class="mb-2" i18n>Ranks</h2>
+							<app-data-grid
+								[data]="service.catalog.ranks"
+								[columns]="rankColumns"
+								[features]="false"
+								[compact]="true"
+							/>
+						</div>
+					</div>
+				}
+			}
+		</app-tabs>
+	</div>
+</div>

@@ -3,6 +3,7 @@ import { Duration } from '../core/format/duration';
 import type { Sector } from '../shared/services/model/model';
 import { SectorService } from '../shared/services/universe.service';
 import { BlueprintsExtractor } from './extractors/blueprints-extractor';
+import { DiplomacyExtractor, type SaveDiplomacy } from './extractors/diplomacy-extractor';
 import { EmpireExtractor } from './extractors/empire-extractor';
 import { LicencesExtractor } from './extractors/licences-extractor';
 import { LogExtractor } from './extractors/log-extractor';
@@ -11,6 +12,7 @@ import { RelationsExtractor } from './extractors/relations-extractor';
 import { ResearchExtractor } from './extractors/research-extractor';
 import { RepresentativesExtractor } from './extractors/representatives-extractor';
 import { ShipsExtractor } from './extractors/ships-extractor';
+import { SaveTerraforming, TerraformingExtractor } from './extractors/terraforming-extractor';
 import { SaveVaults, VaultsExtractor } from './extractors/vaults-extractor';
 import type { SaveBlueprints, SaveLicences, SaveMap, SaveRelations, SaveRepresentatives, SaveResearch, SaveShips } from './map/save-map-model';
 import type { SaveLog } from './log/save-log-model';
@@ -45,6 +47,10 @@ export class ActiveSave {
 	readonly vaults = this.data<SaveVaults>(VaultsExtractor.KEY);
 	/** Fleets, station accounts, ownerless ships and hostile ship counts; undefined for a save read before them. */
 	readonly empire = this.data<SaveEmpire>(EmpireExtractor.KEY);
+	/** Which diplomacy actions the menu shows; undefined for a save read before they were. */
+	readonly diplomacy = this.data<SaveDiplomacy>(DiplomacyExtractor.KEY);
+	/** The terraforming state of the planets set up for it; undefined for a save read before it was. */
+	readonly terraforming = this.data<SaveTerraforming>(TerraformingExtractor.KEY);
 
 	/** Whether the map data can be shown. */
 	readonly status = this.statusOf(this.map);

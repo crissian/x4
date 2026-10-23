@@ -1,0 +1,9 @@
+/* on top of shared/graph/dag-graph.css */
+.edge-any {
+	stroke-dasharray: 5 4;
+}
+
+/* two lines fit the 46px node */
+.node {
+	line-height: 1.1rem;
+}

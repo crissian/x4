@@ -1,0 +1,109 @@
+<div class="card">
+	<div class="card-header flex items-center gap-2">
+		<h1>{{ label('terraforming') }}</h1>
+		<app-experimental-badge />
+	</div>
+	<div class="card-body">
+		<p class="text-sm text-fg-muted" i18n>
+			The planets you can terraform: their stats on the game's own ranges and the projects they offer, with what
+			each one costs, changes and needs.
+		</p>
+		@switch (store.status()) {
+			@case ('ready') {
+				<p class="mt-1 text-sm" i18n>Stats and projects from {{ store.save()!.info.saveName }}.</p>
+			}
+			@case ('reload-needed') {
+				<p class="mt-1 text-sm">
+					<a routerLink="/saves" i18n>Reload this save to see the terraforming state of its planets</a>
+				</p>
+			}
+			@case ('loading') {
+				<p class="mt-1 text-sm text-fg-muted" role="status" i18n>Loading save…</p>
+			}
+			@default {
+				<p class="mt-1 text-sm">
+					<a routerLink="/saves" i18n>Load a savegame</a>
+					<ng-container i18n>
+						for the current stats and every project a planet offers; without one you see the stats and
+						projects the game's scripts give the planet when it is set up.</ng-container
+					>
+				</p>
+			}
+		}
+
+		<div class="mt-4 flex flex-wrap items-end gap-x-6 gap-y-3">
+			<app-option-select
+				class="text-sm"
+				inputId="terraforming-planet"
+				i18n-label
+				label="Planet"
+				[options]="store.options"
+				[formField]="store.form.planet"
+			/>
+			@if (store.cluster(); as cluster) {
+				<p class="pb-2 text-sm">
+					<ng-container i18n>System</ng-container>
+					@if (store.sector(); as sector) {
+						<app-sector-map-link class="ml-1" [sector]="sector" [name]="cluster.name" />
+					}
+				</p>
+			}
+		</div>
+
+		@if (store.state(); as state) {
+			<h2 class="mt-4 text-base font-semibold text-fg-strong">{{ label('environment') }}</h2>
+			@if (!state.fromSave) {
+				<p class="text-sm text-fg-muted" i18n>The stats the game's scripts set when the planet is set up.</p>
+			}
+			<app-terraforming-stats class="mt-2 block" [catalog]="store.catalog" [stats]="state.stats" />
+
+			@if (state.events.length) {
+				<h3 class="mt-4 font-semibold text-fg-strong" i18n>Events in the save</h3>
+				<ul class="mt-1 text-sm">
+					@for (event of state.events; track event.id) {
+						<li>
+							<a [routerLink]="['/terraforming/projects', event.id]">{{ event.name }}</a>
+							@if (event.completed) {
+								<span class="text-fg-muted">
+									· {{ label('timesCompleted') }}: {{ event.completed }}</span
+								>
+							}
+						</li>
+					}
+				</ul>
+			}
+
+			<h2 class="mt-6 text-base font-semibold text-fg-strong">{{ label('projects') }}</h2>
+			<p class="mb-2 text-sm text-fg-muted" i18n>
+				{count(), plural, =1 {1 project} other {{{ count() }} projects}}
+			</p>
+			@if (!state.fromSave) {
+				<p class="mb-2 text-sm text-fg-muted" i18n>
+					Only the projects the scripts add to this planet by name. The general ones (power, industry, housing
+					and more) and the ware amounts the game asks for are known once a save is loaded; the wares shown
+					here are the library's amounts, which the save scales for each planet.
+				</p>
+			}
+			<app-tabs label="Project view" i18n-label [tabs]="tabs" [(selected)]="store.view">
+				@if (store.view() === 'graph') {
+					<p class="mb-2 text-sm text-fg-muted" i18n>
+						Required projects point right to the projects needing them; dashed lines lead to a project that
+						needs any one of them. The projects completed in the save are green.
+					</p>
+					<app-terraforming-graph [rows]="state.projects" [completedLabel]="label('timesCompleted')" />
+				} @else {
+					<app-data-grid
+						[data]="rows()"
+						[columns]="columns"
+						[trackBy]="trackBy"
+						[sort]="sort"
+						[compact]="true"
+						storageKey="terraforming"
+					/>
+				}
+			</app-tabs>
+		} @else {
+			<p class="mt-4 text-fg-muted" i18n>No terraformable planets found.</p>
+		}
+	</div>
+</div>

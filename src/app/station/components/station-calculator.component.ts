@@ -80,6 +80,10 @@ export default class StationCalculatorComponent {
 	readonly l = input<string>();
 	/** The sunlight in percent of a shared layout, from the `sun` query parameter. */
 	readonly sun = input<string>();
+	/** The workers a station of a save really has, from the `wf` query parameter. */
+	readonly wf = input<string>();
+	/** `1` for the player headquarters, from the `hq` query parameter. */
+	readonly hq = input<string>();
 
 	readonly layout = signal<Layout | null>(null);
 	protected readonly stationModulesTitle = $localize`Station Modules`;
@@ -139,6 +143,25 @@ export default class StationCalculatorComponent {
 			const sunlight = StationLayoutLink.parseSunlight(this.sun());
 			if (sunlight !== undefined) {
 				untracked(() => this.settings.update((settings) => ({ ...settings, sunlight })));
+			}
+		});
+		// the player headquarters of a save opens with the Headquarters setting
+		effect(() => {
+			if (this.hq() === '1') {
+				untracked(() => this.settings.update((settings) => ({ ...settings, isHq: true })));
+			}
+		});
+		// a station of a save opens with the workers it really has
+		effect(() => {
+			const workforce = StationLayoutLink.parseWorkforce(this.wf());
+			if (workforce !== undefined) {
+				untracked(() =>
+					this.settings.update((settings) => ({
+						...settings,
+						autoWorkforce: false,
+						partialWorkforce: workforce,
+					}))
+				);
 			}
 		});
 		// keep the workforce slider in line with the calculated value

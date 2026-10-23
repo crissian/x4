@@ -47,7 +47,11 @@ export const appRoutes: Routes = [
 	},
 	{
 		path: 'factions',
-		loadChildren: () => GameText.withTexts(TEXTS.base, () => import('./faction/faction.routes')),
+		loadChildren: () =>
+			GameText.withTexts(
+				[...TEXTS.base, 'equipment-mods', 'diplomacy'],
+				() => import('./faction/faction.routes')
+			),
 	},
 	{
 		path: 'races',
@@ -138,6 +142,22 @@ export const appRoutes: Routes = [
 				() => import('./research/components/research-page.component')
 			),
 		title: `${BASE_TITLE} - ${$localize`Research`}`,
+	},
+	{
+		path: 'diplomacy',
+		loadChildren: () =>
+			GameText.withTexts(
+				[...TEXTS.base, 'equipment-mods', 'diplomacy'],
+				() => import('./diplomacy/diplomacy.routes')
+			),
+	},
+	{
+		path: 'terraforming',
+		loadChildren: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'research', 'terraforming'],
+				() => import('./terraforming/terraforming.routes')
+			),
 	},
 	{
 		path: 'game-starts',

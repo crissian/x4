@@ -1,5 +1,6 @@
 import type { SaveFleetShip, SaveOwnStation, SaveOwnerlessShip } from '../empire/save-empire-model';
 import type { SaveZoneNode } from './save-position';
+import type { StationBuild } from './station-build';
 
 /** The open components the empire extractor keeps: every component gets one, so a node's depth tells what an element is directly inside. */
 export interface SectorNode {
@@ -17,6 +18,8 @@ export interface StationNode {
 	kind: 'station';
 	/** the player's station */
 	own?: SaveOwnStation;
+	/** the player's station's construction sequence */
+	build?: StationBuild;
 }
 /** a storage module of a player station */
 export interface StorageNode {

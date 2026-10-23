@@ -1,6 +1,6 @@
 import { Descriptions } from '../../shared/services/descriptions';
 import { DecimalPipe, PercentPipe } from '@angular/common';
-import { Component, computed, inject, input, viewChild } from '@angular/core';
+import { Component, computed, inject, input, signal, viewChild } from '@angular/core';
 import { EntityDetailPage } from '../../shared/components/entity-detail-page';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { Router, RouterLink } from '@angular/router';
@@ -18,8 +18,10 @@ import { SectorStationsComponent } from './sector-stations.component';
 import { FactionLabelComponent } from '../../shared/components/faction-label.component';
 import { SectorVaultsComponent } from '../../vaults/sector-vaults.component';
 import { ShowOnMapLinkComponent } from '../../shared/components/show-on-map-link.component';
+import { TerraformingBodies } from '../../terraforming/terraforming-bodies';
 
-type PlanetRow = Planet & { moon?: boolean };
+/** `terraformable`: the game's scripts set the planet or moon up for terraforming */
+type PlanetRow = Planet & { moon?: boolean; terraformable?: boolean };
 export type SectorTab = 'stations' | 'connections' | 'resources' | 'system';
 
 @Component({
@@ -120,13 +122,22 @@ export class SectorDetailComponent extends EntityDetailPage<Sector> {
 
 	/** Planets followed by their moons. */
 	protected readonly planets = computed(() => {
+		const cluster = this.cluster()?.id ?? '';
+		const bodies = this.terraformingBodies();
 		const result: PlanetRow[] = [];
-		for (const planet of this.cluster()?.planets ?? []) {
-			result.push(planet);
-			result.push(...(planet.moons ?? []).map((x) => ({ ...x, moon: true })));
-		}
+		(this.cluster()?.planets ?? []).forEach((planet, index) => {
+			result.push({ ...planet, terraformable: bodies?.has(cluster, index) });
+			result.push(
+				...(planet.moons ?? []).map((x, moon) => ({
+					...x,
+					moon: true,
+					terraformable: bodies?.has(cluster, index, moon),
+				}))
+			);
+		});
 		return result;
 	});
+	private readonly terraformingBodies = signal<TerraformingBodies | undefined>(undefined);
 
 	/** Total amount the sector holds per ware. */
 	protected readonly totals = computed(() => {
@@ -148,7 +159,7 @@ export class SectorDetailComponent extends EntityDetailPage<Sector> {
 		{ key: 'respawnDelay', caption: $localize`Respawn (min)`, type: 'number' },
 	];
 
-	protected readonly planetColumns: GridColumn<PlanetRow>[] = [
+	private readonly allPlanetColumns: GridColumn<PlanetRow>[] = [
 		{ key: 'name', caption: $localize`Name`, display: (x) => (x.moon ? '↳ ' : '') + (x.name ?? '-') },
 		{ key: 'class', caption: $localize`Class` },
 		{ key: 'geology', caption: $localize`Geology` },
@@ -159,5 +170,24 @@ export class SectorDetailComponent extends EntityDetailPage<Sector> {
 			display: (x) => PlanetPopulation.label(x),
 		},
 		{ key: 'settlements', caption: $localize`Settlements` },
+		{
+			key: 'terraforming',
+			caption: $localize`Terraforming`,
+			value: (x) => (x.terraformable ? $localize`Terraformable` : ''),
+			link: (x) => (x.terraformable ? ['/terraforming'] : undefined),
+			queryParams: () => ({ planet: this.cluster()?.id }),
+		},
 	];
+
+	/** The columns, the terraforming one only when a planet or moon of the system can be terraformed. */
+	protected readonly planetColumns = computed(() =>
+		this.planets().some((x) => x.terraformable)
+			? this.allPlanetColumns
+			: this.allPlanetColumns.filter((x) => x.key !== 'terraforming')
+	);
+
+	constructor() {
+		super();
+		TerraformingBodies.load().then((x) => this.terraformingBodies.set(x));
+	}
 }

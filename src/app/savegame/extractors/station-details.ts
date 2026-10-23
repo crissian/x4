@@ -1,6 +1,7 @@
 import { MacroId } from '../../core/macro-id';
 import { XmlAttributes } from '../../core/xml/xml-stream-scanner';
 import { SaveOffer, SaveStation } from '../map/save-map-model';
+import { SavePosition } from './save-position';
 
 /** Collects the modules, own trade offers and workforce of one station while the map extractor streams it. */
 export class StationDetails {
@@ -26,12 +27,12 @@ export class StationDetails {
 		this.shady = undefined;
 		const sell = a['seller'] !== undefined && a['seller'] === this.id;
 		const buy = a['buyer'] !== undefined && a['buyer'] === this.id;
-		const amount = StationDetails.num(a['amount']);
+		const amount = SavePosition.num(a['amount']);
 		const ware = a['ware'];
 		if (!ware || (!sell && !buy) || amount <= 0) {
 			return;
 		}
-		const offer: SaveOffer = { ware, sell, price: Math.round(StationDetails.num(a['price'])) / 100, amount };
+		const offer: SaveOffer = { ware, sell, price: Math.round(SavePosition.num(a['price'])) / 100, amount };
 		this.offers.push(offer);
 		if ((a['flags'] ?? '').split('|').includes('shady')) {
 			this.shady = offer;
@@ -49,7 +50,7 @@ export class StationDetails {
 	/** `workforces/workforce` */
 	addWorkforce(a: XmlAttributes): void {
 		const race = a['race'];
-		const amount = StationDetails.num(a['amount']);
+		const amount = SavePosition.num(a['amount']);
 		if (race && amount > 0) {
 			(this.workforce ??= {})[race] = (this.workforce[race] ?? 0) + amount;
 		}
@@ -67,10 +68,5 @@ export class StationDetails {
 		if (this.workforce) {
 			station.workforce = this.workforce;
 		}
-	}
-
-	private static num(value: string | undefined): number {
-		const parsed = Number(value);
-		return Number.isFinite(parsed) ? parsed : 0;
 	}
 }

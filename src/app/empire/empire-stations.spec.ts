@@ -9,6 +9,7 @@ describe('EmpireStations', () => {
 		stationName: (x) => x.name ?? x.code,
 		products: (id) => (id === 'prod_ec' ? ['energycells'] : id === 'prod_mix' ? ['hullparts', 'energycells'] : []),
 		wareName: (id) => ({ energycells: 'Energy Cells', hullparts: 'Hull Parts', water: 'Water' })[id] ?? id,
+		layout: (own, x) => ({ own: own.code, workforce: x.workforce }) as never,
 	};
 	const station = (code: string, extra: Partial<SaveStation> = {}): SaveStation => ({
 		code,
@@ -27,7 +28,12 @@ describe('EmpireStations', () => {
 	it('joins the map stations of the player with their money, storage and commanded ships', () => {
 		const rows = EmpireStations.build(
 			[
-				station('BBB-2', { name: 'Zeta Works', modules: ['prod_ec', 'prod_mix', 'dock'], moduleCounts: [4, 1, 1] }),
+				station('BBB-2', {
+					name: 'Zeta Works',
+					modules: ['prod_ec', 'prod_mix', 'dock'],
+					moduleCounts: [4, 1, 1],
+					workforce: { argon: 50 },
+				}),
 				station('AAA-1', { name: 'Alpha', state: 'construction' }),
 				station('NPC-1', { owner: 'argon' }),
 				station('WRK-1', { state: 'wreck' }),
@@ -52,8 +58,10 @@ describe('EmpireStations', () => {
 			],
 			money: 5000,
 			ships: 3,
+			layout: { own: 'BBB-2', workforce: { argon: 50 } },
 		});
 		expect(rows[0]).toMatchObject({ id: 'AAA-1', state: 'construction', money: 0, storage: [], ships: 0 });
+		expect(rows[0].layout).toBeUndefined();
 	});
 
 	it('sums up money, ships by size and stations', () => {

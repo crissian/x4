@@ -4,11 +4,12 @@ import { SectorMapLinkComponent } from '../../shared/components/sector-map-link.
 import type { EmpireStationRow } from '../empire-model';
 import { EmpireStore } from '../empire-store';
 import { EmpireColumns } from './empire-columns';
+import { StationCalculatorLinkComponent } from './station-calculator-link.component';
 
 /** The player's stations with their modules, products, storage and money. */
 @Component({
 	selector: 'app-empire-stations',
-	imports: [DataGridComponent, SectorMapLinkComponent],
+	imports: [DataGridComponent, SectorMapLinkComponent, StationCalculatorLinkComponent],
 	templateUrl: './empire-stations.component.html',
 })
 export class EmpireStationsComponent {

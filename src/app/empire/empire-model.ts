@@ -1,4 +1,5 @@
 import type { ShipListItem } from '../shared/services/model/model';
+import type { OwnStationLayout } from './own-station-layout';
 
 /** One of the player's ships on the empire page, in fleet order. */
 export interface EmpireShipRow {
@@ -58,6 +59,8 @@ export interface EmpireStationRow {
 	money: number;
 	/** how many ships it commands, directly or not */
 	ships: number;
+	/** its built modules for the station calculator; absent without empire data for it */
+	layout?: OwnStationLayout;
 }
 
 /** The tiles on top of the empire page. */
