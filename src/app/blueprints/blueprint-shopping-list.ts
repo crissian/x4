@@ -19,6 +19,8 @@ export interface ShoppingListInput {
 	/** the player's relations, as of save time */
 	relations: SaveRelations;
 	sellers: (item: BlueprintItem) => BlueprintSeller[];
+	/** the item's sellers whether or not they have a representative in the save */
+	anySellers: (item: BlueprintItem) => BlueprintSeller[];
 	/** `BlueprintRules.missionOnly` */
 	missionOnly: readonly string[];
 	/** `BlueprintRules.unlockedBy` */
@@ -50,8 +52,7 @@ export class BlueprintShoppingList {
 						sellers: BlueprintShoppingList.reputationSellers([gift], input.relations),
 					});
 				}
-				const reason = input.unlockedBy[item.id] ?? (missionOnly.has(item.id) ? 'story' : 'unknown');
-				unsold.push({ item, reason });
+				unsold.push(BlueprintShoppingList.unsold(item, input, missionOnly));
 				continue;
 			}
 			const holders = item.license ? (input.licences[item.license] ?? []) : undefined;
@@ -69,6 +70,20 @@ export class BlueprintShoppingList {
 			),
 			unsold,
 		};
+	}
+
+	/** Where an item no one sells comes from: a script, else sellers without a representative, else unknown. */
+	private static unsold(
+		item: BlueprintItem,
+		input: ShoppingListInput,
+		missionOnly: ReadonlySet<string>
+	): UnsoldEntry {
+		const reason = input.unlockedBy[item.id] ?? (missionOnly.has(item.id) ? 'story' : undefined);
+		if (reason) {
+			return { item, reason };
+		}
+		const sellers = input.anySellers(item);
+		return sellers.length ? { item, reason: 'norepresentative', sellers } : { item, reason: 'unknown' };
 	}
 
 	private static reputationSellers(sellers: BlueprintSeller[], relations: SaveRelations): ReputationSeller[] {

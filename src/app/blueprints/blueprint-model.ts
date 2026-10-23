@@ -45,7 +45,8 @@ export interface ReputationSeller extends BlueprintSeller {
 	pending: boolean;
 }
 
-export type UnsoldReason = BlueprintUnlock | 'unknown';
+/** `norepresentative`: factions sell it, but none has a representative in the save */
+export type UnsoldReason = BlueprintUnlock | 'norepresentative' | 'unknown';
 
 export interface BuyEntry {
 	item: BlueprintItem;
@@ -61,6 +62,8 @@ export interface ReputationEntry {
 export interface UnsoldEntry {
 	item: BlueprintItem;
 	reason: UnsoldReason;
+	/** for `norepresentative`: the factions that would sell it */
+	sellers?: BlueprintSeller[];
 }
 
 /** The blueprints of a shopping list section one faction sells. */

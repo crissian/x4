@@ -93,6 +93,7 @@ export class BlueprintsStore {
 			licences: this.licences(),
 			relations: this.relations(),
 			sellers: (x) => BlueprintSellers.of(x, { ...this.sellerRules, representatives }),
+			anySellers: (x) => (representatives ? BlueprintSellers.of(x, this.sellerRules) : []),
 			missionOnly: BlueprintRules.missionOnly,
 			unlockedBy: BlueprintRules.unlockedBy,
 			gift: (x) => BlueprintSellers.gift(BlueprintRules.giftedBy[x.id], (id) => this.factions.getEntity(id)),

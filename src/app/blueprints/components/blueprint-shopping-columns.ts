@@ -21,6 +21,7 @@ export class BlueprintShoppingColumns {
 		gamestart: $localize`:blueprint source:Game start`,
 		story: $localize`:blueprint source:Story or mission`,
 		ceremony: $localize`:blueprint source:Reputation ceremony gift`,
+		norepresentative: $localize`:blueprint source:Seller has no representative`,
 		unknown: $localize`:blueprint source:Unknown source`,
 	};
 
@@ -87,6 +88,12 @@ export class BlueprintShoppingColumns {
 			caption: $localize`Source`,
 			value: (x) => x.reason,
 			lookup: Object.entries(BlueprintShoppingColumns.REASONS).map(([value, label]) => ({ value, label })),
+		},
+		{
+			key: 'sellers',
+			caption: $localize`Sellers`,
+			value: (x) => this.names(x.sellers ?? []),
+			sortValue: (x) => x.sellers?.length ?? 0,
 		},
 		this.price(),
 	];

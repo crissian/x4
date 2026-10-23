@@ -25,6 +25,7 @@ describe('BlueprintShoppingList', () => {
 			missionOnly: options.missionOnly ?? [],
 			unlockedBy: options.unlockedBy ?? {},
 			gift: () => undefined,
+			anySellers: () => [],
 		});
 
 	it('skips owned blueprints', () => {
@@ -76,6 +77,23 @@ describe('BlueprintShoppingList', () => {
 		]);
 	});
 
+	it('names the sellers of an item none of whose sellers has a representative in the save', () => {
+		const list = BlueprintShoppingList.build({
+			items: [T.item('prometheus', [T.ARGON])],
+			owned: new Set(),
+			licences: {},
+			relations: {},
+			sellers: () => [],
+			anySellers: (x) => T.sellers(x),
+			missionOnly: [],
+			unlockedBy: {},
+			gift: () => undefined,
+		});
+		expect(list.unsold.map((x) => [x.item.id, x.reason, x.sellers?.map((s) => s.faction.id)])).toEqual([
+			['prometheus', 'norepresentative', ['argon']],
+		]);
+	});
+
 	it('lists a gift no one sells as unsold, needing the ceremony reputation until the player has had it', () => {
 		// Argon gifts 'span' at its friend ceremony (relation 0.01, reputation 10); the player is at 7 (relation 0.005)
 		const argon = { ...T.ARGON, licenses: [T.licence('ceremonyfriend', 0.01)] };
@@ -87,6 +105,7 @@ describe('BlueprintShoppingList', () => {
 			licences,
 			relations: { argon: 0.005 },
 			sellers: (x: BlueprintItem) => T.sellers(x),
+			anySellers: () => [],
 			missionOnly: [],
 			unlockedBy: { span: 'ceremony' as const },
 			gift,
