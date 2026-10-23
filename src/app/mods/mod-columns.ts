@@ -1,18 +1,11 @@
-import type { GridColumn, GridDot } from '../shared/components/data-grid/grid-column';
+import type { GridColumn } from '../shared/components/data-grid/grid-column';
 import type { EquipmentModService } from '../shared/services/equipment-mod.service';
 import type { EquipmentMod, ModEffect } from '../shared/services/model/equipment-mod';
-import { type EffectTone, ModEffects } from './mod-effects';
+import { ModEffects } from './mod-effects';
 import { ModSlots } from './mod-slots';
 
 /** The data grid columns of equipment mod lists. */
 export class ModColumns {
-	private static readonly DOTS: Record<EffectTone, GridDot | undefined> = {
-		good: { tone: 'green', level: 3 },
-		bad: { tone: 'red', level: 3 },
-		mixed: { tone: 'amber', level: 3 },
-		none: undefined,
-	};
-
 	/**
 	 * Name, slot, quality, main effect and its range, bonus effects, research, price. `slot: false` drops the slot;
 	 * `pageFilters` drops the grid filters of the slot, quality and stat, for a page that has its own.
@@ -47,9 +40,8 @@ export class ModColumns {
 				key: 'range',
 				caption: $localize`Range`,
 				type: 'number',
-				value: (x) => ModEffects.best(stat(x.effect), x.effect),
+				value: (x) => ModEffects.maxChange(stat(x.effect), x.effect),
 				display: (x) => ModEffects.range(stat(x.effect), x.effect),
-				dot: (x) => ModColumns.DOTS[ModEffects.tone(stat(x.effect), x.effect)],
 				filterable: false,
 			},
 			{

@@ -15,8 +15,6 @@ export interface ModStat {
 	id: string;
 	slot: ModSlot;
 	kind: ModStatKind;
-	/** the stat improves as it gets lower: mass, recharge delay, charge time... */
-	lowerIsBetter?: boolean;
 	name: string;
 	description: string;
 }

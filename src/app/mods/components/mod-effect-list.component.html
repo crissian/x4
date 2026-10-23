@@ -1,12 +1,6 @@
 <ng-template #effect let-row>
 	@if (row.range) {
-		<span
-			class="font-semibold tabular-nums"
-			[class.text-success]="row.tone === 'good'"
-			[class.text-danger]="row.tone === 'bad'"
-			[class.text-warning]="row.tone === 'mixed'"
-			>{{ row.range }}</span
-		>
+		<span class="font-semibold tabular-nums">{{ row.range }}</span>
 		<span [attr.title]="row.description">{{ row.name }}</span>
 	} @else {
 		<span class="font-semibold">{{ row.name }}</span>

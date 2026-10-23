@@ -1,9 +1,6 @@
 import { NumberFormats } from '../core/format/number-formats';
 import type { ModBonus, ModEffect, ModStat, ModStatKind } from '../shared/services/model/equipment-mod';
 
-/** Whether an effect helps, hurts, or can do either across its range; `none` when its values are not shown. */
-export type EffectTone = 'good' | 'bad' | 'mixed' | 'none';
-
 /**
  * Readable texts of equipment mod effects, worked out as the game's mod menu does (ui/addons/ego_detailmonitorhelper/
  * helper.lua, Helper.modPropertyEval2Float and Helper.modPropertyEval2UINT, texts {1001,8041} and {1001,8042}): the
@@ -44,16 +41,11 @@ export class ModEffects {
 		}
 	}
 
-	/**
-	 * The range an effect rolls in, in the game's order: min to max, but max first when min is below max on a stat
-	 * that is better lower. Empty when the values are not shown.
-	 */
+	/** The range an effect rolls in, min to max as stored. Empty when the values are not shown. */
 	static range(stat: ModStat | undefined, effect: Pick<ModEffect, 'min' | 'max'>): string {
 		const kind = stat?.kind ?? 'factor';
-		const positive = !stat?.lowerIsBetter;
-		const minFirst = (positive && effect.min < effect.max) || effect.min > effect.max;
-		const from = ModEffects.value(kind, minFirst ? effect.min : effect.max);
-		const to = ModEffects.value(kind, minFirst ? effect.max : effect.min);
+		const from = ModEffects.value(kind, effect.min);
+		const to = ModEffects.value(kind, effect.max);
 		return from === undefined || to === undefined ? '' : $localize`:mod effect range:${from}:from: to ${to}:to:`;
 	}
 
@@ -64,32 +56,9 @@ export class ModEffects {
 		return range ? `${name} ${range}` : name;
 	}
 
-	/** Good when the whole range improves the stat, bad when it all worsens it, else mixed; none when not shown. */
-	static tone(stat: ModStat | undefined, effect: Pick<ModEffect, 'min' | 'max'>): EffectTone {
-		if (!ModEffects.shown(stat)) {
-			return 'none';
-		}
-		const kind = stat?.kind ?? 'factor';
-		const sign = stat?.lowerIsBetter ? -1 : 1;
-		const low = sign * ModEffects.change(kind, effect.min);
-		const high = sign * ModEffects.change(kind, effect.max);
-		if (low >= 0 && high >= 0) {
-			return 'good';
-		}
-		if (low <= 0 && high <= 0) {
-			return 'bad';
-		}
-		return 'mixed';
-	}
-
-	/** The best value the effect can roll, as a change in the better direction, for sorting; 0 when not shown. */
-	static best(stat: ModStat | undefined, effect: Pick<ModEffect, 'min' | 'max'>): number {
-		if (!ModEffects.shown(stat)) {
-			return 0;
-		}
-		const kind = stat?.kind ?? 'factor';
-		const sign = stat?.lowerIsBetter ? -1 : 1;
-		return Math.max(sign * ModEffects.change(kind, effect.min), sign * ModEffects.change(kind, effect.max));
+	/** The change of the effect's max, for sorting; undefined when the values are not shown. */
+	static maxChange(stat: ModStat | undefined, effect: Pick<ModEffect, 'max'>): number | undefined {
+		return ModEffects.shown(stat) ? ModEffects.change(stat?.kind ?? 'factor', effect.max) : undefined;
 	}
 
 	/**

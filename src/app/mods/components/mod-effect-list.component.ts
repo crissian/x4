@@ -2,17 +2,16 @@ import { Component, computed, inject, input } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { EquipmentModService } from '../../shared/services/equipment-mod.service';
 import type { EquipmentMod, ModEffect } from '../../shared/services/model/equipment-mod';
-import { type EffectTone, ModEffects } from '../mod-effects';
+import { ModEffects } from '../mod-effects';
 
 interface EffectRow {
 	stat: string;
 	name: string;
 	description?: string;
 	range: string;
-	tone: EffectTone;
 }
 
-/** The main effect of a mod and the properties its bonus may add, as readable ranges coloured by whether they help. */
+/** The main effect of a mod and the properties its bonus may add, as readable ranges. */
 @Component({
 	selector: 'app-mod-effect-list',
 	imports: [NgTemplateOutlet],
@@ -41,7 +40,6 @@ export class ModEffectListComponent {
 			name: stat?.name ?? effect.stat,
 			description: stat?.description,
 			range: ModEffects.range(stat, effect),
-			tone: ModEffects.tone(stat, effect),
 		};
 	}
 }
