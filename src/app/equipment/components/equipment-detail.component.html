@@ -124,6 +124,10 @@
 			</div>
 		}
 
+		@if (modSlot(); as slot) {
+			<app-mods-for [mods]="mods()" [slot]="slot" />
+		}
+
 		<app-production-cards [items]="production()" heading="Production" i18n-heading />
 	</app-detail-page>
 }

@@ -1,0 +1,12 @@
+@for (badge of badges(); track badge.key) {
+<svg:g
+	appMapCountBadge
+	[x]="badge.x"
+	[y]="badge.y"
+	[count]="badge.count"
+	[title]="badge.title"
+	[radius]="badge.radius"
+	[color]="badge.color"
+	[showCount]="badge.radius * store.panZoom.scale() >= 5"
+/>
+}

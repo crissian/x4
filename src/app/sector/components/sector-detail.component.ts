@@ -4,7 +4,7 @@ import { Component, computed, inject, input, viewChild } from '@angular/core';
 import { EntityDetailPage } from '../../shared/components/entity-detail-page';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { Router, RouterLink } from '@angular/router';
-import { LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute } from '@lucide/angular';
+import { LucideCircleDot, LucideChevronsRight, LucideRoute } from '@lucide/angular';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
 import { TabItem, TabsComponent } from '../../shared/components/tabs/tabs.component';
 import { FactionService } from '../../shared/services/faction.service';
@@ -16,6 +16,8 @@ import { PlanetPopulation } from '../planet-population';
 import { SectorMapComponent } from './sector-map.component';
 import { SectorStationsComponent } from './sector-stations.component';
 import { FactionLabelComponent } from '../../shared/components/faction-label.component';
+import { SectorVaultsComponent } from '../../vaults/sector-vaults.component';
+import { ShowOnMapLinkComponent } from '../../shared/components/show-on-map-link.component';
 
 type PlanetRow = Planet & { moon?: boolean };
 export type SectorTab = 'stations' | 'connections' | 'resources' | 'system';
@@ -29,13 +31,14 @@ export type SectorTab = 'stations' | 'connections' | 'resources' | 'system';
 		DataGridComponent,
 		DecimalPipe,
 		PercentPipe,
-		LucideMapPinned,
+		ShowOnMapLinkComponent,
 		LucideCircleDot,
 		LucideChevronsRight,
 		LucideRoute,
 		SectorMapComponent,
 		SectorStationsComponent,
 		TabsComponent,
+		SectorVaultsComponent,
 	],
 	templateUrl: './sector-detail.component.html',
 })

@@ -1,0 +1,56 @@
+@if (entity(); as mod) {
+	<app-detail-page section="Equipment Mods" i18n-section sectionLink="/mods" [title]="mod.name" [id]="mod.id">
+		@if (info(); as info) {
+			<div class="grid gap-x-6 gap-y-4 md:grid-cols-3">
+				<dl class="details">
+					<div appDetail="Installed on" i18n-appDetail>{{ info.appliesTo }}</div>
+					<div appDetail="Quality" i18n-appDetail>{{ info.quality }}</div>
+					@if (mod.price) {
+						<div appDetail="Price" i18n-appDetail>{{ mod.price | priceRange }}</div>
+					}
+					@if (info.research) {
+						<div appDetail="Research" i18n-appDetail>{{ info.research }}</div>
+					}
+					@if (info.version) {
+						<div appDetail="DLC" i18n-appDetail>{{ info.version }}</div>
+					}
+				</dl>
+				<div class="md:col-span-2">
+					<h6 i18n>Effects</h6>
+					<app-mod-effect-list [mod]="mod" />
+					@if (mod.notForPlayer) {
+						<p class="mt-2 text-sm text-warning" i18n>
+							A scenario reward: the player can't craft this mod.
+						</p>
+					}
+				</div>
+			</div>
+		}
+
+		@if (mod.ingredients?.length && !mod.notForPlayer) {
+			<div class="mt-4 card">
+				<div class="card-header flex items-center justify-between gap-3">
+					<span i18n>Crafting ingredients</span>
+					<a class="text-sm font-normal" routerLink="/mods/crafting" [queryParams]="{ craft: mod.id }" i18n
+						>Plan crafting</a
+					>
+				</div>
+				<div class="card-body">
+					<app-ingredient-list [ingredients]="mod.ingredients!" />
+					@if (info()?.research; as research) {
+						<p class="mt-2 text-sm text-fg-muted" i18n>Crafting needs the research {{ research }}.</p>
+					}
+				</div>
+			</div>
+		}
+
+		@if (similar().length) {
+			<div class="mt-4 card">
+				<div class="card-header" i18n>Other {{ statName() }} mods ({{ similar().length }})</div>
+				<div class="card-body">
+					<app-data-grid [data]="similar()" [columns]="similarColumns" [features]="false" [compact]="true" />
+				</div>
+			</div>
+		}
+	</app-detail-page>
+}

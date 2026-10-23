@@ -3,7 +3,7 @@ import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { EnumLabelPipe } from '../../core/enum-labels';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductionRequirementsComponent } from '../../shared/components/production-requirements.component';
 import { TabItem, TabsComponent } from '../../shared/components/tabs/tabs.component';
 import { ModuleService } from '../../shared/services/module.service';
@@ -18,8 +18,10 @@ import { StationCalculatorModel } from '../../station/components/station-calcula
 import { SaveWareTradeComponent } from './save-ware-trade.component';
 import { Duration } from '../../core/format/duration';
 import { FactionLabelComponent } from '../../shared/components/faction-label.component';
+import { ProductionChainComponent } from '../../production-chain/components/production-chain.component';
+import { ProductionChainQuery } from '../../production-chain/production-chain-query';
 
-type WareTab = 'construction' | 'producedBy' | 'requiredFor' | 'save';
+type WareTab = 'construction' | 'chain' | 'producedBy' | 'requiredFor' | 'save';
 
 @Component({
 	imports: [FactionLabelComponent, 
@@ -32,6 +34,7 @@ type WareTab = 'construction' | 'producedBy' | 'requiredFor' | 'save';
 		SaveWareTradeComponent,
 		TabsComponent,
 		PriceRangePipe,
+		ProductionChainComponent,
 	],
 	templateUrl: './ware-detail.component.html',
 })
@@ -47,12 +50,18 @@ export class WareDetailComponent extends ProducibleDetailPage<Ware> {
 	protected readonly tabs = computed(() => {
 		const tabs: TabItem<WareTab>[] = [
 			{ id: 'construction', label: $localize`Construction` },
+			{ id: 'chain', label: $localize`Production Chain` },
 			{ id: 'producedBy', label: $localize`Produced By` },
 			{ id: 'requiredFor', label: $localize`Required For` },
 		];
 		return this.hasSave() ? [...tabs, { id: 'save' as const, label: $localize`Stations in your save` }] : tabs;
 	});
-	protected readonly selectedTab = signal<WareTab>('construction');
+	/** A link with production chain settings opens on the chain. */
+	protected readonly selectedTab = signal<WareTab>(
+		ProductionChainQuery.PARAMS.some((x) => inject(ActivatedRoute).snapshot.queryParamMap.has(x))
+			? 'chain'
+			: 'construction'
+	);
 	/** The selected tab; the save tab falls back to the first one when the save goes away. */
 	protected readonly activeTab = computed(() =>
 		this.selectedTab() === 'save' && !this.hasSave() ? 'construction' : this.selectedTab()

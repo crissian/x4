@@ -16,6 +16,16 @@ export class QueryParams {
 		return allowed.find((x) => x === value) ?? fallback;
 	}
 
+	/** A flag param: `1` for true. */
+	static flag(params: ParamMap, key: string): boolean {
+		return params.get(key) === '1';
+	}
+
+	/** A flag as a param: `1`, or null for false (so a merge removes it). */
+	static writeFlag(value: boolean): '1' | null {
+		return value ? '1' : null;
+	}
+
 	/** The param when the check knows it, else the fallback. */
 	static known(params: ParamMap, key: string, check: (value: string) => boolean, fallback = ''): string {
 		const value = params.get(key) ?? '';

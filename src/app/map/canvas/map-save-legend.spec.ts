@@ -1,11 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { afterEach, describe, expect, it } from 'vitest';
 import { MapSaveTesting } from '../map-save-testing';
+import { MapHostiles } from '../save/map-hostiles';
 import { MapSaveLayer } from '../save/map-save-layer';
 import { MapLegendComponent } from './map-legend.component';
 
 describe('MapSaveLegend', () => {
-	afterEach(() => localStorage.removeItem('map-legend-open'));
+	afterEach(() => {
+		localStorage.removeItem('map-legend-open');
+		localStorage.removeItem('map-hostile-layers');
+	});
 
 	async function legend(withSave: boolean) {
 		localStorage.setItem('map-legend-open', 'true');
@@ -38,5 +42,19 @@ describe('MapSaveLegend', () => {
 		await fixture.whenStable();
 		expect(text()).toContain('Contested');
 		expect(text()).not.toContain('Not discovered');
+	});
+
+	it("has the Xenon and Kha'ak layers off until turned on, and remembers them", async () => {
+		const { fixture, text } = await legend(true);
+		expect(text()).toContain('Xenon');
+		const boxes = (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLInputElement>(
+			'app-map-save-legend input[type=checkbox]'
+		);
+		const xenon = [...boxes].find((x) => x.closest('label')?.textContent?.includes('Xenon'));
+		expect(xenon?.checked).toBe(false);
+		xenon!.click();
+		await fixture.whenStable();
+		expect(TestBed.inject(MapHostiles).layers()).toEqual({ xenon: true, khaak: false });
+		expect(JSON.parse(localStorage.getItem('map-hostile-layers')!)).toEqual(['xenon']);
 	});
 });

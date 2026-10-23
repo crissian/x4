@@ -42,27 +42,32 @@
 @if (collapsed() && menuOpen()) {
 	<nav
 		id="app-nav-menu"
-		class="absolute inset-x-0 top-full z-30 flex flex-col border-t border-line bg-nav py-1 shadow-lg sm:right-auto sm:left-2 sm:w-64 sm:rounded-b-md dark:shadow-black/40"
+		class="absolute inset-x-0 top-full z-30 flex max-h-[calc(100dvh-3rem)] flex-col overflow-y-auto border-t border-line bg-nav py-1 shadow-lg sm:right-auto sm:left-2 sm:w-64 sm:rounded-b-md dark:shadow-black/40"
 		i18n-aria-label
 		aria-label="Main"
 	>
-		@for (section of sections(); track section.label) {
-			@if (section.label) {
-				<div class="flex items-center gap-2 px-4 py-1 text-sm font-semibold text-fg-muted">
-					{{ section.label }}
-					@if (section.experimental) {
+		@for (group of groups(); track group.label) {
+			@if (group.label) {
+				<div class="flex items-center gap-2 px-4 pt-2 pb-1 text-sm font-semibold text-fg-muted">
+					{{ group.label }}
+					@if (group.experimental) {
 						<app-experimental-badge />
 					}
 				</div>
 			}
-			@for (link of section.links; track link.path) {
-				<a
-					[routerLink]="link.path"
-					routerLinkActive="!text-fg-strong bg-nav-active"
-					class="inline-flex items-center gap-2 px-4 py-2.5 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
-					(click)="closeMenu()"
-					><svg [lucideIcon]="link.icon" class="opacity-80" />{{ link.label }}</a
-				>
+			@for (section of group.sections; track $index) {
+				@if (section.label) {
+					<div class="px-4 pt-1 text-xs tracking-wide text-fg-muted uppercase">{{ section.label }}</div>
+				}
+				@for (link of section.links; track link.path) {
+					<a
+						[routerLink]="link.path"
+						routerLinkActive="!text-fg-strong bg-nav-active"
+						class="inline-flex items-center gap-2 px-4 py-2.5 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
+						(click)="closeMenu()"
+						><svg [lucideIcon]="link.icon" class="opacity-80" />{{ link.label }}</a
+					>
+				}
 			}
 		}
 	</nav>

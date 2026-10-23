@@ -11,7 +11,9 @@ import { MapSaveSectors } from '../save/map-save-sectors';
 import { MapLegendComponent } from './map-legend.component';
 import { MapLabelsLayer, MapLinksLayer, MapMarkersLayer } from './map-layers';
 import { MapMenuComponent, MapTooltipComponent } from './map-popups';
+import { MapHostileMarkers } from './map-hostile-markers';
 import { MapSaveMarkers } from './map-save-markers';
+import { MapVaultsLayer } from './map-vaults-layer';
 import { StationTooltipComponent } from './station-tooltip';
 
 /** The galaxy map: sectors, layers and overlays, with drag to pan and wheel to zoom. */
@@ -22,6 +24,8 @@ import { StationTooltipComponent } from './station-tooltip';
 		MapLinksLayer,
 		MapMarkersLayer,
 		MapSaveMarkers,
+		MapVaultsLayer,
+		MapHostileMarkers,
 		StationTooltipComponent,
 		MapLabelsLayer,
 		MapLegendComponent,

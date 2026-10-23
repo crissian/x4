@@ -28,14 +28,22 @@ export const appRoutes: Routes = [
 		path: 'ships',
 		loadChildren: () =>
 			GameText.withTexts(
-				[...TEXTS.base, ...TEXTS.universe, 'ships', 'equipment'],
+				[...TEXTS.base, ...TEXTS.universe, 'ships', 'equipment', 'equipment-mods', 'research'],
 				() => import('./ship/ship.routes')
 			),
 	},
 	{
 		path: 'equipment',
 		loadChildren: () =>
-			GameText.withTexts([...TEXTS.base, 'ships', 'equipment'], () => import('./equipment/equipment.routes')),
+			GameText.withTexts(
+				[...TEXTS.base, 'ships', 'equipment', 'equipment-mods'],
+				() => import('./equipment/equipment.routes')
+			),
+	},
+	{
+		path: 'mods',
+		loadChildren: () =>
+			GameText.withTexts([...TEXTS.base, 'equipment-mods'], () => import('./mods/mods.routes')),
 	},
 	{
 		path: 'factions',
@@ -47,7 +55,8 @@ export const appRoutes: Routes = [
 	},
 	{
 		path: 'modules',
-		loadChildren: () => GameText.withTexts([...TEXTS.base, 'modules'], () => import('./module/module.routes')),
+		loadChildren: () =>
+			GameText.withTexts([...TEXTS.base, 'modules', 'research'], () => import('./module/module.routes')),
 	},
 	{
 		path: 'wares',
@@ -55,15 +64,23 @@ export const appRoutes: Routes = [
 			GameText.withTexts([...TEXTS.base, ...TEXTS.universe, 'modules'], () => import('./ware/ware.routes')),
 	},
 	{
+		path: 'production-chains',
+		loadChildren: () =>
+			GameText.withTexts([...TEXTS.base, 'modules'], () => import('./production-chain/production-chain.routes')),
+	},
+	{
 		path: 'sectors',
 		loadChildren: () =>
-			GameText.withTexts([...TEXTS.base, ...TEXTS.universe, 'modules'], () => import('./sector/sector.routes')),
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'modules', 'data-vaults'],
+				() => import('./sector/sector.routes')
+			),
 	},
 	{
 		path: 'map',
 		loadComponent: () =>
 			GameText.withTexts(
-				[...TEXTS.base, ...TEXTS.universe, 'modules', 'ship-list'],
+				[...TEXTS.base, ...TEXTS.universe, 'modules', 'ship-list', 'data-vaults'],
 				() => import('./map/map.component')
 			),
 		title: `${BASE_TITLE} - ${$localize`Galaxy Map`}`,
@@ -103,6 +120,41 @@ export const appRoutes: Routes = [
 				() => import('./blueprints/components/blueprints-page.component')
 			),
 		title: `${BASE_TITLE} - ${$localize`Blueprints`}`,
+	},
+	{
+		path: 'event-log',
+		loadComponent: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'ships'],
+				() => import('./event-log/components/event-log-page.component')
+			),
+		title: `${BASE_TITLE} - ${$localize`Event Log`}`,
+	},
+	{
+		path: 'research',
+		loadComponent: () =>
+			GameText.withTexts(
+				[...TEXTS.base, 'modules', 'ships', 'equipment', 'research'],
+				() => import('./research/components/research-page.component')
+			),
+		title: `${BASE_TITLE} - ${$localize`Research`}`,
+	},
+	{
+		path: 'game-starts',
+		loadChildren: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'ship-list', 'game-starts'],
+				() => import('./game-starts/game-starts.routes')
+			),
+	},
+	{
+		path: 'empire',
+		loadComponent: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'modules', 'ship-list', 'game-texts', 'ship-orders', 'fleet-assignments'],
+				() => import('./empire/components/empire-page.component')
+			),
+		title: `${BASE_TITLE} - ${$localize`Empire`}`,
 	},
 	{
 		path: 'saves',

@@ -8,9 +8,12 @@ import { MAP_PROVIDERS } from './map-providers';
 import { MapStore, PanelTab } from './map-store';
 import { MapSaveLayer } from './save/map-save-layer';
 import { MapAbandonedPanelComponent } from './panels/map-abandoned-panel.component';
+import { MapHostilesPanelComponent } from './panels/map-hostiles-panel.component';
 import { MapMiningPanelComponent } from './panels/map-mining-panel.component';
 import { MapRoutePanelComponent } from './panels/map-route-panel.component';
 import { MapStationsPanelComponent } from './panels/map-stations-panel.component';
+import { MapVaultsPanelComponent } from './panels/map-vaults-panel.component';
+import { MapVaults } from './map-vaults';
 import { SectorInputComponent } from '../shared/components/sector-input.component';
 
 /** Galaxy map page: map settings, the map and the side panel tabs. */
@@ -25,6 +28,8 @@ import { SectorInputComponent } from '../shared/components/sector-input.componen
 		MapMiningPanelComponent,
 		MapStationsPanelComponent,
 		MapAbandonedPanelComponent,
+		MapVaultsPanelComponent,
+		MapHostilesPanelComponent,
 		RouterLink,
 	],
 	providers: MAP_PROVIDERS,
@@ -34,12 +39,15 @@ export default class MapComponent {
 	private readonly router = inject(Router);
 	protected readonly store = inject(MapStore);
 	protected readonly save = inject(MapSaveLayer);
+	private readonly vaults = inject(MapVaults);
 
 	/** Sector to highlight, from the `?sector=` query parameter. */
 	readonly sector = input<string>();
 	/** Route start and destination, from the `?from=` and `?to=` query parameters. */
 	readonly from = input<string>();
 	readonly to = input<string>();
+	/** A layer to show with its panel, from the `?layer=` query parameter: `vaults`. */
+	readonly layer = input<string>();
 
 	protected readonly gameVersions = GAME_VERSIONS;
 	protected readonly versionsOpen = signal(false);
@@ -48,6 +56,8 @@ export default class MapComponent {
 		{ id: 'mining', label: $localize`Mining` },
 		{ id: 'stations', label: $localize`Stations` },
 		{ id: 'abandoned', label: $localize`Abandoned` },
+		{ id: 'vaults', label: $localize`Vaults` },
+		{ id: 'hostiles', label: $localize`:map tab, Xenon and Kha'ak:Hostiles` },
 	];
 
 	constructor() {
@@ -70,6 +80,15 @@ export default class MapComponent {
 					this.store.tab.set('route');
 				}
 			});
+		});
+
+		effect(() => {
+			if (this.layer() === 'vaults') {
+				untracked(() => {
+					this.vaults.layer.set({ show: true });
+					this.store.tab.set('vaults');
+				});
+			}
 		});
 
 		// picking a sector name in the search box selects it

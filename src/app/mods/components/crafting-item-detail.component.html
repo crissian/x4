@@ -1,0 +1,45 @@
+@if (entity(); as item) {
+	<app-detail-page
+		section="Crafting"
+		i18n-section
+		sectionLink="/mods/crafting"
+		[title]="item.name"
+		[id]="item.id"
+		[description]="description()"
+	>
+		@if (info(); as info) {
+			<dl class="details max-w-2xl">
+				<div appDetail="Kind" i18n-appDetail>{{ info.kind }}</div>
+				<div appDetail="Found in" i18n-appDetail>{{ info.sources || '-' }}</div>
+				@if (item.price) {
+					<div appDetail="Price" i18n-appDetail>{{ item.price | priceRange }}</div>
+				}
+				@if (info.illegal.length) {
+					<div appDetail="Illegal for" i18n-appDetail>
+						<span class="flex flex-wrap gap-x-3 gap-y-1">
+							@for (faction of info.illegal; track faction.id) {
+								<app-faction-label [faction]="faction" />
+							}
+						</span>
+					</div>
+				}
+			</dl>
+
+			@if (info.recipe; as recipe) {
+				<div class="mt-4 card">
+					<div class="card-header" i18n>Crafted from</div>
+					<div class="card-body">
+						<app-ingredient-list [ingredients]="recipe.ingredients" />
+					</div>
+				</div>
+			}
+		}
+
+		<div class="mt-4 card">
+			<div class="card-header" i18n>Used to craft</div>
+			<div class="card-body">
+				<app-recipe-uses [ware]="item.id" />
+			</div>
+		</div>
+	</app-detail-page>
+}

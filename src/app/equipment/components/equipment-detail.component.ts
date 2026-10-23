@@ -15,6 +15,9 @@ import { ShipPerformance } from '../../shared/services/ship-performance';
 import { Equipment, Ship } from '../../shared/services/model/model';
 import { ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
+import { EquipmentModService } from '../../shared/services/equipment-mod.service';
+import { ModsForComponent } from '../../mods/components/mods-for.component';
+import { ModSlots } from '../../mods/mod-slots';
 
 interface ShipRow {
 	ship: Ship;
@@ -33,6 +36,7 @@ interface ShipRow {
 		SellersComponent,
 		EnumLabelPipe,
 		PriceRangePipe,
+		ModsForComponent,
 	],
 	templateUrl: './equipment-detail.component.html',
 })
@@ -83,6 +87,17 @@ export class EquipmentDetailComponent extends ProducibleDetailPage<Equipment> {
 		yes: $localize`:@@yes:Yes`,
 		no: $localize`:@@no:No`,
 	};
+
+	/** The mods that fit this equipment and change a stat it has, the player's own only. */
+	private readonly modService = inject(EquipmentModService);
+	protected readonly modSlot = computed(() => {
+		const entity = this.entity();
+		return entity && ModSlots.ofEquipment(entity);
+	});
+	protected readonly mods = computed(() => {
+		const entity = this.entity();
+		return entity ? ModSlots.forEquipment(this.modService.getEntities().filter((x) => !x.notForPlayer), entity) : [];
+	});
 
 	protected readonly openShip = RowNavigation.to<ShipRow>('/ships', (x) => x.ship.id);
 }

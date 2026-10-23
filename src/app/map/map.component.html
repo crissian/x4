@@ -86,13 +86,13 @@
 	</div>
 
 	<aside class="card flex min-w-0 flex-col lg:h-[calc(100vh-6.6rem)] lg:min-h-[470px]">
-		<div class="flex border-b border-line" role="tablist">
+		<div class="flex flex-wrap border-b border-line" role="tablist">
 			@for (item of tabs; track item.id) {
 				@let active = store.tab() === item.id;
 				<button
 					type="button"
 					role="tab"
-					class="flex-1 border-b-2 px-2 py-2.5 text-sm font-semibold"
+					class="flex-1 border-b-2 px-2 py-2.5 text-sm font-semibold whitespace-nowrap"
 					[class.border-primary]="active"
 					[class.text-primary]="active"
 					[class.border-transparent]="!active"
@@ -118,6 +118,12 @@
 				}
 				@case ('abandoned') {
 					<app-map-abandoned-panel />
+				}
+				@case ('vaults') {
+					<app-map-vaults-panel />
+				}
+				@case ('hostiles') {
+					<app-map-hostiles-panel />
 				}
 			}
 		</div>

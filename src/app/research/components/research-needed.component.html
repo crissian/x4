@@ -1,0 +1,5 @@
+@for (project of projects(); track project.id) {
+	<div>
+		<a routerLink="/research" [queryParams]="{ id: project.id }">{{ project.name }}</a>
+	</div>
+}

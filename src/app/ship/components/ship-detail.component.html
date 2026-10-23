@@ -104,11 +104,17 @@
 				<div class="card-header" i18n>Sold by</div>
 				<div class="card-body">
 					<app-sellers [owners]="entity.owners" [license]="entity.license" />
+					@if (research().length) {
+						<p class="mt-2 text-sm" i18n>Blueprint handed out by headquarters research:</p>
+						<app-research-needed class="text-sm" [projects]="research()" />
+					}
 				</div>
 			</div>
 		</div>
 
 		<app-ship-sellers-near class="mt-4 block" [ship]="entity" />
+
+		<app-mods-for [mods]="shipMods" slot="ship" />
 
 		<app-production-cards [items]="production()" heading="Production" i18n-heading />
 	</app-detail-page>

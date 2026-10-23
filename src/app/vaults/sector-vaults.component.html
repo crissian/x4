@@ -1,0 +1,14 @@
+@if (groups().length) {
+	<section class="mt-6">
+		<div class="mb-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+			<h6 class="mb-0" i18n>Data vaults</h6>
+			<span class="text-sm text-fg-muted" i18n>{{ progress().done }} of {{ progress().total }} found</span>
+			<label class="flex items-center gap-1.5 text-sm">
+				<input type="checkbox" [formField]="vaults.positionsForm.show" />
+				<ng-container i18n>Show positions</ng-container>
+			</label>
+			<app-show-on-map-link class="text-sm" [sector]="sector()" layer="vaults" />
+		</div>
+		<app-vault-table [groups]="groups()" [headers]="false" />
+	</section>
+}

@@ -11,6 +11,13 @@ describe('QueryParams', () => {
 		expect(QueryParams.oneOf(params, 'missing', ['where'], 'where')).toBe('where');
 	});
 
+	it('reads and writes a flag as 1', () => {
+		expect(QueryParams.flag(convertToParamMap({ on: '1', off: 'true' }), 'on')).toBe(true);
+		expect(QueryParams.flag(convertToParamMap({ off: 'true' }), 'off')).toBe(false);
+		expect(QueryParams.writeFlag(true)).toBe('1');
+		expect(QueryParams.writeFlag(false)).toBeNull();
+	});
+
 	it('reads a value the check knows, else the fallback', () => {
 		const known = (id: string) => id === 'ore';
 		expect(QueryParams.known(params, 'ware', known)).toBe('ore');

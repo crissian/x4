@@ -125,6 +125,14 @@
 						}
 					</div>
 				}
+				@case ('chain') {
+					<app-production-chain [ware]="entity.id" />
+					<p class="mt-3 text-sm">
+						<a [routerLink]="['/production-chains', entity.id]" queryParamsHandling="preserve" i18n
+							>Open on the production chains page</a
+						>
+					</p>
+				}
 				@case ('producedBy') {
 					<div class="card max-w-2xl">
 						<div class="card-header" i18n>Station Modules</div>

@@ -1,0 +1,30 @@
+<div class="text-xs text-fg-muted">{{ label() }}</div>
+@if (value() !== undefined) {
+	<div class="text-lg font-semibold text-fg-strong">{{ value() }}</div>
+}
+@if (detail()) {
+	<div class="text-xs text-fg-muted">{{ detail() }}</div>
+}
+@if (items(); as items) {
+	<ul class="mt-1 space-y-0.5 text-sm">
+		@for (item of items; track item.key) {
+			<li class="flex justify-between gap-2" [class.text-fg-muted]="item.muted">
+				@if (pickTitle() && !item.muted) {
+					<button
+						type="button"
+						class="link-button truncate text-left"
+						[title]="pickTitle()"
+						(click)="picked.emit(item.key)"
+					>
+						{{ item.label }}
+					</button>
+				} @else {
+					<span class="truncate">{{ item.label }}</span>
+				}
+				<span class="font-medium">{{ item.count }}</span>
+			</li>
+		} @empty {
+			<li class="text-fg-muted">{{ empty() }}</li>
+		}
+	</ul>
+}

@@ -62,6 +62,9 @@ export type SaveLicences = Record<string, string[]>;
 /** Ware ids of the blueprints the player owns. */
 export type SaveBlueprints = string[];
 
+/** Ware ids of the research the player has completed at the headquarters. */
+export type SaveResearch = string[];
+
 /** Ids of the factions with a faction representative, who sells their licences and blueprints. */
 export type SaveRepresentatives = string[];
 

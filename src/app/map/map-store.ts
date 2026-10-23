@@ -22,7 +22,7 @@ import { StationMarkers } from './station-marker';
 
 export type ColorMode = 'owner' | 'sunlight' | 'security' | 'resource';
 export type PriceLevel = 'min' | 'avg' | 'max';
-export type PanelTab = 'route' | 'mining' | 'stations' | 'abandoned';
+export type PanelTab = 'route' | 'mining' | 'stations' | 'abandoned' | 'vaults' | 'hostiles';
 
 export const NEUTRAL = StationMarkers.NEUTRAL;
 

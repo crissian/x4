@@ -7,17 +7,25 @@ import {
 	LucideCoins,
 	LucideDatabase,
 	LucideFactory,
+	LucideCrown,
 	LucideFlag,
+	LucideFlaskConical,
+	LucideHardDrive,
 	LucideHexagon,
 	LucideInfo,
 	LucideMap,
 	LucideMoon,
+	LucideNotebookText,
 	LucidePackage,
+	LucidePlay,
 	LucideRocket,
+	LucideSave,
 	LucideScale,
 	LucideScrollText,
+	LucideSparkles,
 	LucideSun,
 	LucideUsers,
+	LucideWorkflow,
 	LucideWrench,
 } from '@lucide/angular';
 import { GAME_LANGUAGES, GameText } from './core/game-text';
@@ -70,25 +78,61 @@ export class HeaderComponent {
 		{
 			label: $localize`Database`,
 			icon: LucideDatabase,
-			links: [
-				{ path: '/wares', label: $localize`Wares`, icon: LucidePackage },
-				{ path: '/modules', label: $localize`Station Modules`, icon: LucideFactory },
-				{ path: '/ships', label: $localize`Ships`, icon: LucideRocket },
-				{ path: '/equipment', label: $localize`Equipment`, icon: LucideWrench },
-				{ path: '/races', label: $localize`Races`, icon: LucideUsers },
-				{ path: '/factions', label: $localize`Factions`, icon: LucideFlag },
-				{ path: '/sectors', label: $localize`Sectors`, icon: LucideHexagon },
+			sections: [
+				{
+					label: $localize`:Header menu section@@navItems:Items`,
+					links: [
+						{ path: '/wares', label: $localize`Wares`, icon: LucidePackage },
+						{ path: '/production-chains', label: $localize`Production Chains`, icon: LucideWorkflow },
+						{ path: '/modules', label: $localize`Station Modules`, icon: LucideFactory },
+						{ path: '/ships', label: $localize`Ships`, icon: LucideRocket },
+						{ path: '/equipment', label: $localize`Equipment`, icon: LucideWrench },
+						{ path: '/mods', label: $localize`Equipment Mods`, icon: LucideSparkles },
+					],
+				},
+				{
+					label: $localize`:Header menu section@@navWorld:World`,
+					links: [
+						{ path: '/races', label: $localize`Races`, icon: LucideUsers },
+						{ path: '/factions', label: $localize`Factions`, icon: LucideFlag },
+						{ path: '/sectors', label: $localize`Sectors`, icon: LucideHexagon },
+					],
+				},
+				{
+					label: $localize`:Header menu section@@navProgress:Progress`,
+					links: [
+						{ path: '/research', label: $localize`Research`, icon: LucideFlaskConical },
+						{ path: '/game-starts', label: $localize`Game Starts`, icon: LucidePlay },
+					],
+				},
 			],
 		},
 		{
 			label: $localize`:Header menu group@@navEconomy:Economy`,
 			icon: LucideCoins,
 			experimental: true,
-			links: [
-				{ path: '/trade-routes', label: $localize`Trade Routes`, icon: LucideArrowLeftRight },
-				{ path: '/supply-demand', label: $localize`Supply & Demand`, icon: LucideScale },
-				{ path: '/station-suggestions', label: $localize`Station Suggestions`, icon: LucideFactory },
-				{ path: '/blueprints', label: $localize`Blueprints`, icon: LucideScrollText },
+			sections: [
+				{
+					links: [
+						{ path: '/trade-routes', label: $localize`Trade Routes`, icon: LucideArrowLeftRight },
+						{ path: '/supply-demand', label: $localize`Supply & Demand`, icon: LucideScale },
+						{ path: '/station-suggestions', label: $localize`Station Suggestions`, icon: LucideFactory },
+					],
+				},
+			],
+		},
+		{
+			label: $localize`:Header menu group@@navMySave:My Save`,
+			icon: LucideSave,
+			sections: [
+				{
+					links: [
+						{ path: '/empire', label: $localize`Empire`, icon: LucideCrown },
+						{ path: '/blueprints', label: $localize`Blueprints`, icon: LucideScrollText },
+						{ path: '/event-log', label: $localize`Event Log`, icon: LucideNotebookText },
+						{ path: '/saves', label: $localize`Savegames`, icon: LucideHardDrive },
+					],
+				},
 			],
 		},
 	];

@@ -1,0 +1,87 @@
+<div class="flex flex-wrap items-end gap-3" data-chain-settings>
+	<app-option-select
+		class="text-sm"
+		inputId="chain-direction"
+		i18n-label
+		label="Show"
+		[options]="directions"
+		[formField]="form.direction"
+	/>
+	<app-option-select
+		class="text-sm"
+		inputId="chain-method"
+		i18n-label
+		label="Preferred production method"
+		[options]="methods"
+		[formField]="form.method"
+	/>
+	@if (usedBy()) {
+		<app-option-select
+			class="text-sm"
+			inputId="chain-levels"
+			i18n-label
+			label="Levels"
+			[options]="levels"
+			[formField]="form.levels"
+		/>
+	} @else {
+		<label class="w-28 text-sm">
+			<ng-container i18n>Modules</ng-container>
+			<input id="chain-modules" class="input" type="number" [formField]="form.modules" />
+		</label>
+	}
+	@if (hasOverrides()) {
+		<button type="button" class="btn btn-secondary" (click)="resetMethods()" data-reset-methods i18n>
+			Reset picked methods
+		</button>
+	}
+	@if (calculatorParams(); as params) {
+		<a class="btn btn-primary no-underline" [routerLink]="calculator" [queryParams]="params" data-plan>
+			<svg lucideCalculator class="size-4" aria-hidden="true" />
+			<ng-container i18n>Plan this in the Station Calculator</ng-container>
+		</a>
+	}
+</div>
+
+@if (graph(); as graph) {
+	<p class="mt-2 text-sm text-fg-muted">
+		@if (usedBy()) {
+			<ng-container i18n
+				>The wares made from it, with what one production module of each makes and uses per hour.</ng-container
+			>
+		} @else {
+			<ng-container i18n
+				>Per hour for the modules above, without workforce bonus and at 100% sunlight. Each ware appears once,
+				with the amounts of all the wares needing it added up. Pick a method on a ware to change its
+				inputs.</ng-container
+			>
+		}
+	</p>
+	@if (graph.nodes.length > 1) {
+		<app-production-chain-graph class="mt-3" [graph]="graph" (pickMethod)="pick($event)" />
+	} @else {
+		<p class="mt-3 text-info" data-chain-empty>
+			@if (usedBy()) {
+				<ng-container i18n>No ware is made from {{ graph.nodes[0].ware.name }}.</ng-container>
+			} @else {
+				<ng-container i18n>{{ graph.nodes[0].ware.name }} is a raw resource: mine it or buy it.</ng-container>
+			}
+		</p>
+	}
+	@if (!usedBy() && raw().length) {
+		<div class="mt-3 text-sm sm:max-w-sm" data-chain-raw>
+			<div class="mb-1 text-fg-muted" i18n>Raw resources to mine or buy:</div>
+			<app-ware-amounts [items]="raw()" unit="/h" />
+		</div>
+	}
+	@if (graph.nodes.length > 1) {
+		<app-data-grid
+			class="mt-3 block"
+			[data]="rows()"
+			[columns]="columns()"
+			[trackBy]="trackBy"
+			[features]="false"
+			storageKey="production-chain"
+		/>
+	}
+}

@@ -1,0 +1,107 @@
+@if (entity(); as start) {
+	@let summary = this.summary()!;
+	<app-detail-page
+		i18n-section
+		section="Game starts"
+		sectionLink="/game-starts"
+		[title]="start.name"
+		[id]="start.id"
+		[description]="start.description"
+	>
+		<dl class="details mb-4 max-w-2xl">
+			<div i18n-appDetail appDetail="Type">
+				{{ type()?.label }} <span class="text-fg-muted">- {{ type()?.hint }}</span>
+			</div>
+			<div i18n-appDetail appDetail="DLC">{{ dlc() }}</div>
+			<div i18n-appDetail appDetail="Money">{{ start.money | number: '1.0-0' }} Cr</div>
+			<div i18n-appDetail appDetail="Ship">
+				@if (summary.ship; as ship) {
+					<a [routerLink]="['/ships', ship.id]">{{ ship.name }}</a>
+					@if (shipType(); as type) {
+						<span class="text-fg-muted"> ({{ type }})</span>
+					}
+				} @else {
+					{{ summary.shipText ?? '-' }}
+				}
+			</div>
+			<div i18n-appDetail appDetail="Location">
+				@if (summary.sector; as sector) {
+					<app-sector-map-link [sector]="sector.id" [name]="sector.name" />
+					@if (start.docked) {
+						<span class="text-fg-muted" i18n> (docked at a station)</span>
+					}
+				} @else {
+					{{ summary.locationText ?? '-' }}
+				}
+			</div>
+			@for (line of info(); track $index) {
+				<div [appDetail]="line.label">{{ line.text }}</div>
+			}
+			@if (start.unlock) {
+				<div i18n-appDetail appDetail="Unlock">{{ start.unlock }}</div>
+			}
+		</dl>
+
+		<div class="grid gap-4">
+			@if (start.loadout?.length) {
+				<app-game-start-items heading="Ship loadout" i18n-heading [items]="start.loadout!" />
+			}
+			@if (reputations().length) {
+				<div class="card">
+					<div class="card-header" i18n>Starting reputation</div>
+					<div class="card-body">
+						<p class="mb-2 text-sm text-fg-muted" i18n>
+							Factions not listed start at their usual relation to the player.
+						</p>
+						<table class="table max-w-xl">
+							<thead>
+								<tr>
+									<th i18n>Faction</th>
+									<th class="text-right" i18n>Reputation</th>
+								</tr>
+							</thead>
+							<tbody>
+								@for (row of reputations(); track row.faction) {
+									<tr>
+										<td>
+											<app-faction-label [faction]="row.entity">{{
+												row.faction
+											}}</app-faction-label>
+										</td>
+										<td class="text-right">{{ row.reputation }}</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			}
+			@if (blueprints(); as blueprints) {
+				@if (blueprints.modules.length) {
+					<app-game-start-items heading="Module blueprints" i18n-heading [items]="blueprints.modules" />
+				}
+				@if (blueprints.ships.length) {
+					<app-game-start-items heading="Ship blueprints" i18n-heading [items]="blueprints.ships" />
+				}
+				@if (blueprints.equipment.length) {
+					<app-game-start-items heading="Equipment blueprints" i18n-heading [items]="blueprints.equipment" />
+				}
+				@if (blueprints.other.length) {
+					<app-game-start-items
+						heading="Paint and clothing blueprints"
+						i18n-heading
+						[items]="blueprints.other"
+					/>
+				}
+			}
+			@if (start.research?.length) {
+				<app-game-start-items heading="Research done" i18n-heading [items]="start.research!" />
+			}
+			@if (start.inventory?.length) {
+				<app-game-start-items heading="Inventory" i18n-heading [items]="start.inventory!" />
+			}
+		</div>
+	</app-detail-page>
+} @else {
+	<p class="text-fg-muted" i18n>Unknown game start. <a routerLink="/game-starts">See all game starts</a>.</p>
+}

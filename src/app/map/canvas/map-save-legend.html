@@ -27,5 +27,30 @@
 			></span
 			>Your station</span
 		>
+		@if (store.abandonedModel().show && abandoned.active()) {
+		<span i18n
+			><span class="mr-1 inline-block size-2 rotate-45 bg-slate-500/60 align-middle"></span>Abandoned ship, not
+			there in your save</span
+		>
+		<span i18n
+			><span class="mr-1 inline-block size-2 rotate-45 border border-yellow-300 bg-pink-400 align-middle"></span
+			>Ownerless, not on the start list</span
+		>
+		}
 	</div>
+	<div class="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-slate-300">
+		<label class="flex items-center gap-1">
+			<input type="checkbox" [formField]="hostiles.layersForm.xenon" />
+			<span class="inline-block size-2.5 rounded-full align-middle" [style.background]="colors.xenon"></span>
+			<ng-container i18n>Xenon ({{ hostiles.counts().xenon.sectors }} sectors)</ng-container>
+		</label>
+		<label class="flex items-center gap-1">
+			<input type="checkbox" [formField]="hostiles.layersForm.khaak" />
+			<span class="inline-block size-2.5 rounded-full align-middle" [style.background]="colors.khaak"></span>
+			<ng-container i18n>Kha'ak ({{ hostiles.counts().khaak.sectors }} sectors)</ng-container>
+		</label>
+	</div>
+	@if (hostiles.layers().xenon || hostiles.layers().khaak) {
+	<div class="mt-0.5 text-slate-400" i18n>Badges count their stations, or ships where they have none</div>
+	}
 </div>

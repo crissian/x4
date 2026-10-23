@@ -1,0 +1,53 @@
+@if (hostiles.active()) {
+	<div class="mb-3 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+		<label class="flex items-center gap-1.5">
+			<input type="checkbox" [formField]="hostiles.layersForm.xenon" />
+			<span class="inline-block size-2.5 rounded-full" [style.background]="colors.xenon"></span>
+			<ng-container i18n>Show Xenon on map</ng-container>
+		</label>
+		<label class="flex items-center gap-1.5">
+			<input type="checkbox" [formField]="hostiles.layersForm.khaak" />
+			<span class="inline-block size-2.5 rounded-full" [style.background]="colors.khaak"></span>
+			<ng-container i18n>Show Kha'ak on map</ng-container>
+		</label>
+	</div>
+	<table class="table text-sm">
+		<tbody>
+			@for (item of hostiles.sectors(); track item.faction + item.sector) {
+				<tr>
+					<td>
+						<app-map-focus-link [sector]="item.shape.sector" />
+						<div class="flex items-center gap-1 text-xs text-fg-muted">
+							<span
+								class="inline-block size-2 rounded-full"
+								[style.background]="colors[item.faction]"
+							></span>
+							{{ factionName(item.faction) }}
+						</div>
+					</td>
+					<td>
+						@if (item.stations) {
+							<div>{{ item.summary }}</div>
+						}
+						@if (item.shipTotal) {
+							<div class="text-xs text-fg-muted" i18n>
+								{{ item.shipTotal }} ships ({{ sizeSplit(item.ships) }})
+							</div>
+						}
+					</td>
+				</tr>
+			} @empty {
+				<tr>
+					<td class="text-fg-muted" i18n>No Xenon or Kha'ak in the shown sectors.</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	<!-- prettier-ignore -->
+	<p class="mt-2 text-xs text-fg-muted" i18n> Stations and ships as of save time; ship counts need a save loaded with this version. </p>
+} @else {
+	<p class="text-sm text-fg-muted">
+		<a routerLink="/saves" i18n>Load a save</a>
+		<ng-container i18n>to see where the Xenon and Kha'ak have stations and ships.</ng-container>
+	</p>
+}

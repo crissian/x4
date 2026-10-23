@@ -1,0 +1,16 @@
+@for (marker of vaults.markers(); track marker.entry.id) { @let size = store.panZoom.fontSize() * 0.8;
+<svg:g class="cursor-pointer" [attr.data-sector]="marker.shape.sector.id">
+	<svg:title i18n>Data vault {{ vaults.title(marker.entry) }} ({{ marker.shape.sector.name }})</svg:title>
+	<svg:rect
+		[attr.x]="marker.x - size / 2"
+		[attr.y]="marker.y - size / 2"
+		[attr.width]="size"
+		[attr.height]="size"
+		[attr.rx]="size * 0.2"
+		[attr.fill]="marker.done ? '#64748b' : '#fbbf24'"
+		stroke="#05080f"
+		stroke-width="1"
+		vector-effect="non-scaling-stroke"
+	/>
+</svg:g>
+}

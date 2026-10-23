@@ -1,0 +1,46 @@
+@let drawing = layout();
+<div class="max-h-[75vh] overflow-auto rounded border border-line bg-surface p-2">
+	<svg
+		class="block"
+		[attr.width]="drawing.width"
+		[attr.height]="drawing.height"
+		[attr.viewBox]="'0 0 ' + drawing.width + ' ' + drawing.height"
+		role="group"
+		aria-label="Research tree"
+		i18n-aria-label
+	>
+		@for (edge of drawing.edges; track edge.from + '>' + edge.to) {
+			<path
+				class="edge"
+				[class.edge-path]="highlight().has(edge.from) && highlight().has(edge.to)"
+				[attr.d]="edge.path"
+			/>
+		}
+		@for (item of nodes(); track item.id) {
+			<foreignObject
+				[attr.x]="item.x"
+				[attr.y]="item.y"
+				[attr.width]="size.nodeWidth"
+				[attr.height]="size.nodeHeight"
+			>
+				<button
+					type="button"
+					class="node"
+					[attr.data-tone]="item.tone"
+					[class.node-selected]="item.id === selectedId()"
+					[class.node-path]="highlight().has(item.id) && item.id !== selectedId()"
+					[class.node-dim]="matches() && !matches()!.has(item.id)"
+					[attr.aria-pressed]="item.id === selectedId()"
+					[title]="item.title"
+					(click)="pick.emit(item.id)"
+				>
+					<span class="node-name">{{ item.project.name }}</span>
+					<span class="node-line">{{ item.meta }}</span>
+					@if (item.cost) {
+						<span class="node-line">{{ item.cost }}</span>
+					}
+				</button>
+			</foreignObject>
+		}
+	</svg>
+</div>
