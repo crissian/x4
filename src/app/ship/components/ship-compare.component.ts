@@ -1,6 +1,6 @@
 import { DecimalPipe } from '@angular/common';
-import { EnumLabelPipe, EnumLabels } from '../../core/enum-labels';
-import { Component, computed, effect, inject, input, linkedSignal, untracked } from '@angular/core';
+import { EnumLabels } from '../../core/enum-labels';
+import { Component, computed, effect, inject, input, linkedSignal, signal, untracked } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { LucideWrench, LucideX } from '@lucide/angular';
@@ -9,6 +9,7 @@ import { LocalStorage } from '../../core/services/local-storage';
 import { Ship } from '../../shared/services/model/model';
 import { LOADOUT_PRESETS, LoadoutPreset, ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
+import { SearchableSelectComponent } from '../../shared/components/searchable-select/searchable-select.component';
 
 const STORAGE_KEY = 'ship-compare';
 export const MAX_COMPARED = 4;
@@ -43,7 +44,7 @@ interface Row {
 }
 
 @Component({
-	imports: [DecimalPipe, FormField, RouterLink, LucideX, LucideWrench, EnumLabelPipe],
+	imports: [DecimalPipe, FormField, RouterLink, LucideX, LucideWrench, SearchableSelectComponent],
 	templateUrl: './ship-compare.component.html',
 })
 export class ShipCompareComponent {
@@ -53,7 +54,9 @@ export class ShipCompareComponent {
 	 */
 	static addToComparison(value: string): string {
 		const [entry] = ShipCompareComponent.parse(value);
-		const entries = [...ShipCompareComponent.readStored().filter((x) => x.id !== entry.id), entry].slice(-MAX_COMPARED);
+		const entries = [...ShipCompareComponent.readStored().filter((x) => x.id !== entry.id), entry].slice(
+			-MAX_COMPARED
+		);
 		ShipCompareComponent.store(entries);
 		return ShipCompareComponent.format(entries);
 	}
@@ -66,7 +69,12 @@ export class ShipCompareComponent {
 
 	protected readonly presets = LOADOUT_PRESETS;
 	protected readonly max = MAX_COMPARED;
-	protected readonly allShips = [...this.shipService.getEntities()].sort((a, b) => a.name.localeCompare(b.name));
+	protected readonly shipOptions = [...this.shipService.getEntities()]
+		.sort((a, b) => a.name.localeCompare(b.name))
+		.map((ship) => ({ id: ship.id, name: ship.name, detail: EnumLabels.label(ship.size) }));
+	/** the "Add ship" picker: a picked ship is added, then the picker is cleared */
+	protected readonly addShip = signal('');
+	protected readonly addShipForm = form(this.addShip);
 
 	protected readonly entries = linkedSignal<Selection[]>(() => {
 		const fromUrl = ShipCompareComponent.parse(this.ships());
@@ -106,9 +114,19 @@ export class ShipCompareComponent {
 		{ caption: $localize`Boost (m/s)`, value: (c) => c.stats.speeds.boost, best: 'higher' },
 		{ caption: $localize`Travel (m/s)`, value: (c) => c.stats.speeds.travel, best: 'higher' },
 		{ caption: $localize`Strafe (m/s)`, value: (c) => c.stats.handling.strafeH || null, best: 'higher' },
-		{ caption: $localize`Pitch (°/s)`, value: (c) => c.stats.handling.pitch || null, best: 'higher', format: '1.0-1' },
+		{
+			caption: $localize`Pitch (°/s)`,
+			value: (c) => c.stats.handling.pitch || null,
+			best: 'higher',
+			format: '1.0-1',
+		},
 		{ caption: $localize`Yaw (°/s)`, value: (c) => c.stats.handling.yaw || null, best: 'higher', format: '1.0-1' },
-		{ caption: $localize`Roll (°/s)`, value: (c) => c.stats.handling.roll || null, best: 'higher', format: '1.0-1' },
+		{
+			caption: $localize`Roll (°/s)`,
+			value: (c) => c.stats.handling.roll || null,
+			best: 'higher',
+			format: '1.0-1',
+		},
 		{ caption: $localize`Cargo`, value: (c) => this.stats.maxStats(c.ship).cargo || null, best: 'higher' },
 		{ caption: $localize`Cargo type`, value: (c) => this.stats.maxStats(c.ship).cargoTypes },
 		{ caption: $localize`Weapons`, value: (c) => c.ship.weapons?.length ?? 0, best: 'higher' },
@@ -147,6 +165,15 @@ export class ShipCompareComponent {
 	});
 
 	constructor() {
+		effect(() => {
+			const id = this.addShip();
+			if (id) {
+				untracked(() => {
+					this.add(id);
+					this.addShip.set('');
+				});
+			}
+		});
 		effect(() => {
 			const entries = this.columns().map((c) => ({ id: c.ship.id, code: c.code }));
 			const value = ShipCompareComponent.format(entries);
@@ -197,7 +224,9 @@ export class ShipCompareComponent {
 	}
 
 	private static readStored(): Entry[] {
-		return ShipCompareComponent.parse(LocalStorage.read(STORAGE_KEY, '', (x) => (typeof x === 'string' ? x : undefined)));
+		return ShipCompareComponent.parse(
+			LocalStorage.read(STORAGE_KEY, '', (x) => (typeof x === 'string' ? x : undefined))
+		);
 	}
 
 	private static store(entries: Entry[]) {

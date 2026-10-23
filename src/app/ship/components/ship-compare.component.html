@@ -2,12 +2,17 @@
 	<div class="card-header flex flex-wrap items-center justify-between gap-3">
 		<span i18n><a routerLink="/ships">Ships</a> - Compare</span>
 		@if (columns().length < max) {
-			<select #picker class="input w-auto" i18n-aria-label aria-label="Add ship" (change)="add(picker.value); picker.value = ''">
-				<option value="" i18n>Add ship...</option>
-				@for (ship of allShips; track ship.id) {
-					<option [value]="ship.id">{{ ship.name }} ({{ ship.size | enumLabel }})</option>
-				}
-			</select>
+			<app-searchable-select
+				class="w-64 max-w-full"
+				i18n-label
+				label="Add ship"
+				[hideLabel]="true"
+				i18n-placeholder
+				placeholder="Add ship..."
+				recentKey="ship-compare-recent-ships"
+				[options]="shipOptions"
+				[formField]="addShipForm"
+			/>
 		}
 	</div>
 	<div class="card-body">
@@ -21,7 +26,13 @@
 								<th class="min-w-48 align-top">
 									<div class="flex items-start justify-between gap-2">
 										<a [routerLink]="['/ships', column.ship.id]">{{ column.ship.name }}</a>
-										<button type="button" class="link-button" i18n-title title="Remove" (click)="remove(i)">
+										<button
+											type="button"
+											class="link-button"
+											i18n-title
+											title="Remove"
+											(click)="remove(i)"
+										>
 											<svg lucideX />
 										</button>
 									</div>
@@ -42,7 +53,9 @@
 										class="mt-1 inline-block text-sm font-normal"
 										[routerLink]="['/ships', column.ship.id, 'loadout']"
 										[queryParams]="{ l: column.code }"
-										><svg lucideWrench class="mr-0.5" /><ng-container i18n>Customize</ng-container></a
+										><svg lucideWrench class="mr-0.5" /><ng-container i18n
+											>Customize</ng-container
+										></a
 									>
 								</th>
 							}
