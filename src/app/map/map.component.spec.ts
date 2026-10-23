@@ -43,6 +43,12 @@ describe('MapComponent', () => {
 		expect(speed.value).not.toBe('3000');
 	});
 
+	it('opens the legend on the first visit', async () => {
+		localStorage.removeItem('map-legend-open');
+		const { element } = await setup();
+		expect(element.querySelector('app-map-legend button')?.textContent?.trim()).toBe('Hide');
+	});
+
 	it('remembers whether the legend is open', async () => {
 		localStorage.setItem('map-legend-open', 'false');
 		const { fixture, element } = await setup();
