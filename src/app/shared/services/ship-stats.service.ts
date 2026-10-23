@@ -146,6 +146,20 @@ export class ShipStatsService {
 		return result;
 	}
 
+	/**
+	 * The preset a share code stands for, if any. Both sides are compared decoded and encoded again, so codes made
+	 * before the thruster and missile slots still match their preset.
+	 */
+	matchingPreset(ship: Ship, code: string | null | undefined): LoadoutPreset | undefined {
+		const loadout = this.decode(ship, code);
+		if (!loadout) {
+			return undefined;
+		}
+		const normalized = (x: Loadout) => this.encode(ship, this.decode(ship, this.encode(ship, x)) ?? {});
+		const target = normalized(loadout);
+		return LOADOUT_PRESETS.find((p) => normalized(this.preset(ship, p.id)) === target)?.id;
+	}
+
 	/** Factions selling the item and the license each one asks for. */
 	sellers(owners: Faction[] | undefined, license: string | undefined): LicenseRequirement[] {
 		return (owners ?? [])

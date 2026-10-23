@@ -105,12 +105,17 @@ export class ShipCompareComponent {
 		{ caption: $localize`Speed (m/s)`, value: (c) => c.stats.speeds.speed, best: 'higher' },
 		{ caption: $localize`Boost (m/s)`, value: (c) => c.stats.speeds.boost, best: 'higher' },
 		{ caption: $localize`Travel (m/s)`, value: (c) => c.stats.speeds.travel, best: 'higher' },
+		{ caption: $localize`Strafe (m/s)`, value: (c) => c.stats.handling.strafeH || null, best: 'higher' },
+		{ caption: $localize`Pitch (°/s)`, value: (c) => c.stats.handling.pitch || null, best: 'higher', format: '1.0-1' },
+		{ caption: $localize`Yaw (°/s)`, value: (c) => c.stats.handling.yaw || null, best: 'higher', format: '1.0-1' },
+		{ caption: $localize`Roll (°/s)`, value: (c) => c.stats.handling.roll || null, best: 'higher', format: '1.0-1' },
 		{ caption: $localize`Cargo`, value: (c) => this.stats.maxStats(c.ship).cargo || null, best: 'higher' },
 		{ caption: $localize`Cargo type`, value: (c) => this.stats.maxStats(c.ship).cargoTypes },
 		{ caption: $localize`Weapons`, value: (c) => c.ship.weapons?.length ?? 0, best: 'higher' },
 		{ caption: $localize`Turrets`, value: (c) => c.ship.turrets?.length ?? 0, best: 'higher' },
 		{ caption: $localize`Weapon DPS`, value: (c) => c.stats.weaponDps, best: 'higher' },
 		{ caption: $localize`Turret DPS`, value: (c) => c.stats.turretDps, best: 'higher' },
+		{ caption: $localize`Missile DPS`, value: (c) => c.stats.missiles.dps, best: 'higher' },
 		{
 			caption: $localize`Max range (km)`,
 			value: (c) => (c.stats.maxRange ? c.stats.maxRange / 1000 : null),
@@ -169,8 +174,8 @@ export class ShipCompareComponent {
 		if (!code || !this.stats.decode(ship, code)) {
 			return { id: ship.id, preset: 'combat' };
 		}
-		const preset = this.presets.find((p) => this.stats.encode(ship, this.stats.preset(ship, p.id)) === code);
-		return preset ? { id: ship.id, preset: preset.id } : { id: ship.id, preset: '', custom: code };
+		const preset = this.stats.matchingPreset(ship, code);
+		return preset ? { id: ship.id, preset } : { id: ship.id, preset: '', custom: code };
 	}
 
 	protected remove(index: number) {
