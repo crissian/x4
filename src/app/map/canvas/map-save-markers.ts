@@ -52,11 +52,16 @@ export class MapSaveMarkers {
 		this.stations.hovered.set(hover);
 	}
 
-	private static shipTitle(ships: { total: number; bySize: number[] }): string {
-		const split = ships.bySize
+	/** The non-zero counts of `[xs, s, m, l, xl]`, e.g. "S 3, M 9". */
+	static sizeSplit(bySize: number[]): string {
+		return bySize
 			.map((count, i) => (count ? `${MapSaveMarkers.SIZES[i]} ${count}` : ''))
 			.filter((x) => x)
 			.join(', ');
+	}
+
+	private static shipTitle(ships: { total: number; bySize: number[] }): string {
+		const split = MapSaveMarkers.sizeSplit(ships.bySize);
 		return $localize`${ships.total}:total: player ships (${split}:split:)`;
 	}
 }

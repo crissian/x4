@@ -1,0 +1,13 @@
+@if (any()) {
+<ul class="mt-1.5 space-y-0.5 border-t border-white/10 pt-1.5">
+	@if (contested()) {
+	<li class="text-red-300" i18n>Contested</li>
+	} @if (unknown()) {
+	<li class="text-slate-400" i18n>Not discovered</li>
+	} @if (presence(); as presence) { @if (presence.ships; as ships) {
+	<li class="text-sky-300" i18n>Your ships: {{ ships.total }} ({{ sizeSplit(ships.bySize) }})</li>
+	} @if (presence.stations) {
+	<li class="text-sky-300" i18n>Your stations: {{ presence.stations }}</li>
+	} }
+</ul>
+}
