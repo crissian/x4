@@ -1,18 +1,22 @@
+import { Descriptions } from '../../shared/services/descriptions';
 import { DecimalPipe } from '@angular/common';
 import { EnumLabelPipe, EnumLabels } from '../../core/enum-labels';
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { Router, RouterLink } from '@angular/router';
 import { LucideGitCompareArrows, LucideWrench } from '@lucide/angular';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
-import { ProductionCardComponent } from '../../shared/components/production-card.component';
+import { ProducibleDetailPage } from '../../shared/components/entity-detail-page';
+import { EntityLinkComponent } from '../../shared/components/entity-link.component';
+import { ProductionCardsComponent } from '../../shared/components/production-cards.component';
+import { RowNavigation } from '../../shared/components/row-navigation';
+import { PriceRangePipe } from '../../core/format/price-range.pipe';
 import { SellersComponent } from '../../shared/components/sellers.component';
 import { ShipPerformance } from '../../shared/services/ship-performance';
-import { Equipment, ShipCargo } from '../../shared/services/model/model';
+import { Equipment, Ship, ShipCargo } from '../../shared/services/model/model';
 import { Production } from '../../shared/services/production';
 import { ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
-import { WareService } from '../../shared/services/ware.service';
 import { ShipSellersNearComponent } from '../sellers/ship-sellers-near.component';
 import { ShipCompareComponent } from './ship-compare.component';
 
@@ -25,19 +29,29 @@ interface EngineRow {
 }
 
 @Component({
-	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, ProductionCardComponent, SellersComponent, ShipSellersNearComponent, DataGridComponent, LucideWrench, LucideGitCompareArrows, EnumLabelPipe],
+	imports: [
+		DetailPageComponent,
+		DetailComponent,
+		DecimalPipe,
+		RouterLink,
+		EntityLinkComponent,
+		ProductionCardsComponent,
+		SellersComponent,
+		ShipSellersNearComponent,
+		DataGridComponent,
+		LucideWrench,
+		LucideGitCompareArrows,
+		EnumLabelPipe,
+		PriceRangePipe,
+	],
 	templateUrl: './ship-detail.component.html',
 })
-export class ShipDetailComponent {
-	private readonly service = inject(ShipService);
-	private readonly wareService = inject(WareService);
+export class ShipDetailComponent extends ProducibleDetailPage<Ship> {
+	protected readonly service = inject(ShipService);
+	protected readonly description = Descriptions.of('ships', this.id);
 	private readonly stats = inject(ShipStatsService);
 	private readonly router = inject(Router);
 
-	readonly id = input.required<string>();
-
-	protected readonly entity = computed(() => this.service.getEntity(this.id()));
-	protected readonly production = computed(() => Production.toProductionData(this.entity()?.production, this.wareService));
 	protected readonly mainShields = computed(() => this.entity()?.shields?.filter((x) => !x.group) ?? []);
 	protected readonly additionalShields = computed(() => this.entity()?.shields?.filter((x) => x.group) ?? []);
 	protected readonly maxStats = computed(() => {
@@ -72,9 +86,7 @@ export class ShipDetailComponent {
 		return cargo.types.map((x) => EnumLabels.label(x.name)).join(', ');
 	}
 
-	protected openEngine(row: EngineRow) {
-		this.router.navigate(['/equipment', row.engine.id]);
-	}
+	protected readonly openEngine = RowNavigation.to<EngineRow>('/equipment', (x) => x.engine.id);
 
 	protected compare() {
 		this.router.navigate(['/ships/compare'], { queryParams: { ships: ShipCompareComponent.addToComparison(this.id()) } });

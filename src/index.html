@@ -29,9 +29,205 @@
 				}
 			})();
 		</script>
+		<style>
+			/* loading splash (see SplashScreen): fades in after 300ms so fast starts never show it */
+			#splash {
+				--space-centre: #ffffff;
+				--space-edge: #e5e5e5;
+				--star: #0369a1;
+				--star-alpha: 0.55;
+				--glow: rgba(217, 140, 40, 0.45);
+				--label: #737373;
+				position: fixed;
+				inset: 0;
+				z-index: 1000;
+				display: grid;
+				place-items: center;
+				overflow: hidden;
+				background: radial-gradient(circle at center, var(--space-centre) 0%, var(--space-edge) 75%);
+				opacity: 0;
+				animation: splash-in 0.3s ease-out 0.3s forwards;
+				transition: opacity 0.35s ease-in;
+			}
+			.dark #splash {
+				--space-centre: #2c2738;
+				--space-edge: #121212;
+				--star: #ffffff;
+				--star-alpha: 0.9;
+				--glow: rgba(255, 190, 90, 0.6);
+				--label: #a3a3a3;
+			}
+			#splash.splash-hide {
+				animation: none;
+				opacity: 0;
+			}
+			#splash .stars {
+				position: absolute;
+				inset: 0;
+			}
+			#splash .stars i {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				width: 2px;
+				height: 2px;
+				border-radius: 1px;
+				background: var(--star);
+				opacity: 0;
+				animation: splash-warp var(--d) linear var(--delay) infinite;
+			}
+			#splash .logo {
+				position: relative;
+				width: min(220px, 50vw);
+				aspect-ratio: 282 / 200;
+				animation: splash-arrive 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s both;
+			}
+			#splash .logo img {
+				display: block;
+				width: 100%;
+				height: 100%;
+				animation: splash-breathe 2.8s ease-in-out 1.9s infinite;
+			}
+			#splash .shine {
+				position: absolute;
+				inset: 0;
+				-webkit-mask: url(assets/images/x4-logo.webp) center / contain no-repeat;
+				mask: url(assets/images/x4-logo.webp) center / contain no-repeat;
+				background: linear-gradient(
+						105deg,
+						transparent 35%,
+						rgba(255, 255, 255, 0.85) 50%,
+						transparent 65%
+					) -200%
+					0 / 250% 100% no-repeat;
+				mix-blend-mode: screen;
+				animation: splash-sweep 2.8s ease-in-out 1.9s infinite;
+			}
+			#splash .label {
+				position: absolute;
+				bottom: 18%;
+				left: 0;
+				right: 0;
+				text-align: center;
+				font:
+					12px/1.5 system-ui,
+					sans-serif;
+				letter-spacing: 0.25em;
+				text-transform: uppercase;
+				color: var(--label);
+			}
+			@keyframes splash-in {
+				to {
+					opacity: 1;
+				}
+			}
+			@keyframes splash-warp {
+				0% {
+					transform: rotate(var(--a)) translateX(8px) scaleX(1);
+					opacity: 0;
+				}
+				20% {
+					opacity: var(--star-alpha);
+				}
+				100% {
+					transform: rotate(var(--a)) translateX(60vmax) scaleX(14);
+					opacity: 0;
+				}
+			}
+			@keyframes splash-arrive {
+				from {
+					transform: scale(0.4);
+					opacity: 0;
+					filter: blur(6px);
+				}
+				to {
+					transform: scale(1);
+					opacity: 1;
+					filter: blur(0);
+				}
+			}
+			@keyframes splash-breathe {
+				0%,
+				100% {
+					filter: drop-shadow(0 0 4px var(--glow));
+					transform: scale(1);
+				}
+				50% {
+					filter: drop-shadow(0 0 18px var(--glow));
+					transform: scale(1.03);
+				}
+			}
+			@keyframes splash-sweep {
+				0% {
+					background-position: -200% 0;
+				}
+				60%,
+				100% {
+					background-position: 200% 0;
+				}
+			}
+			@media (prefers-reduced-motion: reduce) {
+				#splash,
+				#splash * {
+					animation: none !important;
+				}
+				#splash {
+					opacity: 1;
+				}
+				#splash.splash-hide {
+					opacity: 0;
+				}
+				#splash .stars {
+					display: none;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<app-root></app-root>
+
+		<div id="splash" aria-hidden="true">
+			<div class="stars"></div>
+			<div class="logo">
+				<img src="assets/images/x4-logo.webp" alt="" />
+				<div class="shine"></div>
+			</div>
+			<div class="label"></div>
+		</div>
+		<script>
+			// star streaks and the label in the selected language (GameText stores it as JSON under 'language')
+			(function () {
+				var labels = {
+					cs: 'Načítání',
+					de: 'Wird geladen',
+					es: 'Cargando',
+					fr: 'Chargement',
+					it: 'Caricamento',
+					ja: '読み込み中',
+					ko: '로딩 중',
+					pl: 'Ładowanie',
+					'pt-BR': 'Carregando',
+					tr: 'Yükleniyor',
+					'zh-Hans': '加载中',
+					'zh-Hant': '載入中',
+				};
+				var language = null;
+				try {
+					language = JSON.parse(localStorage.getItem('language'));
+				} catch (e) {}
+				var splash = document.getElementById('splash');
+				splash.querySelector('.label').textContent = labels[language] || 'Loading';
+
+				var stars = splash.querySelector('.stars');
+				for (var i = 0; i < 60; i++) {
+					var star = document.createElement('i');
+					star.style.setProperty('--a', Math.round(Math.random() * 360) + 'deg');
+					star.style.setProperty('--d', (0.8 + Math.random() * 1.2).toFixed(2) + 's');
+					star.style.setProperty('--delay', (-Math.random() * 2).toFixed(2) + 's');
+					stars.appendChild(star);
+				}
+			})();
+		</script>
 
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130883167-1"></script>
 		<script>

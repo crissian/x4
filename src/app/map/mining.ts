@@ -1,5 +1,5 @@
 import { ShipPurpose } from '../shared/services/data/ship-purpose-data';
-import { Ship, Ware } from '../shared/services/model/model';
+import { ShipListItem, Ware } from '../shared/services/model/model';
 
 /**
  * Mining trips: fly from the home sector to the resource, fill the hold, fly back and sell.
@@ -19,13 +19,13 @@ export interface MiningTrip {
 
 export class Mining {
 	/** Cargo capacity a ship can use for a ware (only the holds of the ware's transport type). */
-	static minerCapacity(ship: Ship, ware: Ware): number {
+	static minerCapacity(ship: Pick<ShipListItem, 'cargo'>, ware: Ware): number {
 		const transport = ware.transport?.toLowerCase();
 		return (ship.cargo ?? []).filter((x) => x.types.some((t) => t.id === transport)).reduce((total, x) => total + x.max, 0);
 	}
 
 	/** Mining ships able to carry the ware, largest hold first. */
-	static minersFor(ships: readonly Ship[], ware: Ware): Ship[] {
+	static minersFor<T extends ShipListItem>(ships: readonly T[], ware: Ware): T[] {
 		return ships
 			.filter((x) => x.purpose === ShipPurpose.mine && Mining.minerCapacity(x, ware) > 0)
 			.sort((a, b) => Mining.minerCapacity(b, ware) - Mining.minerCapacity(a, ware) || a.name.localeCompare(b.name));

@@ -1,5 +1,6 @@
 import type { ParamMap, Params } from '@angular/router';
 import type { PlacementLoop } from '../economy/placement-model';
+import { NumberRange, QueryParams } from '../shared/services/query-params';
 
 /** The filter form of the station suggestions page. */
 export interface StationSuggestionsModel {
@@ -48,23 +49,20 @@ export class StationSuggestionsQuery {
 		player: true,
 		group: '',
 	};
-	/** the range of the jumps */
-	static readonly JUMPS = { min: 1, max: 6 };
+	/** the values each number accepts */
+	static readonly RANGES = { jumps: { min: 1, max: 6, integer: true } } satisfies Record<string, NumberRange>;
 
 	static read(params: ParamMap, lookups: StationSuggestionsLookups): StationSuggestionsModel {
 		const defaults = StationSuggestionsQuery.DEFAULTS;
-		const mode = params.get('mode') ?? '';
-		const ware = params.get('ware') ?? '';
-		const group = params.get('group') ?? '';
 		return {
-			mode: StationSuggestionsQuery.MODES.includes(mode) ? mode : defaults.mode,
-			loop: params.get('loop') === StationSuggestionsQuery.OPEN ? StationSuggestionsQuery.OPEN : defaults.loop,
-			ware: lookups.ware(ware) ? ware : defaults.ware,
+			mode: QueryParams.oneOf(params, 'mode', StationSuggestionsQuery.MODES, defaults.mode),
+			loop: QueryParams.oneOf(params, 'loop', [StationSuggestionsQuery.OPEN], defaults.loop),
+			ware: QueryParams.known(params, 'ware', lookups.ware, defaults.ware),
 			sector: lookups.sectorName(params.get('sector') ?? '') ?? defaults.sector,
-			jumps: StationSuggestionsQuery.jumps(params.get('jumps')),
+			jumps: QueryParams.number(params, 'jumps', StationSuggestionsQuery.RANGES.jumps, defaults.jumps),
 			hideHostile: params.get('hostile') !== '1',
 			player: params.get('player') !== '0',
-			group: lookups.group(group) ? group : defaults.group,
+			group: QueryParams.known(params, 'group', lookups.group, defaults.group),
 		};
 	}
 
@@ -74,10 +72,10 @@ export class StationSuggestionsQuery {
 		const here = model.mode === StationSuggestionsQuery.HERE;
 		return {
 			mode: here ? model.mode : null,
-			loop: model.loop === defaults.loop ? null : model.loop,
+			loop: QueryParams.unlessDefault(model.loop, defaults.loop),
 			ware: !here && model.ware ? model.ware : null,
 			sector: here ? (lookups.sectorId(model.sector) ?? null) : null,
-			jumps: model.jumps === defaults.jumps ? null : model.jumps,
+			jumps: QueryParams.unlessDefault(model.jumps, defaults.jumps),
 			hostile: model.hideHostile ? null : '1',
 			player: model.player ? null : '0',
 			group: model.group || null,
@@ -86,18 +84,6 @@ export class StationSuggestionsQuery {
 
 	/** The model with jumps out of range or not a number back at the default. */
 	static clean(model: StationSuggestionsModel): StationSuggestionsModel {
-		return StationSuggestionsQuery.validJumps(model.jumps)
-			? model
-			: { ...model, jumps: StationSuggestionsQuery.DEFAULTS.jumps };
-	}
-
-	private static validJumps(value: number): boolean {
-		const { min, max } = StationSuggestionsQuery.JUMPS;
-		return Number.isInteger(value) && value >= min && value <= max;
-	}
-
-	private static jumps(raw: string | null): number {
-		const value = raw ? Number(raw) : NaN;
-		return StationSuggestionsQuery.validJumps(value) ? value : StationSuggestionsQuery.DEFAULTS.jumps;
+		return QueryParams.clean(model, StationSuggestionsQuery.RANGES, StationSuggestionsQuery.DEFAULTS);
 	}
 }

@@ -38,24 +38,6 @@ export class Production {
 		return production.wares.reduce((total, x) => total + x.amount * x.ware.price[kind], 0);
 	}
 
-	static formatProductionTime(amount: number) {
-		const minutes = Math.trunc(amount / 60);
-		const seconds = amount - minutes * 60;
-
-		let result = '';
-		if (minutes > 0) {
-			result += minutes + (minutes === 1 ? ' minute' : ' minutes');
-		}
-		if (seconds > 0) {
-			if (minutes > 0) {
-				result += ' ';
-			}
-			result += seconds + (seconds === 1 ? ' second' : ' seconds');
-		}
-
-		return result;
-	}
-
 	static getSlots(value: readonly (Slot | Dock)[] | undefined): SlotSummary[] {
 		if (!value) {
 			return [];

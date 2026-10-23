@@ -1,4 +1,4 @@
-import { Signal, computed, effect, signal, untracked } from '@angular/core';
+import { Injector, Signal, Type, computed, effect, inject, signal, untracked } from '@angular/core';
 
 /**
  * A value loaded once on demand, typically through a dynamic `import()`: loading starts the first time `when`
@@ -26,6 +26,15 @@ export class LazyValue<T> {
 				void load.finally(() => LazyValue.loading.delete(load));
 			}
 		});
+	}
+
+	/**
+	 * A root service from a lazily imported module, e.g. one whose data file only some views need: loading
+	 * starts the first time `when` gives true. Create it in an injection context.
+	 */
+	static service<T>(when: () => boolean, load: () => Promise<Type<T>>): LazyValue<T> {
+		const injector = inject(Injector);
+		return new LazyValue(when, async () => injector.get(await load()));
 	}
 
 	/** Resolves once no value is loading; tests run pending effects first (`TestBed.tick()`). */

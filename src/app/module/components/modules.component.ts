@@ -1,30 +1,26 @@
 import { Component, inject } from '@angular/core';
-import { EnumFn } from '../../core/services/enum-fn';
-import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
-import { RowNavigation } from '../../shared/components/list-page';
+import { GridColumn } from '../../shared/components/data-grid/data-grid.component';
+import { ListPageComponent } from '../../shared/components/list-page.component';
+import { GridLookups } from '../../shared/components/data-grid/grid-lookups';
 import { Effects } from '../../shared/services/data/effects-data';
 import { ModuleTypes } from '../../shared/services/data/module-types-data';
 import { StationModule } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
-import { RaceService } from '../../shared/services/race.service';
 
 @Component({
-	imports: [DataGridComponent],
+	imports: [ListPageComponent],
 	templateUrl: './modules.component.html',
 })
 export class ModulesComponent {
 	protected readonly entities = inject(ModuleService).getEntities();
-	protected readonly open = RowNavigation.inject<StationModule>();
 
 	protected readonly columns: GridColumn<StationModule>[] = [
 		{ key: 'name', caption: $localize`Name` },
-		{ key: 'type', caption: $localize`Type`, lookup: DataGridComponent.lookupOf(EnumFn.values(ModuleTypes)) },
+		{ key: 'type', caption: $localize`Type`, lookup: GridLookups.ofEnum(ModuleTypes) },
 		{
 			key: 'makerRace.id',
 			caption: $localize`Race`,
-			lookup: inject(RaceService)
-				.getEntities()
-				.map((x) => ({ value: x.id, label: x.name })),
+			lookup: GridLookups.races(),
 		},
 		{
 			key: 'productName',

@@ -1,17 +1,17 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { DataGridComponent, GridColumn, SortState } from '../../shared/components/data-grid/data-grid.component';
 import { BlueprintCatalog } from '../blueprint-catalog';
 import { BlueprintCategories } from '../blueprint-categories';
 import type { BlueprintItem, UnsoldEntry, UnsoldReason } from '../blueprint-model';
 import { BlueprintsStore, type ReputationRow } from '../blueprints-store';
 import { BlueprintItemLinkComponent } from './blueprint-item-link.component';
+import { FactionLabelComponent } from '../../shared/components/faction-label.component';
 
 /** The missing blueprints: what to buy now from whom, what needs more reputation and what no faction sells. */
 @Component({
 	selector: 'app-blueprint-shopping-list',
-	imports: [BlueprintItemLinkComponent, DataGridComponent, DecimalPipe, RouterLink],
+	imports: [FactionLabelComponent, BlueprintItemLinkComponent, DataGridComponent, DecimalPipe],
 	templateUrl: './blueprint-shopping-list.component.html',
 })
 export class BlueprintShoppingListComponent {

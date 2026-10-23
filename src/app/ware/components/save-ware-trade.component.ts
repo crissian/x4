@@ -1,8 +1,9 @@
-import { Component, Injector, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { LazyValue } from '../../core/lazy-value';
+import { SaveStationNames } from '../../map/save/save-station-names';
+import { ActiveSave } from '../../savegame/active-save';
 import type { SaveMap } from '../../savegame/map/save-map-model';
 import type { SaveTradeIndex, SaveTradeRow } from '../../savegame/map/save-trade-index';
-import { SavegameStore } from '../../savegame/savegame-store';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
 import { FactionService } from '../../shared/services/faction.service';
 import { SectorService } from '../../shared/services/universe.service';
@@ -19,21 +20,18 @@ import { SectorService } from '../../shared/services/universe.service';
 export class SaveWareTradeComponent {
 	readonly ware = input.required<string>();
 
-	private readonly save = inject(SavegameStore);
 	private readonly factions = inject(FactionService);
 	private readonly sectors = inject(SectorService);
-	private readonly injector = inject(Injector);
+	private readonly stationNames = inject(SaveStationNames);
 
-	private readonly saveMap = computed(() => this.save.active()?.data?.['map'] as SaveMap | undefined);
+	private readonly saveMap = inject(ActiveSave).map;
 	private readonly build = new LazyValue(
 		() => !!this.saveMap(),
 		async () => {
-			const [{ SiteNamingTables }, { StationNamer }, { SaveTradeIndex }] = await Promise.all([
-				import('../../map/save/site-naming-tables'),
-				import('../../savegame/map/station-name'),
+			const [namer, { SaveTradeIndex }] = await Promise.all([
+				this.stationNames.loadNamer(),
 				import('../../savegame/map/save-trade-index'),
 			]);
-			const namer = new StationNamer(this.injector.get(SiteNamingTables));
 			const player = $localize`Player`;
 			const names = {
 				owner: (id: string) => (id === 'player' ? player : (this.factions.getEntity(id)?.name ?? id)),

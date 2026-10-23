@@ -37,6 +37,16 @@ describe('WareClasses', () => {
 		expect(partly.has('foodrations')).toBe(false);
 	});
 
+	it('matches the building materials precomputed by the extractor', () => {
+		const { only, partly } = WareClasses.buildingMaterials(
+			new ShipService().getEntities(),
+			EconomyTesting.modules.getEntities(),
+			EconomyTesting.wares.getEntities()
+		);
+		expect([...only]).toEqual([...WareClasses.GAME_BUILDING.only]);
+		expect([...partly]).toEqual([...WareClasses.GAME_BUILDING.partly]);
+	});
+
 	it('works out the building materials from the recipes', () => {
 		const recipe = (...wares: string[]) => ({ production: [{ wares: wares.map((ware) => ({ ware })) }] });
 		const used = WareClasses.buildingMaterials(

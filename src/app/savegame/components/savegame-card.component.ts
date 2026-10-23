@@ -4,6 +4,7 @@ import { LucideCheck, LucideTrash2 } from '@lucide/angular';
 import { SavegameListItem } from '../savegame-model';
 import { SavegameStatus } from '../savegame-store';
 import { SavegameFormat } from '../savegame-format';
+import { Duration } from '../../core/format/duration';
 
 /** One stored save with its facts, a status badge and the make-active / delete actions. */
 @Component({
@@ -18,7 +19,7 @@ export class SavegameCardComponent {
 	readonly activate = output();
 	readonly remove = output();
 
-	protected readonly gameTime = computed(() => SavegameFormat.time(this.save().info.gameTime));
+	protected readonly gameTime = computed(() => Duration.hoursMinutes(this.save().info.gameTime));
 	protected readonly version = computed(() => SavegameFormat.version(this.save().info.gameVersion));
 	protected readonly extensions = computed(() => this.save().info.extensions.map((e) => SavegameFormat.extension(e.id)));
 }

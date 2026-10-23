@@ -1,36 +1,40 @@
 import { describe, expect, it } from 'vitest';
-import type { Equipment, Ship, Ware } from '../shared/services/model/model';
-import type { ShipStatsService } from '../shared/services/ship-stats.service';
+import type { ShipListItem, Ware } from '../shared/services/model/model';
 import { TradeShips } from './trade-ships';
 
 describe('trade ships', () => {
 	const container = { id: 'container', name: 'Container' };
 	const solid = { id: 'solid', name: 'Solid' };
-	const ship = (name: string, cargo?: Ship['cargo']) => ({ id: name, name, cargo }) as unknown as Ship;
-	const hauler = ship('Hauler', [
+	const ship = (name: string, cargo?: ShipListItem['cargo'], travel?: ShipListItem['travel']) =>
+		({ id: name, name, cargo, travel }) as unknown as ShipListItem;
+	const holds = [
 		{ max: 2300, types: [container] },
 		{ max: 500, types: [container, solid] },
-	] as Ship['cargo']);
-	const engine = (forward: number, thrust: number, charge: number) =>
-		({ thrust: { forward }, travel: { thrust, charge } }) as unknown as Equipment;
-	const stats = (travel: number, engines: Equipment[] = []) =>
-		({ maxStats: () => ({ travel }), engines: () => engines }) as unknown as ShipStatsService;
+	] as ShipListItem['cargo'];
 
 	it('sums cargo per type', () => {
-		expect(TradeShips.spec(hauler, stats(1000)).capacity).toEqual({ container: 2800, solid: 500 });
+		expect(TradeShips.spec(ship('Hauler', holds, { speed: 1000 })).capacity).toEqual({
+			container: 2800,
+			solid: 500,
+		});
 	});
 
 	it('takes speed and charge from the fastest travel drive', () => {
-		const spec = TradeShips.spec(hauler, stats(4200, [engine(1, 1, 9), engine(5, 20, 7)]));
+		const spec = TradeShips.spec(ship('Hauler', holds, { speed: 4200, charge: 7 }));
 		expect(spec.speed).toBe(4200);
 		expect(spec.charge).toBe(7);
-		expect(TradeShips.spec(hauler, stats(4200)).charge).toBe(TradeShips.CUSTOM.charge);
+		expect(TradeShips.spec(ship('Hauler', holds, { speed: 4200 })).charge).toBe(TradeShips.CUSTOM.charge);
 	});
 
 	it('lists only ships with cargo and travel speed', () => {
-		const ships = [ship('B', [{ max: 1, types: [container] }] as Ship['cargo']), ship('NoCargo'), hauler];
-		expect(TradeShips.list(ships, stats(10)).map((x) => x.name)).toEqual(['B', 'Hauler']);
-		expect(TradeShips.list(ships, stats(0))).toEqual([]);
+		const travel = { speed: 10 };
+		const ships = [
+			ship('B', [{ max: 1, types: [container] }] as ShipListItem['cargo'], travel),
+			ship('NoCargo', undefined, travel),
+			ship('Hauler', holds, travel),
+			ship('NoDrive', holds, { speed: 0 }),
+		];
+		expect(TradeShips.list(ships).map((x) => x.name)).toEqual(['B', 'Hauler']);
 	});
 
 	it('maps a ware to its transport id', () => {

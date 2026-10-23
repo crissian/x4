@@ -10,22 +10,16 @@
 		</span>
 	</div>
 	<div class="card-body">
-		<label class="block max-w-sm text-sm">
-			<ng-container i18n>From sector</ng-container>
-			<input
-				id="ship-sellers-from"
-				class="input"
-				list="ship-sellers-sectors"
-				placeholder="Pick a sector to sort by travel time"
-				i18n-placeholder
-				[formField]="form.from"
-			/>
-			<datalist id="ship-sellers-sectors">
-				@for (sector of finder.sectors(); track sector.id) {
-					<option [value]="sector.name"></option>
-				}
-			</datalist>
-		</label>
+		<app-sector-input
+			class="max-w-sm text-sm"
+			inputId="ship-sellers-from"
+			i18n-label
+			label="From sector"
+			i18n-placeholder
+			placeholder="Pick a sector to sort by travel time"
+			[sectors]="finder.sectors()"
+			[formField]="form.from"
+		/>
 		<p class="my-2 text-xs text-fg-muted">
 			@if (finder.from()) {
 				<ng-container i18n
@@ -66,15 +60,7 @@
 										}
 									</td>
 									<td>
-										@if (row.faction; as faction) {
-											<span
-												class="mr-1 inline-block size-2 rounded-full"
-												[style.background]="faction.color"
-											></span>
-											<a [routerLink]="['/factions', faction.id]">{{ faction.name }}</a>
-										} @else {
-											{{ row.owner }}
-										}
+										<app-faction-label [faction]="row.faction">{{ row.owner }}</app-faction-label>
 									</td>
 									<td>
 										@if (row.sector; as sector) {

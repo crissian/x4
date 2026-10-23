@@ -32,7 +32,9 @@ interface ShipNode {
 type MapNode = ZoneNode | SectorNode | StationNode | ShipNode;
 
 export class MapExtractor implements XmlExtractor<SaveMap> {
-	readonly key = 'map';
+	/** The key of the extracted data in the save's data. */
+	static readonly KEY = 'map';
+	readonly key = MapExtractor.KEY;
 	private readonly sectors: SaveSector[] = [];
 	private readonly playerShips: ShipCounts = {};
 	private readonly stations: StationNode[] = [];

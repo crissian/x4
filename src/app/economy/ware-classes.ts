@@ -1,3 +1,4 @@
+import { BuildingMaterials as GameBuildingMaterials } from '../shared/services/data/building-materials-data';
 import type { Ware } from '../shared/services/model/model';
 
 /** What a ware is for the supply and demand calculation. */
@@ -45,6 +46,11 @@ export class WareClasses {
 	static readonly UNBUILDABLE_RACES: readonly string[] = ['xenon', 'khaak'];
 
 	static readonly NO_BUILDING: BuildingMaterials = { only: new Set(), partly: new Set() };
+	/** The building materials of the game data, worked out by the extractor like `buildingMaterials`. */
+	static readonly GAME_BUILDING: BuildingMaterials = {
+		only: new Set(GameBuildingMaterials.only),
+		partly: new Set(GameBuildingMaterials.partly),
+	};
 
 	/**
 	 * The wares that ships and station modules are built from: `only` those that no ware's production uses as an

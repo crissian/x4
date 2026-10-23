@@ -2,19 +2,17 @@ import { Injectable, computed, inject, linkedSignal, signal } from '@angular/cor
 import { form } from '@angular/forms/signals';
 import { LazyValue } from '../../core/lazy-value';
 import type { StationFlowCalculator } from '../../economy/station-flow-calculator';
-import type { SaveMap, SaveRelations, SaveStation } from '../../savegame/map/save-map-model';
-import { SavegameFormat } from '../../savegame/savegame-format';
-import { SavegameStore } from '../../savegame/savegame-store';
-import { FactionService } from '../../shared/services/faction.service';
+import { ActiveSave } from '../../savegame/active-save';
+import type { SaveStation } from '../../savegame/map/save-map-model';
 import { ModuleService } from '../../shared/services/module.service';
-import { ShipStatsService } from '../../shared/services/ship-stats.service';
-import { TravelDrives } from '../../shared/services/travel-drives';
 import { SectorService } from '../../shared/services/universe.service';
 import { WareService } from '../../shared/services/ware.service';
 import { TravelCache } from '../../trade/travel-cache';
 import { MapStore } from '../map-store';
 import { Mining } from '../mining';
+import { RoutePlanner } from '../route-planner';
 import { MapSaveLayer } from '../save/map-save-layer';
+import { SaveStationNames } from '../save/save-station-names';
 import { MinersEstimate, MinersNeeded } from './miners-needed';
 import type { MiningBuyers, MiningPair } from './mining-buyers';
 
@@ -47,17 +45,14 @@ export class MiningBuyersStore {
 
 	private readonly map = inject(MapStore);
 	private readonly layer = inject(MapSaveLayer);
-	private readonly savegames = inject(SavegameStore);
-	private readonly shipStats = inject(ShipStatsService);
+	private readonly activeSave = inject(ActiveSave);
 	private readonly wares = inject(WareService);
 	private readonly modules = inject(ModuleService);
 	private readonly sectorService = inject(SectorService);
-	private readonly factions = inject(FactionService);
+	private readonly stationNames = inject(SaveStationNames);
 
-	private readonly saveMap = computed(() => this.savegames.active()?.data?.['map'] as SaveMap | undefined);
-	private readonly relations = computed(
-		() => this.savegames.active()?.data?.['relations'] as SaveRelations | undefined
-	);
+	private readonly saveMap = this.activeSave.map;
+	private readonly relations = this.activeSave.relations;
 	private readonly tools = new LazyValue(
 		() => !!this.saveMap(),
 		async () => {
@@ -74,22 +69,15 @@ export class MiningBuyersStore {
 
 	/** A save with map data is active and the ranking code is loaded; else the panel shows static prices. */
 	readonly active = computed(() => this.map.saveActive() && !!this.tools.value() && !!this.saveMap());
-	readonly gameTime = computed(() => SavegameFormat.time(this.savegames.active()?.info?.gameTime ?? 0));
+	readonly gameTime = this.activeSave.gameTime;
 
 	/** The save's sectors. */
 	private readonly sectors = computed(() => {
 		const ids = this.layer.sectorIds();
 		return ids ? this.map.sectorList.filter((x) => ids.has(x.id)) : [];
 	});
-	/** The miner's speed and fastest drive charge; kept while they stay the same. */
-	private readonly travelOptions = computed(
-		() => {
-			const miner = this.map.miner();
-			const charge = miner ? TravelDrives.fastest(this.shipStats, miner)?.travel?.charge : undefined;
-			return { speed: Math.max(100, this.map.minerSpeed() || 1000), charge: charge ?? 0 };
-		},
-		{ equal: (a, b) => a.speed === b.speed && a.charge === b.charge }
-	);
+	/** The miner's speed and fastest drive charge, the same as the mining panel's. */
+	private readonly travelOptions = computed(() => this.map.minerTravelOptions() ?? RoutePlanner.DEFAULT_OPTIONS);
 	private readonly cache = computed(() => new TravelCache(this.sectors(), this.travelOptions()));
 
 	/** Station names come from the map layer, which names every placed station. */
@@ -187,7 +175,7 @@ export class MiningBuyersStore {
 			pair,
 			key: station.code,
 			name: this.names().get(station) ?? station.code,
-			owner: station.owner === 'player' ? undefined : this.factions.getEntity(station.owner)?.shortName,
+			owner: this.stationNames.ownerShort(station.owner),
 			sectorName: this.map.sectorName(pair.sector),
 			buyerSectorName: this.map.sectorName(station.sector),
 		};

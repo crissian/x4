@@ -1,5 +1,6 @@
 import type { ParamMap, Params } from '@angular/router';
 import { EconomyScopes } from '../economy/economy-scope';
+import { NumberRange, QueryParams } from '../shared/services/query-params';
 
 /** The filter form of the supply and demand page. */
 export interface SupplyDemandModel {
@@ -45,23 +46,20 @@ export class SupplyDemandQuery {
 		mined: false,
 		map: 'local',
 	};
-	/** the lowest value each number accepts */
-	static readonly MIN = { jumps: 0 };
+	/** the values each number accepts */
+	static readonly RANGES = { jumps: { min: 0, integer: true } } satisfies Record<string, NumberRange>;
 
 	static read(params: ParamMap, lookups: SupplyDemandLookups): SupplyDemandModel {
 		const defaults = SupplyDemandQuery.DEFAULTS;
-		const scope = params.get('scope') ?? '';
-		const faction = params.get('faction') ?? '';
-		const group = params.get('group') ?? '';
 		return {
-			scope: SupplyDemandQuery.SCOPES.includes(scope) ? scope : defaults.scope,
-			faction: lookups.faction(faction) ? faction : defaults.faction,
+			scope: QueryParams.oneOf(params, 'scope', SupplyDemandQuery.SCOPES, defaults.scope),
+			faction: QueryParams.known(params, 'faction', lookups.faction, defaults.faction),
 			sector: lookups.sectorName(params.get('sector') ?? '') ?? defaults.sector,
-			jumps: SupplyDemandQuery.jumps(params.get('jumps')),
-			group: lookups.group(group) ? group : defaults.group,
+			jumps: QueryParams.number(params, 'jumps', SupplyDemandQuery.RANGES.jumps, defaults.jumps),
+			group: QueryParams.known(params, 'group', lookups.group, defaults.group),
 			player: params.get('player') !== '0',
 			mined: params.get('mined') === '1',
-			map: SupplyDemandQuery.MAP_MODES.includes(params.get('map') ?? '') ? params.get('map')! : defaults.map,
+			map: QueryParams.oneOf(params, 'map', SupplyDemandQuery.MAP_MODES, defaults.map),
 		};
 	}
 
@@ -79,23 +77,12 @@ export class SupplyDemandQuery {
 			group: model.group || null,
 			player: model.player ? null : '0',
 			mined: model.mined ? '1' : null,
-			map: model.map === defaults.map ? null : model.map,
+			map: QueryParams.unlessDefault(model.map, defaults.map),
 		};
 	}
 
 	/** The model with a jumps number that is below the minimum or not a whole number back at its default. */
 	static clean(model: SupplyDemandModel): SupplyDemandModel {
-		return SupplyDemandQuery.validJumps(model.jumps)
-			? model
-			: { ...model, jumps: SupplyDemandQuery.DEFAULTS.jumps };
-	}
-
-	private static validJumps(value: number): boolean {
-		return Number.isInteger(value) && value >= SupplyDemandQuery.MIN.jumps;
-	}
-
-	private static jumps(raw: string | null): number {
-		const value = raw ? Number(raw) : NaN;
-		return SupplyDemandQuery.validJumps(value) ? value : SupplyDemandQuery.DEFAULTS.jumps;
+		return QueryParams.clean(model, SupplyDemandQuery.RANGES, SupplyDemandQuery.DEFAULTS);
 	}
 }

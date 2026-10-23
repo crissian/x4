@@ -1,17 +1,20 @@
-import type { Ship } from './model/model';
-import type { ShipStatsService } from './ship-stats.service';
-
-type Engine = ReturnType<ShipStatsService['engines']>[number];
+import type { RouteOptions } from '../../map/route-planner';
+import type { ShipTravel } from './model/model';
 
 export class TravelDrives {
-	/** Engine with the best travel thrust, used for the travel drive charge time. */
-	static fastest(stats: ShipStatsService, ship: Ship): Engine | undefined {
-		return stats
-			.engines(ship)
-			.reduce<Engine | undefined>((best, x) => (!best || TravelDrives.score(x) > TravelDrives.score(best) ? x : best), undefined);
+	/** A ship with a travel speed, so it can plan routes. */
+	static canTravel(ship: { travel?: ShipTravel }): boolean {
+		return (ship.travel?.speed ?? 0) > 0;
 	}
 
-	private static score(x: Engine): number {
-		return (x.thrust?.forward ?? 0) * (x.travel?.thrust ?? 0);
+	/**
+	 * The travel options of a ship: its top travel speed and the charge of its fastest drive; `fallback` fills in
+	 * what the ship lacks (no travel speed, or no travel drive).
+	 */
+	static options(ship: { travel?: ShipTravel }, fallback: Readonly<RouteOptions>): RouteOptions {
+		return {
+			speed: ship.travel?.speed || fallback.speed,
+			charge: ship.travel?.charge ?? fallback.charge,
+		};
 	}
 }

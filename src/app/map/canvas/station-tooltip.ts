@@ -6,11 +6,12 @@ import { WareService } from '../../shared/services/ware.service';
 import { PanZoom, ViewSize } from '../pan-zoom';
 import { StationHover } from '../station-marker';
 import { StationTypeBadgeComponent } from '../station-type-badge.component';
+import { FactionLabelComponent } from '../../shared/components/faction-label.component';
 
 /** Details of the station under the pointer, kept inside the map. */
 @Component({
 	selector: 'app-station-tooltip',
-	imports: [DecimalPipe, RouterLink, StationTypeBadgeComponent],
+	imports: [FactionLabelComponent, DecimalPipe, RouterLink, StationTypeBadgeComponent],
 	templateUrl: './station-tooltip.html',
 })
 export class StationTooltipComponent {

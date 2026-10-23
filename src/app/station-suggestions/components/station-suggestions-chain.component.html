@@ -21,7 +21,7 @@
 				}
 			</p>
 		}
-		@if (store.selected().resources; as resources) {
+		@if (store.selected()?.resources; as resources) {
 			@if (resources.length) {
 				<p class="mt-1" data-resources>
 					<ng-container i18n>Resources within reach:</ng-container>
@@ -32,11 +32,7 @@
 								✗
 							} @else {
 								✓
-								<ng-container i18n>{resource.jumps, plural,
-									=0 {here}
-									=1 {1 jump}
-									other {{{ resource.jumps }} jumps}
-								}</ng-container>
+								{{ resource.jumps | jumps: 'away' }}
 							}</span
 						>{{ last ? '' : ',' }}
 					}

@@ -1,14 +1,18 @@
 <div
 	class="relative block h-[calc(100vh-10rem)] min-h-[420px] touch-none overflow-hidden rounded-b-lg bg-[#05080f] select-none"
 >
-	<svg class="absolute inset-0 size-full" [attr.viewBox]="store.viewBox()" preserveAspectRatio="xMidYMid meet">
+	<svg
+		class="absolute inset-0 size-full"
+		[attr.viewBox]="store.panZoom.viewBox()"
+		preserveAspectRatio="xMidYMid meet"
+	>
 		<defs>
 			<radialGradient id="map-glow">
 				<stop offset="0%" stop-color="#1e3a5f" stop-opacity="0.35" />
 				<stop offset="100%" stop-color="#05080f" stop-opacity="0" />
 			</radialGradient>
 			<!-- diagonal red lines over contested sectors, spaced by the label size so their density stays fixed on screen -->
-			@let hatch = store.fontSize() * 0.6;
+			@let hatch = store.panZoom.fontSize() * 0.6;
 			<pattern
 				id="map-contested"
 				patternUnits="userSpaceOnUse"
@@ -65,17 +69,14 @@
 		<g appMapLabels />
 	</svg>
 
-	<div class="absolute top-3 right-3 flex flex-col gap-1" (pointerdown)="$event.stopPropagation()">
-		<button type="button" class="btn btn-dark" title="Zoom in" i18n-title (click)="zoom(0.7)">
-			<svg lucideZoomIn />
-		</button>
-		<button type="button" class="btn btn-dark" title="Zoom out" i18n-title (click)="zoom(1.4)">
-			<svg lucideZoomOut />
-		</button>
-		<button type="button" class="btn btn-dark" title="Show the whole galaxy" i18n-title (click)="store.resetView()">
-			<svg lucideExpand />
-		</button>
-	</div>
+	<app-map-zoom-buttons
+		resetLabel="Show the whole galaxy"
+		i18n-resetLabel
+		[expandable]="false"
+		(zoomIn)="surface.zoomIn()"
+		(zoomOut)="surface.zoomOut()"
+		(fit)="store.resetView()"
+	/>
 
 	<app-map-legend />
 	<app-map-menu />

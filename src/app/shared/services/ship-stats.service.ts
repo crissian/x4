@@ -1,11 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { EnumLabels } from '../../core/enum-labels';
 import { EquipmentService } from './equipment.service';
-import { FactionService } from './faction.service';
 import { SlotGroup, Loadouts, Loadout } from './loadout';
 import { LoadoutMissiles } from './loadout-missiles';
 import { ShipPerformance } from './ship-performance';
-import { Equipment, Faction, License, Ship } from './model/model';
+import { Equipment, Ship } from './model/model';
 
 export type LoadoutPreset = 'combat' | 'travel' | 'cheapest' | 'empty';
 
@@ -26,15 +25,9 @@ export interface ShipMaxStats {
 	cargoTypes: string;
 }
 
-export interface LicenseRequirement {
-	faction: Faction;
-	license?: License;
-}
-
 @Injectable({ providedIn: 'root' })
 export class ShipStatsService {
 	private readonly equipmentService = inject(EquipmentService);
-	private readonly factionService = inject(FactionService);
 	private readonly groupsCache = new Map<string, SlotGroup[]>();
 	private readonly maxCache = new Map<string, ShipMaxStats>();
 
@@ -158,12 +151,5 @@ export class ShipStatsService {
 		const normalized = (x: Loadout) => this.encode(ship, this.decode(ship, this.encode(ship, x)) ?? {});
 		const target = normalized(loadout);
 		return LOADOUT_PRESETS.find((p) => normalized(this.preset(ship, p.id)) === target)?.id;
-	}
-
-	/** Factions selling the item and the license each one asks for. */
-	sellers(owners: Faction[] | undefined, license: string | undefined): LicenseRequirement[] {
-		return (owners ?? [])
-			.map((owner) => this.factionService.getEntity(owner.id) ?? owner)
-			.map((faction) => ({ faction, license: license ? faction.licenses?.find((x) => x.type === license) : undefined }));
 	}
 }

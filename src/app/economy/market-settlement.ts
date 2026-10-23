@@ -1,8 +1,4 @@
-/** A sector at some jumps from another. */
-export interface SettlementRing {
-	sector: string;
-	jumps: number;
-}
+import type { SectorRing } from './sector-graph';
 
 /**
  * Settles the market of one ware as it is, before a new factory is placed: each sector that makes more than it
@@ -32,10 +28,14 @@ export class MarketSettlement {
 	 */
 	static residual(
 		net: ReadonlyMap<string, number>,
-		reach: (sector: string, jumps: number) => readonly SettlementRing[],
+		reach: (sector: string, jumps: number) => readonly SectorRing[],
 		maxJumps = MarketSettlement.MAX_JUMPS
 	): Map<string, number> {
-		const settled = MarketSettlement.settled(net, reach, maxJumps);
+		return MarketSettlement.shortages(MarketSettlement.settled(net, reach, maxJumps));
+	}
+
+	/** The shortages of a settlement (`settled`): the sectors still short, with what they lack as positive values. */
+	static shortages(settled: ReadonlyMap<string, number>): Map<string, number> {
 		return new Map([...settled].filter(([, x]) => x < 0).map(([id, x]) => [id, -x]));
 	}
 
@@ -45,7 +45,7 @@ export class MarketSettlement {
 	 */
 	static settled(
 		net: ReadonlyMap<string, number>,
-		reach: (sector: string, jumps: number) => readonly SettlementRing[],
+		reach: (sector: string, jumps: number) => readonly SectorRing[],
 		maxJumps = MarketSettlement.MAX_JUMPS
 	): Map<string, number> {
 		const surplus = new Map<string, number>();

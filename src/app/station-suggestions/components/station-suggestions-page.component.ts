@@ -1,5 +1,4 @@
 import { Component, computed, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { PlacementRanking } from '../../economy/placement-ranking';
 import { DataGridComponent, SortState } from '../../shared/components/data-grid/data-grid.component';
 import type { StationSuggestionRow } from '../station-suggestions-row';
@@ -9,21 +8,19 @@ import { StationSuggestionsDetailComponent } from './station-suggestions-detail.
 import { StationSuggestionsFiltersComponent } from './station-suggestions-filters.component';
 import { StationSuggestionsHelpComponent } from './station-suggestions-help.component';
 import { StationSuggestionsMapComponent } from './station-suggestions-map.component';
-import { ExperimentalBadgeComponent } from '../../shared/components/experimental-badge.component';
+import { SavePageComponent } from '../../shared/components/save-page/save-page.component';
 
 /** Suggests where to build a factory, or what to build in a sector, from the shortages around each sector. */
 @Component({
 	imports: [
-		ExperimentalBadgeComponent,
 		DataGridComponent,
-		RouterLink,
+		SavePageComponent,
 		StationSuggestionsFiltersComponent,
 		StationSuggestionsHelpComponent,
 		StationSuggestionsMapComponent,
 		StationSuggestionsDetailComponent,
 	],
 	templateUrl: './station-suggestions-page.component.html',
-	styleUrl: './station-suggestions-page.component.css',
 	providers: [StationSuggestionsStore],
 })
 export default class StationSuggestionsPageComponent {

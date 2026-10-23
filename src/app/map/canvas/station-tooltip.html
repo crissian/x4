@@ -11,14 +11,13 @@
 		<dl class="mt-1.5 grid grid-cols-[5.5rem_1fr] gap-y-0.5">
 			<dt class="text-slate-400" i18n>Owner</dt>
 			<dd>
-				@if (marker.faction; as faction) {
-					<span class="mr-1 inline-block size-2 rounded-full" [style.background]="faction.color"></span
-					>{{ faction.name }}
-				} @else if (marker.player) {
-					<ng-container i18n>Player</ng-container>
-				} @else {
-					<ng-container i18n>Unclaimed</ng-container>
-				}
+				<app-faction-label [faction]="marker.faction" [link]="false">
+					@if (marker.player) {
+						<ng-container i18n>Player</ng-container>
+					} @else {
+						<ng-container i18n>Unclaimed</ng-container>
+					}
+				</app-faction-label>
 			</dd>
 			<dt class="text-slate-400" i18n>Type</dt>
 			<dd class="flex items-center gap-1"><app-station-type-badge [type]="marker.type" />{{ marker.type.label }}</dd>

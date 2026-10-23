@@ -7,7 +7,9 @@ import { SaveBlueprints } from '../map/save-map-model';
  * The player component sits inside whatever ship or station the player is in, so its depth varies.
  */
 export class BlueprintsExtractor implements XmlExtractor<SaveBlueprints> {
-	readonly key = 'blueprints';
+	/** The key of the extracted data in the save's data. */
+	static readonly KEY = 'blueprints';
+	readonly key = BlueprintsExtractor.KEY;
 	private readonly wares = new Set<string>();
 	/** path length of the open player component, 0 outside it */
 	private playerDepth = 0;

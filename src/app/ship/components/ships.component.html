@@ -1,18 +1,8 @@
-<div class="card">
-	<div class="card-header flex items-center justify-between gap-3">
-		<span i18n="@@ships">Ships</span>
-		<a routerLink="compare" class="text-sm font-normal"><svg lucideGitCompareArrows class="mr-0.5" /> <ng-container i18n>Compare ships</ng-container></a>
-	</div>
-	<div class="card-body">
-		<p class="mb-2 text-fg-muted" i18n>
-			Max values use the best compatible equipment for each ship (speed: fastest engine, shield: strongest shield in every slot).
-		</p>
-		<app-data-grid
-			[data]="entities"
-			[columns]="columns"
-			[clickable]="true"
-			storageKey="ships"
-			(rowClick)="open($event)"
-		/>
-	</div>
-</div>
+<app-list-page i18n-heading="@@ships" heading="Ships" [data]="entities" [columns]="columns" storageKey="ships">
+	<a actions routerLink="compare" class="text-sm font-normal"
+		><svg lucideGitCompareArrows class="mr-0.5" /> <ng-container i18n>Compare ships</ng-container></a
+	>
+	<p intro class="mb-2 text-fg-muted" i18n>
+		Max values use the best compatible equipment for each ship (speed: fastest engine, shield: strongest shield in every slot).
+	</p>
+</app-list-page>

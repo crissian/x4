@@ -26,8 +26,9 @@ export class Language {
 	}
 
 	/**
-	 * Loads the selected language: the game texts, the translations of the app texts and the number formats.
-	 * Must finish before the app code loads, as `$localize` and the data files translate when they are evaluated.
+	 * Loads the selected language: the translations of the app texts and the number formats. Must finish
+	 * before the app code loads, as `$localize` translates when it is evaluated; the data files fetch
+	 * their game texts themselves when they load.
 	 */
 	static async load(): Promise<void> {
 		const language = GameText.language();
@@ -35,7 +36,8 @@ export class Language {
 			return;
 		}
 
-		await Promise.all([GameText.load(), Language.loadUiText(language), Language.loadLocaleData(language)]);
+		document.documentElement.lang = language;
+		await Promise.all([Language.loadUiText(language), Language.loadLocaleData(language)]);
 	}
 
 	private static async loadUiText(language: string) {

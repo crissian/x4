@@ -79,4 +79,4 @@ export const StationMacros = {
   ]
 };
 
-GameText.translate(StationMacros);
+await GameText.translate(StationMacros, 'station-macros');

@@ -6,7 +6,7 @@
 		[title]="entity.name"
 		[id]="entity.id"
 		image="equipment"
-		[description]="entity.description"
+		[description]="description()"
 	>
 		<div class="grid gap-x-6 gap-y-3 md:grid-cols-3">
 			<dl class="details">
@@ -14,17 +14,13 @@
 				<div appDetail="Class" i18n-appDetail>{{ (entity.equipmentClass | enumLabel) || '-' }}</div>
 				<div appDetail="Size" i18n-appDetail>{{ (entity.size | enumLabel) || '-' }}</div>
 				<div appDetail="Race" i18n-appDetail>
-					@if (entity.race) {
-						<a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
-					} @else {
-						-
-					}
+					<app-entity-link route="/races" [entity]="entity.race" />
 				</div>
 				@if (entity.hull) {
 					<div appDetail="Hull" i18n-appDetail>{{ entity.hull | number }}</div>
 				}
 				@if (entity.price) {
-					<div appDetail="Price" i18n-appDetail>{{ entity.price.min | number }} - {{ entity.price.max | number }}</div>
+					<div appDetail="Price" i18n-appDetail>{{ entity.price | priceRange }}</div>
 				}
 			</dl>
 
@@ -116,7 +112,7 @@
 		@if (ships().length) {
 			<div class="mt-4 card">
 				<div class="card-header" i18n>Compatible ships ({{ ships().length }})</div>
-				<div class="card-body overflow-x-auto">
+				<div class="card-body">
 					<app-data-grid
 						[data]="ships()"
 						[columns]="shipColumns"
@@ -128,13 +124,6 @@
 			</div>
 		}
 
-		@if (production().length) {
-			<h6 class="mt-4" i18n>Production</h6>
-			<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-				@for (item of production(); track $index) {
-					<app-production-card [production]="item" />
-				}
-			</div>
-		}
+		<app-production-cards [items]="production()" heading="Production" i18n-heading />
 	</app-detail-page>
 }

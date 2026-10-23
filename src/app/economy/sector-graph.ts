@@ -1,4 +1,5 @@
 import type { Sector } from '../shared/services/model/model';
+import { SectorLinks } from '../map/sector-links';
 
 /** A sector and its distance in jumps from another. */
 export interface SectorRing {
@@ -8,36 +9,21 @@ export interface SectorRing {
 
 /**
  * Sector adjacency by jumps: a gate, accelerator or highway link counts when the sector on the other side links
- * back, the same rule as `RoutePlanner`.
+ * back (`SectorLinks.twoWay`), the same rule as `RoutePlanner`.
  */
 export class SectorGraph {
 	private readonly adjacent = new Map<string, string[]>();
-	private readonly cache = new Map<number, Map<string, readonly string[]>>();
 	private readonly ringCache = new Map<string, readonly SectorRing[]>();
+	private readonly withinCache = new Map<string, readonly string[]>();
+	private readonly areaCache = new Map<string, ReadonlySet<string>>();
 
 	constructor(sectors: readonly Sector[]) {
-		const links = new Set<string>();
-		const ids = new Set(sectors.map((x) => x.id));
-		for (const sector of sectors) {
-			for (const gate of sector.gates ?? []) {
-				links.add(`${sector.id}>${gate.sector}:${gate.type}`);
-			}
-			for (const link of sector.highwayLinks ?? []) {
-				links.add(`${sector.id}>${link.sector}:highway`);
-			}
+		const next = new Map(sectors.map((x) => [x.id, new Set<string>()]));
+		for (const link of SectorLinks.twoWay(sectors)) {
+			next.get(link.from)?.add(link.to);
 		}
-		for (const sector of sectors) {
-			const next = new Set<string>();
-			const targets = [
-				...(sector.gates ?? []).map((x) => [x.sector, x.type]),
-				...(sector.highwayLinks ?? []).map((x) => [x.sector, 'highway']),
-			];
-			for (const [to, type] of targets) {
-				if (ids.has(to) && links.has(`${to}>${sector.id}:${type}`)) {
-					next.add(to);
-				}
-			}
-			this.adjacent.set(sector.id, [...next]);
+		for (const [id, to] of next) {
+			this.adjacent.set(id, [...to]);
 		}
 	}
 
@@ -46,19 +32,14 @@ export class SectorGraph {
 		return [...this.adjacent.keys()];
 	}
 
-	/** The sectors within `jumps` jumps of `from`, itself included; empty for an unknown sector. Cached per jumps. */
+	/** The sectors within `jumps` jumps of `from`, itself included, nearest first; empty for an unknown sector. */
 	within(from: string, jumps: number): readonly string[] {
-		let perSector = this.cache.get(jumps);
-		if (!perSector) {
-			perSector = new Map();
-			this.cache.set(jumps, perSector);
-		}
-		let result = perSector.get(from);
-		if (!result) {
-			result = this.adjacent.has(from) ? this.search(from, jumps) : [];
-			perSector.set(from, result);
-		}
-		return result;
+		return SectorGraph.cached(this.withinCache, from, jumps, () => this.rings(from, jumps).map((x) => x.sector));
+	}
+
+	/** The sectors within `jumps` jumps of `centre`, itself included, as a set; empty for an unknown sector. */
+	area(centre: string, jumps: number): ReadonlySet<string> {
+		return SectorGraph.cached(this.areaCache, centre, jumps, () => new Set(this.within(centre, jumps)));
 	}
 
 	/**
@@ -66,11 +47,17 @@ export class SectorGraph {
 	 * an unknown sector. Cached per sector and jumps.
 	 */
 	rings(from: string, jumps: number): readonly SectorRing[] {
+		return SectorGraph.cached(this.ringCache, from, jumps, () =>
+			this.adjacent.has(from) ? this.searchRings(from, jumps) : []
+		);
+	}
+
+	private static cached<T>(cache: Map<string, T>, from: string, jumps: number, compute: () => T): T {
 		const key = `${from}|${jumps}`;
-		let result = this.ringCache.get(key);
-		if (!result) {
-			result = this.adjacent.has(from) ? this.searchRings(from, jumps) : [];
-			this.ringCache.set(key, result);
+		let result = cache.get(key);
+		if (result === undefined) {
+			result = compute();
+			cache.set(key, result);
 		}
 		return result;
 	}
@@ -93,23 +80,5 @@ export class SectorGraph {
 			frontier = next;
 		}
 		return result;
-	}
-
-	private search(from: string, jumps: number): string[] {
-		const seen = new Set([from]);
-		let frontier = [from];
-		for (let step = 0; step < jumps && frontier.length; step++) {
-			const next: string[] = [];
-			for (const id of frontier) {
-				for (const to of this.adjacent.get(id) ?? []) {
-					if (!seen.has(to)) {
-						seen.add(to);
-						next.push(to);
-					}
-				}
-			}
-			frontier = next;
-		}
-		return [...seen];
 	}
 }

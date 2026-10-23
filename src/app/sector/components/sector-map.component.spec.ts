@@ -35,10 +35,10 @@ describe('SectorMapComponent', () => {
 		// jsdom has no layout: give the map a size
 		const area = fixture.nativeElement.querySelector('.touch-none') as HTMLElement;
 		area.getBoundingClientRect = () => ({ left: 0, top: 0, width: 1000, height: 600 }) as DOMRect;
-		component.size.set({ width: 1000, height: 600 });
+		component.surface.size.set({ width: 1000, height: 600 });
 		const zoomTo = async (scale: number) => {
-			component.size.set({ width: 1000, height: 600 });
-			component.view.update((view) => ({ ...view, w: 1000 / scale }));
+			component.surface.size.set({ width: 1000, height: 600 });
+			component.surface.view.update((view) => ({ ...view, w: 1000 / scale }));
 			await fixture.whenStable();
 		};
 		return { component, element: fixture.nativeElement as HTMLElement, zoomTo };
@@ -87,21 +87,21 @@ describe('SectorMapComponent', () => {
 		const { component } = await setup();
 		const shape = component.shape()!;
 		component.reset();
-		const home = component.view().w;
-		component.zoom(0.7);
-		expect(component.view().w).toBeCloseTo(home * 0.7);
+		const home = component.surface.view().w;
+		component.surface.zoomIn();
+		expect(component.surface.view().w).toBeCloseTo(home * 0.7);
 		for (let i = 0; i < 30; i++) {
-			component.zoom(1.4);
+			component.surface.zoomOut();
 		}
-		expect(component.view().w).toBeCloseTo(shape.r * 6);
-		component.view.set({ x: shape.x + 1000, y: shape.y + 1000, w: shape.r });
-		component.zoom(1);
-		const view = component.view();
-		const size = component.size();
+		expect(component.surface.view().w).toBeCloseTo(shape.r * 6);
+		component.surface.view.set({ x: shape.x + 1000, y: shape.y + 1000, w: shape.r });
+		component.surface.zoom(1);
+		const view = component.surface.view();
+		const size = component.surface.size();
 		expect(view.x + view.w / 2).toBeLessThanOrEqual(shape.x + shape.r + 1e-6);
 		expect(view.y + (view.w * size.height) / size.width / 2).toBeLessThanOrEqual(shape.y + shape.r + 1e-6);
 		component.reset();
-		expect(component.view().w).toBeCloseTo(home);
+		expect(component.surface.view().w).toBeCloseTo(home);
 	});
 
 	it('opens the map enlarged in a dialog', async () => {

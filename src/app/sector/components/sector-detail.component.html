@@ -7,7 +7,7 @@
 		[id]="entity.id"
 		image="sectors"
 		[aside]="true"
-		[description]="entity.description"
+		[description]="description()"
 	>
 		<span actions class="flex gap-4 text-sm font-normal">
 			<a routerLink="/map" [queryParams]="{ sector: entity.id }" i18n
@@ -22,12 +22,9 @@
 			<dl class="details">
 				<div i18n-appDetail appDetail="System">{{ cluster()?.name }}</div>
 				<div i18n-appDetail appDetail="Owner">
-					@if (owner(); as owner) {
-						<span class="mr-1 inline-block size-2.5 rounded-full" [style.background]="owner.color"></span>
-						<a [routerLink]="['/factions', owner.id]">{{ owner.name }}</a>
-					} @else {
-						<ng-container i18n>None</ng-container>
-					}
+					<app-faction-label [faction]="owner()" size="md"
+						><ng-container i18n>None</ng-container></app-faction-label
+					>
 				</div>
 				<div i18n-appDetail appDetail="DLC">{{ versions[entity.version] }}</div>
 			</dl>
@@ -110,14 +107,12 @@
 								</span>
 							}
 						</div>
-						<div class="overflow-x-auto">
-							<app-data-grid
-								[data]="entity.resources"
-								[columns]="resourceColumns"
-								[features]="false"
-								[trackBy]="trackRow"
-							/>
-						</div>
+						<app-data-grid
+							[data]="entity.resources"
+							[columns]="resourceColumns"
+							[features]="false"
+							[trackBy]="trackRow"
+						/>
 					} @else {
 						<p class="text-fg-muted" i18n>No mineable resources.</p>
 					}
@@ -125,18 +120,18 @@
 				@case ('system') {
 					@if (cluster(); as cluster) {
 						<h6>{{ cluster.name }}</h6>
-						@if (cluster.description && cluster.description !== entity.description) {
-							<p class="mb-3 max-w-4xl whitespace-pre-line">{{ cluster.description }}</p>
+						@if (clusterDescription(); as clusterDescription) {
+							@if (clusterDescription !== description()) {
+								<p class="mb-3 max-w-4xl whitespace-pre-line">{{ clusterDescription }}</p>
+							}
 						}
 						@if (planets().length) {
-							<div class="overflow-x-auto">
-								<app-data-grid
-									[data]="planets()"
-									[columns]="planetColumns"
-									[features]="false"
-									[trackBy]="trackRow"
-								/>
-							</div>
+							<app-data-grid
+								[data]="planets()"
+								[columns]="planetColumns"
+								[features]="false"
+								[trackBy]="trackRow"
+							/>
 						} @else {
 							<p class="text-fg-muted" i18n>No planets recorded.</p>
 						}

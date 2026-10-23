@@ -11,7 +11,11 @@
 		(pointerup)="up($event)"
 		(pointercancel)="surface.pointerUp($event)"
 	>
-		<svg class="absolute inset-0 size-full" [attr.viewBox]="panZoom.viewBox()" preserveAspectRatio="xMidYMid meet">
+		<svg
+			class="absolute inset-0 size-full"
+			[attr.viewBox]="surface.panZoom.viewBox()"
+			preserveAspectRatio="xMidYMid meet"
+		>
 			@for (cell of cells(); track cell.shape.sector.id) {
 				@if (cell.value === undefined) {
 					<polygon
@@ -85,8 +89,8 @@
 			resetLabel="Show the whole galaxy"
 			i18n-resetLabel
 			[expandable]="false"
-			(zoomIn)="zoom(0.7)"
-			(zoomOut)="zoom(1.4)"
+			(zoomIn)="surface.zoomIn()"
+			(zoomOut)="surface.zoomOut()"
 			(fit)="reset()"
 		/>
 	</div>

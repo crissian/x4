@@ -6,7 +6,7 @@
 		[title]="entity.name"
 		[id]="entity.id"
 		image="ships"
-		[description]="entity.description"
+		[description]="description()"
 	>
 		<span actions class="flex gap-2">
 			<a
@@ -21,18 +21,14 @@
 		<div class="grid gap-x-6 gap-y-3 md:grid-cols-3">
 			<dl class="details">
 				<div appDetail="Race" i18n-appDetail>
-					@if (entity.race) {
-						<a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
-					} @else {
-						-
-					}
+					<app-entity-link route="/races" [entity]="entity.race" />
 				</div>
 				<div appDetail="Type" i18n-appDetail>{{ (entity.type | enumLabel) || '-' }}</div>
 				<div appDetail="Size" i18n-appDetail>{{ entity.size | enumLabel }}</div>
 				<div appDetail="Purpose" i18n-appDetail>{{ entity.purpose | enumLabel }}</div>
 				<div appDetail="Hull" i18n-appDetail>{{ entity.hull | number }}</div>
 				<div appDetail="Explosion Damage" i18n-appDetail>{{ (entity.explosionDamage | number) || '-' }}</div>
-				<div appDetail="Price" i18n-appDetail>{{ entity.price.min | number }} - {{ entity.price.max | number }}</div>
+				<div appDetail="Price" i18n-appDetail>{{ entity.price | priceRange }}</div>
 			</dl>
 			<dl class="details">
 				<div appDetail="Cargo" i18n-appDetail>
@@ -67,16 +63,14 @@
 				<div class="card-header" i18n>Speed by engine</div>
 				<div class="card-body">
 					@if (engines().length) {
-						<div class="overflow-x-auto">
-							<app-data-grid
-								[data]="engines()"
-								[columns]="engineColumns"
-								[features]="false"
-								[clickable]="true"
-								[trackBy]="trackEngine"
-								(rowClick)="openEngine($event)"
-							/>
-						</div>
+						<app-data-grid
+							[data]="engines()"
+							[columns]="engineColumns"
+							[features]="false"
+							[clickable]="true"
+							[trackBy]="trackEngine"
+							(rowClick)="openEngine($event)"
+						/>
 						<p class="mt-2 text-xs text-fg-muted" i18n>
 							Speed = engine thrust × {{ entity.engines.length }} engines / drag
 							{{ entity.drag.forward | number: '1.0-2' }}. Equipment mods and crew skill are not included.
@@ -96,13 +90,6 @@
 
 		<app-ship-sellers-near class="mt-4 block" [ship]="entity" />
 
-		@if (production().length) {
-			<h6 class="mt-4" i18n>Production</h6>
-			<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-				@for (item of production(); track $index) {
-					<app-production-card [production]="item" />
-				}
-			</div>
-		}
+		<app-production-cards [items]="production()" heading="Production" i18n-heading />
 	</app-detail-page>
 }

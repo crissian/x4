@@ -32,8 +32,8 @@ describe('MapComponent', () => {
 
 	it('plans a route from the panel fields', async () => {
 		const { element, set } = await setup();
-		await set('input[aria-label="From sector"]', 'Grand Exchange I');
-		await set('input[aria-label="To sector"]', 'Argon Prime');
+		await set('input[placeholder="From sector..."]', 'Grand Exchange I');
+		await set('input[placeholder="To sector..."]', 'Argon Prime');
 		expect(element.querySelector('app-map-route-panel ol')?.children.length).toBeGreaterThan(1);
 		expect(element.querySelector('polyline')).toBeTruthy();
 

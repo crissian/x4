@@ -23,11 +23,11 @@ export interface Drag extends Inertia {
 export interface Ship {
   id: string;
   name: string;
-  description: string;
   size: string;
   explosionDamage?: number;
   hull: number;
   race?: Race;
+  travel?: ShipTravel;
   price: Price;
   owners?: Faction[];
   production: Production[];
@@ -48,6 +48,19 @@ export interface Ship {
   /** License the buyer needs, matches `License.type` of the selling faction. */
   license?: string;
 }
+
+/**
+ * Top travel speed (m/s) over the engines that fit the ship and the charge (s) of its fastest travel drive,
+ * precomputed by the extractor; no charge without a travel drive.
+ */
+export interface ShipTravel {
+  speed: number;
+  charge?: number;
+}
+
+/** What ship pickers and planners need of a ship, from the slim ship list. */
+export type ShipListItem = Pick<Ship, 'id' | 'name' | 'size' | 'race' | 'travel' | 'cargo' | 'owners' | 'license'> &
+  Partial<Pick<Ship, 'purpose' | 'type'>>;
 
 export interface ShipCargo {
   max: number;

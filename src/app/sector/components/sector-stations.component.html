@@ -18,17 +18,13 @@
 					<div class="min-w-0">
 						@for (group of groups; track group.owner) {
 							<h6 class="mt-3 first:mt-0">
-								@if (group.faction; as faction) {
-									<span
-										class="mr-1 inline-block size-2.5 rounded-full"
-										[style.background]="faction.color"
-									></span>
-									<a [routerLink]="['/factions', faction.id]">{{ faction.name }}</a>
-								} @else if (group.owner === 'player') {
-									<ng-container i18n>Your stations</ng-container>
-								} @else {
-									<ng-container i18n>Unowned</ng-container>
-								}
+								<app-faction-label [faction]="group.faction" size="md">
+									@if (group.owner === 'player') {
+										<ng-container i18n>Your stations</ng-container>
+									} @else {
+										<ng-container i18n>Unowned</ng-container>
+									}
+								</app-faction-label>
 								<span class="ml-1 text-sm font-normal text-fg-muted">{{ group.stations.length }}</span>
 							</h6>
 							<ul class="mb-2">

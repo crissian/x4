@@ -3,7 +3,8 @@ import { PlacementRanking } from '../../economy/placement-ranking';
 import { HeatMapComponent } from '../../map/heat-map/heat-map.component';
 import type { HeatMapMarker } from '../../map/heat-map/heat-map-markers';
 import { StationSuggestionsStore } from '../station-suggestions-store';
-import { CompactNumber } from '../../shared/format/compact-number';
+import { NumberFormats } from '../../core/format/number-formats';
+import { JumpsPipe } from '../../core/format/jumps.pipe';
 
 /**
  * The galaxy map of the picked row's ware: each sector shaded by its Cr/h for that ware on its own (no shared
@@ -12,7 +13,7 @@ import { CompactNumber } from '../../shared/format/compact-number';
  */
 @Component({
 	selector: 'app-station-suggestions-map',
-	imports: [HeatMapComponent],
+	imports: [JumpsPipe, HeatMapComponent],
 	templateUrl: './station-suggestions-map.component.html',
 })
 export class StationSuggestionsMapComponent {
@@ -58,9 +59,9 @@ export class StationSuggestionsMapComponent {
 		this.stars().map((sector, i) => ({ sector, label: String(i + 1) }))
 	);
 	/** The reach of the sector in what to build here; no area otherwise. */
-	protected readonly outline = computed(() => {
+	protected readonly outline = computed<ReadonlySet<string>>(() => {
 		const centre = this.store.centre();
-		return new Set(centre ? (this.store.context()?.economy.graph.within(centre, this.store.jumps()) ?? []) : []);
+		return (centre && this.store.context()?.economy.graph.area(centre, this.store.jumps())) || new Set();
 	});
 	protected readonly centre = computed(() => this.store.centre() ?? this.store.selected()?.sector);
 
@@ -71,7 +72,7 @@ export class StationSuggestionsMapComponent {
 		if (!spot) {
 			return $localize`${name}:name:: no room for a factory` + star;
 		}
-		const value = CompactNumber.format(spot.crPerHour).replace(/^\+/, '');
+		const value = NumberFormats.compact(spot.crPerHour);
 		return $localize`${name}:name:: ${value}:value: Cr/h · modules: ~${spot.modules}:modules:` + star;
 	};
 

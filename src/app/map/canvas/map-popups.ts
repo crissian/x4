@@ -2,19 +2,20 @@ import { DecimalPipe, PercentPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MapStore } from '../map-store';
+import { MapSaveLayer } from '../save/map-save-layer';
 import { MapSaveSectorInfo } from './map-save-sector-info';
+import { FactionLabelComponent } from '../../shared/components/faction-label.component';
 
 /** Details of the sector under the pointer. */
 @Component({
 	selector: 'app-map-tooltip',
-	imports: [DecimalPipe, PercentPipe, MapSaveSectorInfo],
+	imports: [FactionLabelComponent, DecimalPipe, PercentPipe, MapSaveSectorInfo],
 	templateUrl: './map-tooltip.html',
 })
 export class MapTooltipComponent {
 	protected readonly store = inject(MapStore);
-	protected readonly faction = computed(() =>
-		this.store.faction(this.store.sectorOwner(this.store.hovered()?.shape.sector))
-	);
+	private readonly save = inject(MapSaveLayer);
+	protected readonly faction = computed(() => this.save.ownerFaction(this.store.hovered()?.shape.sector));
 }
 
 /** Right-click menu of a sector. */

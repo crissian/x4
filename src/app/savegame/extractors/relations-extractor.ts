@@ -6,7 +6,9 @@ const PLAYER_FACTION = 'player';
 
 /** Reads the player faction's relations (relation plus booster) from savegame/universe/factions. */
 export class RelationsExtractor implements XmlExtractor<SaveRelations> {
-	readonly key = 'relations';
+	/** The key of the extracted data in the save's data. */
+	static readonly KEY = 'relations';
+	readonly key = RelationsExtractor.KEY;
 	private readonly base: SaveRelations = {};
 	private readonly boost: SaveRelations = {};
 	private inPlayer = false;

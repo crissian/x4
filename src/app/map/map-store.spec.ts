@@ -121,7 +121,7 @@ describe('MapStore', () => {
 		expect(store.visibleLinks().length).toBe(store.layout.links.length);
 		expect(store.hidesUnknown()).toBe(false);
 		const first = store.layout.shapes[0].sector;
-		expect(store.sectorOwner(first)).toBe(first.owner);
+		expect(TestBed.inject(MapSaveLayer).ownerOf(first)).toBe(first.owner);
 		expect(stations.stations().length).toBe(GodStations.length);
 	});
 

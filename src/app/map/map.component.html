@@ -57,20 +57,16 @@
 			}
 
 			<div class="flex items-center gap-1 text-sm font-normal">
-				<input
-					class="input w-52"
-					list="map-sectors"
-					placeholder="Find sector..."
+				<app-sector-input
+					class="w-52"
+					i18n-label
+					label="Find sector"
+					[hideLabel]="true"
 					i18n-placeholder
-					aria-label="Find sector"
-					i18n-aria-label
+					placeholder="Find sector..."
+					[sectors]="store.sectorList"
 					[formField]="store.settingsForm.search"
 				/>
-				<datalist id="map-sectors">
-					@for (sector of store.sectorList; track sector.id) {
-						<option [value]="sector.name"></option>
-					}
-				</datalist>
 				@if (store.selected()) {
 					<button
 						type="button"

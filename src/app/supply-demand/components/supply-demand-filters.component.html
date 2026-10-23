@@ -7,44 +7,40 @@
 			<option value="sector" i18n>Around a sector</option>
 		</select>
 	</label>
-	<label class="text-sm">
-		<ng-container i18n>Faction</ng-container>
-		<select id="supply-faction" class="input" [formField]="form.faction">
-			<option value="" i18n>Pick a faction</option>
-			@for (faction of store.factions(); track faction.id) {
-				<option [value]="faction.id">{{ faction.name }}</option>
-			}
-		</select>
-	</label>
-	<label class="text-sm">
-		<ng-container i18n>Sector</ng-container>
-		<input
-			id="supply-sector"
-			class="input"
-			list="supply-sectors"
-			placeholder="Pick a sector"
-			i18n-placeholder
-			[formField]="form.sector"
-		/>
-		<datalist id="supply-sectors">
-			@for (sector of store.sectors(); track sector.id) {
-				<option [value]="sector.name"></option>
-			}
-		</datalist>
-	</label>
+	<app-option-select
+		class="text-sm"
+		inputId="supply-faction"
+		i18n-label
+		label="Faction"
+		i18n-allLabel
+		allLabel="Pick a faction"
+		[options]="store.factions()"
+		[formField]="form.faction"
+	/>
+	<app-sector-input
+		class="text-sm"
+		inputId="supply-sector"
+		i18n-label
+		label="Sector"
+		i18n-placeholder
+		placeholder="Pick a sector"
+		[sectors]="store.sectors()"
+		[formField]="form.sector"
+	/>
 	<label class="text-sm" [attr.title]="store.jumpsHint()">
 		<ng-container i18n>Jumps</ng-container>
 		<input id="supply-jumps" class="input" type="number" [formField]="form.jumps" />
 	</label>
-	<label class="text-sm">
-		<ng-container i18n>Ware group</ng-container>
-		<select id="supply-group" class="input" [formField]="form.group">
-			<option value="" i18n>All groups</option>
-			@for (group of store.groups(); track group.id) {
-				<option [value]="group.id">{{ group.name }}</option>
-			}
-		</select>
-	</label>
+	<app-option-select
+		class="text-sm"
+		inputId="supply-group"
+		i18n-label
+		label="Ware group"
+		i18n-allLabel
+		allLabel="All groups"
+		[options]="store.groups()"
+		[formField]="form.group"
+	/>
 </div>
 <div class="mt-3 flex flex-wrap gap-x-6 gap-y-2">
 	<label class="flex items-center gap-2">

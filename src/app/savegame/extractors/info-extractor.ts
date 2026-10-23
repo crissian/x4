@@ -5,7 +5,9 @@ import { SavegameInfo } from '../savegame-model';
 const INFO_PATH = 'savegame/info';
 
 export class InfoExtractor implements XmlExtractor<SavegameInfo | null> {
-	readonly key = 'info';
+	/** The key of the extracted data in the save's data. */
+	static readonly KEY = 'info';
+	readonly key = InfoExtractor.KEY;
 	private readonly info: SavegameInfo = {
 		saveName: '',
 		savedAt: 0,

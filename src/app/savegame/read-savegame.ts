@@ -60,7 +60,7 @@ export class SavegameReader {
 		try {
 			const opened = await TextStream.open(bytes, { size: options.size, onProgress: options.onProgress, keepGzip: true });
 			const results = await XmlExtractorRunner.run(opened.text, extractors, (key, result) => {
-				if (key === 'info' && result) {
+				if (key === InfoExtractor.KEY && result) {
 					options.onInfo?.(result as SavegameInfo);
 				}
 			});

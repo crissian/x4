@@ -9,11 +9,7 @@
 	>
 		<dl class="details mb-4 max-w-xl">
 			<div i18n-appDetail appDetail="Race">
-				@if (entity.race) {
-					<a [routerLink]="['/races', entity.race.id]">{{ entity.race.name }}</a>
-				} @else {
-					-
-				}
+				<app-entity-link route="/races" [entity]="entity.race" />
 			</div>
 		</dl>
 		@if (entity.licenses?.length) {

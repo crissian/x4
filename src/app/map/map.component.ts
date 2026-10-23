@@ -11,12 +11,14 @@ import { MapAbandonedPanelComponent } from './panels/map-abandoned-panel.compone
 import { MapMiningPanelComponent } from './panels/map-mining-panel.component';
 import { MapRoutePanelComponent } from './panels/map-route-panel.component';
 import { MapStationsPanelComponent } from './panels/map-stations-panel.component';
+import { SectorInputComponent } from '../shared/components/sector-input.component';
 
 /** Galaxy map page: map settings, the map and the side panel tabs. */
 @Component({
 	selector: 'app-map',
 	imports: [
 		FormField,
+		SectorInputComponent,
 		LucideX,
 		MapCanvasComponent,
 		MapRoutePanelComponent,

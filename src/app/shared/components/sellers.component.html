@@ -1,6 +1,6 @@
 @for (item of sellers(); track item.faction.id) {
 	<div>
-		<a [routerLink]="['/factions', item.faction.id]">{{ item.faction.name }}</a>
+		<app-faction-label [faction]="item.faction" [dot]="false" />
 		@if (item.license) {
 			<span class="text-fg-muted">
 				- {{ item.license.name }}

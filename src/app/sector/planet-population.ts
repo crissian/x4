@@ -1,4 +1,5 @@
 import type { Planet } from '../shared/services/model/model';
+import { NumberFormats } from '../core/format/number-formats';
 
 /** The population of a planet as shown in the planets table. */
 export class PlanetPopulation {
@@ -7,9 +8,9 @@ export class PlanetPopulation {
 
 	/**
 	 * The population text; a dynamic population (a `$POPULATION$` placeholder) shows its maximum, compactly
-	 * formatted for `locale`, or '-' without one. Raw placeholders are never shown.
+	 * formatted, or '-' without one. Raw placeholders are never shown.
 	 */
-	static label(planet: Pick<Planet, 'population' | 'maxPopulation'>, locale: string): string {
+	static label(planet: Pick<Planet, 'population' | 'maxPopulation'>): string {
 		const population = planet.population ?? '';
 		if (!PlanetPopulation.PLACEHOLDER.test(population)) {
 			return population || '-';
@@ -17,9 +18,7 @@ export class PlanetPopulation {
 		if (!planet.maxPopulation) {
 			return '-';
 		}
-		const count = new Intl.NumberFormat(locale, { notation: 'compact', maximumFractionDigits: 1 }).format(
-			planet.maxPopulation
-		);
+		const count = NumberFormats.compact(planet.maxPopulation);
 		return $localize`up to ${count}:count:`;
 	}
 }

@@ -1,0 +1,12 @@
+@if (faction(); as faction) {
+	@if (dot() && faction.color) {
+		<app-color-dot class="mr-1" [color]="faction.color" [size]="size()" />
+	}
+	@if (link()) {
+		<a [routerLink]="['/factions', faction.id]">{{ faction.name }}</a>
+	} @else {
+		{{ faction.name }}
+	}
+} @else {
+	<ng-content />
+}

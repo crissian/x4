@@ -6,16 +6,12 @@
 		[title]="entity.name"
 		[id]="entity.id"
 		image="modules"
-		[description]="entity.description"
+		[description]="description()"
 	>
 		<div class="grid gap-x-6 gap-y-3 md:grid-cols-2">
 			<dl class="details">
 				<div appDetail="Race" i18n-appDetail>
-					@if (entity.makerRace) {
-						<a [routerLink]="['/races', entity.makerRace.id]">{{ entity.makerRace.name }}</a>
-					} @else {
-						-
-					}
+					<app-entity-link route="/races" [entity]="entity.makerRace" />
 				</div>
 				<div appDetail="Type" i18n-appDetail>{{ (entity.type | enumLabel) || '-' }}</div>
 				<div appDetail="Product" i18n-appDetail>
@@ -41,15 +37,6 @@
 				@if (entity.workForce?.capacity) {
 					<div appDetail="Workforce Capacity" i18n-appDetail>{{ entity.workForce.capacity }}</div>
 				}
-				<div appDetail="Owners" i18n-appDetail>
-					<ul>
-						@for (item of entity.owners; track item.id) {
-							<li>
-								<a [routerLink]="['/factions', item.id]">{{ item.name }}</a>
-							</li>
-						}
-					</ul>
-				</div>
 			</dl>
 			<dl class="details self-start">
 				<div appDetail="Turrets" i18n-appDetail>{{ getSlotsStr(entity.turrets) }}</div>
@@ -62,12 +49,6 @@
 				</div>
 			</dl>
 		</div>
-		@if (production().length) {
-			<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-				@for (item of production(); track $index) {
-					<app-production-card [production]="item" />
-				}
-			</div>
-		}
+		<app-production-cards [items]="production()" />
 	</app-detail-page>
 }

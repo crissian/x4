@@ -1,0 +1,17 @@
+<div class="card">
+	<div class="card-header flex items-center justify-between gap-3">
+		<span>{{ heading() }}</span>
+		<ng-content select="[actions]" />
+	</div>
+	<div class="card-body">
+		<ng-content select="[intro]" />
+		<app-data-grid
+			[data]="data()"
+			[columns]="columns()"
+			[clickable]="true"
+			[storageKey]="storageKey()"
+			(rowClick)="open($event)"
+		/>
+		<ng-content select="[footer]" />
+	</div>
+</div>

@@ -1,22 +1,22 @@
 <div class="grid gap-2">
 	<div class="flex gap-1">
 		<div class="grid flex-1 gap-2">
-			<input
-				class="input"
-				list="map-sectors"
-				placeholder="From sector..."
+			<app-sector-input
+				i18n-label
+				label="From sector"
+				[hideLabel]="true"
 				i18n-placeholder
-				aria-label="From sector"
-				i18n-aria-label
+				placeholder="From sector..."
+				[sectors]="store.sectorList"
 				[formField]="form.from"
 			/>
-			<input
-				class="input"
-				list="map-sectors"
-				placeholder="To sector..."
+			<app-sector-input
+				i18n-label
+				label="To sector"
+				[hideLabel]="true"
 				i18n-placeholder
-				aria-label="To sector"
-				i18n-aria-label
+				placeholder="To sector..."
+				[sectors]="store.sectorList"
 				[formField]="form.to"
 			/>
 		</div>
@@ -43,15 +43,15 @@
 </div>
 @if (store.route(); as route) {
 	<div class="mt-3" i18n>
-		<strong>{{ routes.formatDuration(route.time) }}</strong
-		>, {{ route.jumps }} jumps, {{ route.distance | number: '1.0-0' }} km in sectors
+		<strong>{{ duration(route.time) }}</strong
+		>, {{ route.jumps | jumps }}, {{ route.distance | number: '1.0-0' }} km in sectors
 	</div>
 	<ol class="mt-2 list-decimal pl-6 text-sm">
 		@for (step of route.steps; track $index) {
 			<li>
 				<a [routerLink]="['/sectors', step.sector.id]">{{ step.sector.name }}</a>
 				@if (step.type !== 'start') {
-					<span class="text-fg-muted"> - {{ stepLabels[step.type] }}, {{ routes.formatDuration(step.time) }}</span>
+					<span class="text-fg-muted"> - {{ stepLabels[step.type] }}, {{ duration(step.time) }}</span>
 				}
 			</li>
 		}

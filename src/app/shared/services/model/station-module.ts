@@ -16,7 +16,6 @@ export interface StationModule {
   id: string;
   name: string;
   macro: string;
-  description: string;
   explosionDamage?: number;
   hull: number;
   makerRace?: Race;

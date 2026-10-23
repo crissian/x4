@@ -3,9 +3,10 @@ import type { Sector } from '../shared/services/model/model';
 import type { WareService } from '../shared/services/ware.service';
 import { TradeRouteFinder } from '../trade/trade-route-finder';
 import type { Economy } from './economy';
-import { MarketSettlement, type SettlementRing } from './market-settlement';
+import { MarketSettlement } from './market-settlement';
 import type { PlacementOptions } from './placement-model';
 import type { SectorBalance } from './sector-balance';
+import type { SectorRing } from './sector-graph';
 import { PlacementRecipes } from './placement-recipes';
 import { WareClasses } from './ware-classes';
 
@@ -22,9 +23,6 @@ export interface PlacementSector {
 
 /** Which stations the nets of the placement count. */
 export type PlacementScope = Pick<PlacementOptions, 'includePlayer' | 'hideHostile'>;
-
-/** A sector within reach and its distance. */
-export type PlacementRing = SettlementRing;
 
 /**
  * What the placement scoring reads from a save: the economy's own sector balances, the sectors (owner, sunlight,
@@ -108,7 +106,7 @@ export class PlacementContext {
 	}
 
 	/** The sectors within `jumps` of a sector, itself first, then by distance. */
-	reach(sector: string, jumps: number): readonly PlacementRing[] {
+	reach(sector: string, jumps: number): readonly SectorRing[] {
 		return this.economy.graph.rings(sector, jumps);
 	}
 
@@ -128,10 +126,9 @@ export class PlacementContext {
 	 * nearest to them, see `MarketSettlement`; positive values, only the sectors still short. Cached like `localNet`.
 	 */
 	residual(ware: string, scope: PlacementScope, maxJumps = MarketSettlement.MAX_JUMPS): ReadonlyMap<string, number> {
-		return this.cached(`~${ware}|${maxJumps}`, scope, () => {
-			const settled = [...this.settled(ware, scope, maxJumps)];
-			return new Map(settled.filter(([, x]) => x < 0).map(([id, x]) => [id, -x]));
-		});
+		return this.cached(`~${ware}|${maxJumps}`, scope, () =>
+			MarketSettlement.shortages(this.settled(ware, scope, maxJumps))
+		);
 	}
 
 	/**

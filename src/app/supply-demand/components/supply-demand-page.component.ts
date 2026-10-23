@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { DataGridComponent, SortState } from '../../shared/components/data-grid/data-grid.component';
 import { SupplyDemandMapComponent } from './supply-demand-map.component';
 import type { SupplyDemandRow } from '../supply-demand-model';
@@ -8,21 +7,19 @@ import { SupplyDemandColumns } from './supply-demand-columns';
 import { SupplyDemandDetailComponent } from './supply-demand-detail.component';
 import { SupplyDemandFiltersComponent } from './supply-demand-filters.component';
 import { SupplyDemandHelpComponent } from './supply-demand-help.component';
-import { ExperimentalBadgeComponent } from '../../shared/components/experimental-badge.component';
+import { SavePageComponent } from '../../shared/components/save-page/save-page.component';
 
 /** Shows which wares are short or in surplus in the active save, from what its stations make and use. */
 @Component({
 	imports: [
-		ExperimentalBadgeComponent,
 		DataGridComponent,
-		RouterLink,
+		SavePageComponent,
 		SupplyDemandFiltersComponent,
 		SupplyDemandHelpComponent,
 		SupplyDemandMapComponent,
 		SupplyDemandDetailComponent,
 	],
 	templateUrl: './supply-demand-page.component.html',
-	styleUrl: './supply-demand-page.component.css',
 	providers: [SupplyDemandStore],
 })
 export default class SupplyDemandPageComponent {

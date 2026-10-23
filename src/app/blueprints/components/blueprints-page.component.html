@@ -1,41 +1,26 @@
-<div class="card">
-	<div class="card-header flex items-center gap-2">
-		<ng-container i18n>Blueprints</ng-container>
-		<app-experimental-badge />
-	</div>
-	<div class="card-body">
-		@switch (store.status()) {
-			@case ('ready') {
-				@let save = store.save()!;
-				<p class="text-sm text-fg-muted" i18n>
-					Blueprints, licences, reputation and money as of save time ({{ save.info.saveName }},
-					{{ store.gameTime() }}); prices and sellers from the game data.
-				</p>
-				<app-blueprint-filters class="mt-3 block" />
-				<app-tabs class="mt-4 block" label="Blueprints" i18n-label [tabs]="tabs()" [(selected)]="store.tab">
-					@if (store.tab() === 'progress') {
-						<app-blueprint-progress />
-					} @else {
-						<app-blueprint-shopping-list />
-					}
-				</app-tabs>
+<app-save-page
+	heading="Blueprints"
+	i18n-heading
+	[status]="store.status()"
+	reloadText="Reload this save to read its blueprints"
+	i18n-reloadText
+>
+	<p intro class="text-fg-muted" i18n>
+		The blueprint tracker reads the blueprints, licences and reputation from a savegame.
+	</p>
+	<ng-template>
+		@let save = store.save()!;
+		<p class="text-sm text-fg-muted" i18n>
+			Blueprints, licences, reputation and money as of save time ({{ save.info.saveName }},
+			{{ store.gameTime() }}); prices and sellers from the game data.
+		</p>
+		<app-blueprint-filters class="mt-3 block" />
+		<app-tabs class="mt-4 block" label="Blueprints" i18n-label [tabs]="tabs()" [(selected)]="store.tab">
+			@if (store.tab() === 'progress') {
+				<app-blueprint-progress />
+			} @else {
+				<app-blueprint-shopping-list />
 			}
-			@case ('reload-needed') {
-				<p>
-					<a routerLink="/saves" i18n>Reload this save to read its blueprints</a>
-				</p>
-			}
-			@case ('loading') {
-				<p class="text-fg-muted" role="status" i18n>Loading save…</p>
-			}
-			@default {
-				<p class="text-fg-muted" i18n>
-					The blueprint tracker reads the blueprints, licences and reputation from a savegame.
-				</p>
-				<p class="mt-2">
-					<a routerLink="/saves" i18n>Load a savegame</a>
-				</p>
-			}
-		}
-	</div>
-</div>
+		</app-tabs>
+	</ng-template>
+</app-save-page>

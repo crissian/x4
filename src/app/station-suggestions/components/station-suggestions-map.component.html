@@ -4,8 +4,8 @@
 		<p class="mb-2 text-sm text-fg-muted" data-caption>
 			@if (store.here()) {
 				<ng-container i18n
-					>Colour: the Cr/h of each sector for this ware on its own; ★ the top 5. Outlined: the sectors within
-					{store.jumps(), plural, =1 {1 jump} other {{{ store.jumps() }} jumps}}.</ng-container
+					>Colour: the Cr/h of each sector for this ware on its own; ★ the top 5. Outlined: the sectors
+					{{ store.jumps() | jumps: 'within' }}.</ng-container
 				>
 			} @else {
 				<ng-container i18n

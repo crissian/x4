@@ -1,5 +1,5 @@
 import type { Faction, License } from '../../shared/services/model/model';
-import type { LicenseRequirement } from '../../shared/services/ship-stats.service';
+import type { LicenseRequirement } from '../../shared/services/faction.service';
 import { SellerStanding } from './seller-standing';
 
 const argon = { id: 'argon', name: 'Argon Federation' } as Faction;

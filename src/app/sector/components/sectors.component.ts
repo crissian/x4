@@ -1,18 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideMap } from '@lucide/angular';
-import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
-import { RowNavigation } from '../../shared/components/list-page';
-import { FactionService } from '../../shared/services/faction.service';
+import { GridColumn } from '../../shared/components/data-grid/data-grid.component';
+import { ListPageComponent } from '../../shared/components/list-page.component';
+import { GridLookups } from '../../shared/components/data-grid/grid-lookups';
 import { Sector } from '../../shared/services/model/model';
 import { GAME_VERSION_LOOKUP } from '../../shared/services/constants';
 import { ClusterService, SectorService } from '../../shared/services/universe.service';
 import { WareService } from '../../shared/services/ware.service';
-
-const percent: Intl.NumberFormatOptions = { style: 'percent', maximumFractionDigits: 0 };
+import { NumberFormats } from '../../core/format/number-formats';
 
 @Component({
-	imports: [DataGridComponent, RouterLink, LucideMap],
+	imports: [ListPageComponent, RouterLink, LucideMap],
 	templateUrl: './sectors.component.html',
 })
 export class SectorsComponent {
@@ -20,7 +19,6 @@ export class SectorsComponent {
 	private readonly wares = inject(WareService);
 
 	protected readonly entities = inject(SectorService).getEntities();
-	protected readonly open = RowNavigation.inject<Sector>();
 
 	protected readonly columns: GridColumn<Sector>[] = [
 		{ key: 'name', caption: $localize`Name` },
@@ -28,14 +26,11 @@ export class SectorsComponent {
 		{
 			key: 'owner',
 			caption: $localize`Owner`,
-			lookup: inject(FactionService)
-				.getEntities()
-				.filter((f) => this.entities.some((s) => s.owner === f.id))
-				.map((f) => ({ value: f.id, label: f.name })),
+			lookup: GridLookups.factions((f) => this.entities.some((s) => s.owner === f.id)),
 		},
-		{ key: 'sunlight', caption: $localize`Sunlight`, type: 'number', format: percent },
-		{ key: 'security', caption: $localize`Security`, type: 'number', format: percent },
-		{ key: 'economy', caption: $localize`Economy`, type: 'number', format: percent },
+		{ key: 'sunlight', caption: $localize`Sunlight`, type: 'number', format: NumberFormats.PERCENT },
+		{ key: 'security', caption: $localize`Security`, type: 'number', format: NumberFormats.PERCENT },
+		{ key: 'economy', caption: $localize`Economy`, type: 'number', format: NumberFormats.PERCENT },
 		{
 			key: 'resources',
 			caption: $localize`Resources`,

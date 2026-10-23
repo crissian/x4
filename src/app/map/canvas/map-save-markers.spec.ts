@@ -83,7 +83,7 @@ describe('MapSaveMarkers', () => {
 		const { element, zoom, store } = await setup();
 		await zoom(0.5);
 		const circle = () => element.querySelector('g[appMapCountBadge] circle')!;
-		const pixels = () => Number(circle().getAttribute('r')) * store.scale();
+		const pixels = () => Number(circle().getAttribute('r')) * store.panZoom.scale();
 		const small = pixels();
 		expect(element.querySelector('g[appMapCountBadge] text')).toBeNull();
 		await zoom(MapSaveMarkers.DETAIL_SCALE * 2);

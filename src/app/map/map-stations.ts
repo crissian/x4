@@ -1,12 +1,13 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { form } from '@angular/forms/signals';
 import { EnumLabels } from '../core/enum-labels';
+import { GameText } from '../core/game-text';
+import { LazyValue } from '../core/lazy-value';
 import { GAME_START_STATION_TYPES, STATION_TYPES } from '../shared/services/constants';
 import { GodStations } from '../shared/services/data/god-stations-data';
 import { Size } from '../shared/services/data/size-data';
-import { EquipmentService } from '../shared/services/equipment.service';
 import { GodStation } from '../shared/services/model/model';
-import { ShipService } from '../shared/services/ship.service';
+import { ShipListService } from '../shared/services/ship-list.service';
 import { MapStore } from './map-store';
 import { MapSaveLayer } from './save/map-save-layer';
 import { StationHover, StationMarker, StationMarkers } from './station-marker';
@@ -17,10 +18,19 @@ import { StationHover, StationMarker, StationMarkers } from './station-marker';
  */
 @Injectable()
 export class MapStations {
+	private static readonly EQUIPMENT_SELLERS = ['equipmentdock', 'wharf', 'shipyard'];
+
 	private readonly store = inject(MapStore);
 	private readonly save = inject(MapSaveLayer);
-	private readonly ships = inject(ShipService);
-	private readonly equipment = inject(EquipmentService);
+	private readonly ships = inject(ShipListService);
+	/** Equipment for "where to buy", loaded with the stations panel: the map has no other use for it. */
+	private readonly equipment = LazyValue.service(
+		() => this.store.tab() === 'stations',
+		() =>
+			GameText.withTexts(['equipment'], () => import('../shared/services/equipment.service')).then(
+				(x) => x.EquipmentService
+			)
+	);
 
 	readonly stationsModel = signal({
 		types: Object.fromEntries(
@@ -49,16 +59,18 @@ export class MapStations {
 		return this.stationList().filter((x) => !hide || (x.known && drawn.has(x.sector)));
 	});
 
-	readonly buyOptions = [
-		...this.ships.getEntities().map((x) => ({ id: `ship:${x.id}`, name: $localize`${x.name}:name: (ship, ${EnumLabels.label(x.size)}:size:)` })),
-		...this.equipment
-			.getEntities()
-			.filter((x) => x.owners?.length)
-			.map((x) => ({ id: `equipment:${x.id}`, name: `${x.name} (${x.type ? EnumLabels.label(x.type) : $localize`equipment`})` })),
-	].sort((a, b) => a.name.localeCompare(b.name));
+	/** Ships, and equipment once loaded, by name. */
+	readonly buyOptions = computed(() =>
+		[
+			...this.ships.getEntities().map((x) => ({ id: `ship:${x.id}`, name: $localize`${x.name}:name: (ship, ${EnumLabels.label(x.size)}:size:)` })),
+			...(this.equipment.value()?.getEntities() ?? [])
+				.filter((x) => x.owners?.length)
+				.map((x) => ({ id: `equipment:${x.id}`, name: `${x.name} (${x.type ? EnumLabels.label(x.type) : $localize`equipment`})` })),
+		].sort((a, b) => a.name.localeCompare(b.name))
+	);
 	readonly buyItem = computed(() => {
 		const name = this.stationsModel().buy.trim().toLowerCase();
-		return name ? this.buyOptions.find((x) => x.name.toLowerCase() === name)?.id : undefined;
+		return name ? this.buyOptions().find((x) => x.name.toLowerCase() === name)?.id : undefined;
 	});
 
 	/** Stations selling the chosen item, closest to the route start first. Player stations never sell. */
@@ -68,19 +80,19 @@ export class MapStations {
 			return [];
 		}
 		let owners: string[];
-		let types: string[];
+		let sells: (station: StationMarker) => boolean;
 		if (kind === 'ship') {
 			const ship = this.ships.getEntity(id);
 			owners = (ship?.owners ?? []).map((x) => x.id);
-			// wharfs build small and medium ships, shipyards large and extra large ones
-			types = [Size.small, Size.medium, Size.extrasmall].includes(ship?.size as Size) ? ['wharf'] : ['shipyard'];
+			// the build modules decide which sizes a wharf or shipyard builds, see ShipBuildClasses
+			sells = (x) => x.shipSizes.includes(ship?.size as Size);
 		} else {
-			owners = (this.equipment.getEntity(id)?.owners ?? []).map((x) => x.id);
-			types = ['equipmentdock', 'wharf', 'shipyard'];
+			owners = (this.equipment.value()?.getEntity(id)?.owners ?? []).map((x) => x.id);
+			sells = (x) => MapStations.EQUIPMENT_SELLERS.includes(x.typeId);
 		}
 		const travel = this.store.travel();
 		return this.stations()
-			.filter((x) => types.includes(x.typeId) && owners.includes(x.owner ?? '') && !x.player)
+			.filter((x) => !x.state && !x.player && owners.includes(x.owner ?? '') && sells(x))
 			.map((x) => ({ ...x, time: travel?.time.get(x.sector) }))
 			.filter((x) => !travel || x.time != null)
 			.sort((a, b) => (a.time ?? 0) - (b.time ?? 0) || a.shape.sector.name.localeCompare(b.shape.sector.name));

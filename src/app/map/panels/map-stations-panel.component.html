@@ -2,7 +2,7 @@
 	@for (type of stations.typeList(); track type.id) {
 		<label class="flex items-center gap-1.5">
 			<input type="checkbox" [formField]="form.types[type.id]" />
-			<span class="inline-block size-2.5 rounded-full" [style.background]="type.color"></span>
+			<app-color-dot [color]="type.color" />
 			{{ type.label }}
 		</label>
 	}
@@ -19,7 +19,7 @@
 	[formField]="form.buy"
 />
 <datalist id="map-buy-items">
-	@for (item of stations.buyOptions; track item.id) {
+	@for (item of stations.buyOptions(); track item.id) {
 		<option [value]="item.name"></option>
 	}
 </datalist>
@@ -37,10 +37,7 @@
 			@for (item of stations.sellers(); track item.id) {
 				<tr>
 					<td>
-						<span
-							class="mr-1 inline-block size-2.5 rounded-full"
-							[style.background]="item.type.color"
-						></span>
+						<app-color-dot class="mr-1" [color]="item.type.color" />
 						{{ item.type.label }}
 						<div class="text-xs text-fg-muted">{{ item.faction?.name ?? item.owner }}</div>
 					</td>
@@ -51,7 +48,7 @@
 						}
 					</td>
 					@if (item.time != null) {
-						<td class="text-right whitespace-nowrap">{{ routes.formatDuration(item.time) }}</td>
+						<td class="text-right whitespace-nowrap">{{ duration(item.time) }}</td>
 					}
 				</tr>
 			} @empty {
@@ -73,7 +70,7 @@
 		@for (item of stations.stationList(); track item.id) {
 			<tr>
 				<td>
-					<span class="mr-1 inline-block size-2.5 rounded-full" [style.background]="item.type.color"></span>
+					<app-color-dot class="mr-1" [color]="item.type.color" />
 					{{ item.type.label }}
 					<div class="text-xs text-fg-muted">{{ item.faction?.name ?? item.owner }}</div>
 				</td>

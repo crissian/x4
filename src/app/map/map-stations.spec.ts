@@ -45,9 +45,9 @@ describe('MapStations', () => {
 		expect(stations.stationMarkers().map((x) => x.id)).toEqual(['T']);
 	});
 
-	it('sells only from non-player stations of the owner', async () => {
+	it('sells only from non-player stations of the owner that build the size', async () => {
 		const { testing, stations } = setup();
-		const shipyard = ['buildmodule_gen_ships_xl'];
+		const shipyard = ['buildmodule_gen_ships_l', 'buildmodule_gen_ships_xl'];
 		await testing.load({
 			sectors: [
 				{ id: A, owner: 'argon', contested: false, known: true },
@@ -59,10 +59,12 @@ describe('MapStations', () => {
 				station({ code: 'OTHER', owner: 'xenon', modules: shipyard }),
 				station({ code: 'FAR', sector: B, modules: shipyard, known: false }),
 				station({ code: 'FACTORY' }),
+				// builds XL ships only, so no destroyer
+				station({ code: 'XL', modules: ['buildmodule_gen_ships_xl'] }),
 			],
 		});
 		const ship = 'ship_arg_l_destroyer_01_a';
-		const name = stations.buyOptions.find((x) => x.id === `ship:${ship}`)!.name;
+		const name = stations.buyOptions().find((x) => x.id === `ship:${ship}`)!.name;
 		stations.stationsModel.update((x) => ({ ...x, buy: name }));
 		const sellers = stations.sellers();
 		expect(sellers.map((x) => x.id).sort()).toEqual(['FAR', 'OK']);

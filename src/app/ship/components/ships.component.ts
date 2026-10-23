@@ -1,40 +1,36 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideGitCompareArrows } from '@lucide/angular';
-import { EnumFn } from '../../core/services/enum-fn';
-import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
-import { RowNavigation } from '../../shared/components/list-page';
+import { GridColumn } from '../../shared/components/data-grid/data-grid.component';
+import { ListPageComponent } from '../../shared/components/list-page.component';
+import { GridLookups } from '../../shared/components/data-grid/grid-lookups';
 import { ShipPurpose } from '../../shared/services/data/ship-purpose-data';
 import { ShipType } from '../../shared/services/data/ship-type-data';
 import { Size } from '../../shared/services/data/size-data';
 import { Ship } from '../../shared/services/model/model';
-import { RaceService } from '../../shared/services/race.service';
 import { ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
 import { GAME_VERSION_LOOKUP } from '../../shared/services/constants';
 
 @Component({
-	imports: [DataGridComponent, RouterLink, LucideGitCompareArrows],
+	imports: [ListPageComponent, RouterLink, LucideGitCompareArrows],
 	templateUrl: './ships.component.html',
 })
 export class ShipsComponent {
 	private readonly stats = inject(ShipStatsService);
 
 	protected readonly entities = inject(ShipService).getEntities();
-	protected readonly open = RowNavigation.inject<Ship>();
 
 	protected readonly columns: GridColumn<Ship>[] = [
 		{ key: 'name', caption: $localize`Name` },
 		{
 			key: 'race.id',
 			caption: $localize`Race`,
-			lookup: inject(RaceService)
-				.getEntities()
-				.map((x) => ({ value: x.id, label: x.name })),
+			lookup: GridLookups.races(),
 		},
-		{ key: 'type', caption: $localize`Type`, lookup: DataGridComponent.lookupOf(EnumFn.values(ShipType)) },
-		{ key: 'size', caption: $localize`Size`, lookup: DataGridComponent.lookupOf(EnumFn.values(Size)) },
-		{ key: 'purpose', caption: $localize`Purpose`, lookup: DataGridComponent.lookupOf(EnumFn.values(ShipPurpose)) },
+		{ key: 'type', caption: $localize`Type`, lookup: GridLookups.ofEnum(ShipType) },
+		{ key: 'size', caption: $localize`Size`, lookup: GridLookups.ofEnum(Size) },
+		{ key: 'purpose', caption: $localize`Purpose`, lookup: GridLookups.ofEnum(ShipPurpose) },
 		{ key: 'hull', caption: $localize`Hull`, type: 'number' },
 		{ key: 'shield', caption: $localize`Max Shield`, type: 'number', value: (ship) => this.stats.maxStats(ship).shield || null },
 		{ key: 'speed', caption: $localize`Max Speed`, type: 'number', value: (ship) => this.stats.maxStats(ship).speed || null },

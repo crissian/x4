@@ -1,31 +1,41 @@
-import { DestroyRef, ElementRef, Signal, afterNextRender, computed, inject, signal } from '@angular/core';
+import { DestroyRef, ElementRef, WritableSignal, afterNextRender, inject, signal } from '@angular/core';
 import { PanZoom, PanZoomLimits, ViewBox, ViewSize } from './pan-zoom';
 
 /**
- * A pannable, zoomable SVG map area: owns the view and size signals and the `PanZoom` over them, follows the
- * size of the element with a resize observer, fits the view once the element first has a size, and forwards
+ * A pannable, zoomable SVG map area: a `PanZoom` (its own, or one owned elsewhere such as by a store), follows
+ * the size of the element with a resize observer, fits the view once the element first has a size, and forwards
  * the wheel, pointer and zoom button events. Create it in an injection context, such as a field initialiser.
  */
 export class PanZoomArea {
-	/** Label size in screen pixels. */
-	static readonly LABEL_PX = 11;
+	/** The zoom factor of the zoom in button. */
+	static readonly ZOOM_IN = 0.7;
+	/** The zoom factor of the zoom out button. */
+	static readonly ZOOM_OUT = 1.4;
 
-	readonly size = signal<ViewSize>({ width: 600, height: 400 });
-	readonly view = signal<ViewBox>({ x: 0, y: 0, w: 1 });
-	readonly panZoom = new PanZoom(this.view, this.size, () => this.limits());
-	/** The label size in map units at the current zoom. */
-	readonly fontSize = computed(() => PanZoomArea.LABEL_PX / this.panZoom.scale());
+	readonly panZoom: PanZoom;
+	readonly size: WritableSignal<ViewSize>;
+	readonly view: WritableSignal<ViewBox>;
 
 	/**
 	 * @param element the map element, sized by the page
-	 * @param limits the zoom and pan limits
+	 * @param panZoom the pan and zoom state to drive, or the zoom and pan limits of a new one owned by this area
 	 * @param fit fits the view, called once the element first has a size
 	 */
 	constructor(
-		private readonly element: Signal<ElementRef<HTMLElement>>,
-		private readonly limits: () => PanZoomLimits,
+		private readonly element: () => ElementRef<HTMLElement>,
+		panZoom: PanZoom | (() => PanZoomLimits),
 		fit: () => void
 	) {
+		this.panZoom =
+			panZoom instanceof PanZoom
+				? panZoom
+				: new PanZoom(
+						signal<ViewBox>({ x: 0, y: 0, w: 1 }),
+						signal<ViewSize>({ width: 600, height: 400 }),
+						panZoom
+					);
+		this.size = this.panZoom.size;
+		this.view = this.panZoom.view;
 		const destroyRef = inject(DestroyRef);
 		afterNextRender(() => {
 			let first = true;
@@ -44,8 +54,17 @@ export class PanZoomArea {
 		});
 	}
 
+	/** Zooms on the centre by `factor`; below 1 zooms in. */
 	zoom(factor: number) {
 		this.panZoom.zoom(this.native(), factor);
+	}
+
+	zoomIn() {
+		this.zoom(PanZoomArea.ZOOM_IN);
+	}
+
+	zoomOut() {
+		this.zoom(PanZoomArea.ZOOM_OUT);
 	}
 
 	wheel(event: WheelEvent) {
@@ -64,8 +83,15 @@ export class PanZoomArea {
 		return this.panZoom.move(this.native(), event);
 	}
 
-	pointerUp(event: PointerEvent) {
-		this.panZoom.end(event);
+	/** Ends the drag; true for a click, when the pointer went down and up without moving the view. */
+	pointerUp(event: PointerEvent): boolean {
+		return this.panZoom.end(event);
+	}
+
+	/** The pointer position relative to the element. */
+	offset(event: MouseEvent): { x: number; y: number } {
+		const rect = this.native().getBoundingClientRect();
+		return { x: event.clientX - rect.left, y: event.clientY - rect.top };
 	}
 
 	private native(): HTMLElement {

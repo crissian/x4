@@ -1,18 +1,21 @@
+import { Descriptions } from '../../shared/services/descriptions';
 import { DecimalPipe, PercentPipe } from '@angular/common';
-import { Component, LOCALE_ID, computed, inject, input, viewChild } from '@angular/core';
+import { Component, computed, inject, input, viewChild } from '@angular/core';
+import { EntityDetailPage } from '../../shared/components/entity-detail-page';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { Router, RouterLink } from '@angular/router';
 import { LucideMapPinned, LucideCircleDot, LucideChevronsRight, LucideRoute } from '@lucide/angular';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
 import { TabItem, TabsComponent } from '../../shared/components/tabs/tabs.component';
 import { FactionService } from '../../shared/services/faction.service';
-import { Planet, SectorResource } from '../../shared/services/model/model';
+import { Planet, Sector, SectorResource } from '../../shared/services/model/model';
 import { GAME_VERSIONS } from '../../shared/services/constants';
 import { ClusterService, SectorService } from '../../shared/services/universe.service';
 import { WareService } from '../../shared/services/ware.service';
 import { PlanetPopulation } from '../planet-population';
 import { SectorMapComponent } from './sector-map.component';
 import { SectorStationsComponent } from './sector-stations.component';
+import { FactionLabelComponent } from '../../shared/components/faction-label.component';
 
 type PlanetRow = Planet & { moon?: boolean };
 export type SectorTab = 'stations' | 'connections' | 'resources' | 'system';
@@ -20,6 +23,7 @@ export type SectorTab = 'stations' | 'connections' | 'resources' | 'system';
 @Component({
 	imports: [
 		DetailPageComponent,
+		FactionLabelComponent,
 		DetailComponent,
 		RouterLink,
 		DataGridComponent,
@@ -35,15 +39,14 @@ export type SectorTab = 'stations' | 'connections' | 'resources' | 'system';
 	],
 	templateUrl: './sector-detail.component.html',
 })
-export class SectorDetailComponent {
-	private readonly sectors = inject(SectorService);
+export class SectorDetailComponent extends EntityDetailPage<Sector> {
+	protected readonly service = inject(SectorService);
+	protected readonly description = Descriptions.of('sectors', this.id);
 	private readonly clusters = inject(ClusterService);
 	private readonly factions = inject(FactionService);
 	private readonly wares = inject(WareService);
-	private readonly locale = inject(LOCALE_ID);
 	private readonly router = inject(Router);
 
-	readonly id = input.required<string>();
 	/** The `tab` query parameter: the selected tab, kept in the URL so links can open it. */
 	readonly tab = input<string>();
 	/** The `station` query parameter: the code of the selected station. */
@@ -94,21 +97,22 @@ export class SectorDetailComponent {
 	protected readonly accelerator = $localize`accelerator`;
 	protected readonly trackRow = (row: unknown) => row;
 
-	protected readonly entity = computed(() => this.sectors.getEntity(this.id()));
 	protected readonly cluster = computed(() => this.clusters.getEntity(this.entity()?.cluster ?? ''));
+	/** The system's description, unless it is the sector's. */
+	protected readonly clusterDescription = Descriptions.of('clusters', () => this.cluster()?.id);
 	protected readonly owner = computed(() => this.factions.getEntity(this.entity()?.owner ?? ''));
 
 	protected readonly gates = computed(() =>
 		(this.entity()?.gates ?? []).flatMap((x) => {
-			const sector = this.sectors.getEntity(x.sector);
+			const sector = this.service.getEntity(x.sector);
 			return sector ? [{ type: x.type, sector }] : [];
 		})
 	);
 	protected readonly highways = computed(() =>
-		(this.entity()?.highways ?? []).flatMap((x) => this.sectors.getEntity(x) ?? [])
+		(this.entity()?.highways ?? []).flatMap((x) => this.service.getEntity(x) ?? [])
 	);
 	protected readonly neighbours = computed(() =>
-		(this.cluster()?.sectors ?? []).filter((x) => x !== this.id()).flatMap((x) => this.sectors.getEntity(x) ?? [])
+		(this.cluster()?.sectors ?? []).filter((x) => x !== this.id()).flatMap((x) => this.service.getEntity(x) ?? [])
 	);
 
 	/** Planets followed by their moons. */
@@ -149,7 +153,7 @@ export class SectorDetailComponent {
 		{
 			key: 'population',
 			caption: $localize`Population`,
-			display: (x) => PlanetPopulation.label(x, this.locale),
+			display: (x) => PlanetPopulation.label(x),
 		},
 		{ key: 'settlements', caption: $localize`Settlements` },
 	];

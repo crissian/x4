@@ -1,7 +1,7 @@
 import type { Diagnosis, DiagnosisKind, Severity } from '../economy/diagnosis';
 import type { WareEconomy } from '../economy/economy-model';
 import type { GridDot, GridTone } from '../shared/components/data-grid/data-grid.component';
-import { CompactNumber } from '../shared/format/compact-number';
+import { NumberFormats } from '../core/format/number-formats';
 
 /** The words, explanations and colours of a ware's diagnosis. */
 export class SupplyDemandDiagnosis {
@@ -85,21 +85,12 @@ export class SupplyDemandDiagnosis {
 		return { tone: SupplyDemandDiagnosis.TONES[diagnosis.kind], level };
 	}
 
-	/** A signed percentage such as +12% or -24%. */
-	static percent(ratio: number): string {
-		return new Intl.NumberFormat(undefined, {
-			style: 'percent',
-			maximumFractionDigits: 0,
-			signDisplay: 'exceptZero',
-		}).format(ratio);
-	}
-
 	/** How much of the demand is unmet, or of the output unused. */
 	static balance(ratio: number): string {
 		if (Math.round(ratio * 100) === 0) {
 			return $localize`balanced`;
 		}
-		const percent = SupplyDemandDiagnosis.percent(ratio);
+		const percent = NumberFormats.signedPercent(ratio);
 		return ratio < 0
 			? $localize`${percent}:PERCENT: of demand unmet`
 			: $localize`${percent}:PERCENT: of output unused`;
@@ -112,7 +103,7 @@ export class SupplyDemandDiagnosis {
 			const index = row.priceIndex === undefined ? undefined : Math.round(row.priceIndex);
 			return index === undefined ? label : `${label} — ${$localize`price index ${index}:INDEX:%`}`;
 		}
-		const value = CompactNumber.format(row.value);
+		const value = NumberFormats.compact(row.value, { signed: true });
 		return `${label} — ${SupplyDemandDiagnosis.balance(row.balance)}, ${$localize`${value}:VALUE: Cr/h`}`;
 	}
 }

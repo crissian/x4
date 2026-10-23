@@ -11,8 +11,8 @@
 		vector-effect="non-scaling-stroke"
 	/>
 	@if (link.type === 'gate') {
-		<svg:circle [attr.cx]="link.x1" [attr.cy]="link.y1" [attr.r]="store.fontSize() * 0.3" fill="#e2e8f0" />
-		<svg:circle [attr.cx]="link.x2" [attr.cy]="link.y2" [attr.r]="store.fontSize() * 0.3" fill="#e2e8f0" />
+		<svg:circle [attr.cx]="link.x1" [attr.cy]="link.y1" [attr.r]="store.panZoom.fontSize() * 0.3" fill="#e2e8f0" />
+		<svg:circle [attr.cx]="link.x2" [attr.cy]="link.y2" [attr.r]="store.panZoom.fontSize() * 0.3" fill="#e2e8f0" />
 	}
 }
 

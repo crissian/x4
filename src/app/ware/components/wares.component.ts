@@ -1,22 +1,21 @@
 import { Component, inject } from '@angular/core';
-import { EnumFn } from '../../core/services/enum-fn';
-import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
-import { RowNavigation } from '../../shared/components/list-page';
+import { GridColumn } from '../../shared/components/data-grid/data-grid.component';
+import { ListPageComponent } from '../../shared/components/list-page.component';
+import { GridLookups } from '../../shared/components/data-grid/grid-lookups';
 import { TransportType } from '../../shared/services/data/transport-data';
 import { Ware } from '../../shared/services/model/model';
 import { WareService } from '../../shared/services/ware.service';
 
 @Component({
-	imports: [DataGridComponent],
+	imports: [ListPageComponent],
 	templateUrl: './wares.component.html',
 })
 export class WaresComponent {
 	protected readonly entities = inject(WareService).getEntities();
-	protected readonly open = RowNavigation.inject<Ware>();
 
 	protected readonly columns: GridColumn<Ware>[] = [
 		{ key: 'name', caption: $localize`Name` },
-		{ key: 'transport', caption: $localize`Transport`, lookup: DataGridComponent.lookupOf(EnumFn.values(TransportType)) },
+		{ key: 'transport', caption: $localize`Transport`, lookup: GridLookups.ofEnum(TransportType) },
 		{ key: 'price.min', caption: $localize`Min Price`, type: 'number' },
 		{ key: 'price.avg', caption: $localize`Avg Price`, type: 'number' },
 		{ key: 'price.max', caption: $localize`Max Price`, type: 'number' },

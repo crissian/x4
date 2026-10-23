@@ -1,0 +1,5 @@
+@if (entity(); as entity) {
+	<a [routerLink]="[route(), entity.id]">{{ entity.name }}</a>
+} @else {
+	-
+}

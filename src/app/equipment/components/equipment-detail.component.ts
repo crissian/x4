@@ -1,18 +1,20 @@
+import { Descriptions } from '../../shared/services/descriptions';
 import { DecimalPipe } from '@angular/common';
 import { EnumLabelPipe, EnumLabels } from '../../core/enum-labels';
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
-import { Router, RouterLink } from '@angular/router';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
-import { ProductionCardComponent } from '../../shared/components/production-card.component';
+import { ProducibleDetailPage } from '../../shared/components/entity-detail-page';
+import { EntityLinkComponent } from '../../shared/components/entity-link.component';
+import { ProductionCardsComponent } from '../../shared/components/production-cards.component';
+import { RowNavigation } from '../../shared/components/row-navigation';
+import { PriceRangePipe } from '../../core/format/price-range.pipe';
 import { SellersComponent } from '../../shared/components/sellers.component';
 import { EquipmentService } from '../../shared/services/equipment.service';
 import { ShipPerformance } from '../../shared/services/ship-performance';
-import { Ship } from '../../shared/services/model/model';
-import { Production } from '../../shared/services/production';
+import { Equipment, Ship } from '../../shared/services/model/model';
 import { ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
-import { WareService } from '../../shared/services/ware.service';
 
 interface ShipRow {
 	ship: Ship;
@@ -21,19 +23,25 @@ interface ShipRow {
 }
 
 @Component({
-	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, DataGridComponent, ProductionCardComponent, SellersComponent, EnumLabelPipe],
+	imports: [
+		DetailPageComponent,
+		DetailComponent,
+		DecimalPipe,
+		EntityLinkComponent,
+		DataGridComponent,
+		ProductionCardsComponent,
+		SellersComponent,
+		EnumLabelPipe,
+		PriceRangePipe,
+	],
 	templateUrl: './equipment-detail.component.html',
 })
-export class EquipmentDetailComponent {
-	private readonly service = inject(EquipmentService);
+export class EquipmentDetailComponent extends ProducibleDetailPage<Equipment> {
+	protected readonly service = inject(EquipmentService);
+	protected readonly description = Descriptions.of('equipment', this.id);
 	private readonly shipService = inject(ShipService);
-	private readonly wareService = inject(WareService);
 	private readonly stats = inject(ShipStatsService);
-	private readonly router = inject(Router);
 
-	readonly id = input.required<string>();
-	protected readonly entity = computed(() => this.service.getEntity(this.id()));
-	protected readonly production = computed(() => Production.toProductionData(this.entity()?.production, this.wareService));
 	protected readonly weapon = computed(() => {
 		const weapon = this.entity()?.weapon;
 		return weapon ? ShipPerformance.weaponStats(weapon) : undefined;
@@ -76,7 +84,5 @@ export class EquipmentDetailComponent {
 		no: $localize`:@@no:No`,
 	};
 
-	protected openShip(row: ShipRow) {
-		this.router.navigate(['/ships', row.ship.id]);
-	}
+	protected readonly openShip = RowNavigation.to<ShipRow>('/ships', (x) => x.ship.id);
 }

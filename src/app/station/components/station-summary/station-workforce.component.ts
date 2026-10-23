@@ -4,6 +4,7 @@ import { FieldTree, FormField } from '@angular/forms/signals';
 import { LucideChevronsDown, LucideChevronsUp } from '@lucide/angular';
 import { HQ_WORKFORCE, StationModuleModel, StationSettings } from '../station-calculator.model';
 import { ExpandState } from './station-summary.shared';
+import { NumberFormats } from '../../../core/format/number-formats';
 
 interface WorkforceItem {
 	amount: number;
@@ -50,6 +51,6 @@ export class StationWorkforceComponent {
 
 	readonly workforcePercent = computed(() => {
 		const capacity = this.totalWorkforceCapacity();
-		return capacity === 0 ? '0%' : Math.round((100 * this.values().partialWorkforce) / capacity) + '%';
+		return NumberFormats.percent(capacity === 0 ? 0 : this.values().partialWorkforce / capacity);
 	});
 }

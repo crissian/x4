@@ -1,15 +1,13 @@
-import { Injectable, Injector, Signal, computed, inject, signal } from '@angular/core';
+import { Injectable, Signal, computed, inject, signal } from '@angular/core';
 import { form } from '@angular/forms/signals';
-import { LazyValue } from '../../core/lazy-value';
 import { LocalStorage } from '../../core/services/local-storage';
 import { RoutePlanner, TravelTimes } from '../../map/route-planner';
-import type { SaveLicences, SaveMap, SaveRelations } from '../../savegame/map/save-map-model';
-import { StationNamer } from '../../savegame/map/station-name';
-import { SavegameStore } from '../../savegame/savegame-store';
-import { STATION_TYPES, StationTypeInfo } from '../../shared/services/constants';
-import { FactionService } from '../../shared/services/faction.service';
-import type { Faction, GodStation, Sector, Ship } from '../../shared/services/model/model';
-import { LicenseRequirement, ShipStatsService } from '../../shared/services/ship-stats.service';
+import { SaveStationNames } from '../../map/save/save-station-names';
+import { ActiveSave } from '../../savegame/active-save';
+import type { StationTypeInfo } from '../../shared/services/constants';
+import { FactionService, LicenseRequirement } from '../../shared/services/faction.service';
+import type { Faction, Sector, ShipListItem } from '../../shared/services/model/model';
+import { StationTypes } from '../../shared/services/station-types';
 import { SectorService } from '../../shared/services/universe.service';
 import { SellerStanding, Standing } from './seller-standing';
 import { SellerStation, ShipSellerStations } from './ship-seller-stations';
@@ -43,35 +41,19 @@ export interface ShipSellerModel {
  */
 @Injectable()
 export class ShipSellerFinder {
-	/** The travel drive speed (m/s) and charge (s) the times assume: the map route panel's defaults. */
-	static readonly SPEED = 3000;
-	static readonly CHARGE = 5;
-
-	private readonly savegames = inject(SavegameStore);
+	private readonly activeSave = inject(ActiveSave);
+	private readonly stationNames = inject(SaveStationNames);
 	private readonly factions = inject(FactionService);
 	private readonly sectorService = inject(SectorService);
-	private readonly stats = inject(ShipStatsService);
-	private readonly injector = inject(Injector);
 
-	private readonly source = signal<Signal<Ship | undefined>>(signal(undefined));
+	private readonly source = signal<Signal<ShipListItem | undefined>>(signal(undefined));
 	/** The ship whose sellers are listed. */
 	readonly ship = computed(() => this.source()());
 
-	private readonly save = computed(() => this.savegames.active()?.data);
-	private readonly saveMap = computed(() => this.save()?.['map'] as SaveMap | undefined);
-	private readonly relations = computed(() => this.save()?.['relations'] as SaveRelations | undefined);
-	private readonly licences = computed(() => this.save()?.['licences'] as SaveLicences | undefined);
-	private readonly namer = new LazyValue(
-		() => !!this.saveMap(),
-		async () => {
-			const { SiteNamingTables } = await import('../../map/save/site-naming-tables');
-			return new StationNamer(this.injector.get(SiteNamingTables));
-		}
-	);
-	private readonly godStations = new LazyValue(
-		() => !this.saveMap(),
-		async () => (await import('../../shared/services/data/god-stations-data')).GodStations as GodStation[]
-	);
+	private readonly saveMap = this.activeSave.map;
+	private readonly relations = this.activeSave.relations;
+	private readonly licences = this.activeSave.licences;
+	private readonly godStations = this.stationNames.godStations(() => !this.saveMap());
 
 	/** The stations come from the active save. */
 	readonly fromSave = computed(() => !!this.saveMap());
@@ -86,14 +68,11 @@ export class ShipSellerFinder {
 	readonly form = form(this.model);
 
 	/** The sectors to pick from and route through: the save's, else all, by name. */
-	readonly sectors = computed<Sector[]>(() => {
-		const map = this.saveMap();
-		const ids = map ? new Set(map.sectors.map((x) => x.id)) : undefined;
-		return this.sectorService
-			.getEntities()
-			.filter((x) => !ids || ids.has(x.id))
-			.sort((a, b) => a.name.localeCompare(b.name));
-	});
+	readonly sectors = computed<Sector[]>(() =>
+		this.saveMap()
+			? this.activeSave.sectors()
+			: [...this.sectorService.getEntities()].sort((a, b) => a.name.localeCompare(b.name))
+	);
 	/** The picked from sector, when the text names one. */
 	readonly from = computed(() => {
 		const key = this.model().from.trim().toLowerCase();
@@ -101,12 +80,7 @@ export class ShipSellerFinder {
 	});
 	private readonly travel = computed<TravelTimes | undefined>(() => {
 		const from = this.from();
-		return from
-			? RoutePlanner.travelTimes(this.sectors(), from.id, {
-					speed: ShipSellerFinder.SPEED,
-					charge: ShipSellerFinder.CHARGE,
-				})
-			: undefined;
+		return from ? RoutePlanner.travelTimes(this.sectors(), from.id, RoutePlanner.DEFAULT_OPTIONS) : undefined;
 	});
 
 	/** The rows, nearest first (or by owner and sector without a from sector); null while loading. */
@@ -119,20 +93,20 @@ export class ShipSellerFinder {
 		if (!stations) {
 			return null;
 		}
-		const requirements = new Map(this.stats.sellers(ship.owners, ship.license).map((x) => [x.faction.id, x]));
+		const requirements = new Map(this.factions.sellers(ship.owners, ship.license).map((x) => [x.faction.id, x]));
 		const rows = stations.map((x) => this.row(x, requirements.get(x.station.owner)));
 		return this.travel() ? rows.sort(ShipSellerFinder.byTime) : rows.sort(ShipSellerFinder.byPlace);
 	});
 
 	/** Lists the sellers of the given ship (the card's input). */
-	connect(ship: Signal<Ship | undefined>): void {
+	connect(ship: Signal<ShipListItem | undefined>): void {
 		this.source.set(ship);
 	}
 
-	private stations(ship: Ship): { station: SellerStation; name: string }[] | null {
+	private stations(ship: ShipListItem): { station: SellerStation; name: string }[] | null {
 		const map = this.saveMap();
 		if (map) {
-			const namer = this.namer.value();
+			const namer = this.stationNames.namer();
 			return namer
 				? ShipSellerStations.fromSave(ship, map).map((station) => ({
 						station,
@@ -140,11 +114,11 @@ export class ShipSellerFinder {
 					}))
 				: null;
 		}
-		const god = this.godStations.value();
+		const god = this.godStations();
 		return god
 			? ShipSellerStations.fromGameStart(ship, god).map((station) => ({
 					station,
-					name: this.gameStartName(station),
+					name: this.stationNames.gameStart(station.owner, station.type),
 				}))
 			: null;
 	}
@@ -158,7 +132,7 @@ export class ShipSellerFinder {
 		const faction = requirement?.faction ?? this.factions.getEntity(station.owner);
 		return {
 			id: station.id,
-			type: STATION_TYPES.find((x) => x.id === station.type)!,
+			type: StationTypes.info(station.type),
 			name,
 			owner: station.owner,
 			faction,
@@ -172,12 +146,6 @@ export class ShipSellerFinder {
 				? SellerStanding.of(requirement, this.relations(), this.licences())
 				: { status: this.relations() ? 'ok' : 'unknown' },
 		};
-	}
-
-	private gameStartName(station: SellerStation): string {
-		const short = this.factions.getEntity(station.owner)?.shortName;
-		const type = STATION_TYPES.find((x) => x.id === station.type)!;
-		return [short, type.label].filter(Boolean).join(' ');
 	}
 
 	/** Reachable first, by time, then by name. */

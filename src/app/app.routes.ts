@@ -1,6 +1,17 @@
 import { Routes } from '@angular/router';
 import { AboutComponent } from './about.component';
+import { GameText } from './core/game-text';
 import { BASE_TITLE } from './shared/services/constants';
+
+/**
+ * Texts files of the game data a lazy route uses, fetched along with its code: the data files of a route
+ * fetch their texts while they evaluate, one after another, so they find them in flight.
+ */
+const TEXTS = {
+	/** races, factions and wares, which most data files reference */
+	base: ['race', 'factions', 'ware-groups', 'wares'],
+	universe: ['clusters', 'sectors'],
+} as const;
 
 export const appRoutes: Routes = [
 	{
@@ -15,55 +26,82 @@ export const appRoutes: Routes = [
 	},
 	{
 		path: 'ships',
-		loadChildren: () => import('./ship/ship.routes'),
+		loadChildren: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'ships', 'equipment'],
+				() => import('./ship/ship.routes')
+			),
 	},
 	{
 		path: 'equipment',
-		loadChildren: () => import('./equipment/equipment.routes'),
+		loadChildren: () =>
+			GameText.withTexts([...TEXTS.base, 'ships', 'equipment'], () => import('./equipment/equipment.routes')),
 	},
 	{
 		path: 'factions',
-		loadChildren: () => import('./faction/faction.routes'),
+		loadChildren: () => GameText.withTexts(TEXTS.base, () => import('./faction/faction.routes')),
 	},
 	{
 		path: 'races',
-		loadChildren: () => import('./races/race.routes'),
+		loadChildren: () => GameText.withTexts(TEXTS.base, () => import('./races/race.routes')),
 	},
 	{
 		path: 'modules',
-		loadChildren: () => import('./module/module.routes'),
+		loadChildren: () => GameText.withTexts([...TEXTS.base, 'modules'], () => import('./module/module.routes')),
 	},
 	{
 		path: 'wares',
-		loadChildren: () => import('./ware/ware.routes'),
+		loadChildren: () =>
+			GameText.withTexts([...TEXTS.base, ...TEXTS.universe, 'modules'], () => import('./ware/ware.routes')),
 	},
 	{
 		path: 'sectors',
-		loadChildren: () => import('./sector/sector.routes'),
+		loadChildren: () =>
+			GameText.withTexts([...TEXTS.base, ...TEXTS.universe, 'modules'], () => import('./sector/sector.routes')),
 	},
 	{
 		path: 'map',
-		loadComponent: () => import('./map/map.component'),
+		loadComponent: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'modules', 'ship-list'],
+				() => import('./map/map.component')
+			),
 		title: `${BASE_TITLE} - ${$localize`Galaxy Map`}`,
 	},
 	{
 		path: 'trade-routes',
-		loadComponent: () => import('./trade/components/trade-routes-page.component'),
+		loadComponent: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'ship-list'],
+				() => import('./trade/components/trade-routes-page.component')
+			),
 		title: `${BASE_TITLE} - ${$localize`Trade Routes`}`,
 	},
 	{
 		path: 'supply-demand',
-		loadComponent: () => import('./supply-demand/components/supply-demand-page.component'),
+		loadComponent: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'modules'],
+				() => import('./supply-demand/components/supply-demand-page.component')
+			),
 		title: `${BASE_TITLE} - ${$localize`Supply & Demand`}`,
 	},
 	{
 		path: 'station-suggestions',
-		loadComponent: () => import('./station-suggestions/components/station-suggestions-page.component'),
+		loadComponent: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'modules'],
+				() => import('./station-suggestions/components/station-suggestions-page.component')
+			),
 		title: `${BASE_TITLE} - ${$localize`Station Suggestions`}`,
 	},
 	{
 		path: 'blueprints',
-		loadComponent: () => import('./blueprints/components/blueprints-page.component'),
+		loadComponent: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'modules', 'ships', 'equipment'],
+				() => import('./blueprints/components/blueprints-page.component')
+			),
 		title: `${BASE_TITLE} - ${$localize`Blueprints`}`,
 	},
 	{
@@ -73,7 +111,11 @@ export const appRoutes: Routes = [
 	},
 	{
 		path: 'station-calculator',
-		loadComponent: () => import('./station/components/station-calculator.component'),
+		loadComponent: () =>
+			GameText.withTexts(
+				[...TEXTS.base, 'modules'],
+				() => import('./station/components/station-calculator.component')
+			),
 		title: `${BASE_TITLE} - ${$localize`Station Calculator`}`,
 	},
 ];

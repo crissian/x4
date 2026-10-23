@@ -1,26 +1,33 @@
+import { Descriptions } from '../../shared/services/descriptions';
 import { DecimalPipe } from '@angular/common';
 import { EnumLabelPipe } from '../../core/enum-labels';
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { RouterLink } from '@angular/router';
-import { ProductionCardComponent } from '../../shared/components/production-card.component';
+import { ProducibleDetailPage } from '../../shared/components/entity-detail-page';
+import { EntityLinkComponent } from '../../shared/components/entity-link.component';
+import { ProductionCardsComponent } from '../../shared/components/production-cards.component';
 import { SellersComponent } from '../../shared/components/sellers.component';
+import { StationModule } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
 import { Production } from '../../shared/services/production';
-import { WareService } from '../../shared/services/ware.service';
 
 @Component({
-	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, ProductionCardComponent, SellersComponent, EnumLabelPipe],
+	imports: [
+		DetailPageComponent,
+		DetailComponent,
+		DecimalPipe,
+		RouterLink,
+		EntityLinkComponent,
+		ProductionCardsComponent,
+		SellersComponent,
+		EnumLabelPipe,
+	],
 	templateUrl: './module-detail.component.html',
 })
-export class ModuleDetailComponent {
-	private readonly service = inject(ModuleService);
-	private readonly wareService = inject(WareService);
-
-	readonly id = input.required<string>();
-
-	protected readonly entity = computed(() => this.service.getEntity(this.id()));
-	protected readonly production = computed(() => Production.toProductionData(this.entity()?.production, this.wareService));
+export class ModuleDetailComponent extends ProducibleDetailPage<StationModule> {
+	protected readonly service = inject(ModuleService);
+	protected readonly description = Descriptions.of('modules', this.id);
 
 	protected readonly getSlotsStr = Production.getSlotsStr;
 }

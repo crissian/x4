@@ -3,8 +3,8 @@ import { FormField, form } from '@angular/forms/signals';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LucideFolderOpen, LucideSave } from '@lucide/angular';
 import { SavegameListItem } from '../savegame-model';
-import { SavegameFormat } from '../savegame-format';
 import { SavegameStore } from '../savegame-store';
+import { Duration } from '../../core/format/duration';
 
 /** Header select to pick the active save, or a link to the saves page when there are none. */
 @Component({
@@ -29,6 +29,6 @@ export class SavegameSelectorComponent {
 	}
 
 	protected label(save: SavegameListItem): string {
-		return `${save.info.playerName} · ${save.info.saveName} · ${SavegameFormat.time(save.info.gameTime)}`;
+		return `${save.info.playerName} · ${save.info.saveName} · ${Duration.hoursMinutes(save.info.gameTime)}`;
 	}
 }

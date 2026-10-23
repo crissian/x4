@@ -2,6 +2,7 @@ import { Diagnoses } from '../../economy/diagnosis';
 import type { GridColumn, GridGroup } from '../../shared/components/data-grid/data-grid.component';
 import { SupplyDemandDiagnosis } from '../supply-demand-diagnosis';
 import type { SupplyDemandRow } from '../supply-demand-model';
+import { NumberFormats } from '../../core/format/number-formats';
 
 /** The columns of the supply and demand table. */
 export class SupplyDemandColumns {
@@ -32,14 +33,6 @@ export class SupplyDemandColumns {
 		];
 	}
 
-	private static readonly PER_HOUR: Intl.NumberFormatOptions = { maximumFractionDigits: 0 };
-	private static readonly NET: Intl.NumberFormatOptions = { maximumFractionDigits: 0, signDisplay: 'exceptZero' };
-	/** Big values such as 16.2M, with the full number in the title. */
-	private static readonly COMPACT: Intl.NumberFormatOptions = {
-		notation: 'compact',
-		maximumFractionDigits: 1,
-		signDisplay: 'exceptZero',
-	};
 	private static readonly DASH = '—';
 
 	/** Mined wares have no capacity numbers; the table says so in a title. */
@@ -49,7 +42,7 @@ export class SupplyDemandColumns {
 	private static readonly BALANCE = $localize`Net as a share of the larger of produced and consumed: how much of the demand is unmet, or of the output unused`;
 
 	static all(): GridColumn<SupplyDemandRow>[] {
-		const { NET, PER_HOUR } = SupplyDemandColumns;
+		const { SIGNED_WHOLE: NET, WHOLE: PER_HOUR } = NumberFormats;
 		return [
 			{ key: 'name', caption: $localize`Ware`, hideable: false, link: (x) => ['/wares', x.ware] },
 			SupplyDemandColumns.capacity('produced', $localize`Produced/h`, PER_HOUR, true),
@@ -64,14 +57,11 @@ export class SupplyDemandColumns {
 				group: SupplyDemandColumns.CAPACITY,
 				value: (x) => x.value,
 				display: (x) =>
-					x.mined
-						? ''
-						: SupplyDemandColumns.number(x.value, SupplyDemandColumns.COMPACT) +
-							SupplyDemandColumns.mark(x),
+					x.mined ? '' : NumberFormats.compact(x.value, { signed: true }) + SupplyDemandColumns.mark(x),
 				title: (x) =>
 					x.mined
 						? SupplyDemandColumns.MINING
-						: [SupplyDemandColumns.number(x.value, NET), SupplyDemandColumns.buildingNote(x)]
+						: [NumberFormats.format(x.value, NET), SupplyDemandColumns.buildingNote(x)]
 								.filter(Boolean)
 								.join(' · '),
 			},
@@ -89,7 +79,7 @@ export class SupplyDemandColumns {
 				group: SupplyDemandColumns.MARKET,
 				hidden: true,
 				value: (x) => x.priceIndex,
-				display: (x) => (x.priceIndex === undefined ? '' : `${Math.round(x.priceIndex)}%`),
+				display: (x) => (x.priceIndex === undefined ? '' : NumberFormats.percent(x.priceIndex / 100)),
 				title: () => $localize`Average offer price as a percentage of the ware's average price`,
 			},
 		];
@@ -106,7 +96,7 @@ export class SupplyDemandColumns {
 			display: (x) =>
 				x.mined
 					? SupplyDemandColumns.DASH
-					: SupplyDemandDiagnosis.percent(x.balance) + SupplyDemandColumns.mark(x),
+					: NumberFormats.signedPercent(x.balance) + SupplyDemandColumns.mark(x),
 			bar: (x) => (x.mined ? undefined : x.balance),
 			title: (x) =>
 				x.mined
@@ -143,10 +133,6 @@ export class SupplyDemandColumns {
 		return row.partlyBuilding ? SupplyDemandColumns.PARTLY_BUILDING : undefined;
 	}
 
-	private static number(value: number, format: Intl.NumberFormatOptions): string {
-		return new Intl.NumberFormat(undefined, format).format(value);
-	}
-
 	/** A per hour column: mined wares show a dash where mining isn't counted, building materials an asterisk. */
 	private static capacity(
 		key: 'produced' | 'consumed' | 'net',
@@ -167,7 +153,7 @@ export class SupplyDemandColumns {
 			display: (x) =>
 				blank(x)
 					? SupplyDemandColumns.DASH
-					: SupplyDemandColumns.number(x[key], format) + SupplyDemandColumns.mark(x),
+					: NumberFormats.format(x[key], format) + SupplyDemandColumns.mark(x),
 			title: (x) => (blank(x) ? SupplyDemandColumns.MINING : SupplyDemandColumns.buildingNote(x)),
 		};
 	}

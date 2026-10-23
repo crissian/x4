@@ -5,23 +5,23 @@
 		}
 	</select>
 	@if (buyers.active()) {
-		<input
-			class="input"
-			list="map-sectors"
-			placeholder="Sell near (optional)..."
+		<app-sector-input
+			i18n-label
+			label="Home sector"
+			[hideLabel]="true"
 			i18n-placeholder
-			aria-label="Home sector"
-			i18n-aria-label
+			placeholder="Sell near (optional)..."
+			[sectors]="store.sectorList"
 			[formField]="store.routeForm.from"
 		/>
 	} @else {
-		<input
-			class="input"
-			list="map-sectors"
-			placeholder="Home sector (where you sell)..."
+		<app-sector-input
+			i18n-label
+			label="Home sector"
+			[hideLabel]="true"
 			i18n-placeholder
-			aria-label="Home sector"
-			i18n-aria-label
+			placeholder="Home sector (where you sell)..."
+			[sectors]="store.sectorList"
 			[formField]="store.routeForm.from"
 		/>
 	}
@@ -81,12 +81,12 @@
 						<a [routerLink]="['/sectors', item.sector.id]">{{ item.sector.name }}</a>
 						@if (store.routeFrom()) {
 							<div class="text-xs text-fg-muted" i18n>
-								{{ item.jumps }} jumps, {{ item.amount | number }} units
+								{{ item.jumps | jumps }}, {{ item.amount | number }} units
 							</div>
 						}
 					</td>
 					@if (item.trip; as trip) {
-						<td class="text-right whitespace-nowrap">{{ routes.formatDuration(trip.tripTime) }}</td>
+						<td class="text-right whitespace-nowrap">{{ duration(trip.tripTime) }}</td>
 						<td class="text-right font-semibold">{{ trip.perHour | number: '1.0-0' }}</td>
 					} @else {
 						<td class="text-right">{{ item.amount | number }}</td>

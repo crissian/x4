@@ -1,0 +1,12 @@
+:host {
+	display: inline-block;
+	flex-shrink: 0;
+	width: 0.625rem;
+	height: 0.625rem;
+	border-radius: 9999px;
+}
+
+:host([data-size='sm']) {
+	width: 0.5rem;
+	height: 0.5rem;
+}

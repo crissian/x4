@@ -8,6 +8,7 @@ import { MapSaveLayer } from '../save/map-save-layer';
 import { MapSaveSectors } from '../save/map-save-sectors';
 import { StationIcons } from '../station-icons';
 import { StationMarkersComponent } from './station-markers';
+import { NumberFormats } from '../../core/format/number-formats';
 
 /** Gates, accelerators, superhighways and the planned route. */
 @Component({
@@ -41,7 +42,7 @@ export class MapMarkersLayer {
 	host: {
 		'text-anchor': 'middle',
 		fill: '#f1f5f9',
-		'[attr.font-size]': 'store.fontSize()',
+		'[attr.font-size]': 'store.panZoom.fontSize()',
 	},
 	templateUrl: './map-labels-layer.html',
 })
@@ -69,7 +70,7 @@ export class MapLabelsLayer {
 	private sectorLines(shape: SectorShape): string[] {
 		const lines = MapLabel.wrap(shape.sector.name);
 		if (this.store.mode() === 'sunlight' && shape.sector.sunlight != null) {
-			lines.push(`☀ ${Math.round(shape.sector.sunlight * 100)}%`);
+			lines.push(`☀ ${NumberFormats.percent(shape.sector.sunlight)}`);
 		}
 		return lines;
 	}

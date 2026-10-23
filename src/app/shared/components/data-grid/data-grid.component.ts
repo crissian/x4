@@ -1,11 +1,10 @@
 import { Component, computed, effect, input, linkedSignal, output, signal, untracked } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
-import { EnumLabels } from '../../../core/enum-labels';
 import { GridColumnPrefs } from './grid-column-prefs';
 import { GridGroups } from './grid-groups';
 import { ToneDotComponent } from '../tone-dot/tone-dot.component';
-import type { GridColumn, GridGroup, GridLookupItem, SortState } from './grid-column';
+import type { GridColumn, GridGroup, SortState } from './grid-column';
 import { GridValues, PreparedRow } from './grid-values';
 import {
 	LucideArrowUpNarrowWide,
@@ -17,6 +16,7 @@ import {
 	LucideColumns3,
 	LucideInfo,
 } from '@lucide/angular';
+import { NumberFormats } from '../../../core/format/number-formats';
 
 export type { GridColumn, GridDot, GridGroup, GridLookupItem, GridTone, SortState } from './grid-column';
 
@@ -39,11 +39,6 @@ export type { GridColumn, GridDot, GridGroup, GridLookupItem, GridTone, SortStat
 	styleUrl: './data-grid.component.css',
 })
 export class DataGridComponent<T> {
-	/** Builds a lookup list from plain string values. */
-	static lookupOf(values: readonly string[]): GridLookupItem[] {
-		return values.map((x) => ({ value: x, label: EnumLabels.label(x) }));
-	}
-
 	readonly data = input.required<readonly T[]>();
 	readonly columns = input.required<readonly GridColumn<T>[]>();
 	readonly trackBy = input<(row: T) => unknown>((row) => (row as { id?: unknown } | null)?.id ?? row);
@@ -132,7 +127,7 @@ export class DataGridComponent<T> {
 		const result: Record<string, Intl.NumberFormat> = {};
 		for (const column of this.columns()) {
 			if (column.type === 'number') {
-				result[column.key] = new Intl.NumberFormat(undefined, column.format ?? { maximumFractionDigits: 0 });
+				result[column.key] = NumberFormats.formatter(column.format);
 			}
 		}
 		return result;

@@ -1,10 +1,8 @@
-import { DestroyRef, Injectable, computed, effect, inject, signal, untracked } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { form } from '@angular/forms/signals';
-import { ActivatedRoute, Router } from '@angular/router';
-import { skip } from 'rxjs';
-import type { SaveBlueprints, SaveLicences, SaveRelations, SaveRepresentatives } from '../savegame/map/save-map-model';
-import { SavegameFormat } from '../savegame/savegame-format';
-import { SavegameStore } from '../savegame/savegame-store';
+import { ActivatedRoute } from '@angular/router';
+import { QueryParamSync } from '../core/router/query-param-sync';
+import { ActiveSave } from '../savegame/active-save';
 import { BlueprintRules } from '../shared/services/data/blueprint-rules-data';
 import { EquipmentService } from '../shared/services/equipment.service';
 import { FactionService } from '../shared/services/faction.service';
@@ -18,8 +16,6 @@ import { BlueprintQuery, type BlueprintTab, type BlueprintsModel } from './bluep
 import { BlueprintSellers } from './blueprint-sellers';
 import { BlueprintShoppingList } from './blueprint-shopping-list';
 
-export type BlueprintsStatus = 'no-save' | 'loading' | 'reload-needed' | 'ready';
-
 /** A row of the "need more reputation" table: one seller of one item. */
 export interface ReputationRow {
 	item: BlueprintItem;
@@ -32,31 +28,21 @@ export interface ReputationRow {
  */
 @Injectable()
 export class BlueprintsStore {
-	private readonly savegames = inject(SavegameStore);
-	private readonly router = inject(Router);
+	private readonly activeSave = inject(ActiveSave);
 	private readonly activatedRoute = inject(ActivatedRoute);
 	private readonly factions = inject(FactionService);
 
-	readonly save = this.savegames.active;
-	private readonly blueprints = computed(() => this.save()?.data?.['blueprints'] as SaveBlueprints | undefined);
-	private readonly licences = computed(() => (this.save()?.data?.['licences'] as SaveLicences | undefined) ?? {});
-	private readonly relations = computed(() => (this.save()?.data?.['relations'] as SaveRelations | undefined) ?? {});
+	readonly save = this.activeSave.save;
+	private readonly blueprints = this.activeSave.blueprints;
+	private readonly licences = computed(() => this.activeSave.licences() ?? {});
+	private readonly relations = computed(() => this.activeSave.relations() ?? {});
 	/** unknown for saves read before representatives were extracted */
 	private readonly representatives = computed(() => {
-		const ids = this.save()?.data?.['representatives'] as SaveRepresentatives | undefined;
+		const ids = this.activeSave.representatives();
 		return ids && new Set(ids);
 	});
-	readonly status = computed<BlueprintsStatus>(() => {
-		const save = this.save();
-		if (!save) {
-			return 'no-save';
-		}
-		if (this.blueprints()) {
-			return 'ready';
-		}
-		return this.savegames.status(save.id) === 'updating' ? 'loading' : 'reload-needed';
-	});
-	readonly gameTime = computed(() => SavegameFormat.time(this.save()?.info.gameTime ?? 0));
+	readonly status = this.activeSave.statusOf(this.blueprints);
+	readonly gameTime = this.activeSave.gameTime;
 	readonly money = computed(() => this.save()?.info.money ?? 0);
 	private readonly owned = computed(() => new Set(this.blueprints() ?? []));
 
@@ -116,40 +102,19 @@ export class BlueprintsStore {
 		this.shopping().reputation.flatMap(({ item, sellers }) => sellers.map((seller) => ({ item, seller })))
 	);
 
-	/** The URL params last written to, or read from, the URL; used to skip writes that change nothing. */
-	private urlKey = '';
-
 	constructor() {
 		// the tab and the filters are kept in the URL
-		effect(() => {
-			const queryParams = BlueprintQuery.write(this.model(), this.tab());
-			const key = JSON.stringify(queryParams);
-			if (key === this.urlKey) {
-				return;
-			}
-			this.urlKey = key;
-			untracked(
-				() =>
-					void this.router.navigate([], {
-						relativeTo: this.activatedRoute,
-						queryParams,
-						queryParamsHandling: 'merge',
-						replaceUrl: true,
-					})
-			);
-		});
-		// the form follows URL changes it didn't write itself, such as the header link clearing the params
-		const subscription = this.activatedRoute.queryParamMap.pipe(skip(1)).subscribe((params) => {
-			const model = BlueprintQuery.read(params);
-			const tab = BlueprintQuery.tab(params);
-			const key = JSON.stringify(BlueprintQuery.write(model, tab));
-			if (key !== this.urlKey) {
-				this.urlKey = key;
+		QueryParamSync.connect(
+			computed(() => ({ model: this.model(), tab: this.tab() })),
+			{
+				read: (params) => ({ model: BlueprintQuery.read(params), tab: BlueprintQuery.tab(params) }),
+				write: ({ model, tab }) => BlueprintQuery.write(model, tab),
+			},
+			({ model, tab }) => {
 				this.model.set(model);
 				this.tab.set(tab);
 			}
-		});
-		inject(DestroyRef).onDestroy(() => subscription.unsubscribe());
+		);
 	}
 
 	private matches(item: BlueprintItem, search: string): boolean {

@@ -2,13 +2,15 @@ import { DecimalPipe } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RouteMapComponent } from '../../map/route-map/route-map.component';
-import { RoutePlanner, RouteStep, StepType } from '../../map/route-planner';
+import { RouteStep, StepType } from '../../map/route-planner';
 import { TradeRouteRow, TradeRoutesStore } from '../trade-routes-store';
+import { JumpsPipe } from '../../core/format/jumps.pipe';
+import { Duration } from '../../core/format/duration';
 
 /** The selected trade route: its map, the sectors on the way, and the seller's stock and buyer's demand. */
 @Component({
 	selector: 'app-trade-route-details',
-	imports: [DecimalPipe, RouteMapComponent, RouterLink],
+	imports: [JumpsPipe, DecimalPipe, RouteMapComponent, RouterLink],
 	templateUrl: './trade-route-details.component.html',
 })
 export class TradeRouteDetailsComponent {
@@ -28,7 +30,7 @@ export class TradeRouteDetailsComponent {
 	protected readonly demand = computed(() =>
 		TradeRoutesStore.amount(this.row().route.buyer, this.row().route, false)
 	);
-	protected readonly duration = RoutePlanner.formatDuration;
+	protected readonly duration = Duration.short;
 	protected readonly stepLabels: Record<Exclude<StepType, 'start'>, string> = {
 		gate: $localize`gate`,
 		accelerator: $localize`accelerator`,

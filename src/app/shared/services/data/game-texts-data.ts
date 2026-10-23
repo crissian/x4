@@ -288,4 +288,4 @@ export const GameTexts: Record<string, { name: string }> = {
   '30622,1730': { name: "Lead Fighter" },
 };
 
-GameText.translate(GameTexts);
+await GameText.translate(GameTexts, 'game-texts');

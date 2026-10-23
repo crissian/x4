@@ -60,19 +60,19 @@ describe('RouteMapComponent', () => {
 
 	it('fits the path and refits when it changes', async () => {
 		const { fixture, component } = await setup([ARGON_PRIME]);
-		component.size.set({ width: 1000, height: 1000 });
+		component.surface.size.set({ width: 1000, height: 1000 });
 		component.reset();
-		const one = component.view().w;
+		const one = component.surface.view().w;
 		fixture.componentRef.setInput('path', [ARGON_PRIME, SECOND_CONTACT]);
 		await fixture.whenStable();
-		expect(component.view().w).toBeGreaterThan(one);
+		expect(component.surface.view().w).toBeGreaterThan(one);
 	});
 
 	it('keeps a panned view when a save changes the owner colours', async () => {
 		const { fixture, component, element } = await setup([ARGON_PRIME, SECOND_CONTACT]);
 		const fill = () => element.querySelector('polygon[data-path]')!.getAttribute('fill');
 		const before = fill();
-		component.view.set({ x: 1, y: 2, w: 3 });
+		component.surface.view.set({ x: 1, y: 2, w: 3 });
 		const sectors = [ARGON_PRIME, SECOND_CONTACT].map((id) => ({
 			id,
 			owner: 'xenon',
@@ -86,7 +86,7 @@ describe('RouteMapComponent', () => {
 		await fixture.whenStable();
 		fixture.detectChanges();
 		expect(fill()).not.toBe(before);
-		expect(component.view()).toEqual({ x: 1, y: 2, w: 3 });
+		expect(component.surface.view()).toEqual({ x: 1, y: 2, w: 3 });
 	});
 
 	it('outlines the warn sectors in red', async () => {

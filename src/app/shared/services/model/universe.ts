@@ -14,7 +14,6 @@ export interface Cluster {
   id: string;
   version: number;
   name: string;
-  description?: string;
   x: number;
   z: number;
   environment?: string;
@@ -71,7 +70,6 @@ export interface Sector {
   version: number;
   cluster: string;
   name: string;
-  description?: string;
   /** Offset inside the cluster, in km. */
   x: number;
   z: number;

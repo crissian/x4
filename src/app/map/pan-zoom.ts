@@ -47,6 +47,9 @@ interface Pinch {
  * on the pointer, and zoom buttons on the centre.
  */
 export class PanZoom {
+	/** Label size in screen pixels. */
+	static readonly LABEL_PX = 11;
+
 	/** Screen pixels per map unit. */
 	readonly scale: Signal<number> = computed(() => this.size().width / this.view().w);
 	readonly viewBox: Signal<string> = computed(() => {
@@ -54,6 +57,8 @@ export class PanZoom {
 		const size = this.size();
 		return `${view.x} ${view.y} ${view.w} ${(view.w * size.height) / size.width}`;
 	});
+	/** The label size in map units at the current zoom. */
+	readonly fontSize: Signal<number> = computed(() => PanZoom.LABEL_PX / this.scale());
 
 	private drag: Drag | undefined;
 	private pinch: Pinch | undefined;

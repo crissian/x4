@@ -1,0 +1,48 @@
+.bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 900;
+	height: 3px;
+	overflow: hidden;
+	opacity: 0;
+	animation: appear 0.2s ease-out 0.15s forwards;
+}
+
+.bar span {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 40%;
+	border-radius: 2px;
+	background: linear-gradient(90deg, transparent, #0369a1, #d98c28, transparent);
+	animation: slide 1.2s ease-in-out infinite;
+}
+
+:host-context(.dark) .bar span {
+	background: linear-gradient(90deg, transparent, #38bdf8, #ffbe5a, transparent);
+}
+
+@keyframes appear {
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes slide {
+	from {
+		left: -40%;
+	}
+	to {
+		left: 100%;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bar span {
+		left: 0;
+		width: 100%;
+		animation: none;
+	}
+}

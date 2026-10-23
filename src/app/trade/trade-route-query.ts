@@ -1,4 +1,5 @@
 import type { ParamMap, Params } from '@angular/router';
+import { NumberRange, QueryParams } from '../shared/services/query-params';
 import { TradeShips } from './trade-ships';
 
 /** The filter form of the trade routes page. */
@@ -48,24 +49,31 @@ export class TradeRouteQuery {
 		playerOnly: true,
 		illegal: 'show',
 	};
-	/** the lowest value each number accepts */
-	static readonly MIN = { cargo: 1, speed: 100, charge: 0, jumps: 0 };
+	/** the values each number accepts */
+	static readonly RANGES = {
+		cargo: { min: 1 },
+		speed: { min: 100 },
+		charge: { min: 0 },
+		jumps: { min: 0 },
+	} satisfies Record<string, NumberRange>;
 
 	static read(params: ParamMap, lookups: TradeRouteLookups): TradeRoutesModel {
 		const defaults = TradeRouteQuery.DEFAULTS;
-		const ship = params.get('ship') ?? '';
-		const custom = !lookups.ship(ship);
-		const cargoType = params.get('cargoType') ?? '';
-		const ware = params.get('ware') ?? '';
+		const ship = QueryParams.known(params, 'ship', lookups.ship, defaults.ship);
+		const custom = ship === defaults.ship;
+		const number = (key: keyof typeof TradeRouteQuery.RANGES) =>
+			QueryParams.number(params, key, TradeRouteQuery.RANGES[key], defaults[key]);
 		return {
-			ship: custom ? defaults.ship : ship,
-			cargo: custom ? TradeRouteQuery.number(params, 'cargo') : defaults.cargo,
-			cargoType: custom && TradeRouteQuery.CARGO_TYPES.includes(cargoType) ? cargoType : defaults.cargoType,
-			speed: custom ? TradeRouteQuery.number(params, 'speed') : defaults.speed,
-			charge: custom ? TradeRouteQuery.number(params, 'charge') : defaults.charge,
+			ship,
+			cargo: custom ? number('cargo') : defaults.cargo,
+			cargoType: custom
+				? QueryParams.oneOf(params, 'cargoType', TradeRouteQuery.CARGO_TYPES, defaults.cargoType)
+				: defaults.cargoType,
+			speed: custom ? number('speed') : defaults.speed,
+			charge: custom ? number('charge') : defaults.charge,
 			near: lookups.sectorName(params.get('near') ?? '') ?? '',
-			jumps: TradeRouteQuery.number(params, 'jumps'),
-			ware: lookups.ware(ware) ? ware : '',
+			jumps: number('jumps'),
+			ware: QueryParams.known(params, 'ware', lookups.ware),
 			hideHostile: params.get('hostile') !== '1',
 			playerOnly: params.get('shady') !== '0',
 			illegal: params.get('illegal') === 'hide' ? 'hide' : defaults.illegal,
@@ -77,7 +85,7 @@ export class TradeRouteQuery {
 		const defaults = TradeRouteQuery.DEFAULTS;
 		const custom = model.ship === TradeRouteQuery.CUSTOM;
 		const value = <K extends keyof TradeRoutesModel>(key: K, keep = true) =>
-			keep && model[key] !== defaults[key] ? model[key] : null;
+			keep ? QueryParams.unlessDefault(model[key], defaults[key]) : null;
 		const near = lookups.sectorId(model.near);
 		return {
 			ship: value('ship'),
@@ -96,22 +104,6 @@ export class TradeRouteQuery {
 
 	/** The model with the numbers below their minimum (or not numbers) back at their defaults. */
 	static clean(model: TradeRoutesModel): TradeRoutesModel {
-		const result = { ...model };
-		for (const key of Object.keys(TradeRouteQuery.MIN) as (keyof typeof TradeRouteQuery.MIN)[]) {
-			if (!TradeRouteQuery.valid(model[key], key)) {
-				result[key] = TradeRouteQuery.DEFAULTS[key];
-			}
-		}
-		return result;
-	}
-
-	private static valid(value: number, key: keyof typeof TradeRouteQuery.MIN): boolean {
-		return Number.isFinite(value) && value >= TradeRouteQuery.MIN[key];
-	}
-
-	private static number(params: ParamMap, key: keyof typeof TradeRouteQuery.MIN): number {
-		const raw = params.get(key);
-		const value = raw ? Number(raw) : NaN;
-		return TradeRouteQuery.valid(value, key) ? value : TradeRouteQuery.DEFAULTS[key];
+		return QueryParams.clean(model, TradeRouteQuery.RANGES, TradeRouteQuery.DEFAULTS);
 	}
 }

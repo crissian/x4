@@ -1,14 +1,17 @@
-import { Injectable, InjectionToken, Injector, Signal, WritableSignal, computed, inject } from '@angular/core';
+import { Injectable, InjectionToken, Signal, WritableSignal, computed, inject } from '@angular/core';
 import { form } from '@angular/forms/signals';
 import { LazyValue } from '../../core/lazy-value';
 import { LocalStorage } from '../../core/services/local-storage';
-import type { SaveMap, SaveSector, SaveStation } from '../../savegame/map/save-map-model';
-import { StationNamer } from '../../savegame/map/station-name';
+import { ActiveSave } from '../../savegame/active-save';
+import type { SaveSector, SaveStation } from '../../savegame/map/save-map-model';
+import type { StationNamer } from '../../savegame/map/station-name';
 import type { StationTypeId } from '../../savegame/map/station-type';
 import { SavegameStore } from '../../savegame/savegame-store';
 import { FactionService } from '../../shared/services/faction.service';
-import type { Faction } from '../../shared/services/model/model';
+import type { Faction, Sector } from '../../shared/services/model/model';
 import { GalaxyLayout, SectorShape } from '../galaxy-layout';
+import { StationMarkers } from '../station-marker';
+import { SaveStationNames } from './save-station-names';
 
 /**
  * The sector shapes by sector id (`MapGeometry.shapeById`). Injected rather than set by the geometry so the
@@ -50,12 +53,10 @@ export class MapSaveLayer {
 	private readonly save = inject(SavegameStore);
 	private readonly shapes = inject(MAP_SHAPES);
 	private readonly factions = inject(FactionService);
-	private readonly injector = inject(Injector);
+	private readonly stationNames = inject(SaveStationNames);
 
 	/** undefined for an older save without map data */
-	private readonly saveMap: Signal<SaveMap | undefined> = computed(
-		() => this.save.active()?.data?.['map'] as SaveMap | undefined
-	);
+	private readonly saveMap = inject(ActiveSave).map;
 	/** The game texts, station macros and zones load in their own chunk, only once a save has map data. */
 	private readonly data = new LazyValue(
 		() => !!this.saveMap(),
@@ -101,15 +102,29 @@ export class MapSaveLayer {
 	});
 	readonly discoveredOnlyForm = form(this.discoveredOnly);
 
+	/** The owner of the sector in the active save, else at game start; undefined when nobody owns it. */
+	ownerOf(sector: Sector | undefined): string | undefined {
+		const owner = this.active() ? this.sectors().get(sector?.id ?? '')?.owner : sector?.owner;
+		return owner?.replace(/^ownerless$/, '') || undefined;
+	}
+
+	/** The faction owning the sector in the active save, else at game start. */
+	ownerFaction(sector: Sector | undefined): Faction | undefined {
+		const owner = this.ownerOf(sector);
+		return owner ? this.factions.getEntity(owner) : undefined;
+	}
+
+	/** The colour of the faction owning the sector, or the neutral colour. */
+	ownerColor(sector: Sector | undefined): string {
+		return this.ownerFaction(sector)?.color ?? StationMarkers.NEUTRAL;
+	}
+
 	private async loadData(): Promise<SaveLayerData> {
-		const [{ SiteNamingTables }, { Zones }] = await Promise.all([
-			import('./site-naming-tables'),
+		const [namer, { Zones }] = await Promise.all([
+			this.stationNames.loadNamer(),
 			import('../../shared/services/data/zones-data'),
 		]);
-		return {
-			namer: new StationNamer(this.injector.get(SiteNamingTables)),
-			zones: new Map(Zones.all.map((x) => [x.id, x])),
-		};
+		return { namer, zones: new Map(Zones.all.map((x) => [x.id, x])) };
 	}
 
 	private place(station: SaveStation, data: SaveLayerData): MapSaveStation[] {

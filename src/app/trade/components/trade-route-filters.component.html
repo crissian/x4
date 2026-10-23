@@ -10,35 +10,30 @@
 			}
 		</select>
 	</label>
-	<label class="text-sm">
-		<ng-container i18n>Near sector</ng-container>
-		<input
-			id="trade-near"
-			class="input"
-			list="trade-sectors"
-			placeholder="Anywhere"
-			i18n-placeholder
-			[formField]="form.near"
-		/>
-		<datalist id="trade-sectors">
-			@for (sector of store.sectors(); track sector.id) {
-				<option [value]="sector.name"></option>
-			}
-		</datalist>
-	</label>
+	<app-sector-input
+		class="text-sm"
+		inputId="trade-near"
+		i18n-label
+		label="Near sector"
+		i18n-placeholder
+		placeholder="Anywhere"
+		[sectors]="store.sectors()"
+		[formField]="form.near"
+	/>
 	<label class="text-sm">
 		<ng-container i18n>Max jumps to the seller</ng-container>
 		<input id="trade-jumps" class="input" type="number" [formField]="form.jumps" />
 	</label>
-	<label class="text-sm">
-		<ng-container i18n>Ware</ng-container>
-		<select id="trade-ware" class="input" [formField]="form.ware">
-			<option value="" i18n>All wares</option>
-			@for (ware of store.wares(); track ware.id) {
-				<option [value]="ware.id">{{ ware.name }}</option>
-			}
-		</select>
-	</label>
+	<app-option-select
+		class="text-sm"
+		inputId="trade-ware"
+		i18n-label
+		label="Ware"
+		i18n-allLabel
+		allLabel="All wares"
+		[options]="store.wares()"
+		[formField]="form.ware"
+	/>
 	@if (store.custom()) {
 		<label class="text-sm">
 			<ng-container i18n>Cargo volume (m³)</ng-container>

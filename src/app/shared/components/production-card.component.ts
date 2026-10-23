@@ -1,6 +1,7 @@
 import { Component, input } from '@angular/core';
-import { ProductionData, Production } from '../services/production';
+import { ProductionData } from '../services/production';
 import { ProductionRequirementsComponent } from './production-requirements.component';
+import { Duration } from '../../core/format/duration';
 
 /** Card with a production's requirements and cycle time. */
 @Component({
@@ -10,5 +11,5 @@ import { ProductionRequirementsComponent } from './production-requirements.compo
 })
 export class ProductionCardComponent {
 	readonly production = input.required<ProductionData>();
-	protected readonly formatTime = Production.formatProductionTime;
+	protected readonly formatTime = Duration.long;
 }

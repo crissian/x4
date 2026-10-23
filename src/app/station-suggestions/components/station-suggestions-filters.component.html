@@ -42,46 +42,42 @@
 </div>
 <div class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
 	@if (store.here()) {
-		<label class="text-sm">
-			<ng-container i18n>Sector</ng-container>
-			<input
-				id="suggest-sector"
-				class="input"
-				list="suggest-sectors"
-				placeholder="Pick a sector"
-				i18n-placeholder
-				[formField]="form.sector"
-			/>
-			<datalist id="suggest-sectors">
-				@for (sector of store.sectors(); track sector.id) {
-					<option [value]="sector.name"></option>
-				}
-			</datalist>
-		</label>
+		<app-sector-input
+			class="text-sm"
+			inputId="suggest-sector"
+			i18n-label
+			label="Sector"
+			i18n-placeholder
+			placeholder="Pick a sector"
+			[sectors]="store.sectors()"
+			[formField]="form.sector"
+		/>
 	} @else {
-		<label class="text-sm">
-			<ng-container i18n>Ware</ng-container>
-			<select id="suggest-ware" class="input" [formField]="form.ware">
-				<option value="" i18n>All wares</option>
-				@for (ware of store.wares(); track ware.id) {
-					<option [value]="ware.id">{{ ware.name }}</option>
-				}
-			</select>
-		</label>
+		<app-option-select
+			class="text-sm"
+			inputId="suggest-ware"
+			i18n-label
+			label="Ware"
+			i18n-allLabel
+			allLabel="All wares"
+			[options]="store.wares()"
+			[formField]="form.ware"
+		/>
 	}
 	<label class="text-sm">
 		<ng-container i18n>Sells within jumps</ng-container>
 		<input id="suggest-jumps" class="input" type="number" [formField]="form.jumps" />
 	</label>
-	<label class="text-sm">
-		<ng-container i18n>Ware group</ng-container>
-		<select id="suggest-group" class="input" [formField]="form.group">
-			<option value="" i18n>All groups</option>
-			@for (group of store.groups(); track group.id) {
-				<option [value]="group.id">{{ group.name }}</option>
-			}
-		</select>
-	</label>
+	<app-option-select
+		class="text-sm"
+		inputId="suggest-group"
+		i18n-label
+		label="Ware group"
+		i18n-allLabel
+		allLabel="All groups"
+		[options]="store.groups()"
+		[formField]="form.group"
+	/>
 </div>
 <div class="mt-3 flex flex-wrap gap-x-6 gap-y-2">
 	<label class="flex items-center gap-2">

@@ -1,25 +1,16 @@
-import {
-	Component,
-	ElementRef,
-	Injector,
-	computed,
-	inject,
-	input,
-	model,
-	viewChild,
-	viewChildren,
-} from '@angular/core';
+import { Component, ElementRef, computed, inject, input, model, viewChild, viewChildren } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LazyValue } from '../../core/lazy-value';
+import { SaveStationNames } from '../../map/save/save-station-names';
 import { StationTypeBadgeComponent } from '../../map/station-type-badge.component';
-import type { SaveMap, SaveStation } from '../../savegame/map/save-map-model';
-import { StationNamer } from '../../savegame/map/station-name';
-import { SavegameStore } from '../../savegame/savegame-store';
-import { STATION_TYPES, StationTypeInfo } from '../../shared/services/constants';
+import { ActiveSave } from '../../savegame/active-save';
+import type { SaveStation } from '../../savegame/map/save-map-model';
+import type { StationTypeInfo } from '../../shared/services/constants';
 import { FactionService } from '../../shared/services/faction.service';
+import { StationTypes } from '../../shared/services/station-types';
 import { WareService } from '../../shared/services/ware.service';
-import type { Faction, GodStation } from '../../shared/services/model/model';
+import type { Faction } from '../../shared/services/model/model';
 import { SectorStationDetailsComponent } from './sector-station-details.component';
+import { FactionLabelComponent } from '../../shared/components/faction-label.component';
 
 export interface SectorStationRow {
 	id: string;
@@ -50,7 +41,7 @@ export interface SectorStationGroup {
  */
 @Component({
 	selector: 'app-sector-stations',
-	imports: [RouterLink, SectorStationDetailsComponent, StationTypeBadgeComponent],
+	imports: [FactionLabelComponent, RouterLink, SectorStationDetailsComponent, StationTypeBadgeComponent],
 	templateUrl: './sector-stations.component.html',
 	styleUrl: './sector-stations.component.css',
 })
@@ -59,25 +50,14 @@ export class SectorStationsComponent {
 	/** Code (or game start id) of the selected station; the first station when unset or unknown. */
 	readonly selected = model<string>();
 
-	private readonly save = inject(SavegameStore);
 	private readonly factions = inject(FactionService);
-	private readonly injector = inject(Injector);
+	private readonly stationNames = inject(SaveStationNames);
 	private readonly wares = inject(WareService);
 	private readonly rowButtons = viewChildren<ElementRef<HTMLButtonElement>>('row');
 	private readonly panel = viewChild<ElementRef<HTMLElement>>('panel');
 
-	private readonly saveMap = computed(() => this.save.active()?.data?.['map'] as SaveMap | undefined);
-	private readonly namer = new LazyValue(
-		() => !!this.saveMap(),
-		async () => {
-			const { SiteNamingTables } = await import('../../map/save/site-naming-tables');
-			return new StationNamer(this.injector.get(SiteNamingTables));
-		}
-	);
-	private readonly godStations = new LazyValue(
-		() => !this.saveMap(),
-		async () => (await import('../../shared/services/data/god-stations-data')).GodStations as GodStation[]
-	);
+	private readonly saveMap = inject(ActiveSave).map;
+	private readonly godStations = this.stationNames.godStations(() => !this.saveMap());
 
 	/** The list comes from the active save. */
 	readonly fromSave = computed(() => !!this.saveMap());
@@ -95,7 +75,7 @@ export class SectorStationsComponent {
 	});
 
 	private saveRows(): SectorStationRow[] | null {
-		const namer = this.namer.value();
+		const namer = this.stationNames.namer();
 		if (!namer) {
 			return null;
 		}
@@ -107,7 +87,7 @@ export class SectorStationsComponent {
 				owner: x.owner,
 				...this.product(x),
 				name: namer.name(x),
-				type: SectorStationsComponent.typeInfo(namer.type(x)),
+				type: StationTypes.info(namer.type(x)),
 				player: x.owner === 'player',
 				wreck: x.state === 'wreck',
 				known: x.known,
@@ -142,26 +122,22 @@ export class SectorStationsComponent {
 	}
 
 	private gameStartRows(): SectorStationRow[] | null {
-		const stations = this.godStations.value();
+		const stations = this.godStations();
 		if (!stations) {
 			return null;
 		}
 		const sector = this.sector();
 		return stations
 			.filter((x) => x.sector === sector)
-			.map((x) => {
-				const type = SectorStationsComponent.typeInfo(x.type);
-				const short = this.factions.getEntity(x.owner ?? '')?.shortName;
-				return {
-					id: x.id,
-					owner: x.owner ?? '',
-					name: [short, type.label].filter(Boolean).join(' '),
-					type,
-					player: false,
-					wreck: false,
-					known: true,
-				};
-			});
+			.map((x) => ({
+				id: x.id,
+				owner: x.owner ?? '',
+				name: this.stationNames.gameStart(x.owner, x.type),
+				type: StationTypes.info(x.type),
+				player: false,
+				wreck: false,
+				known: true,
+			}));
 	}
 
 	private group(rows: SectorStationRow[]): SectorStationGroup[] {
@@ -184,9 +160,5 @@ export class SectorStationsComponent {
 		return result.sort(
 			(a, b) => rank(a) - rank(b) || (a.faction?.name ?? a.owner).localeCompare(b.faction?.name ?? b.owner)
 		);
-	}
-
-	private static typeInfo(id: string): StationTypeInfo {
-		return STATION_TYPES.find((x) => x.id === id) ?? STATION_TYPES[STATION_TYPES.length - 1];
 	}
 }

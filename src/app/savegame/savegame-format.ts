@@ -6,14 +6,6 @@ export class SavegameFormat {
 		return (version / 100).toFixed(2);
 	}
 
-	/** In-game seconds as hours and minutes. */
-	static time(seconds: number): string {
-		const total = Math.max(0, Math.floor(seconds / 60));
-		const hours = Math.floor(total / 60);
-		const minutes = total % 60;
-		return $localize`${hours}:hours:h ${minutes}:minutes:m`;
-	}
-
 	/** The DLC name of an extension id; unknown (mod) ids stay as they are. */
 	static extension(id: string): string {
 		SavegameFormat.labels ??= {

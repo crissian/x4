@@ -1,22 +1,28 @@
+import { Descriptions } from '../../shared/services/descriptions';
 import { DecimalPipe } from '@angular/common';
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { EnumLabelPipe } from '../../core/enum-labels';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
 import { RouterLink } from '@angular/router';
 import { ProductionRequirementsComponent } from '../../shared/components/production-requirements.component';
 import { TabItem, TabsComponent } from '../../shared/components/tabs/tabs.component';
 import { ModuleService } from '../../shared/services/module.service';
-import { Production } from '../../shared/services/production';
-import { ShipService } from '../../shared/services/ship.service';
+import { ProducibleDetailPage } from '../../shared/components/entity-detail-page';
+import { PriceRangePipe } from '../../core/format/price-range.pipe';
+import { Ware } from '../../shared/services/model/model';
+import { GameText } from '../../core/game-text';
+import { LazyValue } from '../../core/lazy-value';
 import { WareService } from '../../shared/services/ware.service';
-import { SavegameStore } from '../../savegame/savegame-store';
+import { ActiveSave } from '../../savegame/active-save';
 import { StationCalculatorModel } from '../../station/components/station-calculator.model';
 import { SaveWareTradeComponent } from './save-ware-trade.component';
+import { Duration } from '../../core/format/duration';
+import { FactionLabelComponent } from '../../shared/components/faction-label.component';
 
 type WareTab = 'construction' | 'producedBy' | 'requiredFor' | 'save';
 
 @Component({
-	imports: [
+	imports: [FactionLabelComponent, 
 		DetailPageComponent,
 		DetailComponent,
 		DecimalPipe,
@@ -25,19 +31,18 @@ type WareTab = 'construction' | 'producedBy' | 'requiredFor' | 'save';
 		EnumLabelPipe,
 		SaveWareTradeComponent,
 		TabsComponent,
+		PriceRangePipe,
 	],
 	templateUrl: './ware-detail.component.html',
 })
-export class WareDetailComponent {
-	private readonly wareService = inject(WareService);
+export class WareDetailComponent extends ProducibleDetailPage<Ware> {
+	protected readonly service = inject(WareService);
+	protected readonly description = Descriptions.of('wares', this.id);
 	private readonly moduleService = inject(ModuleService);
-	private readonly shipService = inject(ShipService);
 
-	readonly id = input.required<string>();
-
-	private readonly save = inject(SavegameStore);
+	private readonly activeSave = inject(ActiveSave);
 	/** The active save has map data, so its stations can be listed. */
-	private readonly hasSave = computed(() => !!this.save.active()?.data?.['map']);
+	private readonly hasSave = computed(() => !!this.activeSave.map());
 
 	protected readonly tabs = computed(() => {
 		const tabs: TabItem<WareTab>[] = [
@@ -53,10 +58,6 @@ export class WareDetailComponent {
 		this.selectedTab() === 'save' && !this.hasSave() ? 'construction' : this.selectedTab()
 	);
 
-	protected readonly entity = computed(() => this.wareService.getEntity(this.id()));
-	protected readonly production = computed(() =>
-		Production.toProductionData(this.entity()?.production, this.wareService)
-	);
 	protected readonly waresUsedIn = computed(() => this.wareService.getWaresUsingWare(this.id()));
 	protected readonly producedBy = computed(() =>
 		this.moduleService
@@ -66,8 +67,14 @@ export class WareDetailComponent {
 			)
 	);
 	protected readonly modulesUsedIn = computed(() => this.moduleService.getModulesUsingWare(this.id()));
-	protected readonly shipsUsedIn = computed(() => this.shipService.getEntitiesUsingWare(this.id()));
+	/** Ships built from the ware; the ships are loaded with the tab, undefined until then. */
+	private readonly ships = LazyValue.service(
+		() => this.activeTab() === 'requiredFor',
+		() =>
+			GameText.withTexts(['ships'], () => import('../../shared/services/ship.service')).then((x) => x.ShipService)
+	);
+	protected readonly shipsUsedIn = computed(() => this.ships.value()?.getEntitiesUsingWare(this.id()));
 
-	protected readonly formatTime = Production.formatProductionTime;
+	protected readonly formatTime = Duration.long;
 	protected readonly amountPerCycle = StationCalculatorModel.amountPerCycle;
 }

@@ -1,8 +1,8 @@
 <svg:g
 	appStationMarkers
 	[markers]="stations.stationMarkers()"
-	[scale]="store.scale()"
-	[fontSize]="store.fontSize()"
+	[scale]="store.panZoom.scale()"
+	[fontSize]="store.panZoom.fontSize()"
 	(stationHover)="show($event)"
 />
 
@@ -14,6 +14,6 @@
 	[count]="badge.count"
 	[title]="badge.title"
 	[radius]="badge.radius"
-	[showCount]="badge.radius * store.scale() >= 5"
+	[showCount]="badge.radius * store.panZoom.scale() >= 5"
 />
 }

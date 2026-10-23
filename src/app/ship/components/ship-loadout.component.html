@@ -107,7 +107,7 @@
 								<dd>
 									<strong>{{ price.avg | number: '1.0-0' }}</strong>
 									<div class="text-xs text-fg-muted">
-										{{ price.min | number: '1.0-0' }} - {{ price.max | number: '1.0-0' }}
+										{{ price | priceRange }}
 									</div>
 								</dd>
 							}

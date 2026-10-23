@@ -15,8 +15,8 @@
 		<p class="mb-2 text-sm text-fg-muted" data-caption>
 			@if (reach()) {
 				<ng-container i18n
-					>Colour: what a station built here could sell or buy within
-					{store.jumps(), plural, =1 {1 jump} other {{{ store.jumps() }} jumps}}.</ng-container
+					>Colour: what a station built here could sell or buy
+					{{ store.jumps() | jumps: 'within' }}.</ng-container
 				>
 			} @else {
 				<ng-container i18n>Colour: this sector's own stations.</ng-container>

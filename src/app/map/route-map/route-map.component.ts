@@ -1,14 +1,13 @@
 import { Component, ElementRef, computed, effect, inject, input, untracked, viewChild } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { AppDialog } from '../../shared/components/modal/dialog';
-import { FactionService } from '../../shared/services/faction.service';
 import { MapLink, SectorShape } from '../galaxy-layout';
 import { MapZoomButtonsComponent } from '../map-zoom-buttons.component';
 import { MapGeometry } from '../map-geometry';
+import { MapRects } from '../map-rects';
 import { PanZoom, PanZoomLimits, Rect } from '../pan-zoom';
 import { PanZoomArea } from '../pan-zoom-area';
 import { MAP_SHAPES, MapSaveLayer } from '../save/map-save-layer';
-import { StationMarkers } from '../station-marker';
 import { RouteMapDialogComponent, RouteMapDialogData } from './route-map-dialog.component';
 
 /** A path sector with the colour of its owner. */
@@ -57,19 +56,14 @@ export class RouteMapComponent {
 
 	private readonly geometry = inject(MapGeometry);
 	private readonly layer = inject(MapSaveLayer);
-	private readonly factions = inject(FactionService);
 	private readonly dialog = inject(Dialog);
 	private readonly area = viewChild.required<ElementRef<HTMLElement>>('area');
 
-	protected readonly surface = new PanZoomArea(
+	readonly surface = new PanZoomArea(
 		this.area,
 		() => this.limits(),
 		() => this.reset()
 	);
-	readonly size = this.surface.size;
-	readonly view = this.surface.view;
-	readonly panZoom = this.surface.panZoom;
-	readonly fontSize = this.surface.fontSize;
 
 	private readonly shapes = computed(() =>
 		this.path().flatMap((id) => {
@@ -83,16 +77,18 @@ export class RouteMapComponent {
 		if (!shapes.length) {
 			return undefined;
 		}
-		const box = RouteMapComponent.box(shapes, 1);
-		const near = RouteMapComponent.grow(box, Math.max(...shapes.map((x) => x.r)) * 2);
+		const box = MapRects.box(shapes, 1);
+		const near = MapRects.grow(box, Math.max(...shapes.map((x) => x.r)) * 2);
 		const ids = new Set(shapes.map((x) => x.sector.id));
 		const warn = new Set(this.warnSectors());
-		const context = this.geometry.layout.shapes.filter(
-			(x) => !ids.has(x.sector.id) && RouteMapComponent.inside(x, near)
-		);
+		const context = this.geometry.layout.shapes.filter((x) => !ids.has(x.sector.id) && MapRects.overlaps(x, near));
 		const drawn = new Set([...ids, ...context.map((x) => x.sector.id)]);
 		return {
-			sectors: shapes.map((shape) => ({ shape, color: this.ownerColor(shape), warn: warn.has(shape.sector.id) })),
+			sectors: shapes.map((shape) => ({
+				shape,
+				color: this.layer.ownerColor(shape.sector),
+				warn: warn.has(shape.sector.id),
+			})),
 			points: shapes.map((x) => `${x.x},${x.y}`).join(' '),
 			start: shapes[0],
 			end: shapes[shapes.length - 1],
@@ -110,34 +106,11 @@ export class RouteMapComponent {
 		});
 	}
 
-	/** The bounding box of the hexes, grown by `margin` hex radii. */
-	static box(shapes: readonly SectorShape[], margin = 0): Rect {
-		const left = Math.min(...shapes.map((x) => x.x - x.r * (1 + margin)));
-		const right = Math.max(...shapes.map((x) => x.x + x.r * (1 + margin)));
-		const top = Math.min(...shapes.map((x) => x.y - x.r * (Math.sqrt(3) / 2 + margin)));
-		const bottom = Math.max(...shapes.map((x) => x.y + x.r * (Math.sqrt(3) / 2 + margin)));
-		return { x: left, y: top, w: right - left, h: bottom - top };
-	}
-
-	private static grow(box: Rect, by: number): Rect {
-		return { x: box.x - by, y: box.y - by, w: box.w + by * 2, h: box.h + by * 2 };
-	}
-
-	/** Whether the hex overlaps the box. */
-	private static inside(shape: SectorShape, box: Rect): boolean {
-		return (
-			shape.x + shape.r >= box.x &&
-			shape.x - shape.r <= box.x + box.w &&
-			shape.y + shape.r >= box.y &&
-			shape.y - shape.r <= box.y + box.h
-		);
-	}
-
 	/** Fits the path's hexes plus one hex radius of margin into the view. */
 	reset() {
 		const route = this.route();
 		if (route) {
-			this.view.set(PanZoom.fit(route.box, this.size(), 0.15, RouteMapComponent.BUTTONS_WIDTH));
+			this.surface.view.set(PanZoom.fit(route.box, this.surface.size(), 0.15, RouteMapComponent.BUTTONS_WIDTH));
 		}
 	}
 
@@ -147,16 +120,6 @@ export class RouteMapComponent {
 			data: { path: this.path(), warnSectors: this.warnSectors() } satisfies RouteMapDialogData,
 			size: 'xl',
 		});
-	}
-
-	zoom(factor: number) {
-		this.surface.zoom(factor);
-	}
-
-	/** Colour of the sector owner, in the active save or at game start. */
-	private ownerColor(shape: SectorShape): string {
-		const owner = this.layer.active() ? this.layer.sectors().get(shape.sector.id)?.owner : shape.sector.owner;
-		return this.factions.getEntity(owner ?? '')?.color ?? StationMarkers.NEUTRAL;
 	}
 
 	private limits(): PanZoomLimits {

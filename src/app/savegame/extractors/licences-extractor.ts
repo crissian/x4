@@ -6,7 +6,9 @@ const PLAYER_FACTION = 'player';
 
 /** Reads the licences the player holds from savegame/universe/factions/faction[id=player]/licences. */
 export class LicencesExtractor implements XmlExtractor<SaveLicences> {
-	readonly key = 'licences';
+	/** The key of the extracted data in the save's data. */
+	static readonly KEY = 'licences';
+	readonly key = LicencesExtractor.KEY;
 	private readonly licences: SaveLicences = {};
 	private inPlayer = false;
 	private finished = false;

@@ -7,7 +7,7 @@ import { ToneDotComponent } from '../../shared/components/tone-dot/tone-dot.comp
 import { SupplyDemandDetail, StationOffer } from '../supply-demand-detail';
 import { SupplyDemandDiagnosis } from '../supply-demand-diagnosis';
 import { SupplyDemandStore } from '../supply-demand-store';
-import { CompactNumber } from '../../shared/format/compact-number';
+import { NumberFormats } from '../../core/format/number-formats';
 
 /** An input of the selected ware and its net per hour in the scope. */
 export interface InputSupply {
@@ -27,7 +27,7 @@ export interface InputSupply {
 })
 export class SupplyDemandDetailComponent {
 	protected readonly store = inject(SupplyDemandStore);
-	protected readonly compact = CompactNumber.format;
+	protected readonly compact = (value: number) => NumberFormats.compact(value, { signed: true });
 	protected readonly diagnosis = SupplyDemandDiagnosis;
 	private readonly wares = inject(WareService);
 	private readonly locale = inject(LOCALE_ID);

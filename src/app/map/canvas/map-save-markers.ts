@@ -26,7 +26,7 @@ export class MapSaveMarkers {
 	protected readonly badges = computed(() => {
 		const drawn = this.store.drawnIds();
 		// never larger than a share of the sector on screen
-		const cap = (r: number) => Math.min(this.store.fontSize() * 0.8, r * 0.45);
+		const cap = (r: number) => Math.min(this.store.panZoom.fontSize() * 0.8, r * 0.45);
 		return [...this.save.playerShips()].flatMap(([sector, ships]) => {
 			const shape = this.store.shapeById.get(sector);
 			const radius = shape ? cap(shape.r) : 0;

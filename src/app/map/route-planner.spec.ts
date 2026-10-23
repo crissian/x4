@@ -46,10 +46,4 @@ describe('route planner', () => {
 	it('returns nothing for unreachable sectors', () => {
 		expect(RoutePlanner.travelTimes([a, c], 'a', { speed: 1000, charge: 0 }).route('c')).toBeUndefined();
 	});
-
-	it('formats durations', () => {
-		expect(RoutePlanner.formatDuration(42)).toBe('42s');
-		expect(RoutePlanner.formatDuration(125)).toBe('2m 5s');
-		expect(RoutePlanner.formatDuration(3720)).toBe('1h 2m');
-	});
 });

@@ -12,8 +12,12 @@
 	(pointercancel)="surface.pointerUp($event)"
 >
 	@if (route(); as route) {
-		@let unit = fontSize();
-		<svg class="absolute inset-0 size-full" [attr.viewBox]="panZoom.viewBox()" preserveAspectRatio="xMidYMid meet">
+		@let unit = surface.panZoom.fontSize();
+		<svg
+			class="absolute inset-0 size-full"
+			[attr.viewBox]="surface.panZoom.viewBox()"
+			preserveAspectRatio="xMidYMid meet"
+		>
 			@for (shape of route.context; track shape.sector.id) {
 				<polygon
 					[attr.points]="shape.points"
@@ -121,8 +125,8 @@
 			resetLabel="Show the whole route"
 			i18n-resetLabel
 			[expandable]="!fill()"
-			(zoomIn)="zoom(0.7)"
-			(zoomOut)="zoom(1.4)"
+			(zoomIn)="surface.zoomIn()"
+			(zoomOut)="surface.zoomOut()"
 			(fit)="reset()"
 			(expand)="expand()"
 		/>

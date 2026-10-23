@@ -12,6 +12,7 @@ import { RaceService } from '../../shared/services/race.service';
 import { WareService } from '../../shared/services/ware.service';
 import { StationModuleGroups } from '../station-module-groups';
 import type { SectorStationRow } from './sector-stations.component';
+import { FactionLabelComponent } from '../../shared/components/faction-label.component';
 
 export interface StationOfferRow {
 	ware: string;
@@ -28,7 +29,7 @@ type DetailTab = 'sells' | 'buys' | 'modules';
 /** The panel of the station selected on the sector page: its identity, then its offers, modules and workforce. */
 @Component({
 	selector: 'app-sector-station-details',
-	imports: [DecimalPipe, RouterLink, StationTypeBadgeComponent, TabsComponent],
+	imports: [FactionLabelComponent, DecimalPipe, RouterLink, StationTypeBadgeComponent, TabsComponent],
 	templateUrl: './sector-station-details.component.html',
 })
 export class SectorStationDetailsComponent {

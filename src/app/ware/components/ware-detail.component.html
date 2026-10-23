@@ -6,11 +6,11 @@
 		[title]="entity.name"
 		[id]="entity.id"
 		image="wares"
-		[description]="entity.description"
+		[description]="description()"
 	>
 		<dl class="details mb-4 max-w-2xl grid-cols-[10rem_1fr]">
 			<div i18n-appDetail appDetail="Price">
-				{{ entity.price.min | number }} - {{ entity.price.max | number }}
+				{{ entity.price | priceRange }}
 				<span class="text-success" i18n>(difference: {{ entity.price.max - entity.price.min | number }})</span>
 			</div>
 			<div i18n-appDetail appDetail="Volume">{{ entity.volume }}</div>
@@ -18,7 +18,7 @@
 			<div i18n-appDetail appDetail="Type">{{ entity.group?.name }}</div>
 			<div i18n-appDetail appDetail="Illegal">
 				@for (item of entity.illegal; track item.id; let last = $last) {
-					<a [routerLink]="['/factions', item.id]">{{ item.name }}</a>
+					<app-faction-label [faction]="item" [dot]="false" />
 					@if (!last) {
 						<span> | </span>
 					}
@@ -155,10 +155,12 @@
 						<div class="card">
 							<div class="card-header" i18n>Ships</div>
 							<div class="card-body grid gap-1 lg:grid-cols-2">
-								@for (ship of shipsUsedIn(); track ship.id) {
-									<a [routerLink]="['/ships', ship.id]">{{ ship.name }}</a>
-								} @empty {
-									<span class="text-info" i18n>No usage found.</span>
+								@if (shipsUsedIn(); as ships) {
+									@for (ship of ships; track ship.id) {
+										<a [routerLink]="['/ships', ship.id]">{{ ship.name }}</a>
+									} @empty {
+										<span class="text-info" i18n>No usage found.</span>
+									}
 								}
 							</div>
 						</div>

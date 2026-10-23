@@ -1,6 +1,1 @@
-<div class="card">
-	<div class="card-header" i18n="@@races">Races</div>
-	<div class="card-body">
-		<app-data-grid [data]="entities" [columns]="columns" [clickable]="true" (rowClick)="open($event)" />
-	</div>
-</div>
+<app-list-page i18n-heading="@@races" heading="Races" [data]="entities" [columns]="columns" />

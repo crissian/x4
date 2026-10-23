@@ -3,11 +3,13 @@ import { Component, inject } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { EnumLabelPipe, EnumLabels } from '../../core/enum-labels';
 import { TradeRoutesStore } from '../trade-routes-store';
+import { SectorInputComponent } from '../../shared/components/sector-input.component';
+import { OptionSelectComponent } from '../../shared/components/option-select.component';
 
 /** The ship, location and ware filters of the trade routes page. */
 @Component({
 	selector: 'app-trade-route-filters',
-	imports: [DecimalPipe, EnumLabelPipe, FormField],
+	imports: [OptionSelectComponent, SectorInputComponent, DecimalPipe, EnumLabelPipe, FormField],
 	templateUrl: './trade-route-filters.component.html',
 })
 export class TradeRouteFiltersComponent {

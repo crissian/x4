@@ -9,7 +9,6 @@ export interface Thrust {
 export interface Equipment {
    id: string;
    name: string;
-   description: string;
    race?: Race;
    type?: string;
    equipmentClass?: string;

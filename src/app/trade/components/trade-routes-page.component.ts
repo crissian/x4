@@ -1,22 +1,16 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { RoutePlanner } from '../../map/route-planner';
 import { DataGridComponent, GridColumn, SortState } from '../../shared/components/data-grid/data-grid.component';
 import { TradeRules, type TradeRoute } from '../trade-route-model';
 import { TradeRouteRow, TradeRoutesStore } from '../trade-routes-store';
 import { TradeRouteDetailsComponent } from './trade-route-details.component';
 import { TradeRouteFiltersComponent } from './trade-route-filters.component';
-import { ExperimentalBadgeComponent } from '../../shared/components/experimental-badge.component';
+import { Duration } from '../../core/format/duration';
+import { SavePageComponent } from '../../shared/components/save-page/save-page.component';
 
 /** Ranks the buy-here, sell-there trades of the active save by profit per minute. */
 @Component({
-	imports: [
-		ExperimentalBadgeComponent,
-		DataGridComponent,
-		RouterLink,
-		TradeRouteDetailsComponent,
-		TradeRouteFiltersComponent,
-	],
+	imports: [DataGridComponent, RouterLink, SavePageComponent, TradeRouteDetailsComponent, TradeRouteFiltersComponent],
 	templateUrl: './trade-routes-page.component.html',
 	providers: [TradeRoutesStore],
 })
@@ -135,7 +129,7 @@ export default class TradeRoutesPageComponent {
 			caption,
 			type: 'number',
 			value: (x) => x.route[key],
-			display: (x) => RoutePlanner.formatDuration(x.route[key]),
+			display: (x) => Duration.short(x.route[key]),
 		};
 	}
 }

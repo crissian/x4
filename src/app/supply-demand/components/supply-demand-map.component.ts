@@ -2,10 +2,11 @@ import { Component, computed, inject } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { SectorBalances } from '../../economy/sector-balance';
 import { HeatMapComponent } from '../../map/heat-map/heat-map.component';
-import { JumpTexts } from '../../shared/format/jump-texts';
+import { JumpTexts } from '../../core/format/jump-texts';
 import { WareService } from '../../shared/services/ware.service';
 import { SupplyDemandStore } from '../supply-demand-store';
-import { CompactNumber } from '../../shared/format/compact-number';
+import { NumberFormats } from '../../core/format/number-formats';
+import { JumpsPipe } from '../../core/format/jumps.pipe';
 
 /** How many producers and consumers of the ware a sector has. */
 interface SectorStations {
@@ -23,16 +24,10 @@ interface SectorStations {
  */
 @Component({
 	selector: 'app-supply-demand-map',
-	imports: [HeatMapComponent, FormField],
+	imports: [JumpsPipe, HeatMapComponent, FormField],
 	templateUrl: './supply-demand-map.component.html',
 })
 export class SupplyDemandMapComponent {
-	private static readonly PERCENT = new Intl.NumberFormat(undefined, {
-		style: 'percent',
-		maximumFractionDigits: 0,
-		signDisplay: 'exceptZero',
-	});
-
 	private readonly wares = inject(WareService);
 	protected readonly store = inject(SupplyDemandStore);
 	protected readonly mined = computed(() => !!this.store.selected()?.mined);
@@ -78,9 +73,9 @@ export class SupplyDemandMapComponent {
 		() => new Set([...(this.balances() ?? [])].filter(([, x]) => SectorBalances.idle(x)).map(([id]) => id))
 	);
 	/** The sectors within the jumps of the centre, the area the table sums; empty without a centre. */
-	protected readonly area = computed(() => {
+	protected readonly area = computed<ReadonlySet<string>>(() => {
 		const centre = this.store.centre();
-		return new Set(centre ? this.store.economy()?.graph.within(centre, this.store.jumps()) : []);
+		return (centre && this.store.economy()?.graph.area(centre, this.store.jumps())) || new Set();
 	});
 
 	/** The title of a sector: what the colour says, and whether it is in the scope area. */
@@ -104,7 +99,9 @@ export class SupplyDemandMapComponent {
 		const stations = this.stations().get(id);
 		const consumers = stations?.consumers ?? 0;
 		const producers = stations?.producers ?? 0;
-		const value = CompactNumber.format((this.mined() ? -balance.consumed : balance.net) * this.price());
+		const value = NumberFormats.compact((this.mined() ? -balance.consumed : balance.net) * this.price(), {
+			signed: true,
+		});
 		if (this.mined()) {
 			return $localize`${name}:name:: ${value}:value: Cr/h used · consumers: ${consumers}:count:`;
 		}
@@ -122,8 +119,10 @@ export class SupplyDemandMapComponent {
 		if (!balance || SectorBalances.idle(balance)) {
 			return $localize`${name}:name:: nothing made or used`;
 		}
-		const percent = SupplyDemandMapComponent.PERCENT.format(SectorBalances.ratio(balance));
-		const value = CompactNumber.format((this.mined() ? -balance.consumed : balance.net) * this.price());
+		const percent = NumberFormats.signedPercent(SectorBalances.ratio(balance));
+		const value = NumberFormats.compact((this.mined() ? -balance.consumed : balance.net) * this.price(), {
+			signed: true,
+		});
 		const within = JumpTexts.within(jumps);
 		let title: string;
 		if (this.mined()) {

@@ -1,6 +1,6 @@
 import type { SaveLicences, SaveRelations } from '../../savegame/map/save-map-model';
 import { Loadouts } from '../../shared/services/loadout';
-import type { LicenseRequirement } from '../../shared/services/ship-stats.service';
+import type { LicenseRequirement } from '../../shared/services/faction.service';
 
 /**
  * - ok: the player can buy it now

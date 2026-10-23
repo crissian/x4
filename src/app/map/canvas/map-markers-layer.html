@@ -1,6 +1,6 @@
 @if (store.abandonedModel().show) {
 	@for (marker of store.abandoned(); track $index) {
-		@let size = store.fontSize() * 0.9;
+		@let size = store.panZoom.fontSize() * 0.9;
 		<svg:g class="cursor-pointer" [attr.data-sector]="marker.item.sector">
 			<svg:title i18n>
 				Abandoned {{ marker.ship?.name ?? marker.item.ship
@@ -31,13 +31,13 @@
 		<svg:circle
 			[attr.cx]="marker.x"
 			[attr.cy]="marker.y"
-			[attr.r]="store.fontSize() * 0.6"
+			[attr.r]="store.panZoom.fontSize() * 0.6"
 			[attr.fill]="marker.type.color"
 			stroke="#05080f"
 			stroke-width="1"
 			vector-effect="non-scaling-stroke"
 		/>
-		@let iconSize = store.fontSize() * 0.8;
+		@let iconSize = store.panZoom.fontSize() * 0.8;
 		<svg:svg
 			class="pointer-events-none"
 			[lucideIcon]="icons.of(marker.type)"

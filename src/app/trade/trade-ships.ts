@@ -1,30 +1,26 @@
-import type { Ship, Ware } from '../shared/services/model/model';
-import type { ShipStatsService } from '../shared/services/ship-stats.service';
+import { RoutePlanner } from '../map/route-planner';
+import type { ShipListItem, Ware } from '../shared/services/model/model';
 import { TravelDrives } from '../shared/services/travel-drives';
 import type { TradeShipSpec, TradeWareInfo } from './trade-route-model';
 
 export class TradeShips {
-	static readonly CUSTOM: TradeShipSpec = { capacity: { container: 3000 }, speed: 3000, charge: 5 };
+	static readonly CUSTOM: TradeShipSpec = { capacity: { container: 3000 }, ...RoutePlanner.DEFAULT_OPTIONS };
 
 	/** ships with cargo and a travel drive, by name */
-	static list(ships: readonly Ship[], stats: ShipStatsService): Ship[] {
+	static list<T extends ShipListItem>(ships: readonly T[]): T[] {
 		return ships
-			.filter((x) => (x.cargo?.length ?? 0) > 0 && stats.maxStats(x).travel > 0)
+			.filter((x) => (x.cargo?.length ?? 0) > 0 && TravelDrives.canTravel(x))
 			.sort((a, b) => a.name.localeCompare(b.name));
 	}
 
-	static spec(ship: Ship, stats: ShipStatsService): TradeShipSpec {
+	static spec(ship: ShipListItem): TradeShipSpec {
 		const capacity: Record<string, number> = {};
 		for (const hold of ship.cargo ?? []) {
 			for (const type of hold.types) {
 				capacity[type.id] = (capacity[type.id] ?? 0) + hold.max;
 			}
 		}
-		return {
-			capacity,
-			speed: stats.maxStats(ship).travel,
-			charge: TravelDrives.fastest(stats, ship)?.travel?.charge ?? TradeShips.CUSTOM.charge,
-		};
+		return { capacity, ...TravelDrives.options(ship, TradeShips.CUSTOM) };
 	}
 
 	static custom(volume: number, type: string, speed: number, charge: number): TradeShipSpec {

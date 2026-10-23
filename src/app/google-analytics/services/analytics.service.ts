@@ -40,7 +40,7 @@ export class AnalyticsService {
 		};
 
 		if (page.location) {
-			args['page_location'] = page.path;
+			args['page_location'] = page.location;
 		}
 		if (page.title) {
 			args['page_title'] = page.title;

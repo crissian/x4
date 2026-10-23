@@ -54,11 +54,7 @@
 						<tr>
 							<td>
 								<a [routerLink]="['/sectors', target.sector]">{{ store.sectorName(target.sector) }}</a>
-								<span class="ml-1 text-fg-muted" i18n>{target.jumps, plural,
-									=0 {here}
-									=1 {1 jump}
-									other {{{ target.jumps }} jumps}
-								}</span>
+								<span class="ml-1 text-fg-muted">{{ target.jumps | jumps: 'away' }}</span>
 							</td>
 							<td class="text-right">{{ target.weight | percent }}</td>
 							<td class="text-right" [class]="target.net < 0 ? 'text-danger' : 'text-success'">

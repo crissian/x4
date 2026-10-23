@@ -7,29 +7,30 @@ import { EquipmentService } from '../../shared/services/equipment.service';
 import { Loadouts, Loadout } from '../../shared/services/loadout';
 import { LoadoutMissiles } from '../../shared/services/loadout-missiles';
 import { ShipPerformance } from '../../shared/services/ship-performance';
-import { Equipment } from '../../shared/services/model/model';
+import { Equipment, Ship } from '../../shared/services/model/model';
 import { LOADOUT_PRESETS, LoadoutPreset, ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
 import { WareService } from '../../shared/services/ware.service';
 import { ShipCompareComponent } from './ship-compare.component';
+import { NumberFormats } from '../../core/format/number-formats';
+import { EntityDetailPage } from '../../shared/components/entity-detail-page';
+import { PriceRangePipe } from '../../core/format/price-range.pipe';
 
 @Component({
-	imports: [DecimalPipe, FormField, RouterLink, LucideLink, LucideCheck, LucideGitCompareArrows],
+	imports: [DecimalPipe, PriceRangePipe, FormField, RouterLink, LucideLink, LucideCheck, LucideGitCompareArrows],
 	templateUrl: './ship-loadout.component.html',
 })
-export class ShipLoadoutComponent {
-	private readonly ships = inject(ShipService);
+export class ShipLoadoutComponent extends EntityDetailPage<Ship> {
+	protected readonly service = inject(ShipService);
 	private readonly wares = inject(WareService);
 	private readonly stats = inject(ShipStatsService);
 	private readonly equipment = inject(EquipmentService);
 	private readonly router = inject(Router);
 
-	readonly id = input.required<string>();
 	/** Encoded loadout from the `?l=` query parameter. */
 	readonly l = input<string>();
 
 	protected readonly presets = LOADOUT_PRESETS;
-	protected readonly entity = computed(() => this.ships.getEntity(this.id()));
 	protected readonly groups = computed(() => {
 		const ship = this.entity();
 		return ship ? this.stats.groups(ship) : [];
@@ -125,6 +126,7 @@ export class ShipLoadoutComponent {
 	protected readonly copied = signal(false);
 
 	constructor() {
+		super();
 		// a missile the new launcher does not accept goes back to the launcher's default
 		effect(() => {
 			const slots = this.slots();
@@ -171,8 +173,8 @@ export class ShipLoadoutComponent {
 		if (!data) {
 			return missile.name;
 		}
-		const dps = Math.round(LoadoutMissiles.stats(data).sustainedDps).toLocaleString();
-		const range = (data.range / 1000).toFixed(1);
+		const dps = NumberFormats.whole(LoadoutMissiles.stats(data).sustainedDps);
+		const range = NumberFormats.km(data.range);
 		return data.lock
 			? $localize`${missile.name}:name: - ${dps}:dps: DPS, ${range}:range: km, lock ${data.lock}:lock: s`
 			: $localize`${missile.name}:name: - ${dps}:dps: DPS, ${range}:range: km`;
@@ -186,11 +188,11 @@ export class ShipLoadoutComponent {
 			return $localize`${equipment.name}:name: - ${Math.round(equipment.thruster.strafe)}:strafe: strafe, ${Math.round(equipment.thruster.pitch)}:pitch: pitch`;
 		}
 		if (equipment.recharge) {
-			return $localize`${equipment.name}:name: - ${equipment.recharge.max.toLocaleString()}:shield: shield, ${equipment.recharge.rate.toLocaleString()}:rate:/s`;
+			return $localize`${equipment.name}:name: - ${NumberFormats.format(equipment.recharge.max, {})}:shield: shield, ${NumberFormats.format(equipment.recharge.rate, {})}:rate:/s`;
 		}
 		if (equipment.weapon) {
 			const stats = ShipPerformance.weaponStats(equipment.weapon);
-			return $localize`${equipment.name}:name: - ${Math.round(stats.sustainedDps).toLocaleString()}:dps: DPS, ${(stats.range / 1000).toFixed(1)}:range: km`;
+			return $localize`${equipment.name}:name: - ${NumberFormats.whole(stats.sustainedDps)}:dps: DPS, ${NumberFormats.km(stats.range)}:range: km`;
 		}
 		return equipment.name;
 	}

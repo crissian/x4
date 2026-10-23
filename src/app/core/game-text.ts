@@ -7,7 +7,7 @@ export interface GameLanguage {
 	flag: string;
 }
 
-/** Languages of the game texts (names, descriptions) exported by the extractor to assets/i18n. */
+/** Languages of the game texts (names, descriptions) exported by the extractor to assets/i18n/<language>. */
 export const GAME_LANGUAGES: readonly GameLanguage[] = [
 	{ code: 'en', name: 'English', flag: 'gb' },
 	{ code: 'cs', name: 'Čeština', flag: 'cz' },
@@ -41,7 +41,9 @@ const TEXT_KEYS = new Set([
 
 export class GameText {
 	private static readonly STORAGE_KEY = 'language';
+	/** Texts of the selected language by hash of the English text, from every texts file loaded so far. */
 	private static texts: Record<string, string> | null = null;
+	private static readonly files = new Map<string, Promise<void>>();
 	private static readonly translated = new WeakSet<object>();
 
 	static language(): string {
@@ -66,40 +68,76 @@ export class GameText {
 		return (hash >>> 0).toString(36);
 	}
 
+	/** Replaces the loaded texts, for tests. */
 	static setTexts(value: Record<string, string> | null) {
 		GameText.texts = value;
+		GameText.files.clear();
 	}
 
-	/** Fetches the texts of the selected language. Must finish before the data files load. */
-	static async load(): Promise<void> {
-		const language = GameText.language();
-		if (language === 'en') {
-			return;
-		}
-
-		try {
-			const response = await fetch(new URL(`assets/i18n/${language}.json`, document.baseURI));
-			if (response.ok) {
-				GameText.setTexts(await response.json());
-				document.documentElement.lang = language;
-			}
-		} catch {
-			// keep the English texts
-		}
+	/**
+	 * Starts fetching the texts of data files of the selected language, so the data files of a lazy route
+	 * find them in flight instead of fetching one after another while they evaluate.
+	 */
+	static preload(files: readonly string[]): Promise<void> {
+		return Promise.all(files.map((file) => GameText.loadFile(file))).then(() => undefined);
 	}
 
-	/** The selected language's text of an English game text, e.g. a placeholder description. */
+	/** Loads a lazy route along with the texts of the data files it uses. */
+	static withTexts<T>(files: readonly string[], load: () => Promise<T>): Promise<T> {
+		return Promise.all([GameText.preload(files), load()]).then(([, loaded]) => loaded);
+	}
+
+	/** The selected language's text of an English game text, looked up in the texts loaded so far. */
 	static get(value: string): string {
 		return GameText.texts?.[GameText.hash(value.trim())] ?? value;
 	}
 
 	/**
 	 * Swaps the English game texts of generated data for the selected language, in place, so every
-	 * object referencing the data sees them. Called by each data file when it loads.
+	 * object referencing the data sees them. Awaited by each data file when it loads, with the name of
+	 * its texts file under assets/i18n/<language>.
 	 */
-	static translate(data: object) {
+	static async translate(data: object, file: string): Promise<void> {
+		await GameText.loadFile(file);
 		if (GameText.texts) {
 			GameText.walk(data);
+		}
+	}
+
+	/** Swaps every value of a record of English game texts, e.g. descriptions by id. */
+	static async translateRecord(data: Record<string, string>, file: string): Promise<void> {
+		await GameText.loadFile(file);
+		if (GameText.texts) {
+			for (const [key, value] of Object.entries(data)) {
+				data[key] = GameText.get(value);
+			}
+		}
+	}
+
+	/** Fetches a texts file of the selected language once; a failed fetch keeps the English texts. */
+	private static loadFile(file: string): Promise<void> {
+		const language = GameText.language();
+		if (language === 'en') {
+			return Promise.resolve();
+		}
+
+		let loading = GameText.files.get(file);
+		if (!loading) {
+			loading = GameText.fetchFile(language, file);
+			GameText.files.set(file, loading);
+		}
+		return loading;
+	}
+
+	private static async fetchFile(language: string, file: string) {
+		try {
+			const response = await fetch(new URL(`assets/i18n/${language}/${file}.json`, document.baseURI));
+			if (response.ok) {
+				const texts: Record<string, string> = await response.json();
+				GameText.texts = { ...GameText.texts, ...texts };
+			}
+		} catch {
+			// keep the English texts
 		}
 	}
 

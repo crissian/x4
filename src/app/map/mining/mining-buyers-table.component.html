@@ -31,12 +31,12 @@
 							<span class="text-amber-700 dark:text-amber-300" i18n="mining buyer marker">thin</span>
 						}
 						<div class="text-fg-muted" i18n>
-							{{ row.owner ?? '' }} {{ row.buyerSectorName }}, {{ row.pair.jumps }} jumps
+							{{ row.owner ?? '' }} {{ row.buyerSectorName }}, {{ row.pair.jumps | jumps }}
 						</div>
 					</div>
 				</td>
 				<td class="text-right">{{ row.pair.price | number: '1.0-0' }}</td>
-				<td class="text-right whitespace-nowrap">{{ routes.formatDuration(row.pair.trip.tripTime) }}</td>
+				<td class="text-right whitespace-nowrap">{{ duration(row.pair.trip.tripTime) }}</td>
 				<td class="text-right font-semibold">{{ row.pair.trip.perHour | number: '1.0-0' }}</td>
 			</tr>
 			@if (expanded) {

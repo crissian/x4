@@ -1,17 +1,13 @@
-import { DestroyRef, Injectable, Injector, computed, effect, inject, signal, untracked } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { disabled, form, min } from '@angular/forms/signals';
-import { ActivatedRoute, Router } from '@angular/router';
-import { skip } from 'rxjs';
-import { LazyValue } from '../core/lazy-value';
+import { ActivatedRoute } from '@angular/router';
+import { QueryParamSync } from '../core/router/query-param-sync';
 import type { RouteStep } from '../map/route-planner';
-import type { SaveMap, SaveRelations, SaveStation } from '../savegame/map/save-map-model';
-import { StationNamer } from '../savegame/map/station-name';
-import { SavegameFormat } from '../savegame/savegame-format';
-import { SavegameStore } from '../savegame/savegame-store';
-import { FactionService } from '../shared/services/faction.service';
-import type { Sector } from '../shared/services/model/model';
-import { ShipStatsService } from '../shared/services/ship-stats.service';
-import { ShipService } from '../shared/services/ship.service';
+import { SaveStationNames } from '../map/save/save-station-names';
+import { ActiveSave } from '../savegame/active-save';
+import type { SaveStation } from '../savegame/map/save-map-model';
+import { FilterLookups } from '../shared/services/filter-lookups';
+import { ShipListService } from '../shared/services/ship-list.service';
 import { SectorService } from '../shared/services/universe.service';
 import { WareService } from '../shared/services/ware.service';
 import { TradeRouteFinder } from './trade-route-finder';
@@ -41,44 +37,31 @@ export class TradeRoutesStore {
 	static readonly CARGO_TYPES = TradeRouteQuery.CARGO_TYPES;
 	static readonly CUSTOM = TradeRouteQuery.CUSTOM;
 
-	private readonly savegames = inject(SavegameStore);
-	private readonly router = inject(Router);
+	private readonly activeSave = inject(ActiveSave);
 	private readonly activatedRoute = inject(ActivatedRoute);
 	private readonly sectorService = inject(SectorService);
 	private readonly wareService = inject(WareService);
-	private readonly shipService = inject(ShipService);
-	private readonly shipStats = inject(ShipStatsService);
-	private readonly factions = inject(FactionService);
-	private readonly injector = inject(Injector);
+	private readonly shipService = inject(ShipListService);
+	private readonly stationNames = inject(SaveStationNames);
 	private readonly wareInfos = new Map<string, TradeWareInfo | undefined>();
 
-	readonly save = this.savegames.active;
-	readonly saveMap = computed(() => this.save()?.data?.['map'] as SaveMap | undefined);
-	private readonly relations = computed(() => this.save()?.data?.['relations'] as SaveRelations | undefined);
+	readonly save = this.activeSave.save;
+	readonly saveMap = this.activeSave.map;
+	private readonly relations = this.activeSave.relations;
 	/** The save has map data from before relations were read, so hostile stations can't be told apart. */
 	readonly reloadNeeded = computed(() => !!this.saveMap() && !this.relations());
-	/** The save has no map data and must be loaded again. */
-	readonly saveOutdated = computed(() => {
-		const save = this.save();
-		return !!save && !this.saveMap() && this.savegames.status(save.id) === 'reload-needed';
-	});
-	readonly gameTime = computed(() => SavegameFormat.time(this.save()?.info.gameTime ?? 0));
+	readonly status = this.activeSave.status;
+	readonly gameTime = this.activeSave.gameTime;
 
 	/** The cargo ships with their size and total hold. */
-	readonly ships = TradeShips.list(this.shipService.getEntities(), this.shipStats).map((ship) => ({
+	readonly ships = TradeShips.list(this.shipService.getEntities()).map((ship) => ({
 		id: ship.id,
 		name: ship.name,
 		size: ship.size,
 		capacity: (ship.cargo ?? []).reduce((sum, x) => sum + x.max, 0),
 	}));
 	/** The sectors of the save, by name. */
-	readonly sectors = computed<Sector[]>(() => {
-		const ids = new Set((this.saveMap()?.sectors ?? []).map((x) => x.id));
-		return this.sectorService
-			.getEntities()
-			.filter((x) => ids.has(x.id))
-			.sort((a, b) => a.name.localeCompare(b.name));
-	});
+	readonly sectors = this.activeSave.sectors;
 	/** The wares the save's stations trade, by name. */
 	readonly wares = computed(() => {
 		const ids = new Set((this.saveMap()?.stations ?? []).flatMap((x) => (x.offers ?? []).map((o) => o.ware)));
@@ -89,23 +72,18 @@ export class TradeRoutesStore {
 	});
 
 	private readonly lookups: TradeRouteLookups = {
+		...new FilterLookups(this.sectorService, this.wareService),
 		ship: (id) => this.ships.some((x) => x.id === id),
-		sectorName: (id) => this.sectorService.getEntity(id)?.name,
-		sectorId: (name) => {
-			const key = name.trim().toLowerCase();
-			return key ? this.sectorService.getEntities().find((x) => x.name.toLowerCase() === key)?.id : undefined;
-		},
-		ware: (id) => !!id && !!this.wareService.getEntity(id),
 	};
 
 	readonly model = signal<TradeRoutesModel>(
 		TradeRouteQuery.read(this.activatedRoute.snapshot.queryParamMap, this.lookups)
 	);
 	readonly form = form(this.model, (x) => {
-		min(x.cargo, TradeRouteQuery.MIN.cargo);
-		min(x.speed, TradeRouteQuery.MIN.speed);
-		min(x.charge, TradeRouteQuery.MIN.charge);
-		min(x.jumps, TradeRouteQuery.MIN.jumps);
+		min(x.cargo, TradeRouteQuery.RANGES.cargo.min);
+		min(x.speed, TradeRouteQuery.RANGES.speed.min);
+		min(x.charge, TradeRouteQuery.RANGES.charge.min);
+		min(x.jumps, TradeRouteQuery.RANGES.jumps.min);
 		// the jumps limit applies to a near sector
 		disabled(x.jumps, ({ valueOf }) => !valueOf(x.near).trim());
 	});
@@ -121,7 +99,7 @@ export class TradeRoutesStore {
 			const model = this.filterModel();
 			const ship = model.ship === TradeRouteQuery.CUSTOM ? undefined : this.shipService.getEntity(model.ship);
 			return ship
-				? TradeShips.spec(ship, this.shipStats)
+				? TradeShips.spec(ship)
 				: TradeShips.custom(model.cargo, model.cargoType, model.speed, model.charge);
 		},
 		{ equal: TradeRoutesStore.sameShip }
@@ -177,70 +155,42 @@ export class TradeRoutesStore {
 		);
 	});
 
-	private readonly namer = new LazyValue(
-		() => !!this.saveMap(),
-		async () => {
-			const { SiteNamingTables } = await import('../map/save/site-naming-tables');
-			return new StationNamer(this.injector.get(SiteNamingTables));
-		}
-	);
-	readonly rows = computed<TradeRouteRow[]>(() => {
-		const namer = this.namer.value();
-		return this.result().routes.map((route) => ({
+	readonly rows = computed<TradeRouteRow[]>(() =>
+		this.result().routes.map((route) => ({
 			route,
 			ware: this.wareService.getEntity(route.ware)?.name ?? route.ware,
-			seller: this.stationName(route.seller, namer),
-			buyer: this.stationName(route.buyer, namer),
+			seller: this.stationNames.label(route.seller),
+			buyer: this.stationNames.label(route.buyer),
 			sellerSector: this.sectorName(route.seller.sector),
 			buyerSector: this.sectorName(route.buyer.sector),
-		}));
-	});
+		}))
+	);
 	/** The route named in the URL, else the first one. */
-	readonly selected = computed<TradeRouteRow | undefined>(() => {
-		const rows = this.rows();
-		const key = this.selectedKey();
-		return rows.find((x) => x.route.key === key) ?? rows[0];
-	});
+	readonly selected = computed<TradeRouteRow | undefined>(() =>
+		QueryParamSync.pick(this.rows(), this.selectedKey(), (x) => x.route.key)
+	);
 	/** The selected route's sectors from seller to buyer. */
 	readonly steps = computed<RouteStep[]>(() => {
 		const route = this.selected()?.route;
 		return route ? (this.cache().route(route.seller.sector, route.buyer.sector)?.steps ?? []) : [];
 	});
 
-	/** The URL params last written to, or read from, the URL (none yet, so the first write cleans the URL); used to skip writes that change nothing. */
-	private urlKey = '';
-
 	constructor() {
 		// the filters and the selection are kept in the URL
-		effect(() => {
-			const queryParams = this.params(this.filterModel(), this.selectedKey());
-			const key = JSON.stringify(queryParams);
-			if (key === this.urlKey) {
-				return;
+		QueryParamSync.connect(
+			computed(() => ({ model: this.filterModel(), route: this.selectedKey() })),
+			{
+				read: (params) => ({
+					model: TradeRouteQuery.read(params, this.lookups),
+					route: params.get('route') ?? '',
+				}),
+				write: ({ model, route }) => ({ ...TradeRouteQuery.write(model, this.lookups), route: route || null }),
+			},
+			({ model, route }) => {
+				this.model.set(model);
+				this.selectedKey.set(route);
 			}
-			this.urlKey = key;
-			untracked(
-				() =>
-					void this.router.navigate([], {
-						relativeTo: this.activatedRoute,
-						queryParams,
-						queryParamsHandling: 'merge',
-						replaceUrl: true,
-					})
-			);
-		});
-		// the form follows URL changes it didn't write itself, such as the header link clearing the params
-		const subscription = this.activatedRoute.queryParamMap.pipe(skip(1)).subscribe((params) => {
-			const model = TradeRouteQuery.clean(TradeRouteQuery.read(params, this.lookups));
-			const selected = params.get('route') ?? '';
-			const key = this.paramsKey(model, selected);
-			if (key !== this.urlKey) {
-				this.urlKey = key;
-				this.model.set(TradeRouteQuery.read(params, this.lookups));
-				this.selectedKey.set(selected);
-			}
-		});
-		inject(DestroyRef).onDestroy(() => subscription.unsubscribe());
+		);
 	}
 
 	private static sameShip(a: TradeShipSpec, b: TradeShipSpec): boolean {
@@ -251,14 +201,6 @@ export class TradeRoutesStore {
 			keys.length === Object.keys(b.capacity).length &&
 			keys.every((x) => a.capacity[x] === b.capacity[x])
 		);
-	}
-
-	private params(model: TradeRoutesModel, route: string) {
-		return { ...TradeRouteQuery.write(model, this.lookups), route: route || null };
-	}
-
-	private paramsKey(model: TradeRoutesModel, route: string): string {
-		return JSON.stringify(this.params(model, route));
 	}
 
 	select(row: TradeRouteRow): void {
@@ -282,12 +224,5 @@ export class TradeRoutesStore {
 			this.wareInfos.set(id, ware ? TradeShips.wareInfo(ware) : undefined);
 		}
 		return this.wareInfos.get(id);
-	}
-
-	/** The station name and its owner's short name; the code until the naming tables load. */
-	private stationName(station: SaveStation, namer: StationNamer | undefined): string {
-		const name = namer?.name(station) ?? station.code;
-		const owner = station.owner === 'player' ? undefined : this.factions.getEntity(station.owner)?.shortName;
-		return owner && !name.startsWith(`${owner} `) ? `${name} (${owner})` : name;
 	}
 }

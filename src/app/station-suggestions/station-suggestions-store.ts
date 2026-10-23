@@ -1,20 +1,17 @@
-import { DestroyRef, Injectable, computed, effect, inject, signal, untracked } from '@angular/core';
+import { Injectable, computed, effect, inject, signal, untracked } from '@angular/core';
 import { disabled, form, max, min } from '@angular/forms/signals';
-import { ActivatedRoute, Router } from '@angular/router';
-import { skip } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { QueryParamSync } from '../core/router/query-param-sync';
 import { Economy } from '../economy/economy';
 import { PlacementContext } from '../economy/placement-context';
 import type { PlacementOptions, PlacementResult } from '../economy/placement-model';
 import { PlacementRanking } from '../economy/placement-ranking';
 import { PlacementRecipes } from '../economy/placement-recipes';
 import { WareClasses } from '../economy/ware-classes';
-import type { SaveMap, SaveRelations } from '../savegame/map/save-map-model';
-import { SavegameFormat } from '../savegame/savegame-format';
-import { SavegameStore } from '../savegame/savegame-store';
+import { ActiveSave } from '../savegame/active-save';
 import { FilterLookups } from '../shared/services/filter-lookups';
 import type { WareGroup } from '../shared/services/model/model';
 import { ModuleService } from '../shared/services/module.service';
-import { ShipService } from '../shared/services/ship.service';
 import { SectorService } from '../shared/services/universe.service';
 import { WareService } from '../shared/services/ware.service';
 import {
@@ -30,32 +27,19 @@ import { StationSuggestionRow, StationSuggestionTexts } from './station-suggesti
  */
 @Injectable()
 export class StationSuggestionsStore {
-	private readonly savegames = inject(SavegameStore);
-	private readonly router = inject(Router);
+	private readonly activeSave = inject(ActiveSave);
 	private readonly activatedRoute = inject(ActivatedRoute);
 	private readonly sectorService = inject(SectorService);
 	private readonly wareService = inject(WareService);
 	private readonly moduleService = inject(ModuleService);
-	private readonly shipService = inject(ShipService);
 
-	readonly save = this.savegames.active;
-	readonly saveMap = computed(() => this.save()?.data?.['map'] as SaveMap | undefined);
-	private readonly relations = computed(() => this.save()?.data?.['relations'] as SaveRelations | undefined);
-	/** The save has no map data and must be loaded again. */
-	readonly saveOutdated = computed(() => {
-		const save = this.save();
-		return !!save && !this.saveMap() && this.savegames.status(save.id) === 'reload-needed';
-	});
-	readonly gameTime = computed(() => SavegameFormat.time(this.save()?.info.gameTime ?? 0));
-
+	readonly save = this.activeSave.save;
+	readonly saveMap = this.activeSave.map;
+	private readonly relations = this.activeSave.relations;
+	readonly status = this.activeSave.status;
+	readonly gameTime = this.activeSave.gameTime;
 	/** The sectors of the save, by name. */
-	readonly sectors = computed(() => {
-		const ids = new Set((this.saveMap()?.sectors ?? []).map((x) => x.id));
-		return this.sectorService
-			.getEntities()
-			.filter((x) => ids.has(x.id))
-			.sort((a, b) => a.name.localeCompare(b.name));
-	});
+	readonly sectors = this.activeSave.sectors;
 
 	/** The placement context of the save; the station flows are worked out once per save. */
 	readonly context = computed(() => {
@@ -63,11 +47,7 @@ export class StationSuggestionsStore {
 		if (!map) {
 			return undefined;
 		}
-		const building = WareClasses.buildingMaterials(
-			this.shipService.getEntities(),
-			this.moduleService.getEntities(),
-			this.wareService.getEntities()
-		);
+		const building = WareClasses.GAME_BUILDING;
 		const sectors = this.sectorService.getEntities();
 		const economy = new Economy(map, this.wareService, this.moduleService, sectors, building);
 		const recipes = new PlacementRecipes(this.wareService, this.moduleService);
@@ -88,17 +68,14 @@ export class StationSuggestionsStore {
 		return [...seen.values()].sort((a, b) => this.wareService.compareGroups(a, b));
 	});
 
-	private readonly lookups: StationSuggestionsLookups = {
-		...new FilterLookups(this.sectorService, this.wareService),
-		ware: (id) => !!id && !!this.wareService.getEntity(id),
-	};
+	private readonly lookups: StationSuggestionsLookups = new FilterLookups(this.sectorService, this.wareService);
 
 	readonly model = signal<StationSuggestionsModel>(
 		StationSuggestionsQuery.read(this.activatedRoute.snapshot.queryParamMap, this.lookups)
 	);
 	readonly form = form(this.model, (x) => {
-		min(x.jumps, StationSuggestionsQuery.JUMPS.min);
-		max(x.jumps, StationSuggestionsQuery.JUMPS.max);
+		min(x.jumps, StationSuggestionsQuery.RANGES.jumps.min);
+		max(x.jumps, StationSuggestionsQuery.RANGES.jumps.max);
 		disabled(x.ware, ({ valueOf }) => valueOf(x.mode) !== StationSuggestionsQuery.WHERE);
 		disabled(x.sector, ({ valueOf }) => valueOf(x.mode) !== StationSuggestionsQuery.HERE);
 	});
@@ -164,11 +141,7 @@ export class StationSuggestionsStore {
 		}))
 	);
 	/** The row named in the URL, else the first. */
-	readonly selected = computed(() => {
-		const rows = this.rows();
-		const key = this.pickKey();
-		return rows.find((x) => x.key === key) ?? rows[0];
-	});
+	readonly selected = computed(() => QueryParamSync.pick(this.rows(), this.pickKey(), (x) => x.key));
 
 	/** The closed-loop station of the picked row: its modules sized like the calculator's autofill. */
 	readonly chain = computed(() => {
@@ -185,9 +158,6 @@ export class StationSuggestionsStore {
 		const row = this.selected();
 		return (row && this.context()?.sector(row.sector)?.sunlight) ?? 1;
 	});
-
-	/** The URL params last written to, or read from, the URL. */
-	private urlKey = '';
 
 	constructor() {
 		// once the save is known, a ware no factory is suggested for, or a pick that is not in the table, is dropped
@@ -207,39 +177,24 @@ export class StationSuggestionsStore {
 				untracked(() => this.pickKey.set(''));
 			}
 		});
-		effect(() => {
-			const queryParams = this.params(this.filterModel(), this.pickKey());
-			const key = JSON.stringify(queryParams);
-			if (key === this.urlKey) {
-				return;
-			}
-			this.urlKey = key;
-			untracked(
-				() =>
-					void this.router.navigate([], {
-						relativeTo: this.activatedRoute,
-						queryParams,
-						queryParamsHandling: 'merge',
-						replaceUrl: true,
-					})
-			);
-		});
-		// the form follows URL changes it didn't write itself, such as the header link clearing the params
-		const subscription = this.activatedRoute.queryParamMap.pipe(skip(1)).subscribe((params) => {
-			const model = StationSuggestionsQuery.read(params, this.lookups);
-			const pick = params.get('pick') ?? '';
-			const key = JSON.stringify(this.params(StationSuggestionsQuery.clean(model), pick));
-			if (key !== this.urlKey) {
-				this.urlKey = key;
+		// the filters and the pick are kept in the URL
+		QueryParamSync.connect(
+			computed(() => ({ model: this.filterModel(), pick: this.pickKey() })),
+			{
+				read: (params) => ({
+					model: StationSuggestionsQuery.read(params, this.lookups),
+					pick: params.get('pick') ?? '',
+				}),
+				write: ({ model, pick }) => ({
+					...StationSuggestionsQuery.write(model, this.lookups),
+					pick: pick || null,
+				}),
+			},
+			({ model, pick }) => {
 				this.model.set(model);
 				this.pickKey.set(pick);
 			}
-		});
-		inject(DestroyRef).onDestroy(() => subscription.unsubscribe());
-	}
-
-	private params(model: StationSuggestionsModel, pick: string) {
-		return { ...StationSuggestionsQuery.write(model, this.lookups), pick: pick || null };
+		);
 	}
 
 	select(row: StationSuggestionRow): void {

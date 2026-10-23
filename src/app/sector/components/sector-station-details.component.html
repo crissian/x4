@@ -6,14 +6,13 @@
 <dl class="details mb-3 text-sm">
 	<dt i18n>Owner</dt>
 	<dd>
-		@if (owner(); as faction) {
-			<span class="mr-1 inline-block size-2 rounded-full" [style.background]="faction.color"></span>
-			<a [routerLink]="['/factions', faction.id]">{{ faction.name }}</a>
-		} @else if (row.owner === 'player') {
-			<ng-container i18n>Player</ng-container>
-		} @else {
-			<ng-container i18n>Unclaimed</ng-container>
-		}
+		<app-faction-label [faction]="owner()">
+			@if (row.owner === 'player') {
+				<ng-container i18n>Player</ng-container>
+			} @else {
+				<ng-container i18n>Unclaimed</ng-container>
+			}
+		</app-faction-label>
 	</dd>
 	<dt i18n>Type</dt>
 	<dd>{{ row.type.label }}</dd>

@@ -7,7 +7,9 @@ import { SaveRepresentatives } from '../map/save-map-model';
  * `<entity type="factionrepresentative"/>`. Which factions have one differs per save (a faction can die out or appear).
  */
 export class RepresentativesExtractor implements XmlExtractor<SaveRepresentatives> {
-	readonly key = 'representatives';
+	/** The key of the extracted data in the save's data. */
+	static readonly KEY = 'representatives';
+	readonly key = RepresentativesExtractor.KEY;
 	private readonly factions = new Set<string>();
 	/** path length of the open station component, 0 outside one */
 	private stationDepth = 0;

@@ -1,6 +1,7 @@
 import { Component, ElementRef, computed, inject, input, output, viewChild } from '@angular/core';
 import { SectorShape } from '../galaxy-layout';
 import { MapGeometry } from '../map-geometry';
+import { MapTargets } from '../map-targets';
 import { MapZoomButtonsComponent } from '../map-zoom-buttons.component';
 import { PanZoom, PanZoomLimits } from '../pan-zoom';
 import { PanZoomArea } from '../pan-zoom-area';
@@ -69,14 +70,11 @@ export class HeatMapComponent {
 	private readonly geometry = inject(MapGeometry);
 	private readonly area = viewChild.required<ElementRef<HTMLElement>>('area');
 
-	protected readonly surface = new PanZoomArea(
+	readonly surface = new PanZoomArea(
 		this.area,
 		() => this.limits(),
 		() => this.reset()
 	);
-	readonly size = this.surface.size;
-	readonly view = this.surface.view;
-	readonly panZoom = this.surface.panZoom;
 	private readonly colours = computed(() => HeatPalettes.of(this.palette()));
 	protected readonly swatches = computed(() => this.colours().legend());
 
@@ -120,17 +118,14 @@ export class HeatMapComponent {
 
 	/** Fits the whole galaxy in the view. */
 	reset() {
-		this.view.set(PanZoom.fit(this.geometry.layout.bounds, this.size(), 0.05, HeatMapComponent.BUTTONS_WIDTH));
-	}
-
-	zoom(factor: number) {
-		this.surface.zoom(factor);
+		this.surface.view.set(
+			PanZoom.fit(this.geometry.layout.bounds, this.surface.size(), 0.05, HeatMapComponent.BUTTONS_WIDTH)
+		);
 	}
 
 	/** Ends a drag; a click on a sector with a value, or its marker, picks it. */
 	protected up(event: PointerEvent) {
-		const click = this.panZoom.end(event);
-		const id = click ? (event.target as Element).closest?.('[data-sector]')?.getAttribute('data-sector') : null;
+		const id = this.surface.pointerUp(event) ? MapTargets.sectorId(event) : undefined;
 		if (id) {
 			this.sectorClick.emit(id);
 		}

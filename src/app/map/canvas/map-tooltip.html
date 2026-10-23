@@ -12,11 +12,9 @@
 	<dl class="mt-1.5 grid grid-cols-[5.5rem_1fr] gap-y-0.5">
 		<dt class="text-slate-400" i18n>Owner</dt>
 		<dd>
-			@if (faction(); as faction) {
-			<span class="mr-1 inline-block size-2 rounded-full" [style.background]="faction.color"></span>{{
-			faction.name }} } @else {
-			<ng-container i18n>Unclaimed</ng-container>
-			}
+			<app-faction-label [faction]="faction()" [link]="false"
+				><ng-container i18n>Unclaimed</ng-container></app-faction-label
+			>
 		</dd>
 		<dt class="text-slate-400" i18n>Sunlight</dt>
 		<dd>{{ sector.sunlight != null ? (sector.sunlight | percent) : '-' }}</dd>

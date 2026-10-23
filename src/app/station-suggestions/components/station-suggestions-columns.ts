@@ -2,22 +2,15 @@ import { PlacementScorer } from '../../economy/placement-scorer';
 import type { GridColumn, GridDot } from '../../shared/components/data-grid/data-grid.component';
 import type { StationSuggestionRow } from '../station-suggestions-row';
 import { StationSuggestionTexts } from '../station-suggestions-row';
+import { NumberFormats } from '../../core/format/number-formats';
 
 /**
  * The columns of the station suggestions table: ware, sector, Cr/h (the ranking) and room shown, the rest in the
  * column chooser. The inputs (buying) or resources (closed loop) and the security are shown, not ranked by.
  */
 export class StationSuggestionsColumns {
-	private static readonly WHOLE: Intl.NumberFormatOptions = { maximumFractionDigits: 0 };
-	private static readonly PERCENT = new Intl.NumberFormat(undefined, { style: 'percent', maximumFractionDigits: 0 });
-	private static readonly FACTOR = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 });
-	private static readonly PER_HOUR = new Intl.NumberFormat(undefined, {
-		maximumFractionDigits: 0,
-		signDisplay: 'exceptZero',
-	});
-
 	static all(ware: (id: string) => string, closed: boolean): GridColumn<StationSuggestionRow>[] {
-		const { WHOLE } = StationSuggestionsColumns;
+		const { WHOLE } = NumberFormats;
 		return [
 			// TODO(hideable): merge item; the ware and the sector are never hidden (`hideable: false`, set below)
 			{
@@ -58,7 +51,7 @@ export class StationSuggestionsColumns {
 				caption: $localize`Security`,
 				type: 'number',
 				value: (x) => x.security,
-				display: (x) => (x.security === undefined ? '' : StationSuggestionsColumns.PERCENT.format(x.security)),
+				display: (x) => (x.security === undefined ? '' : NumberFormats.percent(x.security)),
 				hidden: true,
 			},
 			{ key: 'contributors', caption: $localize`Top demand (jumps)`, hidden: true },
@@ -77,7 +70,7 @@ export class StationSuggestionsColumns {
 	}
 
 	private static factor(row: StationSuggestionRow): string {
-		const value = StationSuggestionsColumns.FACTOR.format(PlacementScorer.factor(row.coverage));
+		const value = NumberFormats.format(PlacementScorer.factor(row.coverage), { maximumFractionDigits: 2 });
 		return $localize`Factor ×${value}:factor: (0.5 + 0.5 × coverage), not part of the ranking`;
 	}
 
@@ -95,8 +88,7 @@ export class StationSuggestionsColumns {
 							StationSuggestionTexts.inputsTitle(
 								x.inputs,
 								ware,
-								(value) =>
-									$localize`${StationSuggestionsColumns.PER_HOUR.format(value)}:value: per hour`
+								(value) => $localize`${NumberFormats.signedWhole(value)}:value: per hour`
 							),
 						].join('\n')
 					: undefined,

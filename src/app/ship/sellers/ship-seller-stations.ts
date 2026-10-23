@@ -1,6 +1,6 @@
 import type { SaveMap, SaveStation } from '../../savegame/map/save-map-model';
 import { Size } from '../../shared/services/data/size-data';
-import type { GodStation, Ship } from '../../shared/services/model/model';
+import type { GodStation, ShipListItem } from '../../shared/services/model/model';
 import { ShipBuildClasses } from './ship-build-classes';
 
 /** A station that builds and sells a ship. */
@@ -20,7 +20,7 @@ export interface SellerStation {
  * Player stations, wrecks and stations under construction never sell.
  */
 export class ShipSellerStations {
-	static fromGameStart(ship: Ship, stations: readonly GodStation[]): SellerStation[] {
+	static fromGameStart(ship: ShipListItem, stations: readonly GodStation[]): SellerStation[] {
 		const owners = ShipSellerStations.owners(ship);
 		return stations
 			.filter((x) => (x.type === 'shipyard' || x.type === 'wharf') && owners.has(x.owner ?? ''))
@@ -34,7 +34,7 @@ export class ShipSellerStations {
 			}));
 	}
 
-	static fromSave(ship: Ship, map: SaveMap): SellerStation[] {
+	static fromSave(ship: ShipListItem, map: SaveMap): SellerStation[] {
 		const owners = ShipSellerStations.owners(ship);
 		const result: SellerStation[] = [];
 		for (const station of map.stations) {
@@ -58,7 +58,7 @@ export class ShipSellerStations {
 		return result;
 	}
 
-	private static owners(ship: Ship): Set<string> {
+	private static owners(ship: ShipListItem): Set<string> {
 		const ids = new Set((ship.owners ?? []).map((x) => x.id));
 		ids.delete('player');
 		return ids;

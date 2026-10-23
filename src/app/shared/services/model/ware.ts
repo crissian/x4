@@ -12,7 +12,6 @@ export interface WareGroup {
 export interface Ware {
   id: string;
   name: string;
-  description: string;
   factoryName: string;
   icon: string;
   volume: number;

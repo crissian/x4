@@ -1,0 +1,12 @@
+@if (items().length) {
+	<div class="mt-4">
+		@if (heading(); as heading) {
+			<h6>{{ heading }}</h6>
+		}
+		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+			@for (item of items(); track $index) {
+				<app-production-card [production]="item" />
+			}
+		</div>
+	</div>
+}

@@ -1,19 +1,16 @@
-import { DestroyRef, Injectable, Injector, computed, effect, inject, signal, untracked } from '@angular/core';
+import { Injectable, computed, effect, inject, signal, untracked } from '@angular/core';
 import { disabled, form, min } from '@angular/forms/signals';
-import { ActivatedRoute, Router } from '@angular/router';
-import { skip } from 'rxjs';
-import { LazyValue } from '../core/lazy-value';
+import { ActivatedRoute } from '@angular/router';
+import { QueryParamSync } from '../core/router/query-param-sync';
 import { Economy } from '../economy/economy';
 import type { EconomyScope } from '../economy/economy-model';
 import { WareClasses } from '../economy/ware-classes';
-import type { SaveMap, SaveStation } from '../savegame/map/save-map-model';
-import { StationNamer } from '../savegame/map/station-name';
-import { SavegameFormat } from '../savegame/savegame-format';
-import { SavegameStore } from '../savegame/savegame-store';
+import { SaveStationNames } from '../map/save/save-station-names';
+import { ActiveSave } from '../savegame/active-save';
+import type { SaveStation } from '../savegame/map/save-map-model';
 import { FactionService } from '../shared/services/faction.service';
 import { FilterLookups } from '../shared/services/filter-lookups';
 import { ModuleService } from '../shared/services/module.service';
-import { ShipService } from '../shared/services/ship.service';
 import { SectorService } from '../shared/services/universe.service';
 import type { WareGroup } from '../shared/services/model/model';
 import { WareService } from '../shared/services/ware.service';
@@ -28,33 +25,20 @@ import { SupplyDemandLookups, SupplyDemandModel, SupplyDemandQuery } from './sup
 export class SupplyDemandStore {
 	static readonly DEFAULTS = SupplyDemandQuery.DEFAULTS;
 
-	private readonly savegames = inject(SavegameStore);
-	private readonly router = inject(Router);
+	private readonly activeSave = inject(ActiveSave);
 	private readonly activatedRoute = inject(ActivatedRoute);
 	private readonly sectorService = inject(SectorService);
 	private readonly wareService = inject(WareService);
 	private readonly moduleService = inject(ModuleService);
-	private readonly shipService = inject(ShipService);
 	private readonly factionService = inject(FactionService);
-	private readonly injector = inject(Injector);
+	private readonly stationNames = inject(SaveStationNames);
 
-	readonly save = this.savegames.active;
-	readonly saveMap = computed(() => this.save()?.data?.['map'] as SaveMap | undefined);
-	/** The save has no map data and must be loaded again. */
-	readonly saveOutdated = computed(() => {
-		const save = this.save();
-		return !!save && !this.saveMap() && this.savegames.status(save.id) === 'reload-needed';
-	});
-	readonly gameTime = computed(() => SavegameFormat.time(this.save()?.info.gameTime ?? 0));
-
+	readonly save = this.activeSave.save;
+	readonly saveMap = this.activeSave.map;
+	readonly status = this.activeSave.status;
+	readonly gameTime = this.activeSave.gameTime;
 	/** The sectors of the save, by name. */
-	readonly sectors = computed(() => {
-		const ids = new Set((this.saveMap()?.sectors ?? []).map((x) => x.id));
-		return this.sectorService
-			.getEntities()
-			.filter((x) => ids.has(x.id))
-			.sort((a, b) => a.name.localeCompare(b.name));
-	});
+	readonly sectors = this.activeSave.sectors;
 	/** The factions that own stations in the save, by name. */
 	readonly factions = computed(() => {
 		const owners = new Set((this.saveMap()?.stations ?? []).map((x) => x.owner));
@@ -63,14 +47,6 @@ export class SupplyDemandStore {
 			.map((id) => ({ id, name: this.factionService.getEntity(id)?.name ?? id }))
 			.sort((a, b) => a.name.localeCompare(b.name));
 	});
-
-	private readonly namer = new LazyValue(
-		() => !!this.saveMap(),
-		async () => {
-			const { SiteNamingTables } = await import('../map/save/site-naming-tables');
-			return new StationNamer(this.injector.get(SiteNamingTables));
-		}
-	);
 
 	/** The economy of the save; its station flows are worked out once per save. */
 	readonly economy = computed(() => {
@@ -81,11 +57,7 @@ export class SupplyDemandStore {
 					this.wareService,
 					this.moduleService,
 					this.sectorService.getEntities(),
-					WareClasses.buildingMaterials(
-						this.shipService.getEntities(),
-						this.moduleService.getEntities(),
-						this.wareService.getEntities()
-					)
+					WareClasses.GAME_BUILDING
 				)
 			: undefined;
 	});
@@ -110,7 +82,7 @@ export class SupplyDemandStore {
 		SupplyDemandQuery.read(this.activatedRoute.snapshot.queryParamMap, this.lookups)
 	);
 	readonly form = form(this.model, (x) => {
-		min(x.jumps, SupplyDemandQuery.MIN.jumps);
+		min(x.jumps, SupplyDemandQuery.RANGES.jumps.min);
 		disabled(x.faction, ({ valueOf }) => valueOf(x.scope) !== 'faction');
 		disabled(x.sector, ({ valueOf }) => valueOf(x.scope) !== 'sector');
 		// the jumps are the area around the sector and the reach of the map
@@ -166,16 +138,11 @@ export class SupplyDemandStore {
 			.sort((a, b) => a.value - b.value || a.name.localeCompare(b.name));
 	});
 	/** The ware named in the URL, else the first row. */
-	readonly selected = computed<SupplyDemandRow | undefined>(() => {
-		const rows = this.rows();
-		const key = this.selectedKey();
-		return rows.find((x) => x.ware === key) ?? rows[0];
-	});
+	readonly selected = computed<SupplyDemandRow | undefined>(() =>
+		QueryParamSync.pick(this.rows(), this.selectedKey(), (x) => x.ware)
+	);
 	/** The id of the selected ware, for the map and the detail panel. */
 	readonly selectedWare = computed(() => this.selected()?.ware);
-
-	/** The URL params last written to, or read from, the URL (none yet, so the first write cleans the URL). */
-	private urlKey = '';
 
 	constructor() {
 		// a faction from the URL that owns no station in the save can't be picked in the form: drop it
@@ -186,35 +153,20 @@ export class SupplyDemandStore {
 			}
 		});
 		// the filters and the selection are kept in the URL
-		effect(() => {
-			const queryParams = this.params(this.filterModel(), this.selectedKey());
-			const key = JSON.stringify(queryParams);
-			if (key === this.urlKey) {
-				return;
+		QueryParamSync.connect(
+			computed(() => ({ model: this.filterModel(), ware: this.selectedKey() })),
+			{
+				read: (params) => ({
+					model: SupplyDemandQuery.read(params, this.lookups),
+					ware: this.wareParam(params.get('ware')),
+				}),
+				write: ({ model, ware }) => ({ ...SupplyDemandQuery.write(model, this.lookups), ware: ware || null }),
+			},
+			({ model, ware }) => {
+				this.model.set(model);
+				this.selectedKey.set(ware);
 			}
-			this.urlKey = key;
-			untracked(
-				() =>
-					void this.router.navigate([], {
-						relativeTo: this.activatedRoute,
-						queryParams,
-						queryParamsHandling: 'merge',
-						replaceUrl: true,
-					})
-			);
-		});
-		// the form follows URL changes it didn't write itself, such as the header link clearing the params
-		const subscription = this.activatedRoute.queryParamMap.pipe(skip(1)).subscribe((params) => {
-			const model = SupplyDemandQuery.clean(SupplyDemandQuery.read(params, this.lookups));
-			const selected = this.wareParam(params.get('ware'));
-			const key = this.paramsKey(model, selected);
-			if (key !== this.urlKey) {
-				this.urlKey = key;
-				this.model.set(SupplyDemandQuery.read(params, this.lookups));
-				this.selectedKey.set(selected);
-			}
-		});
-		inject(DestroyRef).onDestroy(() => subscription.unsubscribe());
+		);
 	}
 
 	/** The ware id from the URL, empty when unknown. */
@@ -231,14 +183,6 @@ export class SupplyDemandStore {
 		);
 	}
 
-	private params(model: SupplyDemandModel, ware: string) {
-		return { ...SupplyDemandQuery.write(model, this.lookups), ware: ware || null };
-	}
-
-	private paramsKey(model: SupplyDemandModel, ware: string): string {
-		return JSON.stringify(this.params(model, ware));
-	}
-
 	select(row: SupplyDemandRow): void {
 		this.selectedKey.set(row.ware);
 	}
@@ -253,9 +197,7 @@ export class SupplyDemandStore {
 
 	/** The station name and its owner's short name; the code until the naming tables load. */
 	stationName(station: SaveStation): string {
-		const name = this.namer.value()?.name(station) ?? station.code;
-		const owner = station.owner === 'player' ? undefined : this.factionService.getEntity(station.owner)?.shortName;
-		return owner && !name.startsWith(`${owner} `) ? `${name} (${owner})` : name;
+		return this.stationNames.label(station);
 	}
 
 	sectorName(id: string): string {

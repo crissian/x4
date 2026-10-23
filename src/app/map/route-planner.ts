@@ -1,4 +1,5 @@
 import { Sector } from '../shared/services/model/model';
+import { SectorLinks } from './sector-links';
 
 /**
  * Travel times between sectors. Every sector holds points (its center, gates and superhighway
@@ -53,6 +54,11 @@ export interface TravelTimes {
 }
 
 export class RoutePlanner {
+	/** The travel drive speed (m/s) and charge (s) assumed without a picked ship. */
+	static readonly DEFAULT_OPTIONS: Readonly<RouteOptions> = { speed: 3000, charge: 5 };
+	/** The lowest travel speed (m/s) a route is timed with. */
+	static readonly MIN_SPEED = 100;
+
 	/** Shortest travel times from the center of `from` to every reachable sector. */
 	static travelTimes(sectors: readonly Sector[], from: string, options: RouteOptions): TravelTimes {
 		const nodes: Node[] = [];
@@ -68,14 +74,9 @@ export class RoutePlanner {
 				return nodes.length - 1;
 			};
 			center.set(sector.id, add(0, 0));
-			for (const gate of sector.gates ?? []) {
-				if (ids.has(gate.sector)) {
-					gateNode.set(`${sector.id}>${gate.sector}:${gate.type}`, add(gate.x ?? 0, gate.z ?? 0));
-				}
-			}
-			for (const link of sector.highwayLinks ?? []) {
-				if (ids.has(link.sector)) {
-					gateNode.set(`${sector.id}>${link.sector}:highway`, add(link.x, link.z));
+			for (const exit of SectorLinks.exits(sector)) {
+				if (ids.has(exit.to)) {
+					gateNode.set(SectorLinks.key(exit.from, exit.to, exit.type), add(exit.x, exit.z));
 				}
 			}
 			// flights inside the sector
@@ -91,11 +92,10 @@ export class RoutePlanner {
 		}
 
 		// transitions between sectors: a link and the matching link on the other side
-		for (const [key, node] of gateNode) {
-			const [a, rest] = key.split('>');
-			const [b, type] = rest.split(':') as [string, StepType];
-			const target = gateNode.get(`${b}>${a}:${type}`);
-			if (target != null) {
+		for (const { from: a, to: b, type } of SectorLinks.twoWay(sectors)) {
+			const node = gateNode.get(SectorLinks.key(a, b, type));
+			const target = gateNode.get(SectorLinks.key(b, a, type));
+			if (node != null && target != null) {
 				nodes[node].edges.push({ to: target, time: type === 'highway' ? HIGHWAY_TIME : GATE_TIME, type, distance: 0 });
 			}
 		}
@@ -161,13 +161,5 @@ export class RoutePlanner {
 				return { steps, time: dist[end], jumps: steps.length - 1, distance };
 			},
 		};
-	}
-
-	static formatDuration(seconds: number): string {
-		const total = Math.round(seconds);
-		const h = Math.floor(total / 3600);
-		const m = Math.floor((total % 3600) / 60);
-		const s = total % 60;
-		return h ? `${h}h ${m}m` : m ? `${m}m ${s}s` : `${s}s`;
 	}
 }

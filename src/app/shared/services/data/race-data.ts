@@ -71,4 +71,4 @@ export const Races = {
   ]
 };
 
-GameText.translate(Races);
+await GameText.translate(Races, 'race');

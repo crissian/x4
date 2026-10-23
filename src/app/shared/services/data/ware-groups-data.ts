@@ -104,4 +104,4 @@ export const WareGroups = {
   ]
 };
 
-GameText.translate(WareGroups);
+await GameText.translate(WareGroups, 'ware-groups');

@@ -1,0 +1,29 @@
+<div class="card">
+	<div class="card-header flex items-center gap-2">
+		{{ heading() }}
+		@if (experimental()) {
+			<app-experimental-badge />
+		}
+	</div>
+	<div class="card-body">
+		@switch (status()) {
+			@case ('ready') {
+				<ng-container [appTemplateSlot]="content()" />
+			}
+			@case ('reload-needed') {
+				<p>
+					<a routerLink="/saves">{{ reloadText() }}</a>
+				</p>
+			}
+			@case ('loading') {
+				<p class="text-fg-muted" role="status" i18n>Loading save…</p>
+			}
+			@default {
+				<ng-content select="[intro]" />
+				<p class="mt-2">
+					<a routerLink="/saves" i18n>Load a savegame</a>
+				</p>
+			}
+		}
+	</div>
+</div>

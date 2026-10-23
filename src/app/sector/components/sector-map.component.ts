@@ -1,21 +1,20 @@
 import { Component, ElementRef, computed, effect, inject, input, signal, untracked, viewChild } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { RouterLink } from '@angular/router';
-import { LazyValue } from '../../core/lazy-value';
 import { StationMarkersComponent } from '../../map/canvas/station-markers';
 import { StationTooltipComponent } from '../../map/canvas/station-tooltip';
 import { GalaxyLayout } from '../../map/galaxy-layout';
 import { MapZoomButtonsComponent } from '../../map/map-zoom-buttons.component';
 import { MapGeometry } from '../../map/map-geometry';
+import { MapRects } from '../../map/map-rects';
 import { PanZoom, PanZoomLimits, Rect } from '../../map/pan-zoom';
 import { PanZoomArea } from '../../map/pan-zoom-area';
 import { MAP_SHAPES, MapSaveLayer } from '../../map/save/map-save-layer';
+import { SaveStationNames } from '../../map/save/save-station-names';
 import { StationHover, StationMarker, StationMarkers } from '../../map/station-marker';
-import type { SaveMap } from '../../savegame/map/save-map-model';
-import { SavegameStore } from '../../savegame/savegame-store';
+import { ActiveSave } from '../../savegame/active-save';
 import { AppDialog } from '../../shared/components/modal/dialog';
 import { FactionService } from '../../shared/services/faction.service';
-import type { GodStation } from '../../shared/services/model/model';
 import { SectorService } from '../../shared/services/universe.service';
 import { SectorMapDialogComponent } from './sector-map-dialog.component';
 
@@ -41,30 +40,23 @@ export class SectorMapComponent {
 
 	private readonly geometry = inject(MapGeometry);
 	private readonly layer = inject(MapSaveLayer);
-	private readonly savegames = inject(SavegameStore);
+	private readonly activeSave = inject(ActiveSave);
 	private readonly sectors = inject(SectorService);
 	private readonly factions = inject(FactionService);
 	private readonly dialog = inject(Dialog);
 	private readonly area = viewChild.required<ElementRef<HTMLElement>>('area');
 
-	protected readonly surface = new PanZoomArea(
+	readonly surface = new PanZoomArea(
 		this.area,
 		() => this.limits(),
 		() => this.reset()
 	);
-	readonly size = this.surface.size;
-	readonly view = this.surface.view;
-	readonly panZoom = this.surface.panZoom;
-	readonly fontSize = this.surface.fontSize;
 	readonly hovered = signal<StationHover | undefined>(undefined);
 
 	readonly shape = computed(() => this.geometry.shapeById.get(this.sector()));
 	/** Same source as the stations card: the active save when it has map data. */
-	readonly fromSave = computed(() => !!(this.savegames.active()?.data?.['map'] as SaveMap | undefined));
-	private readonly godStations = new LazyValue(
-		() => !this.fromSave(),
-		async () => (await import('../../shared/services/data/god-stations-data')).GodStations as GodStation[]
-	);
+	readonly fromSave = computed(() => !!this.activeSave.map());
+	private readonly godStations = inject(SaveStationNames).godStations(() => !this.fromSave());
 
 	readonly markers = computed<StationMarker[]>(() => {
 		const shape = this.shape();
@@ -78,7 +70,7 @@ export class SectorMapComponent {
 				.map((x) => StationMarkers.fromSave(x));
 		}
 		// the index over all stations places those without a fixed spot like the universe map does
-		return (this.godStations.value() ?? []).flatMap((x, i) =>
+		return (this.godStations() ?? []).flatMap((x, i) =>
 			x.sector === shape.sector.id
 				? [StationMarkers.fromGameStart(x, i, shape, this.factions.getEntity(x.owner ?? ''))]
 				: []
@@ -100,11 +92,7 @@ export class SectorMapComponent {
 	});
 
 	/** Colour of the sector owner, in the active save or at game start. */
-	readonly ownerColor = computed(() => {
-		const sector = this.shape()?.sector;
-		const owner = this.layer.active() ? this.layer.sectors().get(sector?.id ?? '')?.owner : sector?.owner;
-		return this.factions.getEntity(owner ?? '')?.color ?? StationMarkers.NEUTRAL;
-	});
+	readonly ownerColor = computed(() => this.layer.ownerColor(this.shape()?.sector));
 
 	constructor() {
 		// a gate link keeps the page and changes the sector
@@ -121,17 +109,13 @@ export class SectorMapComponent {
 	reset() {
 		const box = this.hexBox();
 		if (box) {
-			this.view.set(PanZoom.fit(box, this.size(), 0.04));
+			this.surface.view.set(PanZoom.fit(box, this.surface.size(), 0.04));
 		}
 	}
 
 	/** Opens the map enlarged in a dialog. */
 	expand() {
 		AppDialog.open(this.dialog, SectorMapDialogComponent, { data: this.sector(), size: 'xl' });
-	}
-
-	zoom(factor: number) {
-		this.surface.zoom(factor);
 	}
 
 	protected onPointerMove(event: PointerEvent) {
@@ -143,11 +127,7 @@ export class SectorMapComponent {
 	/** The bounding box of the hex: the view centre stays inside it, and it limits zooming out. */
 	private hexBox(): Rect | undefined {
 		const shape = this.shape();
-		if (!shape) {
-			return undefined;
-		}
-		const h = shape.r * Math.sqrt(3);
-		return { x: shape.x - shape.r, y: shape.y - h / 2, w: shape.r * 2, h };
+		return shape ? MapRects.box([shape]) : undefined;
 	}
 
 	private limits(): PanZoomLimits {

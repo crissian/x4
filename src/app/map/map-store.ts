@@ -4,9 +4,8 @@ import { LocalStorage } from '../core/services/local-storage';
 import { GAME_VERSIONS } from '../shared/services/constants';
 import { AbandonedShips } from '../shared/services/data/abandoned-ships-data';
 import { FactionService } from '../shared/services/faction.service';
-import { AbandonedShip, Faction, Sector, Ship } from '../shared/services/model/model';
-import { ShipStatsService } from '../shared/services/ship-stats.service';
-import { ShipService } from '../shared/services/ship.service';
+import { AbandonedShip, Faction, Sector, ShipListItem } from '../shared/services/model/model';
+import { ShipListService } from '../shared/services/ship-list.service';
 import { TravelDrives } from '../shared/services/travel-drives';
 import { SectorService } from '../shared/services/universe.service';
 import { WareService } from '../shared/services/ware.service';
@@ -14,7 +13,7 @@ import { CLUSTER_RADIUS, GalaxyLayout, SectorShape } from './galaxy-layout';
 import { MapGeometry } from './map-geometry';
 import { Mining } from './mining';
 import { PanZoom, ViewBox } from './pan-zoom';
-import { RoutePlanner } from './route-planner';
+import { RouteOptions, RoutePlanner } from './route-planner';
 import { MapSaveLayer } from './save/map-save-layer';
 import { StationMarkers } from './station-marker';
 
@@ -23,7 +22,6 @@ export type PriceLevel = 'min' | 'avg' | 'max';
 export type PanelTab = 'route' | 'mining' | 'stations' | 'abandoned';
 
 export const NEUTRAL = StationMarkers.NEUTRAL;
-const LABEL_PX = 11;
 
 /**
  * State shared by the galaxy map, its layers and side panels. Editable state is held in signal
@@ -31,11 +29,15 @@ const LABEL_PX = 11;
  */
 @Injectable()
 export class MapStore {
+	/** Narrowest view in map units: one sector hex fills it, so its stations stand apart. */
+	static readonly MIN_VIEW_WIDTH = CLUSTER_RADIUS / 2;
+	/** The speed (m/s) and charge (s) of a miner without a travel drive. */
+	private static readonly NO_DRIVE: RouteOptions = { speed: 1000, charge: 0 };
+
 	private readonly sectors = inject(SectorService);
 	private readonly factions = inject(FactionService);
 	private readonly wares = inject(WareService);
-	private readonly ships = inject(ShipService);
-	private readonly shipStats = inject(ShipStatsService);
+	private readonly ships = inject(ShipListService);
 	private readonly save = inject(MapSaveLayer);
 	private readonly geometry = inject(MapGeometry);
 
@@ -49,16 +51,13 @@ export class MapStore {
 	// view: pan and zoom in map units
 	readonly size = signal({ width: 1000, height: 700 });
 	readonly view = signal<ViewBox>(this.home());
-	readonly viewBox = computed(() => {
-		const view = this.view();
-		const size = this.size();
-		return `${view.x} ${view.y} ${view.w} ${(view.w * size.height) / size.width}`;
-	});
-	/** Screen pixels per map unit. */
-	readonly scale = computed(() => this.size().width / this.view().w);
-	readonly fontSize = computed(() => LABEL_PX / this.scale());
-	readonly showSectorLabels = computed(() => (CLUSTER_RADIUS / 2) * this.scale() > 34);
-	readonly showLabels = computed(() => CLUSTER_RADIUS * this.scale() > 30);
+	/** The view of the map canvas, which drives it with the pointer and its zoom buttons. */
+	readonly panZoom = new PanZoom(this.view, this.size, () => ({
+		minWidth: MapStore.MIN_VIEW_WIDTH,
+		maxWidth: this.layout.bounds.w * 3,
+	}));
+	readonly showSectorLabels = computed(() => (CLUSTER_RADIUS / 2) * this.panZoom.scale() > 34);
+	readonly showLabels = computed(() => CLUSTER_RADIUS * this.panZoom.scale() > 30);
 
 	readonly selected = signal<string | undefined>(undefined);
 	readonly hovered = signal<{ shape: SectorShape; x: number; y: number } | undefined>(undefined);
@@ -110,11 +109,11 @@ export class MapStore {
 
 	// route planner: sectors are picked by name from a datalist
 	readonly routeShips = [...this.ships.getEntities()]
-		.filter((x) => this.shipStats.maxStats(x).travel > 0)
+		.filter((x) => TravelDrives.canTravel(x))
 		.sort((a, b) => a.name.localeCompare(b.name));
-	readonly routeModel = signal({ from: '', to: '', ship: '', speed: 3000, charge: 5 });
+	readonly routeModel = signal({ from: '', to: '', ship: '', ...RoutePlanner.DEFAULT_OPTIONS });
 	readonly routeForm = form(this.routeModel, (route) => {
-		min(route.speed, 100);
+		min(route.speed, RoutePlanner.MIN_SPEED);
 		min(route.charge, 0);
 		// a picked ship sets the speed and charge
 		disabled(route.speed, ({ valueOf }) => !!valueOf(route.ship));
@@ -127,7 +126,7 @@ export class MapStore {
 
 	readonly travel = computed(() => {
 		const from = this.routeFrom();
-		const speed = Math.max(100, this.routeModel().speed || 3000);
+		const speed = Math.max(RoutePlanner.MIN_SPEED, this.routeModel().speed || RoutePlanner.DEFAULT_OPTIONS.speed);
 		return from ? RoutePlanner.travelTimes(this.visibleSectors(), from, { speed, charge: this.travelCharge() }) : undefined;
 	});
 	readonly route = computed(() => {
@@ -148,7 +147,7 @@ export class MapStore {
 		return ware ? Mining.minersFor(this.ships.getEntities(), ware) : [];
 	});
 	/** Mining settings; the miner resets to the first one able to carry the resource. */
-	readonly miningModel = linkedSignal<Ship[], { miner: string; fillMinutes: number; price: PriceLevel }>({
+	readonly miningModel = linkedSignal<ShipListItem[], { miner: string; fillMinutes: number; price: PriceLevel }>({
 		source: this.miners,
 		computation: (miners, previous) => ({
 			fillMinutes: 10,
@@ -163,21 +162,32 @@ export class MapStore {
 	readonly miner = computed(() => this.miners().find((x) => x.id === this.miningModel().miner));
 	readonly minerSpeed = computed(() => {
 		const miner = this.miner();
-		return miner ? this.shipStats.maxStats(miner).travel : 0;
+		return miner?.travel?.speed ?? 0;
 	});
 	readonly miningUnits = computed(() => {
 		const ware = this.miningWare();
 		const miner = this.miner();
 		return ware?.volume && miner ? Math.floor(Mining.minerCapacity(miner, ware) / ware.volume) : 0;
 	});
+	/**
+	 * How both mining views time the miner: its travel speed (at least the route minimum) and the charge of its
+	 * fastest drive; kept while they stay the same.
+	 */
+	readonly minerTravelOptions = computed<RouteOptions | undefined>(
+		() => {
+			const miner = this.miner();
+			if (!miner) {
+				return undefined;
+			}
+			const options = TravelDrives.options(miner, MapStore.NO_DRIVE);
+			return { speed: Math.max(RoutePlanner.MIN_SPEED, options.speed), charge: options.charge };
+		},
+		{ equal: (a, b) => a?.speed === b?.speed && a?.charge === b?.charge }
+	);
 	private readonly minerTravel = computed(() => {
 		const from = this.routeFrom();
-		return from && this.miner()
-			? RoutePlanner.travelTimes(this.visibleSectors(), from, {
-					speed: this.minerSpeed() || 1000,
-					charge: this.travelCharge(),
-				})
-			: undefined;
+		const options = this.minerTravelOptions();
+		return from && options ? RoutePlanner.travelTimes(this.visibleSectors(), from, options) : undefined;
 	});
 
 	/** Sectors holding the selected resource: credits per hour from the home sector, or the richest first. */
@@ -243,7 +253,7 @@ export class MapStore {
 	readonly ownerLegend = computed(() => {
 		const counts = new Map<string, number>();
 		for (const sector of this.save.active() ? this.visibleSectors() : this.sectorList) {
-			const owner = this.sectorOwner(sector) ?? '';
+			const owner = this.save.ownerOf(sector) ?? '';
 			counts.set(owner, (counts.get(owner) ?? 0) + 1);
 		}
 		return [...counts]
@@ -260,7 +270,7 @@ export class MapStore {
 		for (const { sector } of this.layout.shapes) {
 			switch (mode) {
 				case 'owner': {
-					const color = this.factions.getEntity(this.sectorOwner(sector) ?? '')?.color;
+					const color = this.save.ownerFaction(sector)?.color;
 					result.set(sector.id, { fill: color ?? NEUTRAL, opacity: color ? 0.5 : 0.2 });
 					break;
 				}
@@ -290,12 +300,10 @@ export class MapStore {
 			const ship = this.ships.getEntity(this.routeShip());
 			if (ship) {
 				untracked(() => {
-					const charge = TravelDrives.fastest(this.shipStats, ship)?.travel?.charge;
-					this.routeModel.update((route) => ({
-						...route,
-						speed: Math.round(this.shipStats.maxStats(ship).travel),
-						charge: charge ?? route.charge,
-					}));
+					this.routeModel.update((route) => {
+						const options = TravelDrives.options(ship, route);
+						return { ...route, speed: Math.round(options.speed), charge: options.charge };
+					});
 				});
 			}
 		});
@@ -357,11 +365,6 @@ export class MapStore {
 
 	resourceAmount(sector: Sector) {
 		return this.resourceAmounts().get(sector.id) ?? 0;
-	}
-
-	/** The sector owner at game start, or in the active save. */
-	sectorOwner(sector: Sector | undefined): string | undefined {
-		return (this.save.active() ? this.save.sectors().get(sector?.id ?? '')?.owner : sector?.owner)?.replace(/^ownerless$/, '') || undefined;
 	}
 
 	/** Content packs added after the stored choice are shown. */

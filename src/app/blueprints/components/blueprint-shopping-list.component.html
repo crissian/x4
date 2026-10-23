@@ -17,7 +17,7 @@
 			@for (group of list.factions; track group.faction.id) {
 				<section class="card">
 					<div class="card-header flex items-baseline justify-between gap-2">
-						<a [routerLink]="['/factions', group.faction.id]">{{ group.faction.name }}</a>
+						<app-faction-label [faction]="group.faction" [dot]="false" />
 						<span class="text-sm text-fg-muted" i18n
 							>{{ group.items.length }} for {{ group.total | number: '1.0-0' }} Cr</span
 						>

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { TradeRouteTesting } from '../trade/trade-route-testing';
-import { MarketSettlement, type SettlementRing } from './market-settlement';
-import { SectorGraph } from './sector-graph';
+import { MarketSettlement } from './market-settlement';
+import { SectorGraph, type SectorRing } from './sector-graph';
 
 /** Reach over a small gate graph, the way `PlacementContext.reach` works it out. */
 class SettlementTesting {
@@ -15,7 +15,7 @@ class SettlementTesting {
 		f: ['e'],
 	};
 
-	static reach(links: Record<string, string[]>): (sector: string, jumps: number) => SettlementRing[] {
+	static reach(links: Record<string, string[]>): (sector: string, jumps: number) => SectorRing[] {
 		const graph = new SectorGraph(Object.entries(links).map(([id, to]) => TradeRouteTesting.sector(id, to)));
 		return (sector, jumps) => [...graph.rings(sector, jumps)];
 	}

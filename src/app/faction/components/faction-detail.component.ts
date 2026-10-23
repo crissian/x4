@@ -1,20 +1,18 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { DetailComponent, DetailPageComponent } from '../../shared/components/detail-page.component';
-import { RouterLink } from '@angular/router';
+import { EntityDetailPage } from '../../shared/components/entity-detail-page';
+import { EntityLinkComponent } from '../../shared/components/entity-link.component';
 import { DataGridComponent, GridColumn } from '../../shared/components/data-grid/data-grid.component';
 import { FactionService } from '../../shared/services/faction.service';
 import { Loadouts } from '../../shared/services/loadout';
-import { License } from '../../shared/services/model/model';
+import { Faction, License } from '../../shared/services/model/model';
 
 @Component({
-	imports: [DetailPageComponent, DetailComponent, RouterLink, DataGridComponent],
+	imports: [DetailPageComponent, DetailComponent, EntityLinkComponent, DataGridComponent],
 	templateUrl: './faction-detail.component.html',
 })
-export class FactionDetailComponent {
-	private readonly service = inject(FactionService);
-
-	readonly id = input.required<string>();
-	protected readonly entity = computed(() => this.service.getEntity(this.id()));
+export class FactionDetailComponent extends EntityDetailPage<Faction> {
+	protected readonly service = inject(FactionService);
 
 	protected readonly licenseColumns: GridColumn<License>[] = [
 		{ key: 'name', caption: $localize`Name` },

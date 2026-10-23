@@ -1,14 +1,13 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { DetailPageComponent } from '../../shared/components/detail-page.component';
+import { EntityDetailPage } from '../../shared/components/entity-detail-page';
+import { Race } from '../../shared/services/model/model';
 import { RaceService } from '../../shared/services/race.service';
 
 @Component({
 	imports: [DetailPageComponent],
 	templateUrl: './race-detail.component.html',
 })
-export class RaceDetailComponent {
-	private readonly service = inject(RaceService);
-
-	readonly id = input.required<string>();
-	protected readonly entity = computed(() => this.service.getEntity(this.id()));
+export class RaceDetailComponent extends EntityDetailPage<Race> {
+	protected readonly service = inject(RaceService);
 }

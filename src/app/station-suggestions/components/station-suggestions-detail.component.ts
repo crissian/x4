@@ -4,11 +4,12 @@ import { RouterLink } from '@angular/router';
 import { MarketSettlement } from '../../economy/market-settlement';
 import { StationSuggestionsStore } from '../station-suggestions-store';
 import { StationSuggestionsChainComponent } from './station-suggestions-chain.component';
+import { JumpsPipe } from '../../core/format/jumps.pipe';
 
 /** The picked suggestion: what it earns, its closed-loop station or inputs, and the sectors behind the demand. */
 @Component({
 	selector: 'app-station-suggestions-detail',
-	imports: [DecimalPipe, PercentPipe, RouterLink, StationSuggestionsChainComponent],
+	imports: [JumpsPipe, DecimalPipe, PercentPipe, RouterLink, StationSuggestionsChainComponent],
 	templateUrl: './station-suggestions-detail.component.html',
 })
 export class StationSuggestionsDetailComponent {

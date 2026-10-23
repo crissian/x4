@@ -3,11 +3,12 @@ import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { StationLayoutLink } from '../../station/station-layout-link';
 import { StationSuggestionsStore } from '../station-suggestions-store';
+import { JumpsPipe } from '../../core/format/jumps.pipe';
 
 /** The closed-loop station of the picked row: its modules, workforce, mined wares and resources in reach. */
 @Component({
 	selector: 'app-station-suggestions-chain',
-	imports: [DecimalPipe, RouterLink],
+	imports: [JumpsPipe, DecimalPipe, RouterLink],
 	templateUrl: './station-suggestions-chain.component.html',
 })
 export class StationSuggestionsChainComponent {

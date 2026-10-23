@@ -15,10 +15,10 @@
 		(pointerleave)="hovered.set(undefined)"
 	>
 		@if (shape(); as shape) {
-			@let unit = fontSize();
+			@let unit = surface.panZoom.fontSize();
 			<svg
 				class="absolute inset-0 size-full"
-				[attr.viewBox]="panZoom.viewBox()"
+				[attr.viewBox]="surface.panZoom.viewBox()"
 				preserveAspectRatio="xMidYMid meet"
 			>
 				<polygon
@@ -69,7 +69,7 @@
 				<g
 					appStationMarkers
 					[markers]="markers()"
-					[scale]="panZoom.scale()"
+					[scale]="surface.panZoom.scale()"
 					[fontSize]="unit"
 					(stationHover)="hovered.set($event)"
 				/>
@@ -80,12 +80,12 @@
 			resetLabel="Show the whole sector"
 			i18n-resetLabel
 			[expandable]="!fill()"
-			(zoomIn)="zoom(0.7)"
-			(zoomOut)="zoom(1.4)"
+			(zoomIn)="surface.zoomIn()"
+			(zoomOut)="surface.zoomOut()"
 			(fit)="reset()"
 			(expand)="expand()"
 		/>
 	</div>
 
-	<app-station-tooltip [hover]="hovered()" [size]="size()" [spill]="!fill()" />
+	<app-station-tooltip [hover]="hovered()" [size]="surface.size()" [spill]="!fill()" />
 </div>

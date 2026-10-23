@@ -740,4 +740,4 @@ export const Factions = {
   ]
 };
 
-GameText.translate(Factions);
+await GameText.translate(Factions, 'factions');
