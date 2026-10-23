@@ -25,7 +25,13 @@ export class ShipSellerStations {
 		return stations
 			.filter((x) => (x.type === 'shipyard' || x.type === 'wharf') && owners.has(x.owner ?? ''))
 			.filter((x) => ShipBuildClasses.ofGameStart(x).includes(ship.size as Size))
-			.map((x) => ({ id: x.id, type: x.type as SellerStation['type'], owner: x.owner!, sector: x.sector, known: true }));
+			.map((x) => ({
+				id: x.id,
+				type: x.type as SellerStation['type'],
+				owner: x.owner!,
+				sector: x.sector,
+				known: true,
+			}));
 	}
 
 	static fromSave(ship: Ship, map: SaveMap): SellerStation[] {

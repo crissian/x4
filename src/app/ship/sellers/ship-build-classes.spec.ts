@@ -23,7 +23,12 @@ describe('ShipBuildClasses', () => {
 
 	it('joins the sizes of a save station, ignoring case', () => {
 		const station = {
-			modules: ['BuildModule_Gen_Ships_L', 'buildmodule_gen_ships_xl', 'buildmodule_gen_ships_l', 'dockarea_arg_m_01'],
+			modules: [
+				'BuildModule_Gen_Ships_L',
+				'buildmodule_gen_ships_xl',
+				'buildmodule_gen_ships_l',
+				'dockarea_arg_m_01',
+			],
 		} as SaveStation;
 		expect(ShipBuildClasses.ofSave(station)).toEqual([Size.large, Size.extralarge]);
 	});
@@ -31,7 +36,10 @@ describe('ShipBuildClasses', () => {
 	it('uses the station type at game start, with the XL only shipyards', () => {
 		const god = (id: string, type: GodStation['type']) => ({ id, type, sector: 's', version: 0 }) as GodStation;
 		expect(ShipBuildClasses.ofGameStart(god('wharf_argon_01', 'wharf'))).toEqual([Size.small, Size.medium]);
-		expect(ShipBuildClasses.ofGameStart(god('shipyard_argon_01', 'shipyard'))).toEqual([Size.large, Size.extralarge]);
+		expect(ShipBuildClasses.ofGameStart(god('shipyard_argon_01', 'shipyard'))).toEqual([
+			Size.large,
+			Size.extralarge,
+		]);
 		expect(ShipBuildClasses.ofGameStart(god('shipyard_alliance', 'shipyard'))).toEqual([Size.extralarge]);
 		expect(ShipBuildClasses.ofGameStart(god('shipyard_split_warforge_01', 'shipyard'))).toEqual([Size.extralarge]);
 		expect(ShipBuildClasses.ofGameStart(god('equipmentdock_argon_01', 'equipmentdock'))).toEqual([]);

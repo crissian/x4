@@ -27,13 +27,21 @@ describe('SellerStanding', () => {
 			have: 4,
 			missing: 6,
 		});
-		expect(SellerStanding.of(requirement(military), {}, {})).toMatchObject({ status: 'reputation', have: 0, missing: 10 });
+		expect(SellerStanding.of(requirement(military), {}, {})).toMatchObject({
+			status: 'reputation',
+			have: 0,
+			missing: 10,
+		});
 	});
 
 	it('asks for the ceremony when the reputation is met but the licence is not held', () => {
 		expect(SellerStanding.of(requirement(military), { argon: 0.01 }, {}).status).toBe('ceremony');
-		expect(SellerStanding.of(requirement(military), { argon: 0.01 }, { militaryship: ['teladi'] }).status).toBe('ceremony');
-		expect(SellerStanding.of(requirement(military), { argon: 0.01 }, { militaryship: ['argon', 'teladi'] })).toEqual({
+		expect(SellerStanding.of(requirement(military), { argon: 0.01 }, { militaryship: ['teladi'] }).status).toBe(
+			'ceremony'
+		);
+		expect(
+			SellerStanding.of(requirement(military), { argon: 0.01 }, { militaryship: ['argon', 'teladi'] })
+		).toEqual({
 			status: 'ok',
 			needed: 10,
 			have: 10,

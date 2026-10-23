@@ -23,14 +23,20 @@ function station(code: string, modules: string[], extra: Partial<SaveStation> = 
 describe('ShipSellerStations', () => {
 	it('lists the game start stations of the selling factions that build the size', () => {
 		expect(ShipSellerStations.fromGameStart(ship(Size.large, 'argon', 'alliance'), GAME_START)).toEqual([
-			{ id: 'shipyard_argon_01', type: 'shipyard', owner: 'argon', sector: 'sector_shipyard_argon_01', known: true },
+			{
+				id: 'shipyard_argon_01',
+				type: 'shipyard',
+				owner: 'argon',
+				sector: 'sector_shipyard_argon_01',
+				known: true,
+			},
 		]);
 		expect(ShipSellerStations.fromGameStart(ship(Size.medium, 'argon'), GAME_START).map((x) => x.id)).toEqual([
 			'wharf_argon_01',
 		]);
-		expect(ShipSellerStations.fromGameStart(ship(Size.extralarge, 'alliance'), GAME_START).map((x) => x.id)).toEqual([
-			'shipyard_alliance',
-		]);
+		expect(
+			ShipSellerStations.fromGameStart(ship(Size.extralarge, 'alliance'), GAME_START).map((x) => x.id)
+		).toEqual(['shipyard_alliance']);
 	});
 
 	it('finds nothing for ships without selling factions or extra small ships', () => {
