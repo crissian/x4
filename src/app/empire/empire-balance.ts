@@ -11,12 +11,23 @@ export interface EmpireBalanceRow {
 	net: number;
 	/** how many of the stations make or use it */
 	stations: number;
+	/** mined or collected (`WareClasses.isMined`): miners supply it, not stations */
+	mined: boolean;
+}
+
+/** What the balance needs to know of a ware. */
+export interface EmpireBalanceWare {
+	name: string;
+	mined: boolean;
 }
 
 /** Sums the hourly flows of the player's stations into one row per ware. */
 export class EmpireBalance {
 	/** The wares the stations make or use, the largest shortage first. */
-	static rows(stations: readonly (readonly StationFlow[])[], wareName: (id: string) => string): EmpireBalanceRow[] {
+	static rows(
+		stations: readonly (readonly StationFlow[])[],
+		ware: (id: string) => EmpireBalanceWare
+	): EmpireBalanceRow[] {
 		const byWare = new Map<string, EmpireBalanceRow>();
 		for (const flows of stations) {
 			for (const flow of flows) {
@@ -25,7 +36,8 @@ export class EmpireBalance {
 				}
 				let row = byWare.get(flow.ware);
 				if (!row) {
-					row = { id: flow.ware, name: wareName(flow.ware), produced: 0, consumed: 0, net: 0, stations: 0 };
+					const { name, mined } = ware(flow.ware);
+					row = { id: flow.ware, name, produced: 0, consumed: 0, net: 0, stations: 0, mined };
 					byWare.set(flow.ware, row);
 				}
 				row.produced += flow.produced;

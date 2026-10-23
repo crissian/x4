@@ -1,7 +1,11 @@
 @let station = layout();
-<a class="whitespace-nowrap" [routerLink]="path" [queryParams]="station.calculator" i18n
-	><svg lucideCalculator class="mr-0.5" />Open in Station Calculator</a
->
+@if (station.rows.length) {
+	<a class="whitespace-nowrap" [routerLink]="path" [queryParams]="station.calculator" i18n
+		><svg lucideCalculator class="mr-0.5" />Open in Station Calculator</a
+	>
+} @else {
+	<span class="text-fg-muted" i18n>No built modules</span>
+}
 @if (station.unknown.length) {
 	<div class="text-xs text-fg-muted">
 		<ng-container i18n>Not in the calculator:</ng-container>
@@ -11,5 +15,10 @@
 	</div>
 }
 @if (station.building) {
-	<div class="text-xs text-fg-muted" i18n>{{ station.building }} still being built, left out</div>
+	<div class="text-xs text-fg-muted" i18n>
+		{station.building, plural,
+			=1 {1 module still being built, left out}
+			other {{{ station.building }} modules still being built, left out}
+		}
+	</div>
 }

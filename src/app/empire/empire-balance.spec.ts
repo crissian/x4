@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { EmpireBalance } from './empire-balance';
 
 describe('EmpireBalance', () => {
-	const name = (id: string) => id.toUpperCase();
+	const name = (id: string) => ({ name: id.toUpperCase(), mined: id === 'water' });
 
 	it('sums the flows of the stations per ware, the largest shortage first', () => {
 		const rows = EmpireBalance.rows(
@@ -20,9 +20,17 @@ describe('EmpireBalance', () => {
 			name
 		);
 		expect(rows).toEqual([
-			{ id: 'graphene', name: 'GRAPHENE', produced: 0, consumed: 200, net: -200, stations: 1 },
-			{ id: 'water', name: 'WATER', produced: 50, consumed: 50, net: 0, stations: 1 },
-			{ id: 'energycells', name: 'ENERGYCELLS', produced: 1000, consumed: 300, net: 700, stations: 2 },
+			{ id: 'graphene', name: 'GRAPHENE', produced: 0, consumed: 200, net: -200, stations: 1, mined: false },
+			{ id: 'water', name: 'WATER', produced: 50, consumed: 50, net: 0, stations: 1, mined: true },
+			{
+				id: 'energycells',
+				name: 'ENERGYCELLS',
+				produced: 1000,
+				consumed: 300,
+				net: 700,
+				stations: 2,
+				mined: false,
+			},
 		]);
 		expect(EmpireBalance.share(rows[0])).toBe(-1);
 		expect(EmpireBalance.share(rows[2])).toBeCloseTo(0.7);

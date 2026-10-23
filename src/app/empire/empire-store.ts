@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { EnumLabels } from '../core/enum-labels';
 import { GameTextRef } from '../core/game-text-ref';
 import { StationFlowCalculator } from '../economy/station-flow-calculator';
+import { WareClasses } from '../economy/ware-classes';
 import { QueryParamSync } from '../core/router/query-param-sync';
 import { SaveStationNames } from '../map/save/save-station-names';
 import { ActiveSave } from '../savegame/active-save';
@@ -107,7 +108,10 @@ export class EmpireStore {
 		const flows = this.flows();
 		return EmpireBalance.rows(
 			this.balanceStations().map((x) => flows.get(x.id) ?? []),
-			(id) => this.wares.getEntity(id)?.name ?? id
+			(id) => {
+				const ware = this.wares.getEntity(id);
+				return { name: ware?.name ?? id, mined: ware ? WareClasses.isMined(ware) : false };
+			}
 		);
 	});
 	readonly filteredBalance = computed(() => EmpireQuery.balance(this.balance(), this.model()));

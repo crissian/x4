@@ -1234,6 +1234,22 @@
     "navProgress": "Progreso",
     "navMySave": "Mi partida",
     "2482577958289330282": "Planificar fabricación",
-    "1357873867588697878": "Inicios de partida"
+    "1357873867588697878": "Inicios de partida",
+    "4223382601878944026": " Por hora, con el modelo de producción de la Calculadora de estaciones: cada módulo construido funciona sin parar con todos sus recursos disponibles, las celdas de energía siguen la luz solar del sector, y la bonificación de personal viene de los trabajadores que la partida da a cada estación (solo las estaciones con hábitats tienen trabajadores). Los hábitats cuentan lo que comen sus trabajadores reales. Se dejan fuera los módulos en construcción, los módulos que la calculadora no conoce y las obras. Las mercancías extraídas o recolectadas vienen de tus mineros; las estaciones solo las usan.\n",
+    "8674969417773777194": "{VAR_PLURAL, plural, =1 {1 estación} other {{INTERPOLATION} estaciones}}",
+    "5595794344928638726": "{$ICU}, {$ICU_1}.",
+    "75783721197666256": "{VAR_PLURAL, plural, =0 {ninguna mercancía escasa} =1 {1 mercancía escasa} other {{INTERPOLATION} mercancías escasas}}",
+    "8188789085390722636": "{VAR_PLURAL, plural, =1 {1 estación con módulos fuera} other {{INTERPOLATION} estaciones con módulos fuera}}",
+    "3109334531552011844": "Estas estaciones no producen ni usan mercancías.",
+    "8442422503555912082": "Cadena de producción",
+    "4370227308575957082": "Extraída",
+    "7995904650755175299": "Extraída o recolectada",
+    "3270263258102848269": "Producida",
+    "7539286826648871972": "Todas las estaciones",
+    "1085985734718060300": "Balance de producción",
+    "2058540860781608440": "{$START_TAG__SVG_SVG}{$CLOSE_TAG__SVG_SVG}Abrir en la Calculadora de estaciones",
+    "4922308101141951396": "Sin módulos construidos",
+    "6996746813678807241": "No está en la calculadora:",
+    "9211062389274478445": "{VAR_PLURAL, plural, =1 {1 módulo aún en construcción, fuera} other {{INTERPOLATION} módulos aún en construcción, fuera}}"
   }
 }

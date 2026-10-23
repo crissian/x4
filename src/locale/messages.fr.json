@@ -1234,6 +1234,22 @@
     "navProgress": "Progression",
     "navMySave": "Ma sauvegarde",
     "2482577958289330282": "Planifier la fabrication",
-    "1357873867588697878": "Débuts de partie"
+    "1357873867588697878": "Débuts de partie",
+    "4223382601878944026": " Par heure, avec le modèle de production du Calculateur de station : chaque module construit tourne sans arrêt avec toutes ses ressources disponibles, les cellules d'énergie suivent l'ensoleillement du secteur, et le bonus de main-d'œuvre vient des travailleurs que la sauvegarde donne à chaque station (seules les stations avec des habitats ont des travailleurs). Les habitats comptent ce que mangent leurs travailleurs réels. Les modules en construction, les modules inconnus du calculateur et les chantiers sont laissés de côté. Les marchandises minées ou collectées viennent de vos mineurs, les stations ne font que les utiliser.\n",
+    "8674969417773777194": "{VAR_PLURAL, plural, =1 {1 station} other {{INTERPOLATION} stations}}",
+    "5595794344928638726": "{$ICU}, {$ICU_1}.",
+    "75783721197666256": "{VAR_PLURAL, plural, =0 {aucune marchandise en manque} =1 {1 marchandise en manque} other {{INTERPOLATION} marchandises en manque}}",
+    "8188789085390722636": "{VAR_PLURAL, plural, =1 {1 station avec des modules laissés de côté} other {{INTERPOLATION} stations avec des modules laissés de côté}}",
+    "3109334531552011844": "Ces stations ne produisent ni n'utilisent aucune marchandise.",
+    "8442422503555912082": "Chaîne de production",
+    "4370227308575957082": "Minée",
+    "7995904650755175299": "Minée ou collectée",
+    "3270263258102848269": "Produite",
+    "7539286826648871972": "Toutes les stations",
+    "1085985734718060300": "Bilan de production",
+    "2058540860781608440": "{$START_TAG__SVG_SVG}{$CLOSE_TAG__SVG_SVG}Ouvrir dans le Calculateur de station",
+    "4922308101141951396": "Aucun module construit",
+    "6996746813678807241": "Absent du calculateur :",
+    "9211062389274478445": "{VAR_PLURAL, plural, =1 {1 module encore en construction, laissé de côté} other {{INTERPOLATION} modules encore en construction, laissés de côté}}"
   }
 }

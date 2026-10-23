@@ -3,10 +3,14 @@
 	Per hour, with the Station Calculator's production model: every built module runs non-stop with all its inputs
 	available, energy cells follow the sector's sunlight, and the workforce bonus comes from the workers the save gives
 	each station (only stations with habitats have workers). Habitats count what their actual workers eat. Modules still
-	being built, modules the calculator doesn't know and construction sites are left out.
+	being built, modules the calculator doesn't know and construction sites are left out. Mined or collected wares come
+	from your miners, so stations only use them.
 </p>
 <p class="mb-2 text-sm">
-	<ng-container i18n>{{ store.balanceStations().length }} stations, {{ shortages() }} wares short.</ng-container>
+	<ng-container i18n
+		>{store.balanceStations().length, plural, =1 {1 station} other {{{ store.balanceStations().length }} stations}},
+		{shortages(), plural, =0 {no ware short} =1 {1 ware short} other {{{ shortages() }} wares short}}.</ng-container
+	>
 	@if (one?.layout; as layout) {
 		<span class="ml-2 inline-block align-top"><app-station-calculator-link [layout]="layout" /></span>
 	}
@@ -14,7 +18,10 @@
 @if (!one && incomplete().length) {
 	<details class="mb-2 text-sm">
 		<summary class="cursor-pointer text-fg-muted" i18n>
-			{{ incomplete().length }} stations with modules left out
+			{incomplete().length, plural,
+				=1 {1 station with modules left out}
+				other {{{ incomplete().length }} stations with modules left out}
+			}
 		</summary>
 		<ul class="mt-1 ml-4 list-disc">
 			@for (item of incomplete(); track item.id) {

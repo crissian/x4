@@ -105,7 +105,9 @@ export class EmpireShips {
 			order: current ? (lookups.orderName(current) ?? current) : '',
 			orderId: current,
 			defaultOrder:
-				ship.order && ship.defaultOrder ? (lookups.orderName(ship.defaultOrder) ?? ship.defaultOrder) : undefined,
+				ship.order && ship.defaultOrder
+					? (lookups.orderName(ship.defaultOrder) ?? ship.defaultOrder)
+					: undefined,
 			assignment: ship.assignment ? (lookups.assignmentName(ship.assignment) ?? ship.assignment) : undefined,
 			assignmentId: ship.assignment,
 			...place,

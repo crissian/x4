@@ -86,7 +86,8 @@ export class EmpireColumns {
 	}
 
 	static balance(): GridColumn<EmpireBalanceRow>[] {
-		const perHour = (value: number) => NumberFormats.whole(Math.round(value));
+		// rounded away from zero, so the net of a rounded flow matches it
+		const perHour = (value: number) => NumberFormats.whole(Math.sign(value) * Math.round(Math.abs(value)));
 		return [
 			{ key: 'name', caption: $localize`Ware`, hideable: false, link: (x) => ['/wares', x.id] },
 			{ key: 'produced', caption: $localize`Produced/h`, type: 'number', display: (x) => perHour(x.produced) },
@@ -100,6 +101,14 @@ export class EmpireColumns {
 				dot: (x) => (x.net < 0 ? { tone: 'red', level: 3 } : undefined),
 			},
 			{ key: 'stations', caption: $localize`Stations`, type: 'number' },
+			{
+				key: 'mined',
+				caption: $localize`Mined`,
+				lookup: [
+					{ value: true, label: $localize`Mined or collected` },
+					{ value: false, label: $localize`Produced` },
+				],
+			},
 			{ key: 'chain', caption: $localize`Production Chain`, sortable: false, filterable: false },
 		];
 	}

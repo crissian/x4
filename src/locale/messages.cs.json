@@ -1234,6 +1234,22 @@
     "navProgress": "Postup",
     "navMySave": "Moje uložená hra",
     "2482577958289330282": "Naplánovat výrobu",
-    "1357873867588697878": "Začátky hry"
+    "1357873867588697878": "Začátky hry",
+    "4223382601878944026": " Za hodinu, podle výrobního modelu Kalkulačky stanic: každý postavený modul běží nepřetržitě se všemi surovinami, energetické články se řídí slunečním svitem sektoru a bonus pracovní síly vychází z pracovníků, které uložená hra uvádí u každé stanice (pracovníky mají jen stanice s obytnými moduly). Obytné moduly počítají, co snědí jejich skuteční pracovníci. Moduly ve výstavbě, moduly, které kalkulačka nezná, a staveniště jsou vynechány. Těžené nebo sbírané zboží pochází od vašich těžařů, stanice ho jen spotřebovávají.\n",
+    "8674969417773777194": "{VAR_PLURAL, plural, =1 {1 stanice} few {{INTERPOLATION} stanice} other {{INTERPOLATION} stanic}}",
+    "5595794344928638726": "{$ICU}, {$ICU_1}.",
+    "75783721197666256": "{VAR_PLURAL, plural, =0 {žádné zboží nechybí} =1 {1 druh zboží chybí} other {{INTERPOLATION} druhů zboží chybí}}",
+    "8188789085390722636": "{VAR_PLURAL, plural, =1 {1 stanice s vynechanými moduly} few {{INTERPOLATION} stanice s vynechanými moduly} other {{INTERPOLATION} stanic s vynechanými moduly}}",
+    "3109334531552011844": "Tyto stanice nevyrábějí ani nespotřebovávají žádné zboží.",
+    "8442422503555912082": "Výrobní řetězec",
+    "4370227308575957082": "Těžené",
+    "7995904650755175299": "Těžené nebo sbírané",
+    "3270263258102848269": "Vyráběné",
+    "7539286826648871972": "Všechny stanice",
+    "1085985734718060300": "Výrobní bilance",
+    "2058540860781608440": "{$START_TAG__SVG_SVG}{$CLOSE_TAG__SVG_SVG}Otevřít v Kalkulačce stanic",
+    "4922308101141951396": "Žádné postavené moduly",
+    "6996746813678807241": "Není v kalkulačce:",
+    "9211062389274478445": "{VAR_PLURAL, plural, =1 {1 modul se ještě staví, vynechán} few {{INTERPOLATION} moduly se ještě staví, vynechány} other {{INTERPOLATION} modulů se ještě staví, vynecháno}}"
   }
 }
