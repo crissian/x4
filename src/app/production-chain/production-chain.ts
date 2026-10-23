@@ -64,7 +64,8 @@ export class ProductionChain {
 		if (!ware) {
 			return undefined;
 		}
-		const links = settings.direction === 'inputs' ? this.inputLinks(ware, settings) : this.usedByLinks(ware, settings);
+		const links =
+			settings.direction === 'inputs' ? this.inputLinks(ware, settings) : this.usedByLinks(ware, settings);
 		const order = ProductionChain.topological(root, links);
 		const nodes = new Map<string, ChainNode>(
 			order.map((id) => {

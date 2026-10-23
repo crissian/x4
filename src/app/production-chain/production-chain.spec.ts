@@ -12,7 +12,8 @@ describe('ProductionChain', () => {
 		const recipes = new ChainRecipes(wares, TestBed.inject(ModuleService));
 		return { wares, recipes, chain: new ProductionChain(wares, recipes) };
 	};
-	const node = (graph: ReturnType<ProductionChain['build']>, id: string) => graph!.nodes.find((x) => x.ware.id === id)!;
+	const node = (graph: ReturnType<ProductionChain['build']>, id: string) =>
+		graph!.nodes.find((x) => x.ware.id === id)!;
 
 	it('follows a ware down to its raw resources with the rates of its modules', () => {
 		// refined metals: 88 per 150 s from 90 energy cells and 240 ore

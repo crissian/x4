@@ -15,6 +15,8 @@ export class ProductionChainQuery implements QueryParamCodec<ChainSettings> {
 		overrides: {},
 		depth: 1,
 	};
+	/** every param the settings use */
+	static readonly PARAMS = ['dir', 'pm', 'n', 'o', 'lv'] as const;
 	static readonly MODULES = { min: 1, max: 999, integer: true };
 	static readonly DEPTH = { min: 0, max: 20, integer: true };
 

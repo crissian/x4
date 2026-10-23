@@ -67,7 +67,9 @@ export class LayeredGraphLayout {
 		const byId = new Map(nodes.map((x) => [x.id, x]));
 		return {
 			nodes: ids.map((x) => byId.get(x)!),
-			edges: valid.map((edge) => LayeredGraphLayout.edge(edge, byId.get(edge.from)!, byId.get(edge.to)!, options)),
+			edges: valid.map((edge) =>
+				LayeredGraphLayout.edge(edge, byId.get(edge.from)!, byId.get(edge.to)!, options)
+			),
 			width: rows.length ? rows.length * layerStep - options.layerGap : 0,
 			height: tallest ? tallest * rowStep - options.nodeGap : 0,
 		};
