@@ -5,6 +5,7 @@ import type {
 	BlueprintSeller,
 	BuyEntry,
 	ReputationEntry,
+	ReputationSeller,
 	UnsoldEntry,
 	UnsoldReason,
 } from '../blueprint-model';
@@ -19,6 +20,7 @@ export class BlueprintShoppingColumns {
 		terraforming: $localize`:blueprint source:Terraforming`,
 		gamestart: $localize`:blueprint source:Game start`,
 		story: $localize`:blueprint source:Story or mission`,
+		ceremony: $localize`:blueprint source:Reputation ceremony gift`,
 		unknown: $localize`:blueprint source:Unknown source`,
 	};
 
@@ -72,10 +74,7 @@ export class BlueprintShoppingColumns {
 		{
 			key: 'note',
 			caption: $localize`Note`,
-			value: (x) =>
-				x.sellers[0].pending
-					? $localize`Reputation reached: the licence comes with a ceremony or a visit to the representative`
-					: '',
+			value: (x) => this.note(x.sellers[0]),
 			sortable: false,
 		},
 	];
@@ -112,6 +111,17 @@ export class BlueprintShoppingColumns {
 
 	private price<T extends { item: BlueprintItem }>(): GridColumn<T> {
 		return { key: 'price', caption: $localize`Game price (Cr)`, type: 'number', value: (x) => x.item.price };
+	}
+
+	private note(seller: ReputationSeller): string {
+		if (seller.gift) {
+			return seller.pending
+				? $localize`Not sold: a gift of the ceremony, which you have reached`
+				: $localize`Not sold: a gift of the ceremony at this reputation`;
+		}
+		return seller.pending
+			? $localize`Reputation reached: the licence comes with a ceremony or a visit to the representative`
+			: '';
 	}
 
 	private names(sellers: readonly BlueprintSeller[]): string {

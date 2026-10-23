@@ -29,6 +29,8 @@ export interface BlueprintCategory {
 export interface BlueprintSeller {
 	faction: Faction;
 	license?: License;
+	/** the faction gives the blueprint at the reputation ceremony of `license` instead of selling it */
+	gift?: boolean;
 }
 
 /** A seller the player lacks the licence of, with the reputation it asks for. */

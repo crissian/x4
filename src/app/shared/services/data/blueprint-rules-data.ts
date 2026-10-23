@@ -1,5 +1,11 @@
 /** Where a blueprint no faction sells comes from. */
-export type BlueprintUnlock = 'research' | 'terraforming' | 'gamestart' | 'story';
+export type BlueprintUnlock = 'research' | 'terraforming' | 'gamestart' | 'story' | 'ceremony';
+
+/** A blueprint a faction gives at its friend (+10) or ally (+20) reputation ceremony. */
+export interface BlueprintGift {
+  faction: string;
+  ceremony: 'friend' | 'ally';
+}
 
 export const BlueprintRules = {
   /** noplayerblueprint, and noblueprint on modules and ships: the player can never own these */
@@ -137,7 +143,7 @@ export const BlueprintRules = {
   noSaleFactions: [
     'kaori',
   ] as string[],
-  /** from the literal add_blueprints calls of the md scripts */
+  /** from the literal add_blueprints calls of the md scripts, and the ceremony gifts below */
   unlockedBy: {
     engine_gen_m_yacht_01_mk1: 'story',
     engine_gen_s_racer_01_mk2: 'story',
@@ -151,6 +157,9 @@ export const BlueprintRules = {
     missile_gen_s_guided_01_mk1: 'story',
     module_arg_dock_m_01: 'story',
     module_arg_radar_dish_01: 'story',
+    module_conn_arg_antigonearc_01: 'ceremony',
+    module_conn_arg_antigonescaffolding_01: 'ceremony',
+    module_conn_arg_antigonestraight_01: 'ceremony',
     module_gen_build_dockarea_m_01: 'story',
     module_gen_build_l_01: 'story',
     module_gen_build_m_01: 'story',
@@ -199,7 +208,8 @@ export const BlueprintRules = {
     module_gen_ventureplatform_cross_01: 'story',
     module_gen_welfare_casino_01: 'research',
     module_gen_welfare_gamblinghall_01: 'research',
-    module_hab_arg_antigonespire_01: 'story',
+    module_hab_arg_antigonepillar_01: 'ceremony',
+    module_hab_arg_antigonespire_01: 'ceremony',
     module_par_def_claim_01: 'story',
     module_par_def_claim_story_01: 'story',
     module_par_def_disc_01: 'story',
@@ -272,4 +282,12 @@ export const BlueprintRules = {
     weapon_xen_s_gatling_01_mk1: 'research',
     welfare_bor_artacademy_01: 'terraforming',
   } as Record<string, BlueprintUnlock>,
+  /** rewarded wares: given at the reputation ceremony that unlocks the licence they need */
+  giftedBy: {
+    module_conn_arg_antigonearc_01: { faction: 'kaori', ceremony: 'friend' },
+    module_conn_arg_antigonescaffolding_01: { faction: 'kaori', ceremony: 'friend' },
+    module_conn_arg_antigonestraight_01: { faction: 'kaori', ceremony: 'friend' },
+    module_hab_arg_antigonepillar_01: { faction: 'kaori', ceremony: 'ally' },
+    module_hab_arg_antigonespire_01: { faction: 'kaori', ceremony: 'ally' },
+  } as Record<string, BlueprintGift>,
 };

@@ -96,6 +96,7 @@ export class BlueprintsStore {
 				),
 			missionOnly: BlueprintRules.missionOnly,
 			unlockedBy: BlueprintRules.unlockedBy,
+			gift: (x) => BlueprintSellers.gift(BlueprintRules.giftedBy[x.id], (id) => this.factions.getEntity(id)),
 		});
 	});
 	/** The shopping list the faction and affordability filters leave too. */

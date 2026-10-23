@@ -1,3 +1,4 @@
+import type { BlueprintGift } from '../shared/services/data/blueprint-rules-data';
 import type { Faction } from '../shared/services/model/model';
 import type { BlueprintSeller } from './blueprint-model';
 
@@ -22,5 +23,18 @@ export class BlueprintSellers {
 			.filter((owner) => !noSale.includes(owner.id) && (!representatives || representatives.has(owner.id)))
 			.map((owner) => faction(owner.id) ?? owner)
 			.map((x) => ({ faction: x, license: license ? x.licenses?.find((l) => l.type === license) : undefined }));
+	}
+
+	/** The faction that gifts a blueprint at a reputation ceremony, with that ceremony's licence; undefined for none. */
+	static gift(
+		gift: BlueprintGift | undefined,
+		faction: (id: string) => Faction | undefined
+	): BlueprintSeller | undefined {
+		const giver = gift && faction(gift.faction);
+		if (!giver) {
+			return undefined;
+		}
+		const type = `ceremony${gift.ceremony}`;
+		return { faction: giver, license: giver.licenses?.find((l) => l.type === type), gift: true };
 	}
 }

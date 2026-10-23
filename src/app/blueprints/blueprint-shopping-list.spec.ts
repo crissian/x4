@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { SaveLicences, SaveRelations } from '../savegame/map/save-map-model';
 import type { BlueprintItem } from './blueprint-model';
+import { BlueprintSellers } from './blueprint-sellers';
 import { BlueprintShoppingList } from './blueprint-shopping-list';
 import { BlueprintTesting as T } from './blueprint-testing';
 
@@ -12,7 +13,7 @@ describe('BlueprintShoppingList', () => {
 			licences?: SaveLicences;
 			relations?: SaveRelations;
 			missionOnly?: string[];
-			unlockedBy?: Record<string, 'research' | 'story'>;
+			unlockedBy?: Record<string, 'research' | 'story' | 'ceremony'>;
 		} = {}
 	) =>
 		BlueprintShoppingList.build({
@@ -23,6 +24,7 @@ describe('BlueprintShoppingList', () => {
 			sellers: (x) => T.sellers(x),
 			missionOnly: options.missionOnly ?? [],
 			unlockedBy: options.unlockedBy ?? {},
+			gift: () => undefined,
 		});
 
 	it('skips owned blueprints', () => {
@@ -77,5 +79,34 @@ describe('BlueprintShoppingList', () => {
 			['kaori_only', 'unknown'],
 			['research', 'research'],
 		]);
+	});
+
+	it('needs the ceremony reputation for a gift no one sells, until the player has had that ceremony', () => {
+		// Argon gifts 'span' at its friend ceremony (relation 0.01, reputation 10); the player is at 7 (relation 0.005)
+		const argon = { ...T.ARGON, licenses: [T.licence('ceremonyfriend', 0.01)] };
+		const gift = (x: BlueprintItem) =>
+			BlueprintSellers.gift(x.id === 'span' ? { faction: 'argon', ceremony: 'friend' } : undefined, () => argon);
+		const input = (licences: SaveLicences) => ({
+			items: [T.item('span', [T.KAORI])],
+			owned: new Set<string>(),
+			licences,
+			relations: { argon: 0.005 },
+			sellers: (x: BlueprintItem) => T.sellers(x),
+			missionOnly: [],
+			unlockedBy: { span: 'ceremony' as const },
+			gift,
+		});
+		const [entry] = BlueprintShoppingList.build(input({})).reputation;
+		const seller = entry.sellers[0];
+		expect([entry.item.id, seller.faction.id, seller.gift, seller.needed, seller.gap]).toEqual([
+			'span',
+			'argon',
+			true,
+			10,
+			3,
+		]);
+		const had = BlueprintShoppingList.build(input({ ceremonyfriend: ['argon'] }));
+		expect(had.reputation).toEqual([]);
+		expect(had.unsold.map((x) => [x.item.id, x.reason])).toEqual([['span', 'ceremony']]);
 	});
 });

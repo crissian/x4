@@ -23,11 +23,14 @@ export interface ShoppingListInput {
 	missionOnly: readonly string[];
 	/** `BlueprintRules.unlockedBy` */
 	unlockedBy: Readonly<Record<string, BlueprintUnlock>>;
+	/** the faction gifting the item at a reputation ceremony (`BlueprintSellers.gift`), if any */
+	gift: (item: BlueprintItem) => BlueprintSeller | undefined;
 }
 
 /**
  * Sorts each missing blueprint into buy now, need more reputation or not sold. A representative sells a blueprint
- * when the item needs no licence or the player holds the faction's licence of its type.
+ * when the item needs no licence or the player holds the faction's licence of its type. A blueprint no one sells but
+ * a faction gifts at a ceremony needs the reputation of that ceremony, until the player has had it.
  */
 export class BlueprintShoppingList {
 	static build(input: ShoppingListInput): ShoppingList {
@@ -39,6 +42,15 @@ export class BlueprintShoppingList {
 		for (const item of missing) {
 			const sellers = missionOnly.has(item.id) ? [] : input.sellers(item);
 			if (!sellers.length) {
+				const gift = input.gift(item);
+				const had = gift?.license && input.licences[gift.license.type]?.includes(gift.faction.id);
+				if (gift && !had) {
+					reputation.push({
+						item,
+						sellers: BlueprintShoppingList.reputationSellers([gift], input.relations),
+					});
+					continue;
+				}
 				const reason = input.unlockedBy[item.id] ?? (missionOnly.has(item.id) ? 'story' : 'unknown');
 				unsold.push({ item, reason });
 				continue;
