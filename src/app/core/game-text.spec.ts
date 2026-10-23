@@ -71,6 +71,35 @@ describe('game text', () => {
 		expect(fetch).toHaveBeenCalledTimes(2);
 	});
 
+	it('translates a data file with its own texts when files translate the same English text differently', async () => {
+		vi.spyOn(LocalStorage, 'read').mockReturnValue('ja');
+		const mine = GameText.hash('Mine');
+		const files: Record<string, Record<string, string>> = {
+			equipment: { [mine]: '機雷', [GameText.hash('Laser Tower')]: 'レーザータワー' },
+			'ship-orders': { [mine]: '採掘' },
+			'fleet-assignments': { [mine]: 'Mine' },
+		};
+		vi.spyOn(globalThis, 'fetch').mockImplementation(async (url) => {
+			const file = /i18n\/ja\/(.+)\.json$/.exec(String(url))?.[1] ?? '';
+			return new Response(JSON.stringify(files[file] ?? {}));
+		});
+		const equipment = [{ name: 'Mine' }, { name: 'Laser Tower' }];
+		const order = { name: 'Mine' };
+		const assignment = { name: 'Mine' };
+
+		// a route loads the texts of all its data files before they translate
+		await GameText.preload(['equipment', 'ship-orders', 'fleet-assignments']);
+		await GameText.translate(equipment, 'equipment');
+		await GameText.translate(order, 'ship-orders');
+		await GameText.translate(assignment, 'fleet-assignments');
+
+		expect(equipment.map((x) => x.name)).toEqual(['機雷', 'レーザータワー']);
+		expect(order.name).toBe('採掘');
+		// kept in English on purpose, not taken from the equipment file
+		expect(assignment.name).toBe('Mine');
+		expect(GameText.get('Mine', 'ship-orders')).toBe('採掘');
+	});
+
 	it('keeps the English texts when a texts file fails to load', async () => {
 		vi.spyOn(LocalStorage, 'read').mockReturnValue('de');
 		vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('offline'));

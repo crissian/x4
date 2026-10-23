@@ -46,8 +46,13 @@ const TEXT_KEYS = new Set([
 
 export class GameText {
 	private static readonly STORAGE_KEY = 'language';
-	/** Texts of the selected language by hash of the English text, from every texts file loaded so far. */
+	/** Texts of the selected language by hash of the English text, from every texts file loaded so far, the first one loaded winning. */
 	private static texts: Record<string, string> | null = null;
+	/**
+	 * The texts of each loaded file. The same English text can mean different things in different files ("Mine": the
+	 * explosive, the ship order), so a data file is translated with its own texts first.
+	 */
+	private static readonly fileTexts = new Map<string, Record<string, string>>();
 	private static readonly files = new Map<string, Promise<void>>();
 	private static readonly translated = new WeakSet<object>();
 
@@ -77,6 +82,7 @@ export class GameText {
 	static setTexts(value: Record<string, string> | null) {
 		GameText.texts = value;
 		GameText.files.clear();
+		GameText.fileTexts.clear();
 	}
 
 	/**
@@ -92,9 +98,12 @@ export class GameText {
 		return Promise.all([GameText.preload(files), load()]).then(([, loaded]) => loaded);
 	}
 
-	/** The selected language's text of an English game text, looked up in the texts loaded so far. */
-	static get(value: string): string {
-		return GameText.texts?.[GameText.hash(value.trim())] ?? value;
+	/** The selected language's text of an English game text, from the texts of a file if given, else any loaded so far. */
+	static get(value: string, file?: string): string {
+		const hash = GameText.hash(value.trim());
+		return (
+			(file === undefined ? undefined : GameText.fileTexts.get(file)?.[hash]) ?? GameText.texts?.[hash] ?? value
+		);
 	}
 
 	/**
@@ -105,7 +114,7 @@ export class GameText {
 	static async translate(data: object, file: string): Promise<void> {
 		await GameText.loadFile(file);
 		if (GameText.texts) {
-			GameText.walk(data);
+			GameText.walk(data, file);
 		}
 	}
 
@@ -114,7 +123,7 @@ export class GameText {
 		await GameText.loadFile(file);
 		if (GameText.texts) {
 			for (const [key, value] of Object.entries(data)) {
-				data[key] = GameText.get(value);
+				data[key] = GameText.get(value, file);
 			}
 		}
 	}
@@ -139,21 +148,22 @@ export class GameText {
 			const response = await fetch(new URL(`assets/i18n/${language}/${file}.json`, document.baseURI));
 			if (response.ok) {
 				const texts: Record<string, string> = await response.json();
-				GameText.texts = { ...GameText.texts, ...texts };
+				GameText.fileTexts.set(file, texts);
+				GameText.texts = { ...texts, ...GameText.texts };
 			}
 		} catch {
 			// keep the English texts
 		}
 	}
 
-	private static walk(value: object) {
+	private static walk(value: object, file: string) {
 		if (GameText.translated.has(value)) {
 			return;
 		}
 		GameText.translated.add(value);
 
 		if (Array.isArray(value)) {
-			value.forEach((x) => GameText.isObject(x) && GameText.walk(x));
+			value.forEach((x) => GameText.isObject(x) && GameText.walk(x, file));
 			return;
 		}
 
@@ -161,12 +171,12 @@ export class GameText {
 		for (const [key, child] of Object.entries(item)) {
 			if (typeof child === 'string') {
 				if (TEXT_KEYS.has(key)) {
-					item[key] = GameText.get(child);
+					item[key] = GameText.get(child, file);
 				}
 			} else if (Array.isArray(child) && TEXT_KEYS.has(key)) {
-				item[key] = child.map((x) => (typeof x === 'string' ? GameText.get(x) : x));
+				item[key] = child.map((x) => (typeof x === 'string' ? GameText.get(x, file) : x));
 			} else if (GameText.isObject(child)) {
-				GameText.walk(child);
+				GameText.walk(child, file);
 			}
 		}
 	}
