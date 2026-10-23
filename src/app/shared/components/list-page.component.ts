@@ -15,7 +15,7 @@ export class ListPageComponent<T extends { id: string }> {
 	readonly heading = input.required<string>();
 	readonly data = input.required<readonly T[]>();
 	readonly columns = input.required<readonly GridColumn<T>[]>();
-	/** Keeps the grid's column choices under this key. */
+	/** Keeps the grid's column and page size choices under this key. */
 	readonly storageKey = input<string>();
 
 	protected readonly open = RowNavigation.inject<T>();
