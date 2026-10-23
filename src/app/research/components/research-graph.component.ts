@@ -36,7 +36,7 @@ export class ResearchGraphComponent {
 	/** the projects a search found; the others are dimmed. Undefined without a search. */
 	readonly matches = input<ReadonlySet<string>>();
 
-	readonly select = output<string>();
+	readonly pick = output<string>();
 
 	protected readonly size = ResearchGraphComponent.OPTIONS;
 	protected readonly layout = computed(() =>

@@ -69,7 +69,7 @@
 							[selectedId]="store.selectedId()"
 							[highlight]="store.pathIds()"
 							[matches]="store.matches()"
-							(select)="store.select($event)"
+							(pick)="store.select($event)"
 						/>
 					} @else {
 						<app-data-grid

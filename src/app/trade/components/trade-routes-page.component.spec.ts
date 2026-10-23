@@ -138,7 +138,7 @@ describe('TradeRoutesPageComponent', () => {
 	});
 
 	it('writes filters to the URL', async () => {
-		const { router, set, pick, pickFirst, element, settle } = await setup();
+		const { router, pick, pickFirst, element, settle } = await setup();
 		expect(element.querySelector('thead')!.textContent).not.toContain('To start');
 		await pick('#trade-ware', 'Food Rations');
 		expect(router.url).toBe('/trade-routes?ware=foodrations');

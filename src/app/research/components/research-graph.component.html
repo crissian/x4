@@ -32,7 +32,7 @@
 					[class.node-dim]="matches() && !matches()!.has(item.id)"
 					[attr.aria-pressed]="item.id === selectedId()"
 					[title]="item.title"
-					(click)="select.emit(item.id)"
+					(click)="pick.emit(item.id)"
 				>
 					<span class="node-name">{{ item.project.name }}</span>
 					<span class="node-line">{{ item.meta }}</span>
