@@ -13,7 +13,8 @@ import { AllModuleTypes, ModuleTypes } from '../../shared/services/data/module-t
 import { StationModule, WareGroup } from '../../shared/services/model/model';
 import { ModuleService } from '../../shared/services/module.service';
 import { WareService } from '../../shared/services/ware.service';
-import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { SearchableSelectComponent } from '../../shared/components/searchable-select/searchable-select.component';
+import { SelectOption } from '../../shared/components/searchable-select/select-option-filter';
 import { StationAutofill } from './station-autofill';
 import { ModuleRow, StationModuleModel, WareGroupModel, StationCalculatorModel } from './station-calculator.model';
 
@@ -25,7 +26,7 @@ import { ModuleRow, StationModuleModel, WareGroupModel, StationCalculatorModel }
 		CdkDrag,
 		CdkDragHandle,
 		CdkDragPreview,
-		AutocompleteComponent,
+		SearchableSelectComponent,
 		LucideGripVertical,
 		LucideTrash,
 		LucideSquarePlus,
@@ -44,7 +45,11 @@ export class StationModulesComponent {
 	readonly partialWorkforce = input(0);
 
 	protected readonly selectText = $localize`:@@select:( Select )`;
-	readonly wareGroups: WareGroupModel[] = this.createWareGroups();
+	/** the production modules by ware group, then the other modules by type; all listed, as the old picker did */
+	protected readonly moduleOptions: SelectOption[] = this.createWareGroups().flatMap((group) =>
+		group.modules.map((module) => ({ id: module.id, name: module.name, group: group.name }))
+	);
+	protected readonly allModules = Infinity;
 
 	removeModule(index: number) {
 		this.rows()().value.update((rows) => rows.filter((_, i) => i !== index));
@@ -52,10 +57,6 @@ export class StationModulesComponent {
 
 	addModule() {
 		this.rows()().value.update((rows) => [...rows, { moduleId: '', count: 1 }]);
-	}
-
-	onSelectModule(id: string, index: number) {
-		this.rows()[index].moduleId().value.set(id);
 	}
 
 	drop(event: CdkDragDrop<unknown>) {

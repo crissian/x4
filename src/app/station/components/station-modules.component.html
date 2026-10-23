@@ -14,10 +14,13 @@
 					<div *cdkDragPreview class="rounded-md bg-raised px-5 py-4 text-fg-strong shadow-2xl">
 						{{ modules()[i]?.module?.name || selectText }}
 					</div>
-					<app-autocomplete
-						[id]="row.moduleId().value()"
-						[groups]="wareGroups"
-						(selectModule)="onSelectModule($event, i)"
+					<app-searchable-select
+						i18n-label="@@module"
+						label="Module"
+						[hideLabel]="true"
+						[options]="moduleOptions"
+						[limit]="allModules"
+						[formField]="row.moduleId"
 					/>
 				</td>
 				<td>
