@@ -1,0 +1,46 @@
+@if (store.losses().length === 0) {
+	<p class="text-sm text-fg-muted" i18n>
+		Your logbook reports no destroyed ships or stations. The game logs every player-owned ship or station it
+		loses, with the killer when one was recorded.
+	</p>
+} @else {
+	<div class="grid gap-3 sm:grid-cols-3">
+		<section class="rounded-md border border-line bg-surface-2 p-3 text-sm">
+			<h3 class="text-fg-muted" i18n>Losses</h3>
+			<p class="text-2xl font-semibold text-fg-strong">{{ store.summary().total }}</p>
+			<p class="text-xs text-fg-muted" i18n>Ships and stations destroyed, matching the filters.</p>
+		</section>
+		<app-count-tile
+			heading="Per sector"
+			i18n-heading
+			[items]="sectors()"
+			pickTitle="Show only this sector"
+			i18n-pickTitle
+			(picked)="store.filter({ sector: $event })"
+		/>
+		<app-count-tile
+			heading="Most frequent killers"
+			i18n-heading
+			[items]="killers()"
+			pickTitle="Show only this killer"
+			i18n-pickTitle
+			empty="No killer recorded"
+			i18n-empty
+			(picked)="store.filter({ search: $event })"
+		/>
+	</div>
+	<div class="mt-4">
+		<app-data-grid
+			[data]="store.filteredLosses()"
+			[columns]="columns.losses"
+			[cells]="{ sector: sectorCell }"
+			[trackBy]="trackBy"
+			[sort]="columns.newest"
+			[pageSizes]="pageSizes"
+			[compact]="true"
+			storageKey="event-log-losses"
+		/>
+	</div>
+}
+
+<ng-template #sectorCell let-row><app-sector-links [sector]="row.sector" [fallback]="row.loss.location" /></ng-template>

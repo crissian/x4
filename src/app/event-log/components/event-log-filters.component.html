@@ -1,0 +1,56 @@
+@let losses = store.tab() === 'losses';
+<div class="flex flex-wrap items-end gap-x-6 gap-y-3">
+	<label class="text-sm">
+		<ng-container i18n>Search</ng-container>
+		<input
+			id="event-log-search"
+			class="input"
+			type="search"
+			[placeholder]="losses ? shipPlaceholder : entryPlaceholder"
+			[formField]="form.search"
+		/>
+	</label>
+	@if (!losses) {
+		<label class="text-sm">
+			<ng-container i18n>Category</ng-container>
+			<select id="event-log-category" class="input" [formField]="form.category">
+				<option value="" i18n>All categories</option>
+				@for (option of store.categories(); track option.value) {
+					<option [value]="option.value">{{ option.label }} ({{ option.count }})</option>
+				}
+			</select>
+		</label>
+	}
+	@if (!losses) {
+		<label class="text-sm">
+			<ng-container i18n>Faction</ng-container>
+			<select id="event-log-faction" class="input" [formField]="form.faction">
+				<option value="" i18n>All factions</option>
+				@for (option of store.factionOptions(); track option.value) {
+					<option [value]="option.value">{{ option.label }} ({{ option.count }})</option>
+				}
+			</select>
+		</label>
+	}
+	<label class="text-sm">
+		<ng-container i18n>Sector</ng-container>
+		<select id="event-log-sector" class="input" [formField]="form.sector">
+			<option value="" i18n>All sectors</option>
+			@for (option of store.sectorOptions(); track option.value) {
+				<option [value]="option.value">{{ option.label }} ({{ option.count }})</option>
+			}
+		</select>
+	</label>
+	<label class="text-sm">
+		<ng-container i18n>Time</ng-container>
+		<select id="event-log-since" class="input" [formField]="form.since">
+			<option value="" i18n>All time</option>
+			@for (hours of since; track hours) {
+				<option [value]="hours" i18n>Last {{ hours }} h before the save</option>
+			}
+		</select>
+	</label>
+	@if (store.hasFilters()) {
+		<button type="button" class="btn btn-secondary" (click)="store.clearFilters()" i18n>Clear filters</button>
+	}
+</div>

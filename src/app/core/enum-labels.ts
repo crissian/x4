@@ -106,6 +106,14 @@ export class EnumLabels {
 			Recycling: $localize`:module type:Recycling`,
 			Radar: $localize`:module type:Radar`,
 			Welfare: $localize`:module type:Welfare`,
+
+			// Logbook categories of a savegame, prefixed with log:
+			'log:general': $localize`:logbook category:General`,
+			'log:missions': $localize`:logbook category:Missions`,
+			'log:news': $localize`:logbook category:News`,
+			'log:alerts': $localize`:logbook category:Alerts`,
+			'log:upkeep': $localize`:logbook category:Upkeep`,
+			'log:tips': $localize`:logbook category:Tips`,
 		};
 	}
 }

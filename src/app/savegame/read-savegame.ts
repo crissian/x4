@@ -5,6 +5,7 @@ import { BlueprintsExtractor } from './extractors/blueprints-extractor';
 import { InfoExtractor } from './extractors/info-extractor';
 import { MapExtractor } from './extractors/map-extractor';
 import { LicencesExtractor } from './extractors/licences-extractor';
+import { LogExtractor } from './extractors/log-extractor';
 import { RelationsExtractor } from './extractors/relations-extractor';
 import { RepresentativesExtractor } from './extractors/representatives-extractor';
 import { ShipsExtractor } from './extractors/ships-extractor';
@@ -58,6 +59,7 @@ export class SavegameReader {
 			new BlueprintsExtractor(),
 			new RepresentativesExtractor(),
 			new ShipsExtractor(),
+			new LogExtractor(),
 		];
 		try {
 			const opened = await TextStream.open(bytes, { size: options.size, onProgress: options.onProgress, keepGzip: true });

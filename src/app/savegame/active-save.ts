@@ -4,11 +4,13 @@ import type { Sector } from '../shared/services/model/model';
 import { SectorService } from '../shared/services/universe.service';
 import { BlueprintsExtractor } from './extractors/blueprints-extractor';
 import { LicencesExtractor } from './extractors/licences-extractor';
+import { LogExtractor } from './extractors/log-extractor';
 import { MapExtractor } from './extractors/map-extractor';
 import { RelationsExtractor } from './extractors/relations-extractor';
 import { RepresentativesExtractor } from './extractors/representatives-extractor';
 import { ShipsExtractor } from './extractors/ships-extractor';
 import type { SaveBlueprints, SaveLicences, SaveMap, SaveRelations, SaveRepresentatives, SaveShips } from './map/save-map-model';
+import type { SaveLog } from './log/save-log-model';
 import { SavegameStore } from './savegame-store';
 
 /**
@@ -31,6 +33,8 @@ export class ActiveSave {
 	readonly representatives = this.data<SaveRepresentatives>(RepresentativesExtractor.KEY);
 	/** The player's ships; undefined for a save read before they were. */
 	readonly ships = this.data<SaveShips>(ShipsExtractor.KEY);
+	/** The player's logbook; undefined for a save read before it was. */
+	readonly log = this.data<SaveLog>(LogExtractor.KEY);
 
 	/** Whether the map data can be shown. */
 	readonly status = this.statusOf(this.map);
