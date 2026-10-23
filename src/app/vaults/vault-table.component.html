@@ -1,0 +1,83 @@
+<table class="table text-sm">
+	<tbody>
+		@for (group of groups(); track group.key) {
+			@if (headers()) {
+				<tr>
+					<th colspan="2">
+						@if (group.sector) {
+							<app-map-focus-link [sector]="group.sector" />
+						} @else if (group.key) {
+							{{ group.key }}
+						} @else {
+							<ng-container i18n>Random spot</ng-container>
+						}
+					</th>
+				</tr>
+			}
+			@for (entry of group.entries; track entry.id) {
+				@let done = vaults.isDone(entry);
+				<tr [class.text-fg-muted]="done">
+					<td class="w-6 align-top">
+						@if (entry.save) {
+							<span
+								class="inline-block size-2.5 rounded-full"
+								[class.bg-emerald-400]="entry.save.opened"
+								[class.bg-amber-400]="!entry.save.opened && entry.save.known"
+								[class.bg-slate-500]="!entry.save.opened && !entry.save.known"
+							></span>
+						} @else {
+							<input
+								type="checkbox"
+								aria-label="Found"
+								i18n-aria-label
+								[formField]="vaults.foundForm[entry.id]"
+							/>
+						}
+					</td>
+					<td>
+						@if (entry.name) {
+							{{ entry.name }}
+						}
+						@for (blueprint of entry.blueprints; track blueprint.id) {
+							<ng-container i18n>Blueprint:</ng-container>{{ ' ' }}
+							<a [routerLink]="['/equipment', blueprint.id]">{{ blueprint.name ?? blueprint.id }}</a>
+						}
+						@if (!entry.name && !entry.blueprints.length) {
+							<ng-container i18n>Data vault</ng-container>
+						}
+						<div class="text-xs text-fg-muted">
+							@if (entry.save; as state) {
+								@if (state.opened) {
+									<span i18n>Opened</span>
+								} @else if (!state.present) {
+									<span i18n>Not placed in this save yet</span>
+								} @else if (state.known) {
+									<span i18n>Discovered, not opened</span>
+								} @else {
+									<span i18n>Not discovered</span>
+								}
+							}
+							@if (entry.condition === 'story') {
+								<span class="block" i18n>Appears during a story mission</span>
+							}
+							@if (!entry.sector) {
+								<span class="block" i18n
+									>Placed at a random spot at game start; load a save to see where</span
+								>
+							} @else if (vaults.positions().show && entry.x != null) {
+								<span class="block">
+									{{ entry.x | number: '1.0-0' }}, {{ entry.y ?? 0 | number: '1.0-0' }},
+									{{ entry.z | number: '1.0-0' }} km
+								</span>
+							}
+						</div>
+					</td>
+				</tr>
+			}
+		} @empty {
+			<tr>
+				<td class="text-fg-muted" i18n>No data vaults</td>
+			</tr>
+		}
+	</tbody>
+</table>
