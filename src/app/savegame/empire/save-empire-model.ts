@@ -30,6 +30,19 @@ export interface SaveOwnStation {
 	money: number;
 	/** wares in storage by ware id */
 	storage?: Record<string, number>;
+	/**
+	 * the built modules of its construction sequence by macro id (lowercased without _macro), with counts, in
+	 * sequence order; modules still being built are left out
+	 */
+	modules?: SaveStationModule[];
+	/** how many modules of its construction sequence are still being built; absent when none */
+	building?: number;
+}
+
+/** A module of a player station and how many of it are built. */
+export interface SaveStationModule {
+	macro: string;
+	count: number;
 }
 
 /** A ship nobody owns, which the player can claim. */

@@ -12,13 +12,14 @@ import type {
 import type { EmpireNode, SectorNode, ShipNode } from './empire-nodes';
 import { FleetLinks } from './fleet-links';
 import { SavePosition, type SaveZoneNode } from './save-position';
+import { StationBuild } from './station-build';
 
 /** ship class -> index in `SectorShipCounts` */
 const SHIP_SIZES: Record<string, number> = { ship_s: 0, ship_m: 1, ship_l: 2, ship_xl: 3 };
 
 /**
- * Reads what the player owns beyond the map data: their ships with fleets and orders, their stations' money and
- * storage, the ownerless ships they can claim, and the Xenon and Kha'ak ship counts per sector. Only components
+ * Reads what the player owns beyond the map data: their ships with fleets and orders, their stations' money,
+ * storage and built modules, the ownerless ships they can claim, and the Xenon and Kha'ak ship counts per sector. Only components
  * inside a sector count (ships waiting in `jobs` don't).
  */
 export class EmpireExtractor implements XmlExtractor<SaveEmpire> {
@@ -30,6 +31,7 @@ export class EmpireExtractor implements XmlExtractor<SaveEmpire> {
 
 	private readonly ships: SaveFleetShip[] = [];
 	private readonly stations: SaveOwnStation[] = [];
+	private readonly builds: StationBuild[] = [];
 	private readonly ownerless: ShipNode['ownerless'][] = [];
 	private readonly hostileShips: Record<string, SectorShipCounts> = {};
 	private readonly fleets = new FleetLinks();
@@ -97,6 +99,17 @@ export class EmpireExtractor implements XmlExtractor<SaveEmpire> {
 					this.commanderOf = undefined;
 				}
 				break;
+			case 'entry': {
+				const station =
+					path[path.length - 2] === 'sequence' && path[path.length - 3] === 'construction'
+						? this.ancestor(path, 3)
+						: undefined;
+				if (station?.kind === 'station' && station.build) {
+					const a = attrs();
+					station.build.addEntry(a['id'], a['macro']);
+				}
+				break;
+			}
 			case 'account': {
 				const station = this.ownStation(path, 1);
 				if (station) {
@@ -130,6 +143,7 @@ export class EmpireExtractor implements XmlExtractor<SaveEmpire> {
 
 	result(): SaveEmpire {
 		this.fleets.apply();
+		this.builds.forEach((x) => x.apply());
 		return {
 			ships: this.ships,
 			stations: this.stations,
@@ -142,6 +156,9 @@ export class EmpireExtractor implements XmlExtractor<SaveEmpire> {
 	private select(path: readonly string[], attrs: () => XmlAttributes): EmpireNode {
 		const a = attrs();
 		const cls = a['class'] ?? '';
+		if (a['construction'] && a['state'] === 'construction') {
+			this.stationBuild()?.markBuilding(a['construction']);
+		}
 		if (cls === 'sector') {
 			return { kind: 'sector', id: MacroId.of(a['macro'] ?? '') };
 		}
@@ -153,10 +170,12 @@ export class EmpireExtractor implements XmlExtractor<SaveEmpire> {
 			return sector ? this.readShip(a, sector.id) : { kind: 'ship' };
 		}
 		if (cls === 'station') {
-			return {
-				kind: 'station',
-				own: sector && a['owner'] === 'player' ? this.readStation(a, sector.id) : undefined,
-			};
+			const own = sector && a['owner'] === 'player' ? this.readStation(a, sector.id) : undefined;
+			const build = own ? new StationBuild(own) : undefined;
+			if (build) {
+				this.builds.push(build);
+			}
+			return { kind: 'station', own, build };
 		}
 		if (cls === 'storage') {
 			// station/connections/connection/component class="storage"
@@ -199,6 +218,12 @@ export class EmpireExtractor implements XmlExtractor<SaveEmpire> {
 		const station: SaveOwnStation = { id: a['id'] ?? '', code: a['code'] ?? '', sector, money: 0 };
 		this.stations.push(station);
 		return station;
+	}
+
+	/** The construction sequence of the player station a module component is in (not one of a ship docked there). */
+	private stationBuild(): StationBuild | undefined {
+		const node = this.stack.nearest((n) => n.kind === 'station' || n.kind === 'ship')?.value;
+		return node?.kind === 'station' ? node.build : undefined;
 	}
 
 	/** The default order, and the first order queued after it. */
