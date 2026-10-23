@@ -56,9 +56,9 @@ export class VaultList {
 		return this.entries().filter((x) => x.sector === id);
 	}
 
-	/** Whether the player has the vault: opened in the save, else ticked. */
+	/** Whether the player has the vault: opened in the save when it can tell, else ticked. */
 	isDone(entry: VaultEntry): boolean {
-		return entry.save ? entry.save.opened : !!this.found()[entry.id];
+		return entry.save?.opened ?? !!this.found()[entry.id];
 	}
 
 	private static ticks(ids: unknown[]): Record<string, boolean> {

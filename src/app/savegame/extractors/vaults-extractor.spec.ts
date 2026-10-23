@@ -33,7 +33,7 @@ class VaultsRunner {
 }
 
 describe('VaultsExtractor', () => {
-	it('keeps the predefined zone and reads an opened, looted vault', async () => {
+	it('keeps the predefined zone and reads an opened vault', async () => {
 		const vault =
 			'<component class="datavault" macro="landmarks_vault_01_macro" knownto="player">' +
 			'<removed><connection macro="connection_pickup"/></removed>' +
@@ -52,7 +52,6 @@ describe('VaultsExtractor', () => {
 				z: 2.6,
 				known: true,
 				unlocked: true,
-				looted: true,
 			},
 		]);
 	});
@@ -75,7 +74,6 @@ describe('VaultsExtractor', () => {
 				z: 29.5,
 				known: false,
 				unlocked: false,
-				looted: false,
 			},
 		]);
 	});

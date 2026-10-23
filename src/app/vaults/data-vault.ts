@@ -32,8 +32,11 @@ export interface VaultSaveState {
 	present: boolean;
 	/** the player has seen it */
 	known: boolean;
-	/** its signal leak was repaired, or its blueprint crate picked up */
-	opened: boolean;
+	/**
+	 * its signal leak was repaired; undefined when the save cannot tell (the Erlking vaults: their opened state is
+	 * not confirmed, so the player ticks them)
+	 */
+	opened?: boolean;
 }
 
 /** A vault as the pages list it: the game data merged with the active save. */

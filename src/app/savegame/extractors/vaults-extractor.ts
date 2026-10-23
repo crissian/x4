@@ -18,8 +18,6 @@ export interface SaveVault {
 	known: boolean;
 	/** its signal leak was repaired (`<unlock state="unlocked">`) */
 	unlocked: boolean;
-	/** a crate it held was picked up (`<removed><connection macro="connection_pickup…">`) */
-	looted: boolean;
 }
 
 export type SaveVaults = SaveVault[];
@@ -87,16 +85,6 @@ export class VaultsExtractor implements XmlExtractor<SaveVaults> {
 				}
 				break;
 			}
-			case 'connection': {
-				if (path[path.length - 2] !== 'removed') {
-					break;
-				}
-				const owner = this.ancestor(path, 2);
-				if (owner?.kind === 'vault' && attrs()['macro']?.startsWith('connection_pickup')) {
-					owner.vault.looted = true;
-				}
-				break;
-			}
 		}
 	}
 
@@ -146,7 +134,6 @@ export class VaultsExtractor implements XmlExtractor<SaveVaults> {
 				z: 0,
 				known: a['knownto'] === 'player',
 				unlocked: false,
-				looted: false,
 			},
 			zone: this.stack.nearest((n) => n.kind === 'zone')?.value as ZoneNode | undefined,
 		};

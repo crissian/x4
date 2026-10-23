@@ -45,7 +45,6 @@ class VaultFixtures {
 			z: 0,
 			known: false,
 			unlocked: false,
-			looted: false,
 			...vault,
 		};
 	}
@@ -78,14 +77,22 @@ describe('VaultMatcher', () => {
 		});
 	});
 
-	it('places a random vault where the save has it; taking its crate opens it', () => {
+	it('places a random vault where the save has it, without an opened state', () => {
 		const save = [
-			VaultFixtures.save({ macro: 'landmarks_erlking_vault_01', sector: 's5', x: 3, z: 4, looted: true }),
+			VaultFixtures.save({
+				macro: 'landmarks_erlking_vault_01',
+				sector: 's5',
+				x: 3,
+				z: 4,
+				known: true,
+				unlocked: true,
+			}),
 		];
 		const entry = VaultMatcher.merge(VaultFixtures.DATA, save, new Set(), new Map()).find(
 			(x) => x.id === 'erlking_blueprint_1'
 		);
-		expect(entry).toMatchObject({ sector: 's5', x: 3, z: 4, save: { present: true, opened: true } });
+		expect(entry).toMatchObject({ sector: 's5', x: 3, z: 4 });
+		expect(entry?.save).toEqual({ present: true, known: true, opened: undefined });
 	});
 
 	it('keeps vaults of the save sectors it does not hold and drops those of other sectors', () => {
@@ -94,24 +101,11 @@ describe('VaultMatcher', () => {
 		expect(entries[0].save).toEqual({ present: false, known: false, opened: false });
 	});
 
-	it('adds the vaults only the save has, and skips those in an unknown zone', () => {
+	it('leaves out the vaults only the save has', () => {
 		const save = [
 			VaultFixtures.save({ macro: 'landmarks_research_vault_01', sector: 's3', x: 1, z: 2, unlocked: true }),
 			VaultFixtures.save({ macro: 'landmarks_research_vault_01', sector: 's3', zone: 'nowhere' }),
 		];
-		const entries = VaultMatcher.merge(VaultFixtures.DATA, save, new Set(), new Map());
-		expect(entries).toEqual([
-			{
-				id: 'save_landmarks_research_vault_01_s3_1_2',
-				macro: 'landmarks_research_vault_01',
-				sector: 's3',
-				x: 1,
-				y: 0,
-				z: 2,
-				version: 0,
-				blueprints: [],
-				save: { present: true, known: false, opened: true },
-			},
-		]);
+		expect(VaultMatcher.merge(VaultFixtures.DATA, save, new Set(), new Map())).toEqual([]);
 	});
 });

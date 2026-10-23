@@ -9,8 +9,8 @@ export class VaultMatcher {
 	}
 
 	/**
-	 * The vaults of a save: game data vaults it holds, game data vaults of its sectors it does not hold yet (a story
-	 * vault), and the vaults only the save knows. A randomly placed vault is matched by its macro, a placed one by its
+	 * The vaults of a save: game data vaults it holds and game data vaults of its sectors it does not hold yet (a story
+	 * vault). Vaults only the save has are left out. A randomly placed vault is matched by its macro, a placed one by its
 	 * macro and the nearest spot in its sector (the game may move it to a free spot). `zones` gives the position of
 	 * the predefined zones in their sector.
 	 */
@@ -46,20 +46,6 @@ export class VaultMatcher {
 				result.push({ ...VaultMatcher.entry(vault), save: { present: false, known: false, opened: false } });
 			}
 		}
-		// vaults the game data does not place, e.g. the ones of story missions
-		for (const vault of left) {
-			result.push({
-				id: `save_${vault.macro}_${vault.sector}_${vault.x}_${vault.z}`,
-				macro: vault.macro,
-				sector: vault.sector,
-				x: vault.x,
-				y: vault.y,
-				z: vault.z,
-				version: 0,
-				blueprints: [],
-				save: { present: true, known: vault.known, opened: vault.unlocked || vault.looted },
-			});
-		}
 		return result;
 	}
 
@@ -79,9 +65,12 @@ export class VaultMatcher {
 		};
 	}
 
-	/** A vault with blueprints is opened once its crate is taken; the others once their signal leak is repaired. */
-	private static opened(vault: DataVault, save: SaveVault): boolean {
-		return vault.blueprints?.length ? save.looted || save.unlocked : save.unlocked;
+	/**
+	 * A placed vault is opened once its signal leak is repaired (`<unlock state="unlocked">`; in a save every such
+	 * vault has its timeline entry). A randomly placed (Erlking) vault never records that, so the save cannot tell.
+	 */
+	private static opened(vault: DataVault, save: SaveVault): boolean | undefined {
+		return vault.sector ? save.unlocked : undefined;
 	}
 
 	private static nearest<T extends { x: number; z: number }>(vault: DataVault, candidates: T[]): T | undefined {
