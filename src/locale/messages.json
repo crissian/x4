@@ -165,6 +165,7 @@
     "jumps.distance.other": "{$count} jumps",
     "jumps.here": "here",
     "4223382601878944026": " Per hour, with the Station Calculator's production model: every built module runs non-stop with all its inputs available, energy cells follow the sector's sunlight, and the workforce bonus comes from the workers the save gives each station (only stations with habitats have workers). Habitats count what their actual workers eat. Modules still being built, modules the calculator doesn't know and construction sites are left out. Mined or collected wares come from your miners, so stations only use them.\n",
+    "6633634676982492446": " Worker food follows the races of the save's actual workforce; the Station Calculator feeds the races of the habitats instead, so a station with mixed races can differ there. Your headquarters counts the 200 extra workers it needs.\n",
     "8674969417773777194": "{VAR_PLURAL, plural, =1 {1 station} other {{INTERPOLATION} stations}}",
     "5595794344928638726": "{$ICU}, {$ICU_1}.",
     "75783721197666256": "{VAR_PLURAL, plural, =0 {no ware short} =1 {1 ware short} other {{INTERPOLATION} wares short}}",

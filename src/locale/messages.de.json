@@ -1250,6 +1250,7 @@
     "2058540860781608440": "{$START_TAG__SVG_SVG}{$CLOSE_TAG__SVG_SVG}Im Stationsrechner öffnen",
     "4922308101141951396": "Keine gebauten Module",
     "6996746813678807241": "Nicht im Rechner:",
-    "9211062389274478445": "{VAR_PLURAL, plural, =1 {1 Modul noch im Bau, ausgelassen} other {{INTERPOLATION} Module noch im Bau, ausgelassen}}"
+    "9211062389274478445": "{VAR_PLURAL, plural, =1 {1 Modul noch im Bau, ausgelassen} other {{INTERPOLATION} Module noch im Bau, ausgelassen}}",
+    "6633634676982492446": " Die Verpflegung der Arbeiter folgt den Völkern der tatsächlichen Belegschaft im Spielstand; der Stationsrechner verpflegt stattdessen die Völker der Wohnmodule, daher kann eine Station mit gemischten Völkern dort abweichen. Dein Hauptquartier zählt die 200 zusätzlichen Arbeiter, die es braucht.\n"
   }
 }

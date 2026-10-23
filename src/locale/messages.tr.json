@@ -1250,6 +1250,7 @@
     "2058540860781608440": "{$START_TAG__SVG_SVG}{$CLOSE_TAG__SVG_SVG}İstasyon Hesaplayıcı'da aç",
     "4922308101141951396": "İnşa edilmiş modül yok",
     "6996746813678807241": "Hesaplayıcıda yok:",
-    "9211062389274478445": "{VAR_PLURAL, plural, =1 {1 modül hâlâ inşa ediliyor, dışarıda} other {{INTERPOLATION} modül hâlâ inşa ediliyor, dışarıda}}"
+    "9211062389274478445": "{VAR_PLURAL, plural, =1 {1 modül hâlâ inşa ediliyor, dışarıda} other {{INTERPOLATION} modül hâlâ inşa ediliyor, dışarıda}}",
+    "6633634676982492446": " İşçi yiyeceği, kayıttaki gerçek işgücünün ırklarına göre hesaplanır; İstasyon Hesaplayıcı ise yaşam modüllerinin ırklarını besler, bu yüzden karışık ırklı bir istasyon burada farklı olabilir. Karargâhınız ihtiyaç duyduğu 200 ek işçiyi sayar.\n"
   }
 }

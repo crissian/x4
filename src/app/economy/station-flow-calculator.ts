@@ -6,15 +6,20 @@ import type { ModuleService } from '../shared/services/module.service';
 import type { WareService } from '../shared/services/ware.service';
 import type { SaveStation } from '../savegame/map/save-map-model';
 import { ResourceCalculator, StationModuleModel } from '../station/components/station-calculator.model';
+import { PlayerHeadquarters } from '../station/player-headquarters';
 import type { StationFlow, StationFlows } from './economy-model';
 
-/** What the flows of a station are calculated from: its modules (macro ids, see `SaveStation`), workers and sector. */
-export type StationFlowInput = Pick<SaveStation, 'modules' | 'moduleCounts' | 'workforce' | 'sector'>;
+/**
+ * What the flows of a station are calculated from: its modules (macro ids, see `SaveStation`), workers and sector,
+ * and its station macro, which tells the player headquarters.
+ */
+export type StationFlowInput = Pick<SaveStation, 'modules' | 'moduleCounts' | 'workforce' | 'sector'> &
+	Partial<Pick<SaveStation, 'macro'>>;
 
 /**
  * Hourly flows of the stations of a save, at full input supply, with the station calculator maths: the workforce
- * bonus scales with the workers the station really has, energy cells with the sector sunlight, and habitats feed
- * the workers actually living there.
+ * bonus scales with the workers the station really has (the player headquarters needs its extra workers), energy
+ * cells with the sector sunlight, and habitats feed the workers actually living there.
  */
 export class StationFlowCalculator {
 	private readonly sunlight = new Map<string, number>();
@@ -56,7 +61,12 @@ export class StationFlowCalculator {
 		const models = station.modules.map((id, i) => this.model(id, station.moduleCounts?.[i] ?? 1));
 		const sunlight = this.sunlightOf(station.sector);
 
-		for (const resource of ResourceCalculator.calculate(models, sunlight, workers)) {
+		for (const resource of ResourceCalculator.calculate(
+			models,
+			sunlight,
+			workers,
+			PlayerHeadquarters.is(station.macro)
+		)) {
 			for (const item of resource.items) {
 				// habitats are fed from the real workers below, not from their capacity
 				if (item.type === ModuleTypes.habitation) {

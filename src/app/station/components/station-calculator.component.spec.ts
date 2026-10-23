@@ -192,8 +192,10 @@ describe('station calculator', () => {
 			])
 		);
 		fixture.componentRef.setInput('wf', '600');
+		fixture.componentRef.setInput('hq', '1');
 		await fixture.whenStable();
 		const component = fixture.componentInstance;
+		expect(component.settings().isHq).toBe(true);
 		expect(component.settings().autoWorkforce).toBe(false);
 		expect(component.partialWorkforce()).toBe(600);
 		expect(StationLayoutLink.params([{ moduleId: HABITAT, count: 1 }], undefined, 600)).toEqual({
@@ -201,6 +203,7 @@ describe('station calculator', () => {
 			wf: 600,
 		});
 		expect(StationLayoutLink.parseWorkforce('-1')).toBeUndefined();
+		expect(StationLayoutLink.params([], undefined, undefined, true)['hq']).toBe(1);
 	});
 
 	it('autofills the production chain from the button', async () => {

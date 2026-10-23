@@ -86,7 +86,7 @@ export class EmpireStore {
 			stationName: (x) => namer?.name(x) ?? x.name ?? x.code,
 			products: (id) => this.modules.getEntity(id)?.product?.map((x) => x.id) ?? [],
 			wareName: (id) => this.wares.getEntity(id)?.name ?? id,
-			layout: (own, workforce) => OwnStationLayouts.of(own, workforce, this.flowCalculator),
+			layout: (own, station) => OwnStationLayouts.of(own, station, this.flowCalculator),
 		});
 	});
 	readonly summary = computed<EmpireSummary>(() =>

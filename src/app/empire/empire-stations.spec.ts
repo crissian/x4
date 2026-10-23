@@ -9,7 +9,7 @@ describe('EmpireStations', () => {
 		stationName: (x) => x.name ?? x.code,
 		products: (id) => (id === 'prod_ec' ? ['energycells'] : id === 'prod_mix' ? ['hullparts', 'energycells'] : []),
 		wareName: (id) => ({ energycells: 'Energy Cells', hullparts: 'Hull Parts', water: 'Water' })[id] ?? id,
-		layout: (own, workforce) => ({ own: own.code, workforce }) as never,
+		layout: (own, x) => ({ own: own.code, workforce: x.workforce }) as never,
 	};
 	const station = (code: string, extra: Partial<SaveStation> = {}): SaveStation => ({
 		code,

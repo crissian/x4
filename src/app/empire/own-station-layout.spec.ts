@@ -20,7 +20,11 @@ describe('OwnStationLayouts', () => {
 	};
 
 	it('turns the built modules into calculator rows and lists the modules the site does not know', () => {
-		const layout = OwnStationLayouts.of(own, { argon: 300, teladi: 20 }, calculator);
+		const layout = OwnStationLayouts.of(
+			own,
+			{ macro: 'station_gen_factory_base_01', workforce: { argon: 300, teladi: 20 } },
+			calculator
+		);
 		const energy = EconomyTesting.modules.getEntities().find((x) => x.macro === `${EconomyTesting.ENERGY}_macro`)!;
 		const habitat = EconomyTesting.modules
 			.getEntities()
@@ -35,7 +39,9 @@ describe('OwnStationLayouts', () => {
 		// sector b has half the sunlight
 		expect(layout.sunlight).toBe(50);
 		expect(layout.calculator).toEqual(StationLayoutLink.params(layout.rows, 50, 320));
+		expect(layout.hq).toBe(false);
 		expect(layout.flows).toEqual({
+			macro: 'station_gen_factory_base_01',
 			modules: [EconomyTesting.ENERGY, 'landmarks_player_hq_01_research', EconomyTesting.HABITAT],
 			moduleCounts: [3, 1, 1],
 			workforce: { argon: 300, teladi: 20 },
@@ -44,8 +50,18 @@ describe('OwnStationLayouts', () => {
 	});
 
 	it('gives a station without workforce no workers', () => {
-		const layout = OwnStationLayouts.of({ ...own, modules: undefined, building: undefined }, undefined, calculator);
+		const layout = OwnStationLayouts.of(
+			{ ...own, modules: undefined, building: undefined },
+			{ macro: 'station_gen_factory_base_01' },
+			calculator
+		);
 		expect(layout).toMatchObject({ rows: [], unknown: [], building: 0, workforce: 0 });
 		expect(layout.calculator['wf']).toBe(0);
+	});
+
+	it('marks the player headquarters for the calculator', () => {
+		const layout = OwnStationLayouts.of(own, { macro: 'station_pla_headquarters_base_01' }, calculator);
+		expect(layout.hq).toBe(true);
+		expect(layout.calculator['hq']).toBe(1);
 	});
 });

@@ -12,8 +12,8 @@ export interface EmpireStationLookups {
 	/** the ware ids a station module makes; empty for other modules */
 	products(moduleId: string): readonly string[];
 	wareName(id: string): string;
-	/** the calculator layout of the station's built modules, with the workers of the map data */
-	layout(own: SaveOwnStation, workforce: SaveStation['workforce']): OwnStationLayout;
+	/** the calculator layout of the station's built modules, with the macro and workers of the map data */
+	layout(own: SaveOwnStation, station: SaveStation): OwnStationLayout;
 }
 
 /** Turns the player's stations of the save into the empire page's rows, and sums up the empire. */
@@ -53,7 +53,7 @@ export class EmpireStations {
 						.sort((a, b) => b.amount - a.amount),
 					money: extra?.money ?? 0,
 					ships: extra ? EmpireStations.commanded(extra.id, ships) : 0,
-					layout: extra ? lookups.layout(extra, station.workforce) : undefined,
+					layout: extra ? lookups.layout(extra, station) : undefined,
 				};
 			})
 			.sort((a, b) => a.name.localeCompare(b.name));

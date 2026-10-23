@@ -1,7 +1,9 @@
 import type { Params } from '@angular/router';
 import type { StationFlowCalculator, StationFlowInput } from '../economy/station-flow-calculator';
 import type { SaveOwnStation, SaveStationModule } from '../savegame/empire/save-empire-model';
+import type { SaveStation } from '../savegame/map/save-map-model';
 import type { ModuleRow } from '../station/components/station-calculator.model';
+import { PlayerHeadquarters } from '../station/player-headquarters';
 import { StationLayoutLink } from '../station/station-layout-link';
 
 /** A player station of the save as the station calculator sees it: its built modules, workers and sunlight. */
@@ -16,23 +18,27 @@ export interface OwnStationLayout {
 	workforce: number;
 	/** of the station's sector, in percent */
 	sunlight: number;
+	/** the player headquarters, which needs extra workers (`PlayerHeadquarters`) */
+	hq: boolean;
 	/** query params of the station calculator link */
 	calculator: Params;
 	/** what the station's hourly flows are calculated from */
 	flows: StationFlowInput;
 }
 
-/** Builds the calculator layout of a player station from the empire data and the map data's workforce. */
+/** Builds the calculator layout of a player station from the empire data and the map data's station. */
 export class OwnStationLayouts {
 	/**
-	 * @param workforce workers by race of the station's `workforces` in the save; absent when the station has none
-	 *   (the save only has it for stations with habitats)
+	 * @param station the map data's station: its macro, and its workers by race from the save's `workforces`, which
+	 *   only stations with habitats have
 	 */
 	static of(
 		own: SaveOwnStation,
-		workforce: Readonly<Record<string, number>> | undefined,
+		station: Pick<SaveStation, 'macro' | 'workforce'>,
 		calculator: StationFlowCalculator
 	): OwnStationLayout {
+		const workforce = station.workforce;
+		const hq = PlayerHeadquarters.is(station.macro);
 		const built = own.modules ?? [];
 		const rows: ModuleRow[] = [];
 		const unknown: SaveStationModule[] = [];
@@ -52,8 +58,10 @@ export class OwnStationLayouts {
 			building: own.building ?? 0,
 			workforce: workers,
 			sunlight,
-			calculator: StationLayoutLink.params(rows, sunlight, workers),
+			hq,
+			calculator: StationLayoutLink.params(rows, sunlight, workers, hq),
 			flows: {
+				macro: station.macro,
 				modules: built.map((x) => x.macro),
 				moduleCounts: built.map((x) => x.count),
 				workforce: workforce ? { ...workforce } : undefined,
