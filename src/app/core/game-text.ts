@@ -37,6 +37,11 @@ const TEXT_KEYS = new Set([
 	'atmosphere',
 	'population',
 	'settlements',
+	// game starts
+	'unlock',
+	'character',
+	'label',
+	'text',
 ]);
 
 export class GameText {

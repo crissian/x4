@@ -1,0 +1,55 @@
+<div class="card">
+	<div class="card-header" i18n>Game starts</div>
+	<div class="card-body">
+		<section class="mb-4" aria-labelledby="game-start-advice">
+			<h2 id="game-start-advice" class="mb-2 font-semibold text-fg-strong" i18n>Which start suits me?</h2>
+			<ul class="grid gap-2 sm:grid-cols-3">
+				@for (item of advice; track item.type) {
+					<li class="rounded-md border border-line bg-surface-2 p-3 text-sm">
+						<a
+							class="font-semibold"
+							[routerLink]="[]"
+							[queryParams]="{ type: item.type }"
+							queryParamsHandling="merge"
+							>{{ item.label }}</a
+						>
+						<p class="mt-1 text-fg-muted">{{ item.hint }}</p>
+					</li>
+				}
+			</ul>
+		</section>
+		<app-game-start-filters class="mb-4 block" />
+		@let starts = store.filtered();
+		@if (starts.length === 0) {
+			<p class="text-fg-muted">
+				<ng-container i18n>No game start matches these filters.</ng-container>
+				<button type="button" class="link-button ml-1 text-link" (click)="store.reset()" i18n>
+					Show all new game starts
+				</button>
+			</p>
+		} @else if (store.model().view === 'table') {
+			<app-data-grid
+				[data]="starts"
+				[columns]="columns"
+				[trackBy]="trackBy"
+				[clickable]="true"
+				storageKey="game-starts"
+				(rowClick)="open($event)"
+			/>
+		} @else {
+			<ul class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+				@for (summary of starts; track summary.start.id) {
+					<li><app-game-start-card [summary]="summary" /></li>
+				}
+			</ul>
+		}
+		@if (store.hiddenByDlc(); as hidden) {
+			<p class="mt-3 text-sm text-fg-muted" i18n>
+				{hidden, plural,
+					=1 {1 start needs a DLC you don't own.}
+					other {{{ hidden }} starts need a DLC you don't own.}
+				}
+			</p>
+		}
+	</div>
+</div>

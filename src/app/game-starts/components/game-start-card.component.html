@@ -1,0 +1,61 @@
+@let start = this.start();
+@let summary = this.summary();
+<div class="card flex h-full flex-col">
+	<div class="card-header flex flex-wrap items-center justify-between gap-2">
+		<a [routerLink]="['/game-starts', start.id]">{{ start.name }}</a>
+		<span class="flex flex-wrap gap-1 text-xs font-normal">
+			@if (story()) {
+				<span
+					class="rounded-full border border-sky-500 px-2 py-0.5 text-sky-700 dark:text-sky-300"
+					[title]="typeHint()"
+					>{{ typeLabel() }}</span
+				>
+			} @else {
+				<span class="rounded-full border border-line-strong px-2 py-0.5" [title]="typeHint()">{{
+					typeLabel()
+				}}</span>
+			}
+			@if (start.version) {
+				<span class="rounded-full border border-amber-500 px-2 py-0.5 text-amber-700 dark:text-amber-300">{{
+					dlc()
+				}}</span>
+			}
+		</span>
+	</div>
+	<div class="card-body flex grow flex-col gap-2 text-sm">
+		<dl class="details">
+			<dt i18n>Money</dt>
+			<dd>{{ start.money | number: '1.0-0' }} Cr</dd>
+			<dt i18n>Ship</dt>
+			<dd>
+				@if (summary.ship; as ship) {
+					<a [routerLink]="['/ships', ship.id]">{{ ship.name }}</a>
+					@if (shipType(); as type) {
+						<span class="text-fg-muted"> ({{ type }})</span>
+					}
+				} @else {
+					{{ summary.shipText ?? '-' }}
+				}
+			</dd>
+			<dt i18n>Location</dt>
+			<dd>
+				@if (summary.sector; as sector) {
+					<a [routerLink]="['/sectors', sector.id]">{{ sector.name }}</a>
+				} @else {
+					{{ summary.locationText ?? '-' }}
+				}
+			</dd>
+			@if (summary.property; as property) {
+				<dt i18n>Property</dt>
+				<dd>{{ property }}</dd>
+			}
+			@if (start.character) {
+				<dt i18n>Character</dt>
+				<dd>{{ start.character }}</dd>
+			}
+		</dl>
+		@if (start.unlock) {
+			<p class="text-xs text-warning" i18n>Unlock first: {{ start.unlock }}</p>
+		}
+	</div>
+</div>

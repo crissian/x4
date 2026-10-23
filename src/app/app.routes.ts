@@ -140,6 +140,14 @@ export const appRoutes: Routes = [
 		title: `${BASE_TITLE} - ${$localize`Research`}`,
 	},
 	{
+		path: 'game-starts',
+		loadChildren: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'ship-list', 'game-starts'],
+				() => import('./game-starts/game-starts.routes')
+			),
+	},
+	{
 		path: 'saves',
 		loadComponent: () => import('./savegame/components/savegames-page.component'),
 		title: `${BASE_TITLE} - ${$localize`Savegames`}`,

@@ -1,0 +1,17 @@
+<div class="card">
+	<div class="card-header">{{ heading() }} ({{ items().length }})</div>
+	<ul class="card-body columns-1 gap-6 text-sm sm:columns-2 lg:columns-3">
+		@for (item of items(); track item.ware) {
+			<li class="break-inside-avoid py-0.5">
+				@if (item.page) {
+					<a [routerLink]="['/' + item.page, item.ware]">{{ item.name ?? item.ware }}</a>
+				} @else {
+					{{ item.name ?? item.ware }}
+				}
+				@if (item.count && item.count > 1) {
+					<span class="text-fg-muted"> ×{{ item.count }}</span>
+				}
+			</li>
+		}
+	</ul>
+</div>
