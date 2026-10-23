@@ -15,7 +15,7 @@ import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/ro
 import { LucideDynamicIcon, LucideMenu } from '@lucide/angular';
 import { filter } from 'rxjs/operators';
 import { NavDropdownComponent } from './nav-dropdown.component';
-import { NavItems, type NavItem } from './nav-item';
+import { NavItems, type NavGroup, type NavItem } from './nav-item';
 import { ExperimentalBadgeComponent } from './shared/components/experimental-badge.component';
 
 /**
@@ -42,13 +42,10 @@ export class HeaderNavComponent {
 	readonly items = input.required<NavItem[]>();
 	protected readonly NavItems = NavItems;
 
-	/** The menu lists the plain links first, then each group under its label. */
-	protected readonly sections = computed(() => {
+	/** The menu lists the plain links first, then each group under its label, with its section headings. */
+	protected readonly groups = computed<Pick<NavGroup, 'label' | 'sections' | 'experimental'>[]>(() => {
 		const items = this.items();
-		return [
-			{ label: '', links: items.filter(NavItems.isLink), experimental: false },
-			...items.filter(NavItems.isGroup),
-		];
+		return [{ label: '', sections: [{ links: items.filter(NavItems.isLink) }] }, ...items.filter(NavItems.isGroup)];
 	});
 
 	protected readonly url = signal(inject(Router).url);

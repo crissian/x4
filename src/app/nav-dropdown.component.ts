@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LucideChevronDown, LucideDynamicIcon } from '@lucide/angular';
-import type { NavGroup } from './nav-item';
+import { NavItems, type NavGroup } from './nav-item';
 import { ExperimentalBadgeComponent } from './shared/components/experimental-badge.component';
 
 /** A header button that toggles a panel of links. The parent owns the open state, so only one panel is open. */
@@ -39,7 +39,12 @@ export class NavDropdownComponent {
 	readonly open = input(false);
 	readonly openChange = output<boolean>();
 
-	protected readonly panelId = `app-nav-dropdown-${NavDropdownComponent.nextId++}`;
+	private readonly id = NavDropdownComponent.nextId++;
+	protected readonly panelId = `app-nav-dropdown-${this.id}`;
+	/** prefix of the section heading ids */
+	protected readonly sectionId = `app-nav-section-${this.id}`;
+	/** several sections are laid out side by side, each under its heading */
+	protected readonly columns = computed(() => this.group().sections.length > 1);
 
 	private leaveTimer: ReturnType<typeof setTimeout> | undefined;
 	private readonly cleanup = inject(DestroyRef).onDestroy(() => clearTimeout(this.leaveTimer));
@@ -51,7 +56,7 @@ export class NavDropdownComponent {
 	/** The route is inside one of the links, so `/wares/:id` counts for `/wares`. */
 	protected readonly active = computed(() => {
 		const path = this.url().split(/[?#;]/)[0];
-		return this.group().links.some((link) => path === link.path || path.startsWith(link.path + '/'));
+		return NavItems.links(this.group()).some((link) => path === link.path || path.startsWith(link.path + '/'));
 	});
 
 	/** A mouse opens the dropdown on hover (and the parent closes the others); touch keeps tapping the button. */

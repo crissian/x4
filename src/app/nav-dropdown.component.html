@@ -17,18 +17,39 @@
 </button>
 
 @if (open()) {
-	<div [id]="panelId" class="absolute top-full z-30 border border-line bg-nav py-1 shadow-lg">
-		@for (link of group().links; track link.path) {
-			<a
-				#item
-				[routerLink]="link.path"
-				routerLinkActive="!text-fg-strong bg-nav-active"
-				class="flex items-center gap-2 px-4 py-2.5 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
-				(click)="openChange.emit(false)"
-				(keydown.arrowdown)="onItemArrow($event, 1)"
-				(keydown.arrowup)="onItemArrow($event, -1)"
-				><svg [lucideIcon]="link.icon" class="opacity-80" />{{ link.label }}</a
+	<div
+		[id]="panelId"
+		class="absolute top-full z-30 border border-line bg-nav py-1 shadow-lg"
+		[class.flex]="columns()"
+	>
+		@for (section of group().sections; track $index) {
+			@let headingId = sectionId + '-' + $index;
+			<div
+				[attr.role]="section.label ? 'group' : null"
+				[attr.aria-labelledby]="section.label ? headingId : null"
+				[class.min-w-44]="columns()"
 			>
+				@if (section.label) {
+					<div
+						[id]="headingId"
+						class="px-4 pt-2 pb-1 text-xs font-semibold tracking-wide text-fg-muted uppercase"
+					>
+						{{ section.label }}
+					</div>
+				}
+				@for (link of section.links; track link.path) {
+					<a
+						#item
+						[routerLink]="link.path"
+						routerLinkActive="!text-fg-strong bg-nav-active"
+						class="flex items-center gap-2 px-4 py-2.5 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
+						(click)="openChange.emit(false)"
+						(keydown.arrowdown)="onItemArrow($event, 1)"
+						(keydown.arrowup)="onItemArrow($event, -1)"
+						><svg [lucideIcon]="link.icon" class="opacity-80" />{{ link.label }}</a
+					>
+				}
+			</div>
 		}
 	</div>
 }

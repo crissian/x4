@@ -15,16 +15,16 @@ const ITEMS: NavItem[] = [
 	{
 		label: 'Database',
 		icon: ICON,
-		links: [
-			{ path: '/wares', label: 'Wares', icon: ICON },
-			{ path: '/ships', label: 'Ships', icon: ICON },
+		sections: [
+			{ label: 'Items', links: [{ path: '/wares', label: 'Wares', icon: ICON }] },
+			{ label: 'World', links: [{ path: '/ships', label: 'Ships', icon: ICON }] },
 		],
 	},
 	{
 		label: 'Economy',
 		icon: ICON,
 		experimental: true,
-		links: [{ path: '/trade-routes', label: 'Trade Routes', icon: ICON }],
+		sections: [{ links: [{ path: '/trade-routes', label: 'Trade Routes', icon: ICON }] }],
 	},
 ];
 
@@ -122,6 +122,20 @@ describe('header nav', () => {
 		expect(panels().length).toBe(0);
 	});
 
+	it('groups the links of a dropdown under their section headings', async () => {
+		buttons()[0].click();
+		await settle();
+		const groups = [...panels()[0].querySelectorAll('[role="group"]')];
+		expect(
+			groups.map((group) => document.getElementById(group.getAttribute('aria-labelledby')!)!.textContent!.trim())
+		).toEqual(['Items', 'World']);
+		expect(groups.map((group) => group.querySelector('a')!.textContent!.trim())).toEqual(['Wares', 'Ships']);
+		// a group without headings has no group roles
+		buttons()[1].click();
+		await settle();
+		expect(panels()[0].querySelectorAll('[role="group"]').length).toBe(0);
+	});
+
 	it('marks a group active while the route is inside one of its links', async () => {
 		await navigate('/wares/ec');
 		expect(buttons()[0].className).toContain('bg-nav-active');
@@ -205,7 +219,9 @@ describe('header nav', () => {
 		expect([...menu.children].map((child) => child.textContent!.replace(/\s+/g, ' ').trim())).toEqual([
 			'Calc',
 			'Database',
+			'Items',
 			'Wares',
+			'World',
 			'Ships',
 			'Economy Experimental',
 			'Trade Routes',
