@@ -10,7 +10,6 @@ export type DiplomacyTab = 'actions' | 'events' | 'gifts' | 'agents';
 export interface DiplomacyModel {
 	category: string;
 	agentType: string;
-	risk: string;
 	/** part of an action's name or short description */
 	search: string;
 	/** only the actions the menu of the active save shows */
@@ -27,7 +26,6 @@ export interface DiplomacyState {
 export interface DiplomacyIds {
 	categories: readonly string[];
 	agentTypes: readonly string[];
-	risks: readonly string[];
 }
 
 /** Reads the diplomacy page state from the URL query params and writes it back, and applies the filters. */
@@ -40,7 +38,6 @@ export class DiplomacyQuery {
 			model: {
 				category: QueryParams.oneOf(params, 'category', ids.categories, ''),
 				agentType: QueryParams.oneOf(params, 'agent', ids.agentTypes, ''),
-				risk: QueryParams.oneOf(params, 'risk', ids.risks, ''),
 				search: params.get('q') ?? '',
 				shown: QueryParams.flag(params, 'shown'),
 			},
@@ -53,7 +50,6 @@ export class DiplomacyQuery {
 			tab: QueryParams.unlessDefault(tab, 'actions'),
 			category: model.category || null,
 			agent: model.agentType || null,
-			risk: model.risk || null,
 			q: model.search.trim() || null,
 			shown: QueryParams.writeFlag(model.shown),
 		};
@@ -67,7 +63,6 @@ export class DiplomacyQuery {
 			(x) =>
 				(!model.category || x.category === model.category) &&
 				(!model.agentType || x.agentType === model.agentType) &&
-				(!model.risk || x.risk === model.risk) &&
 				(!shown || shown[x.id] === true) &&
 				(!search || x.name.toLowerCase().includes(search) || x.shortDescription.toLowerCase().includes(search))
 		);

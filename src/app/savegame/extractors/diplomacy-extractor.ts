@@ -13,7 +13,8 @@ export interface SaveDiplomacy {
 
 /**
  * Reads `savegame/universe/diplomacy/actions/action id= hidden=`: the game sets the flag with
- * set_diplomacy_action_hidden (md/diplomacy.xml) as it unlocks the actions. Agents, influence and running actions are
+ * set_diplomacy_action_hidden (md/diplomacy.xml) as it unlocks the actions. The diplomacy menu lists a hidden action only while it
+ * has an operation, and refuses to start it (ui/addons/ego_detailmonitor/menu_diplomacy.lua lines 1336, 2699). Agents, influence and running actions are
  * not read: no save at hand has them.
  */
 export class DiplomacyExtractor implements XmlExtractor<SaveDiplomacy> {

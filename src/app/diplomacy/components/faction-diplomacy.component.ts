@@ -1,6 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NumberFormats } from '../../core/format/number-formats';
 import { DiplomacyService } from '../../shared/services/diplomacy.service';
 import { DiplomacyWares } from '../diplomacy-wares';
 
@@ -20,6 +19,4 @@ export class FactionDiplomacyComponent {
 		this.wares.list(this.service.giftsFor(this.faction()).map((x) => x.ware))
 	);
 	protected readonly excluded = computed(() => this.service.excluding(this.faction()));
-	protected readonly giftEffect = this.service.catalog.giftEffect;
-	protected readonly signed = NumberFormats.signedWhole;
 }

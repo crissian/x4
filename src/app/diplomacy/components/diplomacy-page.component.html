@@ -5,7 +5,7 @@
 	<div class="card-body">
 		<p class="text-sm text-fg-muted" i18n>
 			What your agents can do in the diplomacy menu, what each action takes and gives, the diplomatic events they
-			can sway and the gifts each faction welcomes, as the game data defines them.
+			can sway and the gifts listed for each faction, as the game data defines them.
 		</p>
 		@switch (saveStatus()) {
 			@case ('ready') {
@@ -39,7 +39,7 @@
 		<app-tabs class="mt-4 block" label="Diplomacy view" i18n-label [tabs]="tabs" [(selected)]="tab">
 			@switch (tab()) {
 				@case ('actions') {
-					<div class="mb-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+					<div class="mb-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
 						<app-option-select
 							class="text-sm"
 							inputId="diplomacy-category"
@@ -59,16 +59,6 @@
 							allLabel="Any experience"
 							[options]="agentTypes"
 							[formField]="form.agentType"
-						/>
-						<app-option-select
-							class="text-sm"
-							inputId="diplomacy-risk"
-							i18n-label
-							label="Risk to agent"
-							i18n-allLabel
-							allLabel="Any risk"
-							[options]="risks"
-							[formField]="form.risk"
 						/>
 						<label class="text-sm">
 							<ng-container i18n>Search</ng-container>
@@ -111,9 +101,8 @@
 				}
 				@case ('gifts') {
 					<p class="mb-3 text-sm text-fg-muted" i18n>
-						An agent action can take an optional gift or bribe. The game changes the action's success chance
-						by {{ signed(giftEffect.positive) }}% for a gift listed for the target faction; its other
-						default is {{ signed(giftEffect.negative) }}%.
+						An agent action can take an optional gift or bribe. Its effect on the success chance depends on
+						the ware and the target faction, and the diplomacy menu shows it once an action has revealed it.
 					</p>
 					<app-data-grid
 						[data]="gifts"

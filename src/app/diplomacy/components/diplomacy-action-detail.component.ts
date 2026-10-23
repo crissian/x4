@@ -33,7 +33,6 @@ export class DiplomacyActionDetailComponent extends EntityDetailPage<DiplomacyAc
 				category: this.service.category(action.category),
 				agentType: this.service.agentType(action.agentType),
 				experience: DiplomacyColumns.experience(this.service, action.experience),
-				risk: this.service.risk(action.risk),
 				success: NumberFormats.percent(action.success.chance / 100),
 				duration: Duration.short(action.duration),
 				cooldown: Duration.short(action.cooldown),
@@ -65,7 +64,4 @@ export class DiplomacyActionDetailComponent extends EntityDetailPage<DiplomacyAc
 		const save = this.diplomacy();
 		return save?.found ? save.actions[this.id()] === true : undefined;
 	});
-
-	protected readonly giftEffect = this.service.catalog.giftEffect;
-	protected readonly signed = NumberFormats.signedWhole;
 }

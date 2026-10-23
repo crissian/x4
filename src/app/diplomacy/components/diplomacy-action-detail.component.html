@@ -19,16 +19,9 @@
 		}
 		<dl class="details mb-4 max-w-2xl">
 			<div i18n-appDetail appDetail="Category">{{ i.category }}</div>
-			<div i18n-appDetail appDetail="Agent experience">{{ i.agentType?.name }}</div>
-			@if (i.experience) {
-				<div i18n-appDetail appDetail="Recommended experience">{{ i.experience }}</div>
+			@if (i.agentType; as type) {
+				<div [appDetail]="type.name">{{ i.experience || '-' }}</div>
 			}
-			<div i18n-appDetail appDetail="Risk to agent">
-				{{ i.risk?.name }}
-				@if (i.risk?.description; as text) {
-					<span class="text-fg-muted"> - {{ text }}</span>
-				}
-			</div>
 			<div i18n-appDetail appDetail="Success chance">{{ i.success }}</div>
 			<div i18n-appDetail appDetail="Duration">{{ i.duration }}</div>
 			<div i18n-appDetail appDetail="Cooldown">{{ i.cooldown }}</div>
@@ -57,8 +50,7 @@
 					@if (giftWares().length) {
 						<h3 class="mt-3 font-semibold text-fg-strong" i18n>Optional gift or bribe</h3>
 						<p class="text-fg-muted" i18n>
-							A gift listed for the target faction changes the success chance by
-							{{ signed(giftEffect.positive) }}%; the other default is {{ signed(giftEffect.negative) }}%.
+							Its effect on the success chance depends on the ware and the target faction.
 						</p>
 						<ul class="mt-1">
 							@for (ware of giftWares(); track ware.name) {

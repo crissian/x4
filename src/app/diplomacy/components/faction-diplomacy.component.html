@@ -4,10 +4,7 @@
 		<div class="card-body text-sm">
 			@if (gifts().length) {
 				<h3 class="font-semibold text-fg-strong" i18n>Gifts</h3>
-				<p class="text-fg-muted" i18n>
-					Given with an agent action aimed at this faction, one of these changes its success chance by
-					{{ signed(giftEffect.positive) }}%.
-				</p>
+				<p class="text-fg-muted" i18n>Listed for this faction in the game's gift list.</p>
 				<ul class="mt-1">
 					@for (ware of gifts(); track ware.name) {
 						<li>

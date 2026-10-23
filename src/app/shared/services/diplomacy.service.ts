@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { DiplomacyData } from './data/diplomacy-data';
 import { EntityStore } from './entity.service';
-import type { DiplomacyAction, DiplomacyCatalog, DiplomacyGift, DiplomacyLevel, DiplomacyName } from './model/diplomacy';
+import type {
+	DiplomacyAction,
+	DiplomacyCatalog,
+	DiplomacyGift,
+	DiplomacyLevel,
+	DiplomacyName,
+} from './model/diplomacy';
 
-/** The agent actions of the diplomacy menu, with the names of their categories, agent types, risks and wares. */
+/** The agent actions of the diplomacy menu, with the names of their categories, agent types and wares. */
 @Injectable({ providedIn: 'root' })
 export class DiplomacyService extends EntityStore<DiplomacyAction> {
 	readonly catalog: DiplomacyCatalog = DiplomacyData;
 
 	private readonly categoryById = DiplomacyService.byId(DiplomacyData.categories);
 	private readonly agentTypeById = DiplomacyService.byId(DiplomacyData.agentTypes);
-	private readonly riskById = DiplomacyService.byId(DiplomacyData.risks);
 	private readonly wareById = new Map(DiplomacyData.wares.map((x) => [x.id, x.name]));
 
 	constructor() {
@@ -23,10 +28,6 @@ export class DiplomacyService extends EntityStore<DiplomacyAction> {
 
 	agentType(id: string): DiplomacyName | undefined {
 		return this.agentTypeById.get(id);
-	}
-
-	risk(id: string): DiplomacyName | undefined {
-		return this.riskById.get(id);
 	}
 
 	ware(id: string): string {

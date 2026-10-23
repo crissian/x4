@@ -1,7 +1,7 @@
 import { Duration } from '../core/format/duration';
 import { NumberFormats } from '../core/format/number-formats';
 import type { SaveDiplomacy } from '../savegame/extractors/diplomacy-extractor';
-import type { GridColumn, GridDot } from '../shared/components/data-grid/grid-column';
+import type { GridColumn } from '../shared/components/data-grid/grid-column';
 import type { DiplomacyService } from '../shared/services/diplomacy.service';
 import { Loadouts } from '../shared/services/loadout';
 import type {
@@ -32,15 +32,6 @@ export interface DiplomacyGiftRow {
 export class DiplomacyColumns {
 	/** keeps a time on one line */
 	private static readonly NO_BREAK = String.fromCharCode(0xa0);
-	/** the dot of each risk, from none to very high */
-	private static readonly RISK_DOTS: Record<string, GridDot> = {
-		none: { tone: 'grey', level: 1 },
-		low: { tone: 'green', level: 3 },
-		medium: { tone: 'amber', level: 3 },
-		high: { tone: 'orange', level: 3 },
-		veryhigh: { tone: 'red', level: 3 },
-	};
-
 	/** The agent actions; with the diplomacy of a save, whether its menu shows each one. */
 	static actions(service: DiplomacyService, save?: SaveDiplomacy): GridColumn<DiplomacyAction>[] {
 		const columns: GridColumn<DiplomacyAction>[] = [
@@ -68,7 +59,6 @@ export class DiplomacyColumns {
 				display: (x) => DiplomacyColumns.experience(service, x.experience),
 				filterable: false,
 			},
-			DiplomacyColumns.risk(service, (x) => x.risk),
 			{
 				key: 'success.chance',
 				caption: $localize`Success chance`,
@@ -118,7 +108,6 @@ export class DiplomacyColumns {
 				title: (x) => x.option.description,
 				hideable: false,
 			},
-			DiplomacyColumns.risk(service, (x) => x.option.risk),
 			...DiplomacyColumns.cost<DiplomacyOptionRow>(service, (x) => x.option.cost),
 			{ key: 'weight', caption: $localize`Base weight`, type: 'number', value: (x) => x.option.weight },
 			{
@@ -175,18 +164,6 @@ export class DiplomacyColumns {
 	/** The wares of a cost with their amounts, as text. */
 	static wares(service: DiplomacyService, cost: DiplomacyCost): string {
 		return cost.wares.map((x) => `${service.ware(x.ware)} ×${NumberFormats.whole(x.amount)}`).join(', ');
-	}
-
-	private static risk<T>(service: DiplomacyService, risk: (row: T) => string): GridColumn<T> {
-		return {
-			key: 'risk',
-			caption: $localize`Risk to agent`,
-			value: risk,
-			sortValue: (x) => service.catalog.risks.findIndex((r) => r.id === risk(x)),
-			lookup: service.catalog.risks.map((x) => ({ value: x.id, label: x.name })),
-			title: (x) => service.risk(risk(x))?.description,
-			dot: (x) => DiplomacyColumns.RISK_DOTS[risk(x)],
-		};
 	}
 
 	private static cost<T>(service: DiplomacyService, cost: (row: T) => DiplomacyCost): GridColumn<T>[] {

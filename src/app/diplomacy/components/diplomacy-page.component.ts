@@ -1,7 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { NumberFormats } from '../../core/format/number-formats';
 import { QueryParamSync } from '../../core/router/query-param-sync';
 import { ActiveSave } from '../../savegame/active-save';
 import { DataGridComponent } from '../../shared/components/data-grid/data-grid.component';
@@ -34,7 +33,6 @@ export class DiplomacyPageComponent {
 	private readonly ids: DiplomacyIds = {
 		categories: this.service.catalog.categories.map((x) => x.id),
 		agentTypes: this.service.catalog.agentTypes.map((x) => x.id),
-		risks: this.service.catalog.risks.map((x) => x.id),
 	};
 	private readonly initial = DiplomacyQuery.read(inject(ActivatedRoute).snapshot.queryParamMap, this.ids);
 	protected readonly tab = signal<DiplomacyTab>(this.initial.tab);
@@ -48,7 +46,6 @@ export class DiplomacyPageComponent {
 
 	protected readonly categories = this.service.catalog.categories;
 	protected readonly agentTypes = this.service.catalog.agentTypes;
-	protected readonly risks = this.service.catalog.risks;
 
 	protected readonly actions = computed(() =>
 		DiplomacyQuery.apply(this.service.getEntities(), this.model(), this.diplomacy())
@@ -74,7 +71,6 @@ export class DiplomacyPageComponent {
 		link: this.wares.link(x.ware),
 	}));
 	protected readonly giftColumns = DiplomacyColumns.gifts();
-	protected readonly giftEffect = this.service.catalog.giftEffect;
 
 	protected readonly experienceColumns = DiplomacyColumns.experienceLevels();
 	protected readonly rankColumns = DiplomacyColumns.ranks();
@@ -85,7 +81,6 @@ export class DiplomacyPageComponent {
 		{ id: 'gifts', label: $localize`:diplomacy tab:Gifts`, count: this.gifts.length },
 		{ id: 'agents', label: $localize`:diplomacy tab:Agents` },
 	];
-	protected readonly signed = NumberFormats.signedWhole;
 
 	constructor() {
 		QueryParamSync.connect(

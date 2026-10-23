@@ -3,7 +3,7 @@
  * scriptproperties.xml (keyword "diplomacy"). Times are seconds, money is credits.
  */
 
-/** A value of the game with its game text: an action category, an agent type or an agent risk. */
+/** A value of the game with its game text: an action category or an agent type. */
 export interface DiplomacyName {
 	id: string;
 	name: string;
@@ -57,8 +57,6 @@ export interface DiplomacyAction {
 	agentType: string;
 	/** the base recommended minimum agent experience */
 	experience?: number;
-	/** a `risks` id */
-	risk: string;
 	cost: DiplomacyCost;
 	reward: { influence?: number; text?: string; unlocks?: string[] };
 	duration: number;
@@ -78,8 +76,6 @@ export interface DiplomacyEventOption {
 	id: string;
 	name: string;
 	description: string;
-	/** a `risks` id */
-	risk: string;
 	/** paid at the conclusion of the event when the option is selected */
 	cost: DiplomacyCost;
 	/** the relation between the two factions when the option is the outcome, -1..1 */
@@ -108,7 +104,6 @@ export interface DiplomacyGift {
 export interface DiplomacyCatalog {
 	categories: DiplomacyName[];
 	agentTypes: DiplomacyName[];
-	risks: DiplomacyName[];
 	experience: DiplomacyLevel[];
 	ranks: DiplomacyLevel[];
 	actions: DiplomacyAction[];
