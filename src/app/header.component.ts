@@ -4,7 +4,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
 	LucideArrowLeftRight,
 	LucideCalculator,
-	LucideCoffee,
 	LucideCoins,
 	LucideDatabase,
 	LucideFactory,
@@ -25,6 +24,7 @@ import { GAME_LANGUAGES, GameText } from './core/game-text';
 import { HeaderNavComponent } from './header-nav.component';
 import type { NavItem } from './nav-item';
 import { SavegameSelectorComponent } from './savegame/components/savegame-selector.component';
+import { SupportMenuComponent } from './support-menu.component';
 import { ThemeService } from './core/services/theme.service';
 
 @Component({
@@ -37,7 +37,7 @@ import { ThemeService } from './core/services/theme.service';
 		FormField,
 		LucideSun,
 		LucideMoon,
-		LucideCoffee,
+		SupportMenuComponent,
 		LucideLanguages,
 		SavegameSelectorComponent,
 	],

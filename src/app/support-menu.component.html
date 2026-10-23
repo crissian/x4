@@ -1,0 +1,31 @@
+<button
+	type="button"
+	popovertarget="app-support-menu"
+	class="group inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full border border-line-strong bg-surface-2/60 px-2.5 text-sm text-nav-fg transition-colors hover:border-amber-400 hover:bg-amber-50 hover:text-amber-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 sm:px-3 dark:hover:border-amber-400/60 dark:hover:bg-amber-400/10 dark:hover:text-amber-200"
+	i18n-title
+	title="Enjoying the planner? Support development"
+	i18n-aria-label
+	aria-label="Support development"
+>
+	<svg
+		lucideHeart
+		class="text-amber-500 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110"
+	/><span class="hidden lg:inline" i18n>Support</span>
+</button>
+
+<div
+	id="app-support-menu"
+	popover
+	class="fixed inset-auto top-12 right-2 m-0 min-w-48 rounded-md border border-line bg-nav py-1 text-nav-fg shadow-lg"
+>
+	<p class="px-4 pt-1.5 pb-2 text-xs opacity-80" i18n>Free and ad-free. Support is optional and appreciated.</p>
+	@for (link of links; track link.href) {
+		<a
+			class="flex items-center gap-2 px-4 py-2.5 whitespace-nowrap text-nav-fg hover:bg-hover hover:text-fg-strong hover:no-underline"
+			target="_blank"
+			rel="noopener"
+			[href]="link.href"
+			><svg [lucideIcon]="link.icon" class="text-amber-500" />{{ link.label }}</a
+		>
+	}
+</div>
