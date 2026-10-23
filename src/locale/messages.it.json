@@ -1328,6 +1328,8 @@
     "7305408602869665674": "{VAR_PLURAL, plural, =1 {1 progetto} other {{INTERPOLATION} progetti}}",
     "3405219391437826486": " Solo i progetti che gli script aggiungono a questo pianeta per nome. Quelli generali (energia, industria, abitazioni e altro) e le quantità di merci richieste dal gioco si conoscono caricando un salvataggio; le merci mostrate sono le quantità della libreria, che il salvataggio scala per ogni pianeta. ",
     "2305633802005188305": " I progetti richiesti puntano a destra verso i progetti che ne hanno bisogno; le linee tratteggiate portano a un progetto a cui ne basta uno. I progetti completati nel salvataggio sono verdi. ",
-    "6287392127125529719": " Le quantità della libreria, che il salvataggio scala per ogni pianeta; vedi il pianificatore con un salvataggio caricato. "
+    "6287392127125529719": " Le quantità della libreria, che il salvataggio scala per ogni pianeta; vedi il pianificatore con un salvataggio caricato. ",
+    "2426195611557792722": "Ostile",
+    "5549612248064831273": "Appartiene a una fazione ostile nei tuoi confronti: non commercia con te"
   }
 }

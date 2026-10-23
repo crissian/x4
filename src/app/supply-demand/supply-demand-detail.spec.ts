@@ -3,8 +3,8 @@ import type { WareStationFlow } from '../economy/economy-model';
 import type { SaveOffer, SaveStation } from '../savegame/map/save-map-model';
 import { SupplyDemandDetail } from './supply-demand-detail';
 
-const station = (code: string, offers: SaveOffer[] = []) =>
-	({ code, macro: 'm', owner: 'argon', sector: 's', x: 0, z: 0, known: true, modules: [], offers }) as SaveStation;
+const station = (code: string, offers: SaveOffer[] = [], owner = 'argon') =>
+	({ code, macro: 'm', owner, sector: 's', x: 0, z: 0, known: true, modules: [], offers }) as SaveStation;
 const flow = (code: string, produced: number, consumed: number): WareStationFlow => ({
 	station: station(code),
 	produced,
@@ -33,5 +33,29 @@ describe('SupplyDemandDetail', () => {
 		];
 		expect(SupplyDemandDetail.offers(stations, 'w', true).map((x) => x.price)).toEqual([20, 30]);
 		expect(SupplyDemandDetail.offers(stations, 'w', false).map((x) => x.price)).toEqual([99]);
+	});
+
+	it('leaves out the stations of factions hostile to the player', () => {
+		const offer: SaveOffer = { ware: 'energycells', sell: true, price: 10, amount: 5 };
+		const stations = [
+			station('XEN', [offer], 'xenon'),
+			station('ARG', [{ ...offer, price: 16 }], 'argon'),
+			station('OWN', [{ ...offer, price: 12 }], 'player'),
+		];
+		const relations = { xenon: -1, argon: 0.1 };
+		expect(SupplyDemandDetail.offers(stations, 'energycells', true, relations).map((x) => x.station.code)).toEqual([
+			'OWN',
+			'ARG',
+		]);
+		expect(
+			SupplyDemandDetail.offers(stations, 'energycells', true, relations, false).map((x) => [
+				x.station.code,
+				x.hostile,
+			])
+		).toEqual([
+			['XEN', true],
+			['OWN', false],
+			['ARG', false],
+		]);
 	});
 });

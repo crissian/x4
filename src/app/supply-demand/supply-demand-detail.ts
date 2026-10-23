@@ -1,11 +1,14 @@
 import type { WareStationFlow } from '../economy/economy-model';
-import type { SaveOffer, SaveStation } from '../savegame/map/save-map-model';
+import type { SaveOffer, SaveRelations, SaveStation } from '../savegame/map/save-map-model';
+import { TradeRouteFinder } from '../trade/trade-route-finder';
 
 /** An offer of a station for the ware. */
 export interface StationOffer {
 	station: SaveStation;
 	price: number;
 	amount: number;
+	/** owned by a faction hostile to the player */
+	hostile: boolean;
 }
 
 /** What the detail panel lists about a ware: the biggest producers and consumers, the best offers. */
@@ -31,14 +34,26 @@ export class SupplyDemandDetail {
 
 	/**
 	 * The best offers of the ware at the stations: the cheapest ones to buy from (`sell`) or the best paying ones
-	 * to sell to. Shady offers restricted to the player are left out, as in the market columns.
+	 * to sell to. Shady offers restricted to the player are left out, as in the market columns. With `hideHostile`, so
+	 * are the stations of factions hostile to the player, who don't trade with the player: the Xenon always among
+	 * them (libraries/factions.xml:695-698, relations locked at -1, tag "notradeoffer"). Otherwise they are marked.
 	 */
-	static offers(stations: readonly SaveStation[], ware: string, sell: boolean): StationOffer[] {
+	static offers(
+		stations: readonly SaveStation[],
+		ware: string,
+		sell: boolean,
+		relations?: SaveRelations,
+		hideHostile = true
+	): StationOffer[] {
 		const found: StationOffer[] = [];
 		for (const station of stations) {
+			const hostile = TradeRouteFinder.isHostile(station.owner, relations);
+			if (hostile && hideHostile) {
+				continue;
+			}
 			for (const offer of station.offers ?? []) {
 				if (SupplyDemandDetail.counts(offer, ware, sell)) {
-					found.push({ station, price: offer.price, amount: offer.amount });
+					found.push({ station, price: offer.price, amount: offer.amount, hostile });
 				}
 			}
 		}

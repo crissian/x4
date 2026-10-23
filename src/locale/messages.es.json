@@ -1328,6 +1328,8 @@
     "7305408602869665674": "{VAR_PLURAL, plural, =1 {1 proyecto} other {{INTERPOLATION} proyectos}}",
     "3405219391437826486": " Solo los proyectos que los scripts añaden a este planeta por nombre. Los generales (energía, industria, vivienda y más) y las cantidades de mercancías que pide el juego se conocen al cargar una partida; las mercancías mostradas son las cantidades de la biblioteca, que la partida ajusta para cada planeta. ",
     "2305633802005188305": " Los proyectos requeridos apuntan a la derecha a los proyectos que los necesitan; las líneas discontinuas llevan a un proyecto que necesita solo uno de ellos. Los proyectos completados en la partida aparecen en verde. ",
-    "6287392127125529719": " Las cantidades de la biblioteca, que la partida ajusta para cada planeta; consulta el planificador con una partida cargada. "
+    "6287392127125529719": " Las cantidades de la biblioteca, que la partida ajusta para cada planeta; consulta el planificador con una partida cargada. ",
+    "2426195611557792722": "Hostil",
+    "5549612248064831273": "Pertenece a una facción hostil contigo: no comercia contigo"
   }
 }

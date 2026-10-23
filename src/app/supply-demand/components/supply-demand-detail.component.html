@@ -82,6 +82,15 @@
 							[queryParams]="{ station: offer.station.code }"
 							>{{ store.stationName(offer.station) }}</a
 						>
+						@if (offer.hostile) {
+							<span
+								class="ml-1 rounded-full border border-danger px-1.5 align-middle text-xs text-danger"
+								title="Owned by a faction hostile to you: it does not trade with you"
+								i18n-title
+								i18n
+								>Hostile</span
+							>
+						}
 						<span class="text-fg-muted">
 							· {{ store.sectorName(offer.station.sector) }} ·
 							<ng-container i18n
@@ -106,6 +115,15 @@
 							[queryParams]="{ station: offer.station.code }"
 							>{{ store.stationName(offer.station) }}</a
 						>
+						@if (offer.hostile) {
+							<span
+								class="ml-1 rounded-full border border-danger px-1.5 align-middle text-xs text-danger"
+								title="Owned by a faction hostile to you: it does not trade with you"
+								i18n-title
+								i18n
+								>Hostile</span
+							>
+						}
 						<span class="text-fg-muted">
 							· {{ store.sectorName(offer.station.sector) }} ·
 							<ng-container i18n

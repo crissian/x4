@@ -52,5 +52,9 @@
 			<input id="supply-mined" type="checkbox" [formField]="form.mined" />
 			<ng-container i18n>Show mined resources</ng-container>
 		</label>
+		<label class="flex items-center gap-2">
+			<input id="supply-hostile" type="checkbox" [formField]="form.hideHostile" />
+			<ng-container i18n>Hide hostile factions</ng-container>
+		</label>
 	</div>
 </app-more-filters>

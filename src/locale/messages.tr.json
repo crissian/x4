@@ -1328,6 +1328,8 @@
     "7305408602869665674": "{VAR_PLURAL, plural, =1 {1 proje} other {{INTERPOLATION} proje}}",
     "3405219391437826486": " Yalnızca betiklerin bu gezegene adıyla eklediği projeler. Genel olanlar (enerji, sanayi, konut ve diğerleri) ve oyunun istediği mal miktarları bir kayıt yüklenince bilinir; gösterilen mallar, kaydın her gezegen için ölçeklediği kütüphane miktarlarıdır. ",
     "2305633802005188305": " Gereken projeler, onlara ihtiyaç duyan projelere sağa doğru işaret eder; kesikli çizgiler bunlardan yalnızca birine ihtiyaç duyan projeye gider. Kayıtta tamamlanan projeler yeşildir. ",
-    "6287392127125529719": " Kaydın her gezegen için ölçeklediği kütüphane miktarları; kayıt yüklüyken planlayıcıya bak. "
+    "6287392127125529719": " Kaydın her gezegen için ölçeklediği kütüphane miktarları; kayıt yüklüyken planlayıcıya bak. ",
+    "2426195611557792722": "Düşman",
+    "5549612248064831273": "Size düşman bir gruba ait: sizinle ticaret yapmaz"
   }
 }

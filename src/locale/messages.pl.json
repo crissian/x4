@@ -1328,6 +1328,8 @@
     "7305408602869665674": "{VAR_PLURAL, plural, =1 {1 projekt} other {{INTERPOLATION} projektów}}",
     "3405219391437826486": " Tylko projekty, które skrypty dodają do tej planety z nazwy. Ogólne (energia, przemysł, mieszkania i inne) oraz ilości towarów wymagane przez grę są znane po wczytaniu zapisu; pokazane towary to ilości z biblioteki, które zapis skaluje dla każdej planety. ",
     "2305633802005188305": " Wymagane projekty wskazują w prawo na projekty, które ich potrzebują; linie przerywane prowadzą do projektu, któremu wystarczy jeden z nich. Projekty ukończone w zapisie są zielone. ",
-    "6287392127125529719": " Ilości z biblioteki, które zapis skaluje dla każdej planety; zobacz planer z wczytanym zapisem. "
+    "6287392127125529719": " Ilości z biblioteki, które zapis skaluje dla każdej planety; zobacz planer z wczytanym zapisem. ",
+    "2426195611557792722": "Wroga",
+    "5549612248064831273": "Należy do frakcji wrogiej wobec ciebie: nie handluje z tobą"
   }
 }

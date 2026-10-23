@@ -37,6 +37,7 @@ export class SupplyDemandStore {
 	readonly saveMap = this.activeSave.map;
 	readonly status = this.activeSave.status;
 	readonly gameTime = this.activeSave.gameTime;
+	readonly relations = this.activeSave.relations;
 	/** The sectors of the save, by name. */
 	readonly sectors = this.activeSave.sectors;
 	/** The factions that own stations in the save, by name. */

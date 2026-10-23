@@ -24,6 +24,7 @@ describe('SupplyDemandQuery', () => {
 				group: 'hightech',
 				player: '0',
 				mined: '1',
+				hostile: '1',
 				map: 'reach',
 			})
 		).toEqual({
@@ -34,6 +35,7 @@ describe('SupplyDemandQuery', () => {
 			group: 'hightech',
 			player: false,
 			mined: true,
+			hideHostile: false,
 			map: 'reach',
 		});
 		expect(read({ scope: 'faction', faction: 'argon' }).faction).toBe('argon');
@@ -58,8 +60,12 @@ describe('SupplyDemandQuery', () => {
 			group: null,
 			player: null,
 			mined: null,
+			hostile: null,
 			map: null,
 		});
+		expect(SupplyDemandQuery.write({ ...SupplyDemandQuery.DEFAULTS, hideHostile: false }, lookups)['hostile']).toBe(
+			'1'
+		);
 		expect(SupplyDemandQuery.write({ ...SupplyDemandQuery.DEFAULTS, map: 'reach' }, lookups)['map']).toBe('reach');
 		const model = { ...SupplyDemandQuery.DEFAULTS, scope: 'sector', sector: 'Argon Prime', jumps: 1, mined: true };
 		expect(SupplyDemandQuery.write(model, lookups)).toMatchObject({
@@ -94,6 +100,7 @@ describe('SupplyDemandQuery', () => {
 		expect(SupplyDemandQuery.moreFiltersSet(model)).toBe(0);
 		expect(SupplyDemandQuery.moreFiltersSet({ ...model, mined: true })).toBe(1);
 		expect(SupplyDemandQuery.moreFiltersSet({ ...model, mined: true, player: false })).toBe(2);
+		expect(SupplyDemandQuery.moreFiltersSet({ ...model, hideHostile: false })).toBe(1);
 		// the scope and the ware group stay in view, so they don't count
 		expect(SupplyDemandQuery.moreFiltersSet({ ...model, scope: 'faction', group: 'food' })).toBe(0);
 	});

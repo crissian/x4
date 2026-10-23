@@ -1328,6 +1328,8 @@
     "7305408602869665674": "{VAR_PLURAL, plural, =1 {1 projet} other {{INTERPOLATION} projets}}",
     "3405219391437826486": " Seulement les projets que les scripts ajoutent nommément à cette planète. Les projets généraux (énergie, industrie, logement et autres) et les quantités de marchandises demandées par le jeu sont connus une fois une sauvegarde chargée ; les marchandises affichées sont les quantités de la bibliothèque, que la sauvegarde ajuste pour chaque planète. ",
     "2305633802005188305": " Les projets requis pointent à droite vers les projets qui en ont besoin ; les lignes pointillées mènent à un projet qui n'en demande qu'un seul. Les projets terminés dans la sauvegarde sont en vert. ",
-    "6287392127125529719": " Les quantités de la bibliothèque, que la sauvegarde ajuste pour chaque planète ; voir le planificateur avec une sauvegarde chargée. "
+    "6287392127125529719": " Les quantités de la bibliothèque, que la sauvegarde ajuste pour chaque planète ; voir le planificateur avec une sauvegarde chargée. ",
+    "2426195611557792722": "Hostile",
+    "5549612248064831273": "Appartient à une faction qui vous est hostile : elle ne commerce pas avec vous"
   }
 }

@@ -70,7 +70,9 @@ export class SupplyDemandDetailComponent {
 			? SupplyDemandDetail.offers(
 					this.stations().map((x) => x.station),
 					ware,
-					sell
+					sell,
+					this.store.relations(),
+					this.store.model().hideHostile
 				)
 			: [];
 	}

@@ -1328,6 +1328,8 @@
     "7305408602869665674": "{VAR_PLURAL, plural, =1 {1 projekt} other {{INTERPOLATION} projektů}}",
     "3405219391437826486": " Jen projekty, které skripty k této planetě přidávají jménem. Obecné (energie, průmysl, bydlení a další) a množství zboží, které hra požaduje, jsou známé po načtení uložené hry; zobrazené zboží jsou množství z knihovny, která uložená hra škáluje pro každou planetu. ",
     "2305633802005188305": " Požadované projekty ukazují doprava na projekty, které je potřebují; přerušované čáry vedou k projektu, kterému stačí jeden z nich. Projekty dokončené v uložené hře jsou zelené. ",
-    "6287392127125529719": " Množství z knihovny, která uložená hra škáluje pro každou planetu; viz plánovač s načtenou uloženou hrou. "
+    "6287392127125529719": " Množství z knihovny, která uložená hra škáluje pro každou planetu; viz plánovač s načtenou uloženou hrou. ",
+    "2426195611557792722": "Nepřátelská",
+    "5549612248064831273": "Patří frakci, která je vůči vám nepřátelská: neobchoduje s vámi"
   }
 }

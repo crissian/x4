@@ -18,6 +18,8 @@ export interface SupplyDemandModel {
 	player: boolean;
 	/** mined wares are listed */
 	mined: boolean;
+	/** the offers of stations owned by factions hostile to the player are left out */
+	hideHostile: boolean;
 	/** `local`: each sector by its own stations; `reach`: by the stations within the jumps around it */
 	map: string;
 }
@@ -44,6 +46,7 @@ export class SupplyDemandQuery {
 		group: '',
 		player: true,
 		mined: false,
+		hideHostile: true,
 		map: 'local',
 	};
 	/** the values each number accepts */
@@ -59,6 +62,7 @@ export class SupplyDemandQuery {
 			group: QueryParams.known(params, 'group', lookups.group, defaults.group),
 			player: params.get('player') !== '0',
 			mined: params.get('mined') === '1',
+			hideHostile: params.get('hostile') !== '1',
 			map: QueryParams.oneOf(params, 'map', SupplyDemandQuery.MAP_MODES, defaults.map),
 		};
 	}
@@ -77,14 +81,19 @@ export class SupplyDemandQuery {
 			group: model.group || null,
 			player: model.player ? null : '0',
 			mined: model.mined ? '1' : null,
+			hostile: model.hideHostile ? null : '1',
 			map: QueryParams.unlessDefault(model.map, defaults.map),
 		};
 	}
 
-	/** How many of the filters under "More filters" (my stations, mined resources) are not at their default. */
+	/** How many of the filters under "More filters" (my stations, mined resources, hostile factions) are not at their default. */
 	static moreFiltersSet(model: SupplyDemandModel): number {
 		const defaults = SupplyDemandQuery.DEFAULTS;
-		return Number(model.player !== defaults.player) + Number(model.mined !== defaults.mined);
+		return (
+			Number(model.player !== defaults.player) +
+			Number(model.mined !== defaults.mined) +
+			Number(model.hideHostile !== defaults.hideHostile)
+		);
 	}
 
 	/** The model with a jumps number that is below the minimum or not a whole number back at its default. */

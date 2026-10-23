@@ -1328,6 +1328,8 @@
     "7305408602869665674": "{VAR_PLURAL, plural, =1 {1 projeto} other {{INTERPOLATION} projetos}}",
     "3405219391437826486": " Apenas os projetos que os scripts adicionam a este planeta pelo nome. Os gerais (energia, indústria, moradia e outros) e as quantidades de mercadorias que o jogo pede são conhecidos ao carregar um save; as mercadorias mostradas são as quantidades da biblioteca, que o save ajusta para cada planeta. ",
     "2305633802005188305": " Os projetos exigidos apontam para a direita, para os projetos que precisam deles; linhas tracejadas levam a um projeto que precisa de apenas um deles. Os projetos concluídos no save ficam em verde. ",
-    "6287392127125529719": " As quantidades da biblioteca, que o save ajusta para cada planeta; veja o planejador com um save carregado. "
+    "6287392127125529719": " As quantidades da biblioteca, que o save ajusta para cada planeta; veja o planejador com um save carregado. ",
+    "2426195611557792722": "Hostil",
+    "5549612248064831273": "Pertence a uma facção hostil a você: ela não negocia com você"
   }
 }

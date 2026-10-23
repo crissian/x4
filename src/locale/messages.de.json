@@ -1328,6 +1328,8 @@
     "7305408602869665674": "{VAR_PLURAL, plural, =1 {1 Projekt} other {{INTERPOLATION} Projekte}}",
     "3405219391437826486": " Nur die Projekte, die die Skripte diesem Planeten namentlich hinzufügen. Die allgemeinen (Energie, Industrie, Wohnraum und mehr) und die Warenmengen, die das Spiel verlangt, sind erst mit einem geladenen Spielstand bekannt; die gezeigten Waren sind die Mengen der Bibliothek, die der Spielstand je Planet skaliert. ",
     "2305633802005188305": " Benötigte Projekte zeigen nach rechts auf die Projekte, die sie brauchen; gestrichelte Linien führen zu einem Projekt, das nur eines davon braucht. Im Spielstand abgeschlossene Projekte sind grün. ",
-    "6287392127125529719": " Die Mengen der Bibliothek, die der Spielstand je Planet skaliert; siehe den Planer mit geladenem Spielstand. "
+    "6287392127125529719": " Die Mengen der Bibliothek, die der Spielstand je Planet skaliert; siehe den Planer mit geladenem Spielstand. ",
+    "2426195611557792722": "Feindlich",
+    "5549612248064831273": "Gehört einer Fraktion, die dir feindlich gesinnt ist: Sie handelt nicht mit dir"
   }
 }
