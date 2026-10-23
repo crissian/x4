@@ -1,0 +1,140 @@
+<div class="card">
+	<div class="card-header flex flex-wrap items-center gap-x-4 gap-y-1">
+		<span class="mr-auto" i18n>Where to buy</span>
+		<span class="text-sm font-normal text-fg-muted">
+			@if (finder.fromSave()) {
+				<ng-container i18n>In the active save</ng-container>
+			} @else {
+				<ng-container i18n>At game start</ng-container>
+			}
+		</span>
+	</div>
+	<div class="card-body">
+		<label class="block max-w-sm text-sm">
+			<ng-container i18n>From sector</ng-container>
+			<input
+				id="ship-sellers-from"
+				class="input"
+				list="ship-sellers-sectors"
+				placeholder="Pick a sector to sort by travel time"
+				i18n-placeholder
+				[formField]="form.from"
+			/>
+			<datalist id="ship-sellers-sectors">
+				@for (sector of finder.sectors(); track sector.id) {
+					<option [value]="sector.name"></option>
+				}
+			</datalist>
+		</label>
+		<p class="my-2 text-xs text-fg-muted">
+			@if (finder.from()) {
+				<ng-container i18n
+					>Travel times at {{ speed }} m/s travel speed with a {{ charge }} s charge per flight.</ng-container
+				>
+			}
+			@if (!finder.withStanding()) {
+				<ng-container i18n>Load a savegame to check your reputation and licences.</ng-container>
+			}
+		</p>
+
+		@if (finder.rows(); as rows) {
+			@if (rows.length) {
+				<div class="overflow-x-auto">
+					<table class="table text-sm">
+						<thead>
+							<tr>
+								<th i18n>Station</th>
+								<th i18n>Owner</th>
+								<th i18n>Sector</th>
+								@if (finder.from()) {
+									<th class="text-right" i18n>Jumps</th>
+									<th class="text-right" i18n>Time</th>
+								}
+								<th i18n>Can buy</th>
+							</tr>
+						</thead>
+						<tbody>
+							@for (row of rows; track row.id) {
+								<tr>
+									<td>
+										<span class="flex items-center gap-2">
+											<app-station-type-badge [type]="row.type" />
+											<span>{{ row.name }}</span>
+										</span>
+										@if (!row.known) {
+											<div class="text-xs text-fg-muted" i18n>Undiscovered</div>
+										}
+									</td>
+									<td>
+										@if (row.faction; as faction) {
+											<span
+												class="mr-1 inline-block size-2 rounded-full"
+												[style.background]="faction.color"
+											></span>
+											<a [routerLink]="['/factions', faction.id]">{{ faction.name }}</a>
+										} @else {
+											{{ row.owner }}
+										}
+									</td>
+									<td>
+										@if (row.sector; as sector) {
+											<a [routerLink]="['/sectors', sector.id]">{{ sector.name }}</a>
+										} @else {
+											{{ row.sectorId }}
+										}
+									</td>
+									@if (finder.from()) {
+										<td class="text-right">{{ row.jumps ?? '-' }}</td>
+										<td class="text-right whitespace-nowrap">
+											{{ row.time != null ? duration(row.time) : '-' }}
+										</td>
+									}
+									<td>
+										@let standing = row.standing;
+										<span class="flex items-center gap-1.5">
+											<app-tone-dot [tone]="tone(standing.status)" />
+											@switch (standing.status) {
+												@case ('ok') {
+													<ng-container i18n>OK</ng-container>
+												}
+												@case ('reputation') {
+													<ng-container i18n
+														>Needs {{ points(standing.needed) }} rep (you have
+														{{ points(standing.have) }},
+														{{ standing.missing }} missing)</ng-container
+													>
+												}
+												@case ('ceremony') {
+													<ng-container i18n>Needs the licence ceremony</ng-container>
+												}
+												@case ('enemy') {
+													<ng-container i18n>Enemy: won't let you dock</ng-container>
+												}
+												@default {
+													@if (standing.needed != null) {
+														<ng-container i18n
+															>Needs {{ points(standing.needed) }} rep</ng-container
+														>
+													} @else {
+														<ng-container i18n>No requirement</ng-container>
+													}
+												}
+											}
+										</span>
+										@if (row.requirement?.license; as license) {
+											<div class="text-xs text-fg-muted">{{ license.name }}</div>
+										}
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			} @else if (finder.fromSave()) {
+				<p class="text-fg-muted" i18n>No station sells it in this save.</p>
+			} @else {
+				<p class="text-fg-muted" i18n>No station sells it at game start.</p>
+			}
+		}
+	</div>
+</div>

@@ -13,6 +13,7 @@ import { Production } from '../../shared/services/production';
 import { ShipStatsService } from '../../shared/services/ship-stats.service';
 import { ShipService } from '../../shared/services/ship.service';
 import { WareService } from '../../shared/services/ware.service';
+import { ShipSellersNearComponent } from '../sellers/ship-sellers-near.component';
 import { ShipCompareComponent } from './ship-compare.component';
 
 interface EngineRow {
@@ -24,7 +25,7 @@ interface EngineRow {
 }
 
 @Component({
-	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, ProductionCardComponent, SellersComponent, DataGridComponent, LucideWrench, LucideGitCompareArrows, EnumLabelPipe],
+	imports: [DetailPageComponent, DetailComponent, DecimalPipe, RouterLink, ProductionCardComponent, SellersComponent, ShipSellersNearComponent, DataGridComponent, LucideWrench, LucideGitCompareArrows, EnumLabelPipe],
 	templateUrl: './ship-detail.component.html',
 })
 export class ShipDetailComponent {
