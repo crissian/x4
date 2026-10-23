@@ -59,13 +59,6 @@ export default class GameStartsPageComponent {
 			link: (x) => (x.ship ? ['/ships', x.ship.id] : undefined),
 		},
 		{
-			key: 'extraShips',
-			caption: $localize`More ships`,
-			type: 'number',
-			value: (x) => x.extraShips || null,
-			hidden: true,
-		},
-		{
 			key: 'location',
 			caption: $localize`Location`,
 			value: (x) => x.sector?.name ?? x.locationText ?? '',

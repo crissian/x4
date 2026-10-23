@@ -37,12 +37,11 @@ const TEXT_KEYS = new Set([
 	'atmosphere',
 	'population',
 	'settlements',
-	// game starts and achievements
+	// game starts
 	'unlock',
 	'character',
 	'label',
 	'text',
-	'rank',
 ]);
 
 export class GameText {

@@ -13,7 +13,7 @@ export interface SummarySector {
 	name: string;
 }
 
-/** The at-a-glance facts of a game start: the ship, location and further ships, resolved to linkable entities. */
+/** The at-a-glance facts of a game start: the ship and location, resolved to linkable entities. */
 export interface GameStartSummary {
 	start: GameStart;
 	/** the ship the player starts in, when the data names it */
@@ -25,8 +25,6 @@ export interface GameStartSummary {
 	locationText?: string;
 	/** the start menu's property line */
 	property?: string;
-	/** how many further player ships the start script creates */
-	extraShips: number;
 }
 
 export class GameStartSummaries {
@@ -44,7 +42,6 @@ export class GameStartSummaries {
 			sector: place,
 			locationText: place ? undefined : GameStartSummaries.info(start, 'location'),
 			property: GameStartSummaries.info(start, 'property'),
-			extraShips: (start.ships ?? []).reduce((sum, x) => sum + (x.count ?? 1), 0),
 		};
 	}
 

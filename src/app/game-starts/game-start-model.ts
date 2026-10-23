@@ -54,8 +54,6 @@ export interface GameStart {
 	/** the ship ware the player starts in; none when the start script creates it or the player starts on foot */
 	ship?: string;
 	loadout?: GameStartItem[];
-	/** further player ships the start script creates */
-	ships?: GameStartItem[];
 	relations?: GameStartRelation[];
 	blueprints?: GameStartItem[];
 	research?: GameStartItem[];

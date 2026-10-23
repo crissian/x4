@@ -113,12 +113,6 @@ export const appRoutes: Routes = [
 			),
 	},
 	{
-		path: 'achievements',
-		loadComponent: () =>
-			GameText.withTexts(['achievements'], () => import('./achievements/components/achievements-page.component')),
-		title: `${BASE_TITLE} - ${$localize`Achievements`}`,
-	},
-	{
 		path: 'saves',
 		loadComponent: () => import('./savegame/components/savegames-page.component'),
 		title: `${BASE_TITLE} - ${$localize`Savegames`}`,

@@ -36,12 +36,6 @@
 				} @else {
 					{{ summary.shipText ?? '-' }}
 				}
-				@if (summary.extraShips) {
-					<span class="text-fg-muted" i18n>
-						+
-						{summary.extraShips, plural, =1 {1 more ship} other {{{ summary.extraShips }} more ships}}</span
-					>
-				}
 			</dd>
 			<dt i18n>Location</dt>
 			<dd>

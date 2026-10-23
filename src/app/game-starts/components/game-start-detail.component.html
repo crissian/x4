@@ -49,9 +49,6 @@
 			@if (start.loadout?.length) {
 				<app-game-start-items heading="Ship loadout" i18n-heading [items]="start.loadout!" />
 			}
-			@if (start.ships?.length) {
-				<app-game-start-items heading="More ships" i18n-heading [items]="start.ships!" />
-			}
 			@if (reputations().length) {
 				<div class="card">
 					<div class="card-header" i18n>Starting reputation</div>

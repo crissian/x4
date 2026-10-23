@@ -70,7 +70,6 @@ describe('GameStartSummaries', () => {
 		const value = start('x', {
 			ship: 'ship_a',
 			sector: 'nowhere',
-			ships: [{ ware: 'ship_b', count: 2 }, { ware: 'ship_c' }],
 			info: [
 				{ key: 'location', label: 'Location', text: 'Simulation' },
 				{ key: 'property', label: 'Property', text: 'None' },
@@ -87,7 +86,6 @@ describe('GameStartSummaries', () => {
 			sector: undefined,
 			locationText: 'Simulation',
 			property: 'None',
-			extraShips: 3,
 		});
 	});
 });
