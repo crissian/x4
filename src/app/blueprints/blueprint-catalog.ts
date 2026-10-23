@@ -18,7 +18,7 @@ export class BlueprintCatalog {
 
 	/**
 	 * @param notForPlayer ids the player can never own (`BlueprintRules.notForPlayer`)
-	 * @returns the items by kind, then by name; software is left out
+	 * @returns the items by kind, then by name; software is left out. Items sharing a name get their id as `variant`.
 	 */
 	static build(
 		modules: readonly StationModule[],
@@ -33,9 +33,17 @@ export class BlueprintCatalog {
 			...equipment.map((x) => BlueprintCatalog.item(x, 'equipment', BlueprintCategories.equipment(x.type))),
 		];
 		const kinds: BlueprintKind[] = ['module', 'ship', 'equipment'];
-		return items
-			.filter((x): x is BlueprintItem => !!x && !excluded.has(x.id))
-			.sort((a, b) => kinds.indexOf(a.kind) - kinds.indexOf(b.kind) || a.name.localeCompare(b.name));
+		const kept = items.filter((x): x is BlueprintItem => !!x && !excluded.has(x.id));
+		const names = new Map<string, number>();
+		kept.forEach((x) => names.set(x.name, (names.get(x.name) ?? 0) + 1));
+		return kept
+			.map((x) => ((names.get(x.name) ?? 0) > 1 ? { ...x, variant: x.id } : x))
+			.sort(
+				(a, b) =>
+					kinds.indexOf(a.kind) - kinds.indexOf(b.kind) ||
+					a.name.localeCompare(b.name) ||
+					a.id.localeCompare(b.id)
+			);
 	}
 
 	private static item(

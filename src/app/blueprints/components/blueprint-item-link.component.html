@@ -1,1 +1,4 @@
 <a [routerLink]="link()">{{ item().name }}</a>
+@if (item().variant; as variant) {
+	<span class="ml-1 text-xs text-fg-muted">{{ variant }}</span>
+}

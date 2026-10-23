@@ -22,4 +22,19 @@ describe('BlueprintCatalog', () => {
 		expect(byId.get('ship_s')).toMatchObject({ kind: 'ship', category: 'ship-small', price: 20 });
 		expect(byId.get('weapon_a')).toMatchObject({ kind: 'equipment', category: 'equipment-weapons', price: 20 });
 	});
+
+	it('tells blueprints with the same name apart by id', () => {
+		const shield = (id: string) => ({ ...T.equipment(id, 'Shields'), name: 'ARG M Shield Generator Mk1' });
+		const alike = BlueprintCatalog.build(
+			[],
+			[],
+			[shield('shield_02'), shield('shield_01'), T.equipment('weapon_a', 'Weapons')],
+			[]
+		);
+		expect(alike.map((x) => [x.id, x.variant])).toEqual([
+			['shield_01', 'shield_01'],
+			['shield_02', 'shield_02'],
+			['weapon_a', undefined],
+		]);
+	});
 });

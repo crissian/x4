@@ -15,6 +15,8 @@ export interface BlueprintItem {
 	owners?: readonly Faction[];
 	/** licence type the seller asks for */
 	license?: string;
+	/** set when another blueprint has the same name (the game names some models alike): tells them apart */
+	variant?: string;
 }
 
 export interface BlueprintCategory {
