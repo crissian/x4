@@ -3,6 +3,7 @@ import { FormField, form } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
 import { GridColumnPrefs } from './grid-column-prefs';
 import { GridGroups } from './grid-groups';
+import { GridPageSizePrefs } from './grid-page-size-prefs';
 import { ToneDotComponent } from '../tone-dot/tone-dot.component';
 import type { GridColumn, GridGroup, SortState } from './grid-column';
 import { GridValues, PreparedRow } from './grid-values';
@@ -54,7 +55,10 @@ export class DataGridComponent<T> {
 	readonly groups = input<readonly GridGroup[]>([]);
 	/** Tighter cell padding, for grids with many columns. */
 	readonly compact = input(false);
-	/** Remembers the columns chosen by the user in local storage under this key. */
+	/**
+	 * Remembers the columns and page size chosen by the user in local storage under this key; grids without one share
+	 * the page size.
+	 */
 	readonly storageKey = input<string>();
 
 	readonly rowClick = output<T>();
@@ -119,7 +123,11 @@ export class DataGridComponent<T> {
 		return this.sorts().filter((x) => shown[x.key]);
 	});
 
-	readonly pagerModel = linkedSignal(() => ({ pageSize: String(this.pageSizes()[1] ?? this.pageSizes()[0]) }));
+	private readonly pageSizeKey = computed(() => GridPageSizePrefs.key(this.storageKey()));
+	/** Starts with the saved page size when the grid offers it, else the default. */
+	readonly pagerModel = linkedSignal(() => ({
+		pageSize: String(GridPageSizePrefs.read(this.pageSizeKey(), this.pageSizes())),
+	}));
 	readonly pagerForm = form(this.pagerModel);
 	readonly pageSize = computed(() => Number(this.pagerModel().pageSize));
 
@@ -200,6 +208,18 @@ export class DataGridComponent<T> {
 			if (key) {
 				untracked(() => GridColumnPrefs.write(key, columns, shown));
 			}
+		});
+
+		// Saves the page size when the user changes it, not the one the grid starts with
+		let last: { key: string; sizes: readonly number[]; size: number } | undefined;
+		effect(() => {
+			const key = this.pageSizeKey();
+			const sizes = this.pageSizes();
+			const size = this.pageSize();
+			if (last?.key === key && last.sizes === sizes && last.size !== size) {
+				GridPageSizePrefs.write(key, size);
+			}
+			last = { key, sizes, size };
 		});
 	}
 

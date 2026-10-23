@@ -102,9 +102,9 @@ describe('DataGridComponent', () => {
 	it('shows the first page of the visible columns', async () => {
 		const { headers, firstColumn, footer, element } = await setup();
 		expect(headers()).toEqual(['Name', 'Size', 'Price']);
-		expect(firstColumn().length).toBe(20);
+		expect(firstColumn().length).toBe(25);
 		expect(footer()).toBe('Count: 25');
-		expect(element.textContent).toContain('Page 1 of 2');
+		expect(element.textContent).toContain('Page 1 of 1');
 	});
 
 	it('filters text, lookup and number columns', async () => {
@@ -138,12 +138,37 @@ describe('DataGridComponent', () => {
 
 	it('pages through the rows and changes the page size', async () => {
 		const { element, click, set, firstColumn } = await setup();
+		await set('select:not([aria-label])', '20');
+		expect(element.textContent).toContain('Page 1 of 2');
 		await click(element.querySelector('button[aria-label="Next page"]')!);
 		expect(firstColumn()).toEqual(['Item 21', 'Item 22', 'Item 23', 'Item 24', 'Item 25']);
 
 		await set('select:not([aria-label])', '50');
 		expect(firstColumn().length).toBe(25);
 		expect(element.textContent).toContain('Page 1 of 1');
+	});
+
+	it('remembers the chosen page size per grid key', async () => {
+		const first = await setup();
+		await first.set('select:not([aria-label])', '10');
+		expect(localStorage.getItem('grid-page-size:test')).toBe('10');
+		expect(localStorage.getItem('grid-page-size')).toBeNull();
+
+		const second = await setup();
+		expect(second.firstColumn().length).toBe(10);
+		expect(second.element.querySelector<HTMLSelectElement>('select:not([aria-label])')!.value).toBe('10');
+	});
+
+	it('does not save the page size it starts with', async () => {
+		await setup();
+		expect(localStorage.getItem('grid-page-size:test')).toBeNull();
+	});
+
+	it('starts with the default page size when the saved one is not offered', async () => {
+		localStorage.setItem('grid-page-size:test', '30');
+		const { firstColumn } = await setup();
+		expect(firstColumn().length).toBe(25);
+		expect(localStorage.getItem('grid-page-size:test')).toBe('30');
 	});
 
 	it('remembers the chosen columns', async () => {
