@@ -714,7 +714,6 @@ export const Research: Record<string, ResearchData> = {
     wares: [  ],
     requires: [ 'research_module_welfare_1_pre' ],
     unlocks: [
-      { id: 'module_gen_welfare_gamblinghall_01', kind: 'module', name: 'Gambling Den', script: true },
     ],
   },
   research_module_welfare_1_pre: {
@@ -738,7 +737,6 @@ export const Research: Record<string, ResearchData> = {
     wares: [  ],
     requires: [ 'research_module_welfare_1', 'research_module_welfare_2_pre' ],
     unlocks: [
-      { id: 'module_gen_welfare_casino_01', kind: 'module', name: 'Casino', script: true },
     ],
   },
   research_module_welfare_2_pre: {
