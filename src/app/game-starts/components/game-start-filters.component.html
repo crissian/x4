@@ -1,0 +1,42 @@
+<div class="flex flex-wrap items-end gap-x-6 gap-y-3">
+	<label class="text-sm">
+		<ng-container i18n>Show</ng-container>
+		<select id="game-start-type" class="input" [formField]="form.type">
+			@for (filter of store.typeFilters; track filter.value) {
+				<option [value]="filter.value">{{ filter.label }}</option>
+			}
+		</select>
+	</label>
+	<label class="text-sm">
+		<ng-container i18n>Search</ng-container>
+		<input
+			id="game-start-search"
+			class="input"
+			type="search"
+			placeholder="Start, character or location"
+			i18n-placeholder
+			[formField]="form.search"
+		/>
+	</label>
+	<label class="text-sm">
+		<ng-container i18n>View</ng-container>
+		<select id="game-start-view" class="input" [formField]="form.view">
+			<option value="cards" i18n>Cards</option>
+			<option value="table" i18n>Table</option>
+		</select>
+	</label>
+</div>
+<app-more-filters class="mt-3 block" storageKey="game-starts-more" [active]="store.notOwnedCount()">
+	<fieldset>
+		<legend class="text-sm font-semibold text-fg-strong" i18n>DLCs I own</legend>
+		<div class="mt-1 flex flex-wrap gap-x-4 gap-y-1">
+			@for (dlc of store.dlcs; track dlc.version) {
+				<label class="flex items-center gap-2 text-sm">
+					<input type="checkbox" [formField]="store.ownedForm[dlc.version]" />
+					{{ dlc.label }}
+				</label>
+			}
+		</div>
+		<p class="mt-1 text-xs text-fg-muted" i18n>Kept in this browser. Starts of DLCs you don't own are hidden.</p>
+	</fieldset>
+</app-more-filters>

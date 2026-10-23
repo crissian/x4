@@ -105,6 +105,20 @@ export const appRoutes: Routes = [
 		title: `${BASE_TITLE} - ${$localize`Blueprints`}`,
 	},
 	{
+		path: 'game-starts',
+		loadChildren: () =>
+			GameText.withTexts(
+				[...TEXTS.base, ...TEXTS.universe, 'ship-list', 'game-starts'],
+				() => import('./game-starts/game-starts.routes')
+			),
+	},
+	{
+		path: 'achievements',
+		loadComponent: () =>
+			GameText.withTexts(['achievements'], () => import('./achievements/components/achievements-page.component')),
+		title: `${BASE_TITLE} - ${$localize`Achievements`}`,
+	},
+	{
 		path: 'saves',
 		loadComponent: () => import('./savegame/components/savegames-page.component'),
 		title: `${BASE_TITLE} - ${$localize`Savegames`}`,
