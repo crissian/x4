@@ -7,7 +7,7 @@ import { SelectOption, SelectOptionFilter } from './select-option-filter';
  * A select for long lists, bound with [formField]: the box shows the selected option's name, typing filters the
  * options by name and detail, and only the first matches are listed. Arrow keys move through the options, Enter or
  * Tab picks the highlighted one and Escape closes the list and restores the selection. With `allLabel`, an empty
- * first option for "any"; with `recentKey`, the last picks are remembered under that storage key and listed first.
+ * first option for "any", also picked by emptying the box (as with `clearable`); with `recentKey`, the last picks are remembered under that storage key and listed first.
  */
 @Component({
 	selector: 'app-searchable-select',
@@ -30,6 +30,8 @@ export class SearchableSelectComponent implements FormValueControl<string> {
 	readonly inputId = input<string>();
 	/** Storage key of the recently picked options, listed first; none without it. */
 	readonly recentKey = input<string>();
+	/** Emptying the box and leaving it (or pressing Enter) clears the value; always so with `allLabel`. */
+	readonly clearable = input(false);
 	/** Most options listed at once. */
 	readonly limit = input(SelectOptionFilter.LIMIT);
 
@@ -99,10 +101,12 @@ export class SearchableSelectComponent implements FormValueControl<string> {
 	}
 
 	protected onBlur() {
-		// accept a fully typed option name
+		// accept a fully typed option name, or an emptied box when clearable
 		const match = this.typing() ? SelectOptionFilter.exactMatch(this.options(), this.query()) : undefined;
 		if (match) {
 			this.pick(match);
+		} else if (this.isCleared()) {
+			this.clear();
 		} else {
 			this.close();
 		}
@@ -124,6 +128,11 @@ export class SearchableSelectComponent implements FormValueControl<string> {
 				break;
 			}
 			case 'Enter': {
+				if (this.open() && this.isCleared()) {
+					event.preventDefault();
+					this.clear();
+					break;
+				}
 				const option =
 					options[this.activeIndex()] ??
 					(this.typing() ? SelectOptionFilter.exactMatch(options, this.query()) : undefined) ??
@@ -157,6 +166,18 @@ export class SearchableSelectComponent implements FormValueControl<string> {
 			RecentPicks.write(key, this.recent());
 		}
 		this.value.set(option.id);
+		this.close();
+	}
+
+	/** Whether the user emptied the box of a select that can be cleared. */
+	private isCleared() {
+		return (
+			this.typing() && !this.query().trim() && (this.clearable() || this.allLabel() !== undefined)
+		);
+	}
+
+	private clear() {
+		this.value.set('');
 		this.close();
 	}
 
