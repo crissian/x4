@@ -5,22 +5,24 @@
 	</p>
 } @else {
 	<div class="grid gap-3 sm:grid-cols-3">
-		<section class="rounded-md border border-line bg-surface-2 p-3 text-sm">
-			<h3 class="text-fg-muted" i18n>Losses</h3>
-			<p class="text-2xl font-semibold text-fg-strong">{{ store.summary().total }}</p>
-			<p class="text-xs text-fg-muted" i18n>Ships and stations destroyed, matching the filters.</p>
-		</section>
-		<app-count-tile
-			heading="Per sector"
-			i18n-heading
+		<app-stat-tile
+			label="Losses"
+			i18n-label
+			[value]="store.summary().total"
+			detail="Ships and stations destroyed, matching the filters."
+			i18n-detail
+		/>
+		<app-stat-tile
+			label="Per sector"
+			i18n-label
 			[items]="sectors()"
 			pickTitle="Show only this sector"
 			i18n-pickTitle
 			(picked)="store.filter({ sector: $event })"
 		/>
-		<app-count-tile
-			heading="Most frequent killers"
-			i18n-heading
+		<app-stat-tile
+			label="Most frequent killers"
+			i18n-label
 			[items]="killers()"
 			pickTitle="Show only this killer"
 			i18n-pickTitle
