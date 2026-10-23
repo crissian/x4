@@ -10,7 +10,6 @@ import {
 	LucideFlag,
 	LucideHexagon,
 	LucideInfo,
-	LucideLanguages,
 	LucideMap,
 	LucideMoon,
 	LucidePackage,
@@ -22,6 +21,7 @@ import {
 } from '@lucide/angular';
 import { GAME_LANGUAGES, GameText } from './core/game-text';
 import { HeaderNavComponent } from './header-nav.component';
+import { LanguageSelectComponent } from './language-select.component';
 import type { NavItem } from './nav-item';
 import { SavegameSelectorComponent } from './savegame/components/savegame-selector.component';
 import { SupportMenuComponent } from './support-menu.component';
@@ -38,7 +38,7 @@ import { ThemeService } from './core/services/theme.service';
 		LucideSun,
 		LucideMoon,
 		SupportMenuComponent,
-		LucideLanguages,
+		LanguageSelectComponent,
 		SavegameSelectorComponent,
 	],
 	templateUrl: './header.component.html',

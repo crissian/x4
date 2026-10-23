@@ -1,0 +1,53 @@
+<button
+	#button
+	type="button"
+	class="inline-flex h-8 cursor-pointer items-center gap-2 rounded-md border border-line-strong bg-surface-2/60 px-2 text-sm text-nav-fg transition-colors hover:bg-hover hover:text-fg-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
+	[attr.popovertarget]="panelId"
+	i18n-title
+	title="Language of the game names and descriptions"
+	i18n-aria-label
+	aria-label="Game text language"
+>
+	@if (selected(); as language) {
+		<img
+			class="h-3.5 w-[1.17rem] rounded-xs object-cover shadow-sm ring-1 ring-black/10"
+			alt=""
+			[src]="'assets/flags/' + language.flag + '.svg'"
+		/>
+		<span class="hidden sm:inline">{{ language.name }}</span>
+	}
+	<svg lucideChevronDown class="size-3.5 opacity-70" />
+</button>
+
+<div
+	#panel
+	popover
+	[id]="panelId"
+	class="fixed inset-auto m-0 max-h-[calc(100vh-4rem)] min-w-52 overflow-y-auto rounded-md border border-line bg-nav py-1 text-nav-fg shadow-lg"
+	(beforetoggle)="onBeforeToggle($event)"
+	(toggle)="onToggle($event)"
+>
+	@for (language of languages(); track language.code) {
+		<button
+			type="button"
+			class="flex w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-left whitespace-nowrap hover:bg-hover hover:text-fg-strong focus-visible:bg-hover focus-visible:outline-none"
+			[class]="{ '!text-fg-strong bg-nav-active': language.code === value() }"
+			[attr.aria-current]="language.code === value()"
+			[attr.lang]="language.code"
+			(click)="choose(language.code)"
+			(keydown.arrowdown)="onArrow($event, 1)"
+			(keydown.arrowup)="onArrow($event, -1)"
+		>
+			<img
+				class="h-3.5 w-[1.17rem] shrink-0 rounded-xs object-cover shadow-sm ring-1 ring-black/10"
+				alt=""
+				loading="lazy"
+				[src]="'assets/flags/' + language.flag + '.svg'"
+			/>
+			<span class="flex-1">{{ language.name }}</span>
+			@if (language.code === value()) {
+				<svg lucideCheck class="size-4 text-sky-500" />
+			}
+		</button>
+	}
+</div>

@@ -3,23 +3,25 @@ import { LocalStorage } from './services/local-storage';
 export interface GameLanguage {
 	code: string;
 	name: string;
+	/** file name under assets/flags */
+	flag: string;
 }
 
 /** Languages of the game texts (names, descriptions) exported by the extractor to assets/i18n. */
 export const GAME_LANGUAGES: readonly GameLanguage[] = [
-	{ code: 'en', name: 'English' },
-	{ code: 'cs', name: 'Čeština' },
-	{ code: 'de', name: 'Deutsch' },
-	{ code: 'es', name: 'Español' },
-	{ code: 'fr', name: 'Français' },
-	{ code: 'it', name: 'Italiano' },
-	{ code: 'pl', name: 'Polski' },
-	{ code: 'pt-BR', name: 'Português (Brasil)' },
-	{ code: 'tr', name: 'Türkçe' },
-	{ code: 'ja', name: '日本語' },
-	{ code: 'ko', name: '한국어' },
-	{ code: 'zh-Hans', name: '简体中文' },
-	{ code: 'zh-Hant', name: '繁體中文' },
+	{ code: 'en', name: 'English', flag: 'gb' },
+	{ code: 'cs', name: 'Čeština', flag: 'cz' },
+	{ code: 'de', name: 'Deutsch', flag: 'de' },
+	{ code: 'es', name: 'Español', flag: 'es' },
+	{ code: 'fr', name: 'Français', flag: 'fr' },
+	{ code: 'it', name: 'Italiano', flag: 'it' },
+	{ code: 'pl', name: 'Polski', flag: 'pl' },
+	{ code: 'pt-BR', name: 'Português (Brasil)', flag: 'br' },
+	{ code: 'tr', name: 'Türkçe', flag: 'tr' },
+	{ code: 'ja', name: '日本語', flag: 'jp' },
+	{ code: 'ko', name: '한국어', flag: 'kr' },
+	{ code: 'zh-Hans', name: '简体中文', flag: 'cn' },
+	{ code: 'zh-Hant', name: '繁體中文', flag: 'tw' },
 ];
 
 /** Properties of the generated data that hold game texts. */
