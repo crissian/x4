@@ -57,11 +57,16 @@ export class DagLayout {
 	): DagLayoutResult<T> {
 		const byId = new Map(nodes.map((x) => [idOf(x), x]));
 		const ids = [...byId.keys()];
-		const parents = new Map(ids.map((id) => [id, [...new Set(parentsOf(byId.get(id)!))].filter((p) => byId.has(p) && p !== id)]));
+		const parents = new Map(
+			ids.map((id) => [id, [...new Set(parentsOf(byId.get(id)!))].filter((p) => byId.has(p) && p !== id)])
+		);
 		const layers = DagLayout.layers(ids, parents);
 		// edges closing a cycle point back to an equal or later column: dropped
 		for (const [id, list] of parents) {
-			parents.set(id, list.filter((p) => layers.get(p)! < layers.get(id)!));
+			parents.set(
+				id,
+				list.filter((p) => layers.get(p)! < layers.get(id)!)
+			);
 		}
 		const children = new Map<string, string[]>(ids.map((id) => [id, []]));
 		for (const [id, list] of parents) {
@@ -86,7 +91,13 @@ export class DagLayout {
 				// a shorter column is centred against the tallest one
 				const offset = ((rows - column.length) * rowStep) / 2;
 				column.forEach((id, index) =>
-					placed.set(id, { node: byId.get(id)!, id, layer, x: layer * columnStep, y: top + offset + index * rowStep })
+					placed.set(id, {
+						node: byId.get(id)!,
+						id,
+						layer,
+						x: layer * columnStep,
+						y: top + offset + index * rowStep,
+					})
 				);
 			});
 			top += rows * rowStep - nodeGap + groupGap;
@@ -119,7 +130,10 @@ export class DagLayout {
 	}
 
 	/** The column of each node: one past its latest parent, 0 without parents. */
-	private static layers(ids: readonly string[], parents: ReadonlyMap<string, readonly string[]>): Map<string, number> {
+	private static layers(
+		ids: readonly string[],
+		parents: ReadonlyMap<string, readonly string[]>
+	): Map<string, number> {
 		const result = new Map<string, number>();
 		const visiting = new Set<string>();
 		const visit = (id: string): number => {
@@ -206,7 +220,11 @@ export class DagLayout {
 		return columns;
 	}
 
-	private static edgePath(from: DagPlacedNode<unknown>, to: DagPlacedNode<unknown>, options: DagLayoutOptions): string {
+	private static edgePath(
+		from: DagPlacedNode<unknown>,
+		to: DagPlacedNode<unknown>,
+		options: DagLayoutOptions
+	): string {
 		const x1 = from.x + options.nodeWidth;
 		const y1 = from.y + options.nodeHeight / 2;
 		const x2 = to.x;

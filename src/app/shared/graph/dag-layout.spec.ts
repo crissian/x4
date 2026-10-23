@@ -7,7 +7,13 @@ interface TestNode {
 }
 
 class DagFixture {
-	static readonly OPTIONS: DagLayoutOptions = { nodeWidth: 100, nodeHeight: 20, layerGap: 50, nodeGap: 10, groupGap: 40 };
+	static readonly OPTIONS: DagLayoutOptions = {
+		nodeWidth: 100,
+		nodeHeight: 20,
+		layerGap: 50,
+		nodeGap: 10,
+		groupGap: 40,
+	};
 
 	static run(nodes: TestNode[], options: Partial<DagLayoutOptions> = {}) {
 		return DagLayout.layout(
@@ -59,7 +65,13 @@ describe('DagLayout', () => {
 
 	it('stacks connected groups and packs nodes without edges into a grid', () => {
 		const result = DagFixture.run(
-			[DagFixture.node('x'), DagFixture.node('a'), DagFixture.node('b', 'a'), DagFixture.node('y'), DagFixture.node('z')],
+			[
+				DagFixture.node('x'),
+				DagFixture.node('a'),
+				DagFixture.node('b', 'a'),
+				DagFixture.node('y'),
+				DagFixture.node('z'),
+			],
 			{ singleColumns: 2 }
 		);
 		const placed = Object.fromEntries(result.nodes.map((x) => [x.id, [x.x, x.y]]));
@@ -80,10 +92,7 @@ describe('DagLayout', () => {
 	});
 
 	it('ignores unknown parents, self references and the edge closing a cycle', () => {
-		const result = DagFixture.run([
-			DagFixture.node('a', 'missing', 'a', 'b'),
-			DagFixture.node('b', 'a'),
-		]);
+		const result = DagFixture.run([DagFixture.node('a', 'missing', 'a', 'b'), DagFixture.node('b', 'a')]);
 		expect(result.nodes.map((x) => x.layer).sort()).toEqual([0, 1]);
 		expect(result.edges).toHaveLength(1);
 	});
