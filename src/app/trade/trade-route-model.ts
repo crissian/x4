@@ -33,6 +33,8 @@ export interface TradeFilters {
 	playerOnly: boolean;
 	/** leave out the routes that carry the ware through a sector where it is illegal */
 	hideIllegal: boolean;
+	/** keep only the best route of every sell offer (the others are counted in `otherBuyers`) */
+	bestPerOffer?: boolean;
 }
 
 export interface TradeInput {
@@ -69,6 +71,8 @@ export interface TradeRoute {
 	playerOnly: boolean;
 	/** the sectors of the loaded leg (seller to buyer) whose owner makes the ware illegal; empty is legal */
 	illegalSectors: string[];
+	/** with `bestPerOffer`: how many routes to other buyers of the same offer were left out */
+	otherBuyers?: number;
 }
 
 export interface TradeRouteResult {

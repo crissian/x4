@@ -3,11 +3,23 @@
 		<ng-container i18n>Ship</ng-container>
 		<select id="trade-ship" class="input" [formField]="form.ship">
 			<option [value]="custom" i18n>Custom ship</option>
-			@for (ship of store.ships; track ship.id) {
-				<option [value]="ship.id">
-					{{ ship.name }} ({{ ship.size | enumLabel }}, {{ ship.capacity | number: '1.0-0' }} m³)
-				</option>
+			@if (store.ownShips().length) {
+				<optgroup label="Your ships" i18n-label>
+					@for (own of store.ownShips(); track own.key) {
+						<option [value]="own.key">
+							{{ own.label }} ({{ own.model.name }}, {{ own.capacity | number: '1.0-0' }} m³) ·
+							{{ own.sectorName }}
+						</option>
+					}
+				</optgroup>
 			}
+			<optgroup label="Ship models" i18n-label>
+				@for (ship of store.ships; track ship.id) {
+					<option [value]="ship.id">
+						{{ ship.name }} ({{ ship.size | enumLabel }}, {{ ship.capacity | number: '1.0-0' }} m³)
+					</option>
+				}
+			</optgroup>
 		</select>
 	</label>
 	<app-sector-input
@@ -72,5 +84,9 @@
 	<label class="flex items-center gap-2">
 		<input id="trade-shady" type="checkbox" [formField]="form.playerOnly" />
 		<ng-container i18n>Include player-only offers</ng-container>
+	</label>
+	<label class="flex items-center gap-2" title="Untick to list every station that buys the offer" i18n-title>
+		<input id="trade-best" type="checkbox" [formField]="form.bestPerOffer" />
+		<ng-container i18n>Best sell per buy station</ng-container>
 	</label>
 </div>

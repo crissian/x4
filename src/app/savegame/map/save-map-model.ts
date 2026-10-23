@@ -64,3 +64,23 @@ export type SaveBlueprints = string[];
 
 /** Ids of the factions with a faction representative, who sells their licences and blueprints. */
 export type SaveRepresentatives = string[];
+
+/** A ship the player owns (no drones), with its installed engines and thrusters. */
+export interface SaveShip {
+	/** component id, e.g. `[0x48a13]` */
+	id: string;
+	code: string;
+	/** ship id: the macro lowercased without _macro */
+	macro: string;
+	sector: string;
+	/** the name the player gave it */
+	name?: string;
+	/** equipment id of the first installed engine; ships carry one engine type */
+	engine?: string;
+	/** how many engines are installed */
+	engines?: number;
+	thruster?: string;
+}
+
+/** The player's ships in save order. */
+export type SaveShips = SaveShip[];

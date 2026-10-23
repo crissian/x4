@@ -19,6 +19,11 @@ describe('trade ships', () => {
 		});
 	});
 
+	it('sums the holds', () => {
+		expect(TradeShips.capacity(ship('Hauler', holds))).toBe(2800);
+		expect(TradeShips.capacity(ship('Fighter'))).toBe(0);
+	});
+
 	it('takes speed and charge from the fastest travel drive', () => {
 		const spec = TradeShips.spec(ship('Hauler', holds, { speed: 4200, charge: 7 }));
 		expect(spec.speed).toBe(4200);

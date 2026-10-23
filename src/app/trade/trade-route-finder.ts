@@ -7,6 +7,7 @@ import {
 	TradeShipSpec,
 	TradeWareInfo,
 } from './trade-route-model';
+import { TradeRouteGrouping } from './trade-route-grouping';
 import { TradeTransit } from './trade-transit';
 import { TravelCache } from './travel-cache';
 
@@ -36,7 +37,8 @@ export class TradeRouteFinder {
 			}
 		}
 		routes.sort((a, b) => b.profitPerMinute - a.profitPerMinute);
-		return { routes: routes.slice(0, TradeRules.MAX_ROWS), total: routes.length };
+		const ranked = input.filters.bestPerOffer ? TradeRouteGrouping.bestPerOffer(routes) : routes;
+		return { routes: ranked.slice(0, TradeRules.MAX_ROWS), total: ranked.length };
 	}
 
 	static capacityFor(ship: TradeShipSpec, ware: TradeWareInfo): number {

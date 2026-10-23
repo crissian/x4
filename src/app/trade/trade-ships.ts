@@ -8,9 +8,12 @@ export class TradeShips {
 
 	/** ships with cargo and a travel drive, by name */
 	static list<T extends ShipListItem>(ships: readonly T[]): T[] {
-		return ships
-			.filter((x) => (x.cargo?.length ?? 0) > 0 && TravelDrives.canTravel(x))
-			.sort((a, b) => a.name.localeCompare(b.name));
+		return ships.filter((x) => TradeShips.canTrade(x)).sort((a, b) => a.name.localeCompare(b.name));
+	}
+
+	/** A ship with cargo holds and a travel drive. */
+	static canTrade(ship: Pick<ShipListItem, 'cargo' | 'travel'>): boolean {
+		return (ship.cargo?.length ?? 0) > 0 && TravelDrives.canTravel(ship);
 	}
 
 	static spec(ship: ShipListItem): TradeShipSpec {
@@ -21,6 +24,11 @@ export class TradeShips {
 			}
 		}
 		return { capacity, ...TravelDrives.options(ship, TradeShips.CUSTOM) };
+	}
+
+	/** m³ of all holds together */
+	static capacity(ship: ShipListItem): number {
+		return (ship.cargo ?? []).reduce((sum, x) => sum + x.max, 0);
 	}
 
 	static custom(volume: number, type: string, speed: number, charge: number): TradeShipSpec {

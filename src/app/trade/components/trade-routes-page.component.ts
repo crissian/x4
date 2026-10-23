@@ -36,6 +36,11 @@ export default class TradeRoutesPageComponent {
 			title: $localize`Illegal in a sector on the loaded leg, the seller's and the buyer's included; the police may scan your ship`,
 		},
 		{
+			on: (x) => !!x.otherBuyers,
+			label: (x) => $localize`:trade route marker:+${x.otherBuyers}:count: buyers`,
+			title: $localize`More stations buy this offer for less profit per minute; untick "Best sell per buy station" to list them`,
+		},
+		{
 			on: (x) => x.thin,
 			label: () => $localize`:trade route marker:thin`,
 			title: $localize`Less than a tenth of a full hold; the offer may be gone when you arrive`,

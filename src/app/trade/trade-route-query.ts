@@ -4,7 +4,7 @@ import { TradeShips } from './trade-ships';
 
 /** The filter form of the trade routes page. */
 export interface TradeRoutesModel {
-	/** a ship id or `custom` */
+	/** a ship id, an own ship key (`OwnShipList.key`) or `custom` */
 	ship: string;
 	/** custom ship: m³ of `cargoType` */
 	cargo: number;
@@ -18,6 +18,8 @@ export interface TradeRoutesModel {
 	ware: string;
 	hideHostile: boolean;
 	playerOnly: boolean;
+	/** only the best route of every sell offer */
+	bestPerOffer: boolean;
 	/** `show` marks the illegal routes, `hide` leaves them out */
 	illegal: string;
 }
@@ -46,7 +48,9 @@ export class TradeRouteQuery {
 		jumps: 3,
 		ware: '',
 		hideHostile: true,
-		playerOnly: true,
+		// shady offers are few, single deals; on by default they crowded the top of the list
+		playerOnly: false,
+		bestPerOffer: true,
 		illegal: 'show',
 	};
 	/** the values each number accepts */
@@ -75,7 +79,9 @@ export class TradeRouteQuery {
 			jumps: number('jumps'),
 			ware: QueryParams.known(params, 'ware', lookups.ware),
 			hideHostile: params.get('hostile') !== '1',
-			playerOnly: params.get('shady') !== '0',
+			// before the default changed, `shady=0` turned them off: such links still do
+			playerOnly: params.get('shady') === '1',
+			bestPerOffer: params.get('best') !== '0',
 			illegal: params.get('illegal') === 'hide' ? 'hide' : defaults.illegal,
 		};
 	}
@@ -97,7 +103,8 @@ export class TradeRouteQuery {
 			jumps: value('jumps', !!near),
 			ware: value('ware'),
 			hostile: model.hideHostile ? null : '1',
-			shady: model.playerOnly ? null : '0',
+			shady: model.playerOnly ? '1' : null,
+			best: model.bestPerOffer ? null : '0',
 			illegal: value('illegal'),
 		};
 	}

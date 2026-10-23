@@ -1,6 +1,8 @@
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
+import { LazyValue } from '../core/lazy-value';
+import type { SavegameSummary } from '../savegame/savegame-model';
 import { SavegameStore } from '../savegame/savegame-store';
 import { GodStations } from '../shared/services/data/god-stations-data';
 import { FactionService } from '../shared/services/faction.service';
@@ -140,6 +142,27 @@ describe('MapStore', () => {
 		TestBed.tick();
 		expect(store.routeModel().speed).not.toBe(3000);
 		expect(store.routeForm.speed().disabled()).toBe(true);
+	});
+
+	it('offers the ships of the save and takes the speed of their engines and their sector', async () => {
+		const testing = new MapSaveTesting();
+		const ship = { id: '[0x1]', code: 'ABC-001', macro: 'ship_arg_s_scout_01_a', sector: MapSaveTesting.B };
+		const engine = { engine: 'engine_arg_s_travel_01_mk2', engines: 2 };
+		const map = { sectors: [], stations: [], playerShips: {} };
+		testing.active.set({ id: 'x', data: { map, ships: [{ ...ship, ...engine }] } } as unknown as SavegameSummary);
+		testing.activeId.set('x');
+		const store = TestBed.inject(MapStore);
+		TestBed.tick();
+		await LazyValue.settled();
+		const own = store.routeOwnShips();
+		expect(own.map((x) => x.key)).toEqual(['own-0x1']);
+		store.routeModel.update((x) => ({ ...x, ship: 'own-0x1' }));
+		TestBed.tick();
+		expect(store.routeModel().speed).toBe(Math.round(own[0].travel!.speed));
+		expect(store.routeModel().from).toBe('Argon Prime');
+		// two engines, so faster than the model with one
+		const model = store.routeShips.find((x) => x.id === ship.macro)!;
+		expect(own[0].travel!.speed).not.toBe(model.travel!.speed);
 	});
 
 	it('keeps the content pack choice as a list of shown versions', () => {
