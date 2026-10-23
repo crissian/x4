@@ -7,7 +7,8 @@
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",
-		"build": "ng build",
+		"build": "ng build && npm run llm",
+		"llm": "esbuild scripts/llm/export-llm.mts --bundle --platform=node --format=esm --packages=external --log-level=warning --outfile=dist/llm/export-llm.mjs && node --no-experimental-webstorage dist/llm/export-llm.mjs",
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
 		"lint": "ng lint"
@@ -35,6 +36,7 @@
 		"@eslint/js": "^10.0.1",
 		"@tailwindcss/postcss": "^4.3.3",
 		"angular-eslint": "22.6.0",
+		"esbuild": "0.28.2",
 		"eslint": "^10.12.0",
 		"jsdom": "^30.1.3",
 		"postcss": "^8.5.31",

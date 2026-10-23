@@ -11,6 +11,7 @@
 		/>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+		<link rel="alternate" type="text/markdown" href="llms.txt" title="Game data as markdown and JSON" />
 		<script>
 			// apply the theme before the app loads to avoid a flash of the wrong theme (see ThemeService)
 			(function () {
@@ -185,6 +186,10 @@
 	</head>
 	<body>
 		<app-root></app-root>
+		<noscript>
+			This app needs JavaScript. The game data (ships, equipment, wares, station modules, sectors, factions) is also
+			published as markdown pages and JSON files, listed in <a href="llms.txt">llms.txt</a>.
+		</noscript>
 
 		<div id="splash" aria-hidden="true">
 			<div class="stars"></div>
