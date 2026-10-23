@@ -1,27 +1,13 @@
 <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-	<label class="text-sm">
-		<ng-container i18n>Ship</ng-container>
-		<select id="trade-ship" class="input" [formField]="form.ship">
-			<option [value]="custom" i18n>Custom ship</option>
-			@if (store.ownShips().length) {
-				<optgroup label="Your ships" i18n-label>
-					@for (own of store.ownShips(); track own.key) {
-						<option [value]="own.key">
-							{{ own.label }} ({{ own.model.name }}, {{ own.capacity | number: '1.0-0' }} m³) ·
-							{{ own.sectorName }}
-						</option>
-					}
-				</optgroup>
-			}
-			<optgroup label="Ship models" i18n-label>
-				@for (ship of store.ships; track ship.id) {
-					<option [value]="ship.id">
-						{{ ship.name }} ({{ ship.size | enumLabel }}, {{ ship.capacity | number: '1.0-0' }} m³)
-					</option>
-				}
-			</optgroup>
-		</select>
-	</label>
+	<app-searchable-select
+		class="text-sm"
+		inputId="trade-ship"
+		i18n-label
+		label="Ship"
+		recentKey="trade-routes-recent-ships"
+		[options]="shipOptions()"
+		[formField]="form.ship"
+	/>
 	<app-sector-input
 		class="text-sm"
 		inputId="trade-near"
@@ -36,14 +22,14 @@
 		<ng-container i18n>Max jumps to the seller</ng-container>
 		<input id="trade-jumps" class="input" type="number" [formField]="form.jumps" />
 	</label>
-	<app-option-select
+	<app-searchable-select
 		class="text-sm"
 		inputId="trade-ware"
 		i18n-label
 		label="Ware"
 		i18n-allLabel
 		allLabel="All wares"
-		[options]="store.wares()"
+		[options]="wareOptions()"
 		[formField]="form.ware"
 	/>
 	@if (store.custom()) {

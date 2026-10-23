@@ -24,21 +24,16 @@
 			⇅
 		</button>
 	</div>
-	<select class="input" aria-label="Ship" i18n-aria-label [formField]="form.ship">
-		<option value="" i18n>Custom travel speed</option>
-		@if (store.routeOwnShips().length) {
-			<optgroup label="Your ships" i18n-label>
-				@for (own of store.routeOwnShips(); track own.key) {
-					<option [value]="own.key">{{ own.label }} ({{ own.model.name }}) · {{ own.sectorName }}</option>
-				}
-			</optgroup>
-		}
-		<optgroup label="Ship models" i18n-label>
-			@for (ship of store.routeShips; track ship.id) {
-				<option [value]="ship.id">{{ ship.name }} ({{ ship.size | enumLabel }})</option>
-			}
-		</optgroup>
-	</select>
+	<app-searchable-select
+		i18n-label
+		label="Ship"
+		[hideLabel]="true"
+		i18n-allLabel
+		allLabel="Custom travel speed"
+		recentKey="map-route-recent-ships"
+		[options]="shipOptions()"
+		[formField]="form.ship"
+	/>
 	<div class="grid grid-cols-2 gap-2">
 		<label class="text-sm">
 			<ng-container i18n>Travel speed (m/s)</ng-container>

@@ -84,7 +84,30 @@ describe('TradeRoutesPageComponent', () => {
 			control.dispatchEvent(new Event('change'));
 			await settle();
 		};
-		return { harness, component, element, store, router, settle, set };
+		/** Opens a searchable select, types the option name and picks it with Enter. */
+		const pick = async (selector: string, name: string) => {
+			const input = element.querySelector<HTMLInputElement>(selector)!;
+			input.dispatchEvent(new FocusEvent('focus'));
+			await set(selector, name);
+			input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', cancelable: true }));
+			await settle();
+		};
+		/** Opens a searchable select and picks its first option, such as "All wares". */
+		const pickFirst = async (selector: string) => {
+			const input = element.querySelector<HTMLInputElement>(selector)!;
+			input.dispatchEvent(new FocusEvent('focus'));
+			await settle();
+			input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', cancelable: true }));
+			input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', cancelable: true }));
+			await settle();
+		};
+		/** Opens a searchable select and returns its list. */
+		const open = async (selector: string) => {
+			element.querySelector<HTMLInputElement>(selector)!.dispatchEvent(new FocusEvent('focus'));
+			await settle();
+			return element.querySelector(`#${element.querySelector(selector)!.getAttribute('aria-controls')}`)!;
+		};
+		return { harness, component, element, store, router, settle, set, pick, pickFirst, open };
 	}
 
 	it('shows the empty state without a save', async () => {
@@ -106,7 +129,7 @@ describe('TradeRoutesPageComponent', () => {
 
 	it('reads filters from the URL', async () => {
 		const { element, store } = await setup(`/trade-routes?ware=energycells&near=${ARGON_PRIME}&jumps=1`);
-		expect(element.querySelector<HTMLSelectElement>('#trade-ware')!.value).toBe('energycells');
+		expect(element.querySelector<HTMLInputElement>('#trade-ware')!.value).toBe('Energy Cells');
 		expect(element.querySelector<HTMLInputElement>('#trade-near')!.value).toBe('Argon Prime');
 		expect(element.querySelector<HTMLInputElement>('#trade-jumps')!.value).toBe('1');
 		expect(store.result().routes.map((x) => x.key)).toEqual(['SEL-1~BUY-1~energycells']);
@@ -115,9 +138,9 @@ describe('TradeRoutesPageComponent', () => {
 	});
 
 	it('writes filters to the URL', async () => {
-		const { router, set, element, settle } = await setup();
+		const { router, set, pick, pickFirst, element, settle } = await setup();
 		expect(element.querySelector('thead')!.textContent).not.toContain('To start');
-		await set('#trade-ware', 'foodrations');
+		await pick('#trade-ware', 'Food Rations');
 		expect(router.url).toBe('/trade-routes?ware=foodrations');
 
 		await set('#trade-near', 'Argon Prime');
@@ -125,7 +148,7 @@ describe('TradeRoutesPageComponent', () => {
 		expect(element.querySelector('thead')!.textContent).toContain('To start');
 		element.querySelector<HTMLInputElement>('#trade-hostile')!.click();
 		await settle();
-		await set('#trade-ware', '');
+		await pickFirst('#trade-ware');
 		expect(router.url).toBe(`/trade-routes?near=${ARGON_PRIME}&hostile=1`);
 	});
 
@@ -181,17 +204,17 @@ describe('TradeRoutesPageComponent', () => {
 		const { element, router, store, settle } = await setup(
 			`/trade-routes?ware=energycells&route=SEL-1~BUY-1~energycells`
 		);
-		expect(element.querySelector<HTMLSelectElement>('#trade-ware')!.value).toBe('energycells');
+		expect(element.querySelector<HTMLInputElement>('#trade-ware')!.value).toBe('Energy Cells');
 		await router.navigateByUrl('/trade-routes');
 		await settle();
 		expect(store.model()).toEqual(TradeRoutesStore.DEFAULTS);
-		expect(element.querySelector<HTMLSelectElement>('#trade-ware')!.value).toBe('');
+		expect(element.querySelector<HTMLInputElement>('#trade-ware')!.value).toBe('');
 		expect(element.querySelectorAll('tbody tr').length).toBe(2);
 		expect(router.url).toBe('/trade-routes');
 
 		await router.navigateByUrl(`/trade-routes?ware=foodrations`);
 		await settle();
-		expect(element.querySelector<HTMLSelectElement>('#trade-ware')!.value).toBe('foodrations');
+		expect(element.querySelector<HTMLInputElement>('#trade-ware')!.value).toBe('Food Rations');
 		expect(router.url).toBe('/trade-routes?ware=foodrations');
 	});
 
@@ -210,12 +233,16 @@ describe('TradeRoutesPageComponent', () => {
 		const data = { map: MAP, relations: {}, ships: SHIPS };
 
 		it('offers the ships of the save and times routes with their engines', async () => {
-			const { element, store, router, set } = await setup('/trade-routes', data);
-			const group = element.querySelector('#trade-ship optgroup')!;
-			expect(group.getAttribute('label')).toBe('Your ships');
-			expect(group.textContent).toContain('Mule');
-			expect(group.textContent).toContain('Argon Prime');
-			await set('#trade-ship', 'own-0x1');
+			const { element, store, router, pick, open } = await setup('/trade-routes', data);
+			const list = await open('#trade-ship');
+			expect([...list.querySelectorAll('[role="presentation"]')].map((x) => x.textContent?.trim())).toEqual([
+				'Your ships, Medium',
+				'Ship models',
+			]);
+			const option = list.querySelectorAll('[role="option"]')[1];
+			expect(option.textContent).toContain('Mule');
+			expect(option.textContent).toContain('Argon Prime');
+			await pick('#trade-ship', 'Mule');
 			expect(router.url).toBe('/trade-routes?ship=own-0x1');
 			expect(element.querySelector('#trade-cargo')).toBeNull();
 			const own = store.ownShips()[0];
@@ -226,7 +253,7 @@ describe('TradeRoutesPageComponent', () => {
 		it('reads an own ship from the URL once the save has loaded', async () => {
 			const { element, store } = await setup('/trade-routes?ship=own-0x1', data);
 			expect(store.custom()).toBe(false);
-			expect(element.querySelector<HTMLSelectElement>('#trade-ship')!.value).toBe('own-0x1');
+			expect(element.querySelector<HTMLInputElement>('#trade-ship')!.value).toBe('Mule');
 		});
 
 		it('falls back to the custom ship for a ship not in the save', async () => {
@@ -236,8 +263,10 @@ describe('TradeRoutesPageComponent', () => {
 		});
 
 		it('offers no own ships for a save read before they were', async () => {
-			const { element } = await setup();
-			expect(element.querySelector('#trade-ship')!.textContent).not.toContain('Your ships');
+			const { open } = await setup();
+			const list = await open('#trade-ship');
+			expect(list.textContent).toContain('Ship models');
+			expect(list.textContent).not.toContain('Your ships');
 		});
 	});
 
@@ -282,7 +311,9 @@ describe('TradeRoutesPageComponent', () => {
 			expect(store.result().routes[0].illegalSectors).toEqual([SECOND_CONTACT]);
 			expect(element.querySelector('tbody tr')!.textContent).toContain('illegal (1)');
 			expect(element.querySelector('section p.text-danger')!.textContent).toContain('is illegal in:');
-			expect(element.querySelector('section p.text-danger a[href="/sectors/' + SECOND_CONTACT + '"]')).not.toBeNull();
+			expect(
+				element.querySelector('section p.text-danger a[href="/sectors/' + SECOND_CONTACT + '"]')
+			).not.toBeNull();
 			const map = harness.routeDebugElement!.query(By.directive(RouteMapComponent)).componentInstance;
 			expect((map as RouteMapComponent).warnSectors()).toEqual([SECOND_CONTACT]);
 		});

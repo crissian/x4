@@ -35,15 +35,17 @@
 						}
 					</div>
 					@for (group of groups(); track group.key) {
-						<label class="mb-2 grid items-center gap-1 sm:grid-cols-[12rem_1fr]">
-							<span>{{ group.label }}</span>
-							<select class="input" [formField]="slotsForm[group.key]">
-								<option value="" i18n>- none -</option>
-								@for (option of group.options; track option.id) {
-									<option [value]="option.id">{{ optionLabel(option) }}</option>
-								}
-							</select>
-						</label>
+						<div class="mb-2 grid items-center gap-1 sm:grid-cols-[12rem_1fr]">
+							<span aria-hidden="true">{{ group.label }}</span>
+							<app-searchable-select
+								[label]="group.label"
+								[hideLabel]="true"
+								i18n-allLabel
+								allLabel="- none -"
+								[options]="slotOptions().get(group.key) ?? []"
+								[formField]="slotsForm[group.key]"
+							/>
+						</div>
 						@if (missileChoices().get(group.key); as choice) {
 							<label class="mb-2 grid items-center gap-1 sm:grid-cols-[12rem_1fr]">
 								<span class="pl-4 text-fg-muted" i18n>Missile</span>
@@ -94,7 +96,13 @@
 								<dt i18n>Missile Storage</dt>
 								<dd>{{ r.missiles.storage | number }}</dd>
 								<dt i18n>Time to Empty</dt>
-								<dd>{{ r.missiles.secondsToEmpty ? (r.missiles.secondsToEmpty | number: '1.0-0') + ' s' : '-' }}</dd>
+								<dd>
+									{{
+										r.missiles.secondsToEmpty
+											? (r.missiles.secondsToEmpty | number: '1.0-0') + ' s'
+											: '-'
+									}}
+								</dd>
 							}
 							<dt i18n>Max Range</dt>
 							<dd>{{ r.maxRange ? (r.maxRange / 1000 | number: '1.0-1') + ' km' : '-' }}</dd>
