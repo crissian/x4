@@ -1,57 +1,75 @@
 import { NumberFormats } from '../core/format/number-formats';
 import type { ModBonus, ModEffect, ModStat, ModStatKind } from '../shared/services/model/equipment-mod';
 
-/** Whether an effect helps, hurts, or can do either across its range. */
-export type EffectTone = 'good' | 'bad' | 'mixed';
+/** Whether an effect helps, hurts, or can do either across its range; `none` when its values are not shown. */
+export type EffectTone = 'good' | 'bad' | 'mixed' | 'none';
 
 /**
- * Readable texts of equipment mod effects: "+5% to +20%", "+1 to +4", "+60% to +90%". Like the game's mod menu
- * (text {1001,8041}), every value is signed.
+ * Readable texts of equipment mod effects, worked out as the game's mod menu does (ui/addons/ego_detailmonitorhelper/
+ * helper.lua, Helper.modPropertyEval2Float and Helper.modPropertyEval2UINT, texts {1001,8041} and {1001,8042}): the
+ * change from the stat's base value, "+5.00% to +20.00%" for a factor and "+1 to +4" for added units.
+ *
+ * The game takes the base value from the engine, not the game data. Factors are shown against 1 and added units
+ * against 0. The fraction stats (radar visibility, hazardous region damage reduction, cargo concealment) have no
+ * base value to go by, so they are shown without numbers: their name and the game's description only.
  */
 export class ModEffects {
 	private static readonly SIGNED_PERCENT: Intl.NumberFormatOptions = {
 		style: 'percent',
-		maximumFractionDigits: 1,
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2,
 		signDisplay: 'exceptZero',
 	};
 	private static readonly PERCENT: Intl.NumberFormatOptions = { style: 'percent', maximumFractionDigits: 1 };
 
-	/** The change a value makes, in the unit it is shown in: a ratio for percentages, else units. */
+	/** Whether the effect's values are shown: false for the fraction stats, whose base value is not in the data. */
+	static shown(stat: ModStat | undefined): boolean {
+		return (stat?.kind ?? 'factor') !== 'fraction';
+	}
+
+	/** The change a value makes from the base value, in the unit it is shown in: a ratio for factors, else units. */
 	static change(kind: ModStatKind, value: number): number {
 		return kind === 'factor' ? value - 1 : value;
 	}
 
-	/** One value as shown: +15% for a factor of 1.15, +2 for an added 2, +60% for a fraction of 0.6. */
-	static value(kind: ModStatKind, value: number): string {
+	/** One value as shown: +15.00% for a factor of 1.15, +2 for an added 2; undefined for a fraction. */
+	static value(kind: ModStatKind, value: number): string | undefined {
 		switch (kind) {
 			case 'factor':
 				return NumberFormats.format(ModEffects.change(kind, value), ModEffects.SIGNED_PERCENT);
 			case 'add':
 				return NumberFormats.signedWhole(value);
 			case 'fraction':
-				return NumberFormats.format(value, ModEffects.SIGNED_PERCENT);
+				return undefined;
 		}
 	}
 
-	/** The range an effect rolls in, lowest first; a single value when it always rolls the same. */
+	/**
+	 * The range an effect rolls in, in the game's order: min to max, but max first when min is below max on a stat
+	 * that is better lower. Empty when the values are not shown.
+	 */
 	static range(stat: ModStat | undefined, effect: Pick<ModEffect, 'min' | 'max'>): string {
 		const kind = stat?.kind ?? 'factor';
-		const low = Math.min(effect.min, effect.max);
-		const high = Math.max(effect.min, effect.max);
-		const from = ModEffects.value(kind, low);
-		const to = ModEffects.value(kind, high);
-		return from === to ? from : $localize`:mod effect range:${from}:from: to ${to}:to:`;
+		const positive = !stat?.lowerIsBetter;
+		const minFirst = (positive && effect.min < effect.max) || effect.min > effect.max;
+		const from = ModEffects.value(kind, minFirst ? effect.min : effect.max);
+		const to = ModEffects.value(kind, minFirst ? effect.max : effect.min);
+		return from === undefined || to === undefined ? '' : $localize`:mod effect range:${from}:from: to ${to}:to:`;
 	}
 
-	/** The effect with its stat: "Weapon Damage +5% to +20%". */
+	/** The effect with its stat: "Weapon Damage +5.00% to +20.00%"; the name alone when the values are not shown. */
 	static text(stat: ModStat | undefined, effect: Pick<ModEffect, 'stat' | 'min' | 'max'>): string {
-		return `${stat?.name ?? effect.stat} ${ModEffects.range(stat, effect)}`;
+		const range = ModEffects.range(stat, effect);
+		const name = stat?.name ?? effect.stat;
+		return range ? `${name} ${range}` : name;
 	}
 
-	/** Good when the whole range improves the stat, bad when it all worsens it, else mixed. */
+	/** Good when the whole range improves the stat, bad when it all worsens it, else mixed; none when not shown. */
 	static tone(stat: ModStat | undefined, effect: Pick<ModEffect, 'min' | 'max'>): EffectTone {
+		if (!ModEffects.shown(stat)) {
+			return 'none';
+		}
 		const kind = stat?.kind ?? 'factor';
-		// a fraction of its own (damage reduction, concealment) is better as it grows unless the stat says otherwise
 		const sign = stat?.lowerIsBetter ? -1 : 1;
 		const low = sign * ModEffects.change(kind, effect.min);
 		const high = sign * ModEffects.change(kind, effect.max);
@@ -64,8 +82,11 @@ export class ModEffects {
 		return 'mixed';
 	}
 
-	/** The best value the effect can roll, as a change in the better direction: for sorting by strength. */
+	/** The best value the effect can roll, as a change in the better direction, for sorting; 0 when not shown. */
 	static best(stat: ModStat | undefined, effect: Pick<ModEffect, 'min' | 'max'>): number {
+		if (!ModEffects.shown(stat)) {
+			return 0;
+		}
 		const kind = stat?.kind ?? 'factor';
 		const sign = stat?.lowerIsBetter ? -1 : 1;
 		return Math.max(sign * ModEffects.change(kind, effect.min), sign * ModEffects.change(kind, effect.max));

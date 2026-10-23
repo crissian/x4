@@ -6,10 +6,11 @@ import { ModSlots } from './mod-slots';
 
 /** The data grid columns of equipment mod lists. */
 export class ModColumns {
-	private static readonly DOTS: Record<EffectTone, GridDot> = {
+	private static readonly DOTS: Record<EffectTone, GridDot | undefined> = {
 		good: { tone: 'green', level: 3 },
 		bad: { tone: 'red', level: 3 },
 		mixed: { tone: 'amber', level: 3 },
+		none: undefined,
 	};
 
 	/**
@@ -54,10 +55,7 @@ export class ModColumns {
 			{
 				key: 'bonus',
 				caption: $localize`Additional properties`,
-				value: (x) =>
-					x.bonus?.effects
-						.map((e) => `${stat(e)?.name ?? e.stat} ${ModEffects.range(stat(e), e)}`)
-						.join(', ') ?? '',
+				value: (x) => x.bonus?.effects.map((e) => ModEffects.text(stat(e), e)).join(', ') ?? '',
 			},
 			{
 				key: 'research',

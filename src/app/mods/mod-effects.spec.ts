@@ -12,21 +12,26 @@ describe('ModEffects', () => {
 		description: '',
 	});
 
-	it('shows factor ranges as signed percentages, lowest first', () => {
-		expect(ModEffects.range(stat('factor'), { min: 1.05, max: 1.2 })).toBe('+5% to +20%');
-		expect(ModEffects.range(stat('factor'), { min: 0.95, max: 0.8 })).toBe('-20% to -5%');
-		expect(ModEffects.range(stat('factor'), { min: 1.048, max: 1.216 })).toBe('+4.8% to +21.6%');
-	});
-
-	it('shows added units and fractions in their own form', () => {
+	it('shows factors as the signed change from 1 with two decimals, as the game does', () => {
+		expect(ModEffects.range(stat('factor'), { min: 1.05, max: 1.2 })).toBe('+5.00% to +20.00%');
+		expect(ModEffects.range(stat('factor'), { min: 1.048, max: 1.216 })).toBe('+4.80% to +21.60%');
 		expect(ModEffects.range(stat('add'), { min: 1, max: 4 })).toBe('+1 to +4');
-		expect(ModEffects.range(stat('fraction'), { min: 0.6, max: 0.9 })).toBe('+60% to +90%');
-		expect(ModEffects.range(stat('fraction'), { min: -0.45, max: -0.3 })).toBe('-45% to -30%');
 	});
 
-	it('shows one value when the range has no spread', () => {
-		expect(ModEffects.range(stat('factor'), { min: 1.15, max: 1.15 })).toBe('+15%');
-		expect(ModEffects.text(stat('factor'), { stat: 'damage', min: 1.15, max: 1.15 })).toBe('Weapon Damage +15%');
+	it('orders the range as the game does: max first only for a lower-is-better stat with min below max', () => {
+		expect(ModEffects.range(stat('factor'), { min: 0.95, max: 0.8 })).toBe('-5.00% to -20.00%');
+		expect(ModEffects.range(stat('factor', true), { min: 0.8, max: 0.95 })).toBe('-5.00% to -20.00%');
+		expect(ModEffects.range(stat('factor', true), { min: 0.95, max: 0.8 })).toBe('-5.00% to -20.00%');
+		expect(ModEffects.text(stat('factor'), { stat: 'damage', min: 1.15, max: 1.15 })).toBe(
+			'Weapon Damage +15.00% to +15.00%'
+		);
+	});
+
+	it('shows no values for the fraction stats, whose base value is not in the game data', () => {
+		expect(ModEffects.range(stat('fraction'), { min: 0.6, max: 0.9 })).toBe('');
+		expect(ModEffects.text(stat('fraction'), { stat: 'regiondamage', min: 0.6, max: 0.9 })).toBe('Weapon Damage');
+		expect(ModEffects.tone(stat('fraction', true), { min: -0.45, max: -0.3 })).toBe('none');
+		expect(ModEffects.best(stat('fraction'), { min: 0.6, max: 0.9 })).toBe(0);
 	});
 
 	it('tells helping, hurting and mixed effects apart by the better direction of the stat', () => {
@@ -34,7 +39,6 @@ describe('ModEffects', () => {
 		expect(ModEffects.tone(stat('factor'), { min: 0.684, max: 0.736 })).toBe('bad');
 		expect(ModEffects.tone(stat('factor'), { min: 0.682, max: 2 })).toBe('mixed');
 		expect(ModEffects.tone(stat('factor', true), { min: 0.833, max: 0.953 })).toBe('good');
-		expect(ModEffects.tone(stat('fraction', true), { min: -0.45, max: -0.3 })).toBe('good');
 	});
 
 	it('rates the best roll in the better direction', () => {
