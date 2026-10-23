@@ -104,6 +104,10 @@
 				<div class="card-header" i18n>Sold by</div>
 				<div class="card-body">
 					<app-sellers [owners]="entity.owners" [license]="entity.license" />
+					@if (research().length) {
+						<p class="mt-2 text-sm" i18n>Blueprint handed out by headquarters research:</p>
+						<app-research-needed class="text-sm" [projects]="research()" />
+					}
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,106 @@
+@if (project(); as project) {
+	<section class="min-w-0 text-sm" aria-live="polite" data-research-detail>
+		<h2 class="text-base font-semibold text-fg-strong">{{ project.name }}</h2>
+		<p class="mt-1 font-semibold"><app-tone-dot [tone]="tone()" />{{ stateLabel() }}</p>
+		@if (project.missionOnly) {
+			<p class="text-fg-muted" i18n>
+				Granted by completing a mission; it can't be researched at the headquarters.
+			</p>
+		}
+		@if (project.story) {
+			<p class="text-fg-muted" i18n>Offered at the headquarters only once a story or event adds it.</p>
+		}
+		@if (project.hidden) {
+			<p class="text-fg-muted" i18n>Not listed at the headquarters: the game grants it on its own.</p>
+		}
+		@if (description(); as text) {
+			<p class="mt-2 whitespace-pre-line">{{ text }}</p>
+		}
+
+		<dl class="details mt-3">
+			<dt i18n>Research time</dt>
+			<dd>{{ time() }}</dd>
+			<dt i18n>Cost value</dt>
+			<dd>
+				@if (project.wares.length) {
+					<ng-container i18n>≈ {{ value() | number: '1.0-0' }} Cr at average prices</ng-container>
+				} @else {
+					<ng-container i18n>No wares</ng-container>
+				}
+			</dd>
+		</dl>
+		@if (project.wares.length) {
+			<h3 class="mt-3 font-semibold text-fg-strong" i18n>Wares to deliver</h3>
+			<app-ware-amounts class="mt-1 block" [items]="project.wares" />
+		}
+
+		@if (state() !== 'done' && path(); as path) {
+			@if (path.steps.length > 1) {
+				<h3 class="mt-4 font-semibold text-fg-strong" i18n>Total to get here</h3>
+				<p class="text-fg-muted" i18n>
+					{{ path.researched.length }} projects not done yet, this one included: ≈
+					{{ pathValue() | number: '1.0-0' }} Cr of wares.
+				</p>
+				@if (path.missions.length) {
+					<p class="mt-1" i18n>Missions needed first:</p>
+					<ul class="list-disc pl-6" data-research-missions>
+						@for (mission of path.missions; track mission.id) {
+							<li>{{ mission.name }}</li>
+						}
+					</ul>
+				}
+				<ol class="mt-1 list-decimal pl-6" data-research-steps>
+					@for (step of steps(); track step.project.id) {
+						<li><app-research-link [project]="step.project" [state]="step.state" /></li>
+					}
+				</ol>
+				@if (path.wares.length) {
+					<h4 class="mt-2 font-semibold" i18n>Wares of the whole path</h4>
+					<app-ware-amounts class="mt-1 block" [items]="path.wares" />
+				}
+			}
+		}
+
+		@if (requires().length) {
+			<h3 class="mt-4 font-semibold text-fg-strong" i18n>Requires</h3>
+			<ul>
+				@for (item of requires(); track item.project.id) {
+					<li><app-research-link [project]="item.project" [state]="item.state" /></li>
+				}
+			</ul>
+		}
+		@if (requiredBy().length) {
+			<h3 class="mt-3 font-semibold text-fg-strong" i18n>Leads to</h3>
+			<ul>
+				@for (item of requiredBy(); track item.project.id) {
+					<li><app-research-link [project]="item.project" [state]="item.state" /></li>
+				}
+			</ul>
+		}
+
+		<h3 class="mt-4 font-semibold text-fg-strong" i18n>Unlocks</h3>
+		@for (group of unlocks(); track group.kind) {
+			<h4 class="mt-2 font-semibold">{{ group.label }} ({{ group.items.length }})</h4>
+			<ul data-research-unlocks>
+				@for (item of group.items; track item.id) {
+					<li>
+						@if (item.route) {
+							<a [routerLink]="[item.route, item.id]">{{ item.name }}</a>
+						} @else {
+							{{ item.name }}
+						}
+						@if (item.script) {
+							<span class="text-fg-muted" i18n> · blueprint handed out</span>
+						}
+					</li>
+				}
+			</ul>
+		} @empty {
+			<p class="text-fg-muted" i18n>No blueprints; the description says what it does.</p>
+		}
+	</section>
+} @else {
+	<p class="text-sm text-fg-muted" i18n>
+		Pick a project in the tree or the list to see its cost, what it unlocks and what it still takes.
+	</p>
+}

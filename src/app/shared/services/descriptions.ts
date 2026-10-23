@@ -3,7 +3,7 @@ import { GameText } from '../../core/game-text';
 import { LazyValue } from '../../core/lazy-value';
 
 /** Kinds of entities with encyclopedia descriptions in their own lazily loaded data file. */
-export type DescriptionKind = 'ships' | 'equipment' | 'modules' | 'wares' | 'sectors' | 'clusters' | 'crafting';
+export type DescriptionKind = 'ships' | 'equipment' | 'modules' | 'wares' | 'sectors' | 'clusters' | 'crafting' | 'research';
 
 interface DescriptionFile {
 	/** the texts file of the data file, fetched along with it */
@@ -44,6 +44,10 @@ export class Descriptions {
 		crafting: {
 			texts: 'crafting-descriptions',
 			load: () => import('./data/crafting-descriptions-data').then((x) => x.CraftingDescriptions),
+		},
+		research: {
+			texts: 'research-descriptions',
+			load: () => import('./data/research-descriptions-data').then((x) => x.ResearchDescriptions),
 		},
 	};
 

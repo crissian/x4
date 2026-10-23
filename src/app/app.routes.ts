@@ -28,7 +28,7 @@ export const appRoutes: Routes = [
 		path: 'ships',
 		loadChildren: () =>
 			GameText.withTexts(
-				[...TEXTS.base, ...TEXTS.universe, 'ships', 'equipment', 'equipment-mods'],
+				[...TEXTS.base, ...TEXTS.universe, 'ships', 'equipment', 'equipment-mods', 'research'],
 				() => import('./ship/ship.routes')
 			),
 	},
@@ -55,7 +55,8 @@ export const appRoutes: Routes = [
 	},
 	{
 		path: 'modules',
-		loadChildren: () => GameText.withTexts([...TEXTS.base, 'modules'], () => import('./module/module.routes')),
+		loadChildren: () =>
+			GameText.withTexts([...TEXTS.base, 'modules', 'research'], () => import('./module/module.routes')),
 	},
 	{
 		path: 'wares',
@@ -128,6 +129,15 @@ export const appRoutes: Routes = [
 				() => import('./event-log/components/event-log-page.component')
 			),
 		title: `${BASE_TITLE} - ${$localize`Event Log`}`,
+	},
+	{
+		path: 'research',
+		loadComponent: () =>
+			GameText.withTexts(
+				[...TEXTS.base, 'modules', 'ships', 'equipment', 'research'],
+				() => import('./research/components/research-page.component')
+			),
+		title: `${BASE_TITLE} - ${$localize`Research`}`,
 	},
 	{
 		path: 'saves',

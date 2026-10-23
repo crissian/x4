@@ -1,0 +1,94 @@
+<div class="card">
+	<div class="card-header flex items-center gap-2">
+		<h1 i18n>Research</h1>
+		<app-experimental-badge />
+	</div>
+	<div class="card-body">
+		<p class="text-sm text-fg-muted" i18n>
+			The research projects of your headquarters: what each one costs and unlocks, and what a project still takes
+			from the research you have done.
+		</p>
+		@switch (store.status()) {
+			@case ('ready') {
+				@let counts = store.counts();
+				<p class="mt-1 text-sm" i18n>
+					{{ counts.done }} of {{ counts.total }} projects done in {{ store.save()!.info.saveName }} ({{
+						store.gameTime()
+					}}).
+				</p>
+			}
+			@case ('reload-needed') {
+				<p class="mt-1 text-sm">
+					<a routerLink="/saves" i18n>Reload this save to see the research you have done</a>
+				</p>
+			}
+			@case ('loading') {
+				<p class="mt-1 text-sm text-fg-muted" role="status" i18n>Loading save…</p>
+			}
+			@default {
+				<p class="mt-1 text-sm">
+					<a routerLink="/saves" i18n>Load a savegame</a>
+					<ng-container i18n>
+						to mark the research you have done and see what is available next.</ng-container
+					>
+				</p>
+			}
+		}
+
+		<app-research-next class="mt-3 block" />
+
+		<div class="mt-4 flex flex-wrap items-end gap-x-6 gap-y-3">
+			<label class="text-sm">
+				<ng-container i18n>Search</ng-container>
+				<input
+					id="research-search"
+					class="input"
+					type="search"
+					placeholder="Project or unlocked item"
+					i18n-placeholder
+					[formField]="store.form.search"
+				/>
+			</label>
+			<label class="flex items-center gap-2 pb-2 text-sm">
+				<input id="research-hidden" type="checkbox" [formField]="store.form.hidden" />
+				<ng-container i18n>Show projects the headquarters doesn't list</ng-container>
+			</label>
+		</div>
+
+		<div class="mt-3 grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,3fr)_minmax(0,1fr)]">
+			<div class="min-w-0">
+				<app-tabs label="Research view" i18n-label [tabs]="tabs" [(selected)]="store.view">
+					@if (store.view() === 'tree') {
+						<p class="mb-2 text-sm text-fg-muted" i18n>
+							Prerequisites point right to the projects needing them; the projects without any are at the
+							end. Pick one to see its path.
+						</p>
+						<app-research-graph
+							[projects]="store.visible()"
+							[progress]="store.progress()"
+							[selectedId]="store.selectedId()"
+							[highlight]="store.pathIds()"
+							[matches]="store.matches()"
+							(select)="store.select($event)"
+						/>
+					} @else {
+						<app-data-grid
+							[data]="rows()"
+							[columns]="columns"
+							[trackBy]="trackBy"
+							[sort]="sort"
+							[clickable]="true"
+							[selected]="selectedRow()"
+							[compact]="true"
+							storageKey="research"
+							(rowClick)="store.select($event.id)"
+						/>
+					}
+				</app-tabs>
+			</div>
+			<div class="min-w-0">
+				<app-research-detail />
+			</div>
+		</div>
+	</div>
+</div>

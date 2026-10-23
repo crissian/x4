@@ -7,6 +7,7 @@ import { MapExtractor } from './extractors/map-extractor';
 import { LicencesExtractor } from './extractors/licences-extractor';
 import { LogExtractor } from './extractors/log-extractor';
 import { RelationsExtractor } from './extractors/relations-extractor';
+import { ResearchExtractor } from './extractors/research-extractor';
 import { RepresentativesExtractor } from './extractors/representatives-extractor';
 import { ShipsExtractor } from './extractors/ships-extractor';
 import { VaultsExtractor } from './extractors/vaults-extractor';
@@ -59,6 +60,7 @@ export class SavegameReader {
 			new LicencesExtractor(),
 			new BlueprintsExtractor(),
 			new RepresentativesExtractor(),
+			new ResearchExtractor(),
 			new ShipsExtractor(),
 			new LogExtractor(),
 			new VaultsExtractor(),
