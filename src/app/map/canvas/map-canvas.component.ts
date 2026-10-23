@@ -11,6 +11,7 @@ import { MapSaveSectors } from '../save/map-save-sectors';
 import { MapLegendComponent } from './map-legend.component';
 import { MapLabelsLayer, MapLinksLayer, MapMarkersLayer } from './map-layers';
 import { MapMenuComponent, MapTooltipComponent } from './map-popups';
+import { MapHostileMarkers } from './map-hostile-markers';
 import { MapSaveMarkers } from './map-save-markers';
 import { StationTooltipComponent } from './station-tooltip';
 
@@ -22,6 +23,7 @@ import { StationTooltipComponent } from './station-tooltip';
 		MapLinksLayer,
 		MapMarkersLayer,
 		MapSaveMarkers,
+		MapHostileMarkers,
 		StationTooltipComponent,
 		MapLabelsLayer,
 		MapLegendComponent,

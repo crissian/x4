@@ -8,6 +8,7 @@ import { MAP_PROVIDERS } from './map-providers';
 import { MapStore, PanelTab } from './map-store';
 import { MapSaveLayer } from './save/map-save-layer';
 import { MapAbandonedPanelComponent } from './panels/map-abandoned-panel.component';
+import { MapHostilesPanelComponent } from './panels/map-hostiles-panel.component';
 import { MapMiningPanelComponent } from './panels/map-mining-panel.component';
 import { MapRoutePanelComponent } from './panels/map-route-panel.component';
 import { MapStationsPanelComponent } from './panels/map-stations-panel.component';
@@ -25,6 +26,7 @@ import { SectorInputComponent } from '../shared/components/sector-input.componen
 		MapMiningPanelComponent,
 		MapStationsPanelComponent,
 		MapAbandonedPanelComponent,
+		MapHostilesPanelComponent,
 		RouterLink,
 	],
 	providers: MAP_PROVIDERS,
@@ -48,6 +50,7 @@ export default class MapComponent {
 		{ id: 'mining', label: $localize`Mining` },
 		{ id: 'stations', label: $localize`Stations` },
 		{ id: 'abandoned', label: $localize`Abandoned` },
+		{ id: 'hostiles', label: $localize`:map tab, Xenon and Kha'ak:Hostiles` },
 	];
 
 	constructor() {
