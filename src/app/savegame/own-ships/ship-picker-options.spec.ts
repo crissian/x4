@@ -41,4 +41,15 @@ describe('ShipPickerOptions', () => {
 		const options = ShipPickerOptions.models([{ id: 'ship_a', name: 'Mercury' }], () => 'Medium');
 		expect(options).toEqual([{ id: 'ship_a', name: 'Mercury', group: 'Ship models', detail: 'Medium' }]);
 	});
+
+	it('describes own ships and models by model, hold, sector and size', () => {
+		const ship = own('own-1', 'Alpha', 'Small');
+		expect(ShipPickerOptions.ownDetail(ship)).toBe('Model Small · Argon Prime');
+		expect(ShipPickerOptions.ownDetail(ship, 6000)).toBe('Model Small, 6,000 m³ · Argon Prime');
+		const unnamed = { ...ship, named: false };
+		expect(ShipPickerOptions.ownDetail(unnamed)).toBe('Argon Prime');
+		expect(ShipPickerOptions.ownDetail(unnamed, 500)).toBe('500 m³ · Argon Prime');
+		expect(ShipPickerOptions.modelDetail({ size: 'Medium' })).toBe('Medium');
+		expect(ShipPickerOptions.modelDetail({ size: 'Medium' }, 6000)).toBe('Medium, 6,000 m³');
+	});
 });

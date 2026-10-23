@@ -1,14 +1,15 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
-import { EnumLabelPipe } from '../../core/enum-labels';
 import { MapStore } from '../map-store';
 import { MiningBuyersStore } from '../mining/mining-buyers-store';
 import { MiningBuyersTableComponent } from '../mining/mining-buyers-table.component';
 import { JumpsPipe } from '../../core/format/jumps.pipe';
 import { Duration } from '../../core/format/duration';
 import { SectorInputComponent } from '../../shared/components/sector-input.component';
+import { SearchableSelectComponent } from '../../shared/components/searchable-select/searchable-select.component';
+import { MinerPicker } from '../mining/miner-picker';
 
 @Component({
 	selector: 'app-map-mining-panel',
@@ -16,7 +17,7 @@ import { SectorInputComponent } from '../../shared/components/sector-input.compo
 		SectorInputComponent,
 		JumpsPipe,
 		DecimalPipe,
-		EnumLabelPipe,
+		SearchableSelectComponent,
 		FormField,
 		MiningBuyersTableComponent,
 		RouterLink,
@@ -30,4 +31,9 @@ export class MapMiningPanelComponent {
 	protected readonly buyers = inject(MiningBuyersStore);
 	protected readonly form = this.store.miningForm;
 	protected readonly duration = Duration.short;
+	/** The player's ships able to mine the resource by size, then the miner models. */
+	protected readonly minerOptions = computed(() => {
+		const ware = this.store.miningWare();
+		return ware ? MinerPicker.options(this.store.ownMiners(), this.store.miners(), ware) : [];
+	});
 }

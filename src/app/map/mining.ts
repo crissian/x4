@@ -24,11 +24,24 @@ export class Mining {
 		return (ship.cargo ?? []).filter((x) => x.types.some((t) => t.id === transport)).reduce((total, x) => total + x.max, 0);
 	}
 
+	/** Whether the ship is a miner with a hold for the ware: solid miners for ore, gas miners for gases. */
+	static canMine(ship: Pick<ShipListItem, 'purpose' | 'cargo'>, ware: Ware): boolean {
+		return ship.purpose === ShipPurpose.mine && Mining.minerCapacity(ship, ware) > 0;
+	}
+
 	/** Mining ships able to carry the ware, largest hold first. */
 	static minersFor<T extends ShipListItem>(ships: readonly T[], ware: Ware): T[] {
-		return ships
-			.filter((x) => x.purpose === ShipPurpose.mine && Mining.minerCapacity(x, ware) > 0)
-			.sort((a, b) => Mining.minerCapacity(b, ware) - Mining.minerCapacity(a, ware) || a.name.localeCompare(b.name));
+		return Mining.minersAmong(ships, ware, (x) => x);
+	}
+
+	/** The entries (such as own ships) whose ship can mine the ware, largest hold first, then by the ship's name. */
+	static minersAmong<T>(items: readonly T[], ware: Ware, shipOf: (item: T) => ShipListItem): T[] {
+		return items
+			.filter((x) => Mining.canMine(shipOf(x), ware))
+			.sort((a, b) => {
+				const [x, y] = [shipOf(a), shipOf(b)];
+				return Mining.minerCapacity(y, ware) - Mining.minerCapacity(x, ware) || x.name.localeCompare(y.name);
+			});
 	}
 
 	/**

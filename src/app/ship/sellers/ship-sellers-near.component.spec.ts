@@ -32,15 +32,21 @@ describe('ShipSellersNearComponent', () => {
 		expect(element.textContent).toContain('Load a savegame');
 		expect(element.querySelector('a[href="/sectors/cluster_14_sector001"]')?.textContent).toBe('Argon Prime');
 		expect(element.querySelector('a[href="/factions/argon"]')).not.toBeNull();
-		expect(element.querySelector('datalist option[value="Argon Prime"]')).not.toBeNull();
 		expect(element.querySelector('th')?.parentElement?.textContent).not.toContain('Jumps');
 	});
 
-	it('shows jumps and times once a from sector is typed', async () => {
+	it('shows jumps and times once a from sector is picked', async () => {
 		const element = await setup(ship(Size.large, 'argon'));
 		const input = element.querySelector<HTMLInputElement>('#ship-sellers-from')!;
+		input.dispatchEvent(new FocusEvent('focus'));
 		input.value = 'Argon Prime';
 		input.dispatchEvent(new Event('input'));
+		TestBed.tick();
+		// the owner faction shows after the name
+		expect(
+			[...element.querySelectorAll('[role="option"]')].map((x) => x.textContent?.trim().replace(/\s+/g, ' '))
+		).toContain('Argon Prime Argon Federation');
+		input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', cancelable: true }));
 		TestBed.tick();
 		expect(element.textContent).toContain('Jumps');
 		expect(element.querySelector('tbody td.text-right')?.textContent?.trim()).toBe('0');

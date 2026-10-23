@@ -143,7 +143,7 @@ describe('TradeRoutesPageComponent', () => {
 		await pick('#trade-ware', 'Food Rations');
 		expect(router.url).toBe('/trade-routes?ware=foodrations');
 
-		await set('#trade-near', 'Argon Prime');
+		await pick('#trade-near', 'Argon Prime');
 		// the empty leg column shows once a near sector is picked, though the first visit saved the columns without it
 		expect(element.querySelector('thead')!.textContent).toContain('To start');
 		element.querySelector<HTMLInputElement>('#trade-hostile')!.click();
@@ -186,17 +186,28 @@ describe('TradeRoutesPageComponent', () => {
 		expect(element.textContent).toContain('Prices as of save time (Save 5, 2h 3m)');
 	});
 
-	it('does not search again while typing text that matches no sector', async () => {
-		const { set, router, store } = await setup();
+	it('searches only once a near sector is picked, and again once it is cleared', async () => {
+		const { set, pick, router, store, element, settle } = await setup();
 		const find = vi.spyOn(TradeRouteFinder, 'find');
 		const url = router.url;
+		const near = element.querySelector<HTMLInputElement>('#trade-near')!;
+		near.dispatchEvent(new FocusEvent('focus'));
 		await set('#trade-near', 'Arg');
 		await set('#trade-near', 'Argo');
-		expect(store.model().near).toBe('Argo');
+		expect(store.model().near).toBe('');
 		expect(find).not.toHaveBeenCalled();
 		expect(router.url).toBe(url);
-		await set('#trade-near', 'Argon Prime');
+		await pick('#trade-near', 'Argon Prime');
 		expect(find).toHaveBeenCalledTimes(1);
+		expect(router.url).toBe(`/trade-routes?near=${ARGON_PRIME}`);
+
+		near.dispatchEvent(new FocusEvent('focus'));
+		await set('#trade-near', '');
+		near.dispatchEvent(new FocusEvent('blur'));
+		await settle();
+		expect(store.model().near).toBe('');
+		expect(find).toHaveBeenCalledTimes(2);
+		expect(router.url).toBe(url);
 		find.mockRestore();
 	});
 

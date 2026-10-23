@@ -98,8 +98,16 @@ describe('SupplyDemandPageComponent', () => {
 			control.dispatchEvent(new Event('change'));
 			await settle();
 		};
+		/** Opens a searchable select, types the option name and picks it with Enter. */
+		const pick = async (selector: string, name: string) => {
+			const input = element.querySelector<HTMLInputElement>(selector)!;
+			input.dispatchEvent(new FocusEvent('focus'));
+			await set(selector, name);
+			input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', cancelable: true }));
+			await settle();
+		};
 		const wares = () => store.rows().map((x) => x.ware);
-		return { element, store, router, settle, set, wares };
+		return { element, store, router, settle, set, pick, wares };
 	}
 
 	it('shows the empty state without a save', async () => {
@@ -141,7 +149,7 @@ describe('SupplyDemandPageComponent', () => {
 	});
 
 	it('picks the scope from a faction and a sector', async () => {
-		const { store, set, router } = await setup();
+		const { store, set, pick, router } = await setup();
 		const producers = () => store.rows().find((x) => x.ware === 'energycells')!.producers;
 		expect(producers()).toBe(3);
 		await set('#supply-scope', 'faction');
@@ -149,7 +157,7 @@ describe('SupplyDemandPageComponent', () => {
 		expect(producers()).toBe(1);
 		expect(router.url).toBe('/supply-demand?scope=faction&faction=teladi');
 		await set('#supply-scope', 'sector');
-		await set('#supply-sector', 'Argon Prime');
+		await pick('#supply-sector', 'Argon Prime');
 		await set('#supply-jumps', '1');
 		expect(store.centre()).toBe(ARGON_PRIME);
 		expect(store.jumps()).toBe(1);

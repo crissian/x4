@@ -19,12 +19,15 @@ class HostComponent {
 	readonly field = form(this.value);
 	readonly allLabel = signal<string | undefined>(undefined);
 	readonly recentKey = signal<string | undefined>(undefined);
+	readonly clearable = signal(false);
 }
 
 describe('SearchableSelectComponent', () => {
 	afterEach(() => localStorage.clear());
 
-	async function setup(options: { value?: string; allLabel?: string; recentKey?: string } = {}) {
+	async function setup(
+		options: { value?: string; allLabel?: string; recentKey?: string; clearable?: boolean } = {}
+	) {
 		const fixture = TestBed.createComponent(HostComponent);
 		const host = fixture.componentInstance;
 		if (options.value !== undefined) {
@@ -32,6 +35,7 @@ describe('SearchableSelectComponent', () => {
 		}
 		host.allLabel.set(options.allLabel);
 		host.recentKey.set(options.recentKey);
+		host.clearable.set(options.clearable ?? false);
 		await fixture.whenStable();
 		const element = fixture.nativeElement as HTMLElement;
 		const input = element.querySelector<HTMLInputElement>('#ship')!;
@@ -122,6 +126,32 @@ describe('SearchableSelectComponent', () => {
 		input.dispatchEvent(new FocusEvent('blur'));
 		await fixture.whenStable();
 		expect(host.value()).toBe('ship_demeter');
+	});
+
+	it('clears the value when emptied and left, if clearable', async () => {
+		const { fixture, host, input, focus, type, key } = await setup({ clearable: true });
+		await focus();
+		await type('');
+		input.dispatchEvent(new FocusEvent('blur'));
+		await fixture.whenStable();
+		expect(host.value()).toBe('');
+		expect(input.value).toBe('');
+		host.value.set('ship_demeter');
+		await fixture.whenStable();
+		await focus();
+		await type(' ');
+		await key('Enter');
+		expect(host.value()).toBe('');
+	});
+
+	it('keeps the value when emptied and left, if not clearable', async () => {
+		const { fixture, host, input, focus, type } = await setup();
+		await focus();
+		await type('');
+		input.dispatchEvent(new FocusEvent('blur'));
+		await fixture.whenStable();
+		expect(host.value()).toBe('ship_mercury');
+		expect(input.value).toBe('Mercury');
 	});
 
 	it('offers the empty "all" option, shown as the placeholder while selected', async () => {

@@ -1,15 +1,10 @@
-<label class="block">
-	<span [class.sr-only]="hideLabel()">{{ label() }}</span>
-	<input
-		class="input"
-		[attr.id]="inputId()"
-		[attr.list]="listId"
-		[attr.placeholder]="placeholder()"
-		[formField]="field"
-	/>
-	<datalist [id]="listId">
-		@for (sector of sectors(); track sector.id) {
-			<option [value]="sector.name"></option>
-		}
-	</datalist>
-</label>
+<app-searchable-select
+	[label]="label()"
+	[hideLabel]="hideLabel()"
+	[placeholder]="placeholder()"
+	[inputId]="inputId()"
+	[recentKey]="recentKey()"
+	[clearable]="true"
+	[options]="options()"
+	[formField]="field"
+/>
