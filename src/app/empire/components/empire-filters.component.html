@@ -1,0 +1,45 @@
+<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+	<label class="text-sm">
+		<ng-container i18n>Search</ng-container>
+		<input
+			id="empire-search"
+			class="input"
+			type="search"
+			placeholder="Name, code, ship or fleet"
+			i18n-placeholder
+			[formField]="form.search"
+		/>
+	</label>
+	<app-option-select
+		class="text-sm"
+		inputId="empire-sector"
+		i18n-label
+		label="Sector"
+		i18n-allLabel
+		allLabel="All sectors"
+		[options]="store.sectorOptions()"
+		[formField]="form.sector"
+	/>
+	@if (store.tab() === 'ships') {
+		<app-option-select
+			class="text-sm"
+			inputId="empire-size"
+			i18n-label
+			label="Size"
+			i18n-allLabel
+			allLabel="All sizes"
+			[options]="store.sizeOptions()"
+			[formField]="form.size"
+		/>
+		<app-option-select
+			class="text-sm"
+			inputId="empire-role"
+			i18n-label
+			label="Role"
+			i18n-allLabel
+			allLabel="All roles"
+			[options]="store.roleOptions()"
+			[formField]="form.role"
+		/>
+	}
+</div>

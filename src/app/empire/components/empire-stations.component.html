@@ -1,0 +1,15 @@
+<app-data-grid
+	[data]="store.filteredStations()"
+	[columns]="columns"
+	[cells]="{ name: nameCell, sectorName: sectorCell }"
+	[trackBy]="trackBy"
+	[compact]="true"
+	storageKey="empire-stations"
+/>
+<ng-template #nameCell let-row>
+	{{ row.name }}
+	@if (row.state === 'construction') {
+		<span class="ml-1 text-xs text-fg-muted" i18n>under construction</span>
+	}
+</ng-template>
+<ng-template #sectorCell let-row><app-sector-map-link [sector]="row.sector" [name]="row.sectorName" /></ng-template>

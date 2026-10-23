@@ -1,0 +1,48 @@
+<app-save-page
+	heading="Empire"
+	i18n-heading
+	[status]="store.status()"
+	reloadText="Reload this save to see your ships and stations"
+	i18n-reloadText
+>
+	<p intro class="text-fg-muted" i18n>
+		The empire overview lists the ships and stations you own in a savegame, with fleets, orders, storage and money.
+	</p>
+	<ng-template>
+		@let save = store.save()!;
+		@let summary = store.summary();
+		<p class="text-sm text-fg-muted">
+			<ng-container i18n>As of save time ({{ save.info.saveName }}, {{ store.gameTime() }}).</ng-container>
+			<a class="ml-2" routerLink="/map" i18n><svg lucideMap class="mr-0.5" /> Your ships on the galaxy map</a>
+		</p>
+		<div class="mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
+			<app-stat-tile i18n-label label="Money" [value]="whole(summary.money) + ' Cr'" />
+			<app-stat-tile i18n-label label="Ships" [value]="whole(summary.ships)" [detail]="sizeSplit()" />
+			<app-stat-tile i18n-label label="Stations" [value]="whole(summary.stations)" />
+			<app-stat-tile
+				i18n-label
+				label="Station accounts"
+				[value]="whole(summary.stationMoney) + ' Cr'"
+			/>
+		</div>
+		<app-empire-filters class="mt-4 block" />
+		<app-tabs class="mt-4 block" label="Empire" i18n-label [tabs]="tabs()" [(selected)]="store.tab">
+			@if (store.tab() === 'ships') {
+				@if (store.ships().length) {
+					<p class="mb-2 text-sm text-fg-muted" i18n>
+						Fleets list their commander first, then the ships under it, indented.
+					</p>
+					<app-empire-ships />
+				} @else {
+					<p class="text-fg-muted" i18n>You own no ships in this save.</p>
+				}
+			} @else {
+				@if (store.stations().length) {
+					<app-empire-stations />
+				} @else {
+					<p class="text-fg-muted" i18n>You own no stations in this save.</p>
+				}
+			}
+		</app-tabs>
+	</ng-template>
+</app-save-page>

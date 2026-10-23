@@ -1,0 +1,21 @@
+<app-data-grid
+	[data]="store.filteredShips()"
+	[columns]="columns"
+	[cells]="{ label: labelCell, sectorName: sectorCell }"
+	[trackBy]="trackBy"
+	[compact]="true"
+	[pageSizes]="[50, 100, 250, 1000]"
+	storageKey="empire-ships"
+/>
+<ng-template #labelCell let-row>
+	<span class="inline-block" [style.padding-left.rem]="row.depth * 1.25">
+		@if (row.depth) {
+			<span class="text-fg-muted" aria-hidden="true">↳ </span>
+		}
+		<span [class.font-semibold]="row.subordinates > 0">{{ row.label }}</span>
+		@if (row.label !== row.code) {
+			<span class="ml-1 text-xs text-fg-muted">{{ row.code }}</span>
+		}
+	</span>
+</ng-template>
+<ng-template #sectorCell let-row><app-sector-map-link [sector]="row.sector" [name]="row.sectorName" /></ng-template>
