@@ -78,16 +78,4 @@ describe('BlueprintShoppingList', () => {
 			['research', 'research'],
 		]);
 	});
-
-	it('totals all the items of each faction, and every item once overall', () => {
-		const list = build([
-			T.item('both', [T.ARGON, T.TELADI], undefined, 100),
-			T.item('argon', [T.ARGON], undefined, 50),
-		]);
-		expect(list.factions.map((x) => [x.faction.id, x.items.map((i) => i.id), x.total])).toEqual([
-			['argon', ['argon', 'both'], 150],
-			['teladi', ['both'], 100],
-		]);
-		expect(list.total).toBe(150);
-	});
 });

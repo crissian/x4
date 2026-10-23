@@ -1,73 +1,83 @@
-@let list = store.shopping();
-<section>
-	<h2 class="text-lg font-medium" i18n>Buy now</h2>
-	<p class="mt-1 text-sm text-fg-muted" i18n>
-		Faction representatives sell these to you today, with the licences in your save. A blueprint several factions
-		sell is listed under each; the price is the same everywhere.
-	</p>
-	@if (list.buy.length > 0) {
-		<p class="mt-2 text-sm">
-			<ng-container i18n
-				>All {{ list.buy.length }} blueprints: {{ list.total | number: '1.0-0' }} Cr (game prices)</ng-container
-			>
+@let list = store.filtered();
+@let summary = store.summary();
+<app-tabs label="Shopping list" i18n-label [tabs]="sections()" [(selected)]="store.section">
+	@switch (store.section()) {
+		@case ('buy') {
+			<p class="text-sm text-fg-muted" i18n>
+				Faction representatives sell these to you today, with the licences in your save; the price is the same
+				at every seller.
+			</p>
+		}
+		@case ('reputation') {
+			<p class="text-sm text-fg-muted" i18n>
+				Sold, but you lack the licence. Reputation as of save time; some licences come only with a ceremony. The
+				seller shown is the closest one, or the one the seller filter picks.
+			</p>
+		}
+		@default {
+			<p class="text-sm text-fg-muted" i18n>
+				No faction representative sells these. The source comes from the game's scripts that hand them out.
+			</p>
+		}
+	}
+	<p class="mt-2 text-sm">
+		<ng-container i18n
+			>{{ summary.count }} blueprints: {{ summary.total | number: '1.0-0' }} Cr (game prices)</ng-container
+		>
+		@if (store.section() !== 'unsold') {
 			·
 			<ng-container i18n>Money in save: {{ store.money() | number: '1.0-0' }} Cr</ng-container>
-		</p>
-		<div class="mt-3 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-			@for (group of list.factions; track group.faction.id) {
-				<section class="card">
-					<div class="card-header flex items-baseline justify-between gap-2">
-						<app-faction-label [faction]="group.faction" [dot]="false" />
-						<span class="text-sm text-fg-muted" i18n
-							>{{ group.items.length }} for {{ group.total | number: '1.0-0' }} Cr</span
-						>
-					</div>
-					<ul class="card-body space-y-0.5 text-sm">
-						@for (item of group.items; track item.id) {
-							<li class="flex justify-between gap-2">
-								<app-blueprint-item-link [item]="item" />
-								<span class="whitespace-nowrap text-fg-muted"
-									>{{ item.price | number: '1.0-0' }} Cr</span
-								>
-							</li>
-						}
-					</ul>
-				</section>
+		}
+	</p>
+	<div class="mt-3">
+		@switch (store.section()) {
+			@case ('buy') {
+				<app-data-grid
+					[data]="list.buy"
+					[columns]="columns.buy"
+					[cells]="{ item: itemCell, sellers: sellersCell }"
+					[trackBy]="trackBy"
+					[sort]="columns.itemSort"
+					storageKey="blueprints-buy"
+				/>
 			}
-		</div>
-	} @else {
-		<p class="mt-2 text-sm" i18n>Nothing to buy right now.</p>
-	}
-</section>
-
-<section class="mt-6">
-	<h2 class="text-lg font-medium" i18n>Need more reputation</h2>
-	<p class="mt-1 text-sm text-fg-muted" i18n>
-		Sold, but you lack the licence. Reputation as of save time; some licences come only with a ceremony.
-	</p>
-	<div class="mt-2">
-		<app-data-grid
-			[data]="store.reputationRows()"
-			[columns]="reputationColumns"
-			[trackBy]="reputationTrackBy"
-			[sort]="reputationSort"
-			storageKey="blueprints-reputation"
-		/>
+			@case ('reputation') {
+				<app-data-grid
+					[data]="list.reputation"
+					[columns]="columns.reputation"
+					[cells]="{ item: itemCell, seller: sellerCell, others: othersCell }"
+					[trackBy]="trackBy"
+					[sort]="columns.gapSort"
+					storageKey="blueprints-reputation"
+				/>
+			}
+			@default {
+				<app-data-grid
+					[data]="list.unsold"
+					[columns]="columns.unsold"
+					[cells]="{ item: itemCell }"
+					[trackBy]="trackBy"
+					[sort]="columns.itemSort"
+					storageKey="blueprints-unsold"
+				/>
+			}
+		}
 	</div>
-</section>
+</app-tabs>
 
-<section class="mt-6">
-	<h2 class="text-lg font-medium" i18n>Not sold anywhere</h2>
-	<p class="mt-1 text-sm text-fg-muted" i18n>
-		No faction representative sells these. The source comes from the game's scripts that hand them out.
-	</p>
-	<div class="mt-2">
-		<app-data-grid
-			[data]="list.unsold"
-			[columns]="unsoldColumns"
-			[trackBy]="unsoldTrackBy"
-			[sort]="unsoldSort"
-			storageKey="blueprints-unsold"
-		/>
-	</div>
-</section>
+<ng-template #itemCell let-row><app-blueprint-item-link [item]="row.item" /></ng-template>
+<ng-template #sellerCell let-row><app-faction-label [faction]="row.sellers[0].faction" /></ng-template>
+<ng-template #sellersCell let-row>
+	<span class="flex flex-wrap gap-x-3 gap-y-0.5">
+		@for (seller of row.sellers; track seller.faction.id) {
+			<app-faction-label class="whitespace-nowrap" [faction]="seller.faction" />
+		}
+	</span>
+</ng-template>
+<ng-template #othersCell let-row>
+	<span class="flex flex-wrap gap-x-3 gap-y-0.5">
+		@for (seller of row.sellers.slice(1); track seller.faction.id) {
+			<app-faction-label class="whitespace-nowrap" [faction]="seller.faction" />
+		}
+	</span>
+</ng-template>

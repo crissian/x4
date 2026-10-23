@@ -10,17 +10,12 @@ import { ModuleService } from '../shared/services/module.service';
 import { ShipService } from '../shared/services/ship.service';
 import { BlueprintCatalog } from './blueprint-catalog';
 import { BlueprintCategories } from './blueprint-categories';
-import type { BlueprintItem, CategoryProgress, ReputationSeller, ShoppingList } from './blueprint-model';
+import type { BlueprintItem, CategoryProgress, FactionTotal, ShoppingList } from './blueprint-model';
 import { BlueprintProgress } from './blueprint-progress';
-import { BlueprintQuery, type BlueprintTab, type BlueprintsModel } from './blueprint-query';
+import { BlueprintQuery, type BlueprintTab, type BlueprintsModel, type ShoppingSection } from './blueprint-query';
 import { BlueprintSellers } from './blueprint-sellers';
+import { BlueprintShoppingFilter } from './blueprint-shopping-filter';
 import { BlueprintShoppingList } from './blueprint-shopping-list';
-
-/** A row of the "need more reputation" table: one seller of one item. */
-export interface ReputationRow {
-	item: BlueprintItem;
-	seller: ReputationSeller;
-}
 
 /**
  * State of the blueprints page: the player's blueprints, licences and reputation from the active save, the progress
@@ -59,8 +54,11 @@ export class BlueprintsStore {
 		categories: BlueprintCategories.ALL.filter((x) => x.kind === kind.kind),
 	}));
 
-	readonly tab = signal<BlueprintTab>(BlueprintQuery.tab(this.activatedRoute.snapshot.queryParamMap));
-	readonly model = signal<BlueprintsModel>(BlueprintQuery.read(this.activatedRoute.snapshot.queryParamMap));
+	private readonly initial = BlueprintQuery.read(this.activatedRoute.snapshot.queryParamMap);
+	readonly tab = signal<BlueprintTab>(this.initial.tab);
+	/** The shopping list sub-tab. */
+	readonly section = signal<ShoppingSection>(this.initial.section);
+	readonly model = signal<BlueprintsModel>(this.initial.model);
 	readonly form = form(this.model);
 	private readonly search = computed(() => this.model().search.trim().toLowerCase());
 
@@ -70,19 +68,21 @@ export class BlueprintsStore {
 		const { category, hideComplete } = this.model();
 		const search = this.search();
 		return this.progress()
-			.categories.filter((x) => !category || x.category.id === category)
+			.categories.filter((x) => BlueprintCategories.includes(category, x.category.id))
 			.filter((x) => !hideComplete || x.owned < x.total)
 			.map((x) => (search ? { ...x, missing: x.missing.filter((i) => this.matches(i, search)) } : x))
 			.filter((x) => !search || x.missing.length > 0);
 	});
 
-	/** The shopping list of the items the filters leave. */
+	/** The shopping list of the items the category and search filters leave. */
 	readonly shopping = computed<ShoppingList>(() => {
 		const { category } = this.model();
 		const search = this.search();
 		const representatives = this.representatives();
 		return BlueprintShoppingList.build({
-			items: this.catalog.filter((x) => (!category || x.category === category) && this.matches(x, search)),
+			items: this.catalog.filter(
+				(x) => BlueprintCategories.includes(category, x.category) && this.matches(x, search)
+			),
 			owned: this.owned(),
 			licences: this.licences(),
 			relations: this.relations(),
@@ -98,21 +98,42 @@ export class BlueprintsStore {
 			unlockedBy: BlueprintRules.unlockedBy,
 		});
 	});
-	readonly reputationRows = computed<ReputationRow[]>(() =>
-		this.shopping().reputation.flatMap(({ item, sellers }) => sellers.map((seller) => ({ item, seller })))
-	);
+	/** The shopping list the faction and affordability filters leave too. */
+	readonly filtered = computed<ShoppingList>(() => {
+		const { faction, affordable } = this.model();
+		return BlueprintShoppingFilter.apply(this.shopping(), { faction, affordable, money: this.money() });
+	});
+	/** The count and total price of the shown section. */
+	readonly summary = computed(() => BlueprintShoppingFilter.summary(this.filtered()[this.section()]));
+	/**
+	 * The faction filter's choices: the factions selling in the shown section what the other filters leave, with
+	 * their count and total. The chosen faction stays listed when it sells nothing there.
+	 */
+	readonly factionTotals = computed<FactionTotal[]>(() => {
+		const section = this.section();
+		if (section === 'unsold') {
+			return [];
+		}
+		const { faction, affordable } = this.model();
+		const entries = BlueprintShoppingFilter.affordable(this.shopping()[section], {
+			faction,
+			affordable,
+			money: this.money(),
+		});
+		const totals = BlueprintShoppingFilter.factions(entries);
+		const chosen = faction && !totals.some((x) => x.faction.id === faction) && this.factions.getEntity(faction);
+		return chosen ? [...totals, { faction: chosen, count: 0, total: 0 }] : totals;
+	});
 
 	constructor() {
-		// the tab and the filters are kept in the URL
+		// the tabs and the filters are kept in the URL
 		QueryParamSync.connect(
-			computed(() => ({ model: this.model(), tab: this.tab() })),
-			{
-				read: (params) => ({ model: BlueprintQuery.read(params), tab: BlueprintQuery.tab(params) }),
-				write: ({ model, tab }) => BlueprintQuery.write(model, tab),
-			},
-			({ model, tab }) => {
+			computed(() => ({ model: this.model(), tab: this.tab(), section: this.section() })),
+			{ read: (params) => BlueprintQuery.read(params), write: (state) => BlueprintQuery.write(state) },
+			({ model, tab, section }) => {
 				this.model.set(model);
 				this.tab.set(tab);
+				this.section.set(section);
 			}
 		);
 	}
