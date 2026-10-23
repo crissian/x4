@@ -4,6 +4,7 @@ import { SectorShape } from '../galaxy-layout';
 import { MapLabel } from '../map-label';
 import { MapStations } from '../map-stations';
 import { MapStore } from '../map-store';
+import { MapSaveAbandoned } from '../save/map-save-abandoned';
 import { MapSaveLayer } from '../save/map-save-layer';
 import { MapSaveSectors } from '../save/map-save-sectors';
 import { StationIcons } from '../station-icons';
@@ -31,6 +32,7 @@ export class MapMarkersLayer {
 	protected readonly store = inject(MapStore);
 	protected readonly stations = inject(MapStations);
 	protected readonly save = inject(MapSaveLayer);
+	protected readonly abandoned = inject(MapSaveAbandoned);
 	protected readonly icons = StationIcons;
 	protected readonly dark = StationMarkersComponent.DARK;
 }

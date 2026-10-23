@@ -2,10 +2,16 @@
 	<input type="checkbox" [formField]="store.abandonedForm.show" />
 	<ng-container i18n>Show on map</ng-container>
 </label>
+@if (save.active()) {
+	<p class="mb-2 text-xs text-fg-muted" i18n>
+		Checked against your save: still there, or gone (claimed, destroyed or not spawned yet).
+	</p>
+}
 <table class="table text-sm">
 	<tbody>
 		@for (marker of store.abandoned(); track $index) {
-			<tr>
+			@let status = save.status(marker.item);
+			<tr [class.opacity-60]="status === 'gone'">
 				<td>
 					@if (marker.ship) {
 						<a [routerLink]="['/ships', marker.ship.id]">{{ marker.ship.name }}</a>
@@ -14,6 +20,16 @@
 					}
 					@if (marker.item.condition) {
 						<div class="text-xs text-fg-muted">{{ marker.item.condition }}</div>
+					}
+					@if (status === 'unclaimed') {
+						<div class="text-xs text-emerald-600 dark:text-emerald-400" i18n>Still there</div>
+					} @else if (status === 'gone') {
+						<div class="text-xs text-fg-muted">
+							<ng-container i18n>Gone</ng-container>
+							@if (save.owns(marker.item.ship)) {
+								· <ng-container i18n>you own one</ng-container>
+							}
+						</div>
 					}
 				</td>
 				<td>
@@ -31,5 +47,30 @@
 		}
 	</tbody>
 </table>
+@if (save.extras().length) {
+	<h6 class="mt-4" i18n>Also ownerless in your save ({{ save.extras().length }})</h6>
+	<table class="table text-sm">
+		<tbody>
+			@for (extra of save.extras(); track extra.ship.id) {
+				<tr>
+					<td>
+						@if (extra.model) {
+							<a [routerLink]="['/ships', extra.model.id]">{{ extra.model.name }}</a>
+						} @else {
+							{{ extra.ship.macro }}
+						}
+						<div class="text-xs text-fg-muted">{{ extra.ship.code }}</div>
+					</td>
+					<td>
+						<app-map-focus-link [sector]="extra.shape.sector" />
+						<div class="text-xs text-fg-muted">
+							{{ extra.at.x | number: '1.0-0' }}, {{ extra.at.z | number: '1.0-0' }} km
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
 <!-- prettier-ignore -->
 <p class="mt-2 text-xs text-fg-muted" i18n> Ownerless ships placed at game start; claim them by boarding with a spacesuit. </p>
