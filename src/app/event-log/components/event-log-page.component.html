@@ -17,7 +17,7 @@
 				ran in.</ng-container
 			>
 			@if (store.capped()) {
-				<ng-container i18n>Showing the newest {{ log.entries.length }} of {{ log.total }} entries.</ng-container>
+				{{ ' ' }}<ng-container i18n>Showing the newest {{ log.entries.length }} of {{ log.total }} entries.</ng-container>
 			}
 		</p>
 		<app-event-log-filters class="mt-3 block" />

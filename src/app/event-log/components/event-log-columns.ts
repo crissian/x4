@@ -63,7 +63,8 @@ export class EventLogColumns {
 			key: 'when',
 			caption: $localize`When`,
 			value: time,
-			display: (x) => LogTime.ago(ago(x)),
+			// no-break spaces keep the short time on one line
+			display: (x) => LogTime.ago(ago(x)).replace(/ /g, ' '),
 			title: (x) => $localize`Play time ${LogTime.at(time(x))}:time:`,
 			filterable: false,
 		};
