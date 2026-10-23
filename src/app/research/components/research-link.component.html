@@ -1,0 +1,8 @@
+<span [title]="label()"
+	><app-tone-dot [tone]="tone()" /><a
+		[routerLink]="['/research']"
+		[queryParams]="{ id: project().id }"
+		queryParamsHandling="merge"
+		>{{ project().name }}</a
+	></span
+>

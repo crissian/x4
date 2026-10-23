@@ -1,0 +1,34 @@
+<section data-research-next>
+	<h2 class="font-semibold text-fg-strong">
+		@if (hasSave()) {
+			<ng-container i18n>Next available</ng-container>
+		} @else {
+			<ng-container i18n>Where to start</ng-container>
+		}
+	</h2>
+	@if (items().length) {
+		<ul class="mt-1 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2 xl:grid-cols-3">
+			@for (item of items(); track item.project.id) {
+				<li class="min-w-0">
+					<app-research-link [project]="item.project" [state]="'available'" />
+					<span class="text-fg-muted">
+						· {{ item.time }} ·
+						@if (item.value) {
+							<ng-container i18n>≈ {{ item.value | number: '1.0-0' }} Cr</ng-container>
+						} @else {
+							<ng-container i18n>no wares</ng-container>
+						}
+					</span>
+				</li>
+			}
+		</ul>
+		<p class="mt-1 text-sm text-fg-muted" i18n>
+			Story projects, such as ship research, are left out: the headquarters offers them once their story adds
+			them.
+		</p>
+	} @else {
+		<p class="text-sm text-fg-muted" i18n>
+			Nothing can be started now: the rest needs a mission or a story event first, or is done.
+		</p>
+	}
+</section>
