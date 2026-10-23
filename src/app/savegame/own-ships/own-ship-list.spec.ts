@@ -12,6 +12,7 @@ describe('OwnShipList', () => {
 		model: (id) => models[id],
 		travel: (ship) => (ship.engine === 'fast' ? { speed: 9000, charge: 4 } : undefined),
 		sectorName: (id) => id.toUpperCase(),
+		text: (ref) => (ref === '{20101,22504}' ? 'Raven Prototype' : undefined),
 	};
 	const ship = (id: string, macro: string, code: string, name?: string, engine?: string): SaveShip => ({
 		id: `[${id}]`,
@@ -51,6 +52,14 @@ describe('OwnShipList', () => {
 		);
 		expect(fast.travel).toEqual({ speed: 9000, charge: 4 });
 		expect(plain.travel).toEqual({ speed: 5000, charge: 2 });
+	});
+
+	it('resolves game text names and falls back to the code for unknown ones', () => {
+		const list = OwnShipList.build(
+			[ship('0x1', 'scout', 'AAA-1', '{20101,22504}'), ship('0x2', 'scout', 'BBB-2', '{1,2}')],
+			lookups
+		);
+		expect(list.map((x) => x.label)).toEqual(['Raven Prototype', 'BBB-2']);
 	});
 
 	it('leaves out ships of unknown models', () => {

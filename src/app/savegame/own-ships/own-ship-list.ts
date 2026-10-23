@@ -1,4 +1,5 @@
 import type { ShipListItem, ShipTravel } from '../../shared/services/model/model';
+import { GameTextRef } from '../../core/game-text-ref';
 import type { SaveShip } from '../map/save-map-model';
 
 /** A ship of the active save, for the ship pickers. */
@@ -19,6 +20,8 @@ export interface OwnShipLookups {
 	model(id: string): ShipListItem | undefined;
 	travel(ship: SaveShip): ShipTravel | undefined;
 	sectorName(id: string): string;
+	/** resolves a `{page,id}` game text reference, the form the save gives story and preset ship names */
+	text(ref: string): string | undefined;
 }
 
 /** Turns the save's ships into picker entries: named ships by name, then the others by model and code. */
@@ -34,6 +37,11 @@ export class OwnShipList {
 		return value.startsWith(OwnShipList.PREFIX) && value.length > OwnShipList.PREFIX.length;
 	}
 
+	/** The ship's name, with game text references resolved; undefined when it has none or the reference is unknown. */
+	private static name(ship: SaveShip, lookups: OwnShipLookups): string | undefined {
+		return ship.name && GameTextRef.isRef(ship.name) ? lookups.text(ship.name) : ship.name;
+	}
+
 	/** The ships of a known model, sorted; ships of unknown (e.g. modded) models are left out. */
 	static build(ships: readonly SaveShip[], lookups: OwnShipLookups): OwnShip[] {
 		const result: { own: OwnShip; named: boolean }[] = [];
@@ -42,11 +50,12 @@ export class OwnShipList {
 			if (!model) {
 				continue;
 			}
+			const name = OwnShipList.name(ship, lookups);
 			result.push({
-				named: !!ship.name,
+				named: !!name,
 				own: {
 					key: OwnShipList.key(ship),
-					label: ship.name || ship.code,
+					label: name || ship.code,
 					model,
 					sector: ship.sector,
 					sectorName: lookups.sectorName(ship.sector),

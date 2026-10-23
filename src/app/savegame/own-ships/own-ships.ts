@@ -1,5 +1,7 @@
 import { Injectable, Signal, computed, inject } from '@angular/core';
+import { GameTextRef } from '../../core/game-text-ref';
 import { LazyValue } from '../../core/lazy-value';
+import { GameTexts } from '../../shared/services/data/game-texts-data';
 import { ShipListService } from '../../shared/services/ship-list.service';
 import { SectorService } from '../../shared/services/universe.service';
 import { ActiveSave } from '../active-save';
@@ -30,6 +32,7 @@ export class OwnShips {
 			model: (id) => this.models.getEntity(id),
 			travel: (ship) => calculator.travel(ship),
 			sectorName: (id) => this.sectors.getEntity(id)?.name ?? id,
+			text: (ref) => GameTextRef.resolve(ref, GameTexts),
 		});
 	});
 	private readonly byKey = computed(() => new Map(this.list().map((x) => [x.key, x])));
