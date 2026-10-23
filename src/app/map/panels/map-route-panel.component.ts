@@ -2,7 +2,6 @@ import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
-import { EnumLabels } from '../../core/enum-labels';
 import { MapStore } from '../map-store';
 import { StepType } from '../route-planner';
 import { JumpsPipe } from '../../core/format/jumps.pipe';
@@ -22,8 +21,8 @@ export class MapRoutePanelComponent {
 	protected readonly duration = Duration.short;
 	/** The player's ships by size, then the ship models; searched by name, model and sector. */
 	protected readonly shipOptions = computed(() => [
-		...ShipPickerOptions.own(this.store.routeOwnShips(), (own) => (own.named ? `${own.model.name} · ${own.sectorName}` : own.sectorName)),
-		...ShipPickerOptions.models(this.store.routeShips, (ship) => EnumLabels.label(ship.size)),
+		...ShipPickerOptions.own(this.store.routeOwnShips(), (own) => ShipPickerOptions.ownDetail(own)),
+		...ShipPickerOptions.models(this.store.routeShips, (ship) => ShipPickerOptions.modelDetail(ship)),
 	]);
 	protected readonly stepLabels: Record<Exclude<StepType, 'start'>, string> = {
 		gate: $localize`gate`,

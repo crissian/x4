@@ -156,7 +156,7 @@ export class MapStore {
 	/** The player's ships of the active save able to mine the resource. */
 	readonly ownMiners = computed(() => {
 		const ware = this.miningWare();
-		return ware ? MinerPicker.own(this.ownShips.list(), ware) : [];
+		return ware ? Mining.minersAmong(this.ownShips.list(), ware, (x) => x.model) : [];
 	});
 	private readonly minerChoices = computed(() => ({ models: this.miners(), own: this.ownMiners() }));
 	/** Mining settings; the miner stays while it can mine the resource, else resets to the largest model. */

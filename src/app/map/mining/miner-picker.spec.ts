@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { OwnShip } from '../../savegame/own-ships/own-ship-list';
 import type { ShipListItem, Ware } from '../../shared/services/model/model';
+import { Mining } from '../mining';
 import { MinerPicker } from './miner-picker';
 
 const ore = { id: 'ore', name: 'Ore', volume: 10, transport: 'Solid' } as Ware;
@@ -38,12 +39,17 @@ describe('MinerPicker', () => {
 	const ships = [own('own-1', solidM), own('own-2', gasM), own('own-3', trader), own('own-4', solidL, true)];
 
 	it('offers the own ships that mine the ware, largest hold first', () => {
-		expect(MinerPicker.own(ships, ore).map((x) => x.key)).toEqual(['own-4', 'own-1']);
-		expect(MinerPicker.own(ships, hydrogen).map((x) => x.key)).toEqual(['own-2']);
+		const own = (ware: Ware) => Mining.minersAmong(ships, ware, (x) => x.model).map((x) => x.key);
+		expect(own(ore)).toEqual(['own-4', 'own-1']);
+		expect(own(hydrogen)).toEqual(['own-2']);
 	});
 
 	it('lists the own miners by size, then the models, with hold and sector to search', () => {
-		const options = MinerPicker.options(MinerPicker.own(ships, ore), [solidL, solidM], ore);
+		const options = MinerPicker.options(
+			Mining.minersAmong(ships, ore, (x) => x.model),
+			[solidL, solidM],
+			ore
+		);
 		expect(options.map((x) => [x.id, x.group, x.detail])).toEqual([
 			['own-1', 'Your ships, Medium', '5,000 m³ · Ore Belt'],
 			['own-4', 'Your ships, Large', 'solid_l, 20,000 m³ · Ore Belt'],

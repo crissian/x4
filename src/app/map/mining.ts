@@ -31,9 +31,17 @@ export class Mining {
 
 	/** Mining ships able to carry the ware, largest hold first. */
 	static minersFor<T extends ShipListItem>(ships: readonly T[], ware: Ware): T[] {
-		return ships
-			.filter((x) => Mining.canMine(x, ware))
-			.sort((a, b) => Mining.minerCapacity(b, ware) - Mining.minerCapacity(a, ware) || a.name.localeCompare(b.name));
+		return Mining.minersAmong(ships, ware, (x) => x);
+	}
+
+	/** The entries (such as own ships) whose ship can mine the ware, largest hold first, then by the ship's name. */
+	static minersAmong<T>(items: readonly T[], ware: Ware, shipOf: (item: T) => ShipListItem): T[] {
+		return items
+			.filter((x) => Mining.canMine(shipOf(x), ware))
+			.sort((a, b) => {
+				const [x, y] = [shipOf(a), shipOf(b)];
+				return Mining.minerCapacity(y, ware) - Mining.minerCapacity(x, ware) || x.name.localeCompare(y.name);
+			});
 	}
 
 	/**
