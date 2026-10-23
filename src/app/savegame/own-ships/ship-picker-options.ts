@@ -7,13 +7,13 @@ import type { OwnShip } from './own-ship-list';
 /** The options of the ship pickers: the player's ships grouped by size, then the ship models. */
 export class ShipPickerOptions {
 	/**
-	 * The own ships under a header per size, smallest first, keeping their order within a size;
-	 * `detail` gives the searchable text after the name, such as the model and sector.
+	 * The own ships under a header per size, smallest first, keeping their order within a size, with the number of
+	 * merged ships after the name; `detail` gives the searchable text after the name, such as the model and sector.
 	 */
 	static own<T extends OwnShip>(ships: readonly T[], detail: (own: T) => string): SelectOption[] {
 		return SizeOrder.sort(ships, (own) => own.model.size).map((own) => ({
 			id: own.key,
-			name: own.label,
+			name: own.count > 1 ? `${own.label} ×${own.count}` : own.label,
 			group: $localize`:ship picker header, own ships of one size:Your ships, ${EnumLabels.label(own.model.size)}:size:`,
 			detail: detail(own),
 		}));

@@ -23,7 +23,7 @@ export class MinerPicker {
 
 	/** The picked miner: an own ship (as its model, named and with its own travel speed) or a model; undefined if gone. */
 	static find(key: string, own: readonly OwnShip[], models: readonly ShipListItem[]): Miner | undefined {
-		const ship = own.find((x) => x.key === key);
+		const ship = own.find((x) => x.keys.includes(key));
 		if (ship) {
 			return { ...ship.model, name: ship.label, travel: ship.travel, own: ship };
 		}

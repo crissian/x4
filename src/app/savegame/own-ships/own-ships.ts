@@ -35,9 +35,11 @@ export class OwnShips {
 			text: (ref) => GameTextRef.resolve(ref, GameTexts),
 		});
 	});
-	private readonly byKey = computed(() => new Map(this.list().map((x) => [x.key, x])));
+	private readonly byKey = computed(
+		() => new Map(this.list().flatMap((x) => x.keys.map((key) => [key, x] as const)))
+	);
 
-	/** The ship with this key in the active save, undefined when there is none (yet). */
+	/** The entry of the ship with this key in the active save (merged with its twins), undefined when there is none (yet). */
 	find(key: string): OwnShip | undefined {
 		return OwnShipList.isKey(key) ? this.byKey().get(key) : undefined;
 	}

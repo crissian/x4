@@ -28,6 +28,8 @@ function own(key: string, ship: ShipListItem, named = false): OwnShip {
 		key,
 		label: named ? `Named ${key}` : ship.name,
 		named,
+		count: 1,
+		keys: [key],
 		model: ship,
 		sector: 'a',
 		sectorName: 'Ore Belt',

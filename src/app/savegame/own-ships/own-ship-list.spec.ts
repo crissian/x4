@@ -45,11 +45,35 @@ describe('OwnShipList', () => {
 			key: 'own-0x5',
 			label: 'Alpha',
 			named: true,
+			count: 1,
+			keys: ['own-0x5'],
 			model: models['hauler'],
 			sector: 'a',
 			sectorName: 'A',
 			travel: { speed: 3000, charge: 10 },
 		});
+	});
+
+	it('merges unnamed ships of one model in one sector with the same travel speed', () => {
+		const list = OwnShipList.build(
+			[
+				ship('0x1', 'scout', 'AAA-1'),
+				ship('0x2', 'scout', 'BBB-2'),
+				ship('0x3', 'scout', 'CCC-3', undefined, 'fast'),
+				ship('0x4', 'scout', 'DDD-4', undefined, undefined, 'b'),
+				ship('0x5', 'scout', 'EEE-5', 'Named'),
+				ship('0x6', 'scout', 'FFF-6'),
+			],
+			lookups
+		);
+		expect(list.map((x) => [x.label, x.sectorName, x.travel?.speed, x.keys])).toEqual([
+			['Named', 'A', 5000, ['own-0x5']],
+			['Scout', 'A', 5000, ['own-0x1', 'own-0x2', 'own-0x6']],
+			['Scout', 'A', 9000, ['own-0x3']],
+			['Scout', 'B', 5000, ['own-0x4']],
+		]);
+		expect(list[1].count).toBe(3);
+		expect(list[1].key).toBe('own-0x1');
 	});
 
 	it('takes the travel speed from the installed engine, else the model', () => {

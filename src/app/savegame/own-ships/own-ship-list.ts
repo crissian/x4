@@ -10,6 +10,10 @@ export interface OwnShip {
 	label: string;
 	/** whether the label is the ship's own name rather than its model's */
 	named: boolean;
+	/** how many ships this entry stands for: unnamed ships of one model in one sector with the same engines are one */
+	count: number;
+	/** the keys of all those ships, `key` first */
+	keys: readonly string[];
 	model: ShipListItem;
 	sector: string;
 	sectorName: string;
@@ -26,7 +30,10 @@ export interface OwnShipLookups {
 	text(ref: string): string | undefined;
 }
 
-/** Turns the save's ships into picker entries: named ships by name, then the others by model and sector. */
+/**
+ * Turns the save's ships into picker entries: named ships by name, then the others by model and sector, with the
+ * unnamed ships that only their code tells apart (same model, sector and travel speed) merged into one entry.
+ */
 export class OwnShipList {
 	static readonly PREFIX = 'own-';
 
@@ -44,24 +51,40 @@ export class OwnShipList {
 		return ship.name && GameTextRef.isRef(ship.name) ? lookups.text(ship.name) : ship.name;
 	}
 
-	/** The ships of a known model, sorted; ships of unknown (e.g. modded) models are left out. */
+	/** The ships of a known model, sorted and merged; ships of unknown (e.g. modded) models are left out. */
 	static build(ships: readonly SaveShip[], lookups: OwnShipLookups): OwnShip[] {
 		const result: OwnShip[] = [];
+		const merged = new Map<string, OwnShip>();
 		for (const ship of ships) {
 			const model = lookups.model(ship.macro);
 			if (!model) {
 				continue;
 			}
 			const name = OwnShipList.name(ship, lookups);
-			result.push({
-				key: OwnShipList.key(ship),
+			const key = OwnShipList.key(ship);
+			const travel = lookups.travel(ship) ?? model.travel;
+			const same = name ? undefined : `${model.id}|${ship.sector}|${travel?.speed}|${travel?.charge}`;
+			const twin = same ? merged.get(same) : undefined;
+			if (twin) {
+				twin.count++;
+				twin.keys = [...twin.keys, key];
+				continue;
+			}
+			const own: OwnShip = {
+				key,
 				label: name || model.name,
 				named: !!name,
+				count: 1,
+				keys: [key],
 				model,
 				sector: ship.sector,
 				sectorName: lookups.sectorName(ship.sector),
-				travel: lookups.travel(ship) ?? model.travel,
-			});
+				travel,
+			};
+			if (same) {
+				merged.set(same, own);
+			}
+			result.push(own);
 		}
 		return result.sort(
 			(a, b) =>

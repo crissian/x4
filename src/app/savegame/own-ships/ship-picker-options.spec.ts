@@ -4,10 +4,12 @@ import type { OwnShip } from './own-ship-list';
 import { ShipPickerOptions } from './ship-picker-options';
 
 describe('ShipPickerOptions', () => {
-	const own = (key: string, label: string, size: string): OwnShip => ({
+	const own = (key: string, label: string, size: string, count = 1): OwnShip => ({
 		key,
 		label,
 		named: true,
+		count,
+		keys: [key],
 		model: { id: `ship_${size}`, name: `Model ${size}`, size } as ShipListItem,
 		sector: 'a',
 		sectorName: 'Argon Prime',
@@ -35,6 +37,11 @@ describe('ShipPickerOptions', () => {
 			group: 'Your ships, Small',
 			detail: 'Model Small · Argon Prime',
 		});
+	});
+
+	it('shows how many ships a merged entry stands for', () => {
+		const [options] = ShipPickerOptions.own([own('own-1', 'Magnetar', 'Large', 5)], () => '');
+		expect(options.name).toBe('Magnetar ×5');
 	});
 
 	it('lists the models under one header', () => {
