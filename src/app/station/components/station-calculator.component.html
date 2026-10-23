@@ -51,6 +51,12 @@
 			</section>
 			<section>
 				<h6 i18n>Station Resources</h6>
+				@if (!hasModules()) {
+					<p class="mb-2 text-fg-muted" i18n="@@stationEmptyHint">
+						Start by picking a module in the list, then use Autofill Modules to add the modules that make
+						its inputs. Or Load a saved layout, or Import construction plans from your game.
+					</p>
+				}
 				<app-station-resources [resources]="resources()" />
 			</section>
 			<section>

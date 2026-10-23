@@ -9,6 +9,7 @@ import { DataGridComponent, GridColumn } from '../../shared/components/data-grid
 import { ProducibleDetailPage } from '../../shared/components/entity-detail-page';
 import { EntityLinkComponent } from '../../shared/components/entity-link.component';
 import { ProductionCardsComponent } from '../../shared/components/production-cards.component';
+import { ListLimit } from '../../shared/components/list-limit';
 import { RowNavigation } from '../../shared/components/row-navigation';
 import { PriceRangePipe } from '../../core/format/price-range.pipe';
 import { SellersComponent } from '../../shared/components/sellers.component';
@@ -64,11 +65,22 @@ export class ShipDetailComponent extends ProducibleDetailPage<Ship> {
 		if (!ship) {
 			return [];
 		}
-		return this.stats.engines(ship).map((engine) => {
-			const speeds = ShipPerformance.flightSpeeds(ship, engine);
-			return { engine, speed: speeds.speed, boost: speeds.boost, travel: speeds.travel, charge: speeds.travelCharge };
-		});
+		return this.stats
+			.engines(ship)
+			.map((engine) => {
+				const speeds = ShipPerformance.flightSpeeds(ship, engine);
+				return {
+					engine,
+					speed: speeds.speed,
+					boost: speeds.boost,
+					travel: speeds.travel,
+					charge: speeds.travelCharge,
+				};
+			})
+			.sort((a, b) => b.travel - a.travel || b.speed - a.speed);
 	});
+	/** Fastest in travel mode first; the long tail stays folded so the sellers below are in view. */
+	protected readonly engineList = new ListLimit(this.engines, 5);
 
 	protected readonly engineColumns: GridColumn<EngineRow>[] = [
 		{ key: 'engine.name', caption: $localize`Engine` },

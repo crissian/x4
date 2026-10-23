@@ -153,6 +153,19 @@ describe('station calculator', () => {
 		expect(text).toContain('Food Rations');
 	});
 
+	it('shows where to start until a module is picked', async () => {
+		TestBed.configureTestingModule({ providers: [provideRouter([])] });
+		const fixture = TestBed.createComponent(StationCalculatorComponent);
+		await fixture.whenStable();
+		const element = fixture.nativeElement as HTMLElement;
+		expect(fixture.componentInstance.hasModules()).toBe(false);
+		expect(element.textContent).toContain('Start by picking a module');
+
+		fixture.componentInstance.rows.set([{ moduleId: HULL_PARTS, count: 1 }]);
+		await fixture.whenStable();
+		expect(element.textContent).not.toContain('Start by picking a module');
+	});
+
 	it('opens a shared layout at the sunlight of the link', async () => {
 		TestBed.configureTestingModule({ providers: [provideRouter([])] });
 		const fixture = TestBed.createComponent(StationCalculatorComponent);

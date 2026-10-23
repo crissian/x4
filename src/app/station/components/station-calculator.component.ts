@@ -116,6 +116,9 @@ export default class StationCalculatorComponent {
 		)
 	);
 
+	/** False while every row is still "[Select]": the resources column then shows where to start. */
+	readonly hasModules = computed(() => this.modules().some((x) => x.module));
+
 	readonly workforce = computed(() => ResourceCalculator.calculateWorkforce(this.modules(), this.settings().isHq));
 
 	/** Workforce actually working: everything available when auto, otherwise the slider value, capped by capacity. */
