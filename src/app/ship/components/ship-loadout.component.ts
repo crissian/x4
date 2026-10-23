@@ -15,9 +15,20 @@ import { ShipCompareComponent } from './ship-compare.component';
 import { NumberFormats } from '../../core/format/number-formats';
 import { EntityDetailPage } from '../../shared/components/entity-detail-page';
 import { PriceRangePipe } from '../../core/format/price-range.pipe';
+import { SearchableSelectComponent } from '../../shared/components/searchable-select/searchable-select.component';
+import { SelectOption } from '../../shared/components/searchable-select/select-option-filter';
 
 @Component({
-	imports: [DecimalPipe, PriceRangePipe, FormField, RouterLink, LucideLink, LucideCheck, LucideGitCompareArrows],
+	imports: [
+		DecimalPipe,
+		PriceRangePipe,
+		FormField,
+		RouterLink,
+		LucideLink,
+		LucideCheck,
+		LucideGitCompareArrows,
+		SearchableSelectComponent,
+	],
 	templateUrl: './ship-loadout.component.html',
 })
 export class ShipLoadoutComponent extends EntityDetailPage<Ship> {
@@ -35,6 +46,16 @@ export class ShipLoadoutComponent extends EntityDetailPage<Ship> {
 		const ship = this.entity();
 		return ship ? this.stats.groups(ship) : [];
 	});
+	/** The equipment choices per slot group, labelled with their main stats; up to ~45, so searchable. */
+	protected readonly slotOptions = computed(
+		() =>
+			new Map<string, SelectOption[]>(
+				this.groups().map((group) => [
+					group.key,
+					group.options.map((option) => ({ id: option.id, name: this.optionLabel(option) })),
+				])
+			)
+	);
 
 	/**
 	 * Equipment id per slot group, '' for an empty group, and the missile per launcher group ('' for
@@ -135,7 +156,9 @@ export class ShipLoadoutComponent extends EntityDetailPage<Ship> {
 				.map((x) => ({ key: LoadoutMissiles.key(x), choice: this.missileChoices().get(x.key) }))
 				.filter(({ key, choice }) => slots[key] && !choice?.options.some((x) => x.id === slots[key]));
 			if (reset.length) {
-				untracked(() => this.slots.update((x) => ({ ...x, ...Object.fromEntries(reset.map(({ key }) => [key, ''])) })));
+				untracked(() =>
+					this.slots.update((x) => ({ ...x, ...Object.fromEntries(reset.map(({ key }) => [key, ''])) }))
+				);
 			}
 		});
 
@@ -165,7 +188,9 @@ export class ShipLoadoutComponent extends EntityDetailPage<Ship> {
 		const missileKeys = this.groups()
 			.filter((g) => LoadoutMissiles.isLauncherGroup(g))
 			.map((g) => LoadoutMissiles.key(g));
-		return Object.fromEntries([...this.groups().map((g) => g.key), ...missileKeys].map((key) => [key, loadout[key] ?? '']));
+		return Object.fromEntries(
+			[...this.groups().map((g) => g.key), ...missileKeys].map((key) => [key, loadout[key] ?? ''])
+		);
 	}
 
 	protected missileLabel(missile: Equipment): string {
@@ -211,7 +236,9 @@ export class ShipLoadoutComponent extends EntityDetailPage<Ship> {
 		const ship = this.entity();
 		if (ship) {
 			const code = this.stats.encode(ship, this.loadout());
-			this.router.navigate(['/ships/compare'], { queryParams: { ships: ShipCompareComponent.addToComparison(`${ship.id}~${code}`) } });
+			this.router.navigate(['/ships/compare'], {
+				queryParams: { ships: ShipCompareComponent.addToComparison(`${ship.id}~${code}`) },
+			});
 		}
 	}
 }

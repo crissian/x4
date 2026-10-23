@@ -53,14 +53,14 @@
 			[formField]="form.sector"
 		/>
 	} @else {
-		<app-option-select
+		<app-searchable-select
 			class="text-sm"
 			inputId="suggest-ware"
 			i18n-label
 			label="Ware"
 			i18n-allLabel
 			allLabel="All wares"
-			[options]="store.wares()"
+			[options]="wareOptions()"
 			[formField]="form.ware"
 		/>
 	}

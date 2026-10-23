@@ -92,13 +92,22 @@ describe('TradeRoutesPageComponent', () => {
 			input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', cancelable: true }));
 			await settle();
 		};
+		/** Opens a searchable select and picks its first option, such as "All wares". */
+		const pickFirst = async (selector: string) => {
+			const input = element.querySelector<HTMLInputElement>(selector)!;
+			input.dispatchEvent(new FocusEvent('focus'));
+			await settle();
+			input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', cancelable: true }));
+			input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', cancelable: true }));
+			await settle();
+		};
 		/** Opens a searchable select and returns its list. */
 		const open = async (selector: string) => {
 			element.querySelector<HTMLInputElement>(selector)!.dispatchEvent(new FocusEvent('focus'));
 			await settle();
 			return element.querySelector(`#${element.querySelector(selector)!.getAttribute('aria-controls')}`)!;
 		};
-		return { harness, component, element, store, router, settle, set, pick, open };
+		return { harness, component, element, store, router, settle, set, pick, pickFirst, open };
 	}
 
 	it('shows the empty state without a save', async () => {
@@ -120,7 +129,7 @@ describe('TradeRoutesPageComponent', () => {
 
 	it('reads filters from the URL', async () => {
 		const { element, store } = await setup(`/trade-routes?ware=energycells&near=${ARGON_PRIME}&jumps=1`);
-		expect(element.querySelector<HTMLSelectElement>('#trade-ware')!.value).toBe('energycells');
+		expect(element.querySelector<HTMLInputElement>('#trade-ware')!.value).toBe('Energy Cells');
 		expect(element.querySelector<HTMLInputElement>('#trade-near')!.value).toBe('Argon Prime');
 		expect(element.querySelector<HTMLInputElement>('#trade-jumps')!.value).toBe('1');
 		expect(store.result().routes.map((x) => x.key)).toEqual(['SEL-1~BUY-1~energycells']);
@@ -129,9 +138,9 @@ describe('TradeRoutesPageComponent', () => {
 	});
 
 	it('writes filters to the URL', async () => {
-		const { router, set, element, settle } = await setup();
+		const { router, set, pick, pickFirst, element, settle } = await setup();
 		expect(element.querySelector('thead')!.textContent).not.toContain('To start');
-		await set('#trade-ware', 'foodrations');
+		await pick('#trade-ware', 'Food Rations');
 		expect(router.url).toBe('/trade-routes?ware=foodrations');
 
 		await set('#trade-near', 'Argon Prime');
@@ -139,7 +148,7 @@ describe('TradeRoutesPageComponent', () => {
 		expect(element.querySelector('thead')!.textContent).toContain('To start');
 		element.querySelector<HTMLInputElement>('#trade-hostile')!.click();
 		await settle();
-		await set('#trade-ware', '');
+		await pickFirst('#trade-ware');
 		expect(router.url).toBe(`/trade-routes?near=${ARGON_PRIME}&hostile=1`);
 	});
 
@@ -195,17 +204,17 @@ describe('TradeRoutesPageComponent', () => {
 		const { element, router, store, settle } = await setup(
 			`/trade-routes?ware=energycells&route=SEL-1~BUY-1~energycells`
 		);
-		expect(element.querySelector<HTMLSelectElement>('#trade-ware')!.value).toBe('energycells');
+		expect(element.querySelector<HTMLInputElement>('#trade-ware')!.value).toBe('Energy Cells');
 		await router.navigateByUrl('/trade-routes');
 		await settle();
 		expect(store.model()).toEqual(TradeRoutesStore.DEFAULTS);
-		expect(element.querySelector<HTMLSelectElement>('#trade-ware')!.value).toBe('');
+		expect(element.querySelector<HTMLInputElement>('#trade-ware')!.value).toBe('');
 		expect(element.querySelectorAll('tbody tr').length).toBe(2);
 		expect(router.url).toBe('/trade-routes');
 
 		await router.navigateByUrl(`/trade-routes?ware=foodrations`);
 		await settle();
-		expect(element.querySelector<HTMLSelectElement>('#trade-ware')!.value).toBe('foodrations');
+		expect(element.querySelector<HTMLInputElement>('#trade-ware')!.value).toBe('Food Rations');
 		expect(router.url).toBe('/trade-routes?ware=foodrations');
 	});
 
