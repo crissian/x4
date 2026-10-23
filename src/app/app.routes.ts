@@ -28,14 +28,22 @@ export const appRoutes: Routes = [
 		path: 'ships',
 		loadChildren: () =>
 			GameText.withTexts(
-				[...TEXTS.base, ...TEXTS.universe, 'ships', 'equipment'],
+				[...TEXTS.base, ...TEXTS.universe, 'ships', 'equipment', 'equipment-mods'],
 				() => import('./ship/ship.routes')
 			),
 	},
 	{
 		path: 'equipment',
 		loadChildren: () =>
-			GameText.withTexts([...TEXTS.base, 'ships', 'equipment'], () => import('./equipment/equipment.routes')),
+			GameText.withTexts(
+				[...TEXTS.base, 'ships', 'equipment', 'equipment-mods'],
+				() => import('./equipment/equipment.routes')
+			),
+	},
+	{
+		path: 'mods',
+		loadChildren: () =>
+			GameText.withTexts([...TEXTS.base, 'equipment-mods'], () => import('./mods/mods.routes')),
 	},
 	{
 		path: 'factions',

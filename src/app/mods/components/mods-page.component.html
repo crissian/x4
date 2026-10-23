@@ -1,0 +1,56 @@
+<app-list-page i18n-heading heading="Equipment Mods" [data]="mods()" [columns]="columns" storageKey="mods">
+	<a actions class="text-sm" routerLink="/mods/crafting" i18n>Crafting ingredients</a>
+	<div intro class="mb-3">
+		<p class="mb-3 text-fg-muted" i18n>
+			Mods are crafted from inventory items and installed at a ship modification dealer. Each crafted mod rolls
+			its main effect and bonus effects within the ranges shown; green helps, red hurts, amber can go either way.
+		</p>
+		<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+			<app-option-select
+				class="text-sm"
+				inputId="mods-slot"
+				i18n-label
+				label="Installed on"
+				i18n-allLabel
+				allLabel="All slots"
+				[options]="slots"
+				[formField]="form.slot"
+			/>
+			<app-option-select
+				class="text-sm"
+				inputId="mods-quality"
+				i18n-label
+				label="Quality"
+				i18n-allLabel
+				allLabel="All qualities"
+				[options]="qualities"
+				[formField]="form.quality"
+			/>
+			<app-option-select
+				class="text-sm"
+				inputId="mods-stat"
+				i18n-label
+				label="Changes stat"
+				i18n-allLabel
+				allLabel="Any stat"
+				[options]="stats()"
+				[formField]="form.stat"
+			/>
+			<label class="text-sm">
+				<ng-container i18n>Search</ng-container>
+				<input
+					id="mods-search"
+					class="input"
+					type="search"
+					i18n-placeholder
+					placeholder="Mod name"
+					[formField]="form.search"
+				/>
+			</label>
+			<label class="flex items-center gap-2 pb-2 text-sm sm:self-end">
+				<input id="mods-scenario" type="checkbox" [formField]="form.scenario" />
+				<ng-container i18n>Show scenario mods</ng-container>
+			</label>
+		</div>
+	</div>
+</app-list-page>

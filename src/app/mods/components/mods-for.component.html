@@ -1,0 +1,11 @@
+@if (mods().length) {
+	<div class="mt-4 card">
+		<div class="card-header flex items-center justify-between gap-3">
+			<span i18n>Mods for this ({{ mods().length }})</span>
+			<a class="text-sm" routerLink="/mods" [queryParams]="{ slot: slot() }" i18n>All mods</a>
+		</div>
+		<div class="card-body">
+			<app-data-grid [data]="mods()" [columns]="columns" [compact]="true" storageKey="mods-for" />
+		</div>
+	</div>
+}

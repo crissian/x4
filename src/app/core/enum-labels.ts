@@ -106,6 +106,10 @@ export class EnumLabels {
 			Recycling: $localize`:module type:Recycling`,
 			Radar: $localize`:module type:Radar`,
 			Welfare: $localize`:module type:Welfare`,
+
+			// ModSlot, with the Weapon and Engine equipment classes
+			Shield: $localize`:mod slot:Shield`,
+			Ship: $localize`:mod slot:Ship`,
 		};
 	}
 }
