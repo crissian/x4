@@ -1,3 +1,4 @@
+import { LoadoutMissiles } from './loadout-missiles';
 import { Equipment, MissileData, Ship, WeaponData } from './model/model';
 
 export interface FlightSpeeds {
@@ -91,7 +92,8 @@ export class ShipPerformance {
 		};
 	}
 
+	/** Sustained damage per second of one launcher, including swarms and magazine reloads. */
 	static missileDps(missile: MissileData): number {
-		return missile.reload ? missile.damage / missile.reload : missile.damage;
+		return LoadoutMissiles.stats(missile).sustainedDps;
 	}
 }

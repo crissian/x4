@@ -1,6 +1,8 @@
 import { EnumLabels } from '../../core/enum-labels';
 import { EquipmentType } from './data/equipment-type-data';
 import { Equipment, Production, Ship, Slot } from './model/model';
+import { LoadoutMissiles, MissileTotals } from './loadout-missiles';
+import { Handling, ShipHandling } from './ship-handling';
 import { FlightSpeeds, ShipPerformance } from './ship-performance';
 
 /**
@@ -10,13 +12,14 @@ import { FlightSpeeds, ShipPerformance } from './ship-performance';
  * (equipment mods, crew skill and ship damage are ignored).
  */
 
-export type SlotKind = 'engines' | 'shields' | 'weapons' | 'turrets';
+export type SlotKind = 'engines' | 'shields' | 'weapons' | 'turrets' | 'thrusters';
 
 const KIND_TYPES: Record<SlotKind, string[]> = {
 	engines: [EquipmentType.engines],
 	shields: [EquipmentType.shields],
 	weapons: [EquipmentType.weapons],
 	turrets: [EquipmentType.turrets],
+	thrusters: [EquipmentType.thrusters],
 };
 
 /** One slot group of a ship: the game equips every slot of a group with the same equipment. */
@@ -36,6 +39,10 @@ export interface LoadoutStats {
 	/** Forward weapons. */
 	weaponDps: number;
 	turretDps: number;
+	/** Missile launchers and missile turrets with their chosen missiles. */
+	missiles: MissileTotals;
+	/** Strafe speed and turn rates with the chosen thruster. */
+	handling: Handling;
 	/** Longest weapon or turret range in meters. */
 	maxRange: number;
 	/** Equipment count per id. */
@@ -43,7 +50,7 @@ export interface LoadoutStats {
 	equipmentPrice: { min: number; avg: number; max: number };
 }
 
-/** Selected equipment id per slot group key. */
+/** Selected equipment id per slot group key, plus the missile per launcher group (see `LoadoutMissiles.key`). */
 export type Loadout = Record<string, string>;
 
 export class Loadouts {
@@ -61,7 +68,8 @@ export class Loadouts {
 
 	/**
 	 * Groups the slots the way the game's ship configuration does: all engines together, the main
-	 * (ungrouped) shields together, grouped shields and turrets per group, weapons one by one.
+	 * (ungrouped) shields together, grouped shields and turrets per group, weapons one by one, and
+	 * the ship's thrusters last (one per ship, so old share codes keep their positions).
 	 */
 	static slotGroups(ship: Ship, equipment: readonly Equipment[]): SlotGroup[] {
 		const groups: SlotGroup[] = [];
@@ -87,6 +95,10 @@ export class Loadouts {
 		add('shields', ship.shields, false);
 		add('weapons', ship.weapons, true);
 		add('turrets', ship.turrets, false);
+		const thrusterTag = ShipHandling.sizeTag(ship);
+		if (thrusterTag) {
+			add('thrusters', [{ size: ship.thruster, hittable: false, tags: ['thruster', thrusterTag] }], false);
+		}
 		return groups;
 	}
 
@@ -124,6 +136,7 @@ export class Loadouts {
 		let maxRange = 0;
 		let engine: Equipment | undefined;
 		let engineCount = 0;
+		let thruster: Equipment | undefined;
 
 		for (const group of groups) {
 			const equipment = loadout[group.key] ? getEquipment(loadout[group.key]) : undefined;
@@ -137,6 +150,9 @@ export class Loadouts {
 				case 'engines':
 					engine = equipment;
 					engineCount += count;
+					break;
+				case 'thrusters':
+					thruster = equipment;
 					break;
 				case 'shields':
 					shield += (equipment.recharge?.max ?? 0) * count;
@@ -177,6 +193,8 @@ export class Loadouts {
 			hull: ship.hull,
 			weaponDps,
 			turretDps,
+			missiles: LoadoutMissiles.totals(ship, groups, loadout, getEquipment),
+			handling: ShipHandling.handling(ship, thruster),
 			maxRange,
 			counts,
 			equipmentPrice,
@@ -239,6 +257,8 @@ export class Loadouts {
 				return $localize`Weapon ${index}:index: (${size}:size:)`;
 			case 'turrets':
 				return $localize`Turret group ${index}:index: (${size}:size:)${amount}:amount:`;
+			case 'thrusters':
+				return $localize`Thrusters (${size}:size:)`;
 		}
 	}
 }

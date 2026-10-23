@@ -25,9 +25,13 @@ export interface Equipment {
    /** Engines. */
    travel?: TravelDrive;
    boost?: Boost;
+   /** Thrusters. */
+   thruster?: ThrusterData;
    /** Weapons and turrets. */
    weapon?: WeaponData;
    missile?: MissileData;
+   /** Missile launchers and missile turrets. */
+   launcher?: LauncherData;
    /** Connection tags, see `Slot.tags`. */
    tags?: string[];
    license?: string;
@@ -57,6 +61,22 @@ export interface Boost {
    duration: number;
    recharge: number;
    acceleration: number;
+}
+
+export interface ThrusterData {
+   /** Strafe force, divided by the ship's horizontal/vertical drag for m/s. */
+   strafe: number;
+   /** Turning torque per axis, divided by the ship's drag on that axis for °/s. */
+   pitch: number;
+   yaw: number;
+   roll: number;
+}
+
+export interface LauncherData {
+   /** Missile tags the launcher accepts, see `MissileData.tags`. */
+   ammo: string[];
+   /** Id of the missile it comes with. */
+   missile: string;
 }
 
 export interface WeaponData {
@@ -99,6 +119,18 @@ export interface MissileData {
    range: number;
    lifetime: number;
    guided: boolean;
+   /** Seconds between launches. */
    reload?: number;
    speed?: number;
+   /** Missiles per launch (swarm, cluster). */
+   amount?: number;
+   /** Extra damage against shields only. */
+   shield?: number;
+   /** Extra damage against hull only. */
+   hull?: number;
+   magazine?: { size: number; reload: number };
+   /** Seconds to lock on, guided missiles only. */
+   lock?: number;
+   /** Ammo tags matched against `LauncherData.ammo`. */
+   tags?: string[];
 }

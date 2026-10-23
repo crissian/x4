@@ -33,6 +33,12 @@
 					<div appDetail="Forward Thrust" i18n-appDetail>{{ entity.thrust.forward | number: '1.0-0' }}</div>
 					<div appDetail="Reverse Thrust" i18n-appDetail>{{ entity.thrust.reverse | number: '1.0-0' }}</div>
 				}
+				@if (entity.thruster; as t) {
+					<div appDetail="Strafe" i18n-appDetail>{{ t.strafe | number: '1.0-1' }}</div>
+					<div appDetail="Pitch" i18n-appDetail>{{ t.pitch | number: '1.0-1' }}</div>
+					<div appDetail="Yaw" i18n-appDetail>{{ t.yaw | number: '1.0-1' }}</div>
+					<div appDetail="Roll" i18n-appDetail>{{ t.roll | number: '1.0-1' }}</div>
+				}
 				@if (entity.boost) {
 					<div appDetail="Boost" i18n-appDetail i18n>
 						×{{ entity.boost.thrust | number: '1.0-2' }} for {{ entity.boost.duration | number: '1.0-1' }} s
@@ -80,13 +86,24 @@
 					}
 				}
 				@if (entity.missile; as m) {
-					<div appDetail="Damage" i18n-appDetail>{{ m.damage | number }}</div>
+					<div appDetail="Damage" i18n-appDetail>{{ m.damage | number }}{{ (m.amount ?? 1) > 1 ? ' ×' + m.amount : '' }}</div>
 					<div appDetail="DPS" i18n-appDetail>{{ missileDps() | number: '1.0-0' }}</div>
 					<div appDetail="Range" i18n-appDetail>{{ m.range / 1000 | number: '1.0-1' }} km</div>
 					@if (m.speed) {
 						<div appDetail="Speed" i18n-appDetail>{{ m.speed | number: '1.0-0' }} m/s</div>
 					}
 					<div appDetail="Guided" i18n-appDetail>{{ m.guided ? labels.yes : labels.no }}</div>
+					@if (m.lock) {
+						<div appDetail="Lock" i18n-appDetail>{{ m.lock | number: '1.0-1' }} s</div>
+					}
+					@if (m.magazine) {
+						<div appDetail="Magazine" i18n-appDetail i18n>
+							{{ m.magazine.size }} missiles, {{ m.magazine.reload | number: '1.0-1' }} s reload
+						</div>
+					}
+					@if (m.tags?.length) {
+						<div appDetail="Ammo tags" i18n-appDetail>{{ m.tags!.join(', ') }}</div>
+					}
 				}
 			</dl>
 
