@@ -33,6 +33,8 @@ jobs:
       - name: Build
         run: npx ng build --base-href "/${{ github.event.repository.name }}/"
 
+      - run: npm run llm
+
       # GitHub Pages has no rewrites: serve the app for unknown paths so deep links and refreshes work
       - run: cp dist/x4-new/index.html dist/x4-new/404.html
 
