@@ -69,13 +69,10 @@
 		</p>
 	}
 	@if (!usedBy() && raw().length) {
-		<p class="mt-3 text-sm" data-chain-raw>
-			<ng-container i18n>Raw resources to mine or buy:</ng-container>
-			@for (node of raw(); track node.ware.id; let last = $last) {
-				<a class="ml-1" [routerLink]="['/wares', node.ware.id]">{{ node.ware.name }}</a>
-				{{ node.rate | number: '1.0-0' }}/h{{ last ? '' : ',' }}
-			}
-		</p>
+		<div class="mt-3 text-sm sm:max-w-sm" data-chain-raw>
+			<div class="mb-1 text-fg-muted" i18n>Raw resources to mine or buy:</div>
+			<app-ware-amounts [items]="raw()" unit="/h" />
+		</div>
 	}
 	@if (graph.nodes.length > 1) {
 		<app-data-grid

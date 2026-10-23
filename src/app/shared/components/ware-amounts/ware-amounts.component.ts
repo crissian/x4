@@ -9,7 +9,7 @@ export interface WareAmountItem {
 	amount: number;
 }
 
-/** A list of ware amounts, each ware linked to its page. */
+/** A list of ware amounts, each ware linked to its page, the amounts aligned right. */
 @Component({
 	selector: 'app-ware-amounts',
 	imports: [DecimalPipe, RouterLink],
@@ -19,6 +19,8 @@ export class WareAmountsComponent {
 	private readonly wares = inject(WareService);
 
 	readonly items = input.required<readonly WareAmountItem[]>();
+	/** written after each amount, e.g. `/h` */
+	readonly unit = input('');
 
 	protected readonly rows = computed(() => this.items().map((x) => ({ ...x, entity: this.wares.getEntity(x.ware) })));
 }

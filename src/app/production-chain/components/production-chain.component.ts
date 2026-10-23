@@ -1,4 +1,3 @@
-import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject, input, signal } from '@angular/core';
 import { FormField, form, max, min } from '@angular/forms/signals';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -6,6 +5,7 @@ import { LucideCalculator } from '@lucide/angular';
 import { QueryParamSync } from '../../core/router/query-param-sync';
 import { DataGridComponent } from '../../shared/components/data-grid/data-grid.component';
 import { OptionSelectComponent } from '../../shared/components/option-select.component';
+import { WareAmountsComponent, type WareAmountItem } from '../../shared/components/ware-amounts/ware-amounts.component';
 import { ModuleService } from '../../shared/services/module.service';
 import { WareService } from '../../shared/services/ware.service';
 import { StationLayoutLink } from '../../station/station-layout-link';
@@ -30,13 +30,13 @@ interface ChainForm {
 @Component({
 	selector: 'app-production-chain',
 	imports: [
-		DecimalPipe,
 		FormField,
 		RouterLink,
 		LucideCalculator,
 		OptionSelectComponent,
 		DataGridComponent,
 		ProductionChainGraphComponent,
+		WareAmountsComponent,
 	],
 	templateUrl: './production-chain.component.html',
 	host: { class: 'block' },
@@ -86,7 +86,11 @@ export class ProductionChainComponent {
 		const nodes = this.graph()?.nodes ?? [];
 		return [...nodes.filter((x) => x.production), ...nodes.filter((x) => !x.production)];
 	});
-	protected readonly raw = computed(() => this.rows().filter((x) => !x.production));
+	protected readonly raw = computed<WareAmountItem[]>(() =>
+		this.rows()
+			.filter((x) => !x.production)
+			.map((x) => ({ ware: x.ware.id, amount: x.rate }))
+	);
 	protected readonly columns = computed(() => ProductionChainColumns.all(this.usedBy()));
 	protected readonly trackBy = (row: ChainNode) => row.ware.id;
 
