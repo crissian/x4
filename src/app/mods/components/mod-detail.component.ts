@@ -14,6 +14,7 @@ import { ModEffectListComponent } from './mod-effect-list.component';
 
 /** An equipment mod: what it changes, what it goes on, what crafting it takes, and the mods like it. */
 @Component({
+	selector: 'app-mod-detail',
 	imports: [
 		DataGridComponent,
 		DetailComponent,

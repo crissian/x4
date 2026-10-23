@@ -14,6 +14,7 @@ import { RecipeUsesComponent } from './recipe-uses.component';
 
 /** A crafting item: where to find it, its own recipe, and what it crafts into. */
 @Component({
+	selector: 'app-crafting-item-detail',
 	imports: [
 		DetailComponent,
 		DetailPageComponent,
