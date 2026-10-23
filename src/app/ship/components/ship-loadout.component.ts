@@ -3,7 +3,9 @@ import { Component, computed, effect, inject, input, linkedSignal, signal, untra
 import { FormField, form } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { LucideCheck, LucideGitCompareArrows, LucideLink } from '@lucide/angular';
+import { EquipmentService } from '../../shared/services/equipment.service';
 import { Loadouts, Loadout } from '../../shared/services/loadout';
+import { LoadoutMissiles } from '../../shared/services/loadout-missiles';
 import { ShipPerformance } from '../../shared/services/ship-performance';
 import { Equipment } from '../../shared/services/model/model';
 import { LOADOUT_PRESETS, LoadoutPreset, ShipStatsService } from '../../shared/services/ship-stats.service';
@@ -19,6 +21,7 @@ export class ShipLoadoutComponent {
 	private readonly ships = inject(ShipService);
 	private readonly wares = inject(WareService);
 	private readonly stats = inject(ShipStatsService);
+	private readonly equipment = inject(EquipmentService);
 	private readonly router = inject(Router);
 
 	readonly id = input.required<string>();
@@ -32,7 +35,10 @@ export class ShipLoadoutComponent {
 		return ship ? this.stats.groups(ship) : [];
 	});
 
-	/** Equipment id per slot group, '' for an empty group; edited through the slot selects. */
+	/**
+	 * Equipment id per slot group, '' for an empty group, and the missile per launcher group ('' for
+	 * the launcher's default); edited through the slot selects.
+	 */
 	protected readonly slots = linkedSignal<Record<string, string>>(() => {
 		const ship = this.entity();
 		if (!ship) {
@@ -46,6 +52,23 @@ export class ShipLoadoutComponent {
 		);
 	});
 	protected readonly slotsForm = form(this.slots);
+
+	/** Missile select of every group that holds a launcher now: its loadout key, default missile and choices. */
+	protected readonly missileChoices = computed(() => {
+		const slots = this.slots();
+		const choices = new Map<string, { key: string; default?: Equipment; options: Equipment[] }>();
+		for (const group of this.groups().filter((x) => LoadoutMissiles.isLauncherGroup(x))) {
+			const launcher = slots[group.key] ? this.stats.getEquipment(slots[group.key])?.launcher : undefined;
+			if (launcher) {
+				choices.set(group.key, {
+					key: LoadoutMissiles.key(group),
+					default: this.stats.getEquipment(launcher.missile),
+					options: LoadoutMissiles.compatible(launcher, this.equipment.getEntities()),
+				});
+			}
+		}
+		return choices;
+	});
 
 	protected readonly loadout = computed<Loadout>(() =>
 		Object.fromEntries(Object.entries(this.slots()).filter(([, id]) => id))
@@ -102,6 +125,18 @@ export class ShipLoadoutComponent {
 	protected readonly copied = signal(false);
 
 	constructor() {
+		// a missile the new launcher does not accept goes back to the launcher's default
+		effect(() => {
+			const slots = this.slots();
+			const reset = this.groups()
+				.filter((x) => LoadoutMissiles.isLauncherGroup(x))
+				.map((x) => ({ key: LoadoutMissiles.key(x), choice: this.missileChoices().get(x.key) }))
+				.filter(({ key, choice }) => slots[key] && !choice?.options.some((x) => x.id === slots[key]));
+			if (reset.length) {
+				untracked(() => this.slots.update((x) => ({ ...x, ...Object.fromEntries(reset.map(({ key }) => [key, ''])) })));
+			}
+		});
+
 		// keep the loadout in the address bar so it can be bookmarked and shared
 		effect(() => {
 			const ship = this.entity();
@@ -125,12 +160,30 @@ export class ShipLoadoutComponent {
 	}
 
 	private toSlots(loadout: Loadout): Record<string, string> {
-		return Object.fromEntries(this.groups().map((g) => [g.key, loadout[g.key] ?? '']));
+		const missileKeys = this.groups()
+			.filter((g) => LoadoutMissiles.isLauncherGroup(g))
+			.map((g) => LoadoutMissiles.key(g));
+		return Object.fromEntries([...this.groups().map((g) => g.key), ...missileKeys].map((key) => [key, loadout[key] ?? '']));
+	}
+
+	protected missileLabel(missile: Equipment): string {
+		const data = missile.missile;
+		if (!data) {
+			return missile.name;
+		}
+		const dps = Math.round(LoadoutMissiles.stats(data).sustainedDps).toLocaleString();
+		const range = (data.range / 1000).toFixed(1);
+		return data.lock
+			? $localize`${missile.name}:name: - ${dps}:dps: DPS, ${range}:range: km, lock ${data.lock}:lock: s`
+			: $localize`${missile.name}:name: - ${dps}:dps: DPS, ${range}:range: km`;
 	}
 
 	protected optionLabel(equipment: Equipment): string {
 		if (equipment.thrust) {
 			return $localize`${equipment.name}:name: - ${Math.round(equipment.thrust.forward)}:thrust: thrust, travel ×${equipment.travel?.thrust ?? 0}:travel:`;
+		}
+		if (equipment.thruster) {
+			return $localize`${equipment.name}:name: - ${Math.round(equipment.thruster.strafe)}:strafe: strafe, ${Math.round(equipment.thruster.pitch)}:pitch: pitch`;
 		}
 		if (equipment.recharge) {
 			return $localize`${equipment.name}:name: - ${equipment.recharge.max.toLocaleString()}:shield: shield, ${equipment.recharge.rate.toLocaleString()}:rate:/s`;

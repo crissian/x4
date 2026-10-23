@@ -44,6 +44,17 @@
 								}
 							</select>
 						</label>
+						@if (missileChoices().get(group.key); as choice) {
+							<label class="mb-2 grid items-center gap-1 sm:grid-cols-[12rem_1fr]">
+								<span class="pl-4 text-fg-muted" i18n>Missile</span>
+								<select class="input" [formField]="slotsForm[choice.key]">
+									<option value="" i18n>Default ({{ choice.default?.name ?? '-' }})</option>
+									@for (missile of choice.options; track missile.id) {
+										<option [value]="missile.id">{{ missileLabel(missile) }}</option>
+									}
+								</select>
+							</label>
+						}
 					} @empty {
 						<p class="text-fg-muted" i18n>This ship has no configurable slots.</p>
 					}
@@ -58,6 +69,15 @@
 							<dd>{{ r.speeds.boost | number: '1.0-0' }} m/s</dd>
 							<dt i18n>Travel</dt>
 							<dd>{{ r.speeds.travel | number: '1.0-0' }} m/s</dd>
+							@if (r.handling.pitch) {
+								<dt i18n>Strafe</dt>
+								<dd>{{ r.handling.strafeH | number: '1.0-0' }} m/s</dd>
+								<dt i18n>Pitch / Yaw / Roll</dt>
+								<dd>
+									{{ r.handling.pitch | number: '1.0-1' }} / {{ r.handling.yaw | number: '1.0-1' }} /
+									{{ r.handling.roll | number: '1.0-1' }} °/s
+								</dd>
+							}
 							<dt i18n>Hull</dt>
 							<dd>{{ r.hull | number }}</dd>
 							<dt i18n>Shield</dt>
@@ -66,6 +86,16 @@
 							<dd>{{ r.weaponDps | number: '1.0-0' }}</dd>
 							<dt i18n>Turret DPS</dt>
 							<dd>{{ r.turretDps | number: '1.0-0' }}</dd>
+							@if (r.missiles.launchers) {
+								<dt i18n>Missile DPS</dt>
+								<dd>{{ r.missiles.dps | number: '1.0-0' }}</dd>
+								<dt i18n>Missile Volley</dt>
+								<dd>{{ r.missiles.volley | number: '1.0-0' }}</dd>
+								<dt i18n>Missile Storage</dt>
+								<dd>{{ r.missiles.storage | number }}</dd>
+								<dt i18n>Time to Empty</dt>
+								<dd>{{ r.missiles.secondsToEmpty ? (r.missiles.secondsToEmpty | number: '1.0-0') + ' s' : '-' }}</dd>
+							}
 							<dt i18n>Max Range</dt>
 							<dd>{{ r.maxRange ? (r.maxRange / 1000 | number: '1.0-1') + ' km' : '-' }}</dd>
 							<dt i18n>Ship Price</dt>
