@@ -2,6 +2,7 @@ import { MacroId } from '../../core/macro-id';
 import { ElementStack } from '../../core/xml/element-stack';
 import { XmlExtractor } from '../../core/xml/xml-extractor';
 import { XmlAttributes } from '../../core/xml/xml-stream-scanner';
+import { SavePosition, SaveZoneNode } from './save-position';
 
 /** A data vault of the save: where it is and what the player did with it. */
 export interface SaveVault {
@@ -22,13 +23,6 @@ export interface SaveVault {
 
 export type SaveVaults = SaveVault[];
 
-interface ZoneNode {
-	kind: 'zone';
-	macro: string;
-	isDefault: boolean;
-	x: number;
-	z: number;
-}
 interface SectorNode {
 	kind: 'sector';
 	id: string;
@@ -36,9 +30,9 @@ interface SectorNode {
 interface VaultNode {
 	kind: 'vault';
 	vault: SaveVault;
-	zone?: ZoneNode;
+	zone?: SaveZoneNode;
 }
-type VaultTreeNode = ZoneNode | SectorNode | VaultNode;
+type VaultTreeNode = SaveZoneNode | SectorNode | VaultNode;
 
 /** Reads the data vaults (`landmarks_…vault_NN` objects) with their position, discovery and unlock state. */
 export class VaultsExtractor implements XmlExtractor<SaveVaults> {
@@ -69,12 +63,12 @@ export class VaultsExtractor implements XmlExtractor<SaveVaults> {
 				const owner = this.ancestor(path, 2);
 				const a = owner && attrs();
 				if (owner?.kind === 'zone') {
-					owner.x = VaultsExtractor.num(a?.['x']);
-					owner.z = VaultsExtractor.num(a?.['z']);
+					owner.x = SavePosition.num(a?.['x']);
+					owner.z = SavePosition.num(a?.['z']);
 				} else if (owner?.kind === 'vault') {
-					owner.vault.x = VaultsExtractor.num(a?.['x']);
-					owner.vault.y = VaultsExtractor.num(a?.['y']);
-					owner.vault.z = VaultsExtractor.num(a?.['z']);
+					owner.vault.x = SavePosition.num(a?.['x']);
+					owner.vault.y = SavePosition.num(a?.['y']);
+					owner.vault.z = SavePosition.num(a?.['z']);
 				}
 				break;
 			}
@@ -111,7 +105,7 @@ export class VaultsExtractor implements XmlExtractor<SaveVaults> {
 		const a = attrs();
 		const cls = a['class'];
 		if (cls === 'zone') {
-			return { kind: 'zone', macro: a['macro'] ?? '', isDefault: false, x: 0, z: 0 };
+			return SavePosition.zone(a['macro'] ?? '');
 		}
 		if (cls === 'sector') {
 			return { kind: 'sector', id: MacroId.of(a['macro'] ?? '') };
@@ -135,7 +129,7 @@ export class VaultsExtractor implements XmlExtractor<SaveVaults> {
 				known: a['knownto'] === 'player',
 				unlocked: false,
 			},
-			zone: this.stack.nearest((n) => n.kind === 'zone')?.value as ZoneNode | undefined,
+			zone: this.stack.nearest((n) => n.kind === 'zone')?.value as SaveZoneNode | undefined,
 		};
 		this.vaults.push(node);
 		return node;
@@ -147,25 +141,6 @@ export class VaultsExtractor implements XmlExtractor<SaveVaults> {
 	}
 
 	private static finish({ vault, zone }: VaultNode): SaveVault {
-		const result = { ...vault };
-		if (zone?.isDefault) {
-			result.zone = MacroId.of(zone.macro);
-		} else if (zone) {
-			result.x += zone.x;
-			result.z += zone.z;
-		}
-		result.x = VaultsExtractor.km(result.x);
-		result.y = VaultsExtractor.km(result.y);
-		result.z = VaultsExtractor.km(result.z);
-		return result;
-	}
-
-	private static km(metres: number): number {
-		return Math.round(metres / 100) / 10;
-	}
-
-	private static num(value: string | undefined): number {
-		const parsed = Number(value);
-		return Number.isFinite(parsed) ? parsed : 0;
+		return { ...vault, ...SavePosition.place(zone, vault.x, vault.z), y: SavePosition.km(vault.y) };
 	}
 }

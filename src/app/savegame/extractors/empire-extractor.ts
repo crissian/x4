@@ -9,43 +9,12 @@ import type {
 	SaveOwnerlessShip,
 	SectorShipCounts,
 } from '../empire/save-empire-model';
+import type { EmpireNode, SectorNode, ShipNode } from './empire-nodes';
 import { FleetLinks } from './fleet-links';
+import { SavePosition, type SaveZoneNode } from './save-position';
 
 /** ship class -> index in `SectorShipCounts` */
 const SHIP_SIZES: Record<string, number> = { ship_s: 0, ship_m: 1, ship_l: 2, ship_xl: 3 };
-
-interface SectorNode {
-	kind: 'sector';
-	id: string;
-}
-interface ZoneNode {
-	kind: 'zone';
-	macro: string;
-	isDefault: boolean;
-	x: number;
-	z: number;
-}
-interface ShipNode {
-	kind: 'ship';
-	/** the player's ship */
-	own?: SaveFleetShip;
-	/** an ownerless ship, with its zone and offset in metres */
-	ownerless?: { ship: SaveOwnerlessShip; zone?: ZoneNode; x: number; z: number };
-}
-interface StationNode {
-	kind: 'station';
-	/** the player's station */
-	own?: SaveOwnStation;
-}
-/** a storage module of a player station */
-interface StorageNode {
-	kind: 'storage';
-	station: SaveOwnStation;
-}
-interface OtherNode {
-	kind: 'other';
-}
-type EmpireNode = SectorNode | ZoneNode | ShipNode | StationNode | StorageNode | OtherNode;
 
 /**
  * Reads what the player owns beyond the map data: their ships with fleets and orders, their stations' money and
@@ -131,7 +100,7 @@ export class EmpireExtractor implements XmlExtractor<SaveEmpire> {
 			case 'account': {
 				const station = this.ownStation(path, 1);
 				if (station) {
-					station.money = EmpireExtractor.num(attrs()['amount']);
+					station.money = SavePosition.num(attrs()['amount']);
 				}
 				break;
 			}
@@ -177,14 +146,17 @@ export class EmpireExtractor implements XmlExtractor<SaveEmpire> {
 			return { kind: 'sector', id: MacroId.of(a['macro'] ?? '') };
 		}
 		if (cls === 'zone') {
-			return { kind: 'zone', macro: a['macro'] ?? '', isDefault: false, x: 0, z: 0 };
+			return SavePosition.zone(a['macro'] ?? '');
 		}
 		const sector = this.stack.nearest((n) => n.kind === 'sector')?.value as SectorNode | undefined;
 		if (cls.startsWith('ship_')) {
 			return sector ? this.readShip(a, sector.id) : { kind: 'ship' };
 		}
 		if (cls === 'station') {
-			return { kind: 'station', own: sector && a['owner'] === 'player' ? this.readStation(a, sector.id) : undefined };
+			return {
+				kind: 'station',
+				own: sector && a['owner'] === 'player' ? this.readStation(a, sector.id) : undefined,
+			};
 		}
 		if (cls === 'storage') {
 			// station/connections/connection/component class="storage"
@@ -211,7 +183,7 @@ export class EmpireExtractor implements XmlExtractor<SaveEmpire> {
 			return { kind: 'ship', own };
 		}
 		if (owner === 'ownerless') {
-			const zone = this.stack.nearest((n) => n.kind === 'zone')?.value as ZoneNode | undefined;
+			const zone = this.stack.nearest((n) => n.kind === 'zone')?.value as SaveZoneNode | undefined;
 			const ownerless = { ship: { ...base, ...name, x: 0, z: 0 }, zone, x: 0, z: 0 };
 			this.ownerless.push(ownerless);
 			return { kind: 'ship', ownerless };
@@ -258,11 +230,11 @@ export class EmpireExtractor implements XmlExtractor<SaveEmpire> {
 
 	private setPosition(owner: EmpireNode | undefined, a: XmlAttributes): void {
 		if (owner?.kind === 'zone') {
-			owner.x = EmpireExtractor.num(a['x']);
-			owner.z = EmpireExtractor.num(a['z']);
+			owner.x = SavePosition.num(a['x']);
+			owner.z = SavePosition.num(a['z']);
 		} else if (owner?.kind === 'ship' && owner.ownerless) {
-			owner.ownerless.x = EmpireExtractor.num(a['x']);
-			owner.ownerless.z = EmpireExtractor.num(a['z']);
+			owner.ownerless.x = SavePosition.num(a['x']);
+			owner.ownerless.z = SavePosition.num(a['z']);
 		}
 	}
 
@@ -288,7 +260,7 @@ export class EmpireExtractor implements XmlExtractor<SaveEmpire> {
 
 	private static addWare(station: SaveOwnStation, a: XmlAttributes): void {
 		const ware = a['ware'];
-		const amount = EmpireExtractor.num(a['amount']);
+		const amount = SavePosition.num(a['amount']);
 		if (ware && amount > 0) {
 			const storage = (station.storage ??= {});
 			storage[ware] = (storage[ware] ?? 0) + amount;
@@ -297,23 +269,6 @@ export class EmpireExtractor implements XmlExtractor<SaveEmpire> {
 
 	/** The ship with its position: relative to a predefined zone, else to the sector. */
 	private static place({ ship, zone, x, z }: NonNullable<ShipNode['ownerless']>): SaveOwnerlessShip {
-		if (zone?.isDefault) {
-			ship.zone = MacroId.of(zone.macro);
-		} else if (zone) {
-			x += zone.x;
-			z += zone.z;
-		}
-		ship.x = EmpireExtractor.km(x);
-		ship.z = EmpireExtractor.km(z);
-		return ship;
-	}
-
-	private static km(metres: number): number {
-		return Math.round(metres / 100) / 10;
-	}
-
-	private static num(value: string | undefined): number {
-		const parsed = Number(value);
-		return Number.isFinite(parsed) ? parsed : 0;
+		return Object.assign(ship, SavePosition.place(zone, x, z));
 	}
 }
