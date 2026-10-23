@@ -68,6 +68,6 @@ export class TerraformingStore {
 
 	/** The worth of the wares at their average prices. */
 	value(wares: readonly { ware: string; amount: number }[]): number {
-		return wares.reduce((sum, x) => sum + x.amount * (this.wares.getEntity(x.ware)?.price.avg ?? 0), 0);
+		return this.wares.averageValue(wares);
 	}
 }

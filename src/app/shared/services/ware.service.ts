@@ -23,6 +23,11 @@ export class WareService extends EntityStore<Ware> {
 		super(AllWares);
 	}
 
+	/** The worth of the wares at their average prices; a ware without a price counts nothing. */
+	averageValue(wares: readonly { ware: string; amount: number }[]): number {
+		return wares.reduce((sum, x) => sum + x.amount * (this.getEntity(x.ware)?.price.avg ?? 0), 0);
+	}
+
 	getWaresUsingWare(id: string): Ware[] {
 		return this.getEntities().filter((x) => EntityStore.usesWare(x, id));
 	}

@@ -5,7 +5,6 @@ import { QueryParamSync } from '../core/router/query-param-sync';
 import { ActiveSave } from '../savegame/active-save';
 import { Research } from '../shared/services/data/research-data';
 import { WareService } from '../shared/services/ware.service';
-import { ResearchCost } from './research-cost';
 import type { ResearchData, WareAmount } from './research-model';
 import { ResearchProgress } from './research-progress';
 import { ResearchQuery, type ResearchModel, type ResearchView } from './research-query';
@@ -117,6 +116,6 @@ export class ResearchStore {
 
 	/** The worth of the wares at their average prices. */
 	value(wares: readonly WareAmount[]): number {
-		return ResearchCost.value(wares, (id) => this.wares.getEntity(id)?.price.avg);
+		return this.wares.averageValue(wares);
 	}
 }
