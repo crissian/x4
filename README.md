@@ -77,11 +77,6 @@ npm run llm        # only the LLM export (llms.txt, markdown and JSON) into the 
 Interface texts are marked with `i18n` attributes and `$localize`. Run `npx ng extract-i18n` to regenerate
 `src/locale/messages.json`, then add the new texts to each `messages.<lang>.json`.
 
-### Deployment
-
-Every push to `dev` is built and deployed by GitHub Actions to Azure Static Web Apps and to GitHub Pages
-(`.github/workflows`).
-
 ## Contributing
 
 Issues and pull requests are welcome. Please run `npm test` and `npm run lint` before opening a pull request.
