@@ -12064,7 +12064,7 @@ export const Ships = [
    id: 'ship_ter_l_miner_liquid_01_a',
 	  version: 2,
    name: 'Hokkaido (Gas)',
-   size: Size.extralarge,
+   size: Size.large,
    race: Races.terran,
    travel: { speed: 5650, charge: 12 },
    explosionDamage: 800,
