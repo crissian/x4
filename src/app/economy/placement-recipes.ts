@@ -6,6 +6,7 @@ import type { ModuleService } from '../shared/services/module.service';
 import type { WareService } from '../shared/services/ware.service';
 import { StationCalculatorModel, StationModuleModel } from '../station/components/station-calculator.model';
 import { PlacementChains } from './placement-chain';
+import { PlacementCosts } from './placement-costs';
 import { WareClasses } from './ware-classes';
 
 /** What one production module of a ware makes and needs per hour, at full workforce and full sunlight. */
@@ -32,6 +33,7 @@ export class PlacementRecipes {
 	private readonly byWare = new Map<string, PlacementRecipe | undefined>();
 	private modulesByWare?: Map<string, StationModule[]>;
 	private chainCache?: PlacementChains;
+	private costCache?: PlacementCosts;
 
 	constructor(
 		private readonly wares: WareService,
@@ -45,6 +47,17 @@ export class PlacementRecipes {
 			return !!ware && WareClasses.isMined(ware);
 		});
 		return this.chainCache;
+	}
+
+	/** The build costs of the suggested stations, at average prices. */
+	get costs(): PlacementCosts {
+		this.costCache ??= new PlacementCosts(
+			this.modules,
+			() => this.chains,
+			(id) => this.wares.getEntity(id)?.price.avg ?? 0,
+			(id) => !!this.modules.getEntity(id)?.product?.some((x) => x.id === PlacementRecipes.ENERGY)
+		);
+		return this.costCache;
 	}
 
 	recipe(ware: string): PlacementRecipe | undefined {

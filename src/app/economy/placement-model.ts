@@ -58,8 +58,18 @@ export interface PlacementSpot {
 	loop: PlacementLoop;
 	/** Cr per unit sold: the average price, less the input cost at average prices when the inputs are bought */
 	margin: number;
-	/** min(modules × module output, absorbable) × margin, Cr per hour: the ranking key */
+	/** min(modules × module output, absorbable) × margin, Cr per hour */
 	crPerHour: number;
+	/** the sector sunlight, 1 = 100% */
+	sunlight: number;
+	/** Cr to build the production modules (with the closed-loop chain) at average prices, see `PlacementCosts` */
+	buildCost: number;
+	/** hours the station takes to earn its build cost */
+	payback: number;
+	/** a module's payback in the sunniest sector over its payback here, 0..1, see `PlacementReturns.efficiency` */
+	efficiency: number;
+	/** Cr per hour × the inputs or resources factor × the efficiency: the ranking key */
+	score: number;
 	/** share of the inputs (buying) or of the chain's mined resources (closed loop) in reach, 0..1; 1 without any */
 	coverage: number;
 	/** sector security from the game data, undefined when unknown */

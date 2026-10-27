@@ -2,11 +2,13 @@ import { PlacementScorer } from '../../economy/placement-scorer';
 import type { GridColumn, GridDot } from '../../shared/components/data-grid/data-grid.component';
 import type { StationSuggestionRow } from '../station-suggestions-row';
 import { StationSuggestionTexts } from '../station-suggestions-row';
+import { Duration } from '../../core/format/duration';
 import { NumberFormats } from '../../core/format/number-formats';
 
 /**
- * The columns of the station suggestions table: ware, sector, Cr/h (the ranking) and the modules to build shown, the rest in the
- * column chooser. The inputs (buying) or resources (closed loop) and the security are shown, not ranked by.
+ * The columns of the station suggestions table: ware, sector, Cr/h, payback, sunlight and the modules to build shown,
+ * the rest in the column chooser. The rows come ranked by their score (see `PlacementScorer.spot`), which has no
+ * column of its own; the inputs (buying) or resources (closed loop) and the sunlight are part of it, the security not.
  */
 export class StationSuggestionsColumns {
 	static all(ware: (id: string) => string, closed: boolean): GridColumn<StationSuggestionRow>[] {
@@ -32,6 +34,24 @@ export class StationSuggestionsColumns {
 						: $localize`What the modules sell at the average price less the inputs; the reach caps it`,
 			},
 			{
+				key: 'payback',
+				caption: $localize`Payback`,
+				type: 'number',
+				display: (x) => StationSuggestionsColumns.hours(x.payback),
+				title: (x) =>
+					$localize`Build cost of about ${NumberFormats.whole(x.buildCost)}:cost: Cr at average prices, production modules only`,
+			},
+			{
+				key: 'sunlight',
+				caption: $localize`Sunlight`,
+				type: 'number',
+				display: (x) => NumberFormats.percent(x.sunlight),
+				title: (x) =>
+					x.efficiency < 1
+						? $localize`A module here pays back at ${NumberFormats.percent(x.efficiency)}:efficiency: of the speed of one in the sunniest sector; the ranking is multiplied by it`
+						: undefined,
+			},
+			{
 				key: 'modules',
 				// never below 1: spots without room for one module are not listed
 				caption: $localize`Modules to build`,
@@ -39,6 +59,13 @@ export class StationSuggestionsColumns {
 				format: WHOLE,
 				title: (x) =>
 					$localize`Production modules of ${NumberFormats.whole(x.moduleOutput)}:output:/h each that the ${NumberFormats.whole(x.absorbable)}:absorbable:/h the reach absorbs keeps busy, rounded down`,
+			},
+			{
+				key: 'buildCost',
+				caption: $localize`Build cost`,
+				type: 'number',
+				format: WHOLE,
+				hidden: true,
 			},
 			{
 				key: 'absorbable',
@@ -71,9 +98,14 @@ export class StationSuggestionsColumns {
 		return row.coverage > 0 ? { tone: 'amber', level: 2 } : { tone: 'red', level: 2 };
 	}
 
+	/** Hours as hours and minutes; empty when it never pays back. */
+	static hours(hours: number): string {
+		return Number.isFinite(hours) ? Duration.hoursMinutes(hours * 3600) : '';
+	}
+
 	private static factor(row: StationSuggestionRow): string {
 		const value = NumberFormats.format(PlacementScorer.factor(row.coverage), { maximumFractionDigits: 2 });
-		return $localize`Factor ×${value}:factor: (0.5 + 0.5 × coverage), not part of the ranking`;
+		return $localize`Factor ×${value}:factor: (0.5 + 0.5 × coverage) on the ranking`;
 	}
 
 	private static inputs(ware: (id: string) => string): GridColumn<StationSuggestionRow> {

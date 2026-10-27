@@ -39,11 +39,19 @@
 			</li>
 			<li i18n>
 				Buy inputs: the station buys its inputs, so Expected Cr/h is what the modules make times the margin, the
-				average price minus the inputs at average prices. No build cost or payback is counted yet.
+				average price minus the inputs at average prices.
 			</li>
 			<li i18n>
-				The list is ranked by Expected Cr/h. The resources (closed loop) or inputs (buy inputs) in reach and the
-				sector security are shown in their own columns, not ranked by. Energy cells follow the sector sunlight.
+				Build cost is what the production modules cost at average prices, with the closed-loop chain shared out
+				per module: an estimate without habitats, docks or your miners. Payback is the build cost over Expected
+				Cr/h.
+			</li>
+			<li i18n>
+				The list is ranked by Expected Cr/h times two factors: the resources (closed loop) or inputs (buy
+				inputs) in reach, 0.5 + 0.5 × the share in reach, and the sunlight. Energy cells follow the sector
+				sunlight, so in a dark sector a station needs more solar modules: its Expected Cr/h is multiplied by how
+				fast a module pays back there compared with the sunniest sector. Click a column to sort by it instead;
+				the security is not ranked by.
 			</li>
 			<li i18n>
 				With "Hide hostile sectors" on, the sectors and the stations of factions hostile to you are left out, as

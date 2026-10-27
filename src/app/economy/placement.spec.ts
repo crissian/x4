@@ -146,7 +146,7 @@ describe('PlacementRanking', () => {
 		const world = context([hull('H', 'c', 400)]);
 		const here = PlacementRanking.here(world, 'c', world.candidates(), OPTIONS);
 		expect(here.spots.map((x) => x.ware)).toContain(ENERGY);
-		expect(here.spots[0].crPerHour).toBeGreaterThanOrEqual(here.spots.at(-1)!.crPerHour);
+		expect(here.spots[0].score).toBeGreaterThanOrEqual(here.spots.at(-1)!.score);
 		expect(PlacementRanking.here(world, 'x', world.candidates(), OPTIONS).total).toBe(0);
 	});
 });
@@ -182,10 +182,10 @@ describe('closed loop', () => {
 		).toBe(0.25);
 	});
 
-	it('ranks by Cr per hour', () => {
+	it('ranks by score', () => {
 		const world = context([hull('H', 'c', 400)], undefined, {}, withOre());
 		const spots = PlacementRanking.where(world, world.candidates(), CLOSED).spots;
 		expect(spots.length).toBeGreaterThan(0);
-		spots.slice(1).forEach((x, i) => expect(x.crPerHour).toBeLessThanOrEqual(spots[i].crPerHour));
+		spots.slice(1).forEach((x, i) => expect(x.score).toBeLessThanOrEqual(spots[i].score));
 	});
 });
