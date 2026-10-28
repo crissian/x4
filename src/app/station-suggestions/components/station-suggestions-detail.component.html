@@ -6,9 +6,9 @@
 			<a [routerLink]="['/sectors', row.sector]">{{ row.sectorName }}</a>
 		</h6>
 		<p class="mb-2" data-payback i18n>
-			Build cost about {{ row.buildCost | number: '1.0-0' }} Cr at average prices (production modules only), paid
-			back in {{ payback() }} at {{ row.crPerHour | number: '1.0-0' }} Cr/h. Sunlight
-			{{ row.sunlight | percent }}.
+			Build cost about {{ row.buildCost | number: '1.0-0' }} Cr at average prices (production modules, and the
+			miners in a closed loop), paid back in {{ payback() }} at {{ row.crPerHour | number: '1.0-0' }} Cr/h.
+			Sunlight {{ row.sunlight | percent }}.
 		</p>
 		@if (row.efficiency < 1) {
 			<p class="mb-2 text-warning" data-efficiency i18n>

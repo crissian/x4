@@ -39,7 +39,7 @@ export class StationSuggestionsColumns {
 				type: 'number',
 				display: (x) => StationSuggestionsColumns.hours(x.payback),
 				title: (x) =>
-					$localize`Build cost of about ${NumberFormats.whole(x.buildCost)}:cost: Cr at average prices, production modules only`,
+					$localize`Build cost of about ${NumberFormats.whole(x.buildCost)}:cost: Cr at average prices: the production modules, and the miners in a closed loop`,
 			},
 			{
 				key: 'sunlight',

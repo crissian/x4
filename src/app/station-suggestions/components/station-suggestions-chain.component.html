@@ -21,6 +21,29 @@
 				}
 			</p>
 		}
+		@if (store.selected()?.miners; as miners) {
+			@if (miners.length) {
+				<p class="mt-1" data-miners>
+					<ng-container i18n>Miners, part of the build cost:</ng-container>
+					@for (need of miners; track need.ware; let last = $last) {
+						<span class="ml-1">
+							@if (need.miner && need.field) {
+								<ng-container i18n
+									>{{ count(need.count) }} × {{ store.shipName(need.miner) }} for
+									{{ store.wareName(need.ware) }} from
+									{{ store.sectorName(need.field) }}</ng-container
+								>
+							} @else {
+								<span class="text-danger" i18n
+									>no L miner or reachable field for {{ store.wareName(need.ware) }}</span
+								>
+							}</span
+						>{{ last ? '' : ',' }}
+					}
+					<span class="text-fg-muted">({{ store.selected()!.minerCost | number: '1.0-0' }} Cr)</span>
+				</p>
+			}
+		}
 		@if (store.selected()?.resources; as resources) {
 			@if (resources.length) {
 				<p class="mt-1" data-resources>

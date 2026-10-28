@@ -39,6 +39,33 @@
 			<ng-container i18n>Buy inputs</ng-container>
 		</label>
 	</fieldset>
+	<fieldset class="inline-flex overflow-hidden rounded-md border border-line text-sm" data-rank>
+		<legend class="sr-only" i18n>Rank by</legend>
+		<label
+			class="cursor-pointer px-3 py-1.5 has-checked:bg-primary has-checked:text-white has-focus-visible:outline-2"
+			title="Expected Cr/h times the resources and sunlight factors"
+			i18n-title
+		>
+			<input id="suggest-rank-score" class="sr-only" type="radio" value="score" [formField]="form.rank" />
+			<ng-container i18n>Best overall</ng-container>
+		</label>
+		<label
+			class="cursor-pointer border-l border-line px-3 py-1.5 has-checked:bg-primary has-checked:text-white has-focus-visible:outline-2"
+			title="The most Expected Cr/h, whatever the station costs"
+			i18n-title
+		>
+			<input id="suggest-rank-income" class="sr-only" type="radio" value="income" [formField]="form.rank" />
+			<ng-container i18n>Most Cr/h</ng-container>
+		</label>
+		<label
+			class="cursor-pointer border-l border-line px-3 py-1.5 has-checked:bg-primary has-checked:text-white has-focus-visible:outline-2"
+			title="The shortest payback of the build cost, whatever the station's size"
+			i18n-title
+		>
+			<input id="suggest-rank-payback" class="sr-only" type="radio" value="payback" [formField]="form.rank" />
+			<ng-container i18n>Fastest payback</ng-container>
+		</label>
+	</fieldset>
 </div>
 <div class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
 	@if (store.here()) {

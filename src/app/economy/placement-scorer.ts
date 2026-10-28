@@ -7,6 +7,7 @@ import type {
 	PlacementTarget,
 } from './placement-model';
 import { PlacementCosts } from './placement-costs';
+import { PlacementMiners } from './placement-miners';
 import { PlacementRecipes } from './placement-recipes';
 import { PlacementReturns } from './placement-returns';
 
@@ -159,7 +160,16 @@ export class PlacementScorer {
 		const resources = known?.resources ?? (closed ? PlacementScorer.resources(context, ware, sector, options) : []);
 		const coverage = closed ? PlacementScorer.resourceCoverage(resources) : PlacementScorer.coverage(inputs);
 		const cost = context.recipes.costs.cost(recipe, options.loop);
-		const buildCost = PlacementCosts.total(cost, modules, info.sunlight);
+		const miners = closed
+			? context.miners.needs(
+					sector,
+					context.recipes.costs
+						.minedPerModule(recipe)
+						.map((x) => ({ ware: x.ware, amount: x.amount * modules }))
+				)
+			: [];
+		const minerCost = PlacementMiners.cost(miners);
+		const buildCost = PlacementCosts.total(cost, modules, info.sunlight) + minerCost;
 		const crPerHour = Math.min(modules * moduleOutput, absorbable) * margin;
 		const efficiency = PlacementReturns.efficiency(context, recipe, cost, options.loop, info.sunlight);
 		return {
@@ -173,6 +183,8 @@ export class PlacementScorer {
 			crPerHour,
 			sunlight: info.sunlight,
 			buildCost,
+			miners,
+			minerCost,
 			payback: PlacementReturns.payback(buildCost, crPerHour),
 			efficiency,
 			score: crPerHour * PlacementScorer.factor(coverage) * efficiency,

@@ -7,7 +7,7 @@ import { NumberFormats } from '../../core/format/number-formats';
 import { JumpsPipe } from '../../core/format/jumps.pipe';
 
 /**
- * The galaxy map of the picked row's ware: each sector shaded by its score for that ware on its own (no shared
+ * The galaxy map of the picked row's ware: each sector shaded by how it ranks for that ware on its own (no shared
  * demand), dark where no factory fits, with a numbered ★ on the top spots: those of the list (where to build) or of
  * the map (what to build here, which also outlines the reach). A click shows what to build in the clicked sector.
  */
@@ -32,7 +32,12 @@ export class StationSuggestionsMapComponent {
 	protected readonly values = computed(() => {
 		const spots = this.spots();
 		const context = this.store.context();
-		return spots && context ? new Map(context.sectors().map((id) => [id, spots.get(id)?.score ?? 0])) : undefined;
+		const rank = this.store.options().rank;
+		const value = (id: string) => {
+			const spot = spots?.get(id);
+			return spot ? PlacementRanking.value(spot, rank) : 0;
+		};
+		return spots && context ? new Map(context.sectors().map((id) => [id, value(id)])) : undefined;
 	});
 	protected readonly idle = computed(
 		() => new Set([...(this.values() ?? [])].filter(([, x]) => !x).map(([id]) => id))
@@ -42,7 +47,7 @@ export class StationSuggestionsMapComponent {
 		const { STARS } = StationSuggestionsMapComponent;
 		if (this.store.here()) {
 			return [...(this.spots()?.values() ?? [])]
-				.sort(PlacementRanking.compare)
+				.sort((a, b) => PlacementRanking.compare(a, b, this.store.options().rank))
 				.slice(0, STARS)
 				.map((x) => x.sector);
 		}

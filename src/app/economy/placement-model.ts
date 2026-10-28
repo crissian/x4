@@ -1,5 +1,10 @@
+import type { PlacementMinerNeed } from './placement-miners';
+
 /** `closed`: the station makes its whole chain, the player mines the raw wares; `open`: it buys its inputs. */
 export type PlacementLoop = 'closed' | 'open';
+
+/** What ranks the spots: the score (Cr/h with the resources and sunlight factors), the Cr/h alone, or the payback. */
+export type PlacementRank = 'score' | 'income' | 'payback';
 
 /** What the station suggestions count: how far a new factory sells, and which stations and sectors count. */
 export interface PlacementOptions {
@@ -10,6 +15,8 @@ export interface PlacementOptions {
 	hideHostile: boolean;
 	/** player-owned stations count unless false */
 	includePlayer: boolean;
+	/** what ranks the spots; the score when not given */
+	rank?: PlacementRank;
 }
 
 /** A sector within reach of a candidate spot and what its own stations add to the ware's balance. */
@@ -62,13 +69,17 @@ export interface PlacementSpot {
 	crPerHour: number;
 	/** the sector sunlight, 1 = 100% */
 	sunlight: number;
-	/** Cr to build the production modules (with the closed-loop chain) at average prices, see `PlacementCosts` */
+	/** Cr to build the production modules (with the closed-loop chain) and the miners, at average prices */
 	buildCost: number;
+	/** the miners bringing the mined wares of a closed loop, see `PlacementMiners`; empty when buying inputs */
+	miners: PlacementMinerNeed[];
+	/** Cr of the miners, part of the build cost */
+	minerCost: number;
 	/** hours the station takes to earn its build cost */
 	payback: number;
 	/** a module's payback at 100% sunlight over its payback here, 0..1, see `PlacementReturns.efficiency` */
 	efficiency: number;
-	/** Cr per hour × the inputs or resources factor × the efficiency: the ranking key */
+	/** Cr per hour × the inputs or resources factor × the efficiency: the default ranking key */
 	score: number;
 	/** share of the inputs (buying) or of the chain's mined resources (closed loop) in reach, 0..1; 1 without any */
 	coverage: number;

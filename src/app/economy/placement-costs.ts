@@ -16,8 +16,8 @@ export interface PlacementCost {
 }
 
 /**
- * The build cost of the suggested stations at average prices: the production modules only, no habitats, docks or
- * ships. A closed-loop chain is sized once per ware for `SAMPLE` end-product modules at 100% sunlight and shared out
+ * The build cost of the suggested stations' production modules at average prices, no habitats or docks; the miners
+ * of a closed loop are `PlacementMiners`. A closed-loop chain is sized once per ware for `SAMPLE` end-product modules at 100% sunlight and shared out
  * per module, so the costs are linear in the module count, an estimate of what the calculator's autofill builds.
  */
 export class PlacementCosts {
@@ -55,6 +55,13 @@ export class PlacementCosts {
 			this.cache.set(key, result);
 		}
 		return result;
+	}
+
+	/** The mined wares one end-product module's share of the closed-loop chain uses, per hour. */
+	minedPerModule(recipe: PlacementRecipe): { ware: string; amount: number }[] {
+		return this.chains()
+			.chain(recipe.module, PlacementCosts.SAMPLE, 1)
+			.mined.map((x) => ({ ware: x.ware, amount: x.amount / PlacementCosts.SAMPLE }));
 	}
 
 	/** Cr of one module at average prices. */

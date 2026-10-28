@@ -1,5 +1,5 @@
 import type { ParamMap, Params } from '@angular/router';
-import type { PlacementLoop } from '../economy/placement-model';
+import type { PlacementLoop, PlacementRank } from '../economy/placement-model';
 import { NumberRange, QueryParams } from '../shared/services/query-params';
 
 /** The filter form of the station suggestions page. */
@@ -8,6 +8,8 @@ export interface StationSuggestionsModel {
 	mode: string;
 	/** `closed`: the station makes its own chain; `open`: it buys its inputs */
 	loop: PlacementLoop;
+	/** what ranks the spots */
+	rank: PlacementRank;
 	/** ware id to look for, where to build only; empty for all */
 	ware: string;
 	/** sector name, picked from a datalist, what to build here only */
@@ -39,9 +41,11 @@ export class StationSuggestionsQuery {
 	static readonly MODES = [StationSuggestionsQuery.WHERE, StationSuggestionsQuery.HERE];
 	static readonly CLOSED: PlacementLoop = 'closed';
 	static readonly OPEN: PlacementLoop = 'open';
+	static readonly RANKS: readonly PlacementRank[] = ['score', 'income', 'payback'];
 	static readonly DEFAULTS: Readonly<StationSuggestionsModel> = {
 		mode: StationSuggestionsQuery.WHERE,
 		loop: StationSuggestionsQuery.CLOSED,
+		rank: 'score',
 		ware: '',
 		sector: '',
 		jumps: 3,
@@ -57,6 +61,7 @@ export class StationSuggestionsQuery {
 		return {
 			mode: QueryParams.oneOf(params, 'mode', StationSuggestionsQuery.MODES, defaults.mode),
 			loop: QueryParams.oneOf(params, 'loop', [StationSuggestionsQuery.OPEN], defaults.loop),
+			rank: QueryParams.oneOf(params, 'rank', StationSuggestionsQuery.RANKS, defaults.rank),
 			ware: QueryParams.known(params, 'ware', lookups.ware, defaults.ware),
 			sector: lookups.sectorName(params.get('sector') ?? '') ?? defaults.sector,
 			jumps: QueryParams.number(params, 'jumps', StationSuggestionsQuery.RANGES.jumps, defaults.jumps),
@@ -73,6 +78,7 @@ export class StationSuggestionsQuery {
 		return {
 			mode: here ? model.mode : null,
 			loop: QueryParams.unlessDefault(model.loop, defaults.loop),
+			rank: QueryParams.unlessDefault(model.rank, defaults.rank),
 			ware: !here && model.ware ? model.ware : null,
 			sector: here ? (lookups.sectorId(model.sector) ?? null) : null,
 			jumps: QueryParams.unlessDefault(model.jumps, defaults.jumps),

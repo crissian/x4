@@ -4,13 +4,13 @@
 		<p class="mb-2 text-sm text-fg-muted" data-caption>
 			@if (store.here()) {
 				<ng-container i18n
-					>Colour: how each sector ranks for this ware on its own, its Cr/h times the resources and sunlight
-					factors; ★ the top 5. Outlined: the sectors {{ store.jumps() | jumps: 'within' }}.</ng-container
+					>Colour: how each sector ranks for this ware on its own, by the ranking picked above; ★ the top 5.
+					Outlined: the sectors {{ store.jumps() | jumps: 'within' }}.</ng-container
 				>
 			} @else {
 				<ng-container i18n
-					>Colour: how each sector ranks for this ware on its own, its Cr/h times the resources and sunlight
-					factors; ★ the top 5 spots of the list.</ng-container
+					>Colour: how each sector ranks for this ware on its own, by the ranking picked above; ★ the top 5
+					spots of the list.</ng-container
 				>
 			}
 		</p>
