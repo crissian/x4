@@ -17,8 +17,9 @@ export interface PlacementCost {
 
 /**
  * The build cost of the suggested stations' production modules at average prices, no habitats or docks; the miners
- * of a closed loop are `PlacementMiners`. A closed-loop chain is sized once per ware for `SAMPLE` end-product modules at 100% sunlight and shared out
- * per module, so the costs are linear in the module count, an estimate of what the calculator's autofill builds.
+ * of a closed loop are `PlacementMiners`. A closed-loop chain is sized once per ware for `SAMPLE` end-product
+ * modules at 100% sunlight and shared out per module, so the costs are linear in the module count, an estimate of
+ * what the calculator's autofill builds.
  */
 export class PlacementCosts {
 	/** End-product modules the chain share is worked out for, so the autofill rounding up spreads thin. */
