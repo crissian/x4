@@ -5,6 +5,18 @@
 			·
 			<a [routerLink]="['/sectors', row.sector]">{{ row.sectorName }}</a>
 		</h6>
+		<p class="mb-2" data-payback i18n>
+			Build cost about {{ row.buildCost | number: '1.0-0' }} Cr at average prices (production modules only), paid
+			back in {{ payback() }} at {{ row.crPerHour | number: '1.0-0' }} Cr/h. Sunlight
+			{{ row.sunlight | percent }}.
+		</p>
+		@if (row.efficiency < 1) {
+			<p class="mb-2 text-warning" data-efficiency i18n>
+				A module here pays back at {{ row.efficiency | percent: '1.0-1' }} of the speed of one at 100% sunlight:
+				its energy cells need more solar modules. The ranking is multiplied by it; building where the sun is
+				stronger and selling here may pay better.
+			</p>
+		}
 		@if (row.loop === 'closed') {
 			<p i18n>
 				Modules to build: {{ row.modules | number: '1.0-0' }} of {{ row.moduleOutput | number: '1.0-0' }}/h

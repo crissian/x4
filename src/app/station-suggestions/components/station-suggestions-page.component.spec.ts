@@ -169,10 +169,10 @@ describe('StationSuggestionsPageComponent', () => {
 		expect(element.querySelectorAll('[data-marker]').length).toBeGreaterThan(0);
 	});
 
-	it('ranks by Cr/h when buying inputs', async () => {
+	it('lists the rows in ranking order, by score, when buying inputs', async () => {
 		const { store, element } = await setup('/station-suggestions?loop=open');
 		expect(store.closed()).toBe(false);
-		const values = store.rows().map((x) => x.crPerHour);
+		const values = store.rows().map((x) => x.score);
 		expect(values).toEqual([...values].sort((a, b) => b - a));
 		expect(element.querySelector('[data-chain]')).toBeNull();
 	});

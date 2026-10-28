@@ -6,7 +6,9 @@ import type {
 	PlacementSpot,
 	PlacementTarget,
 } from './placement-model';
+import { PlacementCosts } from './placement-costs';
 import { PlacementRecipes } from './placement-recipes';
+import { PlacementReturns } from './placement-returns';
 
 /**
  * Scores one candidate factory: a ware made in a sector, selling to the sectors within reach. Pure maths over the
@@ -21,7 +23,7 @@ export class PlacementScorer {
 		return 1 - jumps / (reach + 1);
 	}
 
-	/** The inputs or resources factor shown next to a spot: 0.5 + 0.5 × coverage. Not part of the ranking. */
+	/** The inputs or resources factor of a spot's score: 0.5 + 0.5 × coverage. */
 	static factor(coverage: number): number {
 		return 0.5 + 0.5 * coverage;
 	}
@@ -124,7 +126,8 @@ export class PlacementScorer {
 	 * The spot, or undefined when it is excluded, the reach has no room for a single module or the ware earns
 	 * nothing. `shortage` is each sector's shortage per hour left after the existing supply, lowered by the spots
 	 * already picked. A closed-loop station sells at the average price; one that buys its inputs earns the price
-	 * less their cost.
+	 * less their cost. The score ranks it: Cr per hour times the inputs or resources factor and the sunlight
+	 * efficiency, so a spot far from its resources or in the dark falls behind the same factory built elsewhere.
 	 */
 	static spot(
 		context: PlacementContext,
@@ -148,15 +151,17 @@ export class PlacementScorer {
 			return undefined;
 		}
 		const closed = options.loop === 'closed';
-		const price = context.price(ware);
-		const margin = closed
-			? price
-			: price - PlacementRecipes.inputCost(recipe, info.sunlight, (x) => context.price(x));
+		const margin = PlacementReturns.margin(context, recipe, options.loop, info.sunlight);
 		if (!(margin > 0)) {
 			return undefined;
 		}
 		const inputs = known?.inputs ?? (closed ? [] : PlacementScorer.inputs(context, ware, sector, options));
 		const resources = known?.resources ?? (closed ? PlacementScorer.resources(context, ware, sector, options) : []);
+		const coverage = closed ? PlacementScorer.resourceCoverage(resources) : PlacementScorer.coverage(inputs);
+		const cost = context.recipes.costs.cost(recipe, options.loop);
+		const buildCost = PlacementCosts.total(cost, modules, info.sunlight);
+		const crPerHour = Math.min(modules * moduleOutput, absorbable) * margin;
+		const efficiency = PlacementReturns.efficiency(context, recipe, cost, options.loop, info.sunlight);
 		return {
 			ware,
 			sector,
@@ -165,8 +170,13 @@ export class PlacementScorer {
 			moduleOutput,
 			loop: options.loop,
 			margin,
-			crPerHour: Math.min(modules * moduleOutput, absorbable) * margin,
-			coverage: closed ? PlacementScorer.resourceCoverage(resources) : PlacementScorer.coverage(inputs),
+			crPerHour,
+			sunlight: info.sunlight,
+			buildCost,
+			payback: PlacementReturns.payback(buildCost, crPerHour),
+			efficiency,
+			score: crPerHour * PlacementScorer.factor(coverage) * efficiency,
+			coverage,
 			security: info.security,
 			building: context.isBuilding(ware),
 			inputs,

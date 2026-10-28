@@ -38,6 +38,11 @@ export class Production {
 		return production.wares.reduce((total, x) => total + x.amount * x.ware.price[kind], 0);
 	}
 
+	/** What a recipe's wares cost at the given prices, such as the build cost of a module; 0 without a recipe. */
+	static cost(production: ProductionModel | undefined, price: (ware: string) => number): number {
+		return production?.wares.reduce((total, x) => total + x.amount * price(x.ware), 0) ?? 0;
+	}
+
 	static getSlots(value: readonly (Slot | Dock)[] | undefined): SlotSummary[] {
 		if (!value) {
 			return [];

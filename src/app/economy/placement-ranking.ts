@@ -2,7 +2,7 @@ import type { PlacementContext } from './placement-context';
 import type { PlacementOptions, PlacementResult, PlacementSpot } from './placement-model';
 import { PlacementScorer } from './placement-scorer';
 
-/** A candidate of the greedy pick, with its Cr per hour as last worked out. */
+/** A candidate of the greedy pick, with its score as last worked out. */
 interface Candidate {
 	sector: string;
 	spot: PlacementSpot;
@@ -17,13 +17,13 @@ export class PlacementRanking {
 	/** Rows listed at most. */
 	static readonly MAX_ROWS = 100;
 
-	/** The best spots for the wares, spots of the same ware sharing demand, the most Cr per hour first. */
+	/** The best spots for the wares, spots of the same ware sharing demand, the best score first. */
 	static where(context: PlacementContext, wares: readonly string[], options: PlacementOptions): PlacementResult {
 		const all = wares.flatMap((ware) => PlacementRanking.greedy(context, ware, options));
 		return PlacementRanking.result(all);
 	}
 
-	/** The wares worth making in a sector, the most Cr per hour first. */
+	/** The wares worth making in a sector, the best score first. */
 	static here(
 		context: PlacementContext,
 		sector: string,
@@ -47,8 +47,8 @@ export class PlacementRanking {
 	}
 
 	/**
-	 * The spots of one ware, picked greedily. Cr per hour only falls as shortages are taken, so a candidate whose
-	 * fresh value still beats the stale value of the next one is the best (lazy greedy).
+	 * The spots of one ware, picked greedily. The score only falls as shortages are taken (its factors stay), so a
+	 * candidate whose fresh value still beats the stale value of the next one is the best (lazy greedy).
 	 */
 	static greedy(context: PlacementContext, ware: string, options: PlacementOptions): PlacementSpot[] {
 		const shortage = new Map(context.residual(ware, options));
@@ -77,9 +77,14 @@ export class PlacementRanking {
 		return picked;
 	}
 
-	/** Best first: Cr per hour, then ware and sector for a stable order. */
+	/** Best first: the score, then Cr per hour, ware and sector for a stable order. */
 	static compare(a: PlacementSpot, b: PlacementSpot): number {
-		return b.crPerHour - a.crPerHour || a.ware.localeCompare(b.ware) || a.sector.localeCompare(b.sector);
+		return (
+			b.score - a.score ||
+			b.crPerHour - a.crPerHour ||
+			a.ware.localeCompare(b.ware) ||
+			a.sector.localeCompare(b.sector)
+		);
 	}
 
 	private static insert(queue: Candidate[], item: Candidate): void {
