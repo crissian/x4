@@ -21,7 +21,6 @@ export class StationSuggestionsDetailComponent {
 	/** How far the existing supply travels before a new factory is scored. */
 	protected readonly settlementJumps = MarketSettlement.MAX_JUMPS;
 	protected readonly payback = computed(() => StationSuggestionsColumns.hours(this.store.selected()?.payback ?? 0));
-	protected readonly bestSunlight = computed(() => this.store.context()?.bestSunlight ?? 1);
 	protected readonly targets = computed(() =>
 		(this.store.selected()?.targets ?? []).slice(0, StationSuggestionsDetailComponent.TARGETS)
 	);

@@ -31,8 +31,6 @@ export type PlacementScope = Pick<PlacementOptions, 'includePlayer' | 'hideHosti
  */
 export class PlacementContext {
 	readonly recipes: PlacementRecipes;
-	/** The highest sunlight of the save's sectors (1 = 100%), where a factory needing energy cells costs least; 1 without any. */
-	readonly bestSunlight: number;
 	private readonly sectorInfo = new Map<string, PlacementSector>();
 	private readonly nets = new Map<string, ReadonlyMap<string, number>>();
 
@@ -58,7 +56,6 @@ export class PlacementContext {
 				resources: new Set((sector.resources ?? []).map((x) => x.ware)),
 			});
 		}
-		this.bestSunlight = Math.max(0, ...[...this.sectorInfo.values()].map((x) => x.sunlight)) || 1;
 	}
 
 	/** Ids of the sectors of the save that have a known place in the gate network. */

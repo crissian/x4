@@ -76,16 +76,27 @@ describe('PlacementCosts', () => {
 });
 
 describe('PlacementReturns', () => {
-	it('pays a module back slower in the dark', () => {
+	it('pays a module back slower in the dark, measured against 100% sunlight', () => {
 		const world = solarSystem();
 		const recipe = world.recipes.recipe(ENERGY)!;
 		const cost = world.recipes.costs.cost(recipe, 'closed');
-		const sunny = PlacementReturns.modulePayback(world, recipe, cost, 'closed', 2.08);
+		const full = PlacementReturns.modulePayback(world, recipe, cost, 'closed', 1);
 		const dark = PlacementReturns.modulePayback(world, recipe, cost, 'closed', 0.05);
-		expect(dark).toBeCloseTo((sunny * 2.08) / 0.05);
-		expect(world.bestSunlight).toBe(2.08);
-		expect(PlacementReturns.efficiency(world, recipe, cost, 'closed', 2.08)).toBe(1);
-		expect(PlacementReturns.efficiency(world, recipe, cost, 'closed', 0.05)).toBeCloseTo(0.05 / 2.08);
+		expect(dark).toBeCloseTo(full / 0.05);
+		expect(PlacementReturns.efficiency(world, recipe, cost, 'closed', 0.05)).toBeCloseTo(0.05);
+		expect(PlacementReturns.efficiency(world, recipe, cost, 'closed', 0.5)).toBeCloseTo(0.5);
+		// brighter sectors count as 100%, so a few very bright ones (Avarice, 1390%) don't mark the others down
+		expect(PlacementReturns.efficiency(world, recipe, cost, 'closed', 1)).toBe(1);
+		expect(PlacementReturns.efficiency(world, recipe, cost, 'closed', 13.9)).toBe(1);
+	});
+
+	it('marks a closed-loop chain down less than its energy cells: only their share of the cost grows', () => {
+		const world = solarSystem();
+		const recipe = world.recipes.recipe(HULL)!;
+		const cost = world.recipes.costs.cost(recipe, 'closed');
+		const efficiency = PlacementReturns.efficiency(world, recipe, cost, 'closed', 0.5);
+		expect(efficiency).toBeCloseTo((cost.fixed + cost.solar) / (cost.fixed + 2 * cost.solar));
+		expect(efficiency).toBeGreaterThan(0.5);
 	});
 
 	it('keeps the efficiency at 1 where the sunlight changes nothing', () => {
@@ -116,11 +127,12 @@ describe('the ranking with build costs', () => {
 	it('suggests the energy cells for a dark sector in the sunny sector nearby, not in the dark one', () => {
 		const world = solarSystem();
 		const [best] = PlacementRanking.greedy(world, ENERGY, CLOSED);
-		expect(best.sector).toBe('a');
+		// b has full sunlight one jump from the demand; a is brighter still but two jumps away, and counts as 100%
+		expect(best.sector).toBe('b');
 		const dark = PlacementScorer.spot(world, ENERGY, 'c', CLOSED)!;
-		// the dark spot sells more, but needs over 40 times the modules per unit made
+		// the dark spot sells more, but needs 20 times the modules per unit made
 		expect(dark.crPerHour).toBeGreaterThan(best.crPerHour);
 		expect(dark.modules).toBeGreaterThan(best.modules);
-		expect(dark.payback).toBeGreaterThan(best.payback * 20);
+		expect(dark.payback).toBeCloseTo(best.payback * 20);
 	});
 });

@@ -48,7 +48,7 @@ export class StationSuggestionsColumns {
 				display: (x) => NumberFormats.percent(x.sunlight),
 				title: (x) =>
 					x.efficiency < 1
-						? $localize`A module here pays back at ${NumberFormats.percent(x.efficiency)}:efficiency: of the speed of one in the sunniest sector; the ranking is multiplied by it`
+						? $localize`A module here pays back at ${NumberFormats.percent(x.efficiency)}:efficiency: of the speed of one at 100% sunlight; the ranking is multiplied by it`
 						: undefined,
 			},
 			{

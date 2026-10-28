@@ -66,7 +66,7 @@ export interface PlacementSpot {
 	buildCost: number;
 	/** hours the station takes to earn its build cost */
 	payback: number;
-	/** a module's payback in the sunniest sector over its payback here, 0..1, see `PlacementReturns.efficiency` */
+	/** a module's payback at 100% sunlight over its payback here, 0..1, see `PlacementReturns.efficiency` */
 	efficiency: number;
 	/** Cr per hour × the inputs or resources factor × the efficiency: the ranking key */
 	score: number;

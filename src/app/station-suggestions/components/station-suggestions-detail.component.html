@@ -12,9 +12,9 @@
 		</p>
 		@if (row.efficiency < 1) {
 			<p class="mb-2 text-warning" data-efficiency i18n>
-				A module here pays back at {{ row.efficiency | percent: '1.0-1' }} of the speed of one in the sunniest
-				sector ({{ bestSunlight() | percent }} sunlight): its energy cells need more solar modules. The ranking
-				is multiplied by it; building where the sun is stronger and selling here may pay better.
+				A module here pays back at {{ row.efficiency | percent: '1.0-1' }} of the speed of one at 100% sunlight:
+				its energy cells need more solar modules. The ranking is multiplied by it; building where the sun is
+				stronger and selling here may pay better.
 			</p>
 		}
 		@if (row.loop === 'closed') {
