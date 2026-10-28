@@ -26,6 +26,7 @@ export const ShipList = [
     Factions.scaleplate,
    ],
    license: 'capitalship',
+   price: { min: 4006156, max: 5420094, avg: 4713125 },
   },
   {
    id: 'ship_arg_l_destroyer_01_b',
@@ -43,6 +44,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'capitalship',
+   price: { min: 4795063, max: 6487438, avg: 5641250 },
   },
   {
    id: 'ship_arg_l_destroyer_02_a',
@@ -63,6 +65,7 @@ export const ShipList = [
     Factions.scaleplate,
    ],
    license: 'capitalship',
+   price: { min: 8325747, max: 10175913, avg: 9250830 },
   },
   {
    id: 'ship_arg_l_miner_liquid_01_a',
@@ -81,6 +84,7 @@ export const ShipList = [
     Factions.hatikvah,
    ],
    license: 'generaluseship',
+   price: { min: 1111460, max: 1503740, avg: 1307600 },
   },
   {
    id: 'ship_arg_l_miner_liquid_01_b',
@@ -99,6 +103,7 @@ export const ShipList = [
     Factions.hatikvah,
    ],
    license: 'generaluseship',
+   price: { min: 1350914, max: 1827707, avg: 1589310 },
   },
   {
    id: 'ship_arg_l_miner_solid_01_a',
@@ -117,6 +122,7 @@ export const ShipList = [
     Factions.hatikvah,
    ],
    license: 'generaluseship',
+   price: { min: 1108727, max: 1500043, avg: 1304385 },
   },
   {
    id: 'ship_arg_l_miner_solid_01_b',
@@ -135,6 +141,7 @@ export const ShipList = [
     Factions.hatikvah,
    ],
    license: 'generaluseship',
+   price: { min: 1348181, max: 1824009, avg: 1586095 },
   },
   {
    id: 'ship_arg_l_trans_container_01_a',
@@ -152,6 +159,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 2605841, max: 3525549, avg: 3065695 },
   },
   {
    id: 'ship_arg_l_trans_container_01_b',
@@ -169,6 +177,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 3140563, max: 4248997, avg: 3694780 },
   },
   {
    id: 'ship_arg_l_trans_container_02_a',
@@ -186,6 +195,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 2705448, max: 3660312, avg: 3182880 },
   },
   {
    id: 'ship_arg_l_trans_container_02_b',
@@ -203,6 +213,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 3251101, max: 4398549, avg: 3824825 },
   },
   {
    id: 'ship_arg_l_trans_container_03_a',
@@ -220,6 +231,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 2632348, max: 3561412, avg: 3096880 },
   },
   {
    id: 'ship_arg_l_trans_container_03_b',
@@ -237,6 +249,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 4249222, max: 5748948, avg: 4999085 },
   },
   {
    id: 'ship_arg_l_trans_container_04_a',
@@ -254,6 +267,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 3842459, max: 5198621, avg: 4520540 },
   },
   {
    id: 'ship_arg_l_trans_container_04_b',
@@ -271,6 +285,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 4614858, max: 6243632, avg: 5429245 },
   },
   {
    id: 'ship_arg_l_trans_container_05_a',
@@ -288,6 +303,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 3049154, max: 4125326, avg: 3587240 },
   },
   {
    id: 'ship_arg_l_trans_container_05_b',
@@ -305,6 +321,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 3650555, max: 4938986, avg: 4294770 },
   },
   {
    id: 'ship_arg_m_bomber_01_a',
@@ -322,6 +339,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'militaryship',
+   price: { min: 637993, max: 863167, avg: 750580 },
   },
   {
    id: 'ship_arg_m_bomber_01_b',
@@ -339,6 +357,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'militaryship',
+   price: { min: 755166, max: 1021695, avg: 888430 },
   },
   {
    id: 'ship_arg_m_bomber_02_a',
@@ -357,6 +376,7 @@ export const ShipList = [
     Factions.scaleplate,
    ],
    license: 'militaryship',
+   price: { min: 629863, max: 852167, avg: 741015 },
   },
   {
    id: 'ship_arg_m_frigate_01_a',
@@ -374,6 +394,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'militaryship',
+   price: { min: 819115, max: 1108215, avg: 963665 },
   },
   {
    id: 'ship_arg_m_frigate_01_b',
@@ -391,6 +412,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'militaryship',
+   price: { min: 973250, max: 1316750, avg: 1145000 },
   },
   {
    id: 'ship_arg_m_miner_liquid_01_a',
@@ -409,6 +431,7 @@ export const ShipList = [
     Factions.hatikvah,
    ],
    license: 'generaluseship',
+   price: { min: 108413, max: 146677, avg: 127545 },
   },
   {
    id: 'ship_arg_m_miner_liquid_01_b',
@@ -428,6 +451,7 @@ export const ShipList = [
     Factions.kaori,
    ],
    license: 'generaluseship',
+   price: { min: 137173, max: 185587, avg: 161380 },
   },
   {
    id: 'ship_arg_m_miner_solid_01_a',
@@ -446,6 +470,7 @@ export const ShipList = [
     Factions.hatikvah,
    ],
    license: 'generaluseship',
+   price: { min: 112170, max: 151760, avg: 131965 },
   },
   {
    id: 'ship_arg_m_miner_solid_01_b',
@@ -465,6 +490,7 @@ export const ShipList = [
     Factions.kaori,
    ],
    license: 'generaluseship',
+   price: { min: 132528, max: 179302, avg: 155915 },
   },
   {
    id: 'ship_arg_m_trans_container_01_a',
@@ -483,6 +509,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 147352, max: 199358, avg: 173355 },
   },
   {
    id: 'ship_arg_m_trans_container_01_b',
@@ -500,6 +527,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 177000, max: 239470, avg: 208235 },
   },
   {
    id: 'ship_arg_m_trans_container_02_a',
@@ -518,6 +546,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 179422, max: 219294, avg: 199358 },
   },
   {
    id: 'ship_arg_m_trans_container_02_b',
@@ -535,6 +564,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 215523, max: 263417, avg: 239470 },
   },
   {
    id: 'ship_arg_s_fighter_01_a',
@@ -552,6 +582,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 112175, max: 151766, avg: 131970 },
   },
   {
    id: 'ship_arg_s_fighter_01_b',
@@ -570,6 +601,7 @@ export const ShipList = [
     Factions.kaori,
    ],
    license: 'generaluseship',
+   price: { min: 136085, max: 184115, avg: 160100 },
   },
   {
    id: 'ship_arg_s_fighter_02_a',
@@ -588,6 +620,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 65242, max: 88268, avg: 76755 },
   },
   {
    id: 'ship_arg_s_fighter_02_b',
@@ -605,6 +638,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 79042, max: 106939, avg: 92990 },
   },
   {
    id: 'ship_arg_s_fighter_03_a',
@@ -622,6 +656,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'militaryship',
+   price: { min: 96530, max: 130600, avg: 113565 },
   },
   {
    id: 'ship_arg_s_fighter_04_a',
@@ -639,6 +674,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'militaryship',
+   price: { min: 85463, max: 115627, avg: 100545 },
   },
   {
    id: 'ship_arg_s_heavyfighter_02_a',
@@ -656,6 +692,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'militaryship',
+   price: { min: 144283, max: 195207, avg: 169745 },
   },
   {
    id: 'ship_arg_s_miner_solid_01_a',
@@ -675,6 +712,7 @@ export const ShipList = [
     Factions.hatikvah,
    ],
    license: 'generaluseship',
+   price: { min: 70775, max: 95755, avg: 83265 },
   },
   {
    id: 'ship_arg_s_scout_01_a',
@@ -695,6 +733,7 @@ export const ShipList = [
     Factions.scaleplate,
    ],
    license: 'generaluseship',
+   price: { min: 74464, max: 100746, avg: 87605 },
   },
   {
    id: 'ship_arg_s_scout_01_b',
@@ -715,6 +754,7 @@ export const ShipList = [
     Factions.kaori,
    ],
    license: 'generaluseship',
+   price: { min: 90041, max: 121820, avg: 105930 },
   },
   {
    id: 'ship_arg_s_trans_container_01_a',
@@ -734,6 +774,7 @@ export const ShipList = [
     Factions.scaleplate,
    ],
    license: 'generaluseship',
+   price: { min: 132396, max: 179124, avg: 155760 },
   },
   {
    id: 'ship_arg_s_trans_container_01_b',
@@ -752,6 +793,7 @@ export const ShipList = [
     Factions.scaleplate,
    ],
    license: 'generaluseship',
+   price: { min: 158083, max: 213877, avg: 185980 },
   },
   {
    id: 'ship_arg_s_trans_container_02_a',
@@ -771,6 +813,7 @@ export const ShipList = [
     Factions.scaleplate,
    ],
    license: 'generaluseship',
+   price: { min: 68043, max: 92058, avg: 80050 },
   },
   {
    id: 'ship_arg_s_trans_container_02_b',
@@ -789,6 +832,7 @@ export const ShipList = [
     Factions.scaleplate,
    ],
    license: 'generaluseship',
+   price: { min: 83687, max: 113223, avg: 98455 },
   },
   {
    id: 'ship_arg_xl_builder_01_a',
@@ -806,6 +850,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 7755200, max: 10492330, avg: 9123765 },
   },
   {
    id: 'ship_arg_xl_builder_01_b',
@@ -823,6 +868,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'generaluseship',
+   price: { min: 9306200, max: 12590741, avg: 10948470 },
   },
   {
    id: 'ship_arg_xl_carrier_01_a',
@@ -840,6 +886,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'capitalship',
+   price: { min: 8576543, max: 11603558, avg: 10090050 },
   },
   {
    id: 'ship_arg_xl_carrier_01_b',
@@ -857,6 +904,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'capitalship',
+   price: { min: 10287274, max: 13918076, avg: 12102675 },
   },
   {
    id: 'ship_arg_xl_carrier_02_a',
@@ -875,6 +923,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'capitalship',
+   price: { min: 12287713, max: 18431569, avg: 15359641 },
   },
   {
    id: 'ship_arg_xl_resupplier_01_a',
@@ -892,6 +941,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'militaryship',
+   price: { min: 7310438, max: 9890592, avg: 8600515 },
   },
   {
    id: 'ship_arg_xl_resupplier_01_b',
@@ -909,6 +959,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'militaryship',
+   price: { min: 8766199, max: 11860151, avg: 10313175 },
   },
   {
    id: 'ship_gen_m_transdrone_container_01_a',
@@ -921,6 +972,7 @@ export const ShipList = [
     Factions.player,
    ],
    license: 'generaluseship',
+   price: { min: 39610, max: 53590, avg: 46600 },
   },
   {
    id: 'ship_gen_m_tugboat_01_a',
@@ -944,6 +996,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'generaluseship',
+   price: { min: 342342, max: 463168, avg: 402755 },
   },
   {
    id: 'ship_gen_s_fighter_01_a',
@@ -959,6 +1012,7 @@ export const ShipList = [
     Factions.alliance,
    ],
    license: 'generaluseship',
+   price: { min: 65986, max: 89275, avg: 77630 },
   },
   {
    id: 'ship_gen_s_fighter_01_b',
@@ -975,6 +1029,7 @@ export const ShipList = [
     Factions.alliance,
    ],
    license: 'generaluseship',
+   price: { min: 81082, max: 109699, avg: 95390 },
   },
   {
    id: 'ship_gen_s_transdrone_container_01_a',
@@ -987,6 +1042,7 @@ export const ShipList = [
     Factions.player,
    ],
    license: 'generaluseship',
+   price: { min: 19805, max: 26795, avg: 23300 },
   },
   {
    id: 'ship_kha_l_destroyer_01_a',
@@ -1000,6 +1056,7 @@ export const ShipList = [
     Factions.khaak,
    ],
    license: 'capitalship',
+   price: { min: 0, max: 0, avg: 0 },
   },
   {
    id: 'ship_kha_m_fighter_01_a',
@@ -1013,6 +1070,7 @@ export const ShipList = [
     Factions.khaak,
    ],
    license: 'militaryship',
+   price: { min: 0, max: 0, avg: 0 },
   },
   {
    id: 'ship_kha_m_fighter_02_a',
@@ -1026,6 +1084,7 @@ export const ShipList = [
     Factions.khaak,
    ],
    license: 'militaryship',
+   price: { min: 0, max: 0, avg: 0 },
   },
   {
    id: 'ship_kha_s_fighter_01_a',
@@ -1039,6 +1098,7 @@ export const ShipList = [
     Factions.khaak,
    ],
    license: 'militaryship',
+   price: { min: 0, max: 0, avg: 0 },
   },
   {
    id: 'ship_kha_s_fighter_02_a',
@@ -1052,6 +1112,7 @@ export const ShipList = [
     Factions.khaak,
    ],
    license: 'militaryship',
+   price: { min: 0, max: 0, avg: 0 },
   },
   {
    id: 'ship_kha_xl_battleship_01_a',
@@ -1065,6 +1126,7 @@ export const ShipList = [
     Factions.khaak,
    ],
    license: 'capitalship',
+   price: { min: 0, max: 0, avg: 0 },
   },
   {
    id: 'ship_par_l_destroyer_01_a',
@@ -1083,6 +1145,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'capitalship',
+   price: { min: 4276299, max: 5785581, avg: 5030940 },
   },
   {
    id: 'ship_par_l_destroyer_01_b',
@@ -1101,6 +1164,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'capitalship',
+   price: { min: 5135781, max: 6948409, avg: 6042095 },
   },
   {
    id: 'ship_par_l_destroyer_02_a',
@@ -1121,6 +1185,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'capitalship',
+   price: { min: 8812035, max: 10770265, avg: 9791150 },
   },
   {
    id: 'ship_par_l_miner_liquid_01_a',
@@ -1140,6 +1205,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 981657, max: 1328124, avg: 1154890 },
   },
   {
    id: 'ship_par_l_miner_liquid_01_b',
@@ -1159,6 +1225,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 1186405, max: 1605136, avg: 1395770 },
   },
   {
    id: 'ship_par_l_miner_liquid_02_a',
@@ -1178,6 +1245,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 1352877, max: 1830363, avg: 1591620 },
   },
   {
    id: 'ship_par_l_miner_solid_01_a',
@@ -1197,6 +1265,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 981657, max: 1328124, avg: 1154890 },
   },
   {
    id: 'ship_par_l_miner_solid_01_b',
@@ -1216,6 +1285,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 1186405, max: 1605136, avg: 1395770 },
   },
   {
    id: 'ship_par_l_miner_solid_02_a',
@@ -1235,6 +1305,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 1352881, max: 1830369, avg: 1591625 },
   },
   {
    id: 'ship_par_l_trans_container_01_a',
@@ -1253,6 +1324,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 1696396, max: 2295124, avg: 1995760 },
   },
   {
    id: 'ship_par_l_trans_container_01_b',
@@ -1271,6 +1343,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 2049189, max: 2772432, avg: 2410810 },
   },
   {
    id: 'ship_par_l_trans_container_02_a',
@@ -1289,6 +1362,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 1696396, max: 2295124, avg: 1995760 },
   },
   {
    id: 'ship_par_l_trans_container_02_b',
@@ -1307,6 +1381,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 2049189, max: 2772432, avg: 2410810 },
   },
   {
    id: 'ship_par_l_trans_container_03_a',
@@ -1326,6 +1401,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 2949500, max: 3990500, avg: 3470000 },
   },
   {
    id: 'ship_par_m_corvette_01_a',
@@ -1344,6 +1420,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'militaryship',
+   price: { min: 528951, max: 715639, avg: 622295 },
   },
   {
    id: 'ship_par_m_corvette_01_b',
@@ -1363,6 +1440,7 @@ export const ShipList = [
     Factions.kaori,
    ],
    license: 'militaryship',
+   price: { min: 634372, max: 858268, avg: 746320 },
   },
   {
    id: 'ship_par_m_frigate_01_a',
@@ -1381,6 +1459,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'militaryship',
+   price: { min: 933555, max: 1263045, avg: 1098300 },
   },
   {
    id: 'ship_par_m_frigate_01_b',
@@ -1399,6 +1478,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'militaryship',
+   price: { min: 1124584, max: 1521496, avg: 1323040 },
   },
   {
    id: 'ship_par_m_miner_liquid_01_a',
@@ -1418,6 +1498,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 113059, max: 152962, avg: 133010 },
   },
   {
    id: 'ship_par_m_miner_liquid_01_b',
@@ -1437,6 +1518,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 138129, max: 186881, avg: 162505 },
   },
   {
    id: 'ship_par_m_miner_solid_01_a',
@@ -1456,6 +1538,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 113059, max: 152962, avg: 133010 },
   },
   {
    id: 'ship_par_m_miner_solid_01_b',
@@ -1475,6 +1558,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 138129, max: 186881, avg: 162505 },
   },
   {
    id: 'ship_par_m_trans_container_01_a',
@@ -1494,6 +1578,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 150153, max: 203148, avg: 176650 },
   },
   {
    id: 'ship_par_m_trans_container_01_b',
@@ -1512,6 +1597,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 194693, max: 263408, avg: 229050 },
   },
   {
    id: 'ship_par_m_trans_container_02_a',
@@ -1531,6 +1617,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 150153, max: 203148, avg: 176650 },
   },
   {
    id: 'ship_par_m_trans_container_02_b',
@@ -1549,6 +1636,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 194693, max: 263408, avg: 229050 },
   },
   {
    id: 'ship_par_m_trans_container_03_a',
@@ -1565,6 +1653,7 @@ export const ShipList = [
     Factions.buccaneers,
    ],
    license: 'militaryship',
+   price: { min: 203460, max: 380700, avg: 292080 },
   },
   {
    id: 'ship_par_s_fighter_01_a',
@@ -1583,6 +1672,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 133284, max: 180326, avg: 156805 },
   },
   {
    id: 'ship_par_s_fighter_01_b',
@@ -1601,6 +1691,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 159928, max: 216373, avg: 188150 },
   },
   {
    id: 'ship_par_s_fighter_02_a',
@@ -1619,6 +1710,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'militaryship',
+   price: { min: 150773, max: 203987, avg: 177380 },
   },
   {
    id: 'ship_par_s_fighter_02_b',
@@ -1637,6 +1729,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'militaryship',
+   price: { min: 180149, max: 243731, avg: 211940 },
   },
   {
    id: 'ship_par_s_heavyfighter_01_a',
@@ -1656,6 +1749,7 @@ export const ShipList = [
     Factions.kaori,
    ],
    license: 'militaryship',
+   price: { min: 207009, max: 280071, avg: 243540 },
   },
   {
    id: 'ship_par_s_miner_solid_01_a',
@@ -1676,6 +1770,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 70775, max: 95755, avg: 83265 },
   },
   {
    id: 'ship_par_s_scout_01_a',
@@ -1695,6 +1790,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 68043, max: 92058, avg: 80050 },
   },
   {
    id: 'ship_par_s_scout_01_b',
@@ -1713,6 +1809,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 82731, max: 111930, avg: 97330 },
   },
   {
    id: 'ship_par_s_trans_container_01_a',
@@ -1733,6 +1830,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 127751, max: 172839, avg: 150295 },
   },
   {
    id: 'ship_par_s_trans_container_01_b',
@@ -1752,6 +1850,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 156239, max: 211382, avg: 183810 },
   },
   {
    id: 'ship_par_xl_builder_01_a',
@@ -1771,6 +1870,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 7755200, max: 10492330, avg: 9123765 },
   },
   {
    id: 'ship_par_xl_builder_01_b',
@@ -1789,6 +1889,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'generaluseship',
+   price: { min: 9306200, max: 12590741, avg: 10948470 },
   },
   {
    id: 'ship_par_xl_carrier_01_a',
@@ -1807,6 +1908,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'capitalship',
+   price: { min: 11158558, max: 15096872, avg: 13127715 },
   },
   {
    id: 'ship_par_xl_carrier_01_b',
@@ -1825,6 +1927,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'capitalship',
+   price: { min: 13385719, max: 18110091, avg: 15747905 },
   },
   {
    id: 'ship_par_xl_carrier_02_a',
@@ -1844,6 +1947,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'capitalship',
+   price: { min: 14909536, max: 20171725, avg: 17540630 },
   },
   {
    id: 'ship_par_xl_resupplier_01_a',
@@ -1862,6 +1966,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'militaryship',
+   price: { min: 8194429, max: 11086581, avg: 9640505 },
   },
   {
    id: 'ship_par_xl_resupplier_01_b',
@@ -1880,6 +1985,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'militaryship',
+   price: { min: 9833493, max: 13304137, avg: 11568815 },
   },
   {
    id: 'ship_par_xl_resupplier_02_a',
@@ -1899,6 +2005,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'militaryship',
+   price: { min: 13138973, max: 17776257, avg: 15457615 },
   },
   {
    id: 'ship_tel_l_destroyer_01_a',
@@ -1915,6 +2022,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'capitalship',
+   price: { min: 4482356, max: 6064364, avg: 5273360 },
   },
   {
    id: 'ship_tel_l_destroyer_01_b',
@@ -1931,6 +2039,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'capitalship',
+   price: { min: 5361719, max: 7254091, avg: 6307905 },
   },
   {
    id: 'ship_tel_l_destroyer_02_a',
@@ -1948,6 +2057,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'capitalship',
+   price: { min: 5431379, max: 6638353, avg: 6034866 },
   },
   {
    id: 'ship_tel_l_miner_liquid_01_a',
@@ -1965,6 +2075,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 1277814, max: 1728807, avg: 1503310 },
   },
   {
    id: 'ship_tel_l_miner_liquid_01_b',
@@ -1982,6 +2093,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'generaluseship',
+   price: { min: 1533732, max: 2075049, avg: 1804390 },
   },
   {
    id: 'ship_tel_l_miner_liquid_02_a',
@@ -2000,6 +2112,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 1537750, max: 2306625, avg: 1922187 },
   },
   {
    id: 'ship_tel_l_miner_solid_01_a',
@@ -2017,6 +2130,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 1277814, max: 1728807, avg: 1503310 },
   },
   {
    id: 'ship_tel_l_miner_solid_01_b',
@@ -2034,6 +2148,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'generaluseship',
+   price: { min: 1533732, max: 2075049, avg: 1804390 },
   },
   {
    id: 'ship_tel_l_miner_solid_02_a',
@@ -2052,6 +2167,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 1537750, max: 2306625, avg: 1922187 },
   },
   {
    id: 'ship_tel_l_trans_container_01_a',
@@ -2068,6 +2184,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 2254893, max: 3050737, avg: 2652815 },
   },
   {
    id: 'ship_tel_l_trans_container_01_b',
@@ -2084,6 +2201,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'generaluseship',
+   price: { min: 2719180, max: 3678890, avg: 3199035 },
   },
   {
    id: 'ship_tel_l_trans_container_02_a',
@@ -2100,6 +2218,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 2071119, max: 2802102, avg: 2436610 },
   },
   {
    id: 'ship_tel_l_trans_container_02_b',
@@ -2116,6 +2235,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'generaluseship',
+   price: { min: 2472416, max: 3345034, avg: 2908725 },
   },
   {
    id: 'ship_tel_l_trans_container_03_a',
@@ -2134,6 +2254,7 @@ export const ShipList = [
     Factions.kaori,
    ],
    license: 'generaluseship',
+   price: { min: 2840826, max: 4261239, avg: 3551033 },
   },
   {
    id: 'ship_tel_m_bomber_01_a',
@@ -2150,6 +2271,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'militaryship',
+   price: { min: 625354, max: 846067, avg: 735710 },
   },
   {
    id: 'ship_tel_m_bomber_01_b',
@@ -2167,6 +2289,7 @@ export const ShipList = [
     Factions.kaori,
    ],
    license: 'militaryship',
+   price: { min: 739861, max: 1000989, avg: 870425 },
   },
   {
    id: 'ship_tel_m_frigate_01_a',
@@ -2183,6 +2306,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'militaryship',
+   price: { min: 887574, max: 1200836, avg: 1044205 },
   },
   {
    id: 'ship_tel_m_frigate_01_b',
@@ -2199,6 +2323,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'militaryship',
+   price: { min: 1074162, max: 1453278, avg: 1263720 },
   },
   {
    id: 'ship_tel_m_miner_liquid_01_a',
@@ -2216,6 +2341,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 101035, max: 136695, avg: 118865 },
   },
   {
    id: 'ship_tel_m_miner_liquid_01_b',
@@ -2233,6 +2359,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'generaluseship',
+   price: { min: 122349, max: 165531, avg: 143940 },
   },
   {
    id: 'ship_tel_m_miner_solid_01_a',
@@ -2250,6 +2377,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 101035, max: 136695, avg: 118865 },
   },
   {
    id: 'ship_tel_m_miner_solid_01_b',
@@ -2267,6 +2395,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'generaluseship',
+   price: { min: 122349, max: 165531, avg: 143940 },
   },
   {
    id: 'ship_tel_m_trans_container_01_a',
@@ -2284,6 +2413,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 226117, max: 305923, avg: 266020 },
   },
   {
    id: 'ship_tel_m_trans_container_01_b',
@@ -2301,6 +2431,7 @@ export const ShipList = [
     Factions.kaori,
    ],
    license: 'generaluseship',
+   price: { min: 262323, max: 354907, avg: 308615 },
   },
   {
    id: 'ship_tel_m_trans_container_02_a',
@@ -2318,6 +2449,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 226117, max: 305923, avg: 266020 },
   },
   {
    id: 'ship_tel_m_trans_container_02_b',
@@ -2334,6 +2466,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'generaluseship',
+   price: { min: 262323, max: 354907, avg: 308615 },
   },
   {
    id: 'ship_tel_m_trans_container_03_a',
@@ -2350,6 +2483,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'militaryship',
+   price: { min: 356006, max: 481655, avg: 418830 },
   },
   {
    id: 'ship_tel_s_fighter_01_a',
@@ -2368,6 +2502,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 139706, max: 189014, avg: 164360 },
   },
   {
    id: 'ship_tel_s_fighter_01_b',
@@ -2386,6 +2521,7 @@ export const ShipList = [
     Factions.scaleplate,
    ],
    license: 'generaluseship',
+   price: { min: 166349, max: 225061, avg: 195705 },
   },
   {
    id: 'ship_tel_s_fighter_02_a',
@@ -2402,6 +2538,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'militaryship',
+   price: { min: 134173, max: 181528, avg: 157850 },
   },
   {
    id: 'ship_tel_s_fighter_02_b',
@@ -2418,6 +2555,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'militaryship',
+   price: { min: 161772, max: 218868, avg: 190320 },
   },
   {
    id: 'ship_tel_s_miner_solid_01_a',
@@ -2437,6 +2575,7 @@ export const ShipList = [
     Factions.kaori,
    ],
    license: 'generaluseship',
+   price: { min: 77197, max: 104443, avg: 90820 },
   },
   {
    id: 'ship_tel_s_scout_01_a',
@@ -2456,6 +2595,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 78153, max: 105737, avg: 91945 },
   },
   {
    id: 'ship_tel_s_scout_01_b',
@@ -2474,6 +2614,7 @@ export const ShipList = [
     Factions.scaleplate,
    ],
    license: 'generaluseship',
+   price: { min: 93798, max: 126903, avg: 110350 },
   },
   {
    id: 'ship_tel_s_scout_02_a',
@@ -2491,6 +2632,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 118596, max: 160454, avg: 139525 },
   },
   {
    id: 'ship_tel_s_scout_02_b',
@@ -2507,6 +2649,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'generaluseship',
+   price: { min: 141551, max: 191510, avg: 166530 },
   },
   {
    id: 'ship_tel_s_trans_container_01_a',
@@ -2525,6 +2668,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 143395, max: 194005, avg: 168700 },
   },
   {
    id: 'ship_tel_s_trans_container_01_b',
@@ -2543,6 +2687,7 @@ export const ShipList = [
     Factions.kaori,
    ],
    license: 'generaluseship',
+   price: { min: 170038, max: 230052, avg: 200045 },
   },
   {
    id: 'ship_tel_s_trans_container_02_a',
@@ -2559,6 +2704,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'militaryship',
+   price: { min: 481177, max: 651004, avg: 566090 },
   },
   {
    id: 'ship_tel_xl_builder_01_a',
@@ -2575,6 +2721,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'generaluseship',
+   price: { min: 7755200, max: 10492330, avg: 9123765 },
   },
   {
    id: 'ship_tel_xl_builder_01_b',
@@ -2592,6 +2739,7 @@ export const ShipList = [
     Factions.kaori,
    ],
    license: 'generaluseship',
+   price: { min: 9306200, max: 12590741, avg: 10948470 },
   },
   {
    id: 'ship_tel_xl_carrier_01_a',
@@ -2608,6 +2756,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'capitalship',
+   price: { min: 9494968, max: 12846133, avg: 11170550 },
   },
   {
    id: 'ship_tel_xl_carrier_01_b',
@@ -2624,6 +2773,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'capitalship',
+   price: { min: 11398156, max: 15421034, avg: 13409595 },
   },
   {
    id: 'ship_tel_xl_resupplier_01_a',
@@ -2640,6 +2790,7 @@ export const ShipList = [
     Factions.teladi,
    ],
    license: 'militaryship',
+   price: { min: 6617127, max: 8952583, avg: 7784855 },
   },
   {
    id: 'ship_tel_xl_resupplier_01_b',
@@ -2656,6 +2807,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'militaryship',
+   price: { min: 7941236, max: 10744025, avg: 9342630 },
   },
   {
    id: 'ship_xen_l_terraformer_01_a',
@@ -2672,6 +2824,7 @@ export const ShipList = [
     Factions.xenon,
    ],
    license: 'capitalship',
+   price: { min: 1424804, max: 1927676, avg: 1676240 },
   },
   {
    id: 'ship_xen_m_corvette_01_a',
@@ -2688,6 +2841,7 @@ export const ShipList = [
     Factions.xenon,
    ],
    license: 'militaryship',
+   price: { min: 84660, max: 114540, avg: 99600 },
   },
   {
    id: 'ship_xen_m_corvette_02_a',
@@ -2704,6 +2858,7 @@ export const ShipList = [
     Factions.xenon,
    ],
    license: 'militaryship',
+   price: { min: 72505, max: 98095, avg: 85300 },
   },
   {
    id: 'ship_xen_m_fighter_01_a',
@@ -2717,6 +2872,7 @@ export const ShipList = [
     Factions.xenon,
    ],
    license: 'militaryship',
+   price: { min: 66827, max: 90413, avg: 78620 },
   },
   {
    id: 'ship_xen_m_miner_01_a',
@@ -2733,6 +2889,7 @@ export const ShipList = [
     Factions.xenon,
    ],
    license: 'generaluseship',
+   price: { min: 60648, max: 82053, avg: 71350 },
   },
   {
    id: 'ship_xen_m_miner_solid_01_a',
@@ -2749,6 +2906,7 @@ export const ShipList = [
     Factions.xenon,
    ],
    license: 'generaluseship',
+   price: { min: 60648, max: 82053, avg: 71350 },
   },
   {
    id: 'ship_xen_s_fighter_01_a',
@@ -2762,6 +2920,7 @@ export const ShipList = [
     Factions.xenon,
    ],
    license: 'militaryship',
+   price: { min: 29351, max: 39710, avg: 34530 },
   },
   {
    id: 'ship_xen_s_fighter_02_a',
@@ -2775,6 +2934,7 @@ export const ShipList = [
     Factions.xenon,
    ],
    license: 'militaryship',
+   price: { min: 33864, max: 45816, avg: 39840 },
   },
   {
    id: 'ship_xen_s_heavyfighter_01_a',
@@ -2791,6 +2951,7 @@ export const ShipList = [
     Factions.xenon,
    ],
    license: 'militaryship',
+   price: { min: 57630, max: 77970, avg: 67800 },
   },
   {
    id: 'ship_xen_s_scout_01_a',
@@ -2804,6 +2965,7 @@ export const ShipList = [
     Factions.xenon,
    ],
    license: 'militaryship',
+   price: { min: 21998, max: 29762, avg: 25880 },
   },
   {
    id: 'ship_xen_xl_carrier_01_a',
@@ -2817,6 +2979,7 @@ export const ShipList = [
     Factions.xenon,
    ],
    license: 'capitalship',
+   price: { min: 4300932, max: 5818908, avg: 5059920 },
   },
   {
    id: 'ship_xen_xl_destroyer_01_a',
@@ -2830,6 +2993,7 @@ export const ShipList = [
     Factions.xenon,
    ],
    license: 'capitalship',
+   price: { min: 2067574, max: 2797306, avg: 2432440 },
   },
   {
    id: 'ship_spl_l_destroyer_01_a',
@@ -2848,6 +3012,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'capitalship',
+   price: { min: 13761711, max: 16819869, avg: 15290790 },
   },
   {
    id: 'ship_spl_l_miner_liquid_01_a',
@@ -2866,6 +3031,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'generaluseship',
+   price: { min: 1368742, max: 1851828, avg: 1610285 },
   },
   {
    id: 'ship_spl_l_miner_solid_01_a',
@@ -2884,6 +3050,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'generaluseship',
+   price: { min: 1368742, max: 1851828, avg: 1610285 },
   },
   {
    id: 'ship_spl_l_trans_container_01_a',
@@ -2902,6 +3069,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'generaluseship',
+   price: { min: 2497746, max: 3379304, avg: 2938525 },
   },
   {
    id: 'ship_spl_m_corvette_01_a',
@@ -2919,6 +3087,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'militaryship',
+   price: { min: 1056903, max: 1429927, avg: 1243415 },
   },
   {
    id: 'ship_spl_m_corvette_01_b',
@@ -2936,6 +3105,7 @@ export const ShipList = [
     Factions.freesplit,
    ],
    license: 'militaryship',
+   price: { min: 628375, max: 850155, avg: 739265 },
   },
   {
    id: 'ship_spl_m_frigate_01_a',
@@ -2953,6 +3123,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'militaryship',
+   price: { min: 1846659, max: 2498421, avg: 2172540 },
   },
   {
    id: 'ship_spl_m_miner_liquid_01_a',
@@ -2971,6 +3142,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'generaluseship',
+   price: { min: 180770, max: 244571, avg: 212670 },
   },
   {
    id: 'ship_spl_m_miner_solid_01_a',
@@ -2989,6 +3161,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'generaluseship',
+   price: { min: 200855, max: 271745, avg: 236300 },
   },
   {
    id: 'ship_spl_m_trans_container_01_a',
@@ -3007,6 +3180,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'generaluseship',
+   price: { min: 317679, max: 429801, avg: 373740 },
   },
   {
    id: 'ship_spl_s_fighter_01_a',
@@ -3024,6 +3198,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'militaryship',
+   price: { min: 165266, max: 223595, avg: 194430 },
   },
   {
    id: 'ship_spl_s_fighter_02_a',
@@ -3041,6 +3216,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'generaluseship',
+   price: { min: 216984, max: 293566, avg: 255275 },
   },
   {
    id: 'ship_spl_s_fighter_02_b',
@@ -3058,6 +3234,7 @@ export const ShipList = [
     Factions.freesplit,
    ],
    license: 'militaryship',
+   price: { min: 105349, max: 142531, avg: 123940 },
   },
   {
    id: 'ship_spl_s_heavyfighter_01_a',
@@ -3075,6 +3252,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'militaryship',
+   price: { min: 315429, max: 385525, avg: 350477 },
   },
   {
    id: 'ship_spl_s_heavyfighter_02_a',
@@ -3092,6 +3270,7 @@ export const ShipList = [
     Factions.freesplit,
    ],
    license: 'militaryship',
+   price: { min: 317480, max: 388031, avg: 352755 },
   },
   {
    id: 'ship_spl_s_miner_solid_01_a',
@@ -3110,6 +3289,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'generaluseship',
+   price: { min: 108970, max: 147430, avg: 128200 },
   },
   {
    id: 'ship_spl_s_scout_01_a',
@@ -3128,6 +3308,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'generaluseship',
+   price: { min: 124410, max: 168320, avg: 146365 },
   },
   {
    id: 'ship_spl_s_trans_container_01_a',
@@ -3146,6 +3327,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'generaluseship',
+   price: { min: 210630, max: 284970, avg: 247800 },
   },
   {
    id: 'ship_spl_xl_builder_01_a',
@@ -3164,6 +3346,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'generaluseship',
+   price: { min: 10219542, max: 13826439, avg: 12022990 },
   },
   {
    id: 'ship_spl_xl_carrier_01_a',
@@ -3182,6 +3365,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'capitalship',
+   price: { min: 27714314, max: 37495836, avg: 32605075 },
   },
   {
    id: 'ship_spl_xl_resupplier_01_a',
@@ -3200,6 +3384,7 @@ export const ShipList = [
     Factions.split,
    ],
    license: 'capitalship',
+   price: { min: 14646486, max: 19815834, avg: 17231160 },
   },
   {
    id: 'ship_atf_l_destroyer_01_a',
@@ -3216,6 +3401,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'capitalship',
+   price: { min: 11541582, max: 14106378, avg: 12823980 },
   },
   {
    id: 'ship_atf_xl_battleship_01_a',
@@ -3232,6 +3418,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'capitalship',
+   price: { min: 22252932, max: 30106908, avg: 26179920 },
   },
   {
    id: 'ship_gen_m_transdrone_container_02_a',
@@ -3244,6 +3431,7 @@ export const ShipList = [
     Factions.player,
    ],
    license: 'generaluseship',
+   price: { min: 39610, max: 53590, avg: 46600 },
   },
   {
    id: 'ship_gen_s_transdrone_container_02_a',
@@ -3256,6 +3444,7 @@ export const ShipList = [
     Factions.player,
    ],
    license: 'generaluseship',
+   price: { min: 19805, max: 26795, avg: 23300 },
   },
   {
    id: 'ship_ter_l_destroyer_01_a',
@@ -3273,6 +3462,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'capitalship',
+   price: { min: 7410483, max: 9057257, avg: 8233870 },
   },
   {
    id: 'ship_ter_l_miner_liquid_01_a',
@@ -3290,6 +3480,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'generaluseship',
+   price: { min: 2426113, max: 3282388, avg: 2854250 },
   },
   {
    id: 'ship_ter_l_miner_solid_01_a',
@@ -3307,6 +3498,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'generaluseship',
+   price: { min: 2426113, max: 3282388, avg: 2854250 },
   },
   {
    id: 'ship_ter_l_trans_container_01_a',
@@ -3324,6 +3516,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'generaluseship',
+   price: { min: 3801353, max: 5143007, avg: 4472180 },
   },
   {
    id: 'ship_ter_m_corvette_01_a',
@@ -3341,6 +3534,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'militaryship',
+   price: { min: 1499009, max: 2028071, avg: 1763540 },
   },
   {
    id: 'ship_ter_m_frigate_01_a',
@@ -3357,6 +3551,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'militaryship',
+   price: { min: 2391781, max: 3235939, avg: 2813860 },
   },
   {
    id: 'ship_ter_m_gunboat_01_a',
@@ -3373,6 +3568,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'militaryship',
+   price: { min: 1789217, max: 2366240, avg: 2057600 },
   },
   {
    id: 'ship_ter_m_miner_liquid_01_a',
@@ -3390,6 +3586,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'generaluseship',
+   price: { min: 330429, max: 447051, avg: 388740 },
   },
   {
    id: 'ship_ter_m_miner_solid_01_a',
@@ -3407,6 +3604,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'generaluseship',
+   price: { min: 330429, max: 447051, avg: 388740 },
   },
   {
    id: 'ship_ter_m_trans_container_01_a',
@@ -3424,6 +3622,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'generaluseship',
+   price: { min: 624206, max: 844514, avg: 734360 },
   },
   {
    id: 'ship_ter_s_fighter_01_a',
@@ -3441,6 +3640,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'militaryship',
+   price: { min: 294816, max: 360330, avg: 327573 },
   },
   {
    id: 'ship_ter_s_fighter_02_a',
@@ -3458,6 +3658,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'militaryship',
+   price: { min: 291338, max: 394163, avg: 342750 },
   },
   {
    id: 'ship_ter_s_fighter_03_a',
@@ -3474,6 +3675,7 @@ export const ShipList = [
     Factions.pioneers,
    ],
    license: 'militaryship',
+   price: { min: 291686, max: 394634, avg: 343160 },
   },
   {
    id: 'ship_ter_s_heavyfighter_01_a',
@@ -3490,6 +3692,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'militaryship',
+   price: { min: 400180, max: 541420, avg: 470800 },
   },
   {
    id: 'ship_ter_s_miner_solid_01_a',
@@ -3507,6 +3710,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'generaluseship',
+   price: { min: 145427, max: 196754, avg: 171090 },
   },
   {
    id: 'ship_ter_s_scout_01_a',
@@ -3524,6 +3728,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'generaluseship',
+   price: { min: 181730, max: 245870, avg: 213800 },
   },
   {
    id: 'ship_ter_s_scout_02_a',
@@ -3541,6 +3746,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'generaluseship',
+   price: { min: 298043, max: 394163, avg: 342750 },
   },
   {
    id: 'ship_ter_s_trans_container_01_a',
@@ -3558,6 +3764,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'generaluseship',
+   price: { min: 254686, max: 344575, avg: 299630 },
   },
   {
    id: 'ship_ter_xl_builder_01_a',
@@ -3575,6 +3782,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'generaluseship',
+   price: { min: 17974517, max: 24318464, avg: 21146490 },
   },
   {
    id: 'ship_ter_xl_carrier_01_a',
@@ -3591,6 +3799,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'capitalship',
+   price: { min: 19698188, max: 24075563, avg: 21886875 },
   },
   {
    id: 'ship_ter_xl_resupplier_01_a',
@@ -3608,6 +3817,7 @@ export const ShipList = [
     Factions.terran,
    ],
    license: 'capitalship',
+   price: { min: 22324290, max: 30203451, avg: 26263870 },
   },
   {
    id: 'ship_yak_m_corvette_01_a',
@@ -3624,6 +3834,7 @@ export const ShipList = [
     Factions.yaki,
    ],
    license: 'militaryship',
+   price: { min: 836421, max: 1131629, avg: 984025 },
   },
   {
    id: 'ship_yak_s_fighter_01_a',
@@ -3640,6 +3851,7 @@ export const ShipList = [
     Factions.yaki,
    ],
    license: 'militaryship',
+   price: { min: 228803, max: 309557, avg: 269180 },
   },
   {
    id: 'ship_gen_m_yacht_01_a',
@@ -3656,6 +3868,7 @@ export const ShipList = [
     Factions.ownerless,
    ],
    license: 'generaluseequipment',
+   price: { min: 1844500, max: 2495500, avg: 2170000 },
   },
   {
    id: 'ship_pir_l_miner_solid_01_a',
@@ -3672,6 +3885,7 @@ export const ShipList = [
     Factions.loanshark,
    ],
    license: 'capitalship',
+   price: { min: 1090800, max: 2038140, avg: 1564470 },
   },
   {
    id: 'ship_pir_l_scavenger_01_a',
@@ -3688,6 +3902,7 @@ export const ShipList = [
     Factions.loanshark,
    ],
    license: 'capitalship',
+   price: { min: 5382530, max: 10045520, avg: 7714025 },
   },
   {
    id: 'ship_pir_l_scrapper_01',
@@ -3704,6 +3919,7 @@ export const ShipList = [
     Factions.scavenger,
    ],
    license: 'generaluseship',
+   price: { min: 3013480, max: 5630650, avg: 4322065 },
   },
   {
    id: 'ship_pir_s_fighter_01_a',
@@ -3720,6 +3936,7 @@ export const ShipList = [
     Factions.loanshark,
    ],
    license: 'militaryship',
+   price: { min: 36250, max: 69910, avg: 53080 },
   },
   {
    id: 'ship_pir_s_fighter_02_a',
@@ -3736,6 +3953,7 @@ export const ShipList = [
     Factions.loanshark,
    ],
    license: 'militaryship',
+   price: { min: 122070, max: 228210, avg: 175140 },
   },
   {
    id: 'ship_pir_s_heavyfighter_01_a',
@@ -3752,6 +3970,7 @@ export const ShipList = [
     Factions.loanshark,
    ],
    license: 'militaryship',
+   price: { min: 191310, max: 357660, avg: 274485 },
   },
   {
    id: 'ship_pir_s_trans_condensate_01_a',
@@ -3769,6 +3988,7 @@ export const ShipList = [
     Factions.scavenger,
    ],
    license: 'militaryship',
+   price: { min: 151870, max: 283930, avg: 217900 },
   },
   {
    id: 'ship_pir_s_trans_container_01_a',
@@ -3786,6 +4006,7 @@ export const ShipList = [
     Factions.scavenger,
    ],
    license: 'generaluseship',
+   price: { min: 142180, max: 265810, avg: 203995 },
   },
   {
    id: 'ship_pir_xl_battleship_01_a',
@@ -3802,6 +4023,7 @@ export const ShipList = [
     Factions.ownerless,
    ],
    license: 'capitalship',
+   price: { min: 10407890, max: 19432940, avg: 14920415 },
   },
   {
    id: 'ship_pir_xl_builder_01',
@@ -3819,6 +4041,7 @@ export const ShipList = [
     Factions.scavenger,
    ],
    license: 'generaluseship',
+   price: { min: 8001560, max: 14939990, avg: 11470775 },
   },
   {
    id: 'ship_bor_l_carrier_01_a',
@@ -3835,6 +4058,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'capitalship',
+   price: { min: 5405973, max: 7620468, avg: 6513220 },
   },
   {
    id: 'ship_bor_l_destroyer_01_a',
@@ -3851,6 +4075,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'capitalship',
+   price: { min: 7424456, max: 9074336, avg: 8249396 },
   },
   {
    id: 'ship_bor_l_miner_liquid_01_a',
@@ -3867,6 +4092,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'generaluseship',
+   price: { min: 1146506, max: 1616159, avg: 1381332 },
   },
   {
    id: 'ship_bor_l_miner_solid_01_a',
@@ -3883,6 +4109,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'generaluseship',
+   price: { min: 1128579, max: 1590888, avg: 1359733 },
   },
   {
    id: 'ship_bor_l_trans_container_01_a',
@@ -3899,6 +4126,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'generaluseship',
+   price: { min: 3653390, max: 5149960, avg: 4401675 },
   },
   {
    id: 'ship_bor_m_corvette_01_a',
@@ -3915,6 +4143,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'militaryship',
+   price: { min: 1321790, max: 1615522, avg: 1468656 },
   },
   {
    id: 'ship_bor_m_corvette_02_a',
@@ -3931,6 +4160,7 @@ export const ShipList = [
     Factions.ownerless,
    ],
    license: 'militaryship',
+   price: { min: 1461811, max: 1786657, avg: 1624234 },
   },
   {
    id: 'ship_bor_m_gunboat_01_a',
@@ -3947,6 +4177,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'militaryship',
+   price: { min: 1127133, max: 1377607, avg: 1252370 },
   },
   {
    id: 'ship_bor_m_miner_liquid_01_a',
@@ -3963,6 +4194,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'generaluseship',
+   price: { min: 136612, max: 192573, avg: 164592 },
   },
   {
    id: 'ship_bor_m_miner_solid_01_a',
@@ -3979,6 +4211,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'generaluseship',
+   price: { min: 12142835, max: 201346, avg: 172090 },
   },
   {
    id: 'ship_bor_m_trans_container_01_a',
@@ -3995,6 +4228,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'generaluseship',
+   price: { min: 212164, max: 299075, avg: 255620 },
   },
   {
    id: 'ship_bor_s_fighter_01_a',
@@ -4011,6 +4245,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'generaluseship',
+   price: { min: 110527, max: 155803, avg: 133165 },
   },
   {
    id: 'ship_bor_s_heavyfighter_01_a',
@@ -4027,6 +4262,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'militaryship',
+   price: { min: 320625, max: 391875, avg: 356250 },
   },
   {
    id: 'ship_bor_s_miner_solid_01_a',
@@ -4043,6 +4279,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'generaluseship',
+   price: { min: 69490, max: 97955, avg: 83723 },
   },
   {
    id: 'ship_bor_s_scout_01_a',
@@ -4059,6 +4296,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'generaluseship',
+   price: { min: 85205, max: 120109, avg: 102657 },
   },
   {
    id: 'ship_bor_s_scout_02_a',
@@ -4075,6 +4313,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'militaryship',
+   price: { min: 99353, max: 140052, avg: 119702 },
   },
   {
    id: 'ship_bor_s_trans_container_01_a',
@@ -4091,6 +4330,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'generaluseship',
+   price: { min: 164834, max: 232356, avg: 198595 },
   },
   {
    id: 'ship_bor_xl_builder_01_a',
@@ -4107,6 +4347,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'generaluseship',
+   price: { min: 9921974, max: 13986397, avg: 11954185 },
   },
   {
    id: 'ship_bor_xl_carrier_01_a',
@@ -4123,6 +4364,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'capitalship',
+   price: { min: 22017749, max: 26910582, avg: 24464165 },
   },
   {
    id: 'ship_bor_xl_resupplier_01_a',
@@ -4139,6 +4381,7 @@ export const ShipList = [
     Factions.boron,
    ],
    license: 'capitalship',
+   price: { min: 14605352, max: 20588268, avg: 17596810 },
   },
   {
    id: 'ship_arg_s_racer_01_a',
@@ -4152,6 +4395,7 @@ export const ShipList = [
     Factions.ownerless,
    ],
    license: 'generaluseship',
+   price: { min: 146598, max: 198203, avg: 172350 },
   },
   {
    id: 'ship_gen_s_racer_01_a',
@@ -4167,6 +4411,7 @@ export const ShipList = [
     Factions.ownerless,
    ],
    license: 'generaluseship',
+   price: { min: 294823, max: 398878, avg: 346850 },
   },
   {
    id: 'ship_par_s_racer_01_a',
@@ -4180,6 +4425,7 @@ export const ShipList = [
     Factions.ownerless,
    ],
    license: 'generaluseship',
+   price: { min: 163320, max: 223781, avg: 191440 },
   },
   {
    id: 'ship_tel_s_racer_01_a',
@@ -4193,6 +4439,7 @@ export const ShipList = [
     Factions.ownerless,
    ],
    license: 'generaluseship',
+   price: { min: 146332, max: 171398, avg: 163250 },
   },
   {
    id: 'ship_ter_l_flagship_01_a',
@@ -4209,6 +4456,7 @@ export const ShipList = [
     Factions.ownerless,
    ],
    license: 'capitalship',
+   price: { min: 5679310, max: 8518965, avg: 7099138 },
   },
   {
    id: 'ship_ter_m_corvette_02_a',
@@ -4225,6 +4473,7 @@ export const ShipList = [
     Factions.ownerless,
    ],
    license: 'militaryship',
+   price: { min: 1904549, max: 2327782, avg: 2116165 },
   },
   {
    id: 'ship_ter_s_fighter_04_a',
@@ -4241,6 +4490,7 @@ export const ShipList = [
     Factions.ownerless,
    ],
    license: 'militaryship',
+   price: { min: 275041, max: 412561, avg: 343801 },
   },
   {
    id: 'ship_ter_s_xperimental_01_a',
@@ -4257,6 +4507,7 @@ export const ShipList = [
     Factions.ownerless,
    ],
    license: 'militaryship',
+   price: { min: 1058607, max: 1587910, avg: 1323258 },
   },
   {
    id: 'ship_xen_xl_mothership_01',
@@ -4270,6 +4521,7 @@ export const ShipList = [
     Factions.xenon,
    ],
    license: 'capitalship',
+   price: { min: 13039000, max: 17641000, avg: 15340000 },
   },
   {
    id: 'ship_par_l_expeditionary_01_a',
@@ -4288,6 +4540,7 @@ export const ShipList = [
     Factions.trinity,
    ],
    license: 'hyperion_access',
+   price: { min: 2806214, max: 3429817, avg: 3118015 },
   },
   {
    id: 'ship_gen_m_corvette_01',
@@ -4305,6 +4558,7 @@ export const ShipList = [
     Factions.ministry,
    ],
    license: 'envoy_access',
+   price: { min: 1083822, max: 1466348, avg: 1275085 },
   },
   {
    id: 'ship_gen_m_corvette_02',
@@ -4321,6 +4575,7 @@ export const ShipList = [
     Factions.scaleplate,
    ],
    license: 'envoy_access',
+   price: { min: 777444, max: 1051836, avg: 914640 },
   },
 ];
 

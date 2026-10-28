@@ -169,6 +169,15 @@ describe('StationSuggestionsPageComponent', () => {
 		expect(element.querySelectorAll('[data-marker]').length).toBeGreaterThan(0);
 	});
 
+	it('ranks by the payback picked in the URL, the fastest first, with the miners priced', async () => {
+		const { store, element } = await setup('/station-suggestions?rank=payback');
+		expect(store.options().rank).toBe('payback');
+		expect(element.querySelector<HTMLInputElement>('#suggest-rank-payback')!.checked).toBe(true);
+		const paybacks = store.rows().map((x) => x.payback);
+		expect(paybacks.length).toBeGreaterThan(0);
+		expect(paybacks).toEqual([...paybacks].sort((a, b) => a - b));
+	});
+
 	it('lists the rows in ranking order, by score, when buying inputs', async () => {
 		const { store, element } = await setup('/station-suggestions?loop=open');
 		expect(store.closed()).toBe(false);

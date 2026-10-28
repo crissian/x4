@@ -101,7 +101,7 @@ export class MiningBuyersStore {
 				ware,
 				sectors,
 				capacity: this.capacity(),
-				fillMinutes: Math.max(1, this.map.miningModel().fillMinutes || 10),
+				fillMinutes: Math.max(1, this.map.miningModel().fillMinutes || Mining.DEFAULT_FILL_MINUTES),
 				near: this.map.routeFrom(),
 			},
 			this.cache()

@@ -18,10 +18,15 @@ export interface MiningTrip {
 }
 
 export class Mining {
+	/** Minutes to fill the hold when the player gives none: the mining panel's default. */
+	static readonly DEFAULT_FILL_MINUTES = 10;
+
 	/** Cargo capacity a ship can use for a ware (only the holds of the ware's transport type). */
 	static minerCapacity(ship: Pick<ShipListItem, 'cargo'>, ware: Ware): number {
 		const transport = ware.transport?.toLowerCase();
-		return (ship.cargo ?? []).filter((x) => x.types.some((t) => t.id === transport)).reduce((total, x) => total + x.max, 0);
+		return (ship.cargo ?? [])
+			.filter((x) => x.types.some((t) => t.id === transport))
+			.reduce((total, x) => total + x.max, 0);
 	}
 
 	/** Whether the ship is a miner with a hold for the ware: solid miners for ore, gas miners for gases. */

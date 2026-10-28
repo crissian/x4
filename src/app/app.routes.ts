@@ -42,8 +42,7 @@ export const appRoutes: Routes = [
 	},
 	{
 		path: 'mods',
-		loadChildren: () =>
-			GameText.withTexts([...TEXTS.base, 'equipment-mods'], () => import('./mods/mods.routes')),
+		loadChildren: () => GameText.withTexts([...TEXTS.base, 'equipment-mods'], () => import('./mods/mods.routes')),
 	},
 	{
 		path: 'factions',
@@ -111,7 +110,7 @@ export const appRoutes: Routes = [
 		path: 'station-suggestions',
 		loadComponent: () =>
 			GameText.withTexts(
-				[...TEXTS.base, ...TEXTS.universe, 'modules'],
+				[...TEXTS.base, ...TEXTS.universe, 'modules', 'ship-list'],
 				() => import('./station-suggestions/components/station-suggestions-page.component')
 			),
 		title: `${BASE_TITLE} - ${$localize`Station Suggestions`}`,
@@ -171,7 +170,15 @@ export const appRoutes: Routes = [
 		path: 'empire',
 		loadComponent: () =>
 			GameText.withTexts(
-				[...TEXTS.base, ...TEXTS.universe, 'modules', 'ship-list', 'game-texts', 'ship-orders', 'fleet-assignments'],
+				[
+					...TEXTS.base,
+					...TEXTS.universe,
+					'modules',
+					'ship-list',
+					'game-texts',
+					'ship-orders',
+					'fleet-assignments',
+				],
 				() => import('./empire/components/empire-page.component')
 			),
 		title: `${BASE_TITLE} - ${$localize`Empire`}`,

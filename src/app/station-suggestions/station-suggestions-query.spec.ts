@@ -20,6 +20,7 @@ describe('StationSuggestionsQuery', () => {
 		const params = {
 			mode: 'here',
 			loop: 'open',
+			rank: 'payback',
 			sector: 'ap',
 			jumps: '5',
 			hostile: '1',
@@ -30,6 +31,7 @@ describe('StationSuggestionsQuery', () => {
 		expect(model).toEqual({
 			mode: 'here',
 			loop: 'open',
+			rank: 'payback',
 			ware: '',
 			sector: 'Argon Prime',
 			jumps: 5,
@@ -42,7 +44,7 @@ describe('StationSuggestionsQuery', () => {
 
 	it('drops unknown values and jumps out of range', () => {
 		const model = StationSuggestionsQuery.read(
-			convertToParamMap({ mode: 'x', loop: 'x', ware: 'nope', jumps: '9', group: 'x', sector: 'zz' }),
+			convertToParamMap({ mode: 'x', loop: 'x', rank: 'x', ware: 'nope', jumps: '9', group: 'x', sector: 'zz' }),
 			LOOKUPS
 		);
 		expect(model).toEqual(StationSuggestionsQuery.DEFAULTS);

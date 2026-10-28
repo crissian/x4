@@ -1,5 +1,5 @@
 import type { SaveMap, SaveRelations } from '../savegame/map/save-map-model';
-import type { Sector } from '../shared/services/model/model';
+import type { Sector, ShipListItem } from '../shared/services/model/model';
 import type { WareService } from '../shared/services/ware.service';
 import { TradeRouteFinder } from '../trade/trade-route-finder';
 import type { Economy } from './economy';
@@ -7,6 +7,7 @@ import { MarketSettlement } from './market-settlement';
 import type { PlacementOptions } from './placement-model';
 import type { SectorBalance } from './sector-balance';
 import type { SectorRing } from './sector-graph';
+import { PlacementMiners } from './placement-miners';
 import { PlacementRecipes } from './placement-recipes';
 import { WareClasses } from './ware-classes';
 
@@ -31,6 +32,8 @@ export type PlacementScope = Pick<PlacementOptions, 'includePlayer' | 'hideHosti
  */
 export class PlacementContext {
 	readonly recipes: PlacementRecipes;
+	/** The miners of closed-loop stations; not counted without a ship list. */
+	readonly miners: PlacementMiners;
 	private readonly sectorInfo = new Map<string, PlacementSector>();
 	private readonly nets = new Map<string, ReadonlyMap<string, number>>();
 
@@ -41,7 +44,8 @@ export class PlacementContext {
 		sectors: readonly Sector[],
 		map: SaveMap,
 		private readonly relations: SaveRelations | undefined,
-		private readonly building: ReadonlySet<string> = new Set()
+		private readonly building: ReadonlySet<string> = new Set(),
+		ships: readonly ShipListItem[] = []
 	) {
 		this.recipes = recipes;
 		const owners = new Map(map.sectors.map((x) => [x.id, x.owner]));
@@ -56,6 +60,17 @@ export class PlacementContext {
 				resources: new Set((sector.resources ?? []).map((x) => x.ware)),
 			});
 		}
+		this.miners = new PlacementMiners(
+			ships,
+			sectors,
+			(id) => wares.getEntity(id),
+			(ware) => this.fieldSectors(ware)
+		);
+	}
+
+	/** The sectors of the save with fields of a mined ware. */
+	fieldSectors(ware: string): string[] {
+		return [...this.sectorInfo].filter(([, x]) => x.resources.has(ware)).map(([id]) => id);
 	}
 
 	/** Ids of the sectors of the save that have a known place in the gate network. */

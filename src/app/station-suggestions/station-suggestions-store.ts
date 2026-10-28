@@ -12,6 +12,7 @@ import { ActiveSave } from '../savegame/active-save';
 import { FilterLookups } from '../shared/services/filter-lookups';
 import type { WareGroup } from '../shared/services/model/model';
 import { ModuleService } from '../shared/services/module.service';
+import { ShipListService } from '../shared/services/ship-list.service';
 import { SectorService } from '../shared/services/universe.service';
 import { WareService } from '../shared/services/ware.service';
 import {
@@ -32,6 +33,7 @@ export class StationSuggestionsStore {
 	private readonly sectorService = inject(SectorService);
 	private readonly wareService = inject(WareService);
 	private readonly moduleService = inject(ModuleService);
+	private readonly shipService = inject(ShipListService);
 
 	readonly save = this.activeSave.save;
 	readonly saveMap = this.activeSave.map;
@@ -53,7 +55,16 @@ export class StationSuggestionsStore {
 		const recipes = new PlacementRecipes(this.wareService, this.moduleService);
 		// all building materials are marked: the demand of ship and station building is not counted for any of them
 		const materials = new Set([...building.only, ...building.partly]);
-		return new PlacementContext(economy, this.wareService, recipes, sectors, map, this.relations(), materials);
+		return new PlacementContext(
+			economy,
+			this.wareService,
+			recipes,
+			sectors,
+			map,
+			this.relations(),
+			materials,
+			this.shipService.getEntities()
+		);
 	});
 	/** The wares a factory can be suggested for, by name. */
 	readonly wares = computed(() =>
@@ -96,6 +107,7 @@ export class StationSuggestionsStore {
 				jumps: model.jumps,
 				hideHostile: model.hideHostile,
 				includePlayer: model.player,
+				rank: model.rank,
 			};
 		},
 		{
@@ -103,7 +115,8 @@ export class StationSuggestionsStore {
 				a.loop === b.loop &&
 				a.jumps === b.jumps &&
 				a.hideHostile === b.hideHostile &&
-				a.includePlayer === b.includePlayer,
+				a.includePlayer === b.includePlayer &&
+				a.rank === b.rank,
 		}
 	);
 	/** The centre is owned by a faction hostile to the player and hostile sectors are left out. */
@@ -216,6 +229,10 @@ export class StationSuggestionsStore {
 
 	moduleName(id: string): string {
 		return this.moduleService.getEntity(id)?.name ?? id;
+	}
+
+	shipName(id: string): string {
+		return this.shipService.getEntity(id)?.name ?? id;
 	}
 
 	wareName(id: string): string {

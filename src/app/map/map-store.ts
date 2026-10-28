@@ -133,7 +133,9 @@ export class MapStore {
 	readonly travel = computed(() => {
 		const from = this.routeFrom();
 		const speed = Math.max(RoutePlanner.MIN_SPEED, this.routeModel().speed || RoutePlanner.DEFAULT_OPTIONS.speed);
-		return from ? RoutePlanner.travelTimes(this.visibleSectors(), from, { speed, charge: this.travelCharge() }) : undefined;
+		return from
+			? RoutePlanner.travelTimes(this.visibleSectors(), from, { speed, charge: this.travelCharge() })
+			: undefined;
 	});
 	readonly route = computed(() => {
 		const to = this.routeTo();
@@ -168,7 +170,7 @@ export class MapStore {
 		computation: ({ models, own }, previous) => {
 			const kept = previous?.value.miner ?? '';
 			return {
-				fillMinutes: 10,
+				fillMinutes: Mining.DEFAULT_FILL_MINUTES,
 				price: 'avg',
 				...previous?.value,
 				miner: MinerPicker.find(kept, own, models) ? kept : (models[0]?.id ?? ''),
@@ -228,7 +230,13 @@ export class MapStore {
 					jumps: travel?.route(sector.id)?.jumps,
 					trip:
 						time != null && ware
-							? Mining.miningTrip(time, capacity, ware, ware.price[price], Math.max(1, fillMinutes || 10))
+							? Mining.miningTrip(
+									time,
+									capacity,
+									ware,
+									ware.price[price],
+									Math.max(1, fillMinutes || Mining.DEFAULT_FILL_MINUTES)
+								)
 							: undefined,
 				};
 			})
@@ -248,7 +256,16 @@ export class MapStore {
 			.filter((x) => saveActive || this.isShown(x.version))
 			.flatMap((item) => {
 				const shape = drawn.has(item.sector) ? this.shapeById.get(item.sector) : undefined;
-				return shape ? [{ item, shape, ship: this.ships.getEntity(item.ship), ...GalaxyLayout.markerPosition(shape, item.x, item.z) }] : [];
+				return shape
+					? [
+							{
+								item,
+								shape,
+								ship: this.ships.getEntity(item.ship),
+								...GalaxyLayout.markerPosition(shape, item.x, item.z),
+							},
+						]
+					: [];
 			});
 	});
 
