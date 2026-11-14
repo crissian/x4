@@ -2,7 +2,7 @@
 	@if (importMessage(); as message) {
 		<p class="mb-3" [class.text-danger]="message.error" [class.text-success]="!message.error">{{ message.text }}</p>
 	}
-	<div class="divide-y divide-line overflow-hidden rounded-md border border-line">
+	<div class="max-h-[60vh] divide-y divide-line overflow-y-auto rounded-md border border-line">
 		@for (entity of entities(); track entity.name) {
 			<div
 				class="cursor-pointer px-4 py-2.5 hover:bg-hover"
