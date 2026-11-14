@@ -28,4 +28,15 @@ describe('layout service', () => {
 		expect(() => service.importLayouts('{"version":2,"foo":1}')).toThrow();
 		expect(() => service.importLayouts('not json')).toThrow();
 	});
+
+	it('deletes several layouts at once, ignoring case and unknown names', () => {
+		const service = TestBed.inject(LayoutService);
+		for (const name of ['Hull Parts', 'Food', 'Energy', 'Water']) {
+			service.saveLayout({ name, config: [] });
+		}
+
+		service.deleteLayouts(['hull parts', 'Water', 'Missing']);
+
+		expect(service.getLayouts().map((x) => x.name)).toEqual(['Food', 'Energy']);
+	});
 });

@@ -25,6 +25,7 @@ describe('layout name messages', () => {
 						getLayout: (name: string) => layouts.find((x) => x.name === name),
 						saveLayout: () => undefined,
 						deleteLayout: () => undefined,
+						deleteLayouts: () => undefined,
 					},
 				},
 			],

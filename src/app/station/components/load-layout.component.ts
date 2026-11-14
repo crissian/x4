@@ -1,5 +1,5 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
-import { Component, TemplateRef, inject, signal, viewChild } from '@angular/core';
+import { Component, TemplateRef, computed, inject, signal, viewChild } from '@angular/core';
 import { LucideDownload, LucideFolderOpen, LucideListPlus, LucideTrash, LucideUpload } from '@lucide/angular';
 import { ConfirmComponent, ConfirmData } from '../../shared/components/confirm.component';
 import { AppDialog } from '../../shared/components/modal/dialog';
@@ -39,11 +39,21 @@ export class LoadLayoutComponent {
 	private readonly layoutService = inject(LayoutService);
 	private readonly moduleService = inject(ModuleService);
 	private readonly deleteMessage = viewChild.required<TemplateRef<{ $implicit: string }>>('deleteMessage');
+	private readonly deleteSelectedMessage =
+		viewChild.required<TemplateRef<{ $implicit: number }>>('deleteSelectedMessage');
 
 	protected readonly LoadLayoutType = LoadLayoutType;
 	readonly entities = signal<LayoutData[]>(this.readLayouts());
 	/** result of the last layouts import */
 	readonly importMessage = signal<{ error: boolean; text: string } | null>(null);
+	/** names of the layouts checked for a batch delete */
+	readonly selected = signal<ReadonlySet<string>>(new Set());
+	readonly allSelected = computed(
+		() => this.entities().length > 0 && this.selected().size === this.entities().length
+	);
+
+	/** some, but not all, of the layouts are checked: the select all checkbox shows as partially selected */
+	readonly someSelected = computed(() => this.selected().size > 0 && !this.allSelected());
 
 	getModules(item: LayoutData) {
 		const modules = item.modules.slice(0, 3);
@@ -58,6 +68,41 @@ export class LoadLayoutComponent {
 		this.dialogRef.close({ layoutName: item.name, type });
 	}
 
+	toggleSelected(item: LayoutData, event: Event) {
+		event.stopPropagation();
+		this.selected.update((x) => {
+			const next = new Set(x);
+			if (!next.delete(item.name)) {
+				next.add(item.name);
+			}
+			return next;
+		});
+	}
+
+	toggleAll() {
+		this.selected.set(this.allSelected() ? new Set() : new Set(this.entities().map((x) => x.name)));
+	}
+
+	deleteSelected() {
+		const names = [...this.selected()];
+		if (names.length === 0) {
+			return;
+		}
+
+		AppDialog.open<boolean, ConfirmData<{ $implicit: number }>>(this.dialog, ConfirmComponent, {
+			data: {
+				title: $localize`Confirm Delete`,
+				message: this.deleteSelectedMessage(),
+				context: { $implicit: names.length },
+			},
+		}).closed.subscribe((res) => {
+			if (res) {
+				this.layoutService.deleteLayouts(names);
+				this.refresh();
+			}
+		});
+	}
+
 	deleteLayout(item: LayoutData, event: Event) {
 		event.stopPropagation();
 
@@ -70,7 +115,7 @@ export class LoadLayoutComponent {
 		}).closed.subscribe((res) => {
 			if (res) {
 				this.layoutService.deleteLayout(item.name);
-				this.entities.set(this.readLayouts());
+				this.refresh();
 			}
 		});
 	}
@@ -96,11 +141,18 @@ export class LoadLayoutComponent {
 
 		try {
 			const count = this.layoutService.importLayouts(await file.text());
-			this.entities.set(this.readLayouts());
+			this.refresh();
 			this.importMessage.set({ error: false, text: $localize`Imported ${count}:count: layout(s) from ${file.name}:fileName:.` });
 		} catch {
 			this.importMessage.set({ error: true, text: $localize`${file.name}:fileName: is not an exported layouts file.` });
 		}
+	}
+
+	/** Reloads the layouts and drops the selected names that no longer exist. */
+	private refresh() {
+		this.entities.set(this.readLayouts());
+		const names = new Set(this.entities().map((x) => x.name));
+		this.selected.update((x) => new Set([...x].filter((name) => names.has(name))));
 	}
 
 	private readLayouts() {

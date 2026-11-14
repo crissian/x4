@@ -66,6 +66,13 @@ export class LayoutService {
 		this.saveLayoutsInternal(layouts);
 	}
 
+	/** Deletes several layouts with a single read and write of the storage. */
+	deleteLayouts(names: string[]) {
+		const lowerNames = new Set(names.map((x) => x.toLowerCase()));
+		this.analytics.event({ label: String(names.length), category: 'Layouts', action: 'Delete Layouts' });
+		this.saveLayoutsInternal(this.getLayouts().filter((x) => !lowerNames.has(x.name.toLowerCase())));
+	}
+
 	/** All saved layouts as JSON, in the same format they are kept in local storage. */
 	exportLayouts(): string {
 		const data = this.getCurrentService().getSaveData(this.getLayouts());
