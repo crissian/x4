@@ -214,6 +214,10 @@
 		@apply bg-emerald-600 hover:bg-emerald-500;
 	}
 
+	.btn-danger {
+		@apply bg-red-600 hover:bg-red-500;
+	}
+
 	.link-button {
 		@apply cursor-pointer hover:underline;
 	}

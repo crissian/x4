@@ -2,6 +2,28 @@
 	@if (importMessage(); as message) {
 		<p class="mb-3" [class.text-danger]="message.error" [class.text-success]="!message.error">{{ message.text }}</p>
 	}
+	@if (entities().length > 0) {
+		<div class="mb-2 flex items-center gap-3 text-sm">
+			<label class="flex cursor-pointer items-center gap-2">
+				<input
+					type="checkbox"
+					[checked]="allSelected()"
+					[indeterminate]="someSelected()"
+					(change)="toggleAll()"
+				/>
+				<span i18n="@@selectAllLayouts">Select all</span>
+			</label>
+			<span class="text-fg-muted" i18n="@@selectedLayouts">{{ selected().size // i18n(ph="count") }} selected</span>
+			<button
+				type="button"
+				class="btn btn-danger ml-auto"
+				[disabled]="selected().size === 0"
+				(click)="deleteSelected()"
+			>
+				<svg lucideTrash /><span i18n="@@deleteSelectedLayouts">Delete selected</span>
+			</button>
+		</div>
+	}
 	<div class="max-h-[60vh] divide-y divide-line overflow-y-auto rounded-md border border-line">
 		@for (entity of entities(); track entity.name) {
 			<div
@@ -12,7 +34,18 @@
 				(keydown.enter)="close(entity, LoadLayoutType.load)"
 			>
 				<div class="flex flex-wrap items-center justify-between gap-2">
-					<strong>{{ entity.name }}</strong>
+					<div class="flex min-w-0 items-center gap-2">
+						<input
+							type="checkbox"
+							i18n-aria-label="@@selectLayout"
+							aria-label="Select layout"
+							[checked]="selected().has(entity.name)"
+							(click)="$event.stopPropagation()"
+							(keydown.enter)="$event.stopPropagation()"
+							(change)="toggleSelected(entity, $event)"
+						/>
+						<strong>{{ entity.name }}</strong>
+					</div>
 					<div class="flex items-center gap-1 text-xs">
 						<button
 							type="button"
@@ -70,12 +103,21 @@
 	</ng-container>
 </app-modal>
 
+<ng-template #deleteSelectedMessage let-count>
+	<ng-container i18n
+		>Are you sure you want to delete
+		<strong>{{
+			count // i18n(ph="count")
+		}}</strong>
+		layout(s)?</ng-container
+	>
+</ng-template>
+
 <ng-template #deleteMessage let-name>
 	<ng-container i18n
 		>Are you sure you want to delete
 		<strong>{{
 			name // i18n(ph="name")
-		}}</strong
-		>?</ng-container
+		}}</strong>?</ng-container
 	>
 </ng-template>
